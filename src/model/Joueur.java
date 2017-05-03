@@ -1,71 +1,47 @@
 package model;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Class Joueur -> gere un joueur
  */
 
-public abstract class Joueur
-{
+public abstract class Joueur {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Nombre de deplacements effectues
 	 */
 	
 	public int nbTuiles;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Nombre de poisson manges
 	 */
 	
 	public int poissonsManges;
+	
+	/**
+	 * Nombre de nbPingouin
+	 */
+	
+	public int nbPingouin;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Nom du joueur
 	 */
 	
 	public String nom;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Pingouins du joueur
 	 */
 	
-	public Set<Pingouin> myPingouins;
+	public Pingouin[] myPingouins;
+
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
-	public Joueur(){
-		super();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Execute un tour de jeu
 	 */
 	
-	public void jouer() {
-		// TODO implement me
-	}
+	public abstract void jouer();
 
 }
 

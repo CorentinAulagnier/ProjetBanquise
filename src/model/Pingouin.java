@@ -2,38 +2,33 @@ package model;
 
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Class Pingouin -> gere un pingouin
  */
 
-public class Pingouin
-{
+public class Pingouin {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Position du pingouin sur la grille
 	 */
 	
 	public Coordonnees position;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Indique si le pingouin peut se deplacer
 	 */
 	
 	public boolean actif;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
+	 * Constructeurs
 	 */
 	public Pingouin(){
-		super();
+		this.position = new Coordonnees();
+		this.actif = false;
+	}
+	
+	public Pingouin(Coordonnees c){
+		this.position = c;
+		this.actif = true;
 	}
 
 }

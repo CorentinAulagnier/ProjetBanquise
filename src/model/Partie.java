@@ -1,64 +1,93 @@
 package model;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Class Partie -> cree et gere la partie
  */
 
-public class Partie
-{
+public class Partie {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Nombre de joueurs
+	 */
+	
+	public int nbJoueurs ;
+	
+	/**
+	 * Prochain joueur
+	 */
+	
+	public int joueurActif ;
+	
+	/**
+	 * Plateau du jeu
 	 */
 	
 	public Banquise b;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Tableau de joueurs
 	 */
 	
-	public Set<Joueur> joueurs;
+	public Joueur[] joueurs;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
+	 * Constructeurs
 	 */
 	public Partie(){
-		super();
+		this.b = null;
+		this.joueurs = null;
+		this.nbJoueurs = 0;
+		this.joueurActif = 0;
+	}
+	
+	public Partie(int nbPlayer){
+		this.b = null;
+		this.joueurs = new Joueur[nbPlayer];
+		this.nbJoueurs = nbPlayer;
+		this.joueurActif = 0;
+	}
+	
+	public Partie(Banquise plateau){
+		this.b = plateau;
+		this.joueurs = null;
+		this.nbJoueurs = 0;
+		this.joueurActif = 0;
+	}
+
+	public Partie(Banquise plateau, int nbPlayer){
+		this.b = plateau;
+		this.joueurs = new Joueur[nbPlayer];
+		this.nbJoueurs = nbPlayer;
+		this.joueurActif = 0;
+	}
+	
+	public Partie(Banquise plateau, Joueur[] j){
+		this.b = plateau;
+		this.joueurs = j;
+		this.nbJoueurs = j.length;
+		this.joueurActif = 0;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Execute un tour de jeu
 	 */
 	
 	public void tourDeJeu() {
 		// TODO implement me
+		joueurs[joueurActif].jouer();
+		joueurActif = (joueurActif + 1) %nbJoueurs;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Renvoie vrai, si tout les pingouins sont bloquees
 	 */
 	
 	public boolean estPartieFini() {
-		// TODO implement me
-		return false;
+		for(int i = 0; i<nbJoueurs; i++)
+			for(int j = 0; j<joueurs[i].nbPingouin; j++)
+				if (joueurs[i].myPingouins[j].actif)
+					return false;
+		return true;
 	}
 
 }

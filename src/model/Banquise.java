@@ -133,28 +133,6 @@ public class Banquise
 	 * @ordered
 	 */
 	
-	public void manger(Coordonnees c) {
-		// TODO implement me
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public void deplacement(Coordonnees dep, Coordonnees arr) {
-		// TODO implement me
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
 	public boolean estBloque(Pingouin p) {
 		// TODO implement me
 		return false;

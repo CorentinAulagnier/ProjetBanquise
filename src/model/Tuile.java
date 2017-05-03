@@ -36,5 +36,34 @@ public class Tuile {
 		this.nbPoissons = n;
 		this.aUnPingouin = b;
 	}
+	
+	public Tuile(boolean b){
+		this.nbPoissons = 0;
+		this.aUnPingouin = b;
+	}
+	
+	/**
+	 * Met un pingouin sur la case
+	 */
+	
+	public void metrePingouin(){
+		this.aUnPingouin = true;
+	}
+	
+	/**
+	 * Enleve le pingouin de la case
+	 */
+	
+	public void enlevePingouin(){
+		this.aUnPingouin = false;
+	}
+	
+	/**
+	 * Enleve les poissons de la case
+	 */
+	
+	public void enlevePoissons(){
+		this.nbPoissons = 0;
+	}
 }
 

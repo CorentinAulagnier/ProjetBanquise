@@ -2,39 +2,26 @@ package model;
 
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Class Coordonnees -> position sur le plateau de jeu
  */
 
-public class Coordonnees
-{
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+public class Coordonnees {
+
 	
 	public int x;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
 	public int y;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
+	 * Constructeurs
 	 */
 	public Coordonnees(){
-		super();
+		this.x = 0;
+		this.y = 0;
 	}
-
+	
+	public Coordonnees(int a, int b){
+		this.x = a;
+		this.y = b;
+	}
 }
 

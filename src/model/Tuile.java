@@ -2,39 +2,39 @@ package model;
 
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Class Tuile -> une case du jeu
  */
 
-public class Tuile
-{
+public class Tuile {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * nombre de poisson su cette case
+	 * 0 si la case n'est pas accessible
 	 */
 	
 	public int nbPoissons;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * indique si il y a un pingouin
 	 */
 	
 	public boolean aUnPingouin;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
+	 * Constructeurs
 	 */
 	public Tuile(){
-		super();
+		this.nbPoissons = 0;
+		this.aUnPingouin = false;
 	}
-
+	
+	public Tuile(int n){
+		this.nbPoissons = n;
+		this.aUnPingouin = false;
+	}
+	
+	public Tuile(int n, boolean b){
+		this.nbPoissons = n;
+		this.aUnPingouin = b;
+	}
 }
 

@@ -1,8 +1,4 @@
 package model;
-import java.util.LinkedList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
 
 
 /**
@@ -20,7 +16,8 @@ public class Banquise
 	 * @ordered
 	 */
 	
-	private Set<Tuile> terrain;
+	@SuppressWarnings("unused")
+	private Tuile[][] terrain;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,7 +154,7 @@ public class Banquise
 	 * @ordered
 	 */
 	
-	public List<Pingouin> pingouinsDeplacable() {
+	public Coordonnees[] pingouinsDeplacable() {
 		// TODO implement me
 		return null;
 	}
@@ -169,7 +166,7 @@ public class Banquise
 	 * @ordered
 	 */
 	
-	public List<Coordonnees> deplacementPossible(Pingouin p) {
+	public Coordonnees[] deplacementPossible(Pingouin p) {
 		// TODO implement me
 		return null;
 	}

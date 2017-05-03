@@ -137,6 +137,7 @@ public class Partie {
 		} else {
 			System.out.println("Erreur : deplacement du pingouin impossible, pas de pingouin à la case : " + dep);
 		}
+		
 	}
 	
 }

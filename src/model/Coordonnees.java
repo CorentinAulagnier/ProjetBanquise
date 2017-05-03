@@ -7,8 +7,7 @@ package model;
 
 public class Coordonnees {
 
-	
-	public int x;
+		public int x;
 	public int y;
 
 	/**
@@ -22,6 +21,14 @@ public class Coordonnees {
 	public Coordonnees(int a, int b){
 		this.x = a;
 		this.y = b;
+	}
+	
+	public String tostring(){
+		return "(" + Integer.valueOf(x) + ", " + Integer.valueOf(y) + ")";		
+	}
+
+	public boolean equals(Coordonnees c) {
+		return (this.x == c.x && this.y == c.y);
 	}
 }
 

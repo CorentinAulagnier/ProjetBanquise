@@ -137,7 +137,59 @@ public class Partie {
 		} else {
 			System.out.println("Erreur : deplacement du pingouin impossible, pas de pingouin à la case : " + dep);
 		}
+	}
 
+	/**
+	 * Retourne les coordonnees des pingouins deplacables du joueur j
+	 * 
+	 * ATTENTION : Il peut y avoir des cases vides
+	 */
+	
+	public Coordonnees[] positionPingouins(Joueur j) {
+		Coordonnees[] c = new Coordonnees[j.nbPingouin];
+		
+		for(int i = 0; i < j.nbPingouin; i++) {
+			if (j.myPingouins[i].actif) {
+				c[i] = j.myPingouins[i].position;
+			} else {
+				c[i] = null;
+			}
+		}
+		
+		return c;
+	}
+	
+	/**
+	 * Retourne les coordonnees des pingouins deplacables du joueur courant
+	 * 
+	 * Il peut y avoir des cases vides
+	 */
+	
+	public Coordonnees[] pingouinsDeplacable() {
+		return positionPingouins(joueurs[joueurActif]);
+	}
+	
+	/**
+	 * Retourne vrai si le joueur j peut jouer
+	 */
+	
+	public boolean peutJouer(Joueur j) {
+		Coordonnees[] c = positionPingouins(j);
+		
+		for(int i = 0; i < c.length; i++) {
+			if (c[i] != null)
+				return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Retourne vrai si le joueur courant peut jouer
+	 */
+	
+	public boolean peutJouer() {
+		return peutJouer(joueurs[joueurActif]);
 	}
 }
 

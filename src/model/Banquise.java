@@ -1,5 +1,5 @@
 package model;
-
+import java.util.Random;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +16,6 @@ public class Banquise
 	 * @ordered
 	 */
 	
-	@SuppressWarnings("unused")
 	private Tuile[][] terrain;
 
 	/**
@@ -25,9 +24,54 @@ public class Banquise
 	 * @generated
 	 */
 	public Banquise(){
-		super();
+		initBanquise();
 	}
 
+	/**
+	 * Initialise la banquise avec les poissons
+	 */
+	
+	public void initBanquise() {
+		int unPoisson = 30;
+		int deuxPoissons = 20;
+		int troisPoissons = 10;
+		int nbCasesRestante = 60;
+		int alea = 0;
+		int numligne;
+
+		Random r = new Random();
+		
+		for (int i = 0; i<8; i++) {
+			
+			if (i%2 == 0) { //Ligne pair
+				numligne = 7;
+			} else {
+				numligne = 8; //Ligne impair
+			}
+			
+			for (int j = 0; j < numligne; j++) {
+
+				alea = r.nextInt(nbCasesRestante);
+				
+				if (alea < unPoisson) {
+					setTuile(new Coordonnees(i, j), new Tuile(1)) ;
+					unPoisson --;
+					
+				} else if (alea < (unPoisson + deuxPoissons)) {
+					setTuile(new Coordonnees(i, j), new Tuile(2)) ;
+					deuxPoissons --;
+					
+				} else if (alea < (unPoisson + deuxPoissons + troisPoissons)) {
+					setTuile(new Coordonnees(i, j), new Tuile(3)) ;
+					troisPoissons --;
+				} else {
+					System.out.println("Erreur : Initialisation banquise");
+				}
+				nbCasesRestante --;
+			}
+		}
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->

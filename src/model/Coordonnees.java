@@ -23,8 +23,8 @@ public class Coordonnees {
 		this.y = b;
 	}
 	
-	public String tostring(){
-		return "(" + Integer.valueOf(x) + ", " + Integer.valueOf(y) + ")";		
+	public String toString(){
+		return "(" + x + ", " + y + ")";		
 	}
 
 	public boolean equals(Coordonnees c) {

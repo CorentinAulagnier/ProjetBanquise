@@ -1,5 +1,6 @@
 package model;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -18,7 +19,7 @@ public class Banquise {
 	 * @ordered
 	 */
 	
-	private Tuile[][] terrain;
+	public Tuile[][] terrain;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -26,6 +27,7 @@ public class Banquise {
 	 * @generated
 	 */
 	public Banquise(){
+		terrain = new Tuile[8][8];
 		initBanquise();
 	}
 
@@ -40,35 +42,44 @@ public class Banquise {
 		int nbCasesRestante = 60;
 		int alea = 0;
 		int numligne;
-
+		
+		Tuile t = new Tuile();
 		Random r = new Random();
 		
+		System.out.println("InitBanquise");
+
 		for (int i = 0; i<8; i++) {
-			
+
 			if (i%2 == 0) { //Ligne pair
 				numligne = 7;
 			} else {
 				numligne = 8; //Ligne impair
 			}
-			
-			for (int j = 0; j < numligne; j++) {
 
+			for (int j = 0; j < numligne; j++) {
 				alea = r.nextInt(nbCasesRestante);
 				
 				if (alea < unPoisson) {
-					setTuile(new Coordonnees(i, j), new Tuile(1)) ;
+					t.mettrePoissons(1);
+					this.terrain[i][j] = new Tuile(t);
 					unPoisson --;
+
 					
 				} else if (alea < (unPoisson + deuxPoissons)) {
-					setTuile(new Coordonnees(i, j), new Tuile(2)) ;
+					t.mettrePoissons(2);
+					this.terrain[i][j] = new Tuile(t);
 					deuxPoissons --;
+
 					
 				} else if (alea < (unPoisson + deuxPoissons + troisPoissons)) {
-					setTuile(new Coordonnees(i, j), new Tuile(3)) ;
+					t.mettrePoissons(3);
+					this.terrain[i][j] = new Tuile(t);
 					troisPoissons --;
+
 				} else {
 					System.out.println("Erreur : Initialisation banquise");
 				}
+
 				nbCasesRestante --;
 			}
 		}
@@ -86,7 +97,8 @@ public class Banquise {
 	}
 	
 	public void setTuile(Coordonnees c, Tuile t) {
-		this.terrain[c.x][c.y]=t;
+		this.terrain[c.x][c.y].nbPoissons = t.nbPoissons;
+		this.terrain[c.x][c.y].aUnPingouin = t.aUnPingouin;
 	}
 	
 	/**
@@ -186,6 +198,17 @@ public class Banquise {
 			}		
 		}
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered
+	 */
+	
+	public boolean nePeutPlusBouger(Pingouin p) {
+		return ( estBloque(p) || estNoye(p) );
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -269,6 +292,41 @@ public class Banquise {
 			next = f.apply(next);
 		}
 		return chemin;
+	}
+	
+	/**
+	 * Affichage
+	 */
+	
+	public String toString() {
+		String s = "";
+		Tuile t;
+		int numligne = 0;
+		
+		s = s + "    0  |1  |2  |3  |4  |5  |6  |7\n";
+		s = s + "   ______________________________\n";
+
+		
+		for (int i = 0; i<8; i++) {
+			s = s + i + " | ";
+
+			if (i%2 == 0) { 	//Ligne pair
+				numligne = 7;
+				s = s + "  ";
+
+			} else {
+				numligne = 8; 	//Ligne impair
+			}
+			
+			for (int j = 0; j < numligne; j++) {
+				t = this.terrain[i][j];
+				System.out.println("t.nbPoissons = " + t.nbPoissons);
+				s = s + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ "   ";
+	
+			}
+			s = s + "\n";
+		}
+		return s;
 	}
 }
 

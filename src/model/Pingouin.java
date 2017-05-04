@@ -31,5 +31,9 @@ public class Pingouin {
 		this.actif = true;
 	}
 
+	public String toString() {
+		return "Pingouin " + position + (actif ? " actif" : " inactif") ;
+	}
+
 }
 

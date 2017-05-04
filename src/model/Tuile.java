@@ -42,11 +42,16 @@ public class Tuile {
 		this.aUnPingouin = b;
 	}
 	
+	public Tuile(Tuile t){
+		this.nbPoissons = t.nbPoissons;
+		this.aUnPingouin = t.aUnPingouin;
+	}
+	
 	/**
 	 * Met un pingouin sur la case
 	 */
 	
-	public void metrePingouin(){
+	public void mettrePingouin(){
 		this.aUnPingouin = true;
 	}
 	
@@ -64,6 +69,14 @@ public class Tuile {
 	
 	public void enlevePoissons(){
 		this.nbPoissons = 0;
+	}
+	
+	/**
+	 * Met nb poissons dans la case
+	 */
+	
+	public void mettrePoissons(int nb){
+		this.nbPoissons = nb;
 	}
 }
 

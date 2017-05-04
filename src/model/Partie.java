@@ -106,7 +106,7 @@ public class Partie {
 			t. enlevePoissons();	
 			
 		} else {
-			System.out.println("Erreur : la case à manger ne contient pas de pingouin \n(tuile.aUnPingouin == false) \nCoordonnees : "+c);
+			System.out.println("Erreur : la case à manger ne contient pas de pingouin \n (tuile.aUnPingouin == false) \n Coordonnees : "+c);
 		}
 	}
 
@@ -132,7 +132,7 @@ public class Partie {
 			joueurs[joueurActif].nbTuiles ++;
 			
 			tuileDep.enlevePingouin();
-			tuileArr.metrePingouin();
+			tuileArr.mettrePingouin();
 			
 		} else {
 			System.out.println("Erreur : deplacement du pingouin impossible, pas de pingouin à la case : " + dep);
@@ -142,27 +142,32 @@ public class Partie {
 	/**
 	 * Retourne les coordonnees des pingouins deplacables du joueur j
 	 * 
-	 * ATTENTION : Il peut y avoir des cases vides
+	 * ATTENTION : Il peut y avoir des cases "null"
 	 */
 	
 	public Coordonnees[] positionPingouins(Joueur j) {
 		Coordonnees[] c = new Coordonnees[j.nbPingouin];
 		
 		for(int i = 0; i < j.nbPingouin; i++) {
+			//Verification de la mobilite du pingouin
+			if ((j.myPingouins[i].actif) && (b.nePeutPlusBouger(j.myPingouins[i]))) {
+				j.myPingouins[i].actif = false;
+			}
+			
 			if (j.myPingouins[i].actif) {
 				c[i] = j.myPingouins[i].position;
+
 			} else {
 				c[i] = null;
 			}
 		}
-		
 		return c;
 	}
 	
 	/**
 	 * Retourne les coordonnees des pingouins deplacables du joueur courant
 	 * 
-	 * Il peut y avoir des cases vides
+	 * ATTENTION :  Il peut y avoir des cases "null"
 	 */
 	
 	public Coordonnees[] pingouinsDeplacable() {

@@ -85,5 +85,9 @@ public class Tuile {
 	public void mettrePoissons(int nb){
 		this.nbPoissons = nb;
 	}
+
+	public boolean estAccessible() {
+		return !(aUnPingouin || nbPoissons==0);
+	}
 }
 

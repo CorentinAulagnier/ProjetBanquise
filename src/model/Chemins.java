@@ -32,9 +32,9 @@ public class Chemins {
 	}
 	
 	public String stringChemin(ArrayList<Coordonnees> array, String nomAxe, int numAxe) {
-		String s = String.valueOf(numAxe)+") Axe "+nomAxe+" -";
+		String s = String.valueOf(numAxe)+") Axe "+nomAxe;
 		for(int i =0; i< array.size(); i++) {
-			s+="\t"+String.valueOf(i)+": "+array.get(i).toString();
+			s+="\t"+String.valueOf(i+1)+": "+array.get(i).toString();
 		}
 		return s;
 	}

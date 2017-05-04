@@ -91,7 +91,11 @@ public class Banquise {
 	 */
 	
 	public Tuile getTuile(Coordonnees c) {
-		return this.terrain[c.x][c.y];
+		try {
+			return this.terrain[c.x][c.y];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 	
 	public void setTuile(Coordonnees c, Tuile t) {
@@ -285,7 +289,7 @@ public class Banquise {
 	public ArrayList<Coordonnees> construireChemin(Function<Coordonnees, Coordonnees> f, Coordonnees dep) {
 		ArrayList<Coordonnees> chemin = new ArrayList<>();
 		Coordonnees next = f.apply(dep);
-		while(next!=null) {
+		while(next!=null && getTuile(next).estAccessible()) {
 			chemin.add(next);
 			next = f.apply(next);
 		}

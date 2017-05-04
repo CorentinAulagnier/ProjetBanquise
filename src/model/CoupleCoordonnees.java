@@ -21,7 +21,7 @@ public class CoupleCoordonnees {
 		return result;
 	}
 
-
+	//A tester
 	public boolean equals(CoupleCoordonnees obj) {
 		return (this.c1.equals(obj.c1) && this.c2.equals(obj.c2));
 	}

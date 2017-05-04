@@ -6,6 +6,7 @@ package model;
  */
 
 public class Partie {
+	
 	/**
 	 * Nombre de joueurs
 	 */
@@ -110,6 +111,13 @@ public class Partie {
 		}
 	}
 
+	/**
+	 * Deplace un pingouin de "cc.c1" vers "cc.c2"
+	 */
+	
+	public void deplacement(CoupleCoordonnees cc) {
+		deplacement(cc.c1, cc.c2);
+	}
 
 	/**
 	 * Deplace un pingouin de "dep" vers "arr"
@@ -137,6 +145,20 @@ public class Partie {
 		} else {
 			System.out.println("Erreur : deplacement du pingouin impossible, pas de pingouin à la case : " + dep);
 		}
+	}
+	
+	public void deplacement(Pingouin p, Coordonnees arr) {
+		
+		manger(p.position);
+		Tuile tuileDep = b.getTuile(p.position);
+		Tuile tuileArr = b.getTuile(arr);
+			
+		p.position = arr;
+		joueurs[joueurActif].nbTuiles ++;
+		
+		tuileDep.enlevePingouin();
+		tuileArr.mettrePingouin();
+
 	}
 
 	/**
@@ -253,7 +275,7 @@ public class Partie {
 				t = b.getTuile(new Coordonnees(i, j));
 				int app = appartientPingouin(i, j);
 				if (t.aUnPingouin && (app != -1)) {
-					s = s + "j" + app + (numligne == 7 ? "| " : " |");
+					s = s + "J" + app + (numligne == 7 ? "| " : " |");
 
 				} else {
 					s = s + (numligne == 7 ? " " : "") + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ (numligne == 7 ? "| " : "  |");
@@ -302,7 +324,7 @@ public class Partie {
 				t = b.getTuile(new Coordonnees(i, j));
 				int app = appartientPingouin(i, j);
 				if (t.aUnPingouin && (app != -1)) {
-					s = s + "j" + app + (numligne == 7 ? "| " : " |");
+					s = s + "P" + app + (numligne == 7 ? "| " : " |");
 
 				} else {
 					s = s + (numligne == 7 ? " " : "") + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ (numligne == 7 ? "| " : "  |");

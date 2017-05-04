@@ -93,7 +93,7 @@ public class Banquise {
 	public Tuile getTuile(Coordonnees c) {
 		try {
 			return this.terrain[c.x][c.y];
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -231,13 +231,12 @@ public class Banquise {
 		t[4] = getTuile(getMG(p.position));
 		t[5] = getTuile(getHG(p.position));
 		for(int i = 0; i<6; i++) {
-			if(t[i]!=null) {	
-				if (t[i].aUnPingouin) {
-						voisinPingouin=true;
-				} else if(t[i].nbPoissons!=0) {
-						pasDePoisson = false;
-				}
+			if (t[i]==null || t[i].aUnPingouin) {
+					voisinPingouin=true;
+			} else if(t[i].nbPoissons!=0) {
+					pasDePoisson = false;
 			}
+			
 		}
 		return (voisinPingouin && pasDePoisson);
 	}
@@ -251,13 +250,14 @@ public class Banquise {
 	
 	public boolean estNoye(Pingouin p) {
 		return (
-				(getTuile(getHD(p.position)).nbPoissons==0)
-				&& (getTuile(getMD(p.position)).nbPoissons==0)
-				&& (getTuile(getBD(p.position)).nbPoissons==0)
-				&& (getTuile(getBG(p.position)).nbPoissons==0)
-				&& (getTuile(getMG(p.position)).nbPoissons==0)
-				&& (getTuile(getHG(p.position)).nbPoissons==0)
+				((getTuile(getHD(p.position))==null) || (getTuile(getHD(p.position)).nbPoissons==0))
+				&& ((getTuile(getMD(p.position))==null) || (getTuile(getMD(p.position)).nbPoissons==0))
+				&& ((getTuile(getBD(p.position))==null) || (getTuile(getBD(p.position)).nbPoissons==0))
+				&& ((getTuile(getBG(p.position))==null) || (getTuile(getBG(p.position)).nbPoissons==0))
+				&& ((getTuile(getMG(p.position))==null) || (getTuile(getMG(p.position)).nbPoissons==0))
+				&& ((getTuile(getHG(p.position))==null) || (getTuile(getHG(p.position)).nbPoissons==0))
 		);
+
 	}
 	
 	/**

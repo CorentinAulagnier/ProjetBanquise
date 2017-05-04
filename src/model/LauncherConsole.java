@@ -107,8 +107,12 @@ public class LauncherConsole {
 			while(!joue) {
 				Pingouin pingouin = choixPingouin(br,p);
 				Coordonnees dep = choixDeplacement(br, p, pingouin);
+				//debug
+				System.out.println("pingouin = "+pingouin);
+				System.out.println("dep = "+dep);
+				//fin debug
 				if(dep!=null) {
-					p.deplacement(pingouin.position, dep);
+					p.deplacement(pingouin, dep);
 					joue = true;
 				}
 			}				
@@ -117,6 +121,7 @@ public class LauncherConsole {
 			p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
 		} else {
 			System.out.println(p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") ne peut plus jouer");
+			p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
 		}		
 	}
 	
@@ -172,8 +177,17 @@ public class LauncherConsole {
 				} default : array = null;
 			}
 			if(array!=null) {
-				System.out.println("Numero du déplacement choisi:");
-				int numDep = Integer.valueOf(br.readLine());
+				int numDep =-1;
+				boolean numok = false;
+				while(!numok) {
+					System.out.println("Numero du déplacement choisi:");
+					numDep = Integer.valueOf(br.readLine());
+					if(numDep>0 && numDep<=array.size()) {
+						numok = true;
+					} else {
+						System.out.println("Entrée incorrecte. Réessayer.");
+					}
+				}
 				return array.get(numDep-1);
 			}
 		} catch (IOException e) {

@@ -48,12 +48,48 @@ public class IA extends Joueur {
 		
 		return s;
 	}
+	
 	/**
 	 * Execute un tour de jeu
 	 */
 	
-	public void jouer() {
-		// TODO implement me
+	public CoupleCoordonnees jouer(Partie p) {
+		AlgoIA player = new AlgoIA(this);
+		int level = this.niveau;
+		
+		switch (level) {
+			case 1:
+				return player.algoFacile(p.b);
+			case 2:
+				return player.algoMoyen(p.b);
+			case 3:
+				//return player.algoDifficile(p.b);
+				break;
+			default:
+			
+		}
+		return null;
+	}
+	
+	/**
+	 * Place un pingouin
+	 */
+	
+	public Coordonnees placement(Partie p) {
+		AlgoIA player = new AlgoIA(this);
+		int level = this.niveau;
+		
+		switch (level) {
+			case 1:
+				return player.placementFacile(p.b);
+			case 2:
+				return player.placementMoyen(p.b);
+			case 3:
+				//return player.placementDifficile(p.b);
+				break;
+			default:
+		}
+		return null;
 	}
 
 }

@@ -42,9 +42,18 @@ public class Humain extends Joueur {
 	 * Execute un tour de jeu
 	 */
 	
-	public void jouer() {
-		// TODO implement me
+	public CoupleCoordonnees jouer(Partie p) {
+		return null;
 	}
+
+	/**
+	 * Renvoie ou places un pingouin
+	 */
+	
+	public Coordonnees placement(Partie p) {
+		return null;
+	}
+	
 
 }
 

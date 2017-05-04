@@ -41,8 +41,14 @@ public abstract class Joueur {
 	 * Execute un tour de jeu
 	 */
 	
-	public abstract void jouer();
+	public abstract CoupleCoordonnees jouer(Partie p) ;
 
+	/**
+	 * Renvoie ou places un pingouin
+	 */
+	
+	public abstract Coordonnees placement(Partie p);
+	
 	/**
 	 * Affichage
 	 */

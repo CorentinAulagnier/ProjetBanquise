@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 
 /**
  * Class Joueur -> gere un joueur
@@ -35,13 +36,18 @@ public abstract class Joueur {
 	 */
 	
 	public Pingouin[] myPingouins;
-
-
+	
 	/**
 	 * Execute un tour de jeu
 	 */
 	
 	public abstract void jouer();
+
+	/**
+	 * Affichage
+	 */
+	
+	public abstract String toString();
 
 }
 

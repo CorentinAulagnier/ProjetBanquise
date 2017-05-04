@@ -37,6 +37,18 @@ public class IA extends Joueur {
 	}
 	
 	/**
+	 * Affichage
+	 */
+	
+	public String toString() {
+		String s =  "Joueur nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
+				+ " nom " + nom + " niveau " + niveau + " myPingouins\n";
+		for(int i = 0; i < nbPingouin; i++) 
+			s = s + myPingouins[i];
+		
+		return s;
+	}
+	/**
 	 * Execute un tour de jeu
 	 */
 	

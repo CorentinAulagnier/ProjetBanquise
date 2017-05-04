@@ -25,6 +25,18 @@ public class Humain extends Joueur {
 		this.nbPingouin = nbP;
 	}
 	
+	/**
+	 * Affichage
+	 */
+	
+	public String toString() {
+		String s =  "Humain nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
+				+ " nom " + nom + " myPingouins\n";
+		for(int i = 0; i < nbPingouin; i++) 
+			s = s + myPingouins[i];
+		
+		return s;
+	}
 	
 	/**
 	 * Execute un tour de jeu

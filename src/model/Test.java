@@ -1,6 +1,8 @@
 package model;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Random;
+
 import model.Coordonnees;
 
 public class Test {
@@ -53,6 +55,42 @@ public class Test {
 		}
 	}
 	
+	public static void afficherPartie(){
+		Banquise b = new Banquise();
+		Joueur[] j = new Joueur[2];
+		Tuile t;
+		
+		j[0] = new Humain();
+		j[0].myPingouins[0] = new Pingouin(new Coordonnees(0, 0));
+		t = b.getTuile(new Coordonnees(0, 0));
+		t.mettrePingouin();
+		
+		j[0].myPingouins[1] = new Pingouin(new Coordonnees(2, 2));
+		t = b.getTuile(new Coordonnees(2, 2));
+		t.mettrePingouin();
+		
+		j[0].myPingouins[2] = new Pingouin(new Coordonnees(4, 4));
+		t = b.getTuile(new Coordonnees(4, 4));
+		t.mettrePingouin();
+		
+		j[1] = new Humain();
+		j[1].myPingouins[0] = new Pingouin(new Coordonnees(1, 1));
+		t = b.getTuile(new Coordonnees(1, 1));
+		t.mettrePingouin();
+		
+		j[1].myPingouins[1] = new Pingouin(new Coordonnees(3, 3));
+		t = b.getTuile(new Coordonnees(3, 3));
+		t.mettrePingouin();
+		
+		j[1].myPingouins[2] = new Pingouin(new Coordonnees(5, 5));
+		t = b.getTuile(new Coordonnees(5, 5));
+		t.mettrePingouin();
+		
+		Partie p = new Partie(b, j);
+
+		System.out.println(p);
+	}
+
 	public static void main(String[] args) {
 
     	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -65,6 +103,7 @@ public class Test {
 	        	System.out.println("   - 1 -> affiche une banquise");
 	        	System.out.println("   - 2 -> affiche position d'un pingouin");
 	       		System.out.println("   - 3 -> affiche la position d'un voisin");
+	       		System.out.println("   - 4 -> affiche une partie");
 
 	        	int x = Integer.parseInt(br.readLine());
 	        	int y;
@@ -101,6 +140,9 @@ public class Test {
 			        	System.out.println("z : ");
 			        	z = Integer.parseInt(br.readLine());
 			        	afficherVoisin(x, y, z);
+						break;
+					case 4:
+						afficherPartie();
 						break;
 					default :
 						System.out.println("Commande non reconnu");

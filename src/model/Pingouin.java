@@ -32,7 +32,7 @@ public class Pingouin {
 	}
 
 	public String toString() {
-		return "Pingouin " + position + (actif ? " actif" : " inactif") ;
+		return "Pingouin position " + position + (actif ? " actif" : " inactif") + "\n" ;
 	}
 
 }

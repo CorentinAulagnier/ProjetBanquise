@@ -46,8 +46,6 @@ public class Banquise {
 		Tuile t = new Tuile();
 		Random r = new Random();
 		
-		System.out.println("InitBanquise");
-
 		for (int i = 0; i<8; i++) {
 
 			if (i%2 == 0) { //Ligne pair
@@ -293,7 +291,7 @@ public class Banquise {
 		}
 		return chemin;
 	}
-	
+
 	/**
 	 * Affichage
 	 */
@@ -303,29 +301,32 @@ public class Banquise {
 		Tuile t;
 		int numligne = 0;
 		
-		s = s + "    0  |1  |2  |3  |4  |5  |6  |7\n";
-		s = s + "   ______________________________\n";
-
+		s = s + "  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n";
+		s = s + "--|---|---|---|---|---|---|---|---|\n";
 		
 		for (int i = 0; i<8; i++) {
-			s = s + i + " | ";
+			s = s + i + " |";
 
 			if (i%2 == 0) { 	//Ligne pair
 				numligne = 7;
-				s = s + "  ";
+				s = s + " ";
 
 			} else {
 				numligne = 8; 	//Ligne impair
 			}
 			
 			for (int j = 0; j < numligne; j++) {
-				t = this.terrain[i][j];
-				System.out.println("t.nbPoissons = " + t.nbPoissons);
-				s = s + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ "   ";
+				t = getTuile(new Coordonnees(i, j));
+				s = s + (numligne == 7 ? " " : "") + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ (numligne == 7 ? "| " : "  |");
 	
+			}
+			if (numligne == 7) {
+				s = s + "  |";
 			}
 			s = s + "\n";
 		}
+		s = s + "----------------------------------|\n";
+
 		return s;
 	}
 }

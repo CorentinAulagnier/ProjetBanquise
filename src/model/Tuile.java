@@ -20,6 +20,13 @@ public class Tuile {
 	public boolean aUnPingouin;
 
 	/**
+	 * Affichage
+	 */
+	public String toString() {
+		return "Tuile nbPoissons=" + nbPoissons + ", aUnPingouin=" + aUnPingouin;
+	}
+
+	/**
 	 * Constructeurs
 	 */
 	public Tuile(){

@@ -258,5 +258,49 @@ public class Partie {
 
 		return s;
 	}
+	
+
+	/**
+	 * Affichage
+	 */
+	
+	public String toStringTerminal() {
+		String s = "";
+		Tuile t;
+		int numligne = 0;
+		
+		s = s + "  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n";
+		s = s + "--|---|---|---|---|---|---|---|---|\n";
+		
+		for (int i = 0; i<8; i++) {
+			s = s + i + " |";
+
+			if (i%2 == 0) { 	//Ligne pair
+				numligne = 7;
+				s = s + " ";
+
+			} else {
+				numligne = 8; 	//Ligne impair
+			}
+			
+			for (int j = 0; j < numligne; j++) {
+				t = b.getTuile(new Coordonnees(i, j));
+				int app = appartientPingouin(i, j);
+				if (t.aUnPingouin && (app != -1)) {
+					s = s + "j" + app + (numligne == 7 ? "| " : " |");
+
+				} else {
+					s = s + (numligne == 7 ? " " : "") + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ (numligne == 7 ? "| " : "  |");
+				}
+	
+			}
+			if (numligne == 7) {
+				s = s + "  |";
+			}
+			s = s + "\n";
+		}
+
+		return s;
+	}
 }
 

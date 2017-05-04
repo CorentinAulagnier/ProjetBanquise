@@ -211,6 +211,21 @@ public class Partie {
 		return -1;
 	}
 	
+
+	/**
+	 * Retourne le joueur gagnant
+	 */
+
+	public Joueur getGagnant() {
+		Joueur j = joueurs[0];
+		for(int i = 1; i<nbJoueurs;i++ ) {
+			if(joueurs[i].poissonsManges>j.poissonsManges || (joueurs[i].poissonsManges==j.poissonsManges && joueurs[i].nbTuiles>j.nbTuiles)) {
+				j = joueurs[i];
+			}
+		}
+		return j;
+	}
+	
 	/**
 	 * Affichage
 	 */

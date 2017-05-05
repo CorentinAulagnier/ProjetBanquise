@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 
 /**
  * Class Tuile -> une case du jeu
  */
 
-public class Tuile {
+public class Tuile implements Serializable{
 	/**
 	 * nombre de poisson su cette case
 	 * 0 si la case n'est pas accessible

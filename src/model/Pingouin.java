@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 
 /**
  * Class Pingouin -> gere un pingouin
  */
 
-public class Pingouin {
+public class Pingouin implements Serializable{
 	/**
 	 * Position du pingouin sur la grille
 	 */

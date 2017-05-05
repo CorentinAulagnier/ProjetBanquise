@@ -104,6 +104,7 @@ public class Test {
 	        	System.out.println("   - 2 -> affiche position d'un pingouin");
 	       		System.out.println("   - 3 -> affiche la position d'un voisin");
 	       		System.out.println("   - 4 -> affiche une partie");
+	       		System.out.println("   - 5 -> sauvegarder et charger une partie");
 
 	        	int x = Integer.parseInt(br.readLine());
 	        	int y;
@@ -144,13 +145,23 @@ public class Test {
 					case 4:
 						afficherPartie();
 						break;
+					case 5:
+						Partie p = LauncherConsole.creerPartie(br);
+						LauncherConsole.phasePlacement(br, p);
+						p.sauvegarder();
+						System.out.println("Banquise créée :\n"+p.toStringTerminal());
+						//p = LauncherConsole.creerPartie(new BufferedReader(new InputStreamReader(System.in)));
+						//System.out.println("Banquise modifiée :\n"+p);
+						Partie p2 = new Partie();
+						p2.charger();
+						System.out.println("Banquise restaurée :\n"+p.toStringTerminal());
 					default :
 						System.out.println("Commande non reconnu");
 				}
 	            
 	        }catch(Exception e){
 	            System.out.println("Exception : Commande");
-
+	            e.printStackTrace(System.err);
 	        }
 			
 			

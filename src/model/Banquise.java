@@ -1,4 +1,5 @@
 package model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -11,7 +12,7 @@ import java.util.function.Function;
  * @generated
  */
 
-public class Banquise {
+public class Banquise implements Serializable{
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->

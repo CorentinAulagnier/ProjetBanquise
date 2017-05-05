@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 
 /**
  * Class Coordonnees -> position sur le plateau de jeu
  */
 
-public class Coordonnees {
+public class Coordonnees implements Serializable{
 
 	public int x;
 	public int y;

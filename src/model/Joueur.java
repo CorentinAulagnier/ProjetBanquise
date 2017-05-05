@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Class Joueur -> gere un joueur
  */
 
-public abstract class Joueur {
+public abstract class Joueur implements Serializable{
 	/**
 	 * Nombre de deplacements effectues
 	 */

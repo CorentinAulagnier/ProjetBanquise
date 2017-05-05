@@ -1,12 +1,20 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class Partie -> cree et gere la partie
  */
 
-public class Partie {
+public class Partie implements Serializable {
 	
 	/**
 	 * Nombre de joueurs
@@ -68,6 +76,38 @@ public class Partie {
 		this.joueurs = j;
 		this.nbJoueurs = j.length;
 		this.joueurActif = 0;
+	}
+	
+	public void sauvegarder(String name) {
+		try {
+			File fichier =  new File("save/"+name+".banquise") ;
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
+			oos.writeObject(this) ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	public void sauvegarder() {
+		sauvegarder("no_name");
+	}
+	
+	public void charger(String name) {
+		try {
+		File fichier =  new File("save/"+name+".banquise") ;
+		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
+		Partie p = (Partie)ois.readObject() ;
+		this.b = p.b;
+		this.joueurActif = p.joueurActif;
+		this.nbJoueurs = p.nbJoueurs;
+		this.joueurs = p.joueurs;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	public void charger() {
+		charger("no_name");
 	}
 
 	/**

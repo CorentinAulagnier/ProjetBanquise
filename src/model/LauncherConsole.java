@@ -128,7 +128,7 @@ public class LauncherConsole {
 					System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " cherche son coup.");
 					CoupleCoordonnees cc = p.joueurs[p.joueurActif].jouer(p);
 					if(cc!=null) {
-						p.deplacement(cc);
+						p.deplacement(cc.c1, cc.c2);
 						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.c2);
 						joue = true;
 					} else {

@@ -5,36 +5,29 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.function.Function;
 
-
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
- */
+ * La banquise est le terrain de jeu,
+ * elle indique le nombre de poissons sur chaque case
+ */	
 
 public class Banquise implements Serializable{
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Tableau du terrain de jeu
 	 */
 	
 	public Tuile[][] terrain;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
+	 * Constructeur d'une banquise de taille 8x8, initialisé avec des poissons.
+	 */	
 	public Banquise(){
 		terrain = new Tuile[8][8];
 		initBanquise();
 	}
 
 	/**
-	 * Initialise la banquise avec les poissons
-	 */
+	 * Initialise la banquise avec des valeurs de poissons aleatoire.
+	 */	
 	
 	public void initBanquise() {
 		int unPoisson = 30;
@@ -85,11 +78,12 @@ public class Banquise implements Serializable{
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	 * Renvoie la toile en memoire aux coordonnees c.
+	 * 
+	 * @param c
+	 *            Position à recuperer.
+	 * @return Un tuile.
+	 */	
 	
 	public Tuile getTuile(Coordonnees c) {
 		try {
@@ -99,44 +93,87 @@ public class Banquise implements Serializable{
 		}
 	}
 	
+	/**
+	 * Pose la tuile t à la position c.
+	 * 
+	 * @param c
+	 *            Position à modifier.
+	 * @param t
+	 *            tuile a copier en memoire.
+	 */
+	
 	public void setTuile(Coordonnees c, Tuile t) {
 		this.terrain[c.x][c.y].nbPoissons = t.nbPoissons;
 		this.terrain[c.x][c.y].aUnPingouin = t.aUnPingouin;
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	 * Indique si le point est sur une ligne paire.
+	 * 
+	 * @param c
+	 *            Position à tester.
+	 * @return Vrai si le point est sur une ligne paire.
+	 */	
 	
 	public boolean lignePair(Coordonnees c) {
 		return (c.x%2==0);
 	}
 	
+	/**
+	 * Indique si le point est à la fin de la ligne.
+	 * 
+	 * @param c
+	 *            Position à tester.
+	 * @return Vrai si le point est à la fin de la ligne.
+	 */	
+	
 	public boolean boutLigne(Coordonnees c) {
 		return ((lignePair(c) && c.y == 6) || (!lignePair(c) && c.y == 7));
 	}
+	
+	/**
+	 * Indique si le point est au debut de la ligne.
+	 * 
+	 * @param c
+	 *            Position à tester.
+	 * @return Vrai si le point est au debut de la ligne.
+	 */	
 	
 	public boolean debutLigne(Coordonnees c) {
 		return (c.y == 0);
 	}
 	
+	/**
+	 * Indique si le point est à la premiere ligne.
+	 * 
+	 * @param c
+	 *            Position à tester.
+	 * @return Vrai si le point est à la premiere ligne.
+	 */	
+	
 	public boolean premiereLigne(Coordonnees c) {
 		return (c.x == 0);
 	}
+	
+	/**
+	 * Indique si le point est à la derniere ligne.
+	 * 
+	 * @param c
+	 *            Position à tester.
+	 * @return Vrai si le point est à la derniere ligne.
+	 */	
 	
 	public boolean derniereLigne(Coordonnees c) {
 		return (c.x == 7);
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	 * Renvoie les coordonnees du voisin haut droit d'un point.
+	 * 
+	 * @param c
+	 *            Position de depart.
+	 * @return Les coordonnees de son voisin.
+	 */	
 	
 	public Coordonnees getHD(Coordonnees c) {
 		if(premiereLigne(c) || (boutLigne(c) && !lignePair(c))) { //pas de voisin haut droit
@@ -150,6 +187,14 @@ public class Banquise implements Serializable{
 		}
 	}
 	
+	/**
+	 * Renvoie les coordonnees du voisin haut gauche d'un point.
+	 * 
+	 * @param c
+	 *            Position de depart.
+	 * @return Les coordonnees de son voisin.
+	 */	
+	
 	public Coordonnees getHG(Coordonnees c) {
 		if(premiereLigne(c) || (debutLigne(c) && !lignePair(c))) { //pas de voisin haut gauche
 			return null;
@@ -162,6 +207,14 @@ public class Banquise implements Serializable{
 		}
 	}
 	
+	/**
+	 * Renvoie les coordonnees du voisin milieu droit d'un point.
+	 * 
+	 * @param c
+	 *            Position de depart.
+	 * @return Les coordonnees de son voisin.
+	 */	
+	
 	public Coordonnees getMD(Coordonnees c) {
 		if(boutLigne(c)) { //pas de voisin milieu droit
 			return null;
@@ -170,6 +223,14 @@ public class Banquise implements Serializable{
 		}
 	}
 	
+	/**
+	 * Renvoie les coordonnees du voisin milieu gauche d'un point.
+	 * 
+	 * @param c
+	 *            Position de depart.
+	 * @return Les coordonnees de son voisin.
+	 */	
+	
 	public Coordonnees getMG(Coordonnees c) {
 		if(debutLigne(c)) { //pas de voisin milieu gauche
 			return null;
@@ -177,6 +238,14 @@ public class Banquise implements Serializable{
 			return new Coordonnees(c.x, c.y-1);
 		}
 	}
+	
+	/**
+	 * Renvoie les coordonnees du voisin bas droit d'un point.
+	 * 
+	 * @param c
+	 *            Position de depart.
+	 * @return Les coordonnees de son voisin.
+	 */	
 	
 	public Coordonnees getBD(Coordonnees c) {
 		if(derniereLigne(c) || (boutLigne(c) && !lignePair(c))) { //pas de voisin bas droit
@@ -189,6 +258,14 @@ public class Banquise implements Serializable{
 			}		
 		}
 	}
+	
+	/**
+	 * Renvoie les coordonnees du voisin bas gauche d'un point.
+	 * 
+	 * @param c
+	 *            Position de depart.
+	 * @return Les coordonnees de son voisin.
+	 */	
 	
 	public Coordonnees getBG(Coordonnees c) {
 		if(derniereLigne(c) || (debutLigne(c) && !lignePair(c))) { //pas de voisin bas gauche
@@ -203,10 +280,11 @@ public class Banquise implements Serializable{
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Renvoie un boulean indiquant si un pingouin peut bouger.
+	 * 
+	 * @param p
+	 *            Le pingouin que l'on test.
+	 * @return Vrai si le pingouin ne peut plus bouger.
 	 */
 	
 	public boolean nePeutPlusBouger(Pingouin p) {
@@ -214,12 +292,12 @@ public class Banquise implements Serializable{
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Renvoie un boulean indiquant si un pingouin est bloque.
+	 * 
+	 * @param p
+	 *            Le pingouin que l'on test.
+	 * @return Vrai si le pingouin est entoure d'eau, et d'un pingouin.
 	 */
-	
 	
 	public boolean estBloque(Pingouin p) { //p est cerné par de l'eau et au moins un autre pingouin
 		boolean voisinPingouin = false;
@@ -243,10 +321,11 @@ public class Banquise implements Serializable{
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Renvoie un boulean indiquant si un pingouin est noye.
+	 * 
+	 * @param p
+	 *            Le pingouin que l'on test.
+	 * @return Vrai si le pingouin est entoure de case avec 0 poisson, ou innaccessible.
 	 */
 	
 	public boolean estNoye(Pingouin p) {
@@ -262,12 +341,13 @@ public class Banquise implements Serializable{
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Renvoie la liste de points en partant de dep, et en allant dans tout les sens.
+	 * 
+	 * @param p
+	 *            Le pingouin qui veut se deplacer.
+	 * @return Un ensemble de points d'arrivés possible.
 	 */
-	
+
 	public ArrayList<ArrayList<Coordonnees>> deplacementPossible(Pingouin p) {
 		ArrayList<ArrayList<Coordonnees>> chemins = new ArrayList<ArrayList<Coordonnees>>();
 		//Function<Coordonnees, Coordonnees> HD = c -> getHD(c);
@@ -281,10 +361,14 @@ public class Banquise implements Serializable{
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Renvoie la liste de points en partant de dep, et en allant dans le sens de la fonction f.
+	 * 
+	 * @param f
+	 *          Une fonction de deplacement.
+	 * @param dep
+	 * 			Point de départ.
+	 * 
+	 * @return Une liste de point.
 	 */
 	
 	public ArrayList<Coordonnees> construireChemin(Function<Coordonnees, Coordonnees> f, Coordonnees dep) {
@@ -298,7 +382,9 @@ public class Banquise implements Serializable{
 	}
 
 	/**
-	 * Affichage
+	 * Affichage.
+	 *     .
+	 * @return Un affichage de la banquise.
 	 */
 	
 	public String toString() {

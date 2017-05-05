@@ -110,6 +110,7 @@ public class LauncherConsole {
 		while(!p.estPartieFini()) {
 			afficherPlateau(p);
 			tourDeJeuConsole(br, p);
+			p.verifierPingouinActif();
 		}
 	}
 	

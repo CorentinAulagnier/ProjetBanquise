@@ -138,7 +138,7 @@ public class AlgoIA {
     /* Renvoie la coordonnees de la case choisie par l'IA Facile pour le placement du pingouin
      * Case choisie aleatoirement 
      */
-    public Coordonnees PlacementFacile(Banquise b) { 
+    public Coordonnees placementFacile(Banquise b) { 
         Random r = new Random();
 
         int i = 0;
@@ -263,7 +263,7 @@ public class AlgoIA {
     /**
      * ****************************************************************************************************
      */
-    public Coordonnees PlacementMoyen(Banquise b) {
+    public Coordonnees placementMoyen(Banquise b) {
         Stack<Coordonnees> pile = new Stack<>();
         Coordonnees c = new Coordonnees(3, 3);
         Tuile tuileDep = b.getTuile(c);
@@ -468,7 +468,7 @@ public class AlgoIA {
      * 
      * Sinon on utilise le Placement Moyen 
      */ 
-    public Coordonnees PlacementDificile(Banquise b) { 
+    public Coordonnees placementDificile(Banquise b) { 
         return null;
     }
 

@@ -339,5 +339,20 @@ public class Partie {
 
 		return s;
 	}
+	
+	/**
+	 * Tue les pingouins morts
+	 */
+	public void verifierPingouinActif() {
+	for(int i = 0; i<nbJoueurs; i++) {
+		for(int j = 0; j<joueurs[i].nbPingouin; j++) {
+			Pingouin pin = joueurs[i].myPingouins[j];
+			if (b.nePeutPlusBouger(pin)) {
+				manger(pin.position);
+				b.getTuile(pin.position).enlevePingouin();
+				pin.actif = false;
+			}
+		}
+	}
 }
 

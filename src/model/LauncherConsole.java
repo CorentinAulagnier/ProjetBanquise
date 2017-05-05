@@ -43,7 +43,13 @@ public class LauncherConsole {
 			for(int num_joueur = 0; num_joueur<p.nbJoueurs;num_joueur++) {
 				System.out.println("Joueur "+String.valueOf(num_joueur)+", quel est votre nom ?");
 				String nom = br.readLine();
-				p.joueurs[num_joueur] = new Humain(nom, 6-nb_joueurs);
+				if (nom.equals("IA")) {
+					System.out.println("Quel niveau voulez vous pour l'IA ? (1 à 2)");
+					int niv_IA = Integer.valueOf(br.readLine());
+					p.joueurs[num_joueur] = new IA("IA"+num_joueur, 6-nb_joueurs, niv_IA); //6-nb_joueurs
+				} else {
+					p.joueurs[num_joueur] = new Humain(nom, 6-nb_joueurs); //6-nb_joueurs
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,19 +65,31 @@ public class LauncherConsole {
 				for(int num_joueur = 0; num_joueur<p.nbJoueurs; num_joueur++) {
 					boolean position_dispo = false;
 					while(!position_dispo) {
+						Tuile t = null;
+						Coordonnees c = null;
+						int x, y;
 						try {
-							System.out.println("Joueur "+String.valueOf(num_joueur)+": "+p.joueurs[num_joueur].nom+", choisissez la position initiale de votre pingouin "+String.valueOf(num_pingouin+1)+":");
-							System.out.print("x: ");
-							int x = Integer.valueOf(br.readLine());
-							System.out.print("y: ");
-							int y = Integer.valueOf(br.readLine());
-							Coordonnees c = new Coordonnees(x, y);
-							Tuile t = p.b.getTuile(c);
+							if (p.joueurs[num_joueur].getClass() == IA.class) { // Tour de l'IA
+								c = p.joueurs[num_joueur].placement(p);
+								System.out.println("Placement du pingouin en : "+c);
+								t = p.b.getTuile(c);
+								x = c.x;
+								y = c.y;
+								
+							} else { // Tour de l'Humain
+								System.out.println("Joueur "+String.valueOf(num_joueur)+": "+p.joueurs[num_joueur].nom+", choisissez la position initiale de votre pingouin "+String.valueOf(num_pingouin+1)+":");
+								System.out.print("x: ");
+								x = Integer.valueOf(br.readLine());
+								System.out.print("y: ");
+								y = Integer.valueOf(br.readLine());
+								c = new Coordonnees(x, y);
+								t = p.b.getTuile(c);
+							}
 							if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
 								t.mettrePingouin();
 								p.joueurs[num_joueur].myPingouins[num_pingouin] = new Pingouin(c);
 								
-								System.out.println("Votre pingouin "+String.valueOf(num_pingouin)+" a bien été positionné en ("+String.valueOf(x)+","+String.valueOf(y)+").");
+								System.out.println("Le pingouin " + String.valueOf(num_pingouin)+ " de " + p.joueurs[num_joueur].nom +" a bien été positionné en ("+String.valueOf(x)+","+String.valueOf(y)+").");
 								position_dispo = true;
 							} else {
 								System.out.println("La position ("+String.valueOf(x)+","+String.valueOf(y)+") n'est pas disponible");
@@ -105,24 +123,32 @@ public class LauncherConsole {
 			System.out.println("A "+p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") de jouer!");
 			boolean joue = false;
 			while(!joue) {
-				Pingouin pingouin = choixPingouin(br,p);
-				Coordonnees dep = choixDeplacement(br, p, pingouin);
-				//debug
-				System.out.println("pingouin = "+pingouin);
-				System.out.println("dep = "+dep);
-				//fin debug
-				if(dep!=null) {
-					p.deplacement(pingouin, dep);
-					joue = true;
+				if (p.joueurs[p.joueurActif].getClass() == IA.class) { // Tour de l'IA
+					System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " cherche son coup.");
+					CoupleCoordonnees cc = p.joueurs[p.joueurActif].jouer(p);
+					if(cc!=null) {
+						p.deplacement(cc);
+						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.c2);
+						joue = true;
+					} else {
+						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.c2+" mais cela est impossible.");
+					}
+							
+				} else { // Tour de l'Humain
+					Pingouin pingouin = choixPingouin(br,p);
+					Coordonnees dep = choixDeplacement(br, p, pingouin);
+					if(dep!=null) {
+						p.deplacement(pingouin, dep);
+						joue = true;
+					}
 				}
 			}				
 			/* ----- Fin du tour ----- */
 			System.out.println(""+p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") terminé.");
-			p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
 		} else {
 			System.out.println(p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") ne peut plus jouer");
-			p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
-		}		
+		}	
+		p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
 	}
 	
 	public static Pingouin choixPingouin(BufferedReader br, Partie p) {

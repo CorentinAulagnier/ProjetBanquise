@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 
 /**
  * Class Partie -> cree et gere la partie
@@ -238,14 +239,37 @@ public class Partie {
 	 * Retourne le joueur gagnant
 	 */
 
-	public Joueur getGagnant() {
-		Joueur j = joueurs[0];
-		for(int i = 1; i<nbJoueurs;i++ ) {
-			if(joueurs[i].poissonsManges>j.poissonsManges || (joueurs[i].poissonsManges==j.poissonsManges && joueurs[i].nbTuiles>j.nbTuiles)) {
-				j = joueurs[i];
+	public ArrayList<Joueur> getGagnant() {
+		int scoremax = getScoreMax();
+		int nbTuilesMax = getNbTuiles(scoremax);
+		ArrayList<Joueur> gagnants = new ArrayList<Joueur>();
+		
+		for(int i = 0; i<nbJoueurs;i++ ) {
+			if(joueurs[i].poissonsManges == scoremax && joueurs[i].nbTuiles == nbTuilesMax) {
+				gagnants.add(joueurs[i]);
 			}
 		}
-		return j;
+		return gagnants;
+	}
+	
+	public int getScoreMax() {
+		int max =0;
+		for(int i = 0; i<nbJoueurs;i++ ) {
+			if(joueurs[i].poissonsManges >max) {
+				max = joueurs[i].poissonsManges;
+			}
+		}
+		return max;
+	}
+	
+	public int getNbTuiles(int scoremax) {
+		int NbTuiles =0;
+		for(int i = 0; i<nbJoueurs;i++ ) {
+			if(joueurs[i].poissonsManges == scoremax && joueurs[i].nbTuiles > NbTuiles) {
+				NbTuiles = joueurs[i].nbTuiles;
+			}
+		}
+		return NbTuiles;
 	}
 	
 	/**
@@ -343,11 +367,12 @@ public class Partie {
 	/**
 	 * Tue les pingouins morts
 	 */
+	
 	public void verifierPingouinActif() {
 		for(int i = 0; i<nbJoueurs; i++) {
 			for(int j = 0; j<joueurs[i].nbPingouin; j++) {
 				Pingouin pin = joueurs[i].myPingouins[j];
-				if (b.nePeutPlusBouger(pin)) {
+				if (pin.actif == true && b.nePeutPlusBouger(pin)) {
 					manger(pin.position);
 					b.getTuile(pin.position).enlevePingouin();
 					pin.actif = false;

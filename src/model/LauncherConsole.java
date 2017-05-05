@@ -224,8 +224,16 @@ public class LauncherConsole {
 	}
 	
 	public static void finPartie(Partie p) {
-		Joueur j = p.getGagnant();
-		System.out.println("Partie terminée.\n"+j.nom+"a gagné la partie avec "+String.valueOf(j.poissonsManges)+" poissons mangés !");
+		ArrayList<Joueur> joueurs = p.getGagnant();
+		if(joueurs.size()>1) {
+			System.out.print("Partie terminée.\nLes joueurs ");
+			for(Joueur j : joueurs) {
+				System.out.print(j.nom+" ");
+			}
+			System.out.print("ont gagnés la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
+		} else {
+			System.out.print("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
+		}
 	}
 	
 	

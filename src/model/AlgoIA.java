@@ -28,10 +28,9 @@ public class AlgoIA {
      *    - 4 = Milieu gauche
      *    - 5 = Haut gauche
      */
-    
     /* 
      * Decoupage du terrain en 8 zones 
-    */
+     */
     private void fillStructplat() {
         fillplathhg();
         fillplathbg();
@@ -44,6 +43,7 @@ public class AlgoIA {
     }
 
     private void fillplathhg() {     /* Zone 1 : moitié superieure gauche du carre haut gauche */
+
         platHHG.add(new Coordonnees(0, 0));
         platHHG.add(new Coordonnees(0, 1));
         platHHG.add(new Coordonnees(1, 0));
@@ -52,6 +52,7 @@ public class AlgoIA {
     }
 
     private void fillplathbg() {    /* Zone 2 : moitié inferieure droite du carre haut gauche */
+
         platHBG.add(new Coordonnees(0, 2));
         platHBG.add(new Coordonnees(0, 3));
         platHBG.add(new Coordonnees(1, 2));
@@ -65,6 +66,7 @@ public class AlgoIA {
     }
 
     private void fillplathhd() {    /* Zone 3 : moitié superieure droite du carre haut droit */
+
         platHHD.add(new Coordonnees(0, 5));
         platHHD.add(new Coordonnees(0, 6));
         platHHD.add(new Coordonnees(1, 6));
@@ -73,6 +75,7 @@ public class AlgoIA {
     }
 
     private void fillplathbd() {    /* Zone 4 : moitié inferieure gauche du carre haut droit */
+
         platHBD.add(new Coordonnees(0, 4));
         platHHD.add(new Coordonnees(1, 4));
         platHHD.add(new Coordonnees(1, 5));
@@ -87,6 +90,7 @@ public class AlgoIA {
     }
 
     private void fillplatbhg() {    /* Zone 5 : moitié superieure droite du carre bas gauche */
+
         platBHG.add(new Coordonnees(4, 0));
         platHBD.add(new Coordonnees(4, 1));
         platHBD.add(new Coordonnees(4, 2));
@@ -102,6 +106,7 @@ public class AlgoIA {
     }
 
     private void fillplatbbg() {    /* Zone 6 : moitié inferieure gauche du carre bas gauche */
+
         platBBG.add(new Coordonnees(5, 0));
         platBBG.add(new Coordonnees(6, 0));
         platBBG.add(new Coordonnees(7, 0));
@@ -110,6 +115,7 @@ public class AlgoIA {
     }
 
     private void fillplatbhd() {    /* Zone 7 : moitié superieure gauche du carre bas droit */
+
         platBHD.add(new Coordonnees(4, 3));
         platBHD.add(new Coordonnees(4, 4));
         platBHD.add(new Coordonnees(4, 5));
@@ -125,11 +131,21 @@ public class AlgoIA {
     }
 
     private void fillplatbbd() {     /* Zone 8 : moitié inferieure droit du carre bas droit */
+
         platBBD.add(new Coordonnees(5, 7));
         platBBD.add(new Coordonnees(6, 6));
         platBBD.add(new Coordonnees(7, 6));
         platBBD.add(new Coordonnees(7, 7));
 
+    }
+
+    private Coordonnees containsThree(Partie p, ArrayList<Coordonnees> list) { // renvoie une case à 3, ou une valeur spéciale si non trouvée
+        for (int i = 0; i < list.size(); i++) {
+            if ((p.b.getTuile(list.get(i)).nbPoissons == 3) && !(p.b.getTuile(list.get(i)).aUnPingouin)) {
+                return list.get(i);
+            }
+        }
+        return new Coordonnees(-1, -1); // valeur spéciale
     }
 
     /**
@@ -138,7 +154,7 @@ public class AlgoIA {
     /* Renvoie la coordonnees de la case choisie par l'IA Facile pour le placement du pingouin
      * Case choisie aleatoirement 
      */
-    public Coordonnees placementFacile(Banquise b) { 
+    public Coordonnees placementFacile(Partie p) {
         Random r = new Random();
 
         int i = 0;
@@ -148,20 +164,20 @@ public class AlgoIA {
 
             if (i % 2 == 0) {
                 j = r.nextInt(7);       // Choix aleatoire de la tuile 
+            }else {
                 j = r.nextInt(8);
             }
-        } while (!b.getTuile(new Coordonnees(i, j)).aUnPingouin);
+        } while (!((p.b.getTuile(new Coordonnees(i, j)) != null) && (!p.b.getTuile(new Coordonnees(i, j)).aUnPingouin)));
 
         return new Coordonnees(i, j);
     }
-    
-    
+
     /* Renvoie un couple de coordonnees :
      * La premiere represente la position du pingouin choisi avant le deplacement
      * La seconde represente la position du pingouin choisi apres le deplacement
      * Case choisie aleatoirement par celles accessibles
      */
-    public CoupleCoordonnees algoFacile(Banquise b) {
+    public CoupleCoordonnees algoFacile(Partie p) {
 
         Random r = new Random();
         CoupleCoordonnees cc;
@@ -175,81 +191,81 @@ public class AlgoIA {
         int nbDeplPossible = 0;
         int dir = 0;
 
-        do {	
+        do {
             nbDeplPossible = 0;
             dir = r.nextInt(6);     // Choix de la direction aleatoire - specification de l'entier en haut de la classe
             if (dir == 0) {         // En haut a droite 
-           
-                while ((b.getTuile(b.getHD(dep)) != null) && (b.getTuile(b.getHD(dep)).nbPoissons != 0) && (!b.getTuile(b.getHD(dep)).aUnPingouin)) {
-                    courant = b.getHD(dep);
+
+                while ((p.b.getTuile(p.b.getHD(dep)) != null) && (p.b.getTuile(p.b.getHD(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getHD(dep)).aUnPingouin)) {
+                    courant = p.b.getHD(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
-                
+
             } else if (dir == 1) { // Au milieu a droite
-                while ((b.getTuile(b.getMD(dep)) != null) && (b.getTuile(b.getMD(dep)).nbPoissons != 0) && (!b.getTuile(b.getMD(dep)).aUnPingouin)) {
-                    courant = b.getMD(dep);
+                while ((p.b.getTuile(p.b.getMD(dep)) != null) && (p.b.getTuile(p.b.getMD(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getMD(dep)).aUnPingouin)) {
+                    courant = p.b.getMD(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
             } else if (dir == 2) { // En bas a droite 
-                while ((b.getTuile(b.getBD(dep)) != null) && (b.getTuile(b.getBD(dep)).nbPoissons != 0) && (!b.getTuile(b.getBD(dep)).aUnPingouin)) {
-                    courant = b.getBD(dep);
+                while ((p.b.getTuile(p.b.getBD(dep)) != null) && (p.b.getTuile(p.b.getBD(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getBD(dep)).aUnPingouin)) {
+                    courant = p.b.getBD(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
             } else if (dir == 3) { // En bas a gauche 
-                while ((b.getTuile(b.getBG(dep)) != null) && (b.getTuile(b.getBG(dep)).nbPoissons != 0) && (!b.getTuile(b.getBG(dep)).aUnPingouin)) {
-                    courant = b.getBG(dep);
+                while ((p.b.getTuile(p.b.getBG(dep)) != null) && (p.b.getTuile(p.b.getBG(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getBG(dep)).aUnPingouin)) {
+                    courant = p.b.getBG(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
             } else if (dir == 4) { // Au milieu a gauche
-                while ((b.getTuile(b.getMG(dep)) != null) && (b.getTuile(b.getMG(dep)).nbPoissons != 0) && (!b.getTuile(b.getMG(dep)).aUnPingouin)) {
-                    courant = b.getMG(dep);
+                while ((p.b.getTuile(p.b.getMG(dep)) != null) && (p.b.getTuile(p.b.getMG(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getMG(dep)).aUnPingouin)) {
+                    courant = p.b.getMG(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
             } else {              // En haut a gauche
-                while ((b.getTuile(b.getHG(dep)) != null) && (b.getTuile(b.getHG(dep)).nbPoissons != 0) && (!b.getTuile(b.getHG(dep)).aUnPingouin)) {
-                    courant = b.getHG(dep);
+                while ((p.b.getTuile(p.b.getHG(dep)) != null) && (p.b.getTuile(p.b.getHG(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getHG(dep)).aUnPingouin)) {
+                    courant = p.b.getHG(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
             }
         } while (nbDeplPossible == 0);
         // Tirage au sort du nb de case a se deplacer 
-        int nbDepl = r.nextInt(nbDeplPossible) + 1; 
+        int nbDepl = r.nextInt(nbDeplPossible) + 1;
         dep = new Coordonnees(i, j);
 
         if (dir == 0) { 			// En haut a droite 
             while (nbDepl != 0) {
-                dep = b.getHD(dep);
+                dep = p.b.getHD(dep);
                 nbDepl--;
             }
         } else if (dir == 1) { 	// Au milieu a droite
             while (nbDepl != 0) {
-                dep = b.getMD(dep);
+                dep = p.b.getMD(dep);
                 nbDepl--;
             }
         } else if (dir == 2) { 	// En bas a droite 
             while (nbDepl != 0) {
-                dep = b.getBD(dep);
+                dep = p.b.getBD(dep);
                 nbDepl--;
             }
         } else if (dir == 3) { 	// En bas a gauche 
             while (nbDepl != 0) {
-                dep = b.getBG(dep);
+                dep = p.b.getBG(dep);
                 nbDepl--;
             }
         } else if (dir == 4) { 	// Au milieu a gauche
             while (nbDepl != 0) {
-                dep = b.getMG(dep);
+                dep = p.b.getMG(dep);
                 nbDepl--;
             }
         } else {				// En haut a gauche
             while (nbDepl != 0) {
-                dep = b.getHG(dep);
+                dep = p.b.getHG(dep);
                 nbDepl--;
             }
 
@@ -263,37 +279,47 @@ public class AlgoIA {
     /**
      * ****************************************************************************************************
      */
-    public Coordonnees placementMoyen(Banquise b) {
+    /* Renvoie les coordonnees de la tuile 3 la plus proche de la coordonnee c 
+     */
+    public Coordonnees meilleur3(Partie p, Coordonnees c) {
         Stack<Coordonnees> pile = new Stack<>();
-        Coordonnees c = new Coordonnees(3, 3);
-        Tuile tuileDep = b.getTuile(c);
+        Tuile tuileDep = p.b.getTuile(c);
         pile.push(c);
-        while ((!pile.empty()) && (tuileDep.nbPoissons != 3) && (tuileDep.aUnPingouin)) {
+        while ((!pile.empty()) && (!((tuileDep.nbPoissons == 3) && (!tuileDep.aUnPingouin)))) { // tant que la case n'est pas valide : valide = (nbPoissons=3 && !aUnPingouin)
             c = pile.pop();
-            tuileDep = b.getTuile(c);
-            if (b.getHD(c) != null) {
-                pile.push(b.getHD(c));
+            tuileDep = p.b.getTuile(c);
+
+            if (p.b.getHD(c) != null) {
+                pile.push(p.b.getHD(c));
             }
-            if (b.getMD(c) != null) {
-                pile.push(b.getMD(c));
+            if (p.b.getMD(c) != null) {
+                pile.push(p.b.getMD(c));
             }
-            if (b.getBD(c) != null) {
-                pile.push(b.getBD(c));
+            if (p.b.getBD(c) != null) {
+                pile.push(p.b.getBD(c));
             }
-            if (b.getBG(c) != null) {
-                pile.push(b.getBG(c));
+            if (p.b.getBG(c) != null) {
+                pile.push(p.b.getBG(c));
             }
-            if (b.getMG(c) != null) {
-                pile.push(b.getMG(c));
+            if (p.b.getMG(c) != null) {
+                pile.push(p.b.getMG(c));
             }
-            if (b.getHG(c) != null) {
-                pile.push(b.getHG(c));
+            if (p.b.getHG(c) != null) {
+                pile.push(p.b.getHG(c));
             }
         }
         return c;
     }
 
-    public ArbreGraphe CreationArbre(Coordonnees c, Banquise b, int dir, int nbcoupsmax) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
+    /* Fonction de placement moyen
+     * Renvoie la coordonee de la tuile contenant 3 poisssons la plus au centre
+     */
+    public Coordonnees placementMoyen(Partie p) {
+        Coordonnees c = new Coordonnees(3, 3);
+        return meilleur3(p, c);
+    }
+
+    public ArbreGraphe CreationArbre(Coordonnees c, Partie p, int dir, int nbcoupsmax) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
 
         if (nbcoupsmax == 0) {
             return null;
@@ -301,51 +327,40 @@ public class AlgoIA {
 
         ArbreGraphe abr = new ArbreGraphe();
         abr.c = c;
-        Tuile tuile = b.getTuile(c);
+        Tuile tuile = p.b.getTuile(c);
         abr.poids = tuile.nbPoissons;
         tuile.nbPoissons = 0;
-        b.setTuile(c, tuile);
-        if ((b.getTuile(b.getBG(c)) != null) && (!b.getTuile(b.getBG(c)).aUnPingouin) && (b.getTuile(b.getBG(c)).nbPoissons != 0)) {
-            if (dir == 3) {
-                abr.noeudBG = CreationArbre(b.getBG(c), b, 3, nbcoupsmax);
-            } else {
-                abr.noeudBG = CreationArbre(b.getBG(c), b, 3, nbcoupsmax - 1);
-            }
+        p.b.setTuile(c, tuile);
+
+        Coordonnees a = new Coordonnees(c.x, c.y);
+        while ((p.b.getTuile(p.b.getBG(a)) != null) && (!p.b.getTuile(p.b.getBG(a)).aUnPingouin) && (p.b.getTuile(p.b.getBG(a)).nbPoissons != 0)) {
+            abr.noeudBG.add(CreationArbre(p.b.getBG(a), p, 3, nbcoupsmax - 1));
+            a = p.b.getBG(a);
         }
-        if (b.getTuile(b.getMG(c)) != null && (!b.getTuile(b.getMG(c)).aUnPingouin) && (b.getTuile(b.getMG(c)).nbPoissons != 0)) {
-            if (dir == 4) {
-                abr.noeudMG = CreationArbre(b.getMG(c), b, 4, nbcoupsmax);
-            } else {
-                abr.noeudMG = CreationArbre(b.getMG(c), b, 4, nbcoupsmax - 1);
-            }
+        a = new Coordonnees(c.x, c.y);
+        while (p.b.getTuile(p.b.getMG(c)) != null && (!p.b.getTuile(p.b.getMG(c)).aUnPingouin) && (p.b.getTuile(p.b.getMG(c)).nbPoissons != 0)) {
+            abr.noeudMG.add(CreationArbre(p.b.getMG(c), p, 4, nbcoupsmax - 1));
+            a = p.b.getMG(a);
         }
-        if (b.getTuile(b.getHG(c)) != null && (!b.getTuile(b.getHG(c)).aUnPingouin) && (b.getTuile(b.getHG(c)).nbPoissons != 0)) {
-            if (dir == 5) {
-                abr.noeudHG = CreationArbre(b.getHG(c), b, 5, nbcoupsmax);
-            } else {
-                abr.noeudHG = CreationArbre(b.getHG(c), b, 5, nbcoupsmax - 1);
-            }
+        a = new Coordonnees(c.x, c.y);
+        while (p.b.getTuile(p.b.getHG(c)) != null && (!p.b.getTuile(p.b.getHG(c)).aUnPingouin) && (p.b.getTuile(p.b.getHG(c)).nbPoissons != 0)) {
+            abr.noeudHG.add(CreationArbre(p.b.getHG(c), p, 5, nbcoupsmax - 1));
+            a = p.b.getHG(a);
         }
-        if (b.getTuile(b.getHD(c)) != null && (!b.getTuile(b.getHD(c)).aUnPingouin) && (b.getTuile(b.getHD(c)).nbPoissons != 0)) {
-            if (dir == 0) {
-                abr.noeudHD = CreationArbre(b.getHD(c), b, 0, nbcoupsmax);
-            } else {
-                abr.noeudHD = CreationArbre(b.getHD(c), b, 0, nbcoupsmax - 1);
-            }
+        a = new Coordonnees(c.x, c.y);
+        while (p.b.getTuile(p.b.getHD(c)) != null && (!p.b.getTuile(p.b.getHD(c)).aUnPingouin) && (p.b.getTuile(p.b.getHD(c)).nbPoissons != 0)) {
+            abr.noeudHD.add(CreationArbre(p.b.getHD(c), p, 0, nbcoupsmax - 1));
+            a = p.b.getHD(a);
         }
-        if (b.getTuile(b.getMD(c)) != null && (!b.getTuile(b.getMD(c)).aUnPingouin) && (b.getTuile(b.getMD(c)).nbPoissons != 0)) {
-            if (dir == 1) {
-                abr.noeudMD = CreationArbre(b.getMD(c), b, 1, nbcoupsmax);
-            } else {
-                abr.noeudMD = CreationArbre(b.getMD(c), b, 1, nbcoupsmax - 1);
-            }
+        a = new Coordonnees(c.x, c.y);
+        while (p.b.getTuile(p.b.getMD(c)) != null && (!p.b.getTuile(p.b.getMD(c)).aUnPingouin) && (p.b.getTuile(p.b.getMD(c)).nbPoissons != 0)) {
+            abr.noeudMD.add(CreationArbre(p.b.getMD(c), p, 1, nbcoupsmax - 1));
+            a = p.b.getMG(a);
         }
-        if (b.getTuile(b.getBD(c)) != null && (!b.getTuile(b.getBD(c)).aUnPingouin) && (b.getTuile(b.getBD(c)).nbPoissons != 0)) {
-            if (dir == 2) {
-                abr.noeudBD = CreationArbre(b.getBD(c), b, 2, nbcoupsmax);
-            } else {
-                abr.noeudBD = CreationArbre(b.getBD(c), b, 2, nbcoupsmax - 1);
-            }
+        a = new Coordonnees(c.x, c.y);
+        while (p.b.getTuile(p.b.getBD(c)) != null && (!p.b.getTuile(p.b.getBD(c)).aUnPingouin) && (p.b.getTuile(p.b.getBD(c)).nbPoissons != 0)) {
+            abr.noeudBD.add(CreationArbre(p.b.getBD(c), p, 2, nbcoupsmax - 1));
+            a = p.b.getBD(a);
         }
 
         return abr;
@@ -371,57 +386,33 @@ public class AlgoIA {
         CoupleCoordonneesInt val6 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
 
         if (abr.noeudBD != null) {
-            val1 = parcoursGraphe(abr.noeudBD, nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
-            if (((dir == 2) || (dir == 6)) && abr.noeudBD.noeudBD != null) {
-                CoupleCoordonneesInt val12 = parcoursGraphe(abr.noeudBD, nbCoupsmax, nbCoups, 2, somme, coord1stchoice);          // On ne choisi pas le noeud, on continue dans la meme direction
-                if (val1.i < val12.i) {
-                    val1 = val12;
-                }
+            for (int i = 0; i < abr.noeudBD.size(); i++) {
+                val1 = parcoursGraphe(abr.noeudBD.get(i), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
         if (abr.noeudMD != null) {
-            val2 = parcoursGraphe(abr.noeudMD, nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
-            if (((dir == 1) || (dir == 6)) && abr.noeudMD.noeudMD != null) {
-                CoupleCoordonneesInt val22 = parcoursGraphe(abr.noeudMD, nbCoupsmax, nbCoups, 1, somme, coord1stchoice);          // On ne choisi pas le noeud, on continue dans la meme direction
-                if (val2.i < val22.i) {
-                    val2 = val22;
-                }
+            for (int i = 0; i < abr.noeudMD.size(); i++) {
+                val2 = parcoursGraphe(abr.noeudMD.get(i), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
         if (abr.noeudHD != null) {
-            val3 = parcoursGraphe(abr.noeudHD, nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
-            if (((dir == 0) || (dir == 6)) && abr.noeudHD.noeudHD != null) {
-                CoupleCoordonneesInt val32 = parcoursGraphe(abr.noeudHD, nbCoupsmax, nbCoups, 0, somme, coord1stchoice);          // On ne choisi pas le noeud, on continue dans la meme direction
-                if (val3.i < val32.i) {
-                    val3 = val32;
-                }
+            for (int i = 0; i < abr.noeudHD.size(); i++) {
+                val3 = parcoursGraphe(abr.noeudHD.get(i), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
         if (abr.noeudHG != null) {
-            val4 = parcoursGraphe(abr.noeudHG, nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
-            if (((dir == 5) || (dir == 6)) && abr.noeudHG.noeudHG != null) {
-                CoupleCoordonneesInt val42 = parcoursGraphe(abr.noeudHG, nbCoupsmax, nbCoups, 5, somme, coord1stchoice);          // On ne choisi pas le noeud, on continue dans la meme direction
-                if (val4.i < val42.i) {
-                    val4 = val42;
-                }
+            for (int i = 0; i < abr.noeudHG.size(); i++) {
+                val4 = parcoursGraphe(abr.noeudHG.get(i), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
         if (abr.noeudMG != null) {
-            val5 = parcoursGraphe(abr.noeudMG, nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
-            if (((dir == 4) || (dir == 6)) && abr.noeudMG.noeudMG != null) {
-                CoupleCoordonneesInt val52 = parcoursGraphe(abr.noeudMG, nbCoupsmax, nbCoups, 4, somme, coord1stchoice);          // On ne choisi pas le noeud, on continue dans la meme direction
-                if (val5.i < val52.i) {
-                    val5 = val52;
-                }
+            for (int i = 0; i < abr.noeudMG.size(); i++) {
+                val5 = parcoursGraphe(abr.noeudMG.get(i), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
         if (abr.noeudBG != null) {
-            val6 = parcoursGraphe(abr.noeudBG, nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
-            if (((dir == 3) || (dir == 6)) && abr.noeudBG.noeudBG != null) {
-                CoupleCoordonneesInt val62 = parcoursGraphe(abr.noeudBG, nbCoupsmax, nbCoups, 3, somme, coord1stchoice);          // On ne choisi pas le noeud, on continue dans la meme direction
-                if (val6.i < val62.i) {
-                    val6 = val62;
-                }
+            for (int i = 0; i < abr.noeudBG.size(); i++) {
+                val6 = parcoursGraphe(abr.noeudBG.get(i), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
             }
         }
 
@@ -441,14 +432,14 @@ public class AlgoIA {
         }
     }
 
-    public CoupleCoordonnees algoMoyen(Banquise b) {
+    public CoupleCoordonnees algoMoyen(Partie p) {
         int nbcoupsrecherches = 2; // Choix du "2" très réfléchi mais modifiable.
         int max = 0;
         Coordonnees coordmax = null;
         int indx = 0;
         ArrayList<CoupleCoordonneesInt> poidsPingouins = new ArrayList<>();
         for (int i = 0; i < myIA.nbPingouin; i++) {
-            ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, b, -1, nbcoupsrecherches);
+            ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, p, -1, nbcoupsrecherches);
             CoupleCoordonneesInt coordint = parcoursGraphe(abr, nbcoupsrecherches, nbcoupsrecherches, 6, 0, new Coordonnees(0, 0));
             poidsPingouins.add(coordint);
         }
@@ -461,15 +452,88 @@ public class AlgoIA {
         return new CoupleCoordonnees(myIA.myPingouins[indx].position, coordmax);
     }
 
+    /* Renvoie le numero de Joueur correspondant à l'IA
+     */
+    public int notreNumeroDeJoueur(Partie p) {
+        int num = 0;
+        while ((num != p.nbJoueurs) && (p.joueurs[num].nom.equals(myIA.nom))) {   // mettre une methode equals dans la classe abstraite Joueur ????????????????????????????
+            num = num + 1;
+        }
+        return num;
+    }
 
+    public int numJoueurAdversaire(Partie p, int notreNum) {
+        int num = 0;
+        if (notreNum == 0) {
+            num = 1;
+        }
+        return num;
+    }
+
+    public int nbPingouinActuel(Joueur j) {
+        int nbPing = 0;
+        while ((nbPing != j.nbPingouin) && (j.myPingouins[nbPing] != null)) {
+            nbPing = nbPing + 1;
+        }
+        return nbPing;
+    }
 
     /* Placement des pingouins pour l'IA difficile
      * On regarde si la banquise a une configuration speciale, par exemple :
      * 
      * Sinon on utilise le Placement Moyen 
-     */ 
-    public Coordonnees placementDificile(Banquise b) { 
-        return null;
+     */
+    public Coordonnees PlacementDifficile(Partie p) {
+
+        Coordonnees retour = new Coordonnees();
+        int notreNum = notreNumeroDeJoueur(p);
+        int notreNbPingouin = nbPingouinActuel(p.joueurs[notreNum]);
+        Coordonnees riri = p.joueurs[notreNum].myPingouins[0].position;
+
+        if (p.nbJoueurs == 2) {
+            int ennemiNum = numJoueurAdversaire(p, notreNum);
+            int ennemiNbPingouin = nbPingouinActuel(p.joueurs[ennemiNum]);
+
+            if (ennemiNbPingouin <= 3) { // Si l'adversaire a placé 0, 1, 2 ou 3 pingouins
+                retour = placementMoyen(p);
+            } else {     // l'adversaire n'a plus qu'1 ou 0 pingouin à placer
+                Coordonnees c2;
+
+                if (!(c2 = containsThree(p, platHHG)).equals(new Coordonnees(-1, -1))) {
+                    Coordonnees p1 = p.joueurs[ennemiNum].myPingouins[0].position;
+                    Coordonnees p2 = p.joueurs[ennemiNum].myPingouins[1].position;
+                    Coordonnees p3 = p.joueurs[ennemiNum].myPingouins[2].position;
+                    if (platHHG.contains(p1) || platHHG.contains(p2) || platHHG.contains(p3)) {
+                        Coordonnees p0 = new Coordonnees(0, 0);
+                        if ((p1.equals(p0) || p2.equals(p0) || p3.equals(p0)) && (!p.b.getTuile(new Coordonnees(1, 1)).aUnPingouin)) {
+                            retour = new Coordonnees(1, 1);
+                        } else {
+                            if (!(c2 = containsThree(p, platHBG)).equals(new Coordonnees(-1, -1))) {
+                                boolean condition = false; // nous n'avons pas de pingu dans la zone HBG
+                                for (int i = 0; i < notreNbPingouin; i++) {
+                                    if (platHBG.contains(p.joueurs[notreNum].myPingouins[i].position)) {
+                                        condition = true;
+                                    }
+                                }
+                                if (!condition) {
+                                    retour = c2;
+                                } else {
+                                    retour = placementMoyen(p);
+                                }
+                            } else {
+                                retour = placementMoyen(p);
+                            }
+                        }
+                    }
+                }
+            }
+
+        } else if (p.nbJoueurs == 3) {
+
+        } else {
+
+        }
+        return retour;
     }
 
 }

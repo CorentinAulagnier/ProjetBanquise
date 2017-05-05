@@ -41,7 +41,7 @@ public class LauncherConsole {
 			p.b = new Banquise();
 			/* ----- Creation des joueurs ----- */
 			for(int num_joueur = 0; num_joueur<p.nbJoueurs;num_joueur++) {
-				System.out.println("Joueur "+String.valueOf(num_joueur)+", quel est votre nom ?");
+				System.out.println("Joueur "+String.valueOf(num_joueur)+", quel est votre nom ? (Entrez \"IA\" pour jouer contre l'ordinateur).");
 				String nom = br.readLine();
 				if (nom.equals("IA")) {
 					System.out.println("Quel niveau voulez vous pour l'IA ? (1 à 2)");

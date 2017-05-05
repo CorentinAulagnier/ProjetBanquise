@@ -59,9 +59,9 @@ public class IA extends Joueur {
 		
 		switch (level) {
 			case 1:
-				return player.algoFacile(p.b);
+				return player.algoFacile(p);
 			case 2:
-				return player.algoMoyen(p.b);
+				return player.algoMoyen(p);
 			case 3:
 				//return player.algoDifficile(p.b);
 				break;
@@ -81,9 +81,9 @@ public class IA extends Joueur {
 		
 		switch (level) {
 			case 1:
-				return player.placementFacile(p.b);
+				return player.placementFacile(p);
 			case 2:
-				return player.placementMoyen(p.b);
+				return player.placementMoyen(p);
 			case 3:
 				//return player.placementDifficile(p.b);
 				break;

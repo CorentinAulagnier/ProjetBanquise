@@ -1,8 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
-import java.util.Stack;
 
 public class AlgoIA {
 
@@ -282,30 +282,30 @@ public class AlgoIA {
     /* Renvoie les coordonnees de la tuile 3 la plus proche de la coordonnee c 
      */
     public Coordonnees meilleur3(Partie p, Coordonnees c) {
-        Stack<Coordonnees> pile = new Stack<>();
+        LinkedList<Coordonnees> file = new LinkedList<>();
         Tuile tuileDep = p.b.getTuile(c);
-        pile.push(c);
-        while ((!pile.empty()) && (!((tuileDep.nbPoissons == 3) && (!tuileDep.aUnPingouin)))) { // tant que la case n'est pas valide : valide = (nbPoissons=3 && !aUnPingouin)
-            c = pile.pop();
+        file.add(c);
+        while ((!file.isEmpty()) && (!((tuileDep.nbPoissons == 3) && (!tuileDep.aUnPingouin)))) { // tant que la case n'est pas valide : valide = (nbPoissons=3 && !aUnPingouin)
+            c = file.pop();
             tuileDep = p.b.getTuile(c);
 
             if (p.b.getHD(c) != null) {
-                pile.push(p.b.getHD(c));
+                file.add(p.b.getHD(c));
             }
             if (p.b.getMD(c) != null) {
-                pile.push(p.b.getMD(c));
+                file.add(p.b.getMD(c));
             }
             if (p.b.getBD(c) != null) {
-                pile.push(p.b.getBD(c));
+                file.add(p.b.getBD(c));
             }
             if (p.b.getBG(c) != null) {
-                pile.push(p.b.getBG(c));
+                file.add(p.b.getBG(c));
             }
             if (p.b.getMG(c) != null) {
-                pile.push(p.b.getMG(c));
+                file.add(p.b.getMG(c));
             }
             if (p.b.getHG(c) != null) {
-                pile.push(p.b.getHG(c));
+                file.add(p.b.getHG(c));
             }
         }
         return c;
@@ -338,28 +338,28 @@ public class AlgoIA {
             a = p.b.getBG(a);
         }
         a = new Coordonnees(c.x, c.y);
-        while (p.b.getTuile(p.b.getMG(c)) != null && (!p.b.getTuile(p.b.getMG(c)).aUnPingouin) && (p.b.getTuile(p.b.getMG(c)).nbPoissons != 0)) {
-            abr.noeudMG.add(CreationArbre(p.b.getMG(c), p, 4, nbcoupsmax - 1));
+        while (p.b.getTuile(p.b.getMG(a)) != null && (!p.b.getTuile(p.b.getMG(a)).aUnPingouin) && (p.b.getTuile(p.b.getMG(a)).nbPoissons != 0)) {
+            abr.noeudMG.add(CreationArbre(p.b.getMG(a), p, 4, nbcoupsmax - 1));
             a = p.b.getMG(a);
         }
         a = new Coordonnees(c.x, c.y);
-        while (p.b.getTuile(p.b.getHG(c)) != null && (!p.b.getTuile(p.b.getHG(c)).aUnPingouin) && (p.b.getTuile(p.b.getHG(c)).nbPoissons != 0)) {
-            abr.noeudHG.add(CreationArbre(p.b.getHG(c), p, 5, nbcoupsmax - 1));
+        while (p.b.getTuile(p.b.getHG(a)) != null && (!p.b.getTuile(p.b.getHG(a)).aUnPingouin) && (p.b.getTuile(p.b.getHG(a)).nbPoissons != 0)) {
+            abr.noeudHG.add(CreationArbre(p.b.getHG(a), p, 5, nbcoupsmax - 1));
             a = p.b.getHG(a);
         }
         a = new Coordonnees(c.x, c.y);
-        while (p.b.getTuile(p.b.getHD(c)) != null && (!p.b.getTuile(p.b.getHD(c)).aUnPingouin) && (p.b.getTuile(p.b.getHD(c)).nbPoissons != 0)) {
-            abr.noeudHD.add(CreationArbre(p.b.getHD(c), p, 0, nbcoupsmax - 1));
+        while (p.b.getTuile(p.b.getHD(a)) != null && (!p.b.getTuile(p.b.getHD(a)).aUnPingouin) && (p.b.getTuile(p.b.getHD(a)).nbPoissons != 0)) {
+            abr.noeudHD.add(CreationArbre(p.b.getHD(a), p, 0, nbcoupsmax - 1));
             a = p.b.getHD(a);
         }
         a = new Coordonnees(c.x, c.y);
-        while (p.b.getTuile(p.b.getMD(c)) != null && (!p.b.getTuile(p.b.getMD(c)).aUnPingouin) && (p.b.getTuile(p.b.getMD(c)).nbPoissons != 0)) {
-            abr.noeudMD.add(CreationArbre(p.b.getMD(c), p, 1, nbcoupsmax - 1));
+        while (p.b.getTuile(p.b.getMD(a)) != null && (!p.b.getTuile(p.b.getMD(a)).aUnPingouin) && (p.b.getTuile(p.b.getMD(a)).nbPoissons != 0)) {
+            abr.noeudMD.add(CreationArbre(p.b.getMD(a), p, 1, nbcoupsmax - 1));
             a = p.b.getMG(a);
         }
         a = new Coordonnees(c.x, c.y);
-        while (p.b.getTuile(p.b.getBD(c)) != null && (!p.b.getTuile(p.b.getBD(c)).aUnPingouin) && (p.b.getTuile(p.b.getBD(c)).nbPoissons != 0)) {
-            abr.noeudBD.add(CreationArbre(p.b.getBD(c), p, 2, nbcoupsmax - 1));
+        while (p.b.getTuile(p.b.getBD(a)) != null && (!p.b.getTuile(p.b.getBD(a)).aUnPingouin) && (p.b.getTuile(p.b.getBD(a)).nbPoissons != 0)) {
+            abr.noeudBD.add(CreationArbre(p.b.getBD(a), p, 2, nbcoupsmax - 1));
             a = p.b.getBD(a);
         }
 
@@ -437,18 +437,25 @@ public class AlgoIA {
         int max = 0;
         Coordonnees coordmax = null;
         int indx = 0;
+        System.out.println(myIA.nbPingouin);
         ArrayList<CoupleCoordonneesInt> poidsPingouins = new ArrayList<>();
         for (int i = 0; i < myIA.nbPingouin; i++) {
             ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, p, -1, nbcoupsrecherches);
             CoupleCoordonneesInt coordint = parcoursGraphe(abr, nbcoupsrecherches, nbcoupsrecherches, 6, 0, new Coordonnees(0, 0));
             poidsPingouins.add(coordint);
         }
+                System.out.println("poid Pingouin size" + poidsPingouins.size());
+
         for (int i = 0; i < poidsPingouins.size(); i++) {
             if (poidsPingouins.get(i).i > max) {
                 max = poidsPingouins.get(i).i;
                 coordmax = poidsPingouins.get(i).c;
             }
         }
+        System.out.println("coordmax" + coordmax);
+        System.out.println("max "+max);
+
+        
         return new CoupleCoordonnees(myIA.myPingouins[indx].position, coordmax);
     }
 

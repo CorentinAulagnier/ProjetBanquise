@@ -55,6 +55,6 @@
       </graphic>
     </Button>
     <Text layoutX="365.0" layoutY="58.0" scaleX="3.781640393045433" scaleY="3.8068526676456194" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Règles " />
-    <TextArea layoutX="471.0" layoutY="160.0" prefHeight="282.0" prefWidth="316.0" style="-fx-background-color :transparent;&#10;-fx-font-size: 24px;" text="Durant votre tour vous ne pouvez déplacer que vos pingouins, ils seront en surbrillance.&#10;Pour celacliquez sur le pingouin puis faites le glisser sur une des cases jaune. Relachez la souris." wrapText="true" />
+    <TextArea layoutX="471.0" layoutY="160.0" prefHeight="282.0" prefWidth="316.0" style="-fx-background-color :transparent;&#10;-fx-font-size: 24px;" text="Durant votre tour vous ne pouvez déplacer que vos pingouins, ils seront en surbrillance.&#10;Pour cela cliquez sur le pingouin puis faites le glisser sur une des cases jaune. Relachez la souris." wrapText="true" />
   </children>
 </AnchorPane>

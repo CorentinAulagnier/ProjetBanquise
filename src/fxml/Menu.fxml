@@ -36,27 +36,51 @@
       </top>
     </BorderPane>
     <Region layoutX="1.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" />
-    <MenuButton contentDisplay="GRAPHIC_ONLY" layoutX="7.0" layoutY="529.0" minHeight="78.0" minWidth="65.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="65.0" rotate="270.0" style="-fx-background-color: transparent;" text="">
+    <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="14.0" layoutY="533.0" minHeight="56.866546630859375" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="56.866546630859375" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;&#10;" text="">
       <graphic>
-        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="12.0" x="0.0">
           <image>
             <Image url="@../../../ProjetPing/Images/parametres.png" />
           </image>
         </ImageView>
       </graphic>
       <items>
-        <MenuItem mnemonicParsing="false" text="Musique">
+        <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
           <graphic>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../../../ProjetPing/Images/music-note-1275177_960_720.png" />
               </image>
             </ImageView>
           </graphic>
         </MenuItem>
-        <MenuItem mnemonicParsing="false" text="Son" />
-        <MenuItem mnemonicParsing="false" text="Aide" />
-        <MenuItem mnemonicParsing="false" text="Sortie" />
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/son.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/aide.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/quit.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
       </items>
     </MenuButton>
     <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="300.0" minHeight="214.0" prefHeight="236.0" prefWidth="800.0">

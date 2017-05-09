@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
+      <image>
+        <Image url="@../../../ProjetPing/Images/banquise.jpg" />
+      </image>
+    </ImageView>
+    <BorderPane blendMode="SRC_OVER" layoutX="0.0" layoutY="0.0" mouseTransparent="false" prefHeight="600.0" prefWidth="800.0">
+      <bottom>
+        <HBox prefHeight="64.0" prefWidth="800.0" />
+      </bottom>
+      <top>
+        <BorderPane prefHeight="294.0" prefWidth="800.0" />
+      </top>
+    </BorderPane>
+    <Region layoutX="1.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" />
+    <Text fill="BLACK" layoutX="345.0" layoutY="47.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle Partie">
+      <font>
+        <Font name="Arial" size="15.0" />
+      </font>
+    </Text>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../../ProjetPing/Images/retour.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="529.0" minHeight="56.866546630859375" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="56.866546630859375" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;&#10;" text="">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="12.0" x="0.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/parametres.png" />
+          </image>
+        </ImageView>
+      </graphic>
+      <items>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/quit.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/aide.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Acceuil">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/igloo.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/music-note-1275177_960_720.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../../ProjetPing/Images/son.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+      </items>
+    </MenuButton>
+    <Circle fill="#ffffff5a" layoutX="216.0" layoutY="182.0" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
+    <Circle layoutX="216.0" layoutY="441.0" opacity="0.5" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2">
+      <fill>
+        <Color blue="1.000" green="1.000" opacity="0.353" red="1.000" fx:id="x1" />
+      </fill>
+    </Circle>
+    <Circle fill="$x1" layoutX="561.0" layoutY="441.0" opacity="0.5" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
+    <Circle fill="$x1" layoutX="562.0" layoutY="182.0" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
+    <StackPane blendMode="SRC_OVER" cache="false" layoutX="116.0" layoutY="107.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/crevettejaune.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/evejaune.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" focusTraversable="false" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/OrqueJaune.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="true">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/YellowPingo.png" />
+          </image>
+        </ImageView>
+      </children>
+    </StackPane>
+    <StackPane blendMode="SRC_OVER" cache="false" layoutX="116.0" layoutY="367.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <ImageView fitHeight="112.0" fitWidth="112.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../../ProjetPing/Images/cross.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/crevetterouge.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/everouge.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" focusTraversable="false" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/Orquerouge.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/PingouinRouge.png" />
+          </image>
+        </ImageView>
+      </children>
+    </StackPane>
+    <StackPane blendMode="SRC_OVER" cache="false" layoutX="462.0" layoutY="107.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="true">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/crevetteverte.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/eveverte.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" focusTraversable="false" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/OrcVert.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/PingouinVert.png" />
+          </image>
+        </ImageView>
+      </children>
+    </StackPane>
+    <StackPane blendMode="SRC_OVER" cache="false" layoutX="462.0" layoutY="367.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/crevettebleue.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/evebleue.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" focusTraversable="false" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/Orquebleu.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../../ProjetPing/Jour2/joueurs/PingouinBleu.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="112.0" fitWidth="112.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../../ProjetPing/Images/cross.png" />
+          </image>
+        </ImageView>
+      </children>
+    </StackPane>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="156.0" minWidth="55.0" mnemonicParsing="false" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="701.0" layoutY="529.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="55.0" style="-fx-background-color:transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/fleche.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" opacity="0.5" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" opacity="0.5" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" opacity="0.5" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="650.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" opacity="0.5" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="649.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <TextField layoutX="149.0" layoutY="266.0" prefWidth="136.0" />
+    <Label layoutX="181.0" layoutY="67.0" text="Joueur1">
+      <font>
+        <Font size="20.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label font="$x2" layoutX="527.0" layoutY="67.0" text="IA Facile" />
+    <Label font="$x2" layoutX="188.0" layoutY="326.0" text="Aucun" />
+    <Label font="$x2" layoutX="536.0" layoutY="326.0" text="Aucun" />
+    <Label font="$x2" layoutX="484.0" layoutY="270.0" text="Juliette la crevette" />
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="474.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="474.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="636.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="630.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+          <image>
+            <Image url="@../../../ProjetPing/Images/select.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+  </children>
+</AnchorPane>

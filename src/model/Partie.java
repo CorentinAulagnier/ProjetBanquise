@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Class Partie : cree et gere la partie
@@ -41,7 +42,14 @@ public class Partie implements Serializable {
 	 */
 	
 	public Joueur[] joueurs;
-
+	
+	/**
+	 * Piles annuler et refaire
+	 */	
+	public boolean utiliseHistorique = false;
+	public transient Stack<Partie> undo = new Stack<Partie>();
+	public transient Stack<Partie> redo = new Stack<Partie>();
+	
 	/**
 	 * Constructeurs
 	 */
@@ -114,6 +122,8 @@ public class Partie implements Serializable {
 	
 	/**
 	 * Clone de la partie actuelle.
+	 * 
+	 * @return Renvoie la partie clonne
 	 */
 	
 	@Override
@@ -129,6 +139,38 @@ public class Partie implements Serializable {
 		} catch (Exception e){
 			return null;
 		}
+	}
+	
+	/**
+	 * Annuler le dernier coup joue.
+	 * 
+	 * @return vrai si on a le droit d'annuler un coup
+	 */
+	
+	public boolean annuler() {
+		if (!undo.empty()){
+			Partie p = undo.pop().clone();
+			if (!undo.empty()){
+				redo.push(p);
+				return true;
+			} else {
+				undo.push(p);
+			}	
+		}
+		return false;
+	}
+	
+	/**
+	 * Refaire le dernier coup annule.
+	 * 
+	 * @return vrai si on a le droit de retablir un coup
+	 */
+	public boolean retablir() {
+		if (!redo.empty()){
+			undo.push(redo.pop().clone());
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -172,6 +214,8 @@ public class Partie implements Serializable {
 		this.joueurActif = p.joueurActif;
 		this.nbJoueurs = p.nbJoueurs;
 		this.joueurs = p.joueurs;
+		this.undo = new Stack<Partie>();
+		this.redo = new Stack<Partie>();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -500,6 +544,53 @@ public class Partie implements Serializable {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Verifie si on peut annuler un coup. (Un seul joueur)
+	 * 
+	 * @return Renvoie vrai, si il n'y a qu'un seul joueur.
+	 */
+	
+	public boolean peutAnnulerCoup() {
+		boolean res = false;
+		for(int i = 0; i<nbJoueurs; i++) {
+			if (this.joueurs[i].getClass() == Humain.class) { 
+				if (res) {
+					return false;
+				} else {
+					res = true;
+				}
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * Verifie si la partie dispose des fonctions "annuler" et "retablir"
+	 * 
+	 */
+
+	public void setHistorique() {
+		this.utiliseHistorique = peutAnnulerCoup();		
+	}
+	
+	/**
+	 * Verifie le joueur actif peut effectuer l'action "annuler"
+	 * 
+	 * @return vrai si le joueur actif peut annuler
+	 */
+	public boolean peutAnnuler() {
+		return (utiliseHistorique && undo.size()>1);
+	}
+	
+	/**
+	 * Verifie le joueur actif peut effectuer l'action "retablir"
+	 * 
+	 * @return vrai si le joueur actif peut retablir la dernière action annulee
+	 */
+	public boolean peutRefaire() {
+		return (utiliseHistorique && redo.size()>0);
 	}
 	
 }

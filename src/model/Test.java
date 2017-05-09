@@ -86,46 +86,6 @@ public class Test {
 	}
 	
 	/**
-	 * Test l'affichage d'une partie
-	 */
-	
-	public static void afficherPartie(){
-		Banquise b = new Banquise();
-		Joueur[] j = new Joueur[2];
-		Tuile t;
-		
-		j[0] = new Humain();
-		j[0].myPingouins[0] = new Pingouin(new Coordonnees(0, 0));
-		t = b.getTuile(new Coordonnees(0, 0));
-		t.mettrePingouin();
-		
-		j[0].myPingouins[1] = new Pingouin(new Coordonnees(2, 2));
-		t = b.getTuile(new Coordonnees(2, 2));
-		t.mettrePingouin();
-		
-		j[0].myPingouins[2] = new Pingouin(new Coordonnees(4, 4));
-		t = b.getTuile(new Coordonnees(4, 4));
-		t.mettrePingouin();
-		
-		j[1] = new Humain();
-		j[1].myPingouins[0] = new Pingouin(new Coordonnees(1, 1));
-		t = b.getTuile(new Coordonnees(1, 1));
-		t.mettrePingouin();
-		
-		j[1].myPingouins[1] = new Pingouin(new Coordonnees(3, 3));
-		t = b.getTuile(new Coordonnees(3, 3));
-		t.mettrePingouin();
-		
-		j[1].myPingouins[2] = new Pingouin(new Coordonnees(5, 5));
-		t = b.getTuile(new Coordonnees(5, 5));
-		t.mettrePingouin();
-		
-		Partie p = new Partie(b, j);
-
-		System.out.println(p);
-	}
-	
-	/**
 	 * Main
 	 * 
 	 * @param args
@@ -183,7 +143,10 @@ public class Test {
 			        	afficherVoisin(x, y, z);
 						break;
 					case 4:
-						afficherPartie();
+						Partie p1 = LauncherConsole.creerPartie(br);
+						LauncherConsole.phasePlacement(br, p1);
+						System.out.println(p1);
+						System.out.println(" 1 seul joueur Humain ? " + p1.peutAnnulerCoup());
 						break;
 					case 5:
 						Partie p = LauncherConsole.creerPartie(br);

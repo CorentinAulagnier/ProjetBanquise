@@ -6,11 +6,11 @@ public class Launcher {
 	
 	public static void main(String[] args) {	
 
-		int hauteur = 6;
-		int largeur = 8;
+		int hauteurBanquise = 6;
+		int largeurBanquise = 8;
 		
 		Partie p = new Partie();
-		//Interface.creer(args, p);
+		Interface.creer(args, p,hauteurBanquise,largeurBanquise);
 	}
 
 		

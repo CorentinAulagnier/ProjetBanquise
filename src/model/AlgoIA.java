@@ -1,8 +1,11 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AlgoIA {
 
@@ -164,7 +167,7 @@ public class AlgoIA {
 
             if (i % 2 == 0) {
                 j = r.nextInt(7);       // Choix aleatoire de la tuile 
-            }else {
+            } else {
                 j = r.nextInt(8);
             }
         } while (!((p.b.getTuile(new Coordonnees(i, j)) != null) && (!p.b.getTuile(new Coordonnees(i, j)).aUnPingouin)));
@@ -178,6 +181,11 @@ public class AlgoIA {
      * Case choisie aleatoirement par celles accessibles
      */
     public CoupleCoordonnees algoFacile(Partie p) {
+        
+        
+        // !!!!!!!!
+        // Ne marche pas quand on choisi un pingouin qui na pas de deplacement possible !!2
+        
 
         Random r = new Random();
         CoupleCoordonnees cc;
@@ -190,18 +198,15 @@ public class AlgoIA {
         Coordonnees courant;
         int nbDeplPossible = 0;
         int dir = 0;
-
         do {
             nbDeplPossible = 0;
             dir = r.nextInt(6);     // Choix de la direction aleatoire - specification de l'entier en haut de la classe
             if (dir == 0) {         // En haut a droite 
-
                 while ((p.b.getTuile(p.b.getHD(dep)) != null) && (p.b.getTuile(p.b.getHD(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getHD(dep)).aUnPingouin)) {
                     courant = p.b.getHD(dep);
                     dep = courant;
                     nbDeplPossible = nbDeplPossible + 1;    // Calcul du nombre de deplacement possible pour cette direction 
                 }
-
             } else if (dir == 1) { // Au milieu a droite
                 while ((p.b.getTuile(p.b.getMD(dep)) != null) && (p.b.getTuile(p.b.getMD(dep)).nbPoissons != 0) && (!p.b.getTuile(p.b.getMD(dep)).aUnPingouin)) {
                     courant = p.b.getMD(dep);
@@ -234,11 +239,12 @@ public class AlgoIA {
                 }
             }
         } while (nbDeplPossible == 0);
+
         // Tirage au sort du nb de case a se deplacer 
         int nbDepl = r.nextInt(nbDeplPossible) + 1;
         dep = new Coordonnees(i, j);
 
-        if (dir == 0) { 			// En haut a droite 
+        if (dir == 0) {     // En haut a droite 
             while (nbDepl != 0) {
                 dep = p.b.getHD(dep);
                 nbDepl--;
@@ -263,14 +269,12 @@ public class AlgoIA {
                 dep = p.b.getMG(dep);
                 nbDepl--;
             }
-        } else {				// En haut a gauche
+        } else  		// En haut a gauche
             while (nbDepl != 0) {
                 dep = p.b.getHG(dep);
                 nbDepl--;
             }
-
-        }
-
+        
         cc = new CoupleCoordonnees(new Coordonnees(i, j), dep);
 
         return cc;
@@ -319,13 +323,13 @@ public class AlgoIA {
         return meilleur3(p, c);
     }
 
-    public ArbreGraphe CreationArbre(Coordonnees c, Partie p, int dir, int nbcoupsmax) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
+    public ArbreGraphe CreationArbre(Coordonnees c, Partie partie, int dir, int nbcoupsmax, HashMap<Coordonnees, ArbreGraphe> hash) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
 
         if (nbcoupsmax == 0) {
             return null;
         }
-
-        ArbreGraphe abr = new ArbreGraphe();
+        Partie p = (Partie) partie.clone();
+        ArbreGraphe abr = new ArbreGraphe(1);
         abr.c = c;
         Tuile tuile = p.b.getTuile(c);
         abr.poids = tuile.nbPoissons;
@@ -334,42 +338,72 @@ public class AlgoIA {
 
         Coordonnees a = new Coordonnees(c.x, c.y);
         while ((p.b.getTuile(p.b.getBG(a)) != null) && (!p.b.getTuile(p.b.getBG(a)).aUnPingouin) && (p.b.getTuile(p.b.getBG(a)).nbPoissons != 0)) {
-            abr.noeudBG.add(CreationArbre(p.b.getBG(a), p, 3, nbcoupsmax - 1));
+            if (hash.containsKey(p.b.getBG(a))) {
+                abr.noeudBG[0].add(hash.get(p.b.getBG(a)));
+            } else {
+                abr.noeudBG[0].add(CreationArbre(p.b.getBG(a), p, 3, nbcoupsmax - 1, hash));
+                hash.put(p.b.getBG(a), abr);
+            }
             a = p.b.getBG(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getMG(a)) != null && (!p.b.getTuile(p.b.getMG(a)).aUnPingouin) && (p.b.getTuile(p.b.getMG(a)).nbPoissons != 0)) {
-            abr.noeudMG.add(CreationArbre(p.b.getMG(a), p, 4, nbcoupsmax - 1));
+            if (hash.containsKey(p.b.getMG(a))) {
+                abr.noeudMG[0].add(hash.get(p.b.getMG(a)));
+            } else {
+                abr.noeudMG[0].add(CreationArbre(p.b.getMG(a), p, 4, nbcoupsmax - 1, hash));
+                hash.put(p.b.getMG(a), abr);
+            }
             a = p.b.getMG(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getHG(a)) != null && (!p.b.getTuile(p.b.getHG(a)).aUnPingouin) && (p.b.getTuile(p.b.getHG(a)).nbPoissons != 0)) {
-            abr.noeudHG.add(CreationArbre(p.b.getHG(a), p, 5, nbcoupsmax - 1));
+            if (hash.containsKey(p.b.getHG(a))) {
+                abr.noeudHG[0].add(hash.get(p.b.getHG(a)));
+            } else {
+                abr.noeudHG[0].add(CreationArbre(p.b.getHG(a), p, 5, nbcoupsmax - 1, hash));
+                hash.put(p.b.getHG(a), abr);
+            }
             a = p.b.getHG(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getHD(a)) != null && (!p.b.getTuile(p.b.getHD(a)).aUnPingouin) && (p.b.getTuile(p.b.getHD(a)).nbPoissons != 0)) {
-            abr.noeudHD.add(CreationArbre(p.b.getHD(a), p, 0, nbcoupsmax - 1));
+            if (hash.containsKey(p.b.getHD(a))) {
+                abr.noeudHD[0].add(hash.get(p.b.getHD(a)));
+            } else {
+                abr.noeudHD[0].add(CreationArbre(p.b.getHD(a), p, 0, nbcoupsmax - 1, hash));
+                hash.put(p.b.getHD(a), abr);
+            }
             a = p.b.getHD(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getMD(a)) != null && (!p.b.getTuile(p.b.getMD(a)).aUnPingouin) && (p.b.getTuile(p.b.getMD(a)).nbPoissons != 0)) {
-            abr.noeudMD.add(CreationArbre(p.b.getMD(a), p, 1, nbcoupsmax - 1));
-            a = p.b.getMG(a);
+            if (hash.containsKey(p.b.getMD(a))) {
+                abr.noeudMD[0].add(hash.get(p.b.getMD(a)));
+            } else {
+                abr.noeudMD[0].add(CreationArbre(p.b.getMD(a), p, 1, nbcoupsmax - 1, hash));
+                hash.put(p.b.getMD(a), abr);
+            }
+            a = p.b.getMD(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getBD(a)) != null && (!p.b.getTuile(p.b.getBD(a)).aUnPingouin) && (p.b.getTuile(p.b.getBD(a)).nbPoissons != 0)) {
-            abr.noeudBD.add(CreationArbre(p.b.getBD(a), p, 2, nbcoupsmax - 1));
+            if (hash.containsKey(p.b.getBD(a))) {
+                abr.noeudBD[0].add(hash.get(p.b.getBD(a)));
+            } else {
+                abr.noeudBD[0].add(CreationArbre(p.b.getBD(a), p, 2, nbcoupsmax - 1, hash));
+                hash.put(p.b.getBD(a), abr);
+
+            }
             a = p.b.getBD(a);
         }
-
         return abr;
 
     }
-
     /*
      * dir = 6 a l'appel de la fonction
      */
+
     public CoupleCoordonneesInt parcoursGraphe(ArbreGraphe abr, int nbCoupsmax, int nbCoups, int dir, int somme, Coordonnees coord1stchoice) {
 
         if ((nbCoups == 0)) {
@@ -385,34 +419,34 @@ public class AlgoIA {
         CoupleCoordonneesInt val5 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
         CoupleCoordonneesInt val6 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
 
-        if (abr.noeudBD != null) {
-            for (int i = 0; i < abr.noeudBD.size(); i++) {
-                val1 = parcoursGraphe(abr.noeudBD.get(i), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if (abr.noeudBD[0] != null) {
+            for (int i = 0; i < abr.noeudBD[0].size(); i++) {
+                val1 = parcoursGraphe(abr.noeudBD[0].get(i), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
-        if (abr.noeudMD != null) {
-            for (int i = 0; i < abr.noeudMD.size(); i++) {
-                val2 = parcoursGraphe(abr.noeudMD.get(i), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if (abr.noeudMD[0] != null) {
+            for (int i = 0; i < abr.noeudMD[0].size(); i++) {
+                val2 = parcoursGraphe(abr.noeudMD[0].get(i), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
-        if (abr.noeudHD != null) {
-            for (int i = 0; i < abr.noeudHD.size(); i++) {
-                val3 = parcoursGraphe(abr.noeudHD.get(i), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if (abr.noeudHD[0] != null) {
+            for (int i = 0; i < abr.noeudHD[0].size(); i++) {
+                val3 = parcoursGraphe(abr.noeudHD[0].get(i), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
-        if (abr.noeudHG != null) {
-            for (int i = 0; i < abr.noeudHG.size(); i++) {
-                val4 = parcoursGraphe(abr.noeudHG.get(i), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if (abr.noeudHG[0] != null) {
+            for (int i = 0; i < abr.noeudHG[0].size(); i++) {
+                val4 = parcoursGraphe(abr.noeudHG[0].get(i), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
-        if (abr.noeudMG != null) {
-            for (int i = 0; i < abr.noeudMG.size(); i++) {
-                val5 = parcoursGraphe(abr.noeudMG.get(i), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if (abr.noeudMG[0] != null) {
+            for (int i = 0; i < abr.noeudMG[0].size(); i++) {
+                val5 = parcoursGraphe(abr.noeudMG[0].get(i), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             }
         }
-        if (abr.noeudBG != null) {
-            for (int i = 0; i < abr.noeudBG.size(); i++) {
-                val6 = parcoursGraphe(abr.noeudBG.get(i), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
+        if (abr.noeudBG[0] != null) {
+            for (int i = 0; i < abr.noeudBG[0].size(); i++) {
+                val6 = parcoursGraphe(abr.noeudBG[0].get(i), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
             }
         }
 
@@ -439,12 +473,13 @@ public class AlgoIA {
         int indx = 0;
         System.out.println(myIA.nbPingouin);
         ArrayList<CoupleCoordonneesInt> poidsPingouins = new ArrayList<>();
+        HashMap<Coordonnees, ArbreGraphe> hash = new HashMap<>();
         for (int i = 0; i < myIA.nbPingouin; i++) {
-            ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, p, -1, nbcoupsrecherches);
+            ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, p, -1, nbcoupsrecherches, hash);
             CoupleCoordonneesInt coordint = parcoursGraphe(abr, nbcoupsrecherches, nbcoupsrecherches, 6, 0, new Coordonnees(0, 0));
             poidsPingouins.add(coordint);
         }
-                System.out.println("poid Pingouin size" + poidsPingouins.size());
+        System.out.println("poid Pingouin size" + poidsPingouins.size());
 
         for (int i = 0; i < poidsPingouins.size(); i++) {
             if (poidsPingouins.get(i).i > max) {
@@ -453,9 +488,8 @@ public class AlgoIA {
             }
         }
         System.out.println("coordmax" + coordmax);
-        System.out.println("max "+max);
+        System.out.println("max " + max);
 
-        
         return new CoupleCoordonnees(myIA.myPingouins[indx].position, coordmax);
     }
 
@@ -541,6 +575,171 @@ public class AlgoIA {
 
         }
         return retour;
+    }
+
+    /* Pour deux joueurs seulement
+     * Creation de l'arbre pour le minimax : 
+     * Convention de l'entier joueur : -1 pour nous, 1 pour l'adversaire
+     */
+    public ArbreGraphe CreationAbreMinimax(Coordonnees c, Partie partie, int joueur, int nbcoupsmax, HashMap<Coordonnees, ArbreGraphe> hash, int somme) {
+
+        if (nbcoupsmax <= 0) {
+            ArbreGraphe abr = new ArbreGraphe(0);
+            abr.estFeuille = true;
+            abr.c = c;
+            abr.poids = somme;
+            return abr;
+        } else {
+            Partie p = (Partie) partie.clone();
+            int nbPingouin;
+            int num;
+            if (joueur == 0) { // Si c'est a nous de jouer
+                num = notreNumeroDeJoueur(partie);
+                nbPingouin = nbPingouinActuel(partie.joueurs[num]);
+            } else {
+                num = numJoueurAdversaire(partie, notreNumeroDeJoueur(partie));
+                nbPingouin = nbPingouinActuel(partie.joueurs[num]);
+            }
+            ArbreGraphe abr = new ArbreGraphe(nbPingouin);
+
+            abr.c = c;
+            Tuile tuile = p.b.getTuile(c);
+            abr.poids = tuile.nbPoissons;
+            p.manger(c);
+
+            for (int i = 0; i < nbPingouin; i++) {
+
+                Coordonnees a = new Coordonnees(c.x, c.y);
+
+                while ((p.b.getTuile(p.b.getBG(a)) != null) && (!p.b.getTuile(p.b.getBG(a)).aUnPingouin) && (p.b.getTuile(p.b.getBG(a)).nbPoissons != 0)) { // !!!!! mettre le clone dans le while !!!!!
+                    if (hash.containsKey(p.b.getBG(a))) {
+                        abr.noeudBG[i].add(hash.get(p.b.getBG(a)));
+                    } else {
+                        Partie p2 = (Partie) p.clone();
+
+                        p2.deplacement(c, p2.b.getBG(a));
+                        abr.noeudBG[i].add(CreationAbreMinimax(p2.b.getBG(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
+                        hash.put(p2.b.getBG(a), abr);
+                    }
+                    a = p.b.getBG(a);
+                }
+
+                a = new Coordonnees(c.x, c.y);
+                while (p.b.getTuile(p.b.getMG(a)) != null && (!p.b.getTuile(p.b.getMG(a)).aUnPingouin) && (p.b.getTuile(p.b.getMG(a)).nbPoissons != 0)) {
+                    if (hash.containsKey(p.b.getMG(a))) {
+                        abr.noeudMG[i].add(hash.get(p.b.getMG(a)));
+                    } else {
+                        Partie p2 = (Partie) p.clone();
+                        p2.manger(a);
+                        p2.deplacement(c, p2.b.getMG(a));
+                        abr.noeudMG[i].add(CreationAbreMinimax(p.b.getMG(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
+                        hash.put(p2.b.getMG(a), abr);
+                    }
+                    a = p.b.getMG(a);
+                }
+
+                a = new Coordonnees(c.x, c.y);
+                while (p.b.getTuile(p.b.getHG(a)) != null && (!p.b.getTuile(p.b.getHG(a)).aUnPingouin) && (p.b.getTuile(p.b.getHG(a)).nbPoissons != 0)) {
+                    if (hash.containsKey(p.b.getHG(a))) {
+                        abr.noeudHG[i].add(hash.get(p.b.getHG(a)));
+                    } else {
+                        Partie p2 = (Partie) p.clone();
+                        p2.manger(a);
+                        p2.deplacement(c, p2.b.getHG(a));
+                        abr.noeudHG[i].add(CreationAbreMinimax(p.b.getHG(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
+                        hash.put(p2.b.getHG(a), abr);
+                    }
+                    a = p.b.getHG(a);
+                }
+
+                a = new Coordonnees(c.x, c.y);
+                while (p.b.getTuile(p.b.getHD(a)) != null && (!p.b.getTuile(p.b.getHD(a)).aUnPingouin) && (p.b.getTuile(p.b.getHD(a)).nbPoissons != 0)) {
+                    if (hash.containsKey(p.b.getHD(a))) {
+                        abr.noeudHD[i].add(hash.get(p.b.getHD(a)));
+                    } else {
+                        Partie p2 = (Partie) p.clone();
+                        p2.manger(a);
+                        p2.deplacement(c, p2.b.getHD(a));
+                        abr.noeudHD[i].add(CreationAbreMinimax(p.b.getHD(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
+                        hash.put(p2.b.getHD(a), abr);
+                    }
+                    a = p.b.getHD(a);
+                }
+
+                a = new Coordonnees(c.x, c.y);
+                while (p.b.getTuile(p.b.getMD(a)) != null && (!p.b.getTuile(p.b.getMD(a)).aUnPingouin) && (p.b.getTuile(p.b.getMD(a)).nbPoissons != 0)) {
+                    if (hash.containsKey(p.b.getMD(a))) {
+                        abr.noeudMD[i].add(hash.get(p.b.getMD(a)));
+                    } else {
+                        Partie p2 = (Partie) p.clone();
+                        p2.manger(a);
+                        p2.deplacement(c, p2.b.getMD(a));
+                        abr.noeudMD[i].add(CreationAbreMinimax(p.b.getMD(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
+                        hash.put(p2.b.getMD(a), abr);
+                    }
+                    a = p.b.getMG(a);
+                }
+
+                a = new Coordonnees(c.x, c.y);
+                while (p.b.getTuile(p.b.getBD(a)) != null && (!p.b.getTuile(p.b.getBD(a)).aUnPingouin) && (p.b.getTuile(p.b.getBD(a)).nbPoissons != 0)) {
+                    if (hash.containsKey(p.b.getBD(a))) {
+                        abr.noeudBD[i].add(hash.get(p.b.getBD(a)));
+                    } else {
+                        Partie p2 = (Partie) p.clone();
+                        p2.manger(a);
+                        p2.deplacement(c, p2.b.getBD(a));
+                        abr.noeudBD[i].add(CreationAbreMinimax(p.b.getBD(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
+                        hash.put(p2.b.getBD(a), abr);
+
+                    }
+                    a = p.b.getBD(a);
+                }
+
+            }
+            return abr;
+
+        }
+
+    }
+
+    public CoupleCoordonnees minimax(Partie p, ArbreGraphe abr, int joueur) {
+
+        int nbPingouin;
+        int num;
+        if (joueur == 0) { // Si c'est a nous de jouer
+            num = notreNumeroDeJoueur(p);
+            nbPingouin = nbPingouinActuel(p.joueurs[num]);
+        } else {
+            num = numJoueurAdversaire(p, notreNumeroDeJoueur(p));
+            nbPingouin = nbPingouinActuel(p.joueurs[num]);
+        }
+
+        for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {
+
+            for (int j = 0; j < abr.noeudBD[i].size(); j++) {
+                minimax(p, abr, -joueur);
+            }
+            for (int j = 0; j < abr.noeudMD[i].size(); j++) {
+                minimax(p, abr, -joueur);
+            }
+            for (int j = 0; j < abr.noeudHD[i].size(); j++) {
+                minimax(p, abr, -joueur);
+            }
+            for (int j = 0; j < abr.noeudHG[i].size(); j++) {
+                minimax(p, abr, -joueur);
+            }
+            for (int j = 0; j < abr.noeudMG[i].size(); j++) {
+                minimax(p, abr, -joueur);
+            }
+            for (int j = 0; j < abr.noeudBG[i].size(); j++) {
+                minimax(p, abr, -joueur);
+            }
+
+            if (joueur == 1) {
+
+            }
+        }
+        return null;
     }
 
 }

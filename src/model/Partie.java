@@ -1,5 +1,7 @@
 package model;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Class Partie -> cree et gere la partie
+ * Class Partie : cree et gere la partie
  */
 
 public class Partie implements Serializable {
@@ -109,6 +111,27 @@ public class Partie implements Serializable {
 		this.nbJoueurs = j.length;
 		this.joueurActif = 0;
 	}
+	
+	/**
+	 * Clone de la partie actuelle.
+	 * 
+	 * @return Renvoie la partie clonne
+	 */
+	
+	@Override
+	public Partie clone() {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(this);
+	
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			return (Partie) ois.readObject();
+		} catch (Exception e){
+			return null;
+		}
+	}
 
 	/**
 	 * Sauvegarde la partie en cours.
@@ -121,7 +144,7 @@ public class Partie implements Serializable {
 		try {
 			File fichier =  new File("save/"+name+".banquise") ;
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
-			oos.writeObject(this) ;
+			oos.writeObject(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -401,6 +424,9 @@ public class Partie implements Serializable {
 	}
 	
 	/**       
+	 * @param scoremax
+	 *            Le score du ou des gagnant(s).
+	 *            
 	 * @return le nombre de deplacement max parmis tout les joueurs.
 	 */
 	
@@ -477,5 +503,6 @@ public class Partie implements Serializable {
 			}
 		}
 	}
+	
 }
 

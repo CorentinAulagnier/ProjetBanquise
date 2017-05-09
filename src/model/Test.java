@@ -18,6 +18,11 @@ public class Test {
 
 	/**
 	 * Test l'affichage de la position d'un pingouin
+	 * 
+	 * @param x
+	 *            coordonnee.x.
+	 * @param y
+	 *            coordonnee.y.
 	 */
 	
 	public static void afficherPosPingouin(int x, int y){
@@ -29,12 +34,19 @@ public class Test {
 
 	/**
 	 * Test l'affichage des voisin de la position (x, y) dans l'axe z :
-	 *	- 1 -> Haut Droit
-	 *	- 2 -> Milieu Droit
-	 *	- 3 -> Bas Droit
-	 *	- 4 -> Bas Gauche
-	 *	- 5 -> Milieu Gauche
-	 *	- 6 -> Haut Gauche
+	 *	- 1 : Haut Droit
+	 *	- 2 : Milieu Droit
+	 *	- 3 : Bas Droit
+	 *	- 4 : Bas Gauche
+	 *	- 5 : Milieu Gauche
+	 *	- 6 : Haut Gauche
+	 * 
+	 * @param x
+	 *            coordonnee.x.
+	 * @param y
+	 *            coordonnee.y.
+	 * @param z
+	 *            Deplacement choisi.
 	 */
 	
 	public static void afficherVoisin(int x, int y, int z){
@@ -115,6 +127,9 @@ public class Test {
 	
 	/**
 	 * Main
+	 * 
+	 * @param args
+	 *            arguments du main.
 	 */
 	
 	public static void main(String[] args) {
@@ -129,6 +144,7 @@ public class Test {
 	       		System.out.println("   - 3 -> affiche la position d'un voisin");
 	       		System.out.println("   - 4 -> affiche une partie");
 	       		System.out.println("   - 5 -> sauvegarder et charger une partie");
+	       		System.out.println("   - 6 -> création d'un clone");
 
 	        	int x = Integer.parseInt(br.readLine());
 	        	int y;
@@ -177,6 +193,12 @@ public class Test {
 						Partie p2 = new Partie();
 						p2.charger();
 						System.out.println("Banquise restaurée :\n"+p);
+					case 6:
+						Partie p_origine = LauncherConsole.creerPartie(br);
+						LauncherConsole.phasePlacement(br, p_origine);
+						System.out.println("Banquise créée :\n"+p_origine);
+						Partie p_clone = p_origine.clone();
+						System.out.println("Banquise clonée :\n"+p_clone);
 					default :
 						System.out.println("Commande non reconnu");
 				}

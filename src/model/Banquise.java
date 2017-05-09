@@ -10,7 +10,7 @@ import java.util.function.Function;
  * elle indique le nombre de poissons sur chaque case
  */	
 
-public class Banquise implements Serializable{
+public class Banquise implements Serializable, Cloneable{
 	/**
 	 * Tableau du terrain de jeu
 	 */
@@ -420,5 +420,6 @@ public class Banquise implements Serializable{
 
 		return s;
 	}
+	
 }
 

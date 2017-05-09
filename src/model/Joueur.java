@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * Class Joueur -> gere un joueur
+ * Class Joueur : gere un joueur
  */
 
 public abstract class Joueur implements Serializable{
@@ -65,5 +65,6 @@ public abstract class Joueur implements Serializable{
 	 */	
 	
 	public abstract String toString();
+	
 
 }

@@ -3,10 +3,10 @@ package model;
 import java.io.Serializable;
 
 /**
- * Class Tuile -> une case du jeu
+ * Class Tuile : une case du jeu
  */
 
-public class Tuile implements Serializable{
+public class Tuile implements Serializable {
 	/**
 	 * nombre de poisson sur cette case
 	 * 0 si la case n'est pas accessible
@@ -112,6 +112,9 @@ public class Tuile implements Serializable{
 	
 	/**
 	 * Met nb poissons dans la case
+	 * 
+	 * @param nb
+	 *            Nombre de poissons a metre dans la case.
 	 */
 	
 	public void mettrePoissons(int nb){
@@ -127,4 +130,5 @@ public class Tuile implements Serializable{
 	public boolean estAccessible() {
 		return !(aUnPingouin || nbPoissons==0);
 	}
+	
 }

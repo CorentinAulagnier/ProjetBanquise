@@ -50,6 +50,13 @@ public class Partie implements Serializable {
 		this.joueurActif = 0;
 	}
 	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param nbPlayer
+	 *            Le nombre de joueur.
+	 */
+	
 	public Partie(int nbPlayer){
 		this.b = null;
 		this.joueurs = new Joueur[nbPlayer];
@@ -57,12 +64,28 @@ public class Partie implements Serializable {
 		this.joueurActif = 0;
 	}
 	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param plateau
+	 *            La banquise.
+	 */
+	
 	public Partie(Banquise plateau){
 		this.b = plateau;
 		this.joueurs = null;
 		this.nbJoueurs = 0;
 		this.joueurActif = 0;
 	}
+	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param plateau
+	 *            La banquise.
+	 * @param nbPlayer
+	 *            Le nombre de joueur.
+	 */
 
 	public Partie(Banquise plateau, int nbPlayer){
 		this.b = plateau;
@@ -71,12 +94,28 @@ public class Partie implements Serializable {
 		this.joueurActif = 0;
 	}
 	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param plateau
+	 *            La banquise.
+	 * @param j
+	 *            Le tableau des joueurs.
+	 */
+	
 	public Partie(Banquise plateau, Joueur[] j){
 		this.b = plateau;
 		this.joueurs = j;
 		this.nbJoueurs = j.length;
 		this.joueurActif = 0;
 	}
+
+	/**
+	 * Sauvegarde la partie en cours.
+	 * 
+	 * @param name
+	 *            Nom du fichier de sauvegarde
+	 */
 	
 	public void sauvegarder(String name) {
 		try {
@@ -88,9 +127,20 @@ public class Partie implements Serializable {
 		} 
 	}
 	
+	/**
+	 * Sauvegarde la partie en cours dans le fichier "no_name.banquise" par default.
+	 */
+	
 	public void sauvegarder() {
 		sauvegarder("no_name");
 	}
+	
+	/**
+	 * Charge la partie en parametre.
+	 * 
+	 * @param name
+	 *            Nom du fichier a recuperer
+	 */
 	
 	public void charger(String name) {
 		try {
@@ -106,6 +156,10 @@ public class Partie implements Serializable {
 		} 
 	}
 	
+	/**
+	 * Charge la partie "no_name.banquise" par default.
+	 */
+	
 	public void charger() {
 		charger("no_name");
 	}
@@ -116,16 +170,12 @@ public class Partie implements Serializable {
 	
 	public void tourDeJeu() {
 		// TODO implement me
-		
-		/*
-		(dep, arr) = joueurs[joueurActif].jouer();
-		deplacement(dep, arr);
-		*/
-		joueurActif = (joueurActif + 1) %nbJoueurs;
 	}
 
 	/**
-	 * Renvoie vrai, si tout les pingouins sont bloquees
+	 * Verifie si la partie est termine.
+	 * 
+	 * @return Renvoie vrai, si tout les pingouins de tout les joueurs sont bloquees.
 	 */
 	
 	public boolean estPartieFini() {
@@ -137,7 +187,10 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Le joueur actif recupere les poissons de la case c
+	 * Le joueur actif recupere les poissons de la case c.
+	 * 
+	 * @param c
+	 *            La position a manger.
 	 */
 	
 	public void manger(Coordonnees c) {
@@ -154,6 +207,9 @@ public class Partie implements Serializable {
 
 	/**
 	 * Deplace un pingouin de "cc.c1" vers "cc.c2"
+	 * 	 
+	 * @param cc
+	 *            Le CoupleCoordonnees correspondant au deplacement d'un pingouin.
 	 */
 	
 	public void deplacement(CoupleCoordonnees cc) {
@@ -162,31 +218,33 @@ public class Partie implements Serializable {
 
 	/**
 	 * Deplace un pingouin de "dep" vers "arr"
+	 * 	 
+	 * @param dep
+	 *            Les Coordonnees correspondant a l'emplacement de depart d'un pingouin.
+	 * @param arr
+	 *            Les Coordonnees correspondant a l'emplacement d'arrive d'un pingouin.
 	 */
 	
 	public void deplacement(Coordonnees dep, Coordonnees arr) {
-		
-		manger(dep);
-		Tuile tuileDep = b.getTuile(dep);
-		Tuile tuileArr = b.getTuile(arr);
-		
-		//Recherche du pingouin a deplacer
-		int i;
-		for (i = 0; (i < joueurs[joueurActif].nbPingouin && !(joueurs[joueurActif].myPingouins[i].position.equals(dep))); i++)
-		
-		//On a trouve le pingouin, c'est le numero i
-		if (i < joueurs[joueurActif].nbPingouin) { 
-			
-			joueurs[joueurActif].myPingouins[i].position = arr;
-			joueurs[joueurActif].nbTuiles ++;
-			
-			tuileDep.enlevePingouin();
-			tuileArr.mettrePingouin();
-			
+
+		int numJoueur = appartientPingouin(dep);
+		Pingouin p = recherchePingouin(numJoueur, dep);
+		if(p!=null) {
+			deplacement(p, arr);
 		} else {
-			System.out.println("Erreur : deplacement du pingouin impossible, pas de pingouin à la case : " + dep);
+			System.out.println("Impossible de récupérer le pinguoin en "+dep);
 		}
+
 	}
+	
+	/**
+	 * Deplace un pingouin p vers les coordonnees "arr"
+	 * 	 
+	 * @param p
+	 *            Le pingouin a deplacer.
+	 * @param arr
+	 *            Les Coordonnees correspondant a l'emplacement d'arrive du pingouin p.
+	 */
 	
 	public void deplacement(Pingouin p, Coordonnees arr) {
 		
@@ -201,11 +259,15 @@ public class Partie implements Serializable {
 		tuileArr.mettrePingouin();
 
 	}
-
+	
 	/**
 	 * Retourne les coordonnees des pingouins deplacables du joueur j
-	 * 
 	 * ATTENTION : Il peut y avoir des cases "null"
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Un tableau de coordonnees.
 	 */
 	
 	public Coordonnees[] positionPingouins(Joueur j) {
@@ -228,9 +290,10 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Retourne les coordonnees des pingouins deplacables du joueur courant
-	 * 
-	 * ATTENTION :  Il peut y avoir des cases "null"
+	 * Retourne les coordonnees des pingouins deplacables du joueur actif
+	 * ATTENTION : Il peut y avoir des cases "null"
+	 *            
+	 * @return Un tableau de coordonnees.
 	 */
 	
 	public Coordonnees[] pingouinsDeplacable() {
@@ -238,7 +301,12 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Retourne vrai si le joueur j peut jouer
+	 * Retourne si le joueur j peut jouer
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne vrai si le joueur j peut jouer.
 	 */
 	
 	public boolean peutJouer(Joueur j) {
@@ -253,7 +321,9 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Retourne vrai si le joueur courant peut jouer
+	 * Retourne si le joueur actif peut jouer
+	 *         
+	 * @return Retourne vrai si le joueur actif peut jouer.
 	 */
 	
 	public boolean peutJouer() {
@@ -261,12 +331,15 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Retourne l'entier correspondant au joueur à qui appartient le pingouin a la position (i, j)
+	 * Retourne l'entier correspondant au joueur à qui appartient le pingouin aux coordonnees c
+	 * 
+	 * @param c
+	 *            Les coordonnees du pingouin a tester.
+	 *            
+	 * @return Le numero du joueur proprietaire du pingouin aux coordonnees c si il existe, -1 sinon.
 	 */
 	
-	public int appartientPingouin(int a, int b) {
-		Coordonnees c = new Coordonnees(a, b);
-		
+	public int appartientPingouin(Coordonnees c) {
 		for(int i = 0; i<nbJoueurs; i++)
 			for(int j = 0; j<joueurs[i].nbPingouin; j++)
 				if (joueurs[i].myPingouins[j].position.equals(c))
@@ -274,9 +347,30 @@ public class Partie implements Serializable {
 		return -1;
 	}
 	
+	/**
+	 * Recherche un pingouin pour un joueur donné et des coordonnees donnees
+	 * 
+	 * @param numJoueur
+	 *            Le numero du joueur a qui appartient le pingouin.
+	 * @param c
+	 *            Les coordonnees du pingouin a retrouver.
+	 *            
+	 * @return Le pingouin aux coordonnees c si il existe, null sinon.
+	 */
+	
+	public Pingouin recherchePingouin(int numJoueur, Coordonnees c) {
+		for(int j = 0; j<joueurs[numJoueur].nbPingouin; j++) {
+			if (joueurs[numJoueur].myPingouins[j].position.equals(c)) {
+				return joueurs[numJoueur].myPingouins[j];
+			}
+		}
+		return null;
+	}
 
 	/**
-	 * Retourne le joueur gagnant
+	 * Recupere le ou les joueurs gagants en cas d'egalite
+	 *            
+	 * @return le ou les joueurs gagants en cas d'egalite.
 	 */
 
 	public ArrayList<Joueur> getGagnant() {
@@ -291,6 +385,10 @@ public class Partie implements Serializable {
 		}
 		return gagnants;
 	}
+
+	/**       
+	 * @return le score max parmis tout les joueurs.
+	 */
 	
 	public int getScoreMax() {
 		int max =0;
@@ -302,6 +400,10 @@ public class Partie implements Serializable {
 		return max;
 	}
 	
+	/**       
+	 * @return le nombre de deplacement max parmis tout les joueurs.
+	 */
+	
 	public int getNbTuiles(int scoremax) {
 		int NbTuiles =0;
 		for(int i = 0; i<nbJoueurs;i++ ) {
@@ -312,8 +414,11 @@ public class Partie implements Serializable {
 		return NbTuiles;
 	}
 	
+
 	/**
-	 * Affichage
+	 * Affichage.
+	 *     .
+	 * @return Un affichage de la banquise de cette partie.
 	 */
 	
 	public String toString() {
@@ -336,57 +441,9 @@ public class Partie implements Serializable {
 			}
 			
 			for (int j = 0; j < numligne; j++) {
-				t = b.getTuile(new Coordonnees(i, j));
-				int app = appartientPingouin(i, j);
-				if (t.aUnPingouin && (app != -1)) {
-					s = s + "J" + app + (numligne == 7 ? "| " : " |");
-
-				} else {
-					s = s + (numligne == 7 ? " " : "") + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ (numligne == 7 ? "| " : "  |");
-				}
-	
-			}
-			if (numligne == 7) {
-				s = s + "  |";
-			}
-			s = s + "\n";
-		}
-		s = s + "----------------------------------|\n";
-		s = s + "nbJoueurs " + nbJoueurs + " joueurActif " + joueurActif + "\n";
-		
-		for (int i = 0; i<nbJoueurs; i++)
-			s = s + joueurs[i] + "\n";
-
-		return s;
-	}
-	
-
-	/**
-	 * Affichage
-	 */
-	
-	public String toStringTerminal() {
-		String s = "";
-		Tuile t;
-		int numligne = 0;
-		
-		s = s + "  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n";
-		s = s + "--|---|---|---|---|---|---|---|---|\n";
-		
-		for (int i = 0; i<8; i++) {
-			s = s + i + " |";
-
-			if (i%2 == 0) { 	//Ligne pair
-				numligne = 7;
-				s = s + " ";
-
-			} else {
-				numligne = 8; 	//Ligne impair
-			}
-			
-			for (int j = 0; j < numligne; j++) {
-				t = b.getTuile(new Coordonnees(i, j));
-				int app = appartientPingouin(i, j);
+				Coordonnees c = new Coordonnees(i, j);
+				t = b.getTuile(c);
+				int app = appartientPingouin(c);
 				if (t.aUnPingouin && (app != -1)) {
 					s = s + "P" + app + (numligne == 7 ? "| " : " |");
 
@@ -405,7 +462,7 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Tue les pingouins morts
+	 * Tue les pingouins bloques de chaque joueur
 	 */
 	
 	public void verifierPingouinActif() {

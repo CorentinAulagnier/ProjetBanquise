@@ -6,9 +6,11 @@ package model;
  */
 
 public class Humain extends Joueur {
+	
 	/**
 	 * Constructeurs
-	 */
+	 */	
+
 	public Humain(){
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
@@ -16,6 +18,15 @@ public class Humain extends Joueur {
 		this.myPingouins = new Pingouin[3];
 		this.nbPingouin = 3;
 	}
+	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param name
+	 *            Nom du joueur.
+	 * @param nbP
+	 *            Nombre de piongouins.
+	 */	
 
 	public Humain(String name, int nbP){
 		this.nbTuiles = 0;
@@ -26,8 +37,10 @@ public class Humain extends Joueur {
 	}
 	
 	/**
-	 * Affichage
-	 */
+	 * Affichage.
+	 *            
+	 * @return Un string correspondant à un Humain
+	 */	
 	
 	public String toString() {
 		String s =  "Humain nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
@@ -39,16 +52,24 @@ public class Humain extends Joueur {
 	}
 	
 	/**
-	 * Execute un tour de jeu
-	 */
+	 * Execute un tour de jeu.
+	 * 
+	 * @param p
+	 *            L'etat de la partie.
+	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
+	 */	
 	
 	public CoupleCoordonnees jouer(Partie p) {
 		return null;
 	}
-
+	
 	/**
-	 * Renvoie ou places un pingouin
-	 */
+	 * Renvoie oû placer un pingouin.
+	 * 
+	 * @param p
+	 *            L'etat de la partie.
+	 * @return Une Coordonnees representant la premiere position du pingouin.
+	 */	
 	
 	public Coordonnees placement(Partie p) {
 		return null;
@@ -56,4 +77,3 @@ public class Humain extends Joueur {
 	
 
 }
-

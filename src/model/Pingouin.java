@@ -20,12 +20,19 @@ public class Pingouin implements Serializable{
 	public boolean actif;
 
 	/**
-	 * Constructeurs
+	 * Constructeurs.
+	 * Ne place pas le pingouin et le met inactif.
 	 */
+	
 	public Pingouin(){
 		this.position = new Coordonnees();
 		this.actif = false;
 	}
+	
+	/**
+	 * Constructeurs.
+	 * Place le pingouin a la position c et le met actif.
+	 */
 	
 	public Pingouin(Coordonnees c){
 		this.position = c;
@@ -37,4 +44,3 @@ public class Pingouin implements Serializable{
 	}
 
 }
-

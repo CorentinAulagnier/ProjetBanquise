@@ -7,10 +7,18 @@ import model.Coordonnees;
 
 public class Test {
 
+	/**
+	 * Test l'affichage de la banquise
+	 */
+	
 	public static void afficherBanquise(){
 		Banquise b = new Banquise();
 		System.out.println(b);
 	}
+
+	/**
+	 * Test l'affichage de la position d'un pingouin
+	 */
 	
 	public static void afficherPosPingouin(int x, int y){
 		Coordonnees c = new Coordonnees(x, y);
@@ -18,6 +26,16 @@ public class Test {
 		Pingouin p = new Pingouin(c);
 		System.out.println(p);
 	}
+
+	/**
+	 * Test l'affichage des voisin de la position (x, y) dans l'axe z :
+	 *	- 1 -> Haut Droit
+	 *	- 2 -> Milieu Droit
+	 *	- 3 -> Bas Droit
+	 *	- 4 -> Bas Gauche
+	 *	- 5 -> Milieu Gauche
+	 *	- 6 -> Haut Gauche
+	 */
 	
 	public static void afficherVoisin(int x, int y, int z){
 		Banquise b = new Banquise();
@@ -27,33 +45,37 @@ public class Test {
 
 		switch (z) {
 			case 1:
-				System.out.println(b.getHG(c));
-				break;
-				
-			case 2: 
 				System.out.println(b.getHD(c));
 				break;
 				
-			case 3: 
-				System.out.println(b.getMG(c));
-				break;
-				
-			case 4:
+			case 2: 
 				System.out.println(b.getMD(c));
 				break;
 				
-			case 5:
+			case 3: 
+				System.out.println(b.getBD(c));
+				break;
+				
+			case 4:
 				System.out.println(b.getBG(c));
 				break;
 				
+			case 5:
+				System.out.println(b.getMG(c));
+				break;
+				
 			case 6:
-				System.out.println(b.getBD(c));
+				System.out.println(b.getHG(c));
 				break;
 
 			default :
 				System.out.println("Voisin demande non reconnu");
 		}
 	}
+	
+	/**
+	 * Test l'affichage d'une partie
+	 */
 	
 	public static void afficherPartie(){
 		Banquise b = new Banquise();
@@ -90,13 +112,15 @@ public class Test {
 
 		System.out.println(p);
 	}
-
+	
+	/**
+	 * Main
+	 */
+	
 	public static void main(String[] args) {
 
     	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		
-		
 		while (true){
 			try {
 	        	System.out.println("Liste des tests : ");
@@ -132,12 +156,12 @@ public class Test {
 			        	System.out.print("y : ");
 			        	y = Integer.parseInt(br.readLine());
 			        	System.out.println("Quel voisin voulez vous : ");
-			        	System.out.println("	- 1 -> Haut Gauche");
-			        	System.out.println("	- 2 -> Haut Droit");
-			        	System.out.println("	- 3 -> Milieu Gauche");
-			        	System.out.println("	- 4 -> Milieu Droit");
-			        	System.out.println("	- 5 -> Bas Gauche");
-			        	System.out.println("	- 6 -> Bas Droit");
+			        	System.out.println("	- 1 -> Haut Droit");
+			        	System.out.println("	- 2 -> Milieu Droit");
+			        	System.out.println("	- 3 -> Bas Droit");
+			        	System.out.println("	- 4 -> Bas Gauche");
+			        	System.out.println("	- 5 -> Milieu Gauche");
+			        	System.out.println("	- 6 -> Haut Gauche");
 			        	System.out.println("z : ");
 			        	z = Integer.parseInt(br.readLine());
 			        	afficherVoisin(x, y, z);
@@ -149,12 +173,10 @@ public class Test {
 						Partie p = LauncherConsole.creerPartie(br);
 						LauncherConsole.phasePlacement(br, p);
 						p.sauvegarder();
-						System.out.println("Banquise créée :\n"+p.toStringTerminal());
-						//p = LauncherConsole.creerPartie(new BufferedReader(new InputStreamReader(System.in)));
-						//System.out.println("Banquise modifiée :\n"+p);
+						System.out.println("Banquise créée :\n"+p);
 						Partie p2 = new Partie();
 						p2.charger();
-						System.out.println("Banquise restaurée :\n"+p.toStringTerminal());
+						System.out.println("Banquise restaurée :\n"+p);
 					default :
 						System.out.println("Commande non reconnu");
 				}

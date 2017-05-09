@@ -39,22 +39,31 @@ public abstract class Joueur implements Serializable{
 	public Pingouin[] myPingouins;
 	
 	/**
-	 * Execute un tour de jeu
-	 */
+	 * Execute un tour de jeu.
+	 * 
+	 * @param p
+	 *            L'etat de la partie.
+	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
+	 */	
 	
 	public abstract CoupleCoordonnees jouer(Partie p) ;
 
 	/**
-	 * Renvoie ou places un pingouin
-	 */
+	 * Renvoie oû placer un pingouin.
+	 * 
+	 * @param p
+	 *            L'etat de la partie.
+	 * @return Une Coordonnees representant la premiere position du pingouin.
+	 */	
 	
 	public abstract Coordonnees placement(Partie p);
 	
 	/**
-	 * Affichage
-	 */
+	 * Affichage.
+	 *            
+	 * @return Un string correspondant à un joueur
+	 */	
 	
 	public abstract String toString();
 
 }
-

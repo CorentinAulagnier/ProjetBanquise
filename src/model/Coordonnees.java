@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * Class Coordonnees -> position sur le plateau de jeu
+ * Class Coordonnees : position sur le plateau de jeu
  */
 
 public class Coordonnees implements Serializable{

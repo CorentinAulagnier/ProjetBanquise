@@ -2,7 +2,7 @@ package model;
 
 
 /**
- * Class Humain -> un joueur est un humain
+ * Class Humain : un joueur est un humain
  */
 
 public class Humain extends Joueur {

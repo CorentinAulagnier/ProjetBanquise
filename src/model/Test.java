@@ -18,6 +18,11 @@ public class Test {
 
 	/**
 	 * Test l'affichage de la position d'un pingouin
+	 * 
+	 * @param x
+	 *            coordonnee.x.
+	 * @param y
+	 *            coordonnee.y.
 	 */
 	
 	public static void afficherPosPingouin(int x, int y){
@@ -29,12 +34,19 @@ public class Test {
 
 	/**
 	 * Test l'affichage des voisin de la position (x, y) dans l'axe z :
-	 *	- 1 -> Haut Droit
-	 *	- 2 -> Milieu Droit
-	 *	- 3 -> Bas Droit
-	 *	- 4 -> Bas Gauche
-	 *	- 5 -> Milieu Gauche
-	 *	- 6 -> Haut Gauche
+	 *	- 1 : Haut Droit
+	 *	- 2 : Milieu Droit
+	 *	- 3 : Bas Droit
+	 *	- 4 : Bas Gauche
+	 *	- 5 : Milieu Gauche
+	 *	- 6 : Haut Gauche
+	 * 
+	 * @param x
+	 *            coordonnee.x.
+	 * @param y
+	 *            coordonnee.y.
+	 * @param z
+	 *            Deplacement choisi.
 	 */
 	
 	public static void afficherVoisin(int x, int y, int z){
@@ -115,6 +127,9 @@ public class Test {
 	
 	/**
 	 * Main
+	 * 
+	 * @param args
+	 *            arguments du main.
 	 */
 	
 	public static void main(String[] args) {

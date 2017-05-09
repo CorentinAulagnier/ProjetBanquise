@@ -14,6 +14,8 @@ public class LauncherConsole {
 	
 	/**
 	 * Main
+	 * @param args
+	 *            Parametre du main.
 	 */
 	
 	public static void main(String[] args) {
@@ -28,6 +30,8 @@ public class LauncherConsole {
 	 *  - demande le nombre de joueurs et creee la partie adequate
 	 *  - genere aleatoirement la banquise
 	 *  - demande le nom/type de joueur
+	 * @param br
+	 *            Buffer de la console.
 	 */
 	
 	public static Partie creerPartie(BufferedReader br) {
@@ -73,7 +77,12 @@ public class LauncherConsole {
 	}
 
 	/**
-	 * place les pingouins de chaque joueur/IA a tour de role 
+	 * place les pingouins de chaque joueur/IA a tour de role 	
+	 *  
+	 * @param br
+	 *            Buffer de la console.	 
+	 * @param p
+	 *            La partie.
 	 */
 	
 	public static void phasePlacement(BufferedReader br, Partie p) {
@@ -127,6 +136,11 @@ public class LauncherConsole {
 
 	/**
 	 * deroulement du jeu explicit dans la fonction
+	 * 
+	 * @param br
+	 *            Buffer de la console.	 
+	 * @param p
+	 *            La partie.
 	 */
 	
 	public static void phaseMangerLesPoissons(BufferedReader br, Partie p) {
@@ -139,6 +153,9 @@ public class LauncherConsole {
 
 	/**
 	 * Affiche l'etat courant du plateau dans la console 
+	 * 
+	 * @param p
+	 *            La partie.
 	 */
 	
 	public static void afficherPlateau(Partie p) {
@@ -151,6 +168,11 @@ public class LauncherConsole {
 	 * - affiche la liste des pingouins capable d'effectuer un deplacement
 	 * - affiche tous les deplacements possibles du pingouin selectionne
 	 * - effectue le deplacement choisi puis passe la main au joueur suivant
+	 * 
+	 * @param br
+	 *            Buffer de la console.	 
+	 * @param p
+	 *            La partie.
 	 */
 	
 	public static void tourDeJeuConsole(BufferedReader br, Partie p) {
@@ -188,6 +210,13 @@ public class LauncherConsole {
 
 	/**
 	 * affiche la liste des pingouins deplacables
+	 * 
+	 * @param br
+	 *            Buffer de la console.	 
+	 * @param p
+	 *            La partie.
+	 *            
+	 * @return Le pingouin choisi
 	 */
 	
 	public static Pingouin choixPingouin(BufferedReader br, Partie p) {
@@ -214,7 +243,16 @@ public class LauncherConsole {
 	}
 
 	/**
-	 * affiche la liste des deplacements possibles pour un pingouin
+	 * Affiche la liste des deplacements possibles pour un pingouin
+	 *
+	 * @param br
+	 *            Buffer de la console.	 
+	 * @param p
+	 *            La partie.	 
+	 * @param pingouin
+	 *            Le pingouin.
+	 *        
+	 * @return les coordonnees de deplacement choisis
 	 */
 	
 	public static Coordonnees choixDeplacement(BufferedReader br, Partie p, Pingouin pingouin) {
@@ -267,6 +305,9 @@ public class LauncherConsole {
 
 	/**
 	 * affiche la fin de la partie (le gagnant)
+	 *
+	 * @param p
+	 *            La partie.	 
 	 */
 	
 	public static void finPartie(Partie p) {

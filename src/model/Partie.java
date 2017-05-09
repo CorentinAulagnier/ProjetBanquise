@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Class Partie : cree et gere la partie
  */
 
-public class Partie implements Serializable, Cloneable {
+public class Partie implements Serializable {
 	
 	/**
 	 * Nombre de joueurs

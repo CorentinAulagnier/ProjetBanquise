@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Class Partie -> cree et gere la partie
+ * Class Partie : cree et gere la partie
  */
 
 public class Partie implements Serializable {
@@ -401,6 +401,9 @@ public class Partie implements Serializable {
 	}
 	
 	/**       
+	 * @param scoremax
+	 *            Le score du ou des gagnant(s).
+	 *            
 	 * @return le nombre de deplacement max parmis tout les joueurs.
 	 */
 	

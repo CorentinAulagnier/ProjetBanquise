@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * Class Pingouin -> gere un pingouin
+ * Class Pingouin : gere un pingouin
  */
 
 public class Pingouin implements Serializable{
@@ -32,6 +32,9 @@ public class Pingouin implements Serializable{
 	/**
 	 * Constructeurs.
 	 * Place le pingouin a la position c et le met actif.
+	 * 
+	 * @param c
+	 *            Position du nouveau pingouin.
 	 */
 	
 	public Pingouin(Coordonnees c){

@@ -2,15 +2,15 @@ package model;
 
 
 /**
- * Class IA -> un joueur est une IA
+ * Class IA : un joueur est une IA
  */
 
 public class IA extends Joueur {
 	/**
 	 * Entier qui indique le niveau de l'ia : 
-	 * 	- 1 -> facile
-	 *  - 2 -> moyenne
-	 *  - 3 -> difficile
+	 * 	- 1 : facile
+	 *  - 2 : moyenne
+	 *  - 3 : difficile
 	 */
 	
 	public int niveau;

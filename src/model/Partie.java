@@ -114,6 +114,8 @@ public class Partie implements Serializable, Cloneable {
 	
 	/**
 	 * Clone de la partie actuelle.
+	 * 
+	 * @return Renvoie la partie clonne
 	 */
 	
 	@Override

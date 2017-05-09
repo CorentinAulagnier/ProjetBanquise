@@ -21,6 +21,7 @@ public class LauncherConsole {
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Partie p = creerPartie(br);
+		p.setHistorique();
 		phasePlacement(br, p);
 		phaseMangerLesPoissons(br, p);
 		finPartie(p);
@@ -146,8 +147,41 @@ public class LauncherConsole {
 	public static void phaseMangerLesPoissons(BufferedReader br, Partie p) {
 		while(!p.estPartieFini()) {
 			afficherPlateau(p);
+			demandeAnnulerRefaire(br, p);
 			tourDeJeuConsole(br, p);
 			p.verifierPingouinActif();
+		}
+	}
+
+	private static void demandeAnnulerRefaire(BufferedReader br, Partie p) {
+		boolean fini = false;
+		boolean annuler = p.peutAnnuler();
+		boolean refaire = p.peutRefaire();
+		while(!fini && (annuler || refaire)) {
+			System.out.println("Entrez la valeur de l'action que vous voulez faire : (vide pour passer)");
+			if(annuler) {
+				System.out.println("1 - annuler coup précédent");
+			}
+			if(refaire) {
+				System.out.println("2 - refaire dernier coup annulé");
+			}
+			String entree = null;
+			try {
+				entree = br.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(entree.equals("1")) {
+				p.annuler();
+				afficherPlateau(p);
+				annuler = p.peutAnnuler();
+			} else if(entree.equals("2")) {
+				p.retablir();
+				afficherPlateau(p);
+				refaire = p.peutRefaire();
+			} else {
+				fini = true;
+			}
 		}
 	}
 

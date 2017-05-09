@@ -18,6 +18,7 @@ public class IA extends Joueur {
 	/**
 	 * Constructeurs
 	 */
+	
 	public IA(){
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
@@ -26,7 +27,18 @@ public class IA extends Joueur {
 		this.niveau = 1;
 		this.nbPingouin = 3;
 	}
-
+	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param name
+	 *            Nom du joueur.
+	 * @param nbP
+	 *            Nombre de piongouins.
+	 * @param level
+	 *            Niveau de l'ia.
+	 */	
+	
 	public IA(String name, int nbP, int level){
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
@@ -37,8 +49,10 @@ public class IA extends Joueur {
 	}
 	
 	/**
-	 * Affichage
-	 */
+	 * Affichage.
+	 *            
+	 * @return Un string correspondant à une IA.
+	 */	
 	
 	public String toString() {
 		String s =  "Joueur nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
@@ -50,8 +64,12 @@ public class IA extends Joueur {
 	}
 	
 	/**
-	 * Execute un tour de jeu
-	 */
+	 * Execute un tour de jeu.
+	 * 
+	 * @param p
+	 *            L'etat de la partie.
+	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
+	 */	
 	
 	public CoupleCoordonnees jouer(Partie p) {
 		AlgoIA player = new AlgoIA(this);
@@ -72,8 +90,12 @@ public class IA extends Joueur {
 	}
 	
 	/**
-	 * Place un pingouin
-	 */
+	 * Renvoie oû placer un pingouin.
+	 * 
+	 * @param p
+	 *            L'etat de la partie.
+	 * @return Une Coordonnees representant la premiere position du pingouin.
+	 */	
 	
 	public Coordonnees placement(Partie p) {
 		AlgoIA player = new AlgoIA(this);
@@ -93,4 +115,3 @@ public class IA extends Joueur {
 	}
 
 }
-

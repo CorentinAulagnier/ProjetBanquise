@@ -5,7 +5,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**
+ * Class de test pour jouer dans la console,
+ * Pour plus de renseignements, demander a Mathieu ou Corentin
+ */
+
 public class LauncherConsole {
+	
+	/**
+	 * Main
+	 */
 	
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,6 +23,12 @@ public class LauncherConsole {
 		phaseMangerLesPoissons(br, p);
 		finPartie(p);
 	}
+	
+	/**
+	 *  - demande le nombre de joueurs et creee la partie adequate
+	 *  - genere aleatoirement la banquise
+	 *  - demande le nom/type de joueur
+	 */
 	
 	public static Partie creerPartie(BufferedReader br) {
 		Partie p = null;
@@ -56,6 +71,10 @@ public class LauncherConsole {
 		}
 		return p;
 	}
+
+	/**
+	 * place les pingouins de chaque joueur/IA a tour de role 
+	 */
 	
 	public static void phasePlacement(BufferedReader br, Partie p) {
 		try {
@@ -105,6 +124,10 @@ public class LauncherConsole {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * deroulement du jeu explicit dans la fonction
+	 */
 	
 	public static void phaseMangerLesPoissons(BufferedReader br, Partie p) {
 		while(!p.estPartieFini()) {
@@ -113,11 +136,22 @@ public class LauncherConsole {
 			p.verifierPingouinActif();
 		}
 	}
+
+	/**
+	 * Affiche l'etat courant du plateau dans la console 
+	 */
 	
 	public static void afficherPlateau(Partie p) {
 		System.out.println("Etat du plateau de jeu :");
-		System.out.println(p.toStringTerminal());
+		System.out.println(p);
 	}
+
+	/**
+	 * si le joueur actif peut jouer :
+	 * - affiche la liste des pingouins capable d'effectuer un deplacement
+	 * - affiche tous les deplacements possibles du pingouin selectionne
+	 * - effectue le deplacement choisi puis passe la main au joueur suivant
+	 */
 	
 	public static void tourDeJeuConsole(BufferedReader br, Partie p) {
 		if(p.peutJouer()){
@@ -151,6 +185,10 @@ public class LauncherConsole {
 		}	
 		p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
 	}
+
+	/**
+	 * affiche la liste des pingouins deplacables
+	 */
 	
 	public static Pingouin choixPingouin(BufferedReader br, Partie p) {
 		int num_p = -1;
@@ -174,6 +212,10 @@ public class LauncherConsole {
 		}
 		return pingouins[num_p];
 	}
+
+	/**
+	 * affiche la liste des deplacements possibles pour un pingouin
+	 */
 	
 	public static Coordonnees choixDeplacement(BufferedReader br, Partie p, Pingouin pingouin) {
 		try {
@@ -222,6 +264,10 @@ public class LauncherConsole {
 		}
 		return null;
 	}
+
+	/**
+	 * affiche la fin de la partie (le gagnant)
+	 */
 	
 	public static void finPartie(Partie p) {
 		ArrayList<Joueur> joueurs = p.getGagnant();
@@ -235,7 +281,4 @@ public class LauncherConsole {
 			System.out.print("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
 		}
 	}
-	
-	
-	
 }

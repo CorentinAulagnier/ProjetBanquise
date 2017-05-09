@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Tuile implements Serializable{
 	/**
-	 * nombre de poisson su cette case
+	 * nombre de poisson sur cette case
 	 * 0 si la case n'est pas accessible
 	 */
 	
@@ -27,28 +27,59 @@ public class Tuile implements Serializable{
 		return "Tuile nbPoissons=" + nbPoissons + ", aUnPingouin=" + aUnPingouin;
 	}
 
+
 	/**
-	 * Constructeurs
+	 * Constructeurs.
 	 */
 	public Tuile(){
 		this.nbPoissons = 0;
 		this.aUnPingouin = false;
 	}
 	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param n
+	 *            Le nombre de poissons sur la tuile.
+	 */
+	
 	public Tuile(int n){
 		this.nbPoissons = n;
 		this.aUnPingouin = false;
 	}
+	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param n
+	 *            Le nombre de poissons sur la tuile.
+	 * @param b
+	 *            Presence d'un pingouin sur la tuile.
+	 */
 	
 	public Tuile(int n, boolean b){
 		this.nbPoissons = n;
 		this.aUnPingouin = b;
 	}
 	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param b
+	 *            Presence d'un pingouin sur la tuile.
+	 */
+	
 	public Tuile(boolean b){
 		this.nbPoissons = 0;
 		this.aUnPingouin = b;
 	}
+	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param t
+	 *            Tuile a copier.
+	 */
 	
 	public Tuile(Tuile t){
 		this.nbPoissons = t.nbPoissons;
@@ -87,8 +118,13 @@ public class Tuile implements Serializable{
 		this.nbPoissons = nb;
 	}
 
+	/**
+	 * Indique si un pingouin peut venir sur cette tuile.
+	 * 
+	 * @return Vrai si la tuile est accessible.
+	 */
+	
 	public boolean estAccessible() {
 		return !(aUnPingouin || nbPoissons==0);
 	}
 }
-

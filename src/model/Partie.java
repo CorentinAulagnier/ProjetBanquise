@@ -144,6 +144,7 @@ public class Partie implements Serializable {
 	/**
 	 * Annuler le dernier coup joue.
 	 * 
+	 * @return vrai si on a le droit d'annuler un coup
 	 */
 	
 	public boolean annuler() {
@@ -162,6 +163,7 @@ public class Partie implements Serializable {
 	/**
 	 * Refaire le dernier coup annule.
 	 * 
+	 * @return vrai si on a le droit de retablir un coup
 	 */
 	public boolean retablir() {
 		if (!redo.empty()){

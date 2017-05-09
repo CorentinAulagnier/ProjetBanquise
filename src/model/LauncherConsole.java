@@ -31,8 +31,10 @@ public class LauncherConsole {
 	 *  - demande le nombre de joueurs et creee la partie adequate
 	 *  - genere aleatoirement la banquise
 	 *  - demande le nom/type de joueur
+	 *  
 	 * @param br
 	 *            Buffer de la console.
+	 * @return la partie cree
 	 */
 	
 	public static Partie creerPartie(BufferedReader br) {

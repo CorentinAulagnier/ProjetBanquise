@@ -65,5 +65,6 @@ public abstract class Joueur implements Serializable{
 	 */	
 	
 	public abstract String toString();
+	
 
 }

@@ -129,6 +129,7 @@ public class Test {
 	       		System.out.println("   - 3 -> affiche la position d'un voisin");
 	       		System.out.println("   - 4 -> affiche une partie");
 	       		System.out.println("   - 5 -> sauvegarder et charger une partie");
+	       		System.out.println("   - 6 -> création d'un clone");
 
 	        	int x = Integer.parseInt(br.readLine());
 	        	int y;
@@ -177,6 +178,12 @@ public class Test {
 						Partie p2 = new Partie();
 						p2.charger();
 						System.out.println("Banquise restaurée :\n"+p);
+					case 6:
+						Partie p_origine = LauncherConsole.creerPartie(br);
+						LauncherConsole.phasePlacement(br, p_origine);
+						System.out.println("Banquise créée :\n"+p_origine);
+						Partie p_clone = p_origine.clone();
+						System.out.println("Banquise clonée :\n"+p_clone);
 					default :
 						System.out.println("Commande non reconnu");
 				}

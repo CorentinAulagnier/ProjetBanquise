@@ -31,5 +31,6 @@ public class Coordonnees implements Serializable{
 	public boolean equals(Coordonnees c) {
 		return (this.x == c.x && this.y == c.y);
 	}
+	
 }
 

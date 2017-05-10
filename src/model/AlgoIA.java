@@ -181,16 +181,20 @@ public class AlgoIA {
      * Case choisie aleatoirement par celles accessibles
      */
     public CoupleCoordonnees algoFacile(Partie p) {
-        
-        
+
         // !!!!!!!!
         // Ne marche pas quand on choisi un pingouin qui na pas de deplacement possible !!2
-        
-
         Random r = new Random();
         CoupleCoordonnees cc;
         /* Choix aleatoire du Pingouin */
-        int val = r.nextInt(myIA.nbPingouin);
+
+        int notreNum = notreNumeroDeJoueur(p);
+        int notreNbPingouin = p.joueurs[notreNum].nbPingouin;//p.nbPingouinActif(p.joueurs[notreNum]);
+
+        int val = r.nextInt(notreNbPingouin);  // myIA.nbPingouin pas mis a jour !
+        while (!p.joueurs[notreNum].myPingouins[val].actif) {
+            val = r.nextInt(notreNbPingouin);
+        }
 
         int i = myIA.myPingouins[val].position.x;
         int j = myIA.myPingouins[val].position.y;
@@ -269,12 +273,14 @@ public class AlgoIA {
                 dep = p.b.getMG(dep);
                 nbDepl--;
             }
-        } else  		// En haut a gauche
+        } else // En haut a gauche
+        {
             while (nbDepl != 0) {
                 dep = p.b.getHG(dep);
                 nbDepl--;
             }
-        
+        }
+
         cc = new CoupleCoordonnees(new Coordonnees(i, j), dep);
 
         return cc;
@@ -323,11 +329,26 @@ public class AlgoIA {
         return meilleur3(p, c);
     }
 
+    public boolean feuillePointDinterrogation(Coordonnees c, Partie p) {
+        return (((p.b.getTuile(p.b.getBG(c)) == null) || (p.b.getTuile(p.b.getBG(c)).aUnPingouin) || (p.b.getTuile(p.b.getBG(c)).nbPoissons == 0))
+                && ((p.b.getTuile(p.b.getMG(c)) == null) || (p.b.getTuile(p.b.getMG(c)).aUnPingouin) || (p.b.getTuile(p.b.getMG(c)).nbPoissons == 0))
+                && ((p.b.getTuile(p.b.getHG(c)) == null) || (p.b.getTuile(p.b.getHG(c)).aUnPingouin) || (p.b.getTuile(p.b.getHG(c)).nbPoissons == 0))
+                && ((p.b.getTuile(p.b.getBD(c)) == null) || (p.b.getTuile(p.b.getBD(c)).aUnPingouin) || (p.b.getTuile(p.b.getBD(c)).nbPoissons == 0))
+                && ((p.b.getTuile(p.b.getMD(c)) == null) || (p.b.getTuile(p.b.getMD(c)).aUnPingouin) || (p.b.getTuile(p.b.getMD(c)).nbPoissons == 0))
+                && ((p.b.getTuile(p.b.getHD(c)) == null) || (p.b.getTuile(p.b.getHD(c)).aUnPingouin) || (p.b.getTuile(p.b.getHD(c)).nbPoissons == 0)));
+    }
+
     public ArbreGraphe CreationArbre(Coordonnees c, Partie partie, int dir, int nbcoupsmax, HashMap<Coordonnees, ArbreGraphe> hash) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
 
-        if (nbcoupsmax == 0) {
-            return null;
+        if ((nbcoupsmax <= 0) || feuillePointDinterrogation(c, partie)) {
+            ArbreGraphe abr = new ArbreGraphe(0);
+            abr.estFeuille = true;
+            abr.c = c;
+            Tuile tuile = partie.b.getTuile(c);
+            abr.poids = tuile.nbPoissons;
+            return abr;
         }
+
         Partie p = (Partie) partie.clone();
         ArbreGraphe abr = new ArbreGraphe(1);
         abr.c = c;
@@ -406,51 +427,79 @@ public class AlgoIA {
 
     public CoupleCoordonneesInt parcoursGraphe(ArbreGraphe abr, int nbCoupsmax, int nbCoups, int dir, int somme, Coordonnees coord1stchoice) {
 
-        if ((nbCoups == 0)) {
-            return new CoupleCoordonneesInt(coord1stchoice, somme);
-        }
         if ((nbCoups == nbCoupsmax - 1)) {
             coord1stchoice = abr.c;
         }
+
+        if ((nbCoups == 0) || (abr.estFeuille)) {
+            return new CoupleCoordonneesInt(coord1stchoice, somme);
+        }
+
         CoupleCoordonneesInt val1 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
         CoupleCoordonneesInt val2 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
         CoupleCoordonneesInt val3 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
         CoupleCoordonneesInt val4 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
         CoupleCoordonneesInt val5 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
         CoupleCoordonneesInt val6 = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
+        CoupleCoordonneesInt tmp = new CoupleCoordonneesInt(new Coordonnees(0, 0), 0);
 
-        if (abr.noeudBD[0] != null) {
-            for (int i = 0; i < abr.noeudBD[0].size(); i++) {
-                val1 = parcoursGraphe(abr.noeudBD[0].get(i), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if ((abr.noeudBD[0] != null)&&(!abr.noeudBD[0].isEmpty())) {
+            val1 = parcoursGraphe(abr.noeudBD[0].get(0), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            for (int i = 1; i < abr.noeudBD[0].size(); i++) {
+                tmp = parcoursGraphe(abr.noeudBD[0].get(i), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                if (val1.i <= tmp.i) {
+                    val1 = tmp;
+                }
             }
         }
-        if (abr.noeudMD[0] != null) {
-            for (int i = 0; i < abr.noeudMD[0].size(); i++) {
-                val2 = parcoursGraphe(abr.noeudMD[0].get(i), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if ((abr.noeudMD[0] != null)&&(!abr.noeudMD[0].isEmpty())) {
+            val2 = parcoursGraphe(abr.noeudMD[0].get(0), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            for (int i = 1; i < abr.noeudMD[0].size(); i++) {
+                tmp = parcoursGraphe(abr.noeudMD[0].get(i), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                if (val2.i <= tmp.i) {
+                    val2 = tmp;
+                }
             }
         }
-        if (abr.noeudHD[0] != null) {
-            for (int i = 0; i < abr.noeudHD[0].size(); i++) {
-                val3 = parcoursGraphe(abr.noeudHD[0].get(i), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if ((abr.noeudHD[0] != null)&&(!abr.noeudHD[0].isEmpty())) {
+            val3 = parcoursGraphe(abr.noeudHD[0].get(0), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            for (int i = 1; i < abr.noeudHD[0].size(); i++) {
+                tmp = parcoursGraphe(abr.noeudHD[0].get(i), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                if (val3.i <= tmp.i) {
+                    val3 = tmp;
+                }
             }
         }
-        if (abr.noeudHG[0] != null) {
-            for (int i = 0; i < abr.noeudHG[0].size(); i++) {
-                val4 = parcoursGraphe(abr.noeudHG[0].get(i), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if ((abr.noeudHG[0] != null)&&(!abr.noeudHG[0].isEmpty())) {
+            val4 = parcoursGraphe(abr.noeudHG[0].get(0), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            for (int i = 1; i < abr.noeudHG[0].size(); i++) {
+                tmp = parcoursGraphe(abr.noeudHG[0].get(i), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                if (val4.i <= tmp.i) {
+                    val4 = tmp;
+                }
             }
         }
-        if (abr.noeudMG[0] != null) {
-            for (int i = 0; i < abr.noeudMG[0].size(); i++) {
-                val5 = parcoursGraphe(abr.noeudMG[0].get(i), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+        if ((abr.noeudMG[0] != null)&&(!abr.noeudMG[0].isEmpty())) {
+            val5 = parcoursGraphe(abr.noeudMG[0].get(0), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            for (int i = 1; i < abr.noeudMG[0].size(); i++) {
+                tmp = parcoursGraphe(abr.noeudMG[0].get(i), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                if (val5.i <= tmp.i) {
+                    val5 = tmp;
+                }
             }
         }
-        if (abr.noeudBG[0] != null) {
-            for (int i = 0; i < abr.noeudBG[0].size(); i++) {
-                val6 = parcoursGraphe(abr.noeudBG[0].get(i), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
+        if ((abr.noeudBG[0] != null)&&(!abr.noeudBG[0].isEmpty())) {
+            val6 = parcoursGraphe(abr.noeudBG[0].get(0), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
+            for (int i = 1; i < abr.noeudBG[0].size(); i++) {
+                tmp = parcoursGraphe(abr.noeudBG[0].get(i), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
+                if (val6.i <= tmp.i) {
+                    val6 = tmp;
+                }
             }
         }
 
         int max = Math.max(val1.i, Math.max(val2.i, Math.max(val3.i, Math.max(val4.i, Math.max(val5.i, val6.i)))));
+
         if (max == val1.i) {
             return val1;
         } else if (max == val2.i) {
@@ -467,7 +516,7 @@ public class AlgoIA {
     }
 
     public CoupleCoordonnees algoMoyen(Partie p) {
-        int nbcoupsrecherches = 2; // Choix du "2" très réfléchi mais modifiable.
+        int nbcoupsrecherches = 4; // Choix du "4" très réfléchi mais modifiable.
         int max = 0;
         Coordonnees coordmax = null;
         int indx = 0;
@@ -479,16 +528,14 @@ public class AlgoIA {
             CoupleCoordonneesInt coordint = parcoursGraphe(abr, nbcoupsrecherches, nbcoupsrecherches, 6, 0, new Coordonnees(0, 0));
             poidsPingouins.add(coordint);
         }
-        System.out.println("poid Pingouin size" + poidsPingouins.size());
 
         for (int i = 0; i < poidsPingouins.size(); i++) {
             if (poidsPingouins.get(i).i > max) {
                 max = poidsPingouins.get(i).i;
                 coordmax = poidsPingouins.get(i).c;
+                indx = i;
             }
         }
-        System.out.println("coordmax" + coordmax);
-        System.out.println("max " + max);
 
         return new CoupleCoordonnees(myIA.myPingouins[indx].position, coordmax);
     }
@@ -497,7 +544,7 @@ public class AlgoIA {
      */
     public int notreNumeroDeJoueur(Partie p) {
         int num = 0;
-        while ((num != p.nbJoueurs) && (p.joueurs[num].nom.equals(myIA.nom))) {   // mettre une methode equals dans la classe abstraite Joueur ????????????????????????????
+        while ((num != p.nbJoueurs) && !(p.joueurs[num].nom.equals(myIA.nom))) {   // mettre une methode equals dans la classe abstraite Joueur ????????????????????????????
             num = num + 1;
         }
         return num;
@@ -511,13 +558,6 @@ public class AlgoIA {
         return num;
     }
 
-    public int nbPingouinActuel(Joueur j) {
-        int nbPing = 0;
-        while ((nbPing != j.nbPingouin) && (j.myPingouins[nbPing] != null)) {
-            nbPing = nbPing + 1;
-        }
-        return nbPing;
-    }
 
     /* Placement des pingouins pour l'IA difficile
      * On regarde si la banquise a une configuration speciale, par exemple :
@@ -528,12 +568,12 @@ public class AlgoIA {
 
         Coordonnees retour = new Coordonnees();
         int notreNum = notreNumeroDeJoueur(p);
-        int notreNbPingouin = nbPingouinActuel(p.joueurs[notreNum]);
+        int notreNbPingouin = p.nbPingouinActif(p.joueurs[notreNum]);
         Coordonnees riri = p.joueurs[notreNum].myPingouins[0].position;
 
         if (p.nbJoueurs == 2) {
             int ennemiNum = numJoueurAdversaire(p, notreNum);
-            int ennemiNbPingouin = nbPingouinActuel(p.joueurs[ennemiNum]);
+            int ennemiNbPingouin = p.nbPingouinActif(p.joueurs[ennemiNum]);
 
             if (ennemiNbPingouin <= 3) { // Si l'adversaire a placé 0, 1, 2 ou 3 pingouins
                 retour = placementMoyen(p);
@@ -595,17 +635,17 @@ public class AlgoIA {
             int num;
             if (joueur == 0) { // Si c'est a nous de jouer
                 num = notreNumeroDeJoueur(partie);
-                nbPingouin = nbPingouinActuel(partie.joueurs[num]);
+                nbPingouin = p.nbPingouinActif(partie.joueurs[num]);
             } else {
                 num = numJoueurAdversaire(partie, notreNumeroDeJoueur(partie));
-                nbPingouin = nbPingouinActuel(partie.joueurs[num]);
+                nbPingouin = p.nbPingouinActif(partie.joueurs[num]);
             }
             ArbreGraphe abr = new ArbreGraphe(nbPingouin);
 
             abr.c = c;
             Tuile tuile = p.b.getTuile(c);
             abr.poids = tuile.nbPoissons;
-            p.manger(c);
+            //p.manger(c);
 
             for (int i = 0; i < nbPingouin; i++) {
 
@@ -630,7 +670,7 @@ public class AlgoIA {
                         abr.noeudMG[i].add(hash.get(p.b.getMG(a)));
                     } else {
                         Partie p2 = (Partie) p.clone();
-                        p2.manger(a);
+                        // p2.manger(a);
                         p2.deplacement(c, p2.b.getMG(a));
                         abr.noeudMG[i].add(CreationAbreMinimax(p.b.getMG(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
                         hash.put(p2.b.getMG(a), abr);
@@ -644,7 +684,7 @@ public class AlgoIA {
                         abr.noeudHG[i].add(hash.get(p.b.getHG(a)));
                     } else {
                         Partie p2 = (Partie) p.clone();
-                        p2.manger(a);
+                        //p2.manger(a);
                         p2.deplacement(c, p2.b.getHG(a));
                         abr.noeudHG[i].add(CreationAbreMinimax(p.b.getHG(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
                         hash.put(p2.b.getHG(a), abr);
@@ -658,7 +698,7 @@ public class AlgoIA {
                         abr.noeudHD[i].add(hash.get(p.b.getHD(a)));
                     } else {
                         Partie p2 = (Partie) p.clone();
-                        p2.manger(a);
+                        //p2.manger(a);
                         p2.deplacement(c, p2.b.getHD(a));
                         abr.noeudHD[i].add(CreationAbreMinimax(p.b.getHD(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
                         hash.put(p2.b.getHD(a), abr);
@@ -672,7 +712,7 @@ public class AlgoIA {
                         abr.noeudMD[i].add(hash.get(p.b.getMD(a)));
                     } else {
                         Partie p2 = (Partie) p.clone();
-                        p2.manger(a);
+                        //p2.manger(a);
                         p2.deplacement(c, p2.b.getMD(a));
                         abr.noeudMD[i].add(CreationAbreMinimax(p.b.getMD(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
                         hash.put(p2.b.getMD(a), abr);
@@ -686,7 +726,7 @@ public class AlgoIA {
                         abr.noeudBD[i].add(hash.get(p.b.getBD(a)));
                     } else {
                         Partie p2 = (Partie) p.clone();
-                        p2.manger(a);
+                        //p2.manger(a);
                         p2.deplacement(c, p2.b.getBD(a));
                         abr.noeudBD[i].add(CreationAbreMinimax(p.b.getBD(a), p2, -joueur, nbcoupsmax - 1, hash, somme + abr.poids));
                         hash.put(p2.b.getBD(a), abr);
@@ -708,10 +748,10 @@ public class AlgoIA {
         int num;
         if (joueur == 0) { // Si c'est a nous de jouer
             num = notreNumeroDeJoueur(p);
-            nbPingouin = nbPingouinActuel(p.joueurs[num]);
+            nbPingouin = p.nbPingouinActif(p.joueurs[num]);
         } else {
             num = numJoueurAdversaire(p, notreNumeroDeJoueur(p));
-            nbPingouin = nbPingouinActuel(p.joueurs[num]);
+            nbPingouin = p.nbPingouinActif(p.joueurs[num]);
         }
 
         for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {

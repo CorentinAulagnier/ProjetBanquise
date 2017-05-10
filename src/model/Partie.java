@@ -535,7 +535,7 @@ public class Partie implements Serializable {
 	
 	public void afficherScores() {
 		for(int i = 0; i<nbJoueurs; i++)
-			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points.");
+			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points et "+ joueurs[i].nbTuiles + " tuiles.");
 	}
 
 	/**       

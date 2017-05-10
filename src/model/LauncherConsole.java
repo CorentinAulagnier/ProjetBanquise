@@ -149,7 +149,6 @@ public class LauncherConsole {
 	public static void phaseMangerLesPoissons(BufferedReader br, Partie p) {
 		while(!p.estPartieFini()) {
 			afficherPlateau(p);
-			demandeAnnulerRefaire(br, p);
 			tourDeJeuConsole(br, p);
 			p.verifierPingouinActif();
 		}
@@ -157,8 +156,8 @@ public class LauncherConsole {
 
 	private static void demandeAnnulerRefaire(BufferedReader br, Partie p) {
 		boolean fini = false;
-		boolean annuler = p.peutAnnuler();
-		boolean refaire = p.peutRefaire();
+		boolean annuler = p.h.peutAnnuler();
+		boolean refaire = p.h.peutRefaire();
 		while(!fini && (annuler || refaire)) {
 			System.out.println("Entrez la valeur de l'action que vous voulez faire : (vide pour passer)");
 			if(annuler) {
@@ -176,11 +175,13 @@ public class LauncherConsole {
 			if(entree.equals("1")) {
 				p.annuler();
 				afficherPlateau(p);
-				annuler = p.peutAnnuler();
+				annuler = p.h.peutAnnuler();
+				refaire = p.h.peutRefaire();
 			} else if(entree.equals("2")) {
 				p.retablir();
 				afficherPlateau(p);
-				refaire = p.peutRefaire();
+				annuler = p.h.peutAnnuler();
+				refaire = p.h.peutRefaire();
 			} else {
 				fini = true;
 			}
@@ -212,6 +213,7 @@ public class LauncherConsole {
 	 */
 	
 	public static void tourDeJeuConsole(BufferedReader br, Partie p) {
+		if(p.utiliseHistorique && p.joueurs[p.joueurActif].getClass()==Humain.class) demandeAnnulerRefaire(br, p);
 		if(p.peutJouer()){
 			System.out.println("A "+p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") de jouer!");
 			boolean joue = false;
@@ -231,6 +233,7 @@ public class LauncherConsole {
 					Pingouin pingouin = choixPingouin(br,p);
 					Coordonnees dep = choixDeplacement(br, p, pingouin);
 					if(dep!=null) {
+						if(p.utiliseHistorique) p.majHistorique();
 						p.deplacement(pingouin, dep);
 						joue = true;
 					}
@@ -356,15 +359,18 @@ public class LauncherConsole {
 	 */
 	
 	public static void finPartie(Partie p) {
+		afficherPlateau(p);
 		ArrayList<Joueur> joueurs = p.getGagnant();
 		if(joueurs.size()>1) {
 			System.out.print("Partie terminée.\nLes joueurs ");
 			for(Joueur j : joueurs) {
 				System.out.print(j.nom+" ");
 			}
-			System.out.print("ont gagnés la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
+			System.out.println("ont gagnés la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
 		} else {
-			System.out.print("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
+			System.out.println("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
 		}
+		//score de chaque joueur
+		p.afficherScores();
 	}
 }

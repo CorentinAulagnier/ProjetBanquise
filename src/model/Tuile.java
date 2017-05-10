@@ -89,6 +89,8 @@ public class Tuile implements Serializable {
 	/**
 	 * Met un pingouin sur la case
 	 */
+
+/*******************************************************************************************************/
 	
 	public void mettrePingouin(){
 		this.aUnPingouin = true;
@@ -121,6 +123,8 @@ public class Tuile implements Serializable {
 		this.nbPoissons = nb;
 	}
 
+/*******************************************************************************************************/
+	
 	/**
 	 * Indique si un pingouin peut venir sur cette tuile.
 	 * 

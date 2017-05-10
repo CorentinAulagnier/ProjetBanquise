@@ -44,12 +44,13 @@ public class Partie implements Serializable {
 	public Joueur[] joueurs;
 	
 	/**
-	 * Piles annuler et refaire
+	 * Utilisation historique
 	 */	
-	public boolean utiliseHistorique = false;
-	public transient Stack<Partie> undo = new Stack<Partie>();
-	public transient Stack<Partie> redo = new Stack<Partie>();
 	
+	public boolean utiliseHistorique = false;
+	
+	public transient Historique h;
+
 	/**
 	 * Constructeurs
 	 */
@@ -119,7 +120,9 @@ public class Partie implements Serializable {
 		this.nbJoueurs = j.length;
 		this.joueurActif = 0;
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Clone de la partie actuelle.
 	 * 
@@ -140,24 +143,27 @@ public class Partie implements Serializable {
 			return null;
 		}
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Annuler le dernier coup joue.
 	 * 
 	 * @return vrai si on a le droit d'annuler un coup
 	 */
 	
-	public boolean annuler() {
-		if (!undo.empty()){
-			Partie p = undo.pop().clone();
-			if (!undo.empty()){
-				redo.push(p);
-				return true;
-			} else {
-				undo.push(p);
-			}	
+	public void annuler() {
+		Partie p = h.annuler(this.clone());
+		if(p!=null) {
+			this.b=p.b;
+			//this.h = new Historique(p.h);
+			this.joueurActif=p.joueurActif;
+			this.nbJoueurs=p.nbJoueurs;
+			this.utiliseHistorique = p.utiliseHistorique;
+			this.joueurs = p.joueurs;
+		} else {
+			System.err.println("Impossible d'annuler.");
 		}
-		return false;
 	}
 	
 	/**
@@ -165,13 +171,21 @@ public class Partie implements Serializable {
 	 * 
 	 * @return vrai si on a le droit de retablir un coup
 	 */
-	public boolean retablir() {
-		if (!redo.empty()){
-			undo.push(redo.pop().clone());
-			return true;
+	
+	public void retablir() {
+		Partie p = h.retablir(this.clone());
+		if(p!=null) {
+			this.b=p.b;
+			this.joueurActif=p.joueurActif;
+			this.nbJoueurs=p.nbJoueurs;
+			this.utiliseHistorique = p.utiliseHistorique;
+			this.joueurs = p.joueurs;
+		} else {
+			System.err.println("Impossible de retablir.");
 		}
-		return false;
 	}
+
+/*******************************************************************************************************/
 
 	/**
 	 * Sauvegarde la partie en cours.
@@ -182,9 +196,12 @@ public class Partie implements Serializable {
 	
 	public void sauvegarder(String name) {
 		try {
-			File fichier =  new File("save/"+name+".banquise") ;
+			File fichier =  new File("save/"+name+".partie") ;
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
 			oos.writeObject(this);
+			if(utiliseHistorique) {
+				h.sauvegarder(name);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -207,15 +224,17 @@ public class Partie implements Serializable {
 	
 	public void charger(String name) {
 		try {
-		File fichier =  new File("save/"+name+".banquise") ;
-		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
-		Partie p = (Partie)ois.readObject() ;
-		this.b = p.b;
-		this.joueurActif = p.joueurActif;
-		this.nbJoueurs = p.nbJoueurs;
-		this.joueurs = p.joueurs;
-		this.undo = new Stack<Partie>();
-		this.redo = new Stack<Partie>();
+			File fichier =  new File("save/"+name+".partie") ;
+			ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
+			Partie p = (Partie)ois.readObject() ;
+			this.b = p.b;
+			this.joueurActif = p.joueurActif;
+			this.nbJoueurs = p.nbJoueurs;
+			this.joueurs = p.joueurs;
+			this.utiliseHistorique = p.utiliseHistorique;
+			if(utiliseHistorique) {
+				this.h.charger(name);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -229,6 +248,8 @@ public class Partie implements Serializable {
 		charger("no_name");
 	}
 
+/*******************************************************************************************************/
+
 	/**
 	 * Execute un tour de jeu
 	 */
@@ -236,6 +257,8 @@ public class Partie implements Serializable {
 	public void tourDeJeu() {
 		// TODO implement me
 	}
+
+/*******************************************************************************************************/
 
 	/**
 	 * Verifie si la partie est termine.
@@ -250,7 +273,33 @@ public class Partie implements Serializable {
 					return false;
 		return true;
 	}
+
+	/**
+	 * Retourne si le joueur j peut jouer
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne vrai si le joueur j peut jouer.
+	 */
 	
+	public boolean peutJouer(Joueur j) {
+		return (nbPingouinActif(j) > 0);
+	}
+	
+	/**
+	 * Retourne si le joueur actif peut jouer
+	 *         
+	 * @return Retourne vrai si le joueur actif peut jouer.
+	 */
+	
+	public boolean peutJouer() {
+		return peutJouer(joueurs[joueurActif]);
+	}
+	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Le joueur actif recupere les poissons de la case c.
 	 * 
@@ -324,7 +373,9 @@ public class Partie implements Serializable {
 		tuileArr.mettrePingouin();
 
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Retourne les coordonnees des pingouins deplacables du joueur j
 	 * ATTENTION : Il peut y avoir des cases "null"
@@ -373,7 +424,9 @@ public class Partie implements Serializable {
 	 *            
 	 * @return Retourne le nb de pingouins deplacable du joueur j.
 	 */
-	
+
+/*******************************************************************************************************/
+
 	public int nbPingouinActif(Joueur j) {
 		Coordonnees[] c = positionPingouins(j);
 		int nb = 0;
@@ -397,29 +450,26 @@ public class Partie implements Serializable {
 	public int nbPingouinActif() {
 		return nbPingouinActif(joueurs[joueurActif]);
 	}
-	
+
 	/**
-	 * Retourne si le joueur j peut jouer
-	 * 
-	 * @param j
-	 *            Le joueur.
-	 *            
-	 * @return Retourne vrai si le joueur j peut jouer.
+	 * Tue les pingouins bloques de chaque joueur
 	 */
 	
-	public boolean peutJouer(Joueur j) {
-		return (nbPingouinActif(j) > 0);
+	public void verifierPingouinActif() {
+		for(int i = 0; i<nbJoueurs; i++) {
+			for(int j = 0; j<joueurs[i].nbPingouin; j++) {
+				Pingouin pin = joueurs[i].myPingouins[j];
+				if (pin.actif == true && b.nePeutPlusBouger(pin)) {
+					manger(pin.position);
+					b.getTuile(pin.position).enlevePingouin();
+					pin.actif = false;
+				}
+			}
+		}
 	}
 	
-	/**
-	 * Retourne si le joueur actif peut jouer
-	 *         
-	 * @return Retourne vrai si le joueur actif peut jouer.
-	 */
-	
-	public boolean peutJouer() {
-		return peutJouer(joueurs[joueurActif]);
-	}
+
+/*******************************************************************************************************/
 	
 	/**
 	 * Retourne l'entier correspondant au joueur à qui appartient le pingouin aux coordonnees c
@@ -458,6 +508,8 @@ public class Partie implements Serializable {
 		return null;
 	}
 
+/*******************************************************************************************************/
+
 	/**
 	 * Recupere le ou les joueurs gagants en cas d'egalite
 	 *            
@@ -475,6 +527,15 @@ public class Partie implements Serializable {
 			}
 		}
 		return gagnants;
+	}
+	
+	/**
+	 * Affiche le score de chaque joueur
+	 */
+	
+	public void afficherScores() {
+		for(int i = 0; i<nbJoueurs; i++)
+			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points et "+ joueurs[i].nbTuiles + " tuiles.");
 	}
 
 	/**       
@@ -507,7 +568,52 @@ public class Partie implements Serializable {
 		}
 		return NbTuiles;
 	}
+
+/*******************************************************************************************************/
 	
+	/**
+	 * Verifie si on peut annuler un coup. (Un seul joueur)
+	 * 
+	 * @return Renvoie vrai, si il n'y a qu'un seul joueur.
+	 */
+	
+	public boolean peutAnnulerCoup() {
+		boolean res = false;
+		for(int i = 0; i<nbJoueurs; i++) {
+			if (this.joueurs[i].getClass() == Humain.class) { 
+				if (res) {
+					return false;
+				} else {
+					res = true;
+				}
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * Verifie si la partie dispose des fonctions "annuler" et "retablir"
+	 * 
+	 */
+
+	public void setHistorique() {
+		this.utiliseHistorique = peutAnnulerCoup();
+		if(utiliseHistorique) {
+			this.h = new Historique();
+		}
+	}
+	
+	/**
+	 * Mets a jour l'historique
+	 * ATTENTION : doit etre appele a chaque coup joue
+	 */
+
+	public void majHistorique() {
+		h.undo.push(this.clone());
+		h.redo.clear();
+	}
+	
+/*******************************************************************************************************/
 
 	/**
 	 * Affichage.
@@ -554,70 +660,5 @@ public class Partie implements Serializable {
 
 		return s;
 	}
-	
-	/**
-	 * Tue les pingouins bloques de chaque joueur
-	 */
-	
-	public void verifierPingouinActif() {
-		for(int i = 0; i<nbJoueurs; i++) {
-			for(int j = 0; j<joueurs[i].nbPingouin; j++) {
-				Pingouin pin = joueurs[i].myPingouins[j];
-				if (pin.actif == true && b.nePeutPlusBouger(pin)) {
-					manger(pin.position);
-					b.getTuile(pin.position).enlevePingouin();
-					pin.actif = false;
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Verifie si on peut annuler un coup. (Un seul joueur)
-	 * 
-	 * @return Renvoie vrai, si il n'y a qu'un seul joueur.
-	 */
-	
-	public boolean peutAnnulerCoup() {
-		boolean res = false;
-		for(int i = 0; i<nbJoueurs; i++) {
-			if (this.joueurs[i].getClass() == Humain.class) { 
-				if (res) {
-					return false;
-				} else {
-					res = true;
-				}
-			}
-		}
-		return res;
-	}
-	
-	/**
-	 * Verifie si la partie dispose des fonctions "annuler" et "retablir"
-	 * 
-	 */
-
-	public void setHistorique() {
-		this.utiliseHistorique = peutAnnulerCoup();		
-	}
-	
-	/**
-	 * Verifie le joueur actif peut effectuer l'action "annuler"
-	 * 
-	 * @return vrai si le joueur actif peut annuler
-	 */
-	public boolean peutAnnuler() {
-		return (utiliseHistorique && undo.size()>1);
-	}
-	
-	/**
-	 * Verifie le joueur actif peut effectuer l'action "retablir"
-	 * 
-	 * @return vrai si le joueur actif peut retablir la dernière action annulee
-	 */
-	public boolean peutRefaire() {
-		return (utiliseHistorique && redo.size()>0);
-	}
-	
 }
 

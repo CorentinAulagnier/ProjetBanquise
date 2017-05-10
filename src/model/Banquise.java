@@ -28,7 +28,9 @@ public class Banquise implements Serializable, Cloneable{
 	/**
 	 * Initialise la banquise avec des valeurs de poissons aleatoire.
 	 */	
-	
+
+/*******************************************************************************************************/
+
 	public void initBanquise() {
 		int unPoisson = 30;
 		int deuxPoissons = 20;
@@ -76,7 +78,9 @@ public class Banquise implements Serializable, Cloneable{
 			}
 		}
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Renvoie la toile en memoire aux coordonnees c.
 	 * 
@@ -106,7 +110,9 @@ public class Banquise implements Serializable, Cloneable{
 		this.terrain[c.x][c.y].nbPoissons = t.nbPoissons;
 		this.terrain[c.x][c.y].aUnPingouin = t.aUnPingouin;
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Indique si le point est sur une ligne paire.
 	 * 
@@ -166,7 +172,9 @@ public class Banquise implements Serializable, Cloneable{
 	public boolean derniereLigne(Coordonnees c) {
 		return (c.x == 7);
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Renvoie les coordonnees du voisin haut droit d'un point.
 	 * 
@@ -278,7 +286,9 @@ public class Banquise implements Serializable, Cloneable{
 			}		
 		}
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Renvoie un boulean indiquant si un pingouin peut bouger.
 	 * 
@@ -339,7 +349,9 @@ public class Banquise implements Serializable, Cloneable{
 		);
 
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Renvoie la liste de points en partant de dep, et en allant dans tout les sens.
 	 * 
@@ -381,6 +393,35 @@ public class Banquise implements Serializable, Cloneable{
 		return chemin;
 	}
 
+/*******************************************************************************************************/
+
+	/**
+	 * @return le nombre de tuiles vides de la banquise
+	 */	
+	
+	public int nbTuilesLibres() {
+		int nbTuiles = 0;
+		int numligne = 0;
+		
+		for (int i = 0; i<8; i++) {
+
+			if (i%2 == 0) { //Ligne pair
+				numligne = 7;
+			} else {
+				numligne = 8; //Ligne impair
+			}
+
+			for (int j = 0; j < numligne; j++) {
+				if (this.terrain[i][j].nbPoissons > 0) {
+					nbTuiles ++;
+				}
+			}
+		}
+		return nbTuiles;
+	}
+
+/*******************************************************************************************************/
+	
 	/**
 	 * Affichage.
 	 *     .
@@ -420,6 +461,5 @@ public class Banquise implements Serializable, Cloneable{
 
 		return s;
 	}
-	
 }
 

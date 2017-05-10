@@ -71,7 +71,7 @@ public class IA extends Joueur {
 	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
 	 */	
 	
-	public CoupleCoordonnees jouer(Partie p) {
+	public CoupleGenerique<Coordonnees, Coordonnees> jouer(Partie p) {
 		AlgoIA player = new AlgoIA(this);
 		int level = this.niveau;
 		

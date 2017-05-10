@@ -220,13 +220,13 @@ public class LauncherConsole {
 			while(!joue) {
 				if (p.joueurs[p.joueurActif].getClass() == IA.class) { // Tour de l'IA
 					System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " cherche son coup.");
-					CoupleCoordonnees cc = p.joueurs[p.joueurActif].jouer(p);
+					CoupleGenerique<Coordonnees, Coordonnees> cc = p.joueurs[p.joueurActif].jouer(p);
 					if(cc!=null) {
-						p.deplacement(cc.c1, cc.c2);
-						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.c2);
+						p.deplacement(cc.e1, cc.e2);
+						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2);
 						joue = true;
 					} else {
-						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.c2+" mais cela est impossible.");
+						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2+" mais cela est impossible.");
 					}
 							
 				} else { // Tour de l'Humain

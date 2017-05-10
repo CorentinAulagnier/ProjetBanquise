@@ -59,7 +59,7 @@ public class Humain extends Joueur {
 	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
 	 */	
 	
-	public CoupleCoordonnees jouer(Partie p) {
+	public CoupleGenerique<Coordonnees, Coordonnees> jouer(Partie p) {
 		return null;
 	}
 	

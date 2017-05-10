@@ -46,7 +46,7 @@ public abstract class Joueur implements Serializable{
 	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
 	 */	
 	
-	public abstract CoupleCoordonnees jouer(Partie p) ;
+	public abstract CoupleGenerique<Coordonnees, Coordonnees> jouer(Partie p) ;
 
 	/**
 	 * Renvoie oû placer un pingouin.

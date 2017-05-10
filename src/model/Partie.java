@@ -273,6 +273,20 @@ public class Partie implements Serializable {
 					return false;
 		return true;
 	}
+	
+	/**
+	 * Verifie si tout les pingouins ont ete posés.
+	 * 
+	 * @return Renvoie vrai, si on a fini de poser les pingouins.
+	 */
+	
+	public boolean placementPingouinsFini() {
+		for(int i = 0; i<nbJoueurs; i++)
+			for(int j = 0; j<joueurs[i].nbPingouin; j++)
+				if (!(joueurs[i].myPingouins[j].actif))
+					return false;
+		return true;
+	}
 
 	/**
 	 * Retourne si le joueur j peut jouer

@@ -3,6 +3,7 @@ package vue;
 import model.Partie;
 
 import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,17 +32,33 @@ public class Interface extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		ChargeurFxml chargeurFxml1er= new ChargeurFxml();
+		/*ChargeurFxml chargeurFxml1er= new ChargeurFxml();
 		chargeurFxml1er.chargeEcran(Interface.ECRAN_ACCUEIL,Interface.ECRAN_ACCUEIL_FXML);
 		//chargeurFxml1er.chargeEcran(Interface.ECRAN_REGLES,Interface.ECRAN_REGLES_FXML);
 		
 		chargeurFxml1er.fixeEcran(Interface.ECRAN_ACCUEIL);
 		
-		AnchorPane root = new AnchorPane();
+		Group root = new Group();
 		root.getChildren().addAll(chargeurFxml1er);
-		Scene scene = new Scene(root,largeurFenetre,hauteurFenetre);
+		Scene scene = new Scene(root);
 	    primaryStage.setScene(scene);
-
+	   */
+		
+		try {
+		      // Localisation du fichier FXML.
+		      final URL url = getClass().getResource(ECRAN_ACCUEIL_FXML);
+		      // Création du loader.
+		      final FXMLLoader fxmlLoader = new FXMLLoader(url);
+		      // Chargement du FXML.
+		      final AnchorPane root = (AnchorPane) fxmlLoader.load();
+		      // Création de la scène.
+		      final Scene scene = new Scene(root, hauteurFenetre, hauteurFenetre);
+		      primaryStage.setScene(scene);
+		    } catch (Exception ex) {
+		      System.err.println("Erreur au chargement: " + ex);
+		    }
+		primaryStage.setHeight(hauteurFenetre);
+	    primaryStage.setWidth(largeurFenetre);
 	    primaryStage.setResizable(false);
 	    primaryStage.show(); 
 	    }

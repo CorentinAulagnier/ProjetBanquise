@@ -3,6 +3,7 @@ package reseau;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -89,47 +90,66 @@ public class PingouinClient {
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         // Process all messages from server, according to the protocol.
+        Object newObj = null;
         while (true) {
-            String line = (String)in.readObject();
-            
-            if (line.startsWith("SUBMITNAME")) {
-				System.out.println("quel est votre nom ?");
-				String nom = br.readLine();
-            	out.writeObject(nom);
-            } else if (line.startsWith("NAMEACCEPTED")) {
+        	try {
+	
+	        	newObj = in.readObject();
+System.out.println("On passe le 1er readObject");
 
-            } else if (line.startsWith("NEWPARTIE")) {
-                Partie p = (Partie)in.readObject();
-				System.out.println(p);
+	        	if (newObj instanceof String) {
+	        		String line = (String)newObj;
+	        		
+	        		if (line.startsWith("WAITMATE")) {
+	    				System.out.println("WAITMATE");
 
-            } else if (line.startsWith("POSITIONPINGOUIN")) {
-				System.out.println("Joueur, choisissez la position initiale de votre pingouin :");
-				System.out.print("x: ");
-				int x = Integer.valueOf(br.readLine());
-				System.out.print("y: ");
-				int y = Integer.valueOf(br.readLine());
-            	Coordonnees c = new Coordonnees(x, y);
-            	out.writeObject(c);
-            } else if (line.startsWith("DEPLACEMENTPINGOUIN")) {
-				System.out.println("Joueur, choisissez le pingouin e deplacer:");
-				System.out.print("x: ");
-				int x = Integer.valueOf(br.readLine());
-				System.out.print("y: ");
-				int y = Integer.valueOf(br.readLine());
-            	Coordonnees c = new Coordonnees(x, y);
-				System.out.println("Joueur, choisissez ou lacher le pingouin :");
-				System.out.print("x: ");
-				int x2 = Integer.valueOf(br.readLine());
-				System.out.print("y: ");
-				int y2 = Integer.valueOf(br.readLine());
-            	Coordonnees c2 = new Coordonnees(x2, y2);
-            	
-            	CoupleGenerique<Coordonnees, Coordonnees> cc = new CoupleGenerique<Coordonnees, Coordonnees>(c, c2);
-                out.writeObject(cc);
-            } else if (line.startsWith("")) {
+	                } else if (line.startsWith("STARTGAME")) {
+	    				System.out.println("STARTGAME");
 
-            } else if (line.startsWith("")) {
-
+	                } else if (line.startsWith("SUBMITNAME")) {
+	    				System.out.println("quel est votre nom ?");
+	    				String nom = br.readLine();
+	                	out.writeObject(nom);
+	                	
+	                } else if (line.startsWith("NAMEACCEPTED")) {
+	
+	                } else if (line.startsWith("POSITIONPINGOUIN")) {
+	    				System.out.println("Joueur, choisissez la position initiale de votre pingouin :");
+	    				System.out.print("x: ");
+	    				int x = Integer.valueOf(br.readLine());
+	    				System.out.print("y: ");
+	    				int y = Integer.valueOf(br.readLine());
+	                	Coordonnees c = new Coordonnees(x, y);
+	                	out.writeObject(c);
+	                	
+	                } else if (line.startsWith("DEPLACEMENTPINGOUIN")) {
+	    				System.out.println("Joueur, choisissez le pingouin e deplacer:");
+	    				System.out.print("x: ");
+	    				int x = Integer.valueOf(br.readLine());
+	    				System.out.print("y: ");
+	    				int y = Integer.valueOf(br.readLine());
+	                	Coordonnees c = new Coordonnees(x, y);
+	    				System.out.println("Joueur, choisissez ou lacher le pingouin :");
+	    				System.out.print("x: ");
+	    				int x2 = Integer.valueOf(br.readLine());
+	    				System.out.print("y: ");
+	    				int y2 = Integer.valueOf(br.readLine());
+	                	Coordonnees c2 = new Coordonnees(x2, y2);
+	                	
+	                	CoupleGenerique<Coordonnees, Coordonnees> cc = new CoupleGenerique<Coordonnees, Coordonnees>(c, c2);
+	                    out.writeObject(cc);
+	                }
+	        		
+	        	} else if (newObj instanceof Partie) {
+	                Partie p = (Partie)newObj;
+					System.out.println(p);
+					
+	        	} else {
+					System.out.println("ERREUR envoie");
+	
+	        	}
+            } catch (EOFException e){
+				//System.out.println("EOFException");
             }
         }
     }

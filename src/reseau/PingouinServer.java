@@ -13,7 +13,9 @@ import java.net.Socket;
 import java.util.HashSet;
 
 import model.Coordonnees;
+import model.CoupleCoordonnees;
 import model.CoupleGenerique;
+import model.Humain;
 import model.IA;
 import model.Partie;
 import model.Pingouin;
@@ -34,7 +36,7 @@ public class PingouinServer {
         System.out.println("Pingouins server is running.");
         ServerSocket listener = new ServerSocket(PORT);
         //Initialisation de la partie
-        
+        p = new Partie(4);
         //Fin initialisation
         try {
             while (true) {
@@ -83,40 +85,65 @@ public class PingouinServer {
 	                        }
 	                    }
 	                }*/
+	       			Object newObj = null;
                     out.writeObject("SUBMITNAME");
-                    name = (String)in.readObject();
+                    newObj = in.readObject();
+                    if (newObj instanceof String) {
+                    	name = (String)newObj;
+                    } else {
+                    	System.out.println("Nom non reconnu");
+                    }
+                    p.joueurs[numClient] = new Humain();
+                    p.joueurs[numClient].myPingouins[0] = new Pingouin();
+                    p.joueurs[numClient].myPingouins[1] = new Pingouin();
+                    p.joueurs[numClient].myPingouins[2] = new Pingouin();
+                    p.joueurs[numClient].nom = name;
+                    
                     names[numClient] = name;
                     
 	                //out.writeObject("NAMEACCEPTED");
-	                p.joueurs[numClient].nom = name;
-	                writers[numClient] = out;
+	                //writers[numClient] = out;
 	                /*
 	                 * 
 	                 */
+                    
+                    out.writeObject("WAITMATE");
+                	System.out.println("Attente joueurs");
+                    while (nbClients < 4) {}
+                	System.out.println("Lancement de la partie");
+                	out.writeObject("STARTGAME");
+                	
 	                Partie p2 = null;
-	                
-	                while (!p.estPartieFini()){
-	                	
+	                newObj = null;
+
+	                while (!p.estPartieFini() && !p.placementPingouinsFini()){
+System.out.println("Debut de la partie");
+
 		                while (!p.estPartieFini() && p.joueurActif != numClient) {
 		                	if (!p2.equals(p)) {
-			                	out.writeObject("NEWPARTIE");
 		                		out.writeObject(p);
 		                		p2 = p.clone();
 		                	}
 		                }
 		                if (!p.placementPingouinsFini()) {
 		                	out.writeObject("POSITIONPINGOUIN");
-		                	Coordonnees c = (Coordonnees)in.readObject();
-		                	Tuile t = p.b.getTuile(c);
-		                	t.mettrePingouin();
-							p.joueurs[numClient].myPingouins[p.numPingouinAPlacer(p.joueurs[numClient])] = new Pingouin(c);
-	
+		                	newObj = in.readObject();
+		                    
+		                	if (newObj instanceof Coordonnees) {
+			                	Coordonnees c = (Coordonnees)newObj;
+			                	Tuile t = p.b.getTuile(c);
+			                	t.mettrePingouin();
+								p.joueurs[numClient].myPingouins[p.numPingouinAPlacer(p.joueurs[numClient])] = new Pingouin(c);
+		                	}
 		                } else if (!p.estPartieFini()) {
 		                	out.writeObject("DEPLACEMENTPINGOUIN");
-		                	CoupleGenerique<Coordonnees, Coordonnees> cc = (CoupleGenerique<Coordonnees, Coordonnees>)in.readObject();
-		                	p.deplacement(cc.e1, cc.e2);
+		                	newObj = in.readObject();
+		                    
+		                	if (newObj instanceof CoupleCoordonnees) {
+		                		CoupleCoordonnees cc =  (CoupleCoordonnees) newObj;
+			                	p.deplacement(cc);
+			                }
 		                }
-		                
 	                }
 	                p.afficherScores();
 

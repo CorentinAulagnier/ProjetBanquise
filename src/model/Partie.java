@@ -69,7 +69,7 @@ public class Partie implements Serializable {
 	 */
 	
 	public Partie(int nbPlayer){
-		this.b = null;
+		this.b = new Banquise();
 		this.joueurs = new Joueur[nbPlayer];
 		this.nbJoueurs = nbPlayer;
 		this.joueurActif = 0;

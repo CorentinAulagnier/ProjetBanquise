@@ -120,7 +120,9 @@ public class Partie implements Serializable {
 		this.nbJoueurs = j.length;
 		this.joueurActif = 0;
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Clone de la partie actuelle.
 	 * 
@@ -141,7 +143,9 @@ public class Partie implements Serializable {
 			return null;
 		}
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Annuler le dernier coup joue.
 	 * 
@@ -149,10 +153,10 @@ public class Partie implements Serializable {
 	 */
 	
 	public void annuler() {
-		Partie p = h.annuler(this);
+		Partie p = h.annuler(this.clone());
 		if(p!=null) {
 			this.b=p.b;
-			//this.h=p.h;
+			//this.h = new Historique(p.h);
 			this.joueurActif=p.joueurActif;
 			this.nbJoueurs=p.nbJoueurs;
 			this.utiliseHistorique = p.utiliseHistorique;
@@ -169,10 +173,9 @@ public class Partie implements Serializable {
 	 */
 	
 	public void retablir() {
-		Partie p = h.retablir(this);
+		Partie p = h.retablir(this.clone());
 		if(p!=null) {
 			this.b=p.b;
-			//this.h=p.h;
 			this.joueurActif=p.joueurActif;
 			this.nbJoueurs=p.nbJoueurs;
 			this.utiliseHistorique = p.utiliseHistorique;
@@ -181,6 +184,8 @@ public class Partie implements Serializable {
 			System.err.println("Impossible de retablir.");
 		}
 	}
+
+/*******************************************************************************************************/
 
 	/**
 	 * Sauvegarde la partie en cours.
@@ -243,6 +248,8 @@ public class Partie implements Serializable {
 		charger("no_name");
 	}
 
+/*******************************************************************************************************/
+
 	/**
 	 * Execute un tour de jeu
 	 */
@@ -250,6 +257,8 @@ public class Partie implements Serializable {
 	public void tourDeJeu() {
 		// TODO implement me
 	}
+
+/*******************************************************************************************************/
 
 	/**
 	 * Verifie si la partie est termine.
@@ -264,7 +273,33 @@ public class Partie implements Serializable {
 					return false;
 		return true;
 	}
+
+	/**
+	 * Retourne si le joueur j peut jouer
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne vrai si le joueur j peut jouer.
+	 */
 	
+	public boolean peutJouer(Joueur j) {
+		return (nbPingouinActif(j) > 0);
+	}
+	
+	/**
+	 * Retourne si le joueur actif peut jouer
+	 *         
+	 * @return Retourne vrai si le joueur actif peut jouer.
+	 */
+	
+	public boolean peutJouer() {
+		return peutJouer(joueurs[joueurActif]);
+	}
+	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Le joueur actif recupere les poissons de la case c.
 	 * 
@@ -338,7 +373,9 @@ public class Partie implements Serializable {
 		tuileArr.mettrePingouin();
 
 	}
-	
+
+/*******************************************************************************************************/
+
 	/**
 	 * Retourne les coordonnees des pingouins deplacables du joueur j
 	 * ATTENTION : Il peut y avoir des cases "null"
@@ -387,7 +424,9 @@ public class Partie implements Serializable {
 	 *            
 	 * @return Retourne le nb de pingouins deplacable du joueur j.
 	 */
-	
+
+/*******************************************************************************************************/
+
 	public int nbPingouinActif(Joueur j) {
 		Coordonnees[] c = positionPingouins(j);
 		int nb = 0;
@@ -411,29 +450,26 @@ public class Partie implements Serializable {
 	public int nbPingouinActif() {
 		return nbPingouinActif(joueurs[joueurActif]);
 	}
-	
+
 	/**
-	 * Retourne si le joueur j peut jouer
-	 * 
-	 * @param j
-	 *            Le joueur.
-	 *            
-	 * @return Retourne vrai si le joueur j peut jouer.
+	 * Tue les pingouins bloques de chaque joueur
 	 */
 	
-	public boolean peutJouer(Joueur j) {
-		return (nbPingouinActif(j) > 0);
+	public void verifierPingouinActif() {
+		for(int i = 0; i<nbJoueurs; i++) {
+			for(int j = 0; j<joueurs[i].nbPingouin; j++) {
+				Pingouin pin = joueurs[i].myPingouins[j];
+				if (pin.actif == true && b.nePeutPlusBouger(pin)) {
+					manger(pin.position);
+					b.getTuile(pin.position).enlevePingouin();
+					pin.actif = false;
+				}
+			}
+		}
 	}
 	
-	/**
-	 * Retourne si le joueur actif peut jouer
-	 *         
-	 * @return Retourne vrai si le joueur actif peut jouer.
-	 */
-	
-	public boolean peutJouer() {
-		return peutJouer(joueurs[joueurActif]);
-	}
+
+/*******************************************************************************************************/
 	
 	/**
 	 * Retourne l'entier correspondant au joueur à qui appartient le pingouin aux coordonnees c
@@ -472,6 +508,8 @@ public class Partie implements Serializable {
 		return null;
 	}
 
+/*******************************************************************************************************/
+
 	/**
 	 * Recupere le ou les joueurs gagants en cas d'egalite
 	 *            
@@ -490,6 +528,17 @@ public class Partie implements Serializable {
 		}
 		return gagnants;
 	}
+	
+	/**
+	 * Affiche le score de chaque joueur
+	 */
+	
+	public void afficherScores() {
+		for(int i = 0; i<nbJoueurs; i++)
+			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points.");
+	}
+
+/*******************************************************************************************************/
 
 	/**       
 	 * @return le score max parmis tout les joueurs.
@@ -521,7 +570,52 @@ public class Partie implements Serializable {
 		}
 		return NbTuiles;
 	}
+
+/*******************************************************************************************************/
 	
+	/**
+	 * Verifie si on peut annuler un coup. (Un seul joueur)
+	 * 
+	 * @return Renvoie vrai, si il n'y a qu'un seul joueur.
+	 */
+	
+	public boolean peutAnnulerCoup() {
+		boolean res = false;
+		for(int i = 0; i<nbJoueurs; i++) {
+			if (this.joueurs[i].getClass() == Humain.class) { 
+				if (res) {
+					return false;
+				} else {
+					res = true;
+				}
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * Verifie si la partie dispose des fonctions "annuler" et "retablir"
+	 * 
+	 */
+
+	public void setHistorique() {
+		this.utiliseHistorique = peutAnnulerCoup();
+		if(utiliseHistorique) {
+			this.h = new Historique();
+		}
+	}
+	
+	/**
+	 * Mets a jour l'historique
+	 * ATTENTION : doit etre appele a chaque coup joue
+	 */
+
+	public void majHistorique() {
+		h.undo.push(this.clone());
+		h.redo.clear();
+	}
+	
+/*******************************************************************************************************/
 
 	/**
 	 * Affichage.
@@ -567,74 +661,6 @@ public class Partie implements Serializable {
 		}
 
 		return s;
-	}
-	
-	/**
-	 * Tue les pingouins bloques de chaque joueur
-	 */
-	
-	public void verifierPingouinActif() {
-		for(int i = 0; i<nbJoueurs; i++) {
-			for(int j = 0; j<joueurs[i].nbPingouin; j++) {
-				Pingouin pin = joueurs[i].myPingouins[j];
-				if (pin.actif == true && b.nePeutPlusBouger(pin)) {
-					manger(pin.position);
-					b.getTuile(pin.position).enlevePingouin();
-					pin.actif = false;
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Verifie si on peut annuler un coup. (Un seul joueur)
-	 * 
-	 * @return Renvoie vrai, si il n'y a qu'un seul joueur.
-	 */
-	
-	public boolean peutAnnulerCoup() {
-		boolean res = false;
-		for(int i = 0; i<nbJoueurs; i++) {
-			if (this.joueurs[i].getClass() == Humain.class) { 
-				if (res) {
-					return false;
-				} else {
-					res = true;
-				}
-			}
-		}
-		return res;
-	}
-	
-	/**
-	 * Verifie si la partie dispose des fonctions "annuler" et "retablir"
-	 * 
-	 */
-
-	public void setHistorique() {
-		this.utiliseHistorique = peutAnnulerCoup();
-		if(utiliseHistorique) {
-			this.h = new Historique();
-		}
-	}
-	
-	/**
-	 * Mets a jour l'historique
-	 * ATTENTION : doit etre appele a chaque coup joue
-	 */
-
-	public void majHistorique() {
-		h.undo.push(this.clone());
-		h.redo.clear();
-	}
-	
-	/**
-	 * Affiche le score de chaque joueur
-	 */
-	
-	public void afficherScores() {
-		for(int i = 0; i<nbJoueurs; i++)
-			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points.");
 	}
 }
 

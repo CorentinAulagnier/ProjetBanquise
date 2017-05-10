@@ -21,6 +21,8 @@ public class Historique implements Serializable {
 		undo = new Stack<Partie>();
 		redo = new Stack<Partie>();
 	}
+
+/*******************************************************************************************************/
 	
 	/**
 	 * Annuler le dernier coup joue.
@@ -51,6 +53,8 @@ public class Historique implements Serializable {
 		}
 		return null;
 	}
+
+/*******************************************************************************************************/
 	
 	/**
 	 * Sauvegarde la partie en cours.
@@ -87,6 +91,8 @@ public class Historique implements Serializable {
 			e.printStackTrace();
 		} 
 	}
+
+/*******************************************************************************************************/
 	
 	/**
 	 * Verifie le joueur actif peut effectuer l'action "annuler"
@@ -95,7 +101,7 @@ public class Historique implements Serializable {
 	 */
 	
 	public boolean peutAnnuler() {
-		return (undo.size()>0);
+		return (!undo.empty());
 	}
 	
 	/**
@@ -105,12 +111,14 @@ public class Historique implements Serializable {
 	 */
 	
 	public boolean peutRefaire() {
-		return (redo.size()>0);
+		return (!redo.empty());
 	}
 
+/*******************************************************************************************************/
+	
 	/**
 	 * Affichage.
-	 *     .
+	 *      
 	 * @return Un affichage de l'historique de cette partie.
 	 */
 	

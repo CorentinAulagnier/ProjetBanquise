@@ -85,6 +85,8 @@ public class Test {
 		}
 	}
 	
+/*******************************************************************************************************/
+
 	/**
 	 * Main
 	 * 
@@ -154,6 +156,8 @@ public class Test {
 						LauncherConsole.phasePlacement(br, p);
 						LauncherConsole.tourDeJeuConsole(br, p);
 						LauncherConsole.tourDeJeuConsole(br, p);
+						LauncherConsole.tourDeJeuConsole(br, p);
+						//LauncherConsole.tourDeJeuConsole(br, p);
 						System.out.println("Banquise créée :\n"+p);
 						System.out.println("Historique créée :\n"+p.h);
 						p.sauvegarder();

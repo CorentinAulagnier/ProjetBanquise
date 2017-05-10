@@ -27,9 +27,6 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
-    
-    
-    
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
     	monChargeurFxml = ecranParent;
     }
@@ -40,32 +37,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
 	
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    	name[JAUNE]=name1;
-    	name[VERT]=name2;
-    	name[ROUGE]=name3;
-        name[BLEU]=name4;
         
-        label[JAUNE]=label1;
-    	label[VERT]=label2;
-    	label[ROUGE]=label3;
-        label[BLEU]=label4;
-        
-        pile[JAUNE]=pilejaune;
-    	pile[VERT]=pileverte;
-    	pile[ROUGE]=pilerouge;
-        pile[BLEU]=pilebleue;
-        
-        type[JAUNE]=JOUEUR;
-		type[VERT]= CREVETTE;
-		type[ROUGE]= AUCUN;
-		type[BLEU]= AUCUN;
-    }
-    
     /**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/
     
     final static int AUCUN = 0 ;
@@ -116,6 +88,41 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     private StackPane pilebleue;
    
     StackPane[] pile = new StackPane[4];
+    
+    
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    	name[JAUNE]=name1;
+    	name[VERT]=name2;
+    	name[ROUGE]=name3;
+        name[BLEU]=name4;
+        
+        label[JAUNE]=label1;
+    	label[VERT]=label2;
+    	label[ROUGE]=label3;
+        label[BLEU]=label4;
+        
+        pile[JAUNE]=pilejaune;
+    	pile[VERT]=pileverte;
+    	pile[ROUGE]=pilerouge;
+        pile[BLEU]=pilebleue;
+        
+        type[JAUNE]=JOUEUR;
+		type[VERT]= CREVETTE;
+		type[ROUGE]= AUCUN;
+		type[BLEU]= AUCUN;
+		
+		image[JAUNE]=JOUEUR;
+		image[VERT]=CREVETTE;
+		image[ROUGE]=AUCUN;
+		image[BLEU]=AUCUN;
+    }
+    
+    
     
     /** SELECTION D'UN SKIN DE PERSONNAGE **/
     

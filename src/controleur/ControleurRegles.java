@@ -22,7 +22,7 @@ public class ControleurRegles  implements Initializable, EnfantFxml {
 
     @FXML
     private void ouvrirPageRegle(ActionEvent event){
-    	monChargeurFxml.fixeEcran(Interface.ECRAN_ACCUEIL);
+    	//monChargeurFxml.fixeEcran(Interface.ECRAN_ACCUEIL);
     }
     
 }

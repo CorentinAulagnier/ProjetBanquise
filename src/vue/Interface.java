@@ -3,13 +3,13 @@ package vue;
 import model.Partie;
 
 import java.net.URL;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.Group;
 import javafx.stage.Stage;
+
 
 public class Interface extends Application {
 	
@@ -31,20 +31,20 @@ public class Interface extends Application {
     }
 	
 	@Override
-	public void start(Stage primaryStage) {
-		/*ChargeurFxml chargeurFxml1er= new ChargeurFxml();
-		chargeurFxml1er.chargeEcran(Interface.ECRAN_ACCUEIL,Interface.ECRAN_ACCUEIL_FXML);
-		//chargeurFxml1er.chargeEcran(Interface.ECRAN_REGLES,Interface.ECRAN_REGLES_FXML);
+	public void start(Stage primaryStage) throws Exception {
+		ScreensController mainContainer= new ScreensController();
+		mainContainer.loadScreen(Interface.ECRAN_ACCUEIL,Interface.ECRAN_ACCUEIL_FXML);
+		mainContainer.loadScreen(Interface.ECRAN_REGLES,Interface.ECRAN_REGLES_FXML);
 		
-		chargeurFxml1er.fixeEcran(Interface.ECRAN_ACCUEIL);
+		mainContainer.setScreen(Interface.ECRAN_ACCUEIL);
 		
 		Group root = new Group();
-		root.getChildren().addAll(chargeurFxml1er);
+		root.getChildren().addAll(mainContainer);
 		Scene scene = new Scene(root);
 	    primaryStage.setScene(scene);
-	   */
+	   
 		
-		try {
+		/*try {
 		      // Localisation du fichier FXML.
 		      final URL url = getClass().getResource(ECRAN_ACCUEIL_FXML);
 		      // Création du loader.
@@ -52,16 +52,15 @@ public class Interface extends Application {
 		      // Chargement du FXML.
 		      final AnchorPane root = (AnchorPane) fxmlLoader.load();
 		      // Création de la scène.
-		      final Scene scene = new Scene(root, hauteurFenetre, hauteurFenetre);
+		      Scene scene = new Scene(root);
 		      primaryStage.setScene(scene);
 		    } catch (Exception ex) {
 		      System.err.println("Erreur au chargement: " + ex);
-		    }
-		primaryStage.setHeight(hauteurFenetre);
-	    primaryStage.setWidth(largeurFenetre);
+		    }*/
+		
+	    
 	    primaryStage.setResizable(false);
 	    primaryStage.show(); 
 	    }
-	
-	
+
 }

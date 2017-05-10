@@ -50,12 +50,13 @@ import javafx.util.Duration;
 	        	// Localisation du fichier FXML url  = FichierFXML .
 	        	// Création du loader.
 	            FXMLLoader monChargeur = new FXMLLoader(getClass().getResource(FichierFXML));
-	            
-	            Parent EcranCourant = (Parent) monChargeur.load();
+	            Parent ecranACharger = (Parent) monChargeur.load();
 	            EnfantFxml monControleurDecran = ((EnfantFxml) monChargeur.getController());
+	            System.out.println("zjegjejg");
 	            monControleurDecran.fixeEcranParent(this);
 	            System.out.println("plop");
-	            ajouteEcran(nomEcran, EcranCourant);
+	            ajouteEcran(nomEcran, ecranACharger);
+	            System.out.println("la hash map"+listeEcrans);
 	            return true;
 	        } catch (Exception e) {
 	            System.out.println("ca bug :"+e.getMessage());

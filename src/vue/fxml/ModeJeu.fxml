@@ -39,7 +39,7 @@
         <Font name="Arial" size="15.0" />
       </font>
     </Text>
-    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ouvrirPageAccueil" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>

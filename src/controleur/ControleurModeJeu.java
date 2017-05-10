@@ -29,12 +29,6 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
     	monChargeurFxml = ecranParent;
     }
-
-    @FXML
-    private void ouvrirPageRegle(MouseEvent event){
-    	System.out.println("regles");
-    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
-    }
 	
         
     /**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/

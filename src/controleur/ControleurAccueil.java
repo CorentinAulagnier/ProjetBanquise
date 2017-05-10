@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 
 public class ControleurAccueil  implements Initializable, EcranCourant {
@@ -22,17 +23,17 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     }
 
     @FXML
-    private void ouvrirPageRegle(ActionEvent event){
+    private void ouvrirPageRegle(MouseEvent event){
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
     @FXML
-    private void ouvrirPageJeu (ActionEvent event){
-    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    private void ouvrirPageJeu (MouseEvent event){
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
     }
     
     @FXML
-    private void ouvrirPageCharger(ActionEvent event){
+    private void ouvrirPageCharger(MouseEvent event){
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
 }

@@ -85,7 +85,7 @@
     </MenuButton>
     <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="300.0" minHeight="214.0" prefHeight="236.0" prefWidth="800.0">
       <children>
-        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#ouvrirPageJeu" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Nouvelle Partie">
+        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#ouvrirPageJeu" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Nouvelle Partie">
           <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
               <image>
@@ -97,7 +97,7 @@
             <Insets bottom="10.0" top="20.0" />
           </VBox.margin>
         </Button>
-        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#ouvrirPageCharger" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Didactitiel">
+        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Didactitiel">
           <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -109,7 +109,7 @@
             <Insets bottom="10.0" fx:id="x2" />
           </VBox.margin>
         </Button>
-        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#ouvrirPageRegle" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Chargement Partie">
+        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Chargement Partie">
           <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>

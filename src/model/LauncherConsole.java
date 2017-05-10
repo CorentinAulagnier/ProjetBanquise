@@ -366,9 +366,9 @@ public class LauncherConsole {
 			for(Joueur j : joueurs) {
 				System.out.print(j.nom+" ");
 			}
-			System.out.print("ont gagnés la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
+			System.out.println("ont gagnés la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
 		} else {
-			System.out.print("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
+			System.out.println("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
 		}
 		//score de chaque joueur
 		p.afficherScores();

@@ -61,7 +61,7 @@ public class Historique implements Serializable {
 	
 	public void sauvegarder(String name) {
 		try {
-			File fichier =  new File("save/"+name+".hist") ;
+			File fichier =  new File("save/"+name+".historique") ;
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
 			oos.writeObject(this);
 		} catch (Exception e) {
@@ -78,7 +78,7 @@ public class Historique implements Serializable {
 	
 	public void charger(String name) {
 		try {
-		File fichier =  new File("save/"+name+".hist") ;
+		File fichier =  new File("save/"+name+".historique") ;
 		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
 		Historique h = (Historique)ois.readObject() ;
 		this.undo = h.undo;

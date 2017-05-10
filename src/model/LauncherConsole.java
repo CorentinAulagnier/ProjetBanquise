@@ -359,6 +359,7 @@ public class LauncherConsole {
 	 */
 	
 	public static void finPartie(Partie p) {
+		afficherPlateau(p);
 		ArrayList<Joueur> joueurs = p.getGagnant();
 		if(joueurs.size()>1) {
 			System.out.print("Partie terminée.\nLes joueurs ");

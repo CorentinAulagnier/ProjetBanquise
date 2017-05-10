@@ -8,8 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-
-public class ControleurAccueil  implements Initializable, EcranCourant {
+public class ControleurPage2  implements Initializable, EcranCourant {
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
  
     @Override
@@ -19,11 +18,6 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
     	gestionnaireFxmlCourant = ecranParent;
-    }
-
-    @FXML
-    private void ouvrirPageRegle(ActionEvent event){
-    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
     @FXML

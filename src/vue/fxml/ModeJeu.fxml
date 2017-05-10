@@ -39,7 +39,7 @@
         <Font name="Arial" size="15.0" />
       </font>
     </Text>
-    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" onMousePressed="#retourpresse" onMouseReleased="#retourlache" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -292,7 +292,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="lancer" contentDisplay="GRAPHIC_ONLY" layoutX="638.0" layoutY="529.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="134.0" rotate="0.0" style="-fx-background-color:transparent;" text="Button">
+    <Button fx:id="lancer" contentDisplay="GRAPHIC_ONLY" layoutX="638.0" layoutY="529.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" onMousePressed="#lancerpresse" onMouseReleased="#lancerlache" prefHeight="47.0" prefWidth="134.0" rotate="0.0" style="-fx-background-color:transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="47.00001907348633" fitWidth="140.56080137018822" pickOnBounds="true" preserveRatio="true" rotate="0.0">
           <image>
@@ -375,18 +375,20 @@
     </Button>
     <StackPane fx:id="label1" layoutX="116.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
       <children>
-        <TextField id="name" fx:id="nom1" prefWidth="136.0" />
-        <Label text="Juliette la crevette" visible="false" />
-        <Label id="nomfacile2" text="Eve" visible="false">
+        <Label id="rien" text="" visible="false">
           <font>
             <Font size="20.0" fx:id="x2" />
           </font>
         </Label>
-        <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
+        <TextField id="name" fx:id="nom1" prefWidth="136.0" />
+        <Label id="nomfacile" text="Juliette la crevette" visible="false" />
+        <Label id="nommoyen" font="$x2" text="Eve" visible="false" />
+        <Label id="nomdifficile" font="$x2" text="Mr White" visible="false" />
       </children>
     </StackPane>
     <StackPane id="lable2" fx:id="label2" layoutX="465.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
       <children>
+        <Label id="rien" font="$x2" text="" visible="false" />
         <TextField id="name" disable="true" editable="true" opacity="1.0" prefWidth="136.0" visible="false" />
         <Label fx:id="nomfacile2" font="$x2" text="Juliette la crevette" />
         <Label id="nomfacile2" font="$x2" text="Eve" visible="false" />
@@ -395,6 +397,7 @@
     </StackPane>
     <StackPane id="label3" fx:id="label4" layoutX="462.0" layoutY="493.0" prefHeight="91.0" prefWidth="200.0">
       <children>
+        <Label id="rien" font="$x2" text="" visible="false" />
         <TextField id="name" disable="true" opacity="1.0" prefWidth="136.0" visible="false" />
         <Label text="Juliette la crevette" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Eve" visible="false" />
@@ -403,6 +406,7 @@
     </StackPane>
     <StackPane fx:id="label3" layoutX="120.0" layoutY="493.0" prefHeight="91.0" prefWidth="200.0">
       <children>
+        <Label id="rien" font="$x2" text="" visible="false" />
         <TextField id="name" disable="true" opacity="1.0" prefWidth="136.0" visible="false" />
         <Label text="Juliette la crevette" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Eve" visible="false" />

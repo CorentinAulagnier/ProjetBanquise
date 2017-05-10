@@ -538,8 +538,6 @@ public class Partie implements Serializable {
 			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points.");
 	}
 
-/*******************************************************************************************************/
-
 	/**       
 	 * @return le score max parmis tout les joueurs.
 	 */

@@ -11,8 +11,6 @@ public class Launcher {
 		
 		Partie p = new Partie();
 		Interface.creer(args, p,hauteurBanquise,largeurBanquise);
-	}
-
-		
+	}	
 
 }

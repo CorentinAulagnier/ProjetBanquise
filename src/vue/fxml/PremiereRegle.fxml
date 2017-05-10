@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controleur.ControleurAccueil">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
@@ -35,7 +35,7 @@
         <Image url="@../../ressources/decor/Webp.net-gifmaker%20(1).gif" />
       </image>
     </ImageView>
-    <Button contentDisplay="GRAPHIC_ONLY" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>

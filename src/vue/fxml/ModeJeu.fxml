@@ -220,7 +220,7 @@
         </ImageView>
       </children>
     </StackPane>
-    <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="156.0" minWidth="55.0" mnemonicParsing="false" onAction="#jaunegauche" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="156.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#jaunegauche" onMousePressed="#jaunegauchepresse" onMouseReleased="#jaunegauchelache" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -229,7 +229,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="gaucherouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="73.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#rougegauche" opacity="1.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
+    <Button fx:id="gaucherouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="73.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#rougegauche" onMousePressed="#rougegauchepresse" onMouseReleased="#rougegauchelache" opacity="1.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -238,7 +238,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="gauchebleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="419.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#bleugauche" opacity="1.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
+    <Button fx:id="gauchebleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="419.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#bleugauche" onMousePressed="#bleugauchepresse" onMouseReleased="#bleugauchelache" opacity="1.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -247,7 +247,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="gauchevert" contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onAction="#vertgauche" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
+    <Button fx:id="gauchevert" contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#vertgauche" onMousePressed="#vertgauchepresse" onMouseReleased="#vertgauchelache" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -256,52 +256,52 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onAction="#jaunedroite" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#jaunedroite" onMousePressed="#jaunedroitepresse" onMouseReleased="#jaunedroitelache" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
-        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
           <image>
             <Image url="@../../ressources/decor/select.png" />
           </image>
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitrouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="304.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#rougedroite" opacity="1.0" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button" visible="false">
+    <Button fx:id="droitrouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="304.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#rougedroite" onMousePressed="#rougedroitpresse" onMouseReleased="#rougedroitlache" opacity="1.0" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
-        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
           <image>
             <Image url="@../../ressources/decor/select.png" />
           </image>
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitbleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="650.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#bleudroite" opacity="1.0" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button" visible="false">
+    <Button fx:id="droitbleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="650.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#bleudroite" onMousePressed="#bleudroitpresse" onMouseReleased="#bleudroitlache" opacity="1.0" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
-        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
           <image>
             <Image url="@../../ressources/decor/select.png" />
           </image>
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitvert" contentDisplay="GRAPHIC_ONLY" layoutX="649.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onAction="#vertdroite" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button" visible="false">
+    <Button fx:id="droitvert" contentDisplay="GRAPHIC_ONLY" layoutX="649.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#vertdroite" onMousePressed="#vertdroitpresse" onMouseReleased="#vertdroitlache" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
-        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
           <image>
             <Image url="@../../ressources/decor/select.png" />
           </image>
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="lancer" contentDisplay="GRAPHIC_ONLY" layoutX="638.0" layoutY="529.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="134.0" rotate="180.0" style="-fx-background-color:transparent;" text="Button">
+    <Button fx:id="lancer" contentDisplay="GRAPHIC_ONLY" layoutX="638.0" layoutY="529.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="134.0" rotate="0.0" style="-fx-background-color:transparent;" text="Button">
       <graphic>
-        <ImageView fitHeight="47.00001907348633" fitWidth="140.56080137018822" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+        <ImageView fitHeight="47.00001907348633" fitWidth="140.56080137018822" pickOnBounds="true" preserveRatio="true" rotate="0.0">
           <image>
             <Image url="@../../ressources/decor/lancer.png" />
           </image>
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modejaunegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche1" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modejaunegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche1" onMousePressed="#jaunegauchemodepresse" onMouseReleased="#jaunegauchemodelache" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -310,7 +310,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche3" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche3" onMousePressed="#rougegauchemodepresse" onMouseReleased="#rougegauchemodelache" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -319,7 +319,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" layoutX="474.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche2" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" layoutX="474.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche2" onMousePressed="#vertgauchemodepresse" onMouseReleased="#vertgauchemodelache" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -328,7 +328,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" layoutX="471.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche4" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" layoutX="471.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche4" onMousePressed="#bleugauchemodepresse" onMouseReleased="#bleugauchemodelache" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -337,7 +337,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modejaunedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite1" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modejaunedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite1" onMousePressed="#jaunedroitemodepresse" onMouseReleased="#jaunedroitemodelache" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -346,7 +346,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modevertdroit" contentDisplay="GRAPHIC_ONLY" layoutX="636.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite2" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modevertdroit" contentDisplay="GRAPHIC_ONLY" layoutX="636.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite2" onMousePressed="#vertdroitmodepresse" onMouseReleased="#vertdroitmodelache" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -355,7 +355,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="moderougedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite3" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="moderougedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite3" onMousePressed="#rougedroitmodepresse" onMouseReleased="#rougedroitmodelache" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -364,7 +364,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modebleudroit" contentDisplay="GRAPHIC_ONLY" layoutX="630.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite4" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modebleudroit" contentDisplay="GRAPHIC_ONLY" layoutX="630.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite4" onMousePressed="#bleudroitmodepresse" onMouseReleased="#bleudroitmodelache" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>

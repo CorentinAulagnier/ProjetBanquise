@@ -26,12 +26,12 @@
         <Image url="@../../ressources/decor/banquise.jpg" />
       </image>
     </ImageView>
-    <Circle layoutX="216.0" layoutY="441.0" opacity="0.5" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2">
+    <Circle layoutX="216.0" layoutY="441.0" opacity="1.0" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2">
       <fill>
         <Color blue="1.000" green="1.000" opacity="0.353" red="1.000" fx:id="x1" />
       </fill>
     </Circle>
-    <Circle fill="$x1" layoutX="561.0" layoutY="441.0" opacity="0.5" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
+    <Circle fill="$x1" layoutX="561.0" layoutY="441.0" opacity="1.0" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
     <Circle fill="$x1" layoutX="562.0" layoutY="182.0" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
     <Circle fill="#ffffff5a" layoutX="216.0" layoutY="182.0" radius="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2" />
     <Text fx:id="title" fill="BLACK" layoutX="345.0" layoutY="47.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle Partie">
@@ -39,7 +39,7 @@
         <Font name="Arial" size="15.0" />
       </font>
     </Text>
-    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ouvrirPageAccueil" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -106,19 +106,24 @@
     </MenuButton>
     <StackPane fx:id="pilejaune" blendMode="SRC_OVER" cache="false" layoutX="116.0" layoutY="107.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
       <children>
-        <ImageView id="croixjaune" fx:id="crevettejaune" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+        <ImageView fx:id="croixjaune" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
           <image>
-            <Image url="@../../ressources/joueurs/crevettejaune.png" />
-          </image>
-        </ImageView>
-        <ImageView id="crevettejaune" fx:id="evejaune" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
-          <image>
-            <Image url="@../../ressources/joueurs/evejaune.png" />
+            <Image url="@../../ressources/joueurs/cross.png" />
           </image>
         </ImageView>
         <ImageView fx:id="pingjaune" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="true">
           <image>
             <Image url="@../../ressources/joueurs/YellowPingo.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="crevettejaune" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../ressources/joueurs/crevettejaune.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="evejaune" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../ressources/joueurs/evejaune.png" />
           </image>
         </ImageView>
         <ImageView fx:id="orquejaune" fitHeight="150.0" fitWidth="200.0" focusTraversable="false" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -130,9 +135,14 @@
     </StackPane>
     <StackPane fx:id="pilerouge" blendMode="SRC_OVER" cache="false" layoutX="116.0" layoutY="367.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
       <children>
-        <ImageView fx:id="croixrouge" fitHeight="112.0" fitWidth="112.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="croixrouge" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../../ressources/joueurs/cross.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="pingrouge" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../ressources/joueurs/PingouinRouge.png" />
           </image>
         </ImageView>
         <ImageView fx:id="crevetterouge" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -150,15 +160,20 @@
             <Image url="@../../ressources/joueurs/Orquerouge.png" />
           </image>
         </ImageView>
-        <ImageView fx:id="pingrouge" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
-          <image>
-            <Image url="@../../ressources/joueurs/PingouinRouge.png" />
-          </image>
-        </ImageView>
       </children>
     </StackPane>
     <StackPane fx:id="pileverte" blendMode="SRC_OVER" cache="false" layoutX="462.0" layoutY="107.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
       <children>
+        <ImageView fx:id="croixverte" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../ressources/joueurs/cross.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="pingvert" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../ressources/joueurs/PingouinVert.png" />
+          </image>
+        </ImageView>
         <ImageView fx:id="crevetteverte" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="true">
           <image>
             <Image url="@../../ressources/joueurs/crevetteverte.png" />
@@ -174,18 +189,18 @@
             <Image url="@../../ressources/joueurs/OrcVert.png" />
           </image>
         </ImageView>
-        <ImageView fx:id="pingvert" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
-          <image>
-            <Image url="@../../ressources/joueurs/PingouinVert.png" />
-          </image>
-        </ImageView>
       </children>
     </StackPane>
     <StackPane fx:id="pilebleue" blendMode="SRC_OVER" cache="false" layoutX="462.0" layoutY="367.0" pickOnBounds="true" prefHeight="150.0" prefWidth="200.0">
       <children>
-        <ImageView fx:id="croixbleue" fitHeight="112.0" fitWidth="112.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="true">
+        <ImageView fx:id="croixbleue" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true">
           <image>
             <Image url="@../../ressources/joueurs/cross.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="pingbleu" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../../ressources/joueurs/PingouinBleu.png" />
           </image>
         </ImageView>
         <ImageView fx:id="crevettebleue" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -203,14 +218,9 @@
             <Image url="@../../ressources/joueurs/Orquebleu.png" />
           </image>
         </ImageView>
-        <ImageView fx:id="pingbleu" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false">
-          <image>
-            <Image url="@../../ressources/joueurs/PingouinBleu.png" />
-          </image>
-        </ImageView>
       </children>
     </StackPane>
-    <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="156.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#jaunegauche" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="156.0" minWidth="55.0" mnemonicParsing="false" onAction="#jaunegauche" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -219,7 +229,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="gaucherouge" contentDisplay="GRAPHIC_ONLY" layoutX="73.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#rougegauche" opacity="0.5" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="gaucherouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="73.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#rougegauche" opacity="1.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -228,7 +238,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="gauchebleu" contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#bleugauche" opacity="0.5" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="gauchebleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="419.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#bleugauche" opacity="1.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -237,7 +247,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="gauchevert" contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#vertgauche" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="gauchevert" contentDisplay="GRAPHIC_ONLY" layoutX="419.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onAction="#vertgauche" prefWidth="55.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -246,7 +256,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#jaunedroite" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onAction="#jaunedroite" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -255,7 +265,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitrouge" contentDisplay="GRAPHIC_ONLY" layoutX="304.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseDragged="#rougedroite" opacity="0.5" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="droitrouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="304.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#rougedroite" opacity="1.0" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -264,7 +274,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitbleu" contentDisplay="GRAPHIC_ONLY" layoutX="650.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#bleudroite" opacity="0.5" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="droitbleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="650.0" layoutY="413.0" minWidth="55.0" mnemonicParsing="false" onAction="#bleudroite" opacity="1.0" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -273,7 +283,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="droitvert" contentDisplay="GRAPHIC_ONLY" layoutX="649.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#vertdroite" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="droitvert" contentDisplay="GRAPHIC_ONLY" layoutX="649.0" layoutY="154.0" minWidth="55.0" mnemonicParsing="false" onAction="#vertdroite" prefWidth="55.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button" visible="false">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -291,7 +301,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modejaunegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche1" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modejaunegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche1" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -300,7 +310,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche3" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" layoutX="128.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche3" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -309,7 +319,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" layoutX="474.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche2" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" layoutX="474.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche2" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -318,7 +328,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" layoutX="471.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#gauche4" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" layoutX="471.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#gauche4" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -327,7 +337,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modejaunedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite1" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modejaunedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite1" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -336,7 +346,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modevertdroit" contentDisplay="GRAPHIC_ONLY" layoutX="636.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite2" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modevertdroit" contentDisplay="GRAPHIC_ONLY" layoutX="636.0" layoutY="70.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite2" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -345,7 +355,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="moderougedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite3" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="moderougedroit" contentDisplay="GRAPHIC_ONLY" layoutX="276.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite3" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -354,7 +364,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button fx:id="modebleudroit" contentDisplay="GRAPHIC_ONLY" layoutX="630.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onMouseClicked="#droite3" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="modebleudroit" contentDisplay="GRAPHIC_ONLY" layoutX="630.0" layoutY="328.0" minHeight="27.0" minWidth="28.0" mnemonicParsing="false" onAction="#droite4" prefHeight="27.0" prefWidth="28.0" rotate="180.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
           <image>
@@ -363,68 +373,76 @@
         </ImageView>
       </graphic>
     </Button>
-    <StackPane fx:id="name1" layoutX="156.0" layoutY="57.0" prefHeight="47.0" prefWidth="124.0213623046875">
+    <StackPane fx:id="label1" layoutX="116.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
       <children>
-        <Label id="Iafacile2" fx:id="iafacile1" text="IA Facile" visible="false">
+        <TextField id="name" fx:id="nom1" prefWidth="136.0" />
+        <Label text="Juliette la crevette" visible="false" />
+        <Label id="nomfacile2" text="Eve" visible="false">
           <font>
             <Font size="20.0" fx:id="x2" />
           </font>
         </Label>
-        <Label id="Joueur1" fx:id="joueur1" font="$x2" text="Joueur1" />
-        <Label id="Iafacile2" fx:id="iadifficile1" font="$x2" text="IA Difficile" visible="false" />
-        <Label id="Iafacile2" fx:id="iamoyen1" font="$x2" text="IA Moyen" visible="false" />
-        <Label id="Iafacile2" fx:id="aucun1" font="$x2" text="Aucun" visible="false" />
+        <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
       </children>
     </StackPane>
-    <StackPane fx:id="label1" layoutX="116.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
+    <StackPane id="lable2" fx:id="label2" layoutX="465.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
       <children>
-        <TextField id="name" fx:id="nom1" prefWidth="136.0" />
-        <Label text="Label" visible="false" />
-      </children>
-    </StackPane>
-    <StackPane fx:id="lable2" layoutX="465.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
-      <children>
-        <TextField id="name" disable="true" editable="true" prefWidth="136.0" visible="false" />
-        <Label fx:id="nomfacile2" font="$x2" text="Juliette" />
+        <TextField id="name" disable="true" editable="true" opacity="1.0" prefWidth="136.0" visible="false" />
+        <Label fx:id="nomfacile2" font="$x2" text="Juliette la crevette" />
+        <Label id="nomfacile2" font="$x2" text="Eve" visible="false" />
+        <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
       </children>
     </StackPane>
     <StackPane id="label3" fx:id="label4" layoutX="462.0" layoutY="493.0" prefHeight="91.0" prefWidth="200.0">
       <children>
-        <TextField id="name" disable="true" prefWidth="136.0" visible="false" />
-        <Label text="Label" visible="false" />
+        <TextField id="name" disable="true" opacity="1.0" prefWidth="136.0" visible="false" />
+        <Label text="Juliette la crevette" visible="false" />
+        <Label id="nomfacile2" font="$x2" text="Eve" visible="false" />
+        <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
       </children>
     </StackPane>
     <StackPane fx:id="label3" layoutX="120.0" layoutY="493.0" prefHeight="91.0" prefWidth="200.0">
       <children>
-        <TextField id="name" disable="true" prefWidth="136.0" visible="false" />
-        <Label text="Label" visible="false" />
+        <TextField id="name" disable="true" opacity="1.0" prefWidth="136.0" visible="false" />
+        <Label text="Juliette la crevette" visible="false" />
+        <Label id="nomfacile2" font="$x2" text="Eve" visible="false" />
+        <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
       </children>
     </StackPane>
-    <StackPane id="name1" fx:id="name2" layoutX="503.0" layoutY="57.0" prefHeight="47.0" prefWidth="124.0213623046875">
+    <StackPane fx:id="name1" layoutX="156.0" layoutY="57.0" prefHeight="47.0" prefWidth="124.0213623046875">
       <children>
+        <Label id="Aucun1" fx:id="aucun1" font="$x2" text="Aucun" visible="false" />
+        <Label id="Joueur1" fx:id="joueur1" font="$x2" text="Joueur1" />
+        <Label id="Iafacile2" fx:id="iafacile1" font="$x2" text="IA Facile" visible="false" />
+        <Label id="Iamoyenne1" fx:id="iamoyen1" font="$x2" text="IA Moyen" visible="false" />
+        <Label id="Iadifficile1" fx:id="iadifficile1" font="$x2" text="IA Difficile" visible="false" />
+      </children>
+    </StackPane>
+    <StackPane fx:id="name2" layoutX="503.0" layoutY="57.0" prefHeight="47.0" prefWidth="124.0213623046875">
+      <children>
+        <Label id="Aucun2" fx:id="aucun2" font="$x2" text="Aucun" visible="false" />
+        <Label id="Joueur2" fx:id="joueur2" font="$x2" text="Joueur2" visible="false" />
         <Label id="Iafacile2" fx:id="iafacile2" font="$x2" text="IA Facile" visible="true" />
-        <Label id="Joueur1" fx:id="joueur2" font="$x2" text="Joueur2" visible="false" />
-        <Label id="Iafacile2" fx:id="iadifficile2" font="$x2" text="IA Difficile" visible="false" />
-        <Label id="Iafacile2" fx:id="iamoyen2" font="$x2" text="IA Moyen" visible="false" />
-        <Label id="Iafacile2" fx:id="aucun2" font="$x2" text="Aucun" visible="false" />
+        <Label id="Iamoyen2" fx:id="iamoyen2" font="$x2" text="IA Moyen" visible="false" />
+        <Label id="Iadifficile2" fx:id="iadifficile2" font="$x2" text="IA Difficile" visible="false" />
       </children>
     </StackPane>
-    <StackPane id="name1" fx:id="name3" layoutX="156.0" layoutY="312.0" prefHeight="47.0" prefWidth="124.0213623046875">
+    <StackPane fx:id="name3" layoutX="156.0" layoutY="312.0" prefHeight="47.0" prefWidth="124.0213623046875">
       <children>
-        <Label id="Iafacile2" fx:id="iafacile3" font="$x2" text="IA Facile" visible="false" />
-        <Label id="Joueur1" fx:id="joueur3" font="$x2" text="Joueur2" visible="false" />
-        <Label id="Iafacile2" fx:id="iadifficile3" font="$x2" text="IA Difficile" visible="false" />
-        <Label id="Iafacile2" fx:id="iamoyen3" font="$x2" text="IA Moyen" visible="false" />
-        <Label id="Iafacile2" fx:id="aucun3" font="$x2" text="Aucun" visible="true" />
+        <Label id="Aucun3" fx:id="aucun3" font="$x2" text="Aucun" visible="true" />
+        <Label id="Joueur3" fx:id="joueur3" font="$x2" text="Joueur3" visible="false" />
+        <Label id="Iafacile3" fx:id="iafacile3" font="$x2" text="IA Facile" visible="false" />
+        <Label id="Iamoyen3" fx:id="iamoyen3" font="$x2" text="IA Moyen" visible="false" />
+        <Label id="Iadifficile3" fx:id="iadifficile3" font="$x2" text="IA Difficile" visible="false" />
       </children>
     </StackPane>
-    <StackPane id="name1" fx:id="name4" layoutX="503.0" layoutY="308.0" prefHeight="47.0" prefWidth="124.0213623046875">
+    <StackPane fx:id="name4" layoutX="503.0" layoutY="312.0" prefHeight="47.0" prefWidth="124.0213623046875">
       <children>
-        <Label id="Iafacile2" fx:id="iafacile4" font="$x2" text="IA Facile" visible="false" />
-        <Label id="Joueur1" fx:id="joeur4" font="$x2" text="Joueur2" visible="false" />
-        <Label id="Iafacile2" fx:id="iadifficile4" font="$x2" text="IA Difficile" visible="false" />
-        <Label id="Iafacile2" fx:id="iamoyen4" font="$x2" text="IA Moyen" visible="false" />
-        <Label id="Iafacile2" fx:id="aucun4" font="$x2" text="Aucun" visible="true" />
+        <Label id="Aucun4" fx:id="aucun4" font="$x2" text="Aucun" visible="true" />
+        <Label id="Joueur4" fx:id="joeur4" font="$x2" text="Joueur3" visible="false" />
+        <Label id="Iafacile4" fx:id="iafacile4" font="$x2" text="IA Facile" visible="false" />
+        <Label id="Iamoyen4" fx:id="iamoyen4" font="$x2" text="IA Moyen" visible="false" />
+        <Label id="Iadifficile4" fx:id="iadifficile4" font="$x2" text="IA Difficile" visible="false" />
       </children>
     </StackPane>
   </children>

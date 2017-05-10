@@ -33,8 +33,9 @@ public class Interface extends Application {
 		GestionnaireEcransFxml gestionnaireEcransFXML = new GestionnaireEcransFxml();
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_ACCUEIL, model.Proprietes.ECRAN_ACCUEIL_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_REGLES, model.Proprietes.ECRAN_REGLES_FXML);
+		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_MODE, model.Proprietes.ECRAN_MODE_FXML);
         
-		gestionnaireEcransFXML.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+		gestionnaireEcransFXML.changeEcranCourant(model.Proprietes.ECRAN_MODE);
         
         Group root = new Group();
         root.getChildren().addAll(gestionnaireEcransFXML);

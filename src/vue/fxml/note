@@ -1,0 +1,30 @@
+  @FXML 
+    private StackPane name1;
+    @FXML 
+    private StackPane name2;
+    @FXML 
+    private StackPane name3;
+    @FXML 
+    private StackPane name4;
+        
+    StackPane[] name = new StackPane[4];
+    
+    @FXML 
+    private StackPane label1;
+    @FXML 
+    private StackPane label2;
+    @FXML 
+    private StackPane label3;
+    @FXML 
+    private StackPane label4;
+    
+    StackPane[] label = new StackPane[4];
+    
+    @FXML 
+    private StackPane pilerouge;
+    @FXML 
+    private StackPane pilejaune;
+    @FXML 
+    private StackPane pileverte;
+    @FXML 
+    private StackPane pilebleue;

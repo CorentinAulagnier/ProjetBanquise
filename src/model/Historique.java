@@ -93,6 +93,7 @@ public class Historique implements Serializable {
 	 * 
 	 * @return vrai si le joueur actif peut annuler
 	 */
+	
 	public boolean peutAnnuler() {
 		return (undo.size()>0);
 	}
@@ -102,7 +103,26 @@ public class Historique implements Serializable {
 	 * 
 	 * @return vrai si le joueur actif peut retablir la dernière action annulee
 	 */
+	
 	public boolean peutRefaire() {
 		return (redo.size()>0);
+	}
+
+	/**
+	 * Affichage.
+	 *     .
+	 * @return Un affichage de l'historique de cette partie.
+	 */
+	
+	public String toString() {
+		String s = "Undo :\n";
+		for(Partie p : undo) {
+			s+=p;
+		}
+		s = "Redo :\n";
+		for(Partie p : redo) {
+			s+=p;
+		}
+		return s;
 	}
 }

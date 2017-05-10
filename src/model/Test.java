@@ -98,6 +98,7 @@ public class Test {
 
 		while (true){
 			try {
+				int x = 0;
 	        	System.out.println("Liste des tests : ");
 	        	System.out.println("   - 1 -> affiche une banquise");
 	        	System.out.println("   - 2 -> affiche position d'un pingouin");
@@ -106,7 +107,7 @@ public class Test {
 	       		System.out.println("   - 5 -> sauvegarder et charger une partie");
 	       		System.out.println("   - 6 -> création d'un clone");
 
-	        	int x = Integer.parseInt(br.readLine());
+	        	x = Integer.parseInt(br.readLine());
 	        	int y;
 	        	int z;
 				System.out.println(x);
@@ -151,11 +152,15 @@ public class Test {
 					case 5:
 						Partie p = LauncherConsole.creerPartie(br);
 						LauncherConsole.phasePlacement(br, p);
-						p.sauvegarder();
+						LauncherConsole.tourDeJeuConsole(br, p);
+						LauncherConsole.tourDeJeuConsole(br, p);
 						System.out.println("Banquise créée :\n"+p);
+						System.out.println("Historique créée :\n"+p.h);
+						p.sauvegarder();
 						Partie p2 = new Partie();
 						p2.charger();
 						System.out.println("Banquise restaurée :\n"+p);
+						System.out.println("Historique restaurée :\n"+p.h);
 					case 6:
 						Partie p_origine = LauncherConsole.creerPartie(br);
 						LauncherConsole.phasePlacement(br, p_origine);

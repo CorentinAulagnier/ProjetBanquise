@@ -421,5 +421,30 @@ public class Banquise implements Serializable, Cloneable{
 		return s;
 	}
 	
+	/**
+	 * @return le nombre de tuiles vides de la banquise
+	 */	
+	
+	public int nbTuilesLibres() {
+		int nbTuiles = 0;
+		int numligne = 0;
+		
+		for (int i = 0; i<8; i++) {
+
+			if (i%2 == 0) { //Ligne pair
+				numligne = 7;
+			} else {
+				numligne = 8; //Ligne impair
+			}
+
+			for (int j = 0; j < numligne; j++) {
+				if (this.terrain[i][j].nbPoissons > 0) {
+					nbTuiles ++;
+				}
+			}
+		}
+		return nbTuiles;
+	}
+	
 }
 

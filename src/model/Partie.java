@@ -283,7 +283,7 @@ public class Partie implements Serializable {
 	public boolean placementPingouinsFini() {
 		for(int i = 0; i<nbJoueurs; i++)
 			for(int j = 0; j<joueurs[i].nbPingouin; j++)
-				if (!(joueurs[i].myPingouins[j].actif))
+				if (!(joueurs[i].myPingouins[j].actif) && joueurs[i].myPingouins[j].position.equals(new Coordonnees(-1, -1)))
 					return false;
 		return true;
 	}
@@ -430,6 +430,29 @@ public class Partie implements Serializable {
 		return positionPingouins(joueurs[joueurActif]);
 	}
 	
+/*******************************************************************************************************/
+
+	/**
+	 * Retourne le numero du pingouin a placer
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne le numero du pingouin a placer du joueur j.
+	 */
+
+
+	public int numPingouinAPlacer(Joueur j) {
+		Coordonnees[] c = positionPingouins(j);
+		int i;
+		for(i = 0; i < c.length; i++) {
+			if (c[i] == null)
+				return i;
+		}
+		
+		return -1;
+	}
+	
 	/**
 	 * Retourne combien de pingouins le joueur j peut deplacer
 	 * 
@@ -439,7 +462,6 @@ public class Partie implements Serializable {
 	 * @return Retourne le nb de pingouins deplacable du joueur j.
 	 */
 
-/*******************************************************************************************************/
 
 	public int nbPingouinActif(Joueur j) {
 		Coordonnees[] c = positionPingouins(j);

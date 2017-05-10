@@ -2,10 +2,10 @@ package model;
 
 public class CoupleGenerique <T1,T2> {
 	
-	T1 e1;
-	T2 e2;
+	public T1 e1;
+	public T2 e2;
 	
-	CoupleGenerique (T1 first, T2 second) {
+	public CoupleGenerique (T1 first, T2 second) {
 		this.e1 = first;
 		this.e2 = second;
 	}

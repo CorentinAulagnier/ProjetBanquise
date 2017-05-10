@@ -1,25 +1,41 @@
 package reseau;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
+
+import model.Coordonnees;
+import model.CoupleGenerique;
+import model.IA;
+import model.Partie;
+import model.Pingouin;
+import model.Tuile;
 
 
 public class PingouinServer {
 
 
     private static final int PORT = 9001;
-    private static HashSet<String> names = new HashSet<String>();
-    private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
+    private static String[] names = new String[4];
+    private static ObjectOutputStream[] writers = new ObjectOutputStream[4];
     private static int nbClients = 0;
+    private static Partie p = null;
+
     
     public static void main(String[] args) throws Exception {
         System.out.println("Pingouins server is running.");
         ServerSocket listener = new ServerSocket(PORT);
+        //Initialisation de la partie
+        
+        //Fin initialisation
         try {
             while (true) {
                 new Handler(listener.accept()).start();
@@ -33,8 +49,9 @@ public class PingouinServer {
     private static class Handler extends Thread {
         private String name;
         private Socket socket;
-        private BufferedReader in;
-        private PrintWriter out;
+        private ObjectInputStream in;
+        private ObjectOutputStream out;
+        private int numClient;
 
         public Handler(Socket socket) {
             this.socket = socket;            
@@ -43,16 +60,18 @@ public class PingouinServer {
         public void run() {
 
             try {
-                out = new PrintWriter(socket.getOutputStream(), true);
-            
+                out = new ObjectOutputStream(socket.getOutputStream());
+                
             	if(nbClients<4) {
-	                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	
-	
-	
+            		numClient = nbClients;
+            		nbClients ++;
+            		
+	       			in =  new ObjectInputStream(socket.getInputStream()) ;	
+        			
+      /*
 	                while (true) {
-	                    out.println("SUBMITNAME");
-	                    name = in.readLine();
+	                    out.writeObject("SUBMITNAME");
+	                    name = (String)in.readObject();
 	                    if (name == null) {
 	                        return;
 	                    }
@@ -63,32 +82,58 @@ public class PingouinServer {
 	                            break;
 	                        }
 	                    }
-	                }
+	                }*/
+                    out.writeObject("SUBMITNAME");
+                    name = (String)in.readObject();
+                    names[numClient] = name;
+                    
+	                //out.writeObject("NAMEACCEPTED");
+	                p.joueurs[numClient].nom = name;
+	                writers[numClient] = out;
+	                /*
+	                 * 
+	                 */
+	                Partie p2 = null;
+	                
+	                while (!p.estPartieFini()){
+	                	
+		                while (!p.estPartieFini() && p.joueurActif != numClient) {
+		                	if (!p2.equals(p)) {
+			                	out.writeObject("NEWPARTIE");
+		                		out.writeObject(p);
+		                		p2 = p.clone();
+		                	}
+		                }
+		                if (!p.placementPingouinsFini()) {
+		                	out.writeObject("POSITIONPINGOUIN");
+		                	Coordonnees c = (Coordonnees)in.readObject();
+		                	Tuile t = p.b.getTuile(c);
+		                	t.mettrePingouin();
+							p.joueurs[numClient].myPingouins[p.numPingouinAPlacer(p.joueurs[numClient])] = new Pingouin(c);
 	
-	                out.println("NAMEACCEPTED");
-	                writers.add(out);
-	
-	                while (true) {
-	                    String input = in.readLine();
-	                    if (input == null) {
-	                        return;
-	                    }
-	                    for (PrintWriter writer : writers) {
-	                        writer.println("MESSAGE " + name + ": " + input);
-	                    }
+		                } else if (!p.estPartieFini()) {
+		                	out.writeObject("DEPLACEMENTPINGOUIN");
+		                	CoupleGenerique<Coordonnees, Coordonnees> cc = (CoupleGenerique<Coordonnees, Coordonnees>)in.readObject();
+		                	p.deplacement(cc.e1, cc.e2);
+		                }
+		                
 	                }
+	                p.afficherScores();
+
             	} else {
-            		out.println("NOSLOT");
+            		out.writeObject("NOSLOT");
             	}
             } catch (IOException e) {
                 System.out.println(e);
-            } finally {
+            } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
                 if (name != null) {
-                    names.remove(name);
+                    names[numClient] = null;
                     System.out.println("Joueur " +name+" s'est déconnecté.");
                 }
                 if (out != null) {
-                    writers.remove(out);
+                    writers[numClient] = null;
                 }
                 try {
                     socket.close();

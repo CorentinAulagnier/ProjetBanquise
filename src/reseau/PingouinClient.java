@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -14,6 +16,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import model.Coordonnees;
+import model.CoupleGenerique;
+import model.Partie;
 
 public class PingouinClient {
 
@@ -72,26 +78,58 @@ public class PingouinClient {
 
     /**
      * Connects to the server then enters the processing loop.
+     * @throws ClassNotFoundException 
      */
-    private void run() throws IOException {
+    private void run() throws IOException, ClassNotFoundException {
 
         // Make connection and initialize streams
         String serverAddress = getServerAddress();
         Socket socket = new Socket(serverAddress, PORT);
-        in = new BufferedReader(new InputStreamReader(
-            socket.getInputStream()));
-        out = new PrintWriter(socket.getOutputStream(), true);
-
+        ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         // Process all messages from server, according to the protocol.
         while (true) {
-            String line = in.readLine();
+            String line = (String)in.readObject();
+            
             if (line.startsWith("SUBMITNAME")) {
-                out.println(getUsername());
+				System.out.println("quel est votre nom ?");
+				String nom = br.readLine();
+            	out.writeObject(nom);
             } else if (line.startsWith("NAMEACCEPTED")) {
-                textField.setEditable(true);
-                messageArea.append("Bienvenue sur PINGOUINS !\n");
-            } else if (line.startsWith("MESSAGE")) {
-                messageArea.append(line.substring(8) + "\n");
+
+            } else if (line.startsWith("NEWPARTIE")) {
+                Partie p = (Partie)in.readObject();
+				System.out.println(p);
+
+            } else if (line.startsWith("POSITIONPINGOUIN")) {
+				System.out.println("Joueur, choisissez la position initiale de votre pingouin :");
+				System.out.print("x: ");
+				int x = Integer.valueOf(br.readLine());
+				System.out.print("y: ");
+				int y = Integer.valueOf(br.readLine());
+            	Coordonnees c = new Coordonnees(x, y);
+            	out.writeObject(c);
+            } else if (line.startsWith("DEPLACEMENTPINGOUIN")) {
+				System.out.println("Joueur, choisissez le pingouin e deplacer:");
+				System.out.print("x: ");
+				int x = Integer.valueOf(br.readLine());
+				System.out.print("y: ");
+				int y = Integer.valueOf(br.readLine());
+            	Coordonnees c = new Coordonnees(x, y);
+				System.out.println("Joueur, choisissez ou lacher le pingouin :");
+				System.out.print("x: ");
+				int x2 = Integer.valueOf(br.readLine());
+				System.out.print("y: ");
+				int y2 = Integer.valueOf(br.readLine());
+            	Coordonnees c2 = new Coordonnees(x2, y2);
+            	
+            	CoupleGenerique<Coordonnees, Coordonnees> cc = new CoupleGenerique<Coordonnees, Coordonnees>(c, c2);
+                out.writeObject(cc);
+            } else if (line.startsWith("")) {
+
+            } else if (line.startsWith("")) {
+
             }
         }
     }

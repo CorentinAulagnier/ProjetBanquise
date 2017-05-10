@@ -15,8 +15,8 @@ public class Coordonnees implements Serializable{
 	 * Constructeurs
 	 */
 	public Coordonnees(){
-		this.x = 0;
-		this.y = 0;
+		this.x = -1;
+		this.y = -1;
 	}
 	
 	public Coordonnees(int a, int b){

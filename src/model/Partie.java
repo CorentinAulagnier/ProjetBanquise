@@ -44,12 +44,13 @@ public class Partie implements Serializable {
 	public Joueur[] joueurs;
 	
 	/**
-	 * Piles annuler et refaire
+	 * Utilisation historique
 	 */	
-	public boolean utiliseHistorique = false;
-	public transient Stack<Partie> undo = new Stack<Partie>();
-	public transient Stack<Partie> redo = new Stack<Partie>();
 	
+	public boolean utiliseHistorique = false;
+	
+	public transient Historique h;
+
 	/**
 	 * Constructeurs
 	 */
@@ -147,17 +148,18 @@ public class Partie implements Serializable {
 	 * @return vrai si on a le droit d'annuler un coup
 	 */
 	
-	public boolean annuler() {
-		if (!undo.empty()){
-			Partie p = undo.pop().clone();
-			if (!undo.empty()){
-				redo.push(p);
-				return true;
-			} else {
-				undo.push(p);
-			}	
+	public void annuler() {
+		Partie p = h.annuler(this);
+		if(p!=null) {
+			this.b=p.b;
+			//this.h=p.h;
+			this.joueurActif=p.joueurActif;
+			this.nbJoueurs=p.nbJoueurs;
+			this.utiliseHistorique = p.utiliseHistorique;
+			this.joueurs = p.joueurs;
+		} else {
+			System.err.println("Impossible d'annuler.");
 		}
-		return false;
 	}
 	
 	/**
@@ -165,12 +167,19 @@ public class Partie implements Serializable {
 	 * 
 	 * @return vrai si on a le droit de retablir un coup
 	 */
-	public boolean retablir() {
-		if (!redo.empty()){
-			undo.push(redo.pop().clone());
-			return true;
+	
+	public void retablir() {
+		Partie p = h.retablir(this);
+		if(p!=null) {
+			this.b=p.b;
+			//this.h=p.h;
+			this.joueurActif=p.joueurActif;
+			this.nbJoueurs=p.nbJoueurs;
+			this.utiliseHistorique = p.utiliseHistorique;
+			this.joueurs = p.joueurs;
+		} else {
+			System.err.println("Impossible de retablir.");
 		}
-		return false;
 	}
 
 	/**
@@ -182,9 +191,12 @@ public class Partie implements Serializable {
 	
 	public void sauvegarder(String name) {
 		try {
-			File fichier =  new File("save/"+name+".banquise") ;
+			File fichier =  new File("save/"+name+".partie") ;
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
 			oos.writeObject(this);
+			if(utiliseHistorique) {
+				h.sauvegarder(name);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -207,15 +219,17 @@ public class Partie implements Serializable {
 	
 	public void charger(String name) {
 		try {
-		File fichier =  new File("save/"+name+".banquise") ;
-		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
-		Partie p = (Partie)ois.readObject() ;
-		this.b = p.b;
-		this.joueurActif = p.joueurActif;
-		this.nbJoueurs = p.nbJoueurs;
-		this.joueurs = p.joueurs;
-		this.undo = new Stack<Partie>();
-		this.redo = new Stack<Partie>();
+			File fichier =  new File("save/"+name+".partie") ;
+			ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
+			Partie p = (Partie)ois.readObject() ;
+			this.b = p.b;
+			this.joueurActif = p.joueurActif;
+			this.nbJoueurs = p.nbJoueurs;
+			this.joueurs = p.joueurs;
+			this.utiliseHistorique = p.utiliseHistorique;
+			if(utiliseHistorique) {
+				this.h.charger(name);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -598,25 +612,29 @@ public class Partie implements Serializable {
 	 */
 
 	public void setHistorique() {
-		this.utiliseHistorique = peutAnnulerCoup();		
+		this.utiliseHistorique = peutAnnulerCoup();
+		if(utiliseHistorique) {
+			this.h = new Historique();
+		}
 	}
 	
 	/**
-	 * Verifie le joueur actif peut effectuer l'action "annuler"
-	 * 
-	 * @return vrai si le joueur actif peut annuler
+	 * Mets a jour l'historique
+	 * ATTENTION : doit etre appele a chaque coup joue
 	 */
-	public boolean peutAnnuler() {
-		return (utiliseHistorique && undo.size()>1);
+
+	public void majHistorique() {
+		h.undo.push(this.clone());
+		h.redo.clear();
 	}
 	
 	/**
-	 * Verifie le joueur actif peut effectuer l'action "retablir"
-	 * 
-	 * @return vrai si le joueur actif peut retablir la dernière action annulee
+	 * Affiche le score de chaque joueur
 	 */
-	public boolean peutRefaire() {
-		return (utiliseHistorique && redo.size()>0);
+	
+	public void afficherScores() {
+		for(int i = 0; i<nbJoueurs; i++)
+			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points.");
 	}
 	
 }

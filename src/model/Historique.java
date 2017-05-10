@@ -1,0 +1,108 @@
+package model;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Stack;
+
+public class Historique implements Serializable {
+	
+	public Stack<Partie> undo;
+	public Stack<Partie> redo;
+	
+	/**
+	 * Constructeur
+	 */
+	
+	public Historique() {
+		undo = new Stack<Partie>();
+		redo = new Stack<Partie>();
+	}
+	
+	/**
+	 * Annuler le dernier coup joue.
+	 * 
+	 * @return la Partie au sommet de la pile undo i.e. dernier coup joue
+	 */
+	
+	public Partie annuler(Partie old) {
+		if (!undo.empty()){
+			Partie p = undo.pop().clone();
+			redo.push(old);
+			return p;
+		}
+		return null;
+	}
+	
+	/**
+	 * Refaire le dernier coup annule.
+	 * 
+	 * @return la Partie au sommet de la pile redo i.e. dernier coup annule
+	 */
+	
+	public Partie retablir(Partie old) {
+		if (!redo.empty()){
+			Partie p = redo.pop().clone();
+			undo.push(old);
+			return p;
+		}
+		return null;
+	}
+	
+	/**
+	 * Sauvegarde la partie en cours.
+	 * 
+	 * @param name
+	 *            Nom du fichier de sauvegarde
+	 */
+	
+	public void sauvegarder(String name) {
+		try {
+			File fichier =  new File("save/"+name+".hist") ;
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
+			oos.writeObject(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	/**
+	 * Charge la partie en parametre.
+	 * 
+	 * @param name
+	 *            Nom du fichier a recuperer
+	 */
+	
+	public void charger(String name) {
+		try {
+		File fichier =  new File("save/"+name+".hist") ;
+		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
+		Historique h = (Historique)ois.readObject() ;
+		this.undo = h.undo;
+		this.redo = h.redo;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	/**
+	 * Verifie le joueur actif peut effectuer l'action "annuler"
+	 * 
+	 * @return vrai si le joueur actif peut annuler
+	 */
+	public boolean peutAnnuler() {
+		return (undo.size()>0);
+	}
+	
+	/**
+	 * Verifie le joueur actif peut effectuer l'action "retablir"
+	 * 
+	 * @return vrai si le joueur actif peut retablir la dernière action annulee
+	 */
+	public boolean peutRefaire() {
+		return (redo.size()>0);
+	}
+}

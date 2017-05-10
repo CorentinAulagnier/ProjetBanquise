@@ -366,6 +366,39 @@ public class Partie implements Serializable {
 	}
 	
 	/**
+	 * Retourne combien de pingouins le joueur j peut deplacer
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne le nb de pingouins deplacable du joueur j.
+	 */
+	
+	public int nbPingouinActif(Joueur j) {
+		Coordonnees[] c = positionPingouins(j);
+		int nb = 0;
+		for(int i = 0; i < c.length; i++) {
+			if (c[i] != null)
+				nb++;
+		}
+		
+		return nb;
+	}
+	
+	/**
+	 * Retourne combien de pingouins le joueur actif peut deplacer
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne le nb de pingouins deplacable du joueur actif.
+	 */
+	
+	public int nbPingouinActif() {
+		return nbPingouinActif(joueurs[joueurActif]);
+	}
+	
+	/**
 	 * Retourne si le joueur j peut jouer
 	 * 
 	 * @param j
@@ -375,14 +408,7 @@ public class Partie implements Serializable {
 	 */
 	
 	public boolean peutJouer(Joueur j) {
-		Coordonnees[] c = positionPingouins(j);
-		
-		for(int i = 0; i < c.length; i++) {
-			if (c[i] != null)
-				return true;
-		}
-		
-		return false;
+		return (nbPingouinActif(j) > 0);
 	}
 	
 	/**

@@ -19,6 +19,9 @@ public class Interface extends Application {
     public static final String ECRAN_ACCUEIL_FXML = "fxml/Menu.fxml";
     public static final String ECRAN_REGLES = "Regles";
     public static final String ECRAN_REGLES_FXML = "fxml/Regles.fxml";
+    public static final String ECRAN_MODE = "Mode";
+    public static final String ECRAN_MODE_FXML = "fxml/ModeJeu.fxml";
+    
     
 	public static int largeurFenetre = 800;
 	public static int hauteurFenetre = 600;
@@ -47,13 +50,18 @@ public class Interface extends Application {
 		StackPane listeTousEcrans = new StackPane();
 		
 		try {
-					URL url1 = getClass().getResource(ECRAN_ACCUEIL_FXML);
-					FXMLLoader fxmlLoader1 = new FXMLLoader(url1);
+				
+				URL url1 = getClass().getResource(ECRAN_ACCUEIL_FXML);
+				FXMLLoader fxmlLoader1 = new FXMLLoader(url1);
 					listeTousEcrans.getChildren().add(fxmlLoader1.load());
 					
-					URL url2 = getClass().getResource(ECRAN_REGLES_FXML);
-					FXMLLoader fxmlLoader2 = new FXMLLoader(url1);
-					listeTousEcrans.getChildren().add(fxmlLoader2.load());
+				URL url2 = getClass().getResource(ECRAN_REGLES_FXML);
+				FXMLLoader fxmlLoader2 = new FXMLLoader(url2);
+				listeTousEcrans.getChildren().add(fxmlLoader2.load());
+				
+				URL url0 = getClass().getResource(ECRAN_MODE_FXML);
+				FXMLLoader fxmlLoader0 = new FXMLLoader(url0);
+				listeTousEcrans.getChildren().add(fxmlLoader0.load());
 					
 					// Création de la scène.
 					Scene scene = new Scene(listeTousEcrans);

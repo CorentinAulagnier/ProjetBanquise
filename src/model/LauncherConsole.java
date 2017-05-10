@@ -293,46 +293,55 @@ public class LauncherConsole {
 	
 	public static Coordonnees choixDeplacement(BufferedReader br, Partie p, Pingouin pingouin) {
 		try {
-			Chemins chemins = new Chemins(p, pingouin.position);
-			System.out.println(chemins);
-			System.out.println("Numero de l'axe choisi(0 pour retourner au choix du pingouin):");
-			int numAxe = Integer.valueOf(br.readLine());
-			ArrayList<Coordonnees> array;
-			switch (numAxe) {
-				case 1: {
-					array = chemins.hautDroit;
-					break;
-				} case 2: {
-					array = chemins.milieuDroit;
-					break;
-				} case 3: {
-					array = chemins.basDroit;
-					break;
-				} case 4: {
-					array = chemins.basGauche;
-					break;
-				} case 5: {
-					array = chemins.milieuGauche;
-					break;
-				} case 6: {
-					array = chemins.hautGauche;
-					break;
-				} default : array = null;
-			}
-			if(array!=null) {
-				int numDep =-1;
-				boolean numok = false;
-				while(!numok) {
-					System.out.println("Numero du déplacement choisi:");
-					numDep = Integer.valueOf(br.readLine());
-					if(numDep>0 && numDep<=array.size()) {
-						numok = true;
-					} else {
-						System.out.println("Entrée incorrecte. Réessayer.");
+			ArrayList<Coordonnees> array = null;
+			int numDep = 0;
+			boolean axeok = false;
+			while (!axeok) {
+				Chemins chemins = new Chemins(p, pingouin.position);
+				System.out.println(chemins);
+				System.out.println("Numero de l'axe choisi (0 pour retourner au choix du pingouin):");
+				int numAxe = Integer.valueOf(br.readLine());
+				switch (numAxe) {
+					case 1: {
+						array = chemins.hautDroit;
+						break;
+					} case 2: {
+						array = chemins.milieuDroit;
+						break;
+					} case 3: {
+						array = chemins.basDroit;
+						break;
+					} case 4: {
+						array = chemins.basGauche;
+						break;
+					} case 5: {
+						array = chemins.milieuGauche;
+						break;
+					} case 6: {
+						array = chemins.hautGauche;
+						break;
+					} default : return null;
+				}
+				if(array!=null) {
+					numDep =-1;
+					boolean numok = false;
+					while(!numok) {
+						System.out.println("Numero du déplacement choisi: (0 pour changer d'axe)");
+						numDep = Integer.valueOf(br.readLine());
+						if(numDep>0 && numDep<=array.size()) {
+							numok = true;
+							axeok = true;
+						} else if (numDep == 0) {
+							numok = true;
+							axeok = false;
+							System.out.println("Retour au choix de l'axe !");
+						} else {
+							System.out.println("Entrée incorrecte. Réessayer.");
+						}
 					}
 				}
-				return array.get(numDep-1);
 			}
+			return array.get(numDep-1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

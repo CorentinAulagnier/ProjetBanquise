@@ -3,14 +3,22 @@ package controleur;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import model.Humain;
+import model.IA;
+import model.Joueur;
 import model.Partie;
+import model.Proprietes;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 import vue.Interface;
@@ -35,18 +43,100 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     			nbJoueurs++;
     		}
     	}
+    	
+    	 int nbPingouins = 0;
+    	    
+    	    if (nbJoueurs == 2){
+    	    	nbPingouins = 4 ;
+    	    }else if(nbJoueurs == 3){
+    	    	nbPingouins = 3;
+    	    }else if(nbJoueurs == 4){
+    	    	nbPingouins = 2;
+    	    }
+    	
     	monChargeurFxml.partie = new Partie(nbJoueurs);
-    	int couleur = 0;
-    	for (int i = 0 ; i < nbJoueurs ; i++){
-    		if (modeJeu[couleur] == CREVETTE){}
-    		//monChargeurFxml.partie.joueurs;
+    	
+    	Joueur jjaune = creerJoueur(JAUNE,nbPingouins);
+    	Joueur jrouge = creerJoueur(ROUGE,nbPingouins);
+    	Joueur jbleu = creerJoueur(BLEU,nbPingouins);
+    	Joueur jvert = creerJoueur(VERT,nbPingouins);
+    	
+    	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
+    	int i = 0;
+    	if (jjaune!=null){
+    		tableauDeJoueur[i]=jjaune;
+    		i++;
     	}
-    	
-    	
-    	
+    	if (jrouge!=null){
+    		tableauDeJoueur[i]=jrouge;
+    		i++;
+    	}
+    	if (jbleu!=null){
+    		tableauDeJoueur[i]=jbleu;
+    		i++;
+    	}
+    	if (jvert!=null){
+    		tableauDeJoueur[i]=jvert;
+    		i++;
+    	}
     	
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
     	
+    }
+    
+    public Joueur creerJoueur(int couleur, int nbP){
+    	String name = "";
+    	int i = 0;
+    	while ((i<5)&&(name.equals(""))){
+    		if (pileNom[couleur].getChildren().get(i).isVisible()){
+    			if (pileNom[couleur].getChildren().get(i) instanceof Label){
+    				name = ((Label)pileNom[couleur].getChildren().get(i)).getText();
+    			}else if (pileNom[couleur].getChildren().get(i) instanceof TextField){
+    				name = ((TextField)pileNom[couleur].getChildren().get(i)).getText();
+    			}
+    		}
+    	}
+    	
+    	   	String path = "";
+	    	switch(couleur){
+		    	case JAUNE: switch(modeJeu[couleur]){
+		    					case JOUEUR :path = model.Proprietes.PING_JAUNE_PATH;
+		    					case CREVETTE : path = model.Proprietes.CREVETTE_JAUNE_PATH;
+		    					case EVE :  path = model.Proprietes.EVE_JAUNE_PATH;
+		    					case ORQUE :  path = model.Proprietes.ORQUE_JAUNE_PATH;
+	    					}
+		    	case ROUGE :switch(modeJeu[couleur]){
+								case JOUEUR :path = model.Proprietes.PING_ROUGE_PATH;
+								case CREVETTE : path = model.Proprietes.CREVETTE_ROUGE_PATH;
+								case EVE :  path = model.Proprietes.EVE_ROUGE_PATH;
+								case ORQUE :  path = model.Proprietes.ORQUE_ROUGE_PATH;
+							}
+		    	case BLEU :switch(modeJeu[couleur]){
+								case JOUEUR :path = model.Proprietes.PING_BLEU_PATH;
+								case CREVETTE : path = model.Proprietes.CREVETTE_BLEUE_PATH;
+								case EVE :  path = model.Proprietes.EVE_BLEUE_PATH;
+								case ORQUE :  path = model.Proprietes.ORQUE_BLEUE_PATH;
+							}
+		    	case VERT:switch(modeJeu[couleur]){
+							case JOUEUR :path = model.Proprietes.PING_VERT_PATH;
+							case CREVETTE : path = model.Proprietes.CREVETTE_VERTE_PATH;
+							case EVE :  path = model.Proprietes.EVE_VERTE_PATH;
+							case ORQUE :  path = model.Proprietes.ORQUE_VERTE_PATH;
+						}
+	    	}
+	    	
+	    	
+	    	if (modeJeu[couleur] == JOUEUR){
+	    		return new Humain(name, nbP, path, couleur);
+	    	}else if (modeJeu[couleur] == CREVETTE){
+	    		return new IA(name, nbP, 1 ,path, couleur);
+	    	}else if (modeJeu[couleur] == EVE){
+	    		return new IA(name, nbP, 2 ,path, couleur);
+	    	}else if (modeJeu[couleur] == ORQUE){
+	    		return new IA(name, nbP, 3 , path, couleur);
+	    	}else{
+	    		return null;
+    	}
     }
     
     
@@ -213,6 +303,8 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
 		retour.setStyle(model.Proprietes.STYLE_NORMAL);
 		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
 		
+		modeValide();
+		
     }
     
     
@@ -312,18 +404,26 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[JAUNE]){
     		selectMode(JAUNE,true);
     	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[JAUNE]){
-    		selectMode(JAUNE,true);
+    		selectMode(JAUNE,false);
     	}
     	modeValide();
     }
     
-   
+    @FXML
+    public void textEntre(KeyEvent event){
+    	modeValide();
+    }
+  
     public void modeValide(){
     	boolean JRV = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[VERT] == AUCUN));
     	boolean JRB = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[BLEU] == AUCUN));
     	boolean JBV = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[BLEU] == AUCUN) && (modeJeu[VERT] == AUCUN));
     	boolean BRV = ((modeJeu[BLEU] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[VERT] == AUCUN));
-    	if (!(JRV||JRB||JBV||BRV)){
+    	boolean JOK = (pileNom[JAUNE].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[JAUNE].getChildren().get(JOUEUR)).getText()).equals("") ) ) ;
+    	boolean ROK = (pileNom[ROUGE].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[ROUGE].getChildren().get(JOUEUR)).getText()).equals("") ) ) ;
+    	boolean BOK = (pileNom[BLEU].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[BLEU].getChildren().get(JOUEUR)).getText()).equals("") ) ) ;
+    	boolean VOK = (pileNom[VERT].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[VERT].getChildren().get(JOUEUR)).getText()).equals("")) ) ;
+    	if (!(JRV||JRB||JBV||BRV||JOK||BOK||ROK||VOK)){
     		lancer.setDisable(false);
     	}else{
     		lancer.setDisable(true);

@@ -380,7 +380,7 @@
             <Font size="20.0" fx:id="x2" />
           </font>
         </Label>
-        <TextField id="name" fx:id="nom1" prefWidth="136.0" />
+        <TextField id="name" fx:id="nom1" onKeyPressed="#textEntre" onKeyReleased="#textEntre" prefWidth="136.0" />
         <Label id="nomfacile" text="Suzette la crevette" visible="false" />
         <Label id="nommoyen" font="$x2" text="Jarvis" visible="false" />
         <Label id="nomdifficile" font="$x2" text="Barbossa" visible="false" />
@@ -389,7 +389,7 @@
     <StackPane id="lable2" fx:id="label2" layoutX="465.0" layoutY="235.0" prefHeight="91.0" prefWidth="200.0">
       <children>
         <Label id="rien" font="$x2" text="" visible="false" />
-        <TextField id="name" disable="true" editable="true" opacity="1.0" prefWidth="136.0" visible="false" />
+        <TextField id="name" disable="false" editable="true" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" visible="false" />
         <Label fx:id="nomfacile2" font="$x2" text="Juliette la crevette" />
         <Label id="nomfacile2" font="$x2" text="Eve Green" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Garrosh" visible="false" />
@@ -398,7 +398,7 @@
     <StackPane id="label3" fx:id="label4" layoutX="462.0" layoutY="493.0" prefHeight="91.0" prefWidth="200.0">
       <children>
         <Label id="rien" font="$x2" text="" visible="false" />
-        <TextField id="name" disable="true" opacity="1.0" prefWidth="136.0" visible="false" />
+        <TextField id="name" disable="false" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" visible="false" />
         <Label text="Georgette la crevette" visible="false" />
         <Label id="nomfacile2" font="$x2" text="R2D2" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
@@ -407,7 +407,7 @@
     <StackPane fx:id="label3" layoutX="120.0" layoutY="493.0" prefHeight="91.0" prefWidth="200.0">
       <children>
         <Label id="rien" font="$x2" text="" visible="false" />
-        <TextField id="name" disable="true" opacity="1.0" prefWidth="136.0" visible="false" />
+        <TextField id="name" disable="false" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" visible="false" />
         <Label text="Jeanette la crevette" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Ultron" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Dexter" visible="false" />

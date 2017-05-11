@@ -10,6 +10,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import model.Partie;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 import vue.Interface;
@@ -27,7 +28,25 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     
     @FXML
     private void lancerPartie(MouseEvent event){
-    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    	
+    	int nbJoueurs = 0;
+    	for (int i = 0 ; i < 4 ; i++){
+    		if (modeJeu[i]!=AUCUN){
+    			nbJoueurs++;
+    		}
+    	}
+    	monChargeurFxml.partie = new Partie(nbJoueurs);
+    	int couleur = 0;
+    	for (int i = 0 ; i < nbJoueurs ; i++){
+    		if (modeJeu[couleur] == CREVETTE){}
+    		//monChargeurFxml.partie.joueurs;
+    	}
+    	
+    	
+    	
+    	
+    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
+    	
     }
     
     

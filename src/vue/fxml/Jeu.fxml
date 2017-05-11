@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" opacity="0.63" pickOnBounds="true" preserveRatio="true" style="">
+      <image>
+        <Image url="@../../ressources/decor/banquise.jpg" />
+      </image>
+    </ImageView>
+    <Region prefHeight="600.0" prefWidth="793.0" />
+    <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="360.0" layoutY="573.0" minHeight="26.0" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="26.0" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;&#10;" text="">
+      <items>
+        <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../ressources/decor/son.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sauver">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/decor/sauver.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../ressources/decor/aide.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+        <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../ressources/decor/quit.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </MenuItem>
+      </items>
+    </MenuButton>
+    <Text fill="BLACK" layoutX="332.0" layoutY="22.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour de TrucMuche" textAlignment="CENTER" wrappingWidth="127.13571810722351">
+      <font>
+        <Font name="Arial" size="10.0" />
+      </font>
+    </Text>
+      <Arc id="zoneJ3" fill="#2394f1" layoutY="600.0" length="90.0" radiusX="175.0" radiusY="225.0" stroke="#2394f1" strokeType="INSIDE" type="ROUND" />
+      <Arc id="zoneJ1" fill="#ffda4a" length="90.0" radiusX="175.0" radiusY="225.0" startAngle="-90.0" stroke="#ffda4a" strokeType="INSIDE" type="ROUND" />
+      <Arc id="zoneJ4" fill="#950303" layoutX="793.0" layoutY="600.0" length="90.0" radiusX="175.0" radiusY="225.0" startAngle="90.0" stroke="#950303" strokeType="INSIDE" type="ROUND" />
+      <Arc id="zoneJ4" fill="#37cc2c" layoutX="793.0" length="90.0" radiusX="175.0" radiusY="225.0" startAngle="180.0" stroke="#37cc2c" strokeType="INSIDE" type="ROUND" />
+  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="372.0" layoutY="575.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" x="0.0">
+    <image>
+      <Image url="@../../ressources/decor/DemiParametres.png" />
+    </image>
+  </ImageView>
+      <Label fx:id="labelJoueur1" layoutX="14.0" layoutY="1.0" prefHeight="36.0" prefWidth="97.0" text="Joueur1" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelJoueur2" layoutX="682.0" layoutY="1.0" prefHeight="36.0" prefWidth="97.0" text="Joueur2" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelJoueur3" layoutX="682.0" layoutY="557.0" prefHeight="36.0" prefWidth="97.0" text="Joueur3" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelJoueur4" layoutX="14.0" layoutY="555.0" prefHeight="36.0" prefWidth="97.0" text="Joueur4" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+  </children>
+</AnchorPane>

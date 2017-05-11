@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controleur.ControleurRegles">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
@@ -39,12 +39,25 @@
         </ImageView>
       </graphic>
     </Button>
-    <ImageView fitHeight="363.0" fitWidth="426.929147159352" layoutX="33.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../ressources/decor/Webp.net-gifmaker%20(1).gif" />
-      </image>
-    </ImageView>
-    <Button contentDisplay="GRAPHIC_ONLY" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+    <StackPane id="Text" layoutX="479.0" layoutY="149.0" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <Text scaleX="1.0" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durant votre tour vous ne pouvez déplacer que vos pingouins, ils seront en surbrillance.Pour cela cliquez sur le pingouin puis faites le glisser sur une des cases jaune. Relachez la souris." textAlignment="LEFT" wrappingWidth="300.0">
+          <font>
+            <Font size="24.0" />
+          </font>
+        </Text>
+      </children>
+    </StackPane>
+    <StackPane id="Gif" layoutX="37.0" layoutY="120.0" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <ImageView fitHeight="363.0" fitWidth="426.929147159352" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../ressources/decor/Webp.net-gifmaker%20(1).gif" />
+          </image>
+        </ImageView>
+      </children>
+    </StackPane>
+    <Button contentDisplay="GRAPHIC_ONLY" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAcceuil" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -54,6 +67,5 @@
       </graphic>
     </Button>
     <Text layoutX="365.0" layoutY="58.0" scaleX="3.781640393045433" scaleY="3.8068526676456194" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Règles " />
-    <TextArea layoutX="471.0" layoutY="160.0" prefHeight="282.0" prefWidth="316.0" style="-fx-background-color :transparent;&#10;-fx-font-size: 24px;" text="Durant votre tour vous ne pouvez déplacer que vos pingouins, ils seront en surbrillance.&#10;Pour cela cliquez sur le pingouin puis faites le glisser sur une des cases jaune. Relachez la souris." wrapText="true" />
   </children>
 </AnchorPane>

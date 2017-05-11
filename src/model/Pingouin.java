@@ -57,8 +57,11 @@ public class Pingouin implements Serializable {
 
 	/**
 	 * Verifie si deux Pingouin sont egaux.
-	 *     .
-	 * @return this <=> obj.
+	 *  
+	 * @param obj
+	 *            objet a tester
+	 *            
+	 * @return this egale à obj.
 	 */
 	
 	public boolean equals(Pingouin obj) {

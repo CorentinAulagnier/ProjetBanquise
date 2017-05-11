@@ -139,8 +139,11 @@ public class Tuile implements Serializable {
 	
 	/**
 	 * Verifie si deux Tuile sont egales.
-	 *     .
-	 * @return this <=> obj.
+	 * 
+	 * @param obj
+	 *            objet a tester
+	 *              .
+	 * @return this egale à obj.
 	 */
 	
 	public boolean equals(Tuile obj) {

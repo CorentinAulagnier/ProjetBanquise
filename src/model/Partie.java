@@ -150,7 +150,6 @@ public class Partie implements Serializable {
 	/**
 	 * Annuler le dernier coup joue.
 	 * 
-	 * @return vrai si on a le droit d'annuler un coup
 	 */
 	
 	public void annuler() {
@@ -170,7 +169,6 @@ public class Partie implements Serializable {
 	/**
 	 * Refaire le dernier coup annule.
 	 * 
-	 * @return vrai si on a le droit de retablir un coup
 	 */
 	
 	public void retablir() {
@@ -487,9 +485,6 @@ public class Partie implements Serializable {
 	
 	/**
 	 * Retourne combien de pingouins le joueur actif peut deplacer
-	 * 
-	 * @param j
-	 *            Le joueur.
 	 *            
 	 * @return Retourne le nb de pingouins deplacable du joueur actif.
 	 */
@@ -764,7 +759,7 @@ public class Partie implements Serializable {
 	/**
 	 * Verifie si deux Partie sont egales.
 	 *     .
-	 * @return this <=> obj.
+	 * @return this egale à obj.
 	 */
 
 	public boolean equals(Partie obj) {

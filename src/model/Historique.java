@@ -27,6 +27,9 @@ public class Historique implements Serializable {
 	/**
 	 * Annuler le dernier coup joue.
 	 * 
+	 * @param old
+	 *            partie ou il faut annuler le coup.
+	 *           
 	 * @return la Partie au sommet de la pile undo i.e. dernier coup joue
 	 */
 	
@@ -42,6 +45,9 @@ public class Historique implements Serializable {
 	/**
 	 * Refaire le dernier coup annule.
 	 * 
+	 * @param old
+	 *            partie ou il faut annuler le coup.
+	 *           
 	 * @return la Partie au sommet de la pile redo i.e. dernier coup annule
 	 */
 	

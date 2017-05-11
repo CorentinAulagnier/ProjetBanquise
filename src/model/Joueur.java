@@ -81,7 +81,7 @@ public abstract class Joueur implements Serializable{
 	/**
 	 * Verifie si deux Joueurs sont egaux.
 	 *     .
-	 * @return this <=> obj.
+	 * @return this egale à obj.
 	 */	
 	
 	public boolean equals(Object obj) {

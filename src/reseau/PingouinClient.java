@@ -140,6 +140,10 @@ System.out.println("On passe le 1er readObject");
 	                    out.writeObject(cc);
 	                }
 	        		
+	        	} else if (newObj instanceof Integer) {
+	                int p2 = (int)newObj;
+					System.out.println(p2);
+					
 	        	} else if (newObj instanceof Partie) {
 	                Partie p = (Partie)newObj;
 					System.out.println(p);

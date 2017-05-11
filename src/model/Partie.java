@@ -267,9 +267,19 @@ public class Partie implements Serializable {
 	 */
 	
 	public boolean estPartieFini() {
+		return (placementPingouinsFini() && jeuPingouinsFini() );
+	}
+	
+	/**
+	 * Verifie si la phase de jeu est fini.
+	 * 
+	 * @return Renvoie vrai, si on a fini la phase de jeu.
+	 */
+	
+	public boolean jeuPingouinsFini() {
 		for(int i = 0; i<nbJoueurs; i++)
 			for(int j = 0; j<joueurs[i].nbPingouin; j++)
-				if (joueurs[i].myPingouins[j].actif)
+				if (joueurs[i].myPingouins[j].actif || joueurs[i].myPingouins[j].position.equals(new Coordonnees(-1, -1)))
 					return false;
 		return true;
 	}

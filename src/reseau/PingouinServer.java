@@ -115,18 +115,26 @@ public class PingouinServer {
                 	
 	                Partie p2 = null;
 	                newObj = null;
+System.out.println("p.placementPingouinsFini() " + p.placementPingouinsFini());
+System.out.println("p.estPartieFini() " + p.estPartieFini());
 
-	                while (!p.estPartieFini() && !p.placementPingouinsFini()){
+	                while (!p.estPartieFini()){
 System.out.println("Debut de la partie");
 
-		                while (!p.estPartieFini() && p.joueurActif != numClient) {
-		                	if (!p2.equals(p)) {
+		                while (!p.estPartieFini() && !(p.joueurActif == numClient)) {
+		                	if (p2 == null || !p.equals(p2)) {
 		                		out.writeObject(p);
 		                		p2 = p.clone();
 		                	}
 		                }
-		                if (!p.placementPingouinsFini()) {
-		                	out.writeObject("POSITIONPINGOUIN");
+		                if (p.joueurActif == numClient) {
+		                	
+			                if (!p.placementPingouinsFini()) {
+			                	out.writeObject("POSITIONPINGOUIN");
+			                } else  {
+			                	out.writeObject("DEPLACEMENTPINGOUIN");
+			                }
+			                
 		                	newObj = in.readObject();
 		                    
 		                	if (newObj instanceof Coordonnees) {
@@ -134,12 +142,8 @@ System.out.println("Debut de la partie");
 			                	Tuile t = p.b.getTuile(c);
 			                	t.mettrePingouin();
 								p.joueurs[numClient].myPingouins[p.numPingouinAPlacer(p.joueurs[numClient])] = new Pingouin(c);
-		                	}
-		                } else if (!p.estPartieFini()) {
-		                	out.writeObject("DEPLACEMENTPINGOUIN");
-		                	newObj = in.readObject();
-		                    
-		                	if (newObj instanceof CoupleCoordonnees) {
+								
+		                	} else 	if (newObj instanceof CoupleCoordonnees) {
 		                		CoupleCoordonnees cc =  (CoupleCoordonnees) newObj;
 			                	p.deplacement(cc);
 			                }

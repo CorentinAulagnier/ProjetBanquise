@@ -34,6 +34,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     @FXML 
     private Button lancer;
     
+    
     @FXML
     private void lancerPartie(MouseEvent event){
     	
@@ -79,6 +80,11 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     		tableauDeJoueur[i]=jvert;
     		i++;
     	}
+    	
+    	bulleVisible(bulle,2);
+    	try{
+    		Thread.sleep(2);
+    	}catch(InterruptedException e){}
     	
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
     	
@@ -167,6 +173,9 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     int[] modeJeu = new int[4];
     
     int[] image = new int[4];
+    
+    @FXML 
+    private StackPane bulle;
     
     @FXML 
     private StackPane name1;
@@ -363,6 +372,16 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	}
     }
     
+    public void bulleVisible(StackPane stck, int indice){
+    	for (int i = 0; i<3 ; i++){
+    		if (i==indice){
+    			stck.getChildren().get(i).setVisible(true);
+    		}else{
+    			stck.getChildren().get(i).setVisible(false);
+    		}
+    	}
+    }
+    
     public int selectType(StackPane stck, int indice, boolean direction){//false = gauche, true = droit	
     	stck.getChildren().get(indice).setVisible(false);
     	if (direction){	indice = (indice+1)%5;
@@ -425,8 +444,10 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	boolean VOK = (pileNom[VERT].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[VERT].getChildren().get(JOUEUR)).getText()).equals("")) ) ;
     	if (!(JRV||JRB||JBV||BRV||JOK||BOK||ROK||VOK)){
     		lancer.setDisable(false);
+    		bulleVisible(bulle,1);
     	}else{
     		lancer.setDisable(true);
+    		bulleVisible(bulle,0);
     	}
     }
 	

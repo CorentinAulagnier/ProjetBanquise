@@ -30,7 +30,7 @@ public class Interface extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		GestionnaireEcransFxml gestionnaireEcransFXML = new GestionnaireEcransFxml();
+		GestionnaireEcransFxml gestionnaireEcransFXML = new GestionnaireEcransFxml(partie);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_ACCUEIL, model.Proprietes.ECRAN_ACCUEIL_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_REGLES, model.Proprietes.ECRAN_REGLES_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_MODE, model.Proprietes.ECRAN_MODE_FXML);

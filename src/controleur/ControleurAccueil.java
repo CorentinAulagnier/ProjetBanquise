@@ -49,30 +49,19 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     
     
     
-    /** GESTION PRESSION DE SBOUTONS**/ /*A MODIFIER COMME PADDING QUI BOUGE BOUTON AUSSI FAUT AJUSTER LE PADDING DES AUTRES*/
-    @FXML
-    public void lancerpresse(MouseEvent event){
-    	jouer.setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void chargerpresse(MouseEvent event){
-    	charger.setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void reglespresse(MouseEvent event){
-    	regles.setStyle(model.Proprietes.STYLE_PRESSED);
-    }
+/**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
     
     @FXML
-    public void lancerlache(MouseEvent event){
-    	jouer.setStyle(model.Proprietes.STYLE_NORMAL);
+    public void boutonPresse(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
     }
+
+    
+    
+    /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
+    
     @FXML
-    public void chargerlache(MouseEvent event){
-    	charger.setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void regleslache(MouseEvent event){
-    	regles.setStyle(model.Proprietes.STYLE_NORMAL);
+    public void boutonLache(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
     }
 }

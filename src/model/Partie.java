@@ -762,29 +762,22 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Verifie si deux objets sont egaux.
+	 * Verifie si deux Partie sont egales.
 	 *     .
-	 * @return this == obj.
+	 * @return this <=> obj.
 	 */
 
 	public boolean equals(Partie obj) {
-		if (joueurActif != obj.joueurActif) {
-			System.out.println("joueurActif");
+		if (joueurActif != obj.joueurActif) 
 			return false;
-		}
-		if (nbJoueurs != obj.nbJoueurs) {
-			System.out.println("nbJoueurs");
+		if (nbJoueurs != obj.nbJoueurs) 
 			return false;
-		}
-		for (int i =0; i<nbJoueurs ; i++){
-			if (!joueurs[i].equals(obj.joueurs[i])){
-				System.out.println("joueurs i = "+i);
-				return false;
-			}
-		}
 		if (!b.equals(obj.b)) {
-			System.out.println("banquise");
 			return false;
+		}
+		for (int i =0; i<nbJoueurs ; i++) {
+			if (!joueurs[i].equals(obj.joueurs[i]))
+				return false;
 		}
 		return true;
 	}

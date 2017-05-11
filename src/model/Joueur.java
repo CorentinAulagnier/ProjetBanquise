@@ -78,32 +78,34 @@ public abstract class Joueur implements Serializable{
 	
 	public abstract String toString();
 
+	/**
+	 * Verifie si deux Joueurs sont egaux.
+	 *     .
+	 * @return this <=> obj.
+	 */	
 	
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Joueur other = (Joueur) obj;
-		for (int i =0; i<nbPingouin ; i++){
-			if (!myPingouins[i].equals(other.myPingouins[i])){
-				System.out.println("myPingouins i = "+i);
+			if (this == obj)
+				return true;
+			if (obj == null)
 				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Joueur other = (Joueur) obj;
+			if (nbPingouin != other.nbPingouin)
+				return false;
+			if (nom == null) {
+				if (other.nom != null)
+					return false;
+			} else if (!nom.equals(other.nom))
+				return false;
+			for (int i =0; i<nbPingouin ; i++) {
+				if (!myPingouins[i].equals(other.myPingouins[i]))
+					return false;
 			}
+			return true;
 		}
-		if (nbPingouin != other.nbPingouin)
-			return false;
-		if (nbTuiles != other.nbTuiles)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		return true;
-	}
+	
 	
 
 }

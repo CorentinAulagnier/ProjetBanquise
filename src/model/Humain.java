@@ -63,21 +63,8 @@ public class Humain extends Joueur {
 		this.couleur = color;
 	}
 	
-	/**
-	 * Affichage.
-	 *            
-	 * @return Un string correspondant à un Humain
-	 */	
-	
-	public String toString() {
-		String s =  "Humain nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
-				+ " nom " + nom + " myPingouins\n";
-		for(int i = 0; i < nbPingouin; i++) 
-			s = s + myPingouins[i];
-		
-		return s;
-	}
-	
+/*******************************************************************************************************/
+
 	/**
 	 * Execute un tour de jeu.
 	 * 
@@ -102,6 +89,21 @@ public class Humain extends Joueur {
 		return null;
 	}
 	
+/*******************************************************************************************************/
 	
+	/**
+	 * Affichage.
+	 *            
+	 * @return Un string correspondant à un Humain
+	 */	
+	
+	public String toString() {
+		String s =  "Humain nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
+				+ " nom " + nom + " myPingouins\n";
+		for(int i = 0; i < nbPingouin; i++) 
+			s = s + myPingouins[i];
+		
+		return s;
+	}
 
 }

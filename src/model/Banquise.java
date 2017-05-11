@@ -462,6 +462,12 @@ public class Banquise implements Serializable, Cloneable{
 		return s;
 	}
 
+	/**
+	 * Verifie si deux Banquise sont egales.
+	 *     .
+	 * @return this <=> obj.
+	 */
+	
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -477,7 +483,6 @@ public class Banquise implements Serializable, Cloneable{
 			} else {
 				numligne = 8; //Ligne impair
 			}
-
 			for (int j = 0; j < numligne; j++) {
 				if (!this.terrain[i][j].equals(other.terrain[i][j]))
 					return false;

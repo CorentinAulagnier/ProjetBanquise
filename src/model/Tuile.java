@@ -135,11 +135,15 @@ public class Tuile implements Serializable {
 		return !(aUnPingouin || nbPoissons==0);
 	}
 
-
+/*******************************************************************************************************/
+	
+	/**
+	 * Verifie si deux Tuile sont egales.
+	 *     .
+	 * @return this <=> obj.
+	 */
+	
 	public boolean equals(Tuile obj) {
 		return (aUnPingouin == obj.aUnPingouin && nbPoissons == obj.nbPoissons);
 	}
-	
-	
-	
 }

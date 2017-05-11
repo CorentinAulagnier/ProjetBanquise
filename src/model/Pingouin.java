@@ -42,11 +42,25 @@ public class Pingouin implements Serializable {
 		this.position = c;
 		this.actif = true;
 	}
+	
+/*******************************************************************************************************/
 
+	/**
+	 * Affichage.
+	 *            
+	 * @return Un string correspondant à un pingouin.
+	 */	
+	
 	public String toString() {
 		return "Pingouin position " + position + (actif ? " actif" : " inactif") + "\n" ;
 	}
 
+	/**
+	 * Verifie si deux Pingouin sont egaux.
+	 *     .
+	 * @return this <=> obj.
+	 */
+	
 	public boolean equals(Pingouin obj) {
 		if (actif != obj.actif)
 			return false;

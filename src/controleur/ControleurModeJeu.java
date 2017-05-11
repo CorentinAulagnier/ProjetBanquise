@@ -174,7 +174,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
 		flecheGaucheImage[JAUNE] = gauchejaune;
 		flecheGaucheImage[VERT] = gauchevert;
 		flecheGaucheImage[ROUGE] = gaucherouge;
-		flecheGaucheImage[BLEU] = gauchevert;
+		flecheGaucheImage[BLEU] = gauchebleu;
 		
 		flecheDroiteMode[JAUNE]= modejaunedroit;
 		flecheDroiteMode[VERT] = modevertdroit;
@@ -184,7 +184,11 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
 		flecheGaucheMode[JAUNE] = modejaunegauche;
 		flecheGaucheMode[VERT] = modevertgauche;
 		flecheGaucheMode[ROUGE] = moderougegauche;
-		flecheGaucheMode[BLEU] = modevertgauche;
+		flecheGaucheMode[BLEU] = modebleugauche;
+		
+		retour.setStyle(model.Proprietes.STYLE_NORMAL);
+		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
+		
     }
     
     
@@ -196,50 +200,39 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	stck.getChildren().get(indice).setVisible(false);
     	if (direction){							// 0 1 2 3 4
     		indice = (indice+1)%5;
+    		if (indice == 0){indice=1;}
     	}else{
     			indice= (indice+4)%5;
+    			if (indice == 0){indice=4;}
     	}
     	stck.getChildren().get(indice).setVisible(true);
     	
     	return indice;
     }
     
-    /*ROUGE*/
-	@FXML
-    public void rougedroite(MouseEvent event){
-    	image[ROUGE] = selectImage(pileImage[ROUGE],image[ROUGE],true);
-    }
+    
     @FXML
-    public void rougegauche(MouseEvent event){
-    	image[ROUGE] = selectImage(pileImage[ROUGE],image[ROUGE],false);
+    public void flecheImageEvent(MouseEvent event){
+    	if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[ROUGE]){
+        	image[ROUGE] = selectImage(pileImage[ROUGE],image[ROUGE],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[ROUGE]){
+    		image[ROUGE] = selectImage(pileImage[ROUGE],image[ROUGE],false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[BLEU]){
+    		image[BLEU] = selectImage(pileImage[BLEU],image[BLEU],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[BLEU]){
+    		image[BLEU] = selectImage(pileImage[BLEU],image[BLEU],false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[VERT]){
+    		image[VERT] = selectImage(pileImage[VERT],image[VERT],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[VERT]){
+    		image[VERT] = selectImage(pileImage[VERT],image[VERT],false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[JAUNE]){
+    		image[JAUNE] = selectImage(pileImage[JAUNE],image[JAUNE],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[JAUNE]){
+    		image[JAUNE] = selectImage(pileImage[JAUNE],image[JAUNE],false);
+    	}
     }
-    /*BLEU*/
-    @FXML
-    public void bleudroite(MouseEvent event){
-    	image[BLEU] = selectImage(pileImage[BLEU],image[BLEU],true);
-    }
-    @FXML
-    public void bleugauche(MouseEvent event){
-    	image[BLEU] = selectImage(pileImage[BLEU],image[BLEU],false);
-    }
-    /*VERT*/
-    @FXML
-    public void vertdroite(MouseEvent event){
-    	image[VERT] = selectImage(pileImage[VERT],image[VERT],true);
-    }
-    @FXML
-    public void vertgauche(MouseEvent event){
-    	image[VERT] = selectImage(pileImage[VERT],image[VERT],false);
-    }
-    /*JAUNE*/
-    @FXML
-    public void jaunedroite(MouseEvent event){
-    	image[JAUNE] = selectImage(pileImage[JAUNE],image[JAUNE],true);
-    }
-    @FXML
-    public void jaunegauche(MouseEvent event){
-    	image[JAUNE] = selectImage(pileImage[JAUNE],image[JAUNE],false);
-    }
+    
+   
     
     
     /** SELECTION D'UN MODE DE PERSONNAGE **/
@@ -254,131 +247,63 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	}
     }
     
-    public int selectType(StackPane stck, int indice, boolean direction){//false = gauche, true = droit
-    	
+    public int selectType(StackPane stck, int indice, boolean direction){//false = gauche, true = droit	
     	stck.getChildren().get(indice).setVisible(false);
     	if (direction){	indice = (indice+1)%5;
     	}else{			
     		indice = (indice+4)%5;}
     	stck.getChildren().get(indice).setVisible(true);
-    	
     	return indice;
     	
     }
     
-    @FXML
-    public void droite1(MouseEvent event){
-    	modeJeu[JAUNE] = selectType(pileMode[JAUNE],modeJeu[JAUNE],true);
-    	if(modeJeu[JAUNE] != 1) {
-    		droitjaune.setVisible(false);
-    		gauchejaune.setVisible(false);
+    public void selectMode(int couleur, boolean direction){
+    	modeJeu[couleur] = selectType(pileMode[couleur],modeJeu[couleur],direction);
+    	if(modeJeu[couleur] != 1) {
+    		flecheDroiteImage[couleur].setVisible(false);
+    		flecheGaucheImage[couleur].setVisible(false);
     	}else{
-        		droitjaune.setVisible(true);
-        		gauchejaune.setVisible(true);
+    		flecheDroiteImage[couleur].setVisible(true);
+    		flecheGaucheImage[couleur].setVisible(true);
         }
-    	justOneVisible(pileNom[JAUNE], modeJeu[JAUNE]);
-
-		justOneVisible(pileImage[JAUNE], modeJeu[JAUNE]);
-		image[JAUNE]=modeJeu[JAUNE];
+    	justOneVisible(pileNom[couleur], modeJeu[couleur]);
+		justOneVisible(pileImage[couleur], modeJeu[couleur]);
+		image[couleur]=modeJeu[couleur];
     }
+    
     @FXML
-    public void gauche1(MouseEvent event){
-    	modeJeu[JAUNE]=selectType(pileMode[JAUNE],modeJeu[JAUNE],false);
-    	if(modeJeu[JAUNE] != 1) {
-    		droitjaune.setVisible(false);
-    		gauchejaune.setVisible(false);
-    	}else{
-    		droitjaune.setVisible(true);
-    		gauchejaune.setVisible(true);
-        }
-    	justOneVisible(pileNom[JAUNE],modeJeu[JAUNE]);
-
-		justOneVisible(pileImage[JAUNE], modeJeu[JAUNE]);
-		image[JAUNE]=modeJeu[JAUNE];
+    public void flecheModeEvent(MouseEvent event){
+    	if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[ROUGE]){
+    		selectMode(ROUGE,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[ROUGE]){
+    		selectMode(ROUGE,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[BLEU]){
+    		selectMode(BLEU,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[BLEU]){
+    		selectMode(BLEU,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[VERT]){
+    		selectMode(VERT,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[VERT]){
+    		selectMode(VERT,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[JAUNE]){
+    		selectMode(JAUNE,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[JAUNE]){
+    		selectMode(JAUNE,true);
+    	}
+    	modeValide();
     }
-    @FXML
-    public void droite2(MouseEvent event){
-    	modeJeu[VERT]=selectType(pileMode[VERT],modeJeu[VERT],true);
-    	if(modeJeu[VERT] != 1) {
-    		droitvert.setVisible(false);
-    		gauchevert.setVisible(false);
+    
+   
+    public void modeValide(){
+    	boolean JRV = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[VERT] == AUCUN));
+    	boolean JRB = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[BLEU] == AUCUN));
+    	boolean JBV = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[BLEU] == AUCUN) && (modeJeu[VERT] == AUCUN));
+    	boolean BRV = ((modeJeu[BLEU] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[VERT] == AUCUN));
+    	if (!(JRV||JRB||JBV||BRV)){
+    		lancer.setDisable(false);
     	}else{
-    		droitvert.setVisible(true);
-    		gauchevert.setVisible(true);
-        }
-    	justOneVisible(pileNom[VERT],modeJeu[VERT]);
-    	justOneVisible(pileImage[VERT], modeJeu[VERT]);
-		image[VERT]=modeJeu[VERT];
-    }
-    @FXML
-    public void gauche2(MouseEvent event){
-    	modeJeu[VERT]=selectType(pileMode[VERT],modeJeu[VERT],false);
-    	if(modeJeu[VERT] != 1) {
-    		droitvert.setVisible(false);
-    		gauchevert.setVisible(false);
-    	}else{
-    		droitvert.setVisible(true);
-    		gauchevert.setVisible(true);
-        }
-    	justOneVisible(pileNom[VERT],modeJeu[VERT]);
-    	justOneVisible(pileImage[VERT], modeJeu[VERT]);
-		image[VERT]=modeJeu[VERT];
-    }
-    @FXML
-    public void droite3(MouseEvent event){
-    	modeJeu[ROUGE]=selectType(pileMode[ROUGE],modeJeu[ROUGE],true);
-    	if(modeJeu[ROUGE] != 1) {
-    		droitrouge.setVisible(false);
-    		gaucherouge.setVisible(false);
-    	}else{
-    		droitrouge.setVisible(true);
-    		gaucherouge.setVisible(true);
-        }
-    	justOneVisible(pileNom[ROUGE],modeJeu[ROUGE]);
-    	justOneVisible(pileImage[ROUGE], modeJeu[ROUGE]);
-		image[ROUGE]=modeJeu[ROUGE];
-    }
-    @FXML
-    public void gauche3(MouseEvent event){
-    	modeJeu[ROUGE]=selectType(pileMode[ROUGE],modeJeu[ROUGE],false);
-    	if(modeJeu[ROUGE] != 1) {
-    		droitrouge.setVisible(false);
-    		gaucherouge.setVisible(false);
-    	}else{
-    		droitrouge.setVisible(true);
-    		gaucherouge.setVisible(true);
-        }
-    	justOneVisible(pileNom[ROUGE],modeJeu[ROUGE]);
-		justOneVisible(pileImage[ROUGE], modeJeu[ROUGE]);
-		image[ROUGE]=modeJeu[ROUGE];
-    }
-    @FXML
-    public void droite4(MouseEvent event){
-    	modeJeu[BLEU]=selectType(pileMode[BLEU],modeJeu[BLEU],true);
-    	if(modeJeu[BLEU] != 1) {
-    		droitbleu.setVisible(false);
-    		gauchebleu.setVisible(false);
-    	}else{
-    		droitbleu.setVisible(true);
-    		gauchebleu.setVisible(true);
-        }
-    	justOneVisible(pileNom[BLEU],modeJeu[BLEU]);
-    	justOneVisible(pileImage[BLEU], modeJeu[BLEU]);
-		image[BLEU]=modeJeu[BLEU];
-    }
-    @FXML
-    public void gauche4(MouseEvent event){
-    	modeJeu[BLEU]=selectType(pileMode[BLEU],modeJeu[BLEU],false);
-    	if(modeJeu[BLEU] != 1) {
-    		droitbleu.setVisible(false);
-    		gauchebleu.setVisible(false);
-    	}else{
-    		droitbleu.setVisible(true);
-    		gauchebleu.setVisible(true);
-        }
-    	justOneVisible(pileNom[BLEU],modeJeu[BLEU]);
-    	justOneVisible(pileImage[BLEU], modeJeu[BLEU]);
-		image[JAUNE]=modeJeu[JAUNE];
+    		lancer.setDisable(true);
+    	}
     }
 	
     
@@ -386,173 +311,18 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     /**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
     
     @FXML
-    public void rougedroitpresse(MouseEvent event){
-    	flecheDroiteImage[ROUGE].setStyle(model.Proprietes.STYLE_PRESSED);
+    public void boutonPresse(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
     }
-    @FXML
-    public void rougegauchepresse(MouseEvent event){
-    	flecheGaucheImage[ROUGE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    /*BLEU*/
-    @FXML
-    public void bleudroitpresse(MouseEvent event){
-    	flecheDroiteImage[BLEU].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void bleugauchepresse(MouseEvent event){
-    	flecheGaucheImage[BLEU].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    /*VERT*/
-    @FXML
-    public void vertdroitpresse(MouseEvent event){
-    	flecheDroiteImage[VERT].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void vertgauchepresse(MouseEvent event){
-    	flecheGaucheImage[VERT].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    /*JAUNE*/
-    @FXML
-    public void jaunedroitepresse(MouseEvent event){
-    	flecheDroiteImage[JAUNE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void jaunegauchepresse(MouseEvent event){
-    	flecheGaucheImage[JAUNE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void rougedroitmodepresse(MouseEvent event){
-    	flecheDroiteMode[ROUGE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void rougegauchemodepresse(MouseEvent event){
-    	flecheGaucheMode[ROUGE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    /*BLEU*/
-    @FXML
-    public void bleudroitmodepresse(MouseEvent event){
-    	flecheDroiteMode[BLEU].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void bleugauchemodepresse(MouseEvent event){
-    	flecheGaucheMode[BLEU].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    /*VERT*/
-    @FXML
-    public void vertdroitmodepresse(MouseEvent event){
-    	flecheDroiteMode[VERT].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void vertgauchemodepresse(MouseEvent event){
-    	flecheGaucheMode[VERT].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    /*JAUNE*/
-    @FXML
-    public void jaunedroitemodepresse(MouseEvent event){
-    	flecheDroiteMode[JAUNE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void jaunegauchemodepresse(MouseEvent event){
-    	flecheGaucheMode[JAUNE].setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void retourpresse(MouseEvent event){
-    	retour.setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void lancerpresse(MouseEvent event){
-    	lancer.setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-    @FXML
-    public void optionspresse(MouseEvent event){
-    	options.setStyle(model.Proprietes.STYLE_PRESSED);
-    }
+
     
     
     /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
     
     @FXML
-    public void rougedroitlache(MouseEvent event){
-    	flecheDroiteImage[ROUGE].setStyle(model.Proprietes.STYLE_NORMAL);
+    public void boutonLache(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
     }
-    @FXML
-    public void rougegauchelache(MouseEvent event){
-    	flecheGaucheImage[ROUGE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    /*BLEU*/
-    @FXML
-    public void bleudroitlache(MouseEvent event){
-    	flecheDroiteImage[BLEU].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void bleugauchelache(MouseEvent event){
-    	flecheGaucheImage[BLEU].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    /*VERT*/
-    @FXML
-    public void vertdroitlache(MouseEvent event){
-    	flecheDroiteImage[VERT].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void vertgauchelache(MouseEvent event){
-    	flecheGaucheImage[VERT].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    /*JAUNE*/
-    @FXML
-    public void jaunedroitelache(MouseEvent event){
-    	flecheDroiteImage[JAUNE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void jaunegauchelache(MouseEvent event){
-    	flecheGaucheImage[JAUNE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void rougedroitmodelache(MouseEvent event){
-    	flecheDroiteMode[ROUGE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void rougegauchemodelache(MouseEvent event){
-    	flecheGaucheMode[ROUGE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    /*BLEU*/
-    @FXML
-    public void bleudroitmodelache(MouseEvent event){
-    	flecheDroiteMode[BLEU].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void bleugauchemodelache(MouseEvent event){
-    	flecheGaucheMode[BLEU].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    /*VERT*/
-    @FXML
-    public void vertdroitmodelache(MouseEvent event){
-    	flecheDroiteMode[VERT].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void vertgauchemodelache(MouseEvent event){
-    	flecheGaucheMode[VERT].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    /*JAUNE*/
-    @FXML
-    public void jaunedroitemodelache(MouseEvent event){
-    	flecheDroiteMode[JAUNE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void jaunegauchemodelache(MouseEvent event){
-    	flecheGaucheMode[JAUNE].setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    
-    @FXML
-    public void retourlache(MouseEvent event){
-    	retour.setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void lancerlache(MouseEvent event){
-    	lancer.setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    @FXML
-    public void optionslache(MouseEvent event){
-    	options.setStyle(model.Proprietes.STYLE_NORMAL);
-    }
+   
     
 }

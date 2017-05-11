@@ -23,7 +23,9 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
 	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    	jouer.setStyle(model.Proprietes.STYLE_NORMAL);
+		charger.setStyle(model.Proprietes.STYLE_NORMAL);
+		regles.setStyle(model.Proprietes.STYLE_NORMAL);
     }
     
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){

@@ -16,26 +16,11 @@
         <Image url="@../../ressources/decor/banquise.jpg" />
       </image>
     </ImageView>
-    <BorderPane blendMode="SRC_OVER" layoutX="0.0" layoutY="0.0" mouseTransparent="false" prefHeight="600.0" prefWidth="800.0">
-      <bottom>
-        <HBox prefHeight="64.0" prefWidth="800.0" />
-      </bottom>
-      <top>
-        <BorderPane prefHeight="294.0" prefWidth="800.0">
-          <center>
-            <ImageView blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="229.52159118652344" fitWidth="361.16693900908734" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_CENTER">
-              <image>
-                <Image url="@../../ressources/decor/Penguins-of-Madagascar-PNG-Clipart.png" />
-              </image>
-              <BorderPane.margin>
-                <Insets top="20.0" />
-              </BorderPane.margin>
-            </ImageView>
-          </center>
-        </BorderPane>
-      </top>
-    </BorderPane>
-    <Region layoutX="1.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" />
+    <ImageView blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="229.52159118652344" fitWidth="361.16693900908734" layoutX="215.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../../ressources/decor/Penguins-of-Madagascar-PNG-Clipart.png" />
+      </image>
+    </ImageView>
     <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="14.0" layoutY="533.0" minHeight="56.866546630859375" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="56.866546630859375" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;&#10;" text="">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="12.0" x="0.0">
@@ -83,46 +68,33 @@
         </MenuItem>
       </items>
     </MenuButton>
-    <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="300.0" minHeight="214.0" prefHeight="236.0" prefWidth="800.0">
-      <children>
-        <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#ouvrirPageJeu" onMousePressed="#lancerpresse" onMouseReleased="#lancerlache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Nouvelle Partie">
-          <graphic>
-            <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
-              <image>
-                <Image url="@../../ressources/decor/jouer.png" />
-              </image>
-            </ImageView>
-          </graphic>
-          <VBox.margin>
-            <Insets bottom="10.0" top="20.0" />
-          </VBox.margin>
-        </Button>
-        <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#chargerpresse" onMouseReleased="#chargerlache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
-          <graphic>
-            <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../ressources/decor/charger.png" />
-              </image>
-            </ImageView>
-          </graphic>
-          <VBox.margin>
-            <Insets bottom="10.0" fx:id="x2" />
-          </VBox.margin>
-        </Button>
-        <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#reglespresse" onMouseReleased="#regleslache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Chargement Partie">
-          <graphic>
-            <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../ressources/decor/regles.png" />
-              </image>
-            </ImageView>
-          </graphic>
-          <VBox.margin>
-            <Insets />
-          </VBox.margin>
-        </Button>
-      </children>
-    </VBox>
+    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="283.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageJeu" onMousePressed="#lancerpresse" onMouseReleased="#lancerlache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Nouvelle Partie">
+      <graphic>
+        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
+          <image>
+            <Image url="@../../ressources/decor/jouer.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="283.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#chargerpresse" onMouseReleased="#chargerlache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
+      <graphic>
+        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../ressources/decor/charger.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="283.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#reglespresse" onMouseReleased="#regleslache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Chargement Partie">
+      <graphic>
+        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../ressources/decor/regles.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
     <Text fill="BLACK" layoutX="328.0" layoutY="55.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Hey ! That's my fish !">
       <font>
         <Font name="Arial" size="15.0" />

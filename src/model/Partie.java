@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -705,6 +706,87 @@ public class Partie implements Serializable {
 		}
 
 		return s;
+	}
+	
+	/**
+	 * Affichage2.
+	 *     .
+	 * @return Un affichage de la banquise et des composants de cette partie.
+	 */
+	
+	public String toString2() {
+		String s = "";
+		Tuile t;
+		int numligne = 0;
+		
+		s = s + "  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n";
+		s = s + "--|---|---|---|---|---|---|---|---|\n";
+		
+		for (int i = 0; i<8; i++) {
+			s = s + i + " |";
+
+			if (i%2 == 0) { 	//Ligne pair
+				numligne = 7;
+				s = s + " ";
+
+			} else {
+				numligne = 8; 	//Ligne impair
+			}
+			
+			for (int j = 0; j < numligne; j++) {
+				Coordonnees c = new Coordonnees(i, j);
+				t = b.getTuile(c);
+				int app = appartientPingouin(c);
+				if (t.aUnPingouin && (app != -1)) {
+					s = s + "P" + app + (numligne == 7 ? "| " : " |");
+
+				} else {
+					s = s + (numligne == 7 ? " " : "") + (t.nbPoissons == 0 ? " " : t.nbPoissons)+ (numligne == 7 ? "| " : "  |");
+				}
+	
+			}
+			if (numligne == 7) {
+				s = s + "  |";
+			}
+			s = s + "\n";
+		}
+		
+		s = s + "nbJoueurs "+ nbJoueurs + "\n";
+		s = s + "joueurActif "+ joueurActif + "\n";
+
+		for (int i=0; i< nbJoueurs; i++) {
+			s = s + joueurs[i] + "\n";
+		}
+		
+		return s;
+	}
+	
+	/**
+	 * Verifie si deux objets sont egaux.
+	 *     .
+	 * @return this == obj.
+	 */
+
+	public boolean equals(Partie obj) {
+		if (joueurActif != obj.joueurActif) {
+			System.out.println("joueurActif");
+			return false;
+		}
+		if (nbJoueurs != obj.nbJoueurs) {
+			System.out.println("nbJoueurs");
+			return false;
+		}
+		for (int i =0; i<nbJoueurs ; i++){
+			if (!joueurs[i].equals(obj.joueurs[i])){
+				System.out.println("joueurs i = "+i);
+				return false;
+			}
+		}
+		if (!b.equals(obj.b)) {
+			System.out.println("banquise");
+			return false;
+		}
+		return true;
 	}
 }
 

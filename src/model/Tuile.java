@@ -134,5 +134,12 @@ public class Tuile implements Serializable {
 	public boolean estAccessible() {
 		return !(aUnPingouin || nbPoissons==0);
 	}
+
+
+	public boolean equals(Tuile obj) {
+		return (aUnPingouin == obj.aUnPingouin && nbPoissons == obj.nbPoissons);
+	}
+	
+	
 	
 }

@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class Pingouin implements Serializable {
+	
 	/**
 	 * Position du pingouin sur la grille
 	 */
@@ -46,4 +47,14 @@ public class Pingouin implements Serializable {
 		return "Pingouin position " + position + (actif ? " actif" : " inactif") + "\n" ;
 	}
 
+	public boolean equals(Pingouin obj) {
+		if (actif != obj.actif)
+			return false;
+		if (position == null) {
+			if (obj.position != null)
+				return false;
+		} else if (!position.equals(obj.position))
+			return false;
+		return true;
+	}
 }

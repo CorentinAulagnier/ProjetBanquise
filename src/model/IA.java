@@ -81,7 +81,7 @@ public class IA extends Joueur {
 			case 2:
 				return player.algoMoyen(p);
 			case 3:
-				return player.algoDifficile(p);
+				return null;//player.algoDifficile(p);
 			default:
 			
 		}

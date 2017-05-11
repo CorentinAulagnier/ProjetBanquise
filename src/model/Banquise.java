@@ -461,5 +461,30 @@ public class Banquise implements Serializable, Cloneable{
 
 		return s;
 	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Banquise other = (Banquise) obj;
+		int numligne = 0;
+		for (int i = 0; i<8; i++) {
+			if (i%2 == 0) { //Ligne pair
+				numligne = 7;
+			} else {
+				numligne = 8; //Ligne impair
+			}
+
+			for (int j = 0; j < numligne; j++) {
+				if (!this.terrain[i][j].equals(other.terrain[i][j]))
+					return false;
+			}
+		}
+		return true;
+	}
+	
 }
 

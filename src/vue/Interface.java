@@ -4,6 +4,7 @@ import model.Partie;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Interface extends Application {   
@@ -38,6 +39,7 @@ public class Interface extends Application {
         
         primaryStage.setHeight(hauteurFenetre);
         primaryStage.setWidth(largeurFenetre);
+        primaryStage.getIcons().add(new Image("ressources/decor/favicon.png"));
         primaryStage.setTitle("Pinguouins");
         primaryStage.setResizable(false);
         primaryStage.show();

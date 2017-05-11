@@ -81,8 +81,7 @@ public class IA extends Joueur {
 			case 2:
 				return player.algoMoyen(p);
 			case 3:
-				//return player.algoDifficile(p.b);
-				break;
+				return player.algoDifficile(p);
 			default:
 			
 		}
@@ -107,8 +106,7 @@ public class IA extends Joueur {
 			case 2:
 				return player.placementMoyen(p);
 			case 3:
-				//return player.placementDifficile(p.b);
-				break;
+				return player.placementMoyen(p);
 			default:
 		}
 		return null;

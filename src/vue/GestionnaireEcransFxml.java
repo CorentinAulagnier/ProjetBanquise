@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import model.Partie;
 
 	/**
 	 * Controle le passage entre scenes FXML (comme dans le tutoriel de Angela Caicedo).
@@ -21,9 +22,12 @@ import javafx.util.Duration;
 	public class GestionnaireEcransFxml extends StackPane {
 
 	    private final HashMap<String, Node> listeEcrans = new HashMap<>();
+	    
+	    public Partie partie;
 
-	    public GestionnaireEcransFxml() {
+	    public GestionnaireEcransFxml(Partie p) {
 	        super();
+	        partie = p;
 	    }
 
 	    /**

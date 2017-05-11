@@ -13,7 +13,19 @@ public abstract class Joueur implements Serializable{
 	 */
 	
 	public int nbTuiles;
-
+	
+	/**
+	 * Chemin pour retrouver sa photo
+	 */
+	
+	public String cheminMignature;
+	
+	/**
+	 * Entier correspondant a la couleur du joueur
+	 */
+	
+	public int couleur;
+	
 	/**
 	 * Nombre de poisson manges
 	 */

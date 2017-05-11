@@ -26,6 +26,8 @@ public class IA extends Joueur {
 		this.myPingouins = new Pingouin[3];
 		this.niveau = 1;
 		this.nbPingouin = 3;
+		this.cheminMignature = "";
+		this.couleur = -1;
 	}
 	
 	/**
@@ -46,8 +48,36 @@ public class IA extends Joueur {
 		this.myPingouins = new Pingouin[nbP];
 		this.niveau = level;
 		this.nbPingouin = nbP;
+		this.cheminMignature = "";
+		this.couleur = -1;
 	}
 	
+	/**
+	 * Constructeurs.
+	 * 
+	 * @param name
+	 *            Nom du joueur.
+	 * @param nbP
+	 *            Nombre de piongouins.
+	 * @param level
+	 *            Niveau de l'ia.
+	 * @param cheminMigna
+	 *            Chemin de sa photo.
+	 * @param color
+	 *            Couleur du joueur.
+	 */	
+	
+	public IA(String name, int nbP, int level, String cheminMigna, int color){
+		this.nbTuiles = 0;
+		this.poissonsManges = 0;
+		this.nom = name;
+		this.myPingouins = new Pingouin[nbP];
+		this.niveau = level;
+		this.nbPingouin = nbP;
+		this.cheminMignature = cheminMigna;
+		this.couleur = color;
+	}
+
 	/**
 	 * Affichage.
 	 *            

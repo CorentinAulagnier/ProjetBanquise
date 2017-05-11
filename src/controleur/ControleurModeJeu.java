@@ -25,6 +25,11 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     @FXML 
     private Button lancer;
     
+    @FXML
+    private void lancerPartie(MouseEvent event){
+    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    }
+    
     
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){

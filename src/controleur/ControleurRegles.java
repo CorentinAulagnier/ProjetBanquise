@@ -2,6 +2,7 @@ package controleur;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import vue.EcranCourant;
 import vue.GestionnaireEcransFxml;
@@ -25,4 +26,19 @@ public class ControleurRegles implements Initializable, EcranCourant {
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
+/**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
+    
+    @FXML
+    public void boutonPresse(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
+    }
+
+    
+    
+    /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
+    
+    @FXML
+    public void boutonLache(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
+    }
 }

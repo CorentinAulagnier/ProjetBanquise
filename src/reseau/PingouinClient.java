@@ -9,6 +9,9 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
+import com.sun.org.apache.xerces.internal.impl.xs.identity.Selector.Matcher;
+
 //java.net.ConnectException	152.77.82.225
 import model.*;
 
@@ -19,10 +22,31 @@ public class PingouinClient {
     public static void main(String[] args) throws Exception {
     	 // Make connection and initialize streams
     	Socket socket = null;
-    	while (socket==null) {
+    	
+    	/*
+    	Pattern patAddr = Pattern.compile("[file://\\s*((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?]\\s*((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))"+":(6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]|[1-5][0-9]{4}|[0-9]{1,4})\\s*") ;
+    	
+    	while (true) {
 	    	try {
-		        String serverAddress = getServerAddress();
+		        String serverAddress = getServerAddress();        		                                         
+		        Matcher matchAddr = patAddr.matcher(serverAddress);		        		                                         
+		        if (matchAddr.matches()) {
+		        	socket = new Socket(serverAddress, PORT);
+		        	break;
+		        } else {
+					System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+		        }
 		        socket = new Socket(serverAddress, PORT);
+	    	} catch (ConnectException | UnknownHostException e) {
+				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+			}
+    	}*/
+    	
+    	while (socket == null) {
+	    	try {
+		        String serverAddress = getServerAddress();        		                                         
+		        socket = new Socket(serverAddress, PORT);
+
 	    	} catch (ConnectException | UnknownHostException e) {
 				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
 			}
@@ -120,7 +144,8 @@ public class PingouinClient {
 						nb_ias = Integer.valueOf(br.readLine());
 						if(nb_ias<= (4-nb_humains) && nb_ias>=0) {
 							nb_ia_ok = true;
-							System.out.println("Ajout de "+String.valueOf(nb_ias)+" IAs à la partie.");
+							if (nb_ias>0)
+								System.out.println("Ajout de "+String.valueOf(nb_ias)+" IAs à la partie.");
 						} else {
 							System.out.println("Nombre de joueurs incorrect. Réessayez.");
 						}

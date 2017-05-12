@@ -99,12 +99,12 @@ import model.Partie;
 	            if (!getChildren().isEmpty()) {    //il y a bien un autre ecran en memoire = l'écran courant
 	                Timeline fade = new Timeline(
 	                        new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1.0)),
-	                        new KeyFrame(new Duration(50), (ActionEvent t) -> {
+	                        new KeyFrame(new Duration(500), (ActionEvent t) -> {
 	                            getChildren().remove(0);                    //retire de root l'écran courant
 	                            getChildren().add(0, listeEcrans.get(nomEcran));     //ajoute à root l'écran en paramètres
 	                            Timeline fadeIn = new Timeline(
 	                                    new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
-	                                    new KeyFrame(new Duration(75), new KeyValue(opacity, 1.0)));
+	                                    new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
 	                            fadeIn.play();
 	                        }, new KeyValue(opacity, 0.0)));
 	                fade.play();
@@ -113,7 +113,7 @@ import model.Partie;
 	                getChildren().add(listeEcrans.get(nomEcran));  
 	                Timeline fadeIn = new Timeline(
 	                        new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
-	                        new KeyFrame(new Duration(400), new KeyValue(opacity, 1.0)));
+	                        new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
 	                fadeIn.play();
 	            }
 	            return true;

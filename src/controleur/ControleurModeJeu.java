@@ -55,14 +55,19 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	    	nbPingouins = 2;
     	    }
     	    
-    	    System.out.println("nombre de pingouins : "+nbPingouins );
-    	
     	monChargeurFxml.partie = new Partie(nbJoueurs);
+    	
     	
     	Joueur jjaune = creerJoueur(model.Proprietes.JAUNE,nbPingouins);
     	Joueur jrouge = creerJoueur(model.Proprietes.ROUGE,nbPingouins);
     	Joueur jbleu = creerJoueur(model.Proprietes.BLEU,nbPingouins);
     	Joueur jvert = creerJoueur(model.Proprietes.VERT,nbPingouins);
+    	
+    	System.out.println(jjaune );
+    	System.out.println(jrouge );
+    	System.out.println(jbleu );
+    	System.out.println(jvert );
+    	
     	
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
     	int i = 0;
@@ -82,14 +87,11 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     		tableauDeJoueur[i]=jvert;
     		i++;
     	}
-    	System.out.println("Joueurs : "+ jjaune +"\n"+jrouge+"\n"+jbleu+"\n"+jvert );
-    	
+    	    	
     	bulleVisible(bulle,2);
-    	try {
-    		Thread.sleep(1);
-    	}catch(Exception e){}
-    	
+    	   	
     	monChargeurFxml.partie.joueurs=tableauDeJoueur;
+    	
     	
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
     	

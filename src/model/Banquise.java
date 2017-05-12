@@ -1,4 +1,9 @@
 package model;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +29,19 @@ public class Banquise implements Serializable, Cloneable{
 		terrain = new Tuile[8][8];
 		initBanquise();
 	}
+	
+	/**
+	 * Constructeur d'une banquise de taille 8x8, avec un fichie texte.
+	 */	
+	public Banquise(String filename){
+		terrain = new Tuile[8][8];
+		try {
+			recupBanquise(filename);
+		} catch (IOException e) {
+			System.out.println("Erreur : fichier a lire, banquise initialisée aleatoirement");
+			initBanquise();
+		}
+	}
 
 	/**
 	 * Initialise la banquise avec des valeurs de poissons aleatoire.
@@ -46,8 +64,8 @@ public class Banquise implements Serializable, Cloneable{
 
 			if (i%2 == 0) { //Ligne pair
 				numligne = 7;
-			} else {
-				numligne = 8; //Ligne impair
+			} else {		//Ligne impair
+				numligne = 8; 
 			}
 
 			for (int j = 0; j < numligne; j++) {
@@ -77,6 +95,71 @@ public class Banquise implements Serializable, Cloneable{
 				nbCasesRestante --;
 			}
 		}
+	}
+	
+	public void recupBanquise(String filename) throws IOException {
+		Tuile t = new Tuile();
+		
+		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+		
+		String ligne;
+		String[] poissons;
+		
+		/* Fichier a lire
+		 * 
+		 * | 1 2 3 1 2 3 1 |
+		 * |1 2 3 1 2 3 1 2|
+		 * | 1 2 3 1 2 3 1 |
+		 * |1 2 3 1 2 3 1 2|
+		 * | 1 2 3 1 2 3 1 |
+		 * |1 2 3 1 2 3 1 2|
+		 * | 1 2 3 1 2 3 1 |
+		 * 
+		 */
+
+		for (int i = 0; i<8; i++) {
+
+			ligne=br.readLine();
+			poissons = ligne.split(" ");
+			int numligne = 0;
+			int a = 0;
+
+			if (i%2 == 0) { //Ligne pair
+				numligne = 7;
+			} else {		//Ligne impair
+				numligne = 8; 
+			}
+
+			for (int j = 0; j < numligne; j++) {
+				if (numligne == 7) {
+					a = j+1;
+				} else {
+					a = j;
+				}
+				
+				if (Integer.parseInt(poissons[a]) == 0) {
+					this.terrain[i][j] = new Tuile();
+					
+				} else {
+					if (Integer.parseInt(poissons[a]) == 1) {
+						t.mettrePoissons(1);
+						this.terrain[i][j] = new Tuile(t);
+
+					} else if (Integer.parseInt(poissons[a]) == 2) {
+						t.mettrePoissons(2);
+						this.terrain[i][j] = new Tuile(t);
+
+					} else if (Integer.parseInt(poissons[a]) == 3) {
+						t.mettrePoissons(3);
+						this.terrain[i][j] = new Tuile(t);
+
+					} else {
+						System.out.println("Erreur : Nombre de poisson sur la case "+i+" "+j);
+					} 
+				}
+			}
+		}
+		br.close();
 	}
 
 /*******************************************************************************************************/
@@ -492,4 +575,3 @@ public class Banquise implements Serializable, Cloneable{
 	}
 	
 }
-

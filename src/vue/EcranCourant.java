@@ -1,5 +1,7 @@
 package vue;
 
+import model.Partie;
+
 /**
  * Permet de donner un nouvel écran à affciher parmi ceux créer.
  * @author Riou Sebastien, Thisse Noémi.
@@ -10,4 +12,10 @@ public interface EcranCourant {
 	 * @param interfaceurFXML ecran parent
 	 */
     public void fixeEcranParent(GestionnaireEcransFxml interfaceurFXML);
+    
+	/**
+	 * Permet de mettre à jour l'ecran FXML donné après son chargement
+	 * @param interfaceurFXML ecran parent
+	 */
+    public void miseAjour();
 }

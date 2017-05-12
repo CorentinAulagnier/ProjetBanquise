@@ -21,6 +21,8 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
 	 @FXML 
 	 private Button regles;
 	
+	 public void miseAjour(){}
+	 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	jouer.setStyle(model.Proprietes.STYLE_NORMAL);

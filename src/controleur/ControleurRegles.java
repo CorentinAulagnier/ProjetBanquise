@@ -20,7 +20,7 @@ public class ControleurRegles implements Initializable, EcranCourant {
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
     	gestionnaireFxmlCourant = ecranParent;
     };
-    
+    public void miseAjour(){}
     @FXML
     private void ouvrirPageAcceuil(MouseEvent event){
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);

@@ -72,7 +72,10 @@ import model.Partie;
 	            FXMLLoader monChargeurFXML = new FXMLLoader(getClass().getResource(FichierFXML));
 	            Parent ecranACharger = (Parent) monChargeurFXML.load();            
 	            EcranCourant monControleurDecran = ((EcranCourant) monChargeurFXML.getController());
-	            monControleurDecran.fixeEcranParent(this);        
+	            monControleurDecran.fixeEcranParent(this);    
+	            if(nomEcran.equals(model.Proprietes.ECRAN_JEU)){
+	            	monControleurDecran.miseAjour();
+	            }
 	            ajouteEcran(nomEcran, ecranACharger);
 	            return true;
 	        } catch (Exception e) {
@@ -81,6 +84,7 @@ import model.Partie;
 	        }
 	    }
 	    
+
 	    /**
 	     * Gère une transition d'affichage entre l'écran donné en paramètre et l'écran courant.
 	     * Il vérifie que cet écran à préalablement été ajouté à la liste d'écran connu et chargé.
@@ -122,7 +126,10 @@ import model.Partie;
 	            return false;
 	        }
 	    }
-
+	    
+	    public void changePartie(Partie p) {
+	    	this.partie =p;
+	    }
 	    
 
 	}

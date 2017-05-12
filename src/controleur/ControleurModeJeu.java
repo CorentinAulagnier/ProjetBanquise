@@ -92,7 +92,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	   	
     	monChargeurFxml.partie.joueurs=tableauDeJoueur;
     	
-    	
+    	monChargeurFxml.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
     	
     }
@@ -441,5 +441,6 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
     }
    
+    public void miseAjour(){}
     
 }

@@ -2,8 +2,8 @@ package model;
 
 public class CoupleCoordonnees {
 
-	Coordonnees c1;
-	Coordonnees c2;
+	public Coordonnees c1;
+	public Coordonnees c2;
 	
 	
 	public CoupleCoordonnees(Coordonnees c1, Coordonnees c2){

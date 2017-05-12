@@ -329,17 +329,19 @@ public class LauncherConsole {
 					numDep =-1;
 					boolean numok = false;
 					while(!numok) {
-						System.out.println("Numero du déplacement choisi: (0 pour changer d'axe)");
-						numDep = Integer.valueOf(br.readLine());
-						if(numDep>0 && numDep<=array.size()) {
-							numok = true;
-							axeok = true;
-						} else if (numDep == 0) {
-							numok = true;
-							axeok = false;
-							System.out.println("Retour au choix de l'axe !");
-						} else {
-							System.out.println("Entrée incorrecte. Réessayer.");
+						try {
+							System.out.println("Numero du déplacement choisi: (0 pour changer d'axe)");
+							numDep = Integer.valueOf(br.readLine());
+							if(numDep>0 && numDep<=array.size()) {
+								numok = true;
+								axeok = true;
+							} else if (numDep == 0) {
+								numok = true;
+								axeok = false;
+								System.out.println("Retour au choix de l'axe !");
+							}
+						} catch (Exception e) {
+							System.out.println("Entrée incorrecte. Réessayez.");
 						}
 					}
 				}

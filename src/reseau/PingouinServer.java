@@ -14,9 +14,9 @@ public class PingouinServer {
 
 
     private static final int PORT = 9001;
-    private static final int MAXPLAYERS = 2;
-    private static final int NBPINGOUINS = 1;
-    private static ObjectOutputStream writers[] = new ObjectOutputStream[MAXPLAYERS];
+    private static int MAXPLAYERS;
+    private static int NBPINGOUINS;
+    private static ObjectOutputStream writers[];
     private static int nbClients = 0;
     private static Partie p;
     private static boolean phasePlacement = true;
@@ -64,16 +64,6 @@ public class PingouinServer {
 	            	so.println("Tentative de connexion depuis "+socket.getRemoteSocketAddress().toString()+" impossible.\nCAUSE : Nombre maximum de joueurs atteint.");
 	            }
 	            
-	            synchronized (p) {
-		            if (num == 0) {
-			            out.writeObject("INITGAME");
-	                    Object obj = in.readObject();
-	                    if(obj instanceof Partie) {
-	    	            	p = (Partie)obj;
-	    	            	partieCree = true;
-	    	            }
-		            }
-	            }
 	            
 	            //attente des autres joueurs
 	            while(true) {
@@ -91,51 +81,57 @@ public class PingouinServer {
                 	synchronized (p) {
 	                	if(phasePlacement) {
 		                	if(p.joueurActif == num) {
-		                		out.writeObject("PLACEMENT n° "+(num_pingouin+1));
-			                    Object obj = in.readObject();
-			                    if (obj instanceof Coordonnees) {
-			                    	Coordonnees c = (Coordonnees)obj;
-			                    	Tuile t = p.b.getTuile(c);
-		                    		Joueur j = p.joueurs[num];
-									if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
-										t.mettrePingouin();
-										j.myPingouins[num_pingouin] = new Pingouin(c);
-										p.verifierPingouinActif();
-										
-										//Maj prochain joueur
-										p.joueurActif = (num+1)%MAXPLAYERS;
-										
-										//envoie du placement à tout les joueurs
+		                		Coordonnees c = null;
+								if (p.joueurs[p.joueurActif].getClass() == IA.class) { // Tour de l'IA
+									c = p.joueurs[p.joueurActif].placement(p);
+								} else { 												// Tour de l'Humain
+			                		out.writeObject("PLACEMENT n° "+(num_pingouin+1));
+				                    Object obj = in.readObject();
+				                    if (obj instanceof Coordonnees) {
+				                    	c = (Coordonnees)obj;
+				                    } else {
+				                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+p.joueurs[num].nom);
+				                    }
+								}
+		                    	Tuile t = p.b.getTuile(c);
+	                    		Joueur j = p.joueurs[num];
+								if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
+									t.mettrePingouin();
+									j.myPingouins[num_pingouin] = new Pingouin(c);
+									p.verifierPingouinActif();
+									
+									//Maj prochain joueur
+									p.joueurActif = (num+1)%MAXPLAYERS;
+									
+									//envoie du placement à tout les joueurs
+									for(int i = 0; i<MAXPLAYERS; i++) {
+										writers[i].writeObject("MESSAGE "+j.nom+" a posé un pingouin en "+c.toString());
+										writers[i].writeObject(p.clone());
+									}
+									
+									//Maj numero du pingouin
+									if((num+1)%MAXPLAYERS < num) {
+										num_pingouin++;
+									}
+									
+									
+									//Test fin de phase placement
+									if(num_pingouin>=NBPINGOUINS) {
+										phasePlacement = false;
 										for(int i = 0; i<MAXPLAYERS; i++) {
-											writers[i].writeObject("MESSAGE "+j.nom+" a posé un pingouin en "+c.toString());
-											writers[i].writeObject(p.clone());
-										}
-										
-										//Maj numero du pingouin
-										if((num+1)%MAXPLAYERS < num) {
-											num_pingouin++;
-										}
-										
-										
-										//Test fin de phase placement
-										if(num_pingouin>=NBPINGOUINS) {
-											phasePlacement = false;
-											for(int i = 0; i<MAXPLAYERS; i++) {
-												writers[i].writeObject("MESSAGE Début de la phase de jeu !\n\n"+p.joueurs[p.joueurActif].nom+" commence à jouer.");
-											}
-										} else {
-											//Affiche qui est le prochain joueur sur tout les clients
-											for(int i = 0; i<MAXPLAYERS; i++) {
-												writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de placer.");
-											}
+											writers[i].writeObject("MESSAGE Début de la phase de jeu !\n\n"+p.joueurs[p.joueurActif].nom+" commence à jouer.");
 										}
 									} else {
-										out.writeObject("MESSAGE Impossible de poser un pingouin à cet emplacement.");
+										//Affiche qui est le prochain joueur sur tout les clients
+										for(int i = 0; i<MAXPLAYERS; i++) {
+											writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de placer.");
+										}
 									}
-			                    } else {
-			                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+p.joueurs[p.joueurActif].nom);
-			                    }
+								} else {
+									out.writeObject("MESSAGE Impossible de poser un pingouin à cet emplacement.");
+								}
 		                	}
+							
 	                	} else {
 	                		break;
 	                	}
@@ -214,8 +210,11 @@ public class PingouinServer {
             }
         }
         
-        public void getNom(ObjectInputStream in, ObjectOutputStream out) {
+        public synchronized void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {
+            	if(nbClients==0) {
+            		initGame(in, out);
+            	}
 	            while (true) {
 	                out.writeObject("SUBMITNAME");
 	                Object obj = in.readObject();
@@ -224,18 +223,17 @@ public class PingouinServer {
 	                    if (name == null) {
 	                        return;
 	                    }
-	                    synchronized (p) {
-	                    	num = nbClients;
-	                        p.joueurs[num] = new Humain(name, NBPINGOUINS);
-	                        for(int i = 0; i<NBPINGOUINS;i++) {
-	                        	p.joueurs[num].myPingouins[i] = new Pingouin();
-	                        }
-	        	            nbClients++;
-	        	            if(nbClients == MAXPLAYERS) {
-	        	            	phaseNoms = false;
-	        	            }
-	                        break;
-	                    }
+                    	num = nbClients;
+                        p.joueurs[num].nom = name;
+                        for(int i = 0; i<NBPINGOUINS;i++) {
+                        	p.joueurs[num].myPingouins[i] = new Pingouin();
+                        }
+        	            nbClients++;
+        	            if(p.joueurs[nbClients].getClass()==IA.class) {
+        	            	phaseNoms = false;
+        	            }
+                        break;
+	                    
 	                } else {
 	                	out.writeObject("NAMEREJECTED");
 	                }
@@ -274,5 +272,22 @@ public class PingouinServer {
         		}
         	}
         }
+        
+        public synchronized void initGame(ObjectInputStream in, ObjectOutputStream out) {
+        	try {
+	            out.writeObject("INITGAME");
+                Object obj = in.readObject();
+                if(obj instanceof Partie) {
+	            	p = (Partie)obj;
+	            	NBPINGOUINS = p.joueurs[0].nbPingouin;
+	            	MAXPLAYERS = p.nbJoueurs;
+	            	writers = new ObjectOutputStream[MAXPLAYERS];
+	            	partieCree = true;
+	            }
+        	} catch (Exception e){
+        		e.printStackTrace(so);
+        	}
+        }
+        
     }
 }

@@ -1,6 +1,7 @@
 package reseau;
 import java.io.BufferedReader;
 import java.io.EOFException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -46,9 +47,7 @@ public class PingouinClient {
 	                } else if (line.startsWith("PLACEMENT")) {
 	                	out.writeObject(getPlacement(line.substring(10)));
 	                } else if (line.startsWith("INITGAME")) {
-//TODO
-	                
-	                
+	                	out.writeObject(creerPartie());
 	                } else if (line.startsWith("DEPLACEMENT")) {
 	                	out.writeObject(getDeplacement(p));
 	                } else if (line.startsWith("NAMEACCEPTED")) {
@@ -77,6 +76,97 @@ public class PingouinClient {
 
         }
     }
+    
+    /**
+	 *  - demande le nombre de joueurs et creee la partie adequate
+	 *  - genere aleatoirement la banquise
+	 *  - demande le nom/type de joueur
+	 *  
+	 * @param br
+	 *            Buffer de la console.
+	 * @return la partie cree
+	 */
+	
+	public static Partie creerPartie() {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Partie p = null;
+		try {
+			System.out.println("Creation de la partie !");
+			/* ----- Choix du nombre de joueurs et IA----- */
+			//Humains
+			boolean nb_humain_ok = false;
+			int nb_humains = 1;
+			while (!nb_humain_ok) {
+				try {
+					System.out.println("A combien de joueurs (humains) voulez-vous jouer ? (1 à 4)");
+					nb_humains = Integer.valueOf(br.readLine());
+					if(nb_humains<= 4 && nb_humains>=1) {
+						nb_humain_ok = true;
+						System.out.println("Création d'une partie à "+String.valueOf(nb_humains)+" joueurs.");
+					} else {
+						System.out.println("Nombre de joueurs incorrect. Réessayez.");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("Nombre de joueurs incorrect. Réessayez.");
+				}
+			}
+			//IAs
+			int nb_ias = 0;
+			if(nb_humains<4) {
+				boolean nb_ia_ok = false;
+				while (!nb_ia_ok) {
+					try {
+						System.out.println("Combien d'IA(s) voulez-vous ajouter ? (0 à "+(4-nb_humains)+")");
+						nb_ias = Integer.valueOf(br.readLine());
+						if(nb_ias<= (4-nb_humains) && nb_ias>=0) {
+							nb_ia_ok = true;
+							System.out.println("Ajout de "+String.valueOf(nb_ias)+" IAs à la partie.");
+						} else {
+							System.out.println("Nombre de joueurs incorrect. Réessayez.");
+						}
+					} catch (NumberFormatException e) {
+						System.out.println("Nombre de joueurs incorrect. Réessayez.");
+					}
+				}
+			}
+			
+			/* ----- Creation partie + init banquise ----- */
+			int nb_joueurs_tot = nb_humains+nb_ias;
+			p = new Partie(nb_joueurs_tot);
+			p.b = new Banquise();
+			
+			/* ----- Ajout des joueurs et IA à la partie ------*/
+			for(int i = 0; i<nb_joueurs_tot;i++) {
+				if(i<nb_humains) {
+					p.joueurs[i]= new Humain("",6-nb_joueurs_tot);
+				} else {
+					int niv_IA;
+					while(true) {
+						try {
+							System.out.println("Quel niveau voulez vous pour l'IA ? (1 à 3)");
+							niv_IA = Integer.valueOf(br.readLine());
+							if(niv_IA<=3 && niv_IA>=1) {
+								break;
+							} else {
+								System.out.println("Entrée incorrecte. Réessayez.");
+							}
+						} catch (Exception e) {
+							e.printStackTrace(System.out);
+						}
+					}
+					p.joueurs[i] = new IA("IA"+(i-nb_humains+1), 6-nb_joueurs_tot, niv_IA);
+                    for(int j = 0; j<6-nb_joueurs_tot;j++) {
+                    	p.joueurs[i].myPingouins[j] = new Pingouin();
+                    }
+				}
+			}
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
 
 	private static String getServerAddress() {
     	String s = null;

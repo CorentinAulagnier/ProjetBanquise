@@ -22,6 +22,15 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     @FXML private AnchorPane anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4;
     @FXML private Arc banquise_j1,banquise_j2,banquise_j3,banquise_j4;
     @FXML private Label nom_j1,nom_j2,nom_j3,nom_j4;
+  /*  @FXML private ArrayList<Label> noms_joueurs;
+    <fx:define>
+    <ArrayList fx:id="noms_joueurs" >
+        <fx:reference source="nom_j1"/>
+        <fx:reference source="nom_j2"/>
+        <fx:reference source="nom_j3"/>
+        <fx:reference source="nom_j4"/>
+    </ArrayList>
+</fx:define>*/
     @FXML private HBox reglette_j1,reglette_j2,reglette_j3,reglette_j4;
     @FXML private Label score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4;
     @FXML private Label score_tuiles_j1,score_tuiles_j2,score_tuiles_j3,score_tuiles_j4;
@@ -73,12 +82,12 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     		}
 	    	
    
-    		/*for(int k=0; k<gestionnaireFxmlCourant.partie.joueurs.length; k++){
+    		for(int k=0; k<gestionnaireFxmlCourant.partie.joueurs.length; k++){
     			//((Arc) banquises_joueurs[k]).setFill(p[k]);
-    			//((Label)noms_joueurs[k]).setText( gestionnaireFxmlCourant.partie.joueurs[k].nom );
+    			//noms_joueurs.get(k).setText( gestionnaireFxmlCourant.partie.joueurs[k].nom );
     			//((Label)scores_poissons_joueurs[k]).setText( String.valueOf( gestionnaireFxmlCourant.partie.joueurs[k].poissonsManges ) );
     			//((Label)scores_tuiles_joueurs[k]).setText( String.valueOf( gestionnaireFxmlCourant.partie.joueurs[k].nbTuiles ) );
-    		}*/
+    		}
     	}
     }
     

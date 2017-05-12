@@ -22,6 +22,7 @@ public class PingouinServer {
     private static boolean phasePlacement = true;
     private static boolean phaseJeu = true;
     private static boolean phaseNoms = true;
+    private static boolean partieCree = false;
 	private static int num_pingouin = 0;
 	private static PrintStream so = System.out;
     
@@ -63,10 +64,21 @@ public class PingouinServer {
 	            	so.println("Tentative de connexion depuis "+socket.getRemoteSocketAddress().toString()+" impossible.\nCAUSE : Nombre maximum de joueurs atteint.");
 	            }
 	            
+	            synchronized (p) {
+		            if (num == 0) {
+			            out.writeObject("INITGAME");
+	                    Object obj = in.readObject();
+	                    if(obj instanceof Partie) {
+	    	            	p = (Partie)obj;
+	    	            	partieCree = true;
+	    	            }
+		            }
+	            }
+	            
 	            //attente des autres joueurs
 	            while(true) {
 	            	synchronized (p) {
-		            	if(!phaseNoms) break;
+		            	if(!phaseNoms && partieCree) break;
 					}
 
 	            }

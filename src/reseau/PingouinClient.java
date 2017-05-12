@@ -4,7 +4,10 @@ import java.io.EOFException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
+
 //java.net.ConnectException	152.77.82.225
 import model.*;
 
@@ -14,8 +17,16 @@ public class PingouinClient {
 
     public static void main(String[] args) throws Exception {
     	 // Make connection and initialize streams
-        String serverAddress = getServerAddress();
-        Socket socket = new Socket(serverAddress, PORT);
+    	Socket socket = null;
+    	while (socket==null) {
+	    	try {
+		        String serverAddress = getServerAddress();
+		        socket = new Socket(serverAddress, PORT);
+	    	} catch (ConnectException | UnknownHostException e) {
+				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+			}
+    	}
+    	
         ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         Partie p = null;
@@ -32,9 +43,13 @@ public class PingouinClient {
 	            	String line = (String)obj;
 	                if (line.startsWith("SUBMITNAME")) {
 	                    out.writeObject(getUsername());
-	                }else if (line.startsWith("PLACEMENT")) {
+	                } else if (line.startsWith("PLACEMENT")) {
 	                	out.writeObject(getPlacement(line.substring(10)));
-	                }  else if (line.startsWith("DEPLACEMENT")) {
+	                } else if (line.startsWith("INITGAME")) {
+//TODO
+	                
+	                
+	                } else if (line.startsWith("DEPLACEMENT")) {
 	                	out.writeObject(getDeplacement(p));
 	                } else if (line.startsWith("NAMEACCEPTED")) {
 	                	System.out.println("Bienvenue sur PINGOUINS !\n");

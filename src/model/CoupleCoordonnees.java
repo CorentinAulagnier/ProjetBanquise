@@ -1,6 +1,8 @@
 package model;
 
-public class CoupleCoordonnees {
+import java.io.Serializable;
+
+public class CoupleCoordonnees implements Serializable{
 
 	public Coordonnees c1;
 	public Coordonnees c2;

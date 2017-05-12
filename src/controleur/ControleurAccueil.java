@@ -4,11 +4,19 @@ import vue.EcranCourant;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 
 public class ControleurAccueil  implements Initializable, EcranCourant {
@@ -20,6 +28,7 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
 	 private Button charger;
 	 @FXML 
 	 private Button regles;
+	 
 	
 	 public void miseAjour(){}
 	 
@@ -65,5 +74,31 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     @FXML
     public void boutonLache(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
+    }
+    
+    @FXML AnchorPane optionbox;
+    
+    @FXML
+    public void boutonOption(MouseEvent event){
+    	if (optionbox.isDisable()){
+    		optionbox.setDisable(false);
+    		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+    	     tt.setByX(200);
+    		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+    		ft.setFromValue(0);
+    		ft.setToValue(1);
+    		ParallelTransition pt = new ParallelTransition(optionbox, ft, tt);
+    	     pt.play();
+    		
+    	}else{
+    		optionbox.setDisable(true);
+    		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+   	     	tt.setByX(-200);
+   	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+   	     	ft.setFromValue(1);
+   	     	ft.setToValue(0);
+   	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt);
+   	     	pt.play();
+    	}
     }
 }

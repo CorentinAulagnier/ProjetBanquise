@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 public class Proprietes {
     public static final String ECRAN_ACCUEIL = "Menu";
     public static final String ECRAN_ACCUEIL_FXML = "fxml/Menu.fxml";
@@ -13,30 +15,20 @@ public class Proprietes {
     public static final String ECRAN_VICTOIRE_FXML = "fxml/Victoire.fxml";
     
    public static final String IMAGE_JOUEUR_PATH = "../ressources/joueurs/";
-    
-    /*à modifier en ia facile-moyen-difficile-joueur*/
-    public static final String CREVETTE_BLEUE_PATH = IMAGE_JOUEUR_PATH + "crevettebleue.png";
-    public static final String CREVETTE_ROUGE_PATH = IMAGE_JOUEUR_PATH + "crevetterouge.png";
-    public static final String CREVETTE_JAUNE_PATH = IMAGE_JOUEUR_PATH + "crevettejaune.png";
-    public static final String CREVETTE_VERTE_PATH = IMAGE_JOUEUR_PATH + "crevetteverte.png";
-    
-    public static final String EVE_BLEUE_PATH = IMAGE_JOUEUR_PATH + "evebleue.png";
-    public static final String EVE_ROUGE_PATH = IMAGE_JOUEUR_PATH + "everouge.png";
-    public static final String EVE_JAUNE_PATH = IMAGE_JOUEUR_PATH + "evejaune.png";
-    public static final String EVE_VERTE_PATH = IMAGE_JOUEUR_PATH + "eveverte.png";
-    
-    public static final String ORQUE_BLEUE_PATH = IMAGE_JOUEUR_PATH + "Orquebleue.png";
-    public static final String ORQUE_ROUGE_PATH = IMAGE_JOUEUR_PATH + "Orquerouge.png";
-    public static final String ORQUE_JAUNE_PATH = IMAGE_JOUEUR_PATH + "OrqueJaune.png";
-    public static final String ORQUE_VERTE_PATH = IMAGE_JOUEUR_PATH + "OrcVert.png";
-    
-    public static final String PING_BLEU_PATH = IMAGE_JOUEUR_PATH + "PingouinBleu.png";
-    public static final String PING_ROUGE_PATH = IMAGE_JOUEUR_PATH + "PingouinRouge.png";
-    public static final String PING_JAUNE_PATH = IMAGE_JOUEUR_PATH + "PingouinJaune.png";
-    public static final String PING_VERT_PATH = IMAGE_JOUEUR_PATH + "PingouinVert.png";
-    
-    
-    
+    /*MODEJEU+COULEUR.png*/
+   
+   public final static int AUCUN = 0 ;
+   public final static int JOUEUR = 1 ;
+   public final static int CREVETTE = 2 ;
+   public final static int EVE = 3 ;
+   public final static int ORQUE = 4 ;
+   
+   public final static int JAUNE = 0 ; 
+   public final static int VERT = 1 ;
+   public final static int ROUGE = 2 ;
+   public final static int BLEU = 3 ;
+   
+   
 
     public static final String STYLE_NORMAL = "-fx-background-color: transparent; -fx-padding: 5 5 5 5 ;";
     public static final String STYLE_PRESSED = "-fx-background-color: transparent; -fx-padding: 6 5 5 6;";

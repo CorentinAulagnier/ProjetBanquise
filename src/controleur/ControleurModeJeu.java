@@ -40,7 +40,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	
     	int nbJoueurs = 0;
     	for (int i = 0 ; i < 4 ; i++){
-    		if (modeJeu[i]!=AUCUN){
+    		if (modeJeu[i]!=model.Proprietes.AUCUN){
     			nbJoueurs++;
     		}
     	}
@@ -57,10 +57,10 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	
     	monChargeurFxml.partie = new Partie(nbJoueurs);
     	
-    	Joueur jjaune = creerJoueur(JAUNE,nbPingouins);
-    	Joueur jrouge = creerJoueur(ROUGE,nbPingouins);
-    	Joueur jbleu = creerJoueur(BLEU,nbPingouins);
-    	Joueur jvert = creerJoueur(VERT,nbPingouins);
+    	Joueur jjaune = creerJoueur(model.Proprietes.JAUNE,nbPingouins);
+    	Joueur jrouge = creerJoueur(model.Proprietes.ROUGE,nbPingouins);
+    	Joueur jbleu = creerJoueur(model.Proprietes.BLEU,nbPingouins);
+    	Joueur jvert = creerJoueur(model.Proprietes.VERT,nbPingouins);
     	
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
     	int i = 0;
@@ -82,9 +82,8 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	}
     	
     	bulleVisible(bulle,2);
-    	try{
-    		Thread.sleep(2);
-    	}catch(InterruptedException e){}
+    	
+    	monChargeurFxml.partie.joueurs=tableauDeJoueur;
     	
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
     	
@@ -103,42 +102,19 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     		}
     	}
     	
+    	
+    	
+    	/*String path = ""+modeJeu[couleur]+""+couleur+".png"*/
+    	
     	   	String path = "";
-	    	switch(couleur){
-		    	case JAUNE: switch(modeJeu[couleur]){
-		    					case JOUEUR :path = model.Proprietes.PING_JAUNE_PATH;
-		    					case CREVETTE : path = model.Proprietes.CREVETTE_JAUNE_PATH;
-		    					case EVE :  path = model.Proprietes.EVE_JAUNE_PATH;
-		    					case ORQUE :  path = model.Proprietes.ORQUE_JAUNE_PATH;
-	    					}
-		    	case ROUGE :switch(modeJeu[couleur]){
-								case JOUEUR :path = model.Proprietes.PING_ROUGE_PATH;
-								case CREVETTE : path = model.Proprietes.CREVETTE_ROUGE_PATH;
-								case EVE :  path = model.Proprietes.EVE_ROUGE_PATH;
-								case ORQUE :  path = model.Proprietes.ORQUE_ROUGE_PATH;
-							}
-		    	case BLEU :switch(modeJeu[couleur]){
-								case JOUEUR :path = model.Proprietes.PING_BLEU_PATH;
-								case CREVETTE : path = model.Proprietes.CREVETTE_BLEUE_PATH;
-								case EVE :  path = model.Proprietes.EVE_BLEUE_PATH;
-								case ORQUE :  path = model.Proprietes.ORQUE_BLEUE_PATH;
-							}
-		    	case VERT:switch(modeJeu[couleur]){
-							case JOUEUR :path = model.Proprietes.PING_VERT_PATH;
-							case CREVETTE : path = model.Proprietes.CREVETTE_VERTE_PATH;
-							case EVE :  path = model.Proprietes.EVE_VERTE_PATH;
-							case ORQUE :  path = model.Proprietes.ORQUE_VERTE_PATH;
-						}
-	    	}
-	    	
-	    	
-	    	if (modeJeu[couleur] == JOUEUR){
+	    	    	
+	    	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
 	    		return new Humain(name, nbP, path, couleur);
-	    	}else if (modeJeu[couleur] == CREVETTE){
+	    	}else if (modeJeu[couleur] == model.Proprietes.CREVETTE){
 	    		return new IA(name, nbP, 1 ,path, couleur);
-	    	}else if (modeJeu[couleur] == EVE){
+	    	}else if (modeJeu[couleur] == model.Proprietes.EVE){
 	    		return new IA(name, nbP, 2 ,path, couleur);
-	    	}else if (modeJeu[couleur] == ORQUE){
+	    	}else if (modeJeu[couleur] == model.Proprietes.ORQUE){
 	    		return new IA(name, nbP, 3 , path, couleur);
 	    	}else{
 	    		return null;
@@ -157,18 +133,6 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
 	
         
     /**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/
-    
-    final static int AUCUN = 0 ;
-    final static int JOUEUR = 1 ;
-    final static int CREVETTE = 2 ;
-    final static int EVE = 3 ;
-    final static int ORQUE = 4 ;
-    
-    final static int JAUNE = 0 ; 
-    final static int VERT = 1 ;
-    final static int ROUGE = 2 ;
-    final static int BLEU = 3 ;
-        
     
     int[] modeJeu = new int[4];
     
@@ -262,52 +226,52 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     public void initialize(URL url, ResourceBundle rb) {
     	
     	/*MODE DE JEU ET IMAGE INITIALES*/
-    	modeJeu[JAUNE]=JOUEUR;
- 		modeJeu[VERT]= CREVETTE;
- 		modeJeu[ROUGE]= AUCUN;
- 		modeJeu[BLEU]= AUCUN;
+    	modeJeu[model.Proprietes.JAUNE]= model.Proprietes.JOUEUR;
+ 		modeJeu[model.Proprietes.VERT]= model.Proprietes.CREVETTE;
+ 		modeJeu[model.Proprietes.ROUGE]= model.Proprietes.AUCUN;
+ 		modeJeu[model.Proprietes.BLEU]= model.Proprietes.AUCUN;
  		
- 		image[JAUNE]=JOUEUR;
- 		image[VERT]=CREVETTE;
- 		image[ROUGE]=AUCUN;
- 		image[BLEU]=AUCUN;
+ 		image[model.Proprietes.JAUNE]=model.Proprietes.JOUEUR;
+ 		image[model.Proprietes.VERT]=model.Proprietes.CREVETTE;
+ 		image[model.Proprietes.ROUGE]=model.Proprietes.AUCUN;
+ 		image[model.Proprietes.BLEU]=model.Proprietes.AUCUN;
  		
  		/*INITIALISATION DES PILES*/
     	
-    	pileMode[JAUNE]=name1;
-    	pileMode[VERT]=name2;
-    	pileMode[ROUGE]=name3;
-        pileMode[BLEU]=name4;
+    	pileMode[model.Proprietes.JAUNE]=name1;
+    	pileMode[model.Proprietes.VERT]=name2;
+    	pileMode[model.Proprietes.ROUGE]=name3;
+        pileMode[model.Proprietes.BLEU]=name4;
         
-        pileNom[JAUNE]=label1;
-    	pileNom[VERT]=label2;
-    	pileNom[ROUGE]=label3;
-        pileNom[BLEU]=label4;
+        pileNom[model.Proprietes.JAUNE]=label1;
+    	pileNom[model.Proprietes.VERT]=label2;
+    	pileNom[model.Proprietes.ROUGE]=label3;
+        pileNom[model.Proprietes.BLEU]=label4;
         
-        pileImage[JAUNE]=pilejaune;
-    	pileImage[VERT]=pileverte;
-    	pileImage[ROUGE]=pilerouge;
-        pileImage[BLEU]=pilebleue;
+        pileImage[model.Proprietes.JAUNE]=pilejaune;
+    	pileImage[model.Proprietes.VERT]=pileverte;
+    	pileImage[model.Proprietes.ROUGE]=pilerouge;
+        pileImage[model.Proprietes.BLEU]=pilebleue;
         
-       	flecheDroiteImage[JAUNE]= droitjaune;
-		flecheDroiteImage[VERT] = droitvert;
-		flecheDroiteImage[ROUGE] = droitrouge;
-		flecheDroiteImage[BLEU]= droitbleu;
+       	flecheDroiteImage[model.Proprietes.JAUNE]= droitjaune;
+		flecheDroiteImage[model.Proprietes.VERT] = droitvert;
+		flecheDroiteImage[model.Proprietes.ROUGE] = droitrouge;
+		flecheDroiteImage[model.Proprietes.BLEU]= droitbleu;
 		
-		flecheGaucheImage[JAUNE] = gauchejaune;
-		flecheGaucheImage[VERT] = gauchevert;
-		flecheGaucheImage[ROUGE] = gaucherouge;
-		flecheGaucheImage[BLEU] = gauchebleu;
+		flecheGaucheImage[model.Proprietes.JAUNE] = gauchejaune;
+		flecheGaucheImage[model.Proprietes.VERT] = gauchevert;
+		flecheGaucheImage[model.Proprietes.ROUGE] = gaucherouge;
+		flecheGaucheImage[model.Proprietes.BLEU] = gauchebleu;
 		
-		flecheDroiteMode[JAUNE]= modejaunedroit;
-		flecheDroiteMode[VERT] = modevertdroit;
-		flecheDroiteMode[ROUGE] = moderougedroit;
-		flecheDroiteMode[BLEU]= modebleudroit;
+		flecheDroiteMode[model.Proprietes.JAUNE]= modejaunedroit;
+		flecheDroiteMode[model.Proprietes.VERT] = modevertdroit;
+		flecheDroiteMode[model.Proprietes.ROUGE] = moderougedroit;
+		flecheDroiteMode[model.Proprietes.BLEU]= modebleudroit;
 		
-		flecheGaucheMode[JAUNE] = modejaunegauche;
-		flecheGaucheMode[VERT] = modevertgauche;
-		flecheGaucheMode[ROUGE] = moderougegauche;
-		flecheGaucheMode[BLEU] = modebleugauche;
+		flecheGaucheMode[model.Proprietes.JAUNE] = modejaunegauche;
+		flecheGaucheMode[model.Proprietes.VERT] = modevertgauche;
+		flecheGaucheMode[model.Proprietes.ROUGE] = moderougegauche;
+		flecheGaucheMode[model.Proprietes.BLEU] = modebleugauche;
 		
 		retour.setStyle(model.Proprietes.STYLE_NORMAL);
 		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
@@ -315,8 +279,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
 		modeValide();
 		
     }
-    
-    
+   
     
     /** SELECTION D'UN SKIN DE PERSONNAGE **/
     
@@ -338,22 +301,22 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     
     @FXML
     public void flecheImageEvent(MouseEvent event){
-    	if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[ROUGE]){
-        	image[ROUGE] = selectImage(pileImage[ROUGE],image[ROUGE],true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[ROUGE]){
-    		image[ROUGE] = selectImage(pileImage[ROUGE],image[ROUGE],false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[BLEU]){
-    		image[BLEU] = selectImage(pileImage[BLEU],image[BLEU],true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[BLEU]){
-    		image[BLEU] = selectImage(pileImage[BLEU],image[BLEU],false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[VERT]){
-    		image[VERT] = selectImage(pileImage[VERT],image[VERT],true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[VERT]){
-    		image[VERT] = selectImage(pileImage[VERT],image[VERT],false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[JAUNE]){
-    		image[JAUNE] = selectImage(pileImage[JAUNE],image[JAUNE],true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[JAUNE]){
-    		image[JAUNE] = selectImage(pileImage[JAUNE],image[JAUNE],false);
+    	if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[model.Proprietes.ROUGE]){
+        	image[model.Proprietes.ROUGE] = selectImage(pileImage[model.Proprietes.ROUGE],image[model.Proprietes.ROUGE],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[model.Proprietes.ROUGE]){
+    		image[model.Proprietes.ROUGE] = selectImage(pileImage[model.Proprietes.ROUGE],image[model.Proprietes.ROUGE],false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[model.Proprietes.BLEU]){
+    		image[model.Proprietes.BLEU] = selectImage(pileImage[model.Proprietes.BLEU],image[model.Proprietes.BLEU],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[model.Proprietes.BLEU]){
+    		image[model.Proprietes.BLEU] = selectImage(pileImage[model.Proprietes.BLEU],image[model.Proprietes.BLEU],false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[model.Proprietes.VERT]){
+    		image[model.Proprietes.VERT] = selectImage(pileImage[model.Proprietes.VERT],image[model.Proprietes.VERT],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[model.Proprietes.VERT]){
+    		image[model.Proprietes.VERT] = selectImage(pileImage[model.Proprietes.VERT],image[model.Proprietes.VERT],false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[model.Proprietes.JAUNE]){
+    		image[model.Proprietes.JAUNE] = selectImage(pileImage[model.Proprietes.JAUNE],image[model.Proprietes.JAUNE],true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheImage[model.Proprietes.JAUNE]){
+    		image[model.Proprietes.JAUNE] = selectImage(pileImage[model.Proprietes.JAUNE],image[model.Proprietes.JAUNE],false);
     	}
     }
     
@@ -408,22 +371,22 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     
     @FXML
     public void flecheModeEvent(MouseEvent event){
-    	if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[ROUGE]){
-    		selectMode(ROUGE,true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[ROUGE]){
-    		selectMode(ROUGE,false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[BLEU]){
-    		selectMode(BLEU,true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[BLEU]){
-    		selectMode(BLEU,false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[VERT]){
-    		selectMode(VERT,true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[VERT]){
-    		selectMode(VERT,false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[JAUNE]){
-    		selectMode(JAUNE,true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[JAUNE]){
-    		selectMode(JAUNE,false);
+    	if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.ROUGE]){
+    		selectMode(model.Proprietes.ROUGE,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.ROUGE]){
+    		selectMode(model.Proprietes.ROUGE,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.BLEU]){
+    		selectMode(model.Proprietes.BLEU,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.BLEU]){
+    		selectMode(model.Proprietes.BLEU,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.VERT]){
+    		selectMode(model.Proprietes.VERT,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.VERT]){
+    		selectMode(model.Proprietes.VERT,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.JAUNE]){
+    		selectMode(model.Proprietes.JAUNE,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.JAUNE]){
+    		selectMode(model.Proprietes.JAUNE,false);
     	}
     	modeValide();
     }
@@ -434,14 +397,14 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     }
   
     public void modeValide(){
-    	boolean JRV = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[VERT] == AUCUN));
-    	boolean JRB = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[BLEU] == AUCUN));
-    	boolean JBV = ((modeJeu[JAUNE] == AUCUN) && (modeJeu[BLEU] == AUCUN) && (modeJeu[VERT] == AUCUN));
-    	boolean BRV = ((modeJeu[BLEU] == AUCUN) && (modeJeu[ROUGE] == AUCUN) && (modeJeu[VERT] == AUCUN));
-    	boolean JOK = (pileNom[JAUNE].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[JAUNE].getChildren().get(JOUEUR)).getText()).equals("") ) ) ;
-    	boolean ROK = (pileNom[ROUGE].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[ROUGE].getChildren().get(JOUEUR)).getText()).equals("") ) ) ;
-    	boolean BOK = (pileNom[BLEU].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[BLEU].getChildren().get(JOUEUR)).getText()).equals("") ) ) ;
-    	boolean VOK = (pileNom[VERT].getChildren().get(JOUEUR).isVisible() && ( (( (TextField)pileNom[VERT].getChildren().get(JOUEUR)).getText()).equals("")) ) ;
+    	boolean JRV = ((modeJeu[model.Proprietes.JAUNE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.ROUGE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.VERT] == model.Proprietes.AUCUN));
+    	boolean JRB = ((modeJeu[model.Proprietes.JAUNE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.ROUGE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.BLEU] == model.Proprietes.AUCUN));
+    	boolean JBV = ((modeJeu[model.Proprietes.JAUNE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.BLEU] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.VERT] == model.Proprietes.AUCUN));
+    	boolean BRV = ((modeJeu[model.Proprietes.BLEU] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.ROUGE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.VERT] == model.Proprietes.AUCUN));
+    	boolean JOK = (pileNom[model.Proprietes.JAUNE].getChildren().get(model.Proprietes.JOUEUR).isVisible() && ( (( (TextField)pileNom[model.Proprietes.JAUNE].getChildren().get(model.Proprietes.JOUEUR)).getText()).equals("") ) ) ;
+    	boolean ROK = (pileNom[model.Proprietes.ROUGE].getChildren().get(model.Proprietes.JOUEUR).isVisible() && ( (( (TextField)pileNom[model.Proprietes.ROUGE].getChildren().get(model.Proprietes.JOUEUR)).getText()).equals("") ) ) ;
+    	boolean BOK = (pileNom[model.Proprietes.BLEU].getChildren().get(model.Proprietes.JOUEUR).isVisible() && ( (( (TextField)pileNom[model.Proprietes.BLEU].getChildren().get(model.Proprietes.JOUEUR)).getText()).equals("") ) ) ;
+    	boolean VOK = (pileNom[model.Proprietes.VERT].getChildren().get(model.Proprietes.JOUEUR).isVisible() && ( (( (TextField)pileNom[model.Proprietes.VERT].getChildren().get(model.Proprietes.JOUEUR)).getText()).equals("")) ) ;
     	if (!(JRV||JRB||JBV||BRV||JOK||BOK||ROK||VOK)){
     		lancer.setDisable(false);
     		bulleVisible(bulle,1);

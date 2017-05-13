@@ -5,6 +5,12 @@ import vue.EcranCourant;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
+import javafx.util.Duration;
 
 public class ControleurJeu  implements Initializable, EcranCourant {
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
@@ -114,6 +121,78 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     
     @FXML private void refaireTours(MouseEvent event){
     	System.out.println("refaireTours");
+    }
+    
+    
+    
+    
+    /** DESIGN AJOUTE CE WEEK END**/
+    
+    @FXML AnchorPane optionbox;
+    @FXML Button roue;
+    
+	 public void optionWheelOpen(){
+		 optionbox.setDisable(false);
+ 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+ 		ft.setFromValue(0);
+ 		ft.setToValue(1);
+ 		
+ 		ScaleTransition st = new ScaleTransition(Duration.millis(500), optionbox);
+     	st.setFromX(0);
+     	st.setToX(1);
+ 		
+    	TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+     	tt.setByY(-100);
+     	
+     	
+ 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+ 	     rt.setByAngle(180);
+ 	     
+ 		ParallelTransition pt = new ParallelTransition(optionbox,ft,rt,st,tt );
+ 	     pt.play();
+	    }
+	 public void optionWheelClose(){
+		 optionbox.setDisable(true);
+		 	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+	 		ft.setFromValue(1);
+	 		ft.setToValue(0);
+		 
+	     	ScaleTransition st = new ScaleTransition(Duration.millis(500), optionbox);
+	     	st.setFromX(1);
+	     	st.setToX(0);
+	     	
+	     	TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+	     	tt.setByY(100);
+	     	
+ 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+ 	     rt.setByAngle(-180);
+	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, st ,rt,tt);
+	     	pt.play();
+	 }
+ 
+    @FXML
+    public void boutonOption(MouseEvent event){
+    	if (optionbox.isDisable()){
+    		optionWheelOpen();    		
+    	}else{
+    		optionWheelClose();
+    	}
+    }
+    
+/**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
+    
+    @FXML
+    public void boutonPresse(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
+    }
+
+    
+    
+    /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
+    
+    @FXML
+    public void boutonLache(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
     }
 
     

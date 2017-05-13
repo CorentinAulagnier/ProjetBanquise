@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.shape.Arc?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" style="">
@@ -25,343 +34,398 @@
         <Image url="@../../ressources/decor/banquise.jpg" />
       </image>
     </ImageView>
-      <GridPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="170.0" prefWidth="175.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="400.0" prefWidth="450.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="170.0" prefWidth="175.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="75.0" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="30.0" minHeight="30.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" prefHeight="250.0" prefWidth="175.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-               <children>
-                  <Arc id="zoneJ1" fx:id="banquise_j1" fill="#ffda4a" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="-90.0" stroke="#ffda4a" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </Arc>
-                  <Label fx:id="nom_j1" layoutY="1.0" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="10.0">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox fx:id="reglette_j1" layoutX="-3.0" layoutY="1.0" prefHeight="40.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
-                     <children>
-                        <ImageView fitHeight="40.0" fitWidth="24.0">
-                           <image>
-                              <Image url="@../../ressources/joueurs/PingouinBleu.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="5.0" right="5.0" />
-                           </HBox.margin>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <GridPane fx:id="score_j1" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../../ressources/decor/hexagone.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_poissons_j1" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
-                           <image>
-                              <Image url="@../../ressources/decor/poissons.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_tuiles_j1" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-               <children>
-                  <Arc id="zoneJ4" fx:id="banquise_j2" fill="#37cc2c" layoutX="177.0" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="180.0" stroke="#37cc2c" strokeType="INSIDE" type="ROUND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <effect>
-                        <Glow />
-                     </effect></Arc>
-                  <Label fx:id="nom_j2" alignment="CENTER_RIGHT" layoutX="80.0" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox fx:id="reglette_j2" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
-                  <GridPane fx:id="score_j2" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../../ressources/decor/hexagone.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_poissons_j2" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1">
-                           <image>
-                              <Image url="@../../ressources/decor/poissons.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_tuiles_j2" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-               <children>
-                  <Arc id="zoneJ4" fx:id="banquise_j3" fill="#950303" layoutX="177.0" layoutY="100.0" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="90.0" stroke="#950303" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <Label fx:id="nom_j3" alignment="CENTER_RIGHT" layoutX="80.0" layoutY="64.0" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox fx:id="reglette_j3" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
-                  <GridPane fx:id="score_j3" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="10.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1">
-                           <image>
-                              <Image url="@../../ressources/decor/hexagone.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_tuiles_J3" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../../ressources/decor/poissons.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_poissons_J3" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-               <children>
-                  <Arc id="zoneJ3" fx:id="banquise_j4" fill="#2394f1" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" stroke="#2394f1" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-                  <Label fx:id="nom_j4" layoutY="218.0" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox fx:id="reglette_j4" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" />
-                  <GridPane fx:id="score_j4" alignment="BOTTOM_LEFT" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
-                           <image>
-                              <Image url="@../../ressources/decor/hexagone.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_tuiles_J4" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../../ressources/decor/poissons.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="score_poissons_J4" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-          <Text fx:id="label_tourDe" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour de TrucMuche" textAlignment="CENTER" wrappingWidth="301.1357181072235" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-            <font>
-              <Font size="30.0" />
-            </font>
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-          </Text>
-            <ImageView fitHeight="410.0" fitWidth="448.0" rotate="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
-               <image>
-                  <Image url="@../../ressources/decor/plateau.png" />
-               </image>
-            </ImageView>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0">
-                           <image>
-                              <Image url="@../../ressources/decor/reculeRapide.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="bouton_indice" layoutX="280.0" layoutY="10.0" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                           <image>
-                              <Image url="@../../ressources/decor/tips.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Annuler">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Fin de tour" textAlignment="CENTER">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0">
-                           <image>
-                              <Image url="@../../ressources/decor/avanceRapide.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="215.0" layoutY="648.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
+      <children>
+        <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="354.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
+          <image>
+            <Image url="@../../ressources/decor/option.png" />
+          </image>
+        </ImageView>
+        <HBox id="optionbox" alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="67.0" prefWidth="354.0" style="-fx-background-color: transparent;" visible="true">
+          <children>
+            <StackPane prefHeight="40.0" prefWidth="40.0">
+              <children>
+                <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                </Button>
+              </children>
+            </StackPane>
+            <StackPane minHeight="-1.0" minWidth="-1.0" prefHeight="40.0" prefWidth="40.0">
+              <children>
+                <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@../../ressources/decor/son.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                </Button>
+              </children>
+            </StackPane>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/sauver.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets right="40.0" />
+              </HBox.margin>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/aide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets left="40.0" />
+              </HBox.margin>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/igloo.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/quit.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <GridPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" prefHeight="250.0" prefWidth="175.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+          <children>
+            <Arc id="zoneJ1" fx:id="banquise_j1" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="-90.0" stroke="$x1" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <effect>
+                <Glow />
+              </effect>
+              <fill>
+                <Color blue="0.290" green="0.855" red="1.000" fx:id="x1" />
+              </fill>
+            </Arc>
+            <Label fx:id="nom_j1" layoutY="1.0" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="10.0">
+              <font>
+                <Font name="Arial" size="18.0" fx:id="x2" />
+              </font>
+            </Label>
+            <HBox fx:id="reglette_j1" prefHeight="40.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
+              <children>
+                <ImageView fitHeight="40.0" fitWidth="24.0">
+                  <image>
+                    <Image url="@../../ressources/joueurs/13.png" />
+                  </image>
+                  <HBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                  </HBox.margin>
+                </ImageView>
+              </children>
             </HBox>
-          <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" minHeight="26.0" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: transparent;&#10;" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-            <items>
-              <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
-                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </MenuItem>
-              <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
-                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@../../ressources/decor/son.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </MenuItem>
-                  <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sauver">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../ressources/decor/sauver.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuItem>
-              <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
-                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@../../ressources/decor/aide.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </MenuItem>
-              <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
-                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@../../ressources/decor/quit.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </MenuItem>
-            </items>
-               <graphic>
-              <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" x="0.0">
-                <image>
-                  <Image url="@../../ressources/decor/DemiParametres.png" />
-                </image>
-              </ImageView>
-               </graphic>
-          </MenuButton>
-         </children>
-      </GridPane>
+            <GridPane fx:id="score_j1" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
+              <children>
+                <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
+                  <image>
+                    <Image url="@../../ressources/decor/hexagone.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_poissons_j1" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                <ImageView fitHeight="30.0" fitWidth="30.0">
+                  <image>
+                    <Image url="@../../ressources/decor/poissons.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_tuiles_j1" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+          <children>
+            <Arc id="zoneJ4" fx:id="banquise_j2" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="180.0" stroke="$x3" strokeType="INSIDE" type="ROUND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <effect>
+                <Glow />
+              </effect>
+              <fill>
+                <Color blue="0.173" green="0.800" red="0.216" fx:id="x3" />
+              </fill>
+            </Arc>
+            <Label fx:id="nom_j2" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0" />
+            <HBox fx:id="reglette_j2" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
+            <GridPane fx:id="score_j2" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+              <children>
+                <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <image>
+                    <Image url="@../../ressources/decor/hexagone.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_poissons_j2" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" />
+                <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1">
+                  <image>
+                    <Image url="@../../ressources/decor/poissons.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_tuiles_j2" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+          <children>
+            <Arc id="zoneJ4" fx:id="banquise_j3" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="90.0" stroke="$x4" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <fill>
+                <Color blue="0.012" green="0.012" red="0.584" fx:id="x4" />
+              </fill>
+            </Arc>
+            <Label fx:id="nom_j3" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+            <HBox fx:id="reglette_j3" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
+            <GridPane fx:id="score_j3" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="10.0">
+              <children>
+                <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1">
+                  <image>
+                    <Image url="@../../ressources/decor/hexagone.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_tuiles_J3" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" />
+                <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <image>
+                    <Image url="@../../ressources/decor/poissons.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_poissons_J3" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+          <children>
+            <Arc id="zoneJ3" fx:id="banquise_j4" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" stroke="$x5" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+              <fill>
+                <Color blue="0.945" green="0.580" red="0.137" fx:id="x5" />
+              </fill>
+            </Arc>
+            <Label fx:id="nom_j4" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" />
+            <HBox fx:id="reglette_j4" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" />
+            <GridPane fx:id="score_j4" alignment="BOTTOM_LEFT" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0">
+              <children>
+                <ImageView fitHeight="30.0" fitWidth="30.0">
+                  <image>
+                    <Image url="@../../ressources/decor/hexagone.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_tuiles_J4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
+                  <image>
+                    <Image url="@../../ressources/decor/poissons.png" />
+                  </image>
+                </ImageView>
+                <Label fx:id="score_poissons_J4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+        <Text fx:id="label_tourDe" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour de TrucMuche" textAlignment="CENTER" wrappingWidth="301.1357181072235" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+          <font>
+            <Font size="30.0" />
+          </font>
+          <GridPane.margin>
+            <Insets top="10.0" />
+          </GridPane.margin>
+        </Text>
+        <ImageView fitHeight="410.0" fitWidth="448.0" rotate="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+          <image>
+            <Image url="@../../ressources/decor/plateau.png" />
+          </image>
+        </ImageView>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <children>
+            <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+              <graphic>
+                <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <image>
+                    <Image url="@../../ressources/decor/reculeRapide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_indice" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+              <graphic>
+                <ImageView fitHeight="40.0" fitWidth="40.0">
+                  <image>
+                    <Image url="@../../ressources/decor/tips.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Annuler">
+              <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Fin de tour" textAlignment="CENTER">
+              <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+              <graphic>
+                <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <image>
+                    <Image url="@../../ressources/decor/avanceRapide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" minHeight="26.0" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: transparent;&#10;" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+          <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" x="0.0">
+              <image>
+                <Image url="@../../ressources/decor/DemiParametres.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <items>
+            <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/son.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sauver" />
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/aide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/quit.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+          </items>
+        </MenuButton>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="170.0" prefWidth="175.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="400.0" prefWidth="450.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="170.0" prefWidth="175.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="75.0" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="30.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="360.0" layoutY="559.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Button">
+      <graphic>
+        <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
+          <image>
+            <Image url="@../../ressources/decor/parametres.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
   </children>
-  
 </AnchorPane>

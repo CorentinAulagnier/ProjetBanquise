@@ -87,7 +87,7 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
 	 public void optionWheelOpen(){
 		 optionbox.setDisable(false);
  		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
- 	     tt.setByX(200);
+ 	     tt.setByX(200); // A voi si on peu pas utiliser ça pour redimensionner la fenetre ???
  		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
  		ft.setFromValue(0);
  		ft.setToValue(1);

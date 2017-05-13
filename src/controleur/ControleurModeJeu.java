@@ -69,10 +69,10 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	Joueur jbleu = creerJoueur(model.Proprietes.BLEU,nbPingouins);
     	Joueur jvert = creerJoueur(model.Proprietes.VERT,nbPingouins);
     	
-    	System.out.println(jjaune );
+    	/*System.out.println(jjaune );
     	System.out.println(jrouge );
     	System.out.println(jbleu );
-    	System.out.println(jvert );
+    	System.out.println(jvert );*/
     	
     	
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
@@ -99,7 +99,10 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	monChargeurFxml.partie.joueurs=tableauDeJoueur;
     	
     	monChargeurFxml.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
+    	
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
+    	
+    	System.out.println("lancement de la partie");
     	
     }
     

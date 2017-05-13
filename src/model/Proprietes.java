@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.paint.Color;
-
 public class Proprietes {
     public static final String ECRAN_ACCUEIL = "Menu";
     public static final String ECRAN_ACCUEIL_FXML = "fxml/Menu.fxml";

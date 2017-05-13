@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Arc?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controleur.ControleurJeu">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" style="">
@@ -122,13 +115,16 @@
       <children>
         <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" prefHeight="250.0" prefWidth="175.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
           <children>
-            <Arc id="zoneJ1" fx:id="banquise_j1" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="-90.0" stroke="$x1" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Arc id="zoneJ1" fx:id="banquise_j1" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="-90.0" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
               <effect>
                 <Glow />
               </effect>
               <fill>
                 <Color blue="0.290" green="0.855" red="1.000" fx:id="x1" />
               </fill>
+                     <stroke>
+                        <Color blue="0.290" green="0.855" red="1.000" fx:id="x6" />
+                     </stroke>
             </Arc>
             <Label fx:id="nom_j1" layoutY="1.0" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="10.0">
               <font>
@@ -178,13 +174,16 @@
         </AnchorPane>
         <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
           <children>
-            <Arc id="zoneJ4" fx:id="banquise_j2" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="180.0" stroke="$x3" strokeType="INSIDE" type="ROUND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Arc id="zoneJ4" fx:id="banquise_j2" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="180.0" strokeType="INSIDE" type="ROUND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <effect>
                 <Glow />
               </effect>
               <fill>
                 <Color blue="0.173" green="0.800" red="0.216" fx:id="x3" />
               </fill>
+                     <stroke>
+                        <Color blue="0.173" green="0.800" red="0.216" fx:id="x7" />
+                     </stroke>
             </Arc>
             <Label fx:id="nom_j2" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0" />
             <HBox fx:id="reglette_j2" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
@@ -219,10 +218,13 @@
         </AnchorPane>
         <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
           <children>
-            <Arc id="zoneJ4" fx:id="banquise_j3" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="90.0" stroke="$x4" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Arc id="zoneJ4" fx:id="banquise_j3" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="90.0" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <fill>
                 <Color blue="0.012" green="0.012" red="0.584" fx:id="x4" />
               </fill>
+                     <stroke>
+                        <Color blue="0.012" green="0.012" red="0.584" fx:id="x8" />
+                     </stroke>
             </Arc>
             <Label fx:id="nom_j3" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" />
             <HBox fx:id="reglette_j3" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
@@ -257,10 +259,13 @@
         </AnchorPane>
         <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
           <children>
-            <Arc id="zoneJ3" fx:id="banquise_j4" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" stroke="$x5" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <Arc id="zoneJ3" fx:id="banquise_j4" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
               <fill>
                 <Color blue="0.945" green="0.580" red="0.137" fx:id="x5" />
               </fill>
+                     <stroke>
+                        <Color blue="0.945" green="0.580" red="0.137" fx:id="x9" />
+                     </stroke>
             </Arc>
             <Label fx:id="nom_j4" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" />
             <HBox fx:id="reglette_j4" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" />
@@ -306,7 +311,7 @@
             <Image url="@../../ressources/decor/plateau.png" />
           </image>
         </ImageView>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <HBox fx:id="box_boutons_tour" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <children>
             <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
               <graphic>
@@ -421,9 +426,9 @@
     <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="360.0" layoutY="559.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
-          <image>
-            <Image url="@../../ressources/decor/parametres.png" />
-          </image>
+               <image>
+                  <Image url="@../../ressources/decor/parametres.png" />
+               </image>
         </ImageView>
       </graphic>
     </Button>

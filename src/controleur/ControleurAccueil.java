@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,16 +47,19 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
 
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
+    	netoyerEcran();
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
     @FXML
     private void ouvrirPageJeu (MouseEvent event){
+    	netoyerEcran();
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
     }
     
     @FXML
     private void ouvrirPageCharger(MouseEvent event){
+    	netoyerEcran();
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
@@ -77,28 +82,45 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     }
     
     @FXML AnchorPane optionbox;
+    @FXML Button roue;
     
+	 public void optionWheelOpen(){
+		 optionbox.setDisable(false);
+ 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+ 	     tt.setByX(200);
+ 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+ 		ft.setFromValue(0);
+ 		ft.setToValue(1);
+ 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+ 	     rt.setByAngle(180);
+ 		ParallelTransition pt = new ParallelTransition(optionbox,ft, tt,rt );
+ 	     pt.play();
+	    }
+	 public void optionWheelClose(){
+		 optionbox.setDisable(true);
+ 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+	     	tt.setByX(-200);
+	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+	     	ft.setFromValue(1);
+	     	ft.setToValue(0);
+ 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+ 	     rt.setByAngle(-180);
+	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt,rt);
+	     	pt.play();
+	 }
+ 
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		optionbox.setDisable(false);
-    		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-    	     tt.setByX(200);
-    		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
-    		ft.setFromValue(0);
-    		ft.setToValue(1);
-    		ParallelTransition pt = new ParallelTransition(optionbox, ft, tt);
-    	     pt.play();
-    		
+    		optionWheelOpen();    		
     	}else{
-    		optionbox.setDisable(true);
-    		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-   	     	tt.setByX(-200);
-   	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
-   	     	ft.setFromValue(1);
-   	     	ft.setToValue(0);
-   	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt);
-   	     	pt.play();
+    		optionWheelClose();
+    	}
+    }
+    
+    public void netoyerEcran(){
+    	if (!(optionbox.isDisable())){
+    		optionWheelClose();
     	}
     }
 }

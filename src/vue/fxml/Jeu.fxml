@@ -228,20 +228,20 @@
             </Arc>
             <Label fx:id="nom_j3" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" />
             <HBox fx:id="reglette_j3" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
-            <GridPane fx:id="score_j3" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="10.0">
+            <GridPane maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="10.0">
               <children>
                 <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1">
                   <image>
                     <Image url="@../../ressources/decor/hexagone.png" />
                   </image>
                 </ImageView>
-                <Label fx:id="score_tuiles_J3" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" />
+                <Label fx:id="score_tuiles_j3" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" />
                 <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <image>
                     <Image url="@../../ressources/decor/poissons.png" />
                   </image>
                 </ImageView>
-                <Label fx:id="score_poissons_J3" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                <Label fx:id="score_poissons_j3" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -269,20 +269,20 @@
             </Arc>
             <Label fx:id="nom_j4" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" />
             <HBox fx:id="reglette_j4" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" />
-            <GridPane fx:id="score_j4" alignment="BOTTOM_LEFT" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0">
+            <GridPane alignment="BOTTOM_LEFT" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0">
               <children>
                 <ImageView fitHeight="30.0" fitWidth="30.0">
                   <image>
                     <Image url="@../../ressources/decor/hexagone.png" />
                   </image>
                 </ImageView>
-                <Label fx:id="score_tuiles_J4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                <Label fx:id="score_tuiles_j4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
                 <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
                   <image>
                     <Image url="@../../ressources/decor/poissons.png" />
                   </image>
                 </ImageView>
-                <Label fx:id="score_poissons_J4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="score_poissons_j4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

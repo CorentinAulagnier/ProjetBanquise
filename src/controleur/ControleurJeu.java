@@ -3,6 +3,7 @@ import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -13,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -29,12 +32,17 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
     @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
-    @FXML private AnchorPane anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4;
-    @FXML private Arc banquise_j1,banquise_j2,banquise_j3,banquise_j4;
-    @FXML private Label nom_j1,nom_j2,nom_j3,nom_j4;
-    @FXML private HBox reglette_j1,reglette_j2,reglette_j3,reglette_j4;
-    @FXML private Label score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4;
-    @FXML private Label score_tuiles_j1,score_tuiles_j2,score_tuiles_j3,score_tuiles_j4;
+    
+    @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
+    @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
+    @FXML private Label nom_j1, nom_j2, nom_j3, nom_j4;
+    @FXML private HBox reglette_j1, reglette_j2, reglette_j3, reglette_j4;
+    @FXML private ImageView reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4,
+    						reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4,
+    						reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4,
+    						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
+    @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
+    @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
 
     //recupere le fxml associe a  ce controleur (et donc la partie en cours)
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
@@ -60,10 +68,20 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	    Label[] noms = {nom_j1,nom_j2,nom_j3,nom_j4};
     	    Label[] score_poissons = {score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4};
     	    Label[] score_tuiles = {score_tuiles_j1,score_tuiles_j2,score_tuiles_j3,score_tuiles_j4};
+    	   
+    	    ImageView[] j1_reglette = {reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4};
+    	    ImageView[] j2_reglette = {reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4};
+    	    ImageView[] j3_reglette = {reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4};
+    	    ImageView[] j4_reglette = {reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4};
+    	    ArrayList<ImageView[]> reglettes = new ArrayList<ImageView[]>();
+    	    reglettes.add(j1_reglette); 
+    	    reglettes.add(j2_reglette);
+    	    reglettes.add(j3_reglette);
+    	    reglettes.add(j4_reglette);
     	    
     	    miseAjour_initiale(anchorPanes,banquises,p,noms,score_poissons,score_tuiles);
     	    
-    	    miseAjour_tourDeJeu();
+    	    miseAjour_tourDeJeu(reglettes);
     	}
     }
     
@@ -84,10 +102,22 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     		
     }
     
-    public void miseAjour_tourDeJeu(){
+    public void miseAjour_tourDeJeu(ArrayList<ImageView[]> reglettes){
+    	//maj tour de untel
     	label_tourDe.setText("Tour de "+gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].nom+" :");
-		
+  
     	//maj des pinguouins sur les reglettes 
+    	for(int j=0; j < gestionnaireFxmlCourant.partie.joueurs.length; j++){
+    		//String path = "/ressources/joueurs/" + String.valueOf(j+1) + String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].couleur) ;
+    		//String path = model.Proprietes.IMAGE_JOUEUR_PATH + String.valueOf(j+1) + String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].couleur) ;
+    		//String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMignature
+    		//System.out.println(gestionnaireFxmlCourant.partie.joueurs[j].nom+" : "+j+" "+path);
+    		for(int p=0; p < gestionnaireFxmlCourant.partie.joueurs[j].nbPingouin ; p++){
+    			reglettes.get(j)[p].setImage(new Image("/ressources/joueurs/Pingouin.png"));
+    			//reglettes.get(j)[p].setImage(new Image(path));
+    		}
+    	}
+
     	
     	//maj de la banquise
     	

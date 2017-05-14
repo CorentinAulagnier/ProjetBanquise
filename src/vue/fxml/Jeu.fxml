@@ -133,14 +133,10 @@
             </Label>
             <HBox fx:id="reglette_j1" prefHeight="40.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
               <children>
-                <ImageView fitHeight="40.0" fitWidth="24.0">
-                  <image>
-                    <Image url="@../../ressources/joueurs/13.png" />
-                  </image>
-                  <HBox.margin>
-                    <Insets left="5.0" right="5.0" />
-                  </HBox.margin>
-                </ImageView>
+                        <ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="24.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="24.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="24.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
               </children>
             </HBox>
             <GridPane fx:id="score_j1" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
@@ -186,7 +182,13 @@
                      </stroke>
             </Arc>
             <Label fx:id="nom_j2" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0" />
-            <HBox fx:id="reglette_j2" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
+            <HBox fx:id="reglette_j2" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                     <children>
+                        <ImageView fx:id="reglette_j2_4" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j2_3" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j2_2" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j2_1" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                     </children></HBox>
             <GridPane fx:id="score_j2" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
               <children>
                 <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -227,7 +229,13 @@
                      </stroke>
             </Arc>
             <Label fx:id="nom_j3" alignment="CENTER_RIGHT" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" />
-            <HBox fx:id="reglette_j3" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
+            <HBox fx:id="reglette_j3" alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <ImageView fx:id="reglette_j3_4" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j3_3" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j3_2" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j3_1" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                     </children></HBox>
             <GridPane maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="10.0">
               <children>
                 <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1">
@@ -268,7 +276,13 @@
                      </stroke>
             </Arc>
             <Label fx:id="nom_j4" font="$x2" prefHeight="40.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" />
-            <HBox fx:id="reglette_j4" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" />
+            <HBox fx:id="reglette_j4" prefHeight="40.0" prefWidth="160.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0">
+                     <children>
+                        <ImageView fx:id="reglette_j4_1" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                     </children></HBox>
             <GridPane alignment="BOTTOM_LEFT" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0">
               <children>
                 <ImageView fitHeight="30.0" fitWidth="30.0">

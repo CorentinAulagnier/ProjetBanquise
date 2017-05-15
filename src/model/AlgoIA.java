@@ -702,7 +702,7 @@ public class AlgoIA {
         int max = 0;
         Coordonnees coordmax = null;
         int indx = 0;
-        System.out.println(myIA.nbPingouin);
+        //System.out.println(myIA.nbPingouin);
         ArrayList<CoupleGenerique<Coordonnees, Integer>> poidsPingouins = new ArrayList<>();
         HashMap<Coordonnees, ArbreGraphe> hash = new HashMap<>();
         for (int i = 0; i < myIA.nbPingouin; i++) {
@@ -1567,7 +1567,7 @@ public class AlgoIA {
         int nbCoupsmax = 3;
 
         if (p.b.nbTuilesLibres() <= 25) {
-            System.out.println("mAINTENANT 5");
+            //System.out.println("mAINTENANT 5");
             nbCoupsmax = 5;
         }
 

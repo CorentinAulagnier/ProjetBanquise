@@ -58,7 +58,7 @@ public class PingouinClient {
 	                if (line.startsWith("SUBMITNAME")) {
 	                    out.writeObject(getUsername());
 	                } else if (line.startsWith("PLACEMENT")) {
-	                	out.writeObject(getPlacement(line.substring(10)));
+	                	out.writeObject(getPlacement(line.substring(10),p));
 	                } else if (line.startsWith("INITGAME")) {
 	                	out.writeObject(creerPartie());
 	                } else if (line.startsWith("DEPLACEMENT")) {
@@ -125,13 +125,15 @@ public class PingouinClient {
 			}
 			//IAs
 			int nb_ias = 0;
+			int min_ia = 0;
+			if(nb_humains==1) min_ia = 1;
 			if(nb_humains<4) {
 				boolean nb_ia_ok = false;
 				while (!nb_ia_ok) {
 					try {
-						System.out.println("Combien d'IA(s) voulez-vous ajouter ? (0 à "+(4-nb_humains)+")");
+						System.out.println("Combien d'IA(s) voulez-vous ajouter ? ("+min_ia+" à "+(4-nb_humains)+")");
 						nb_ias = Integer.valueOf(br.readLine());
-						if(nb_ias<= (4-nb_humains) && nb_ias>=0) {
+						if(nb_ias<= (4-nb_humains) && nb_ias>=min_ia) {
 							nb_ia_ok = true;
 							if (nb_ias>0)
 								System.out.println("Ajout de "+String.valueOf(nb_ias)+" IAs à la partie.");
@@ -206,30 +208,38 @@ public class PingouinClient {
         return s;
     }
 
-	private static Coordonnees getPlacement(String num) {
+	private static Coordonnees getPlacement(String num, Partie p) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int x = -1;
 		int y = -1;
-		try {
-			System.out.println("Entrez le placement de votre pingouin "+num);
-			System.out.print("x :");
-			x = Integer.valueOf(br.readLine());
-			System.out.print("y :");
-			y = Integer.valueOf(br.readLine());
-		} catch (Exception e) {
-			e.printStackTrace(System.out);
+		while(true) {
+			try {
+				System.out.println("Entrez le placement de votre pingouin "+num+" (/!\\ cases à 1 poisson seulement)");
+				System.out.print("x :");
+				x = Integer.valueOf(br.readLine());
+				System.out.print("y :");
+				y = Integer.valueOf(br.readLine());
+			} catch (Exception e) {
+				e.printStackTrace(System.out);
+			}
+			Coordonnees c = new Coordonnees(x, y);
+			Tuile t = p.b.getTuile(c);
+			if(t!= null && t.nbPoissons==1) {
+				return c;
+			} else {
+				System.out.println("La case choisie ne contient pas qu'un poisson. Impossible de placer le pingouin ici.");
+			}
 		}
-		return new Coordonnees(x, y);
 	}
 	
-    private static CoupleCoordonnees getDeplacement(Partie p) {
+    private static CoupleGenerique getDeplacement(Partie p) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		boolean joue = false;
 		while(true) {
 			Pingouin pingouin = LauncherConsole.choixPingouin(br,p);
 			Coordonnees dep = LauncherConsole.choixDeplacement(br, p, pingouin);
 			if(dep!=null) {
-				return new CoupleCoordonnees(pingouin.position,dep);
+				return new CoupleGenerique<Coordonnees,Coordonnees>(pingouin.position,dep);
 			}
 		}
 	}

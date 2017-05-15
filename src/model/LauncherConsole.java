@@ -262,14 +262,14 @@ public class LauncherConsole {
 		int num_p = -1;
 		Pingouin[] pingouins = p.joueurs[p.joueurActif].myPingouins; 
 		try {
-			System.out.println("Vos pinguoins déplacables sont:");
+			System.out.println("Vos pingouins déplacables sont:");
 			for(int i =0; i<pingouins.length;i++) {
 				if(pingouins[i].actif) {
-					System.out.println(String.valueOf(i) + " - " + pingouins[i]);
+					System.out.print(String.valueOf(i) + " - " + pingouins[i]);
 				}
 			}
 			while (num_p < 0 || num_p >= pingouins.length) {
-				System.out.println("Entrez le numero de celui que vous voulez déplacer:");
+				System.out.println("\nEntrez le numero de celui que vous voulez déplacer:");
 				num_p = Integer.valueOf(br.readLine());
 				if (num_p < 0 || num_p >= pingouins.length) {
 					System.out.println("Mauvaise entree. Réessayez.");

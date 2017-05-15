@@ -65,7 +65,7 @@ public class PingouinServer {
 	            }
 	            
 	            
-	            //attente des autres joueurs
+	            /* ----- ATTENTE AUTRES JOUEURS ----- */
 	            while(true) {
 	            	synchronized (p) {
 		            	if(!phaseNoms && partieCree) break;
@@ -74,15 +74,15 @@ public class PingouinServer {
 	            }
 	            
 	            out.writeObject(p.clone());
-	            out.writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de placer.");
+	            out.writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" commence à placer.");
 	                
-                //phase placement
+                /* ----- PLACEMENT ----- */
                 while (true) {
                 	synchronized (p) {
 	                	if(phasePlacement) {
-		                	if(p.joueurActif == num || p.joueurs[p.joueurActif].getClass() == IA.class) {
+		                	if(p.joueurActif == num || p.joueurs[p.joueurActif] instanceof IA) {
 		                		Coordonnees c = null;
-								if (p.joueurs[p.joueurActif].getClass() == IA.class) { // Tour de l'IA
+								if (p.joueurs[p.joueurActif] instanceof IA) { // Tour de l'IA
 									c = p.joueurs[p.joueurActif].placement(p);
 								} else { 												// Tour de l'Humain
 			                		out.writeObject("PLACEMENT n° "+(num_pingouin+1));
@@ -104,28 +104,21 @@ public class PingouinServer {
 									p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
 									
 									//envoie du placement à tout les joueurs
-									for(int i = 0; i<nbClients; i++) {
-										writers[i].writeObject("MESSAGE "+j.nom+" a posé un pingouin en "+c);
-										writers[i].writeObject(p.clone());
-									}
+									envoyerMessageAuxClients(j.nom+" a posé un pingouin en "+c);
+									envoyerPartieAuxClients(p.clone());
 									
 									//Maj numero du pingouin
 									if(p.joueurActif == 0) {
 										num_pingouin++;
-									}
-									
+									}	
 									
 									//Test fin de phase placement
 									if(num_pingouin == NBPINGOUINS && p.joueurActif == 0) {
 										phasePlacement = false;
-										for(int i = 0; i<nbClients; i++) {
-											writers[i].writeObject("MESSAGE Début de la phase de jeu !\n\n"+p.joueurs[p.joueurActif].nom+" commence à jouer.");
-										}
+										envoyerMessageAuxClients("Début de la phase de jeu !\n\n"+p.joueurs[p.joueurActif].nom+" commence à jouer.");
 									} else {
 										//Affiche qui est le prochain joueur sur tout les clients
-										for(int i = 0; i<nbClients; i++) {
-											writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de placer.");
-										}
+										envoyerMessageAuxClients("Au tour de "+p.joueurs[p.joueurActif].nom+" de placer.");
 									}
 								} else {
 									out.writeObject("MESSAGE Impossible de poser un pingouin à l'emplacement "+c);
@@ -138,55 +131,48 @@ public class PingouinServer {
                 	}
                 }
                 
-                //phase jeu
+                /* ----- JEU ----- */
                 while (true) {
                 	synchronized (p) {
 	                	if(phaseJeu) {
-		                	if(p.joueurActif == num || p.joueurs[p.joueurActif].getClass()==IA.class) {
+		                	if(p.joueurActif == num || p.joueurs[p.joueurActif] instanceof IA) {
 		                		if(p.peutJouer()) {
 			                		Joueur j = p.joueurs[p.joueurActif];
-			                		CoupleCoordonnees cc = null;
-			                		if(p.joueurs[p.joueurActif].getClass()==IA.class && p.peutJouer()) {
-			                			CoupleGenerique<Coordonnees, Coordonnees> cg = p.joueurs[p.joueurActif].jouer(p);
-			                			cc = new CoupleCoordonnees(cg.e1,cg.e2);
-			                		} else {//le joueur actif peut jouer
+			                		CoupleGenerique<Coordonnees, Coordonnees> cg = null;
+			                		if(p.joueurs[p.joueurActif] instanceof IA) { //tour de l'IA
+			                			cg = p.joueurs[p.joueurActif].jouer(p);
+			                		} else {									//tour du joueur
 				                		writers[p.joueurActif].writeObject("DEPLACEMENT");
 					                    Object obj = in.readObject();
-					                    if (obj instanceof CoupleCoordonnees) {
-					                    	cc = (CoupleCoordonnees)obj;
+					                    if (obj instanceof CoupleGenerique<?, ?>) {
+					                    	cg = (CoupleGenerique<Coordonnees,Coordonnees>)obj;
 					                    } else {
-					                    	so.println("Lecture du couple envoyée par "+name+" impossible.");
+					                    	so.println("Lecture du couple de coordonnées envoyé par "+name+" impossible.");
 					                    }   	
-					                 }
-			                    	p.deplacement(cc);
+					                }
+			                		//effectue le deplacement et verifie l'effet de ce deplacement sur le plateau
+			                    	p.deplacement(cg);
 			                    	p.verifierPingouinActif();
 									//Maj prochain joueur
 									p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
 									
-									//envoie du deplacement à tout les joueurs
-									for(int i = 0; i<nbClients; i++) {
-										writers[i].writeObject("MESSAGE "+j.nom+" a deplacé un pingouin de "+cc.c1+" vers "+cc.c2);
-										writers[i].writeObject(p.clone());
-									}
+									//envoie du deplacement et de la partie à tous les clients
+									envoyerMessageAuxClients(j.nom+" a deplacé un pingouin de "+cg.e1+" vers "+cg.e2);
+									envoyerPartieAuxClients(p.clone());
 									
-									//envoie du nom du prochain joueur devant jouer
-									for(int i = 0; i<nbClients; i++) {
-										writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
-									}
+									//envoie du nom du prochain joueur a jouer à tous les clients
+									envoyerMessageAuxClients("Au tour de "+p.joueurs[p.joueurActif].nom+" de jouer.");
 									
 									//Test fin de partie
 									if(p.estPartieFini()) {
 										phaseJeu = false;
 									}
-			                    } else {//le joueur actif ne peut plus jouer
-									for(int i = 0; i<nbClients; i++) {
-										writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" ne peut plus jouer.");
-									}
+			                    } else {//le joueur actif OU l'IA active ne peut plus jouer
+			                    	envoyerMessageAuxClients(p.joueurs[p.joueurActif].nom+" ne peut plus jouer.");
 									//Maj prochain joueur
 									p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
-									for(int i = 0; i<nbClients; i++) {
-										writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
-									}
+									envoyerPartieAuxClients(p.clone());
+									envoyerMessageAuxClients("Au tour de "+p.joueurs[p.joueurActif].nom+" de jouer.");
 			                    }
 		                	}
 		                	
@@ -196,6 +182,7 @@ public class PingouinServer {
                 	}
                 }
                 
+                /* ----- AFFICHAGE FIN PARTIE -----*/
                 out.writeObject("MESSAGE Fin de la partie ! "+p.getGagnant().get(0).nom+" a gagné !\n"+p.scoresToString());
                 
             } catch (Exception e) {
@@ -255,7 +242,7 @@ public class PingouinServer {
 					out.writeObject("MESSAGE "+others.substring(0,others.length()-2)+" dans une partie.");
 	            }
 				//Si ils manquent d'autres joueurs
-	            if(num+1==MAXPLAYERS) {
+	            if(num+1<MAXPLAYERS) {
 	            	out.writeObject("MESSAGE En attente d'autres joueurs pour lancer la partie.");
 	            }
 				//envoie du placement à tout les joueurs
@@ -272,7 +259,7 @@ public class PingouinServer {
         }
         
         public synchronized void afficherJoueursConnectes() {
-        	for (int i = 0; i<MAXPLAYERS;i++) {
+        	for (int i = 0; i<nbClients;i++) {
         		if(p.joueurs[i]!=null) {
         			so.println(p.joueurs[i].nom+ " est dans la partie.");
         		}
@@ -293,6 +280,27 @@ public class PingouinServer {
         	} catch (Exception e){
         		e.printStackTrace(so);
         	}
+        }
+        
+        public synchronized void envoyerPartieAuxClients(Partie p) {
+        	try {
+	        	for(int i = 0; i<nbClients; i++) {
+	        		writers[i].writeObject(p);
+	        	}
+        	}catch (Exception e) {
+        		e.printStackTrace(System.err);
+        	}
+        }
+        
+        public synchronized void envoyerMessageAuxClients(String message) {
+        	try {
+	        	for(int i = 0; i<nbClients; i++) {
+	        		writers[i].writeObject("MESSAGE "+message);
+	        	}
+        	}catch (Exception e) {
+        		e.printStackTrace(System.err);
+        	}
+        	
         }
         
     }

@@ -1,6 +1,8 @@
 package model;
 
-public class CoupleGenerique<T1, T2> {
+import java.io.Serializable;
+
+public class CoupleGenerique<T1, T2> implements Serializable{
 
     public T1 e1;
     public T2 e2;

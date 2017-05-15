@@ -201,6 +201,7 @@ public class Partie implements Serializable {
 			if(utiliseHistorique) {
 				h.sauvegarder(name);
 			}
+			oos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -234,6 +235,7 @@ public class Partie implements Serializable {
 			if(utiliseHistorique) {
 				this.h.charger(name);
 			}
+			ois.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -351,6 +353,17 @@ public class Partie implements Serializable {
 	
 	public void deplacement(CoupleCoordonnees cc) {
 		deplacement(cc.c1, cc.c2);
+	}
+	
+	/**
+	 * Deplace un pingouin de "cg.e1" vers "cg.e2"
+	 * 	 
+	 * @param cg
+	 *            Le CoupleGenerique de coordonnees correspondant au deplacement d'un pingouin.
+	 */
+	
+	public void deplacement(CoupleGenerique<Coordonnees,Coordonnees> cg) {
+		deplacement(cg.e1, cg.e2);
 	}
 
 	/**

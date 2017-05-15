@@ -452,12 +452,12 @@
                 <Image url="@../../ressources/decor/tuilettes.png" />
               </image>
             </ImageView>
-            <ImageView fx:id="t82" fitHeight="48.0" fitWidth="64.0" layoutX="256.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="t82" fx:id="t45" fitHeight="48.0" fitWidth="64.0" layoutX="256.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../../ressources/decor/tuilettes.png" />
               </image>
             </ImageView>
-            <ImageView fx:id="t82" fitHeight="48.0" fitWidth="64.0" layoutX="320.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="t82" fx:id="t46" fitHeight="48.0" fitWidth="64.0" layoutX="320.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../../ressources/decor/tuilettes.png" />
               </image>

@@ -320,105 +320,7 @@
             <Insets top="10.0" />
           </GridPane.margin>
         </Text>
-        <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-          <children>
-            <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
-              <graphic>
-                <ImageView fitHeight="45.0" fitWidth="45.0">
-                  <image>
-                    <Image url="@../../ressources/decor/reculeRapide.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-              <HBox.margin>
-                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-              </HBox.margin>
-            </Button>
-            <Button fx:id="bouton_indice" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
-              <graphic>
-                <ImageView fitHeight="40.0" fitWidth="40.0">
-                  <image>
-                    <Image url="@../../ressources/decor/tips.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-              <HBox.margin>
-                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-              </HBox.margin>
-            </Button>
-            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Annuler">
-              <HBox.margin>
-                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-              </HBox.margin>
-            </Button>
-            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Fin de tour" textAlignment="CENTER">
-              <HBox.margin>
-                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-              </HBox.margin>
-            </Button>
-            <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
-              <graphic>
-                <ImageView fitHeight="45.0" fitWidth="45.0">
-                  <image>
-                    <Image url="@../../ressources/decor/avanceRapide.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-              <HBox.margin>
-                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-              </HBox.margin>
-            </Button>
-          </children>
-        </HBox>
-        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" minHeight="26.0" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: transparent;&#10;" text="" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-          <graphic>
-            <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" x="0.0">
-              <image>
-                <Image url="@../../ressources/decor/DemiParametres.png" />
-              </image>
-            </ImageView>
-          </graphic>
-          <items>
-            <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
-              <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-            </MenuItem>
-            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
-              <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/son.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-            </MenuItem>
-            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sauver" />
-            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
-              <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/aide.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-            </MenuItem>
-            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
-              <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/quit.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-            </MenuItem>
-          </items>
-        </MenuButton>
-            <AnchorPane fx:id="banquise" maxHeight="300.0" maxWidth="525.0" prefHeight="275.0" prefWidth="550.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <AnchorPane fx:id="banquise" maxHeight="256.0" maxWidth="512.0" minHeight="256.0" minWidth="512.0" prefHeight="256.0" prefWidth="512.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <children>
                   <ImageView fx:id="t11" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -722,6 +624,104 @@
                   </ImageView>
                </children>
             </AnchorPane>
+        <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+          <children>
+            <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+              <graphic>
+                <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <image>
+                    <Image url="@../../ressources/decor/reculeRapide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_indice" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+              <graphic>
+                <ImageView fitHeight="40.0" fitWidth="40.0">
+                  <image>
+                    <Image url="@../../ressources/decor/tips.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Annuler">
+              <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Fin de tour" textAlignment="CENTER">
+              <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+              <graphic>
+                <ImageView fitHeight="45.0" fitWidth="45.0">
+                  <image>
+                    <Image url="@../../ressources/decor/avanceRapide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" minHeight="26.0" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: transparent;&#10;" text="" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+          <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" x="0.0">
+              <image>
+                <Image url="@../../ressources/decor/DemiParametres.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <items>
+            <MenuItem disable="false" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Musique">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Son">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/son.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sauver" />
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Aide">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/aide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" style="-fx-background-color: transparent" text="Sortie">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/quit.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </MenuItem>
+          </items>
+        </MenuButton>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />

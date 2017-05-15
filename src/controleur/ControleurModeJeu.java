@@ -122,9 +122,8 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	
     	
     	
-    	/*String path = ""+modeJeu[couleur]+""+couleur+".png"*/
-    	
-    	   	String path = "";
+    		String path = modeJeu[couleur]+""+couleur+".png";
+    				
 	    	    	
 	    	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
 	    		return new Humain(name, nbP, path, couleur);

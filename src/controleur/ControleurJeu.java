@@ -23,6 +23,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import model.Coordonnees;
 import model.Humain;
 import model.IA;
 
@@ -138,6 +139,147 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	//reglette
     }
     
+    ImageView[][] banq = new ImageView[8][8];
+    ImageView[][]  pingouin = new ImageView[4][4];
+    int fromX;
+    int fromY;
+    int toX;
+    int toY;
+    boolean EndOfTurn;
+    int largeurHexagone ;
+    int hauteurHexagone ;
+    Image image1PoissonJaune;
+    Image image2PoissonsJaunes;
+    Image image3PoissonsJaunes;
+    Image image1PoissonBlanc;
+    Image image2PoissonsBlancs;
+    Image image3PoissonsBlancs;
+    
+    
+    @FXML ImageView shadowPingouin;
+    @FXML AnchorPane banquise;
+    
+    public void majBanquise(){
+    	int indice = 0;
+    	for (int i = 0 ; i < 8 ; i++){
+    		for (int j = 0 ; j< 8 ; j++){
+    			if (!( (i%2 == 1) && (j == 7) )){
+    				banq [i][j] = (ImageView) banquise.getChildren().get(indice);
+    				indice++;
+    			}
+    		}
+    	}
+    }
+
+   double hauteurbanquise;
+   double largeurbanquise;
+    
+   public Coordonnees getXY(double x , double y){
+   	int i = 0, j = 0;
+   	double c = 0;
+   	double h = hauteurbanquise/3;;
+   	if ( (y/h)%2 == 1){
+   		i = (int) ( (y/h) / 2 ) +1;
+   		if (i%2 == 1){
+   			j = (int) (x/largeurbanquise);
+   		}else{
+   			j = (int) ((x - (largeurbanquise/2) ) / largeurbanquise);
+   		}
+   	}else{
+   		i = (int) (y/h);
+   		if (i%4 == 2){
+   			j = (int) (x/(largeurbanquise/2));
+   			c = (double) (i + j + 1 ) * h ;
+   			j = (int) (x/largeurbanquise);
+   			i = (int) ( (y/h) / 2 ) + 1 ;
+   			if ( (-0.5*x - y) < c ){
+   			i++;
+   			}
+   		
+   		}else if (i%4 ==0){
+   		j = (int) (x/(largeurbanquise/2));
+   			c = (i - j + 1 ) * h ;
+   			j = (int) (x/largeurbanquise );
+   			i = (int) ( (y/h) / 2 ) +1;
+   			if ((0.5*x - y) < c){
+   			i++;
+   			}
+   		}
+   	}
+   	
+   	System.out.println(" i = " + i +" et j = "+j);
+   	return new Coordonnees(i,j);
+   }
+    
+   /* 
+    @FXML
+    public void SelectPingouin(MouseEvent event){
+    	if (EndOfTurn) {
+    		shadowPingouin.setVisible(false);
+    	}    	
+    	for (int i = 0; i<8 ; i++){
+    		for (int j = 0; j<8 ; j++){
+    			if (!( (i%2 == 1) && (j == 7) )){
+    				if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsJaunes){
+    					((ImageView) (banq [i][j] )).setImage(image3PoissonsBlancs) ;
+    				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsJaunes){
+    					((ImageView) (banq [i][j] )).setImage(image2PoissonsBlancs) ;
+    				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonJaune){
+    					((ImageView) (banq [i][j] )).setImage(image1PoissonBlanc) ;
+    				}
+    			}
+        	}
+    	}
+    	EndOfTurn = false;
+    	fromX = getX();
+    	fromY = getY();
+    	 ArrayList<ArrayList<Coordonnees>> accessibles = deplacementPossible(pingouin[fromX][fromY]);
+    	for ( ArrayList<Coordonnees> path : accessibles){
+    		for (Coordonnees bloc : path){
+    			int i = bloc.x;
+    			int j = bloc.y;
+    			if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsBlancs){
+					((ImageView) (banq [i][j] )).setImage(image3PoissonsJaunes) ;
+				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsBlancs){
+					((ImageView) (banq [i][j] )).setImage(image2PoissonsJaunes) ;
+				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonBlanc){
+					((ImageView) (banq [i][j] )).setImage(image1PoissonJaune) ;
+				}
+    		}
+    	}
+    }
+    @FXML
+    public void GoToPingouin(MouseEvent event){
+    	toX = getX();
+    	toY = getY();
+    	if ( estJaune(  ((ImageView) (banq[toX][toY])) .getImage() ) ){
+    		TranslateTransition tt = new TranslateTransition(Duration.millis(0), shadowPingouin);
+    	     tt.setToX( toX * largeurHexagone);
+    	     tt.setToY(toY * hauteurHexagone);
+    	     tt.play();
+    	     shadowPingouin.setVisible(true);
+    	     EndOfTurn = true;
+    	}
+    }
+    */
+    public boolean estJaune(Image imag){
+    	return (imag==image1PoissonJaune)||(imag==image2PoissonsJaunes)||(imag==image3PoissonsJaunes);
+    }
+    
+    @FXML
+    public void ValidatePingouinTranslation(MouseEvent event){
+    	if (EndOfTurn){
+	    	TranslateTransition tt = new TranslateTransition(Duration.millis(500),pingouin[toX][toY]);
+	    	shadowPingouin.setVisible(true);
+	    	tt.setFromX( fromX * largeurHexagone);
+   	     	tt.setFromY( fromY * hauteurHexagone);
+	   	    tt.setToX( toX * largeurHexagone);
+		    tt.setToY(toY * hauteurHexagone);
+	   	    
+	   	    /*tour suivant*/
+    	}
+    }
+    
     
     /********************************************/
     /*			Gestion des boutons 			*/
@@ -164,7 +306,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     }
     
     
-    /*
+    
     
     /** DESIGN AJOUTE CE WEEK END**/
     

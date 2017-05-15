@@ -7,33 +7,72 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class AlgoIA : Implémente les algorithmes utilisés par l'IA
+ */
 public class AlgoIA {
 
+    /**
+     * Reference au joueur IA
+     */
     IA myIA = null;
-    ArrayList<Coordonnees> platHHG; // Haut Haut Gauche
-    ArrayList<Coordonnees> platHBG; // Haut Bas Gauche
-    ArrayList<Coordonnees> platHHD; // Haut Haut Droit
-    ArrayList<Coordonnees> platHBD; // Haut Bas Droit
-    ArrayList<Coordonnees> platBHG; // Bas Haut Gauche
-    ArrayList<Coordonnees> platBBG; // Bas Bas Gauche
-    ArrayList<Coordonnees> platBHD; // Bas Haut Droit
-    ArrayList<Coordonnees> platBBD; // Bas Bas Droit
 
+    /**
+     * Moitie superieure gauche du carre haut gauche
+     */
+    ArrayList<Coordonnees> platHHG;
+
+    /**
+     * Moitie inferieure droite du carre haut gauche
+     */
+    ArrayList<Coordonnees> platHBG;
+
+    /**
+     * Moitie superieure droite du carre haut droit
+     */
+    ArrayList<Coordonnees> platHHD;
+
+    /**
+     * Moitie inferieure gauche du carre haut droit
+     */
+    ArrayList<Coordonnees> platHBD;
+
+    /**
+     * Moitie superieure droite du carre bas gauche
+     */
+    ArrayList<Coordonnees> platBHG;
+
+    /**
+     * Moitie inferieure gauche du carre bas gauche
+     */
+    ArrayList<Coordonnees> platBBG;
+
+    /**
+     * Moitie superieure gauche du carre bas droit
+     */
+    ArrayList<Coordonnees> platBHD;
+
+    /**
+     * Moitie inferieure droit du carre bas droit
+     */
+    ArrayList<Coordonnees> platBBD;
+
+    /**
+     * Constructeurs
+     */
+    /**
+     * Constructeurs.
+     *
+     * @param ia Le joueur de type IA.
+     */
     public AlgoIA(IA ia) {
         myIA = ia;
     }
-
-    /*  Représentation de la direction selon un int : 
-     *    - 0 = Haut droit
-     *    - 1 = Milieu droit
-     *    - 2 = Bas droit
-     *    - 3 = Bas gauche
-     *    - 4 = Milieu gauche
-     *    - 5 = Haut gauche
+    
+    /**
+     * Rempli les structures de separation du terrain.
      */
-    /* 
-     * Decoupage du terrain en 8 zones 
-     */
+    
     private void fillStructplat() {
         fillplathhg();
         fillplathbg();
@@ -45,6 +84,10 @@ public class AlgoIA {
         fillplatbbd();
     }
 
+    /**
+     * Rempli la structure Haut Haut Gauche.
+     */
+    
     private void fillplathhg() {     /* Zone 1 : moitié superieure gauche du carre haut gauche */
 
         platHHG.add(new Coordonnees(0, 0));
@@ -54,6 +97,10 @@ public class AlgoIA {
         platHHG.add(new Coordonnees(2, 0));
     }
 
+    /**
+     * Rempli la structure Haut Bas Gauche.
+     */    
+    
     private void fillplathbg() {    /* Zone 2 : moitié inferieure droite du carre haut gauche */
 
         platHBG.add(new Coordonnees(0, 2));
@@ -68,6 +115,10 @@ public class AlgoIA {
         platHBG.add(new Coordonnees(3, 3));
     }
 
+    /**
+     * Rempli la structure Haut Haut Droite.
+     */    
+    
     private void fillplathhd() {    /* Zone 3 : moitié superieure droite du carre haut droit */
 
         platHHD.add(new Coordonnees(0, 5));
@@ -77,6 +128,10 @@ public class AlgoIA {
         platHHD.add(new Coordonnees(2, 6));
     }
 
+    /**
+     * Rempli la structure Haut Bas Droit.
+     */
+    
     private void fillplathbd() {    /* Zone 4 : moitié inferieure gauche du carre haut droit */
 
         platHBD.add(new Coordonnees(0, 4));
@@ -91,7 +146,11 @@ public class AlgoIA {
         platHHD.add(new Coordonnees(3, 7));
 
     }
-
+    
+    /**
+     * Rempli la structure Bas Haut Gauche.
+     */
+    
     private void fillplatbhg() {    /* Zone 5 : moitié superieure droite du carre bas gauche */
 
         platBHG.add(new Coordonnees(4, 0));
@@ -108,6 +167,10 @@ public class AlgoIA {
 
     }
 
+    /**
+     * Rempli la structure Bas Bas Gauche.
+     */    
+    
     private void fillplatbbg() {    /* Zone 6 : moitié inferieure gauche du carre bas gauche */
 
         platBBG.add(new Coordonnees(5, 0));
@@ -117,6 +180,10 @@ public class AlgoIA {
 
     }
 
+    /**
+     * Rempli la structure Bas Haut Droite.
+     */    
+    
     private void fillplatbhd() {    /* Zone 7 : moitié superieure gauche du carre bas droit */
 
         platBHD.add(new Coordonnees(4, 3));
@@ -132,7 +199,11 @@ public class AlgoIA {
         platBHD.add(new Coordonnees(7, 5));
 
     }
-
+    
+    /**
+     * Rempli la structure Bas Bas Droite.
+     */
+    
     private void fillplatbbd() {     /* Zone 8 : moitié inferieure droit du carre bas droit */
 
         platBBD.add(new Coordonnees(5, 7));
@@ -142,7 +213,20 @@ public class AlgoIA {
 
     }
 
-    private Coordonnees containsThree(Partie p, ArrayList<Coordonnees> list) { // renvoie une case à 3, ou une valeur spéciale si non trouvée
+    
+    /**
+     * Observe une liste representant une zone de la banquise
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @param list 
+     *          La liste des cases de la partie à observer.
+     * 
+     * @return renvoie les coordonnees d'une case a 3 presente dans la liste, ou (-1, -1) si non trouvée.
+     */
+    
+    private Coordonnees containsThree(Partie p, ArrayList<Coordonnees> list) { // 
         for (int i = 0; i < list.size(); i++) {
             if ((p.b.getTuile(list.get(i)).nbPoissons == 3) && !(p.b.getTuile(list.get(i)).aUnPingouin)) {
                 return list.get(i);
@@ -154,9 +238,20 @@ public class AlgoIA {
     /**
      * ****************************************************************************************************
      */
+    
     /* Renvoie la coordonnees de la case choisie par l'IA Facile pour le placement du pingouin
      * Case choisie aleatoirement 
      */
+    
+    /**
+     * Algorithme de placement pour l'IA facile
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return renvoie les coordonnees de la case choisie.
+     */
+    
     public Coordonnees placementFacile(Partie p) {
         Random r = new Random();
 
@@ -174,24 +269,25 @@ public class AlgoIA {
 
         return new Coordonnees(i, j);
     }
-
-    /* Renvoie un couple de coordonnees :
-     * La premiere represente la position du pingouin choisi avant le deplacement
-     * La seconde represente la position du pingouin choisi apres le deplacement
-     * Case choisie aleatoirement par celles accessibles
+    
+    /**
+     * Algorithme de choix d'une case a jouer pour l'IA facile
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie un couple de coordonnee : (Position du pingouin choisi avant le deplacement, Position du pingouin choisi apres le deplacement) .
      */
     public CoupleGenerique<Coordonnees, Coordonnees> algoFacile(Partie p) {
 
-        // !!!!!!!!
-        // Ne marche pas quand on choisi un pingouin qui na pas de deplacement possible !!2
         Random r = new Random();
         CoupleGenerique<Coordonnees, Coordonnees> cc;
-        /* Choix aleatoire du Pingouin */
-
+        
         int notreNum = notreNumeroDeJoueur(p);
-        int notreNbPingouin = p.joueurs[notreNum].nbPingouin;//p.nbPingouinActif(p.joueurs[notreNum]);
-
-        int val = r.nextInt(notreNbPingouin);  // myIA.nbPingouin pas mis a jour !
+        int notreNbPingouin = p.joueurs[notreNum].nbPingouin;
+        
+        /* Choix aleatoire du Pingouin */
+        int val = r.nextInt(notreNbPingouin);
         while (!p.joueurs[notreNum].myPingouins[val].actif) {
             val = r.nextInt(notreNbPingouin);
         }
@@ -289,8 +385,19 @@ public class AlgoIA {
     /**
      * ****************************************************************************************************
      */
-    /* Renvoie les coordonnees de la tuile 3 la plus proche de la coordonnee c 
+
+    /**
+     * Algorithme de choix d'une case a jouer pour l'IA facile
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @param c 
+     *          La coordonnee de depart de l'algo.
+     * 
+     * @return Les coordonnees de la tuile 3 la plus proche de la coordonnee c .
      */
+    
     public Coordonnees meilleur3(Partie p, Coordonnees c) {
         LinkedList<Coordonnees> file = new LinkedList<>();
         Tuile tuileDep = p.b.getTuile(c);
@@ -320,15 +427,32 @@ public class AlgoIA {
         }
         return c;
     }
-
-    /* Fonction de placement moyen
-     * Renvoie la coordonee de la tuile contenant 3 poisssons la plus au centre
+    
+    /**
+     * Fonction de placement moyen
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie la coordonee de la tuile libre contenant 3 poisssons la plus au centre .
      */
     public Coordonnees placementMoyen(Partie p) {
         Coordonnees c = new Coordonnees(3, 3);
         return meilleur3(p, c);
     }
 
+    /**
+     * Test si une case est une feuille
+     *
+     * @param c 
+     *          Les coordonnees de la case a traiter.
+     * 
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie vrai si la case de coordonnees c est une destination finale.
+     */
+    
     public boolean feuillePointDinterrogation(Coordonnees c, Partie p) {
         return (((p.b.getTuile(p.b.getBG(c)) == null) || (p.b.getTuile(p.b.getBG(c)).aUnPingouin) || (p.b.getTuile(p.b.getBG(c)).nbPoissons == 0))
                 && ((p.b.getTuile(p.b.getMG(c)) == null) || (p.b.getTuile(p.b.getMG(c)).aUnPingouin) || (p.b.getTuile(p.b.getMG(c)).nbPoissons == 0))
@@ -338,6 +462,18 @@ public class AlgoIA {
                 && ((p.b.getTuile(p.b.getHD(c)) == null) || (p.b.getTuile(p.b.getHD(c)).aUnPingouin) || (p.b.getTuile(p.b.getHD(c)).nbPoissons == 0)));
     }
 
+    /**
+     * Test si une configuration de partie est une configuration finale
+     *
+     * @param p
+     *          La partie.
+     * 
+     * @param j 
+     *          Le joueur.
+     * 
+     * @return Renvoie vrai si dans la partie, le joueur j ne peut plus bouger aucun pingouin.
+     */    
+    
     public boolean feuillePointDinterrogationPingu(Partie p, Joueur j) {
         boolean bool = true;
         for (int i = 0; i < j.nbPingouin; i++) {
@@ -351,7 +487,22 @@ public class AlgoIA {
         return bool;
     }
 
-    public ArbreGraphe CreationArbre(Coordonnees c, Partie partie, int dir, int nbcoupsmax) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
+    /**
+     * Creation de l'arbre des coups possibles pour un pingouin
+     *
+     * @param c
+     *          Les coordonnees c de la racine de l'arbre.
+     * 
+     * @param partie
+     *          La partie.
+     * 
+     * @param nbcoupsmax
+     *          La profondeur de l'arbre = le nombre de coups que l'on veut evalue
+     * 
+     * @return Renvoie un ArbreGraphe.
+     */
+    
+    public ArbreGraphe CreationArbre(Coordonnees c, Partie partie, int nbcoupsmax) { // crée l'ArbreGraphe à partir de c sur nbcoupsmax coups.
 
         if ((nbcoupsmax <= 0) || feuillePointDinterrogation(c, partie)) {
             ArbreGraphe abr = new ArbreGraphe(0);
@@ -373,42 +524,42 @@ public class AlgoIA {
         Coordonnees a = new Coordonnees(c.x, c.y);
         while ((p.b.getTuile(p.b.getBG(a)) != null) && (!p.b.getTuile(p.b.getBG(a)).aUnPingouin) && (p.b.getTuile(p.b.getBG(a)).nbPoissons != 0)) {
 
-            abr.noeudBG[0].add(CreationArbre(p.b.getBG(a), p, 3, nbcoupsmax - 1));
+            abr.noeudBG[0].add(CreationArbre(p.b.getBG(a), p, nbcoupsmax - 1));
 
             a = p.b.getBG(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getMG(a)) != null && (!p.b.getTuile(p.b.getMG(a)).aUnPingouin) && (p.b.getTuile(p.b.getMG(a)).nbPoissons != 0)) {
 
-            abr.noeudMG[0].add(CreationArbre(p.b.getMG(a), p, 4, nbcoupsmax - 1));
+            abr.noeudMG[0].add(CreationArbre(p.b.getMG(a), p, nbcoupsmax - 1));
 
             a = p.b.getMG(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getHG(a)) != null && (!p.b.getTuile(p.b.getHG(a)).aUnPingouin) && (p.b.getTuile(p.b.getHG(a)).nbPoissons != 0)) {
 
-            abr.noeudHG[0].add(CreationArbre(p.b.getHG(a), p, 5, nbcoupsmax - 1));
+            abr.noeudHG[0].add(CreationArbre(p.b.getHG(a), p, nbcoupsmax - 1));
 
             a = p.b.getHG(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getHD(a)) != null && (!p.b.getTuile(p.b.getHD(a)).aUnPingouin) && (p.b.getTuile(p.b.getHD(a)).nbPoissons != 0)) {
 
-            abr.noeudHD[0].add(CreationArbre(p.b.getHD(a), p, 0, nbcoupsmax - 1));
+            abr.noeudHD[0].add(CreationArbre(p.b.getHD(a), p, nbcoupsmax - 1));
 
             a = p.b.getHD(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getMD(a)) != null && (!p.b.getTuile(p.b.getMD(a)).aUnPingouin) && (p.b.getTuile(p.b.getMD(a)).nbPoissons != 0)) {
 
-            abr.noeudMD[0].add(CreationArbre(p.b.getMD(a), p, 1, nbcoupsmax - 1));
+            abr.noeudMD[0].add(CreationArbre(p.b.getMD(a), p, nbcoupsmax - 1));
 
             a = p.b.getMD(a);
         }
         a = new Coordonnees(c.x, c.y);
         while (p.b.getTuile(p.b.getBD(a)) != null && (!p.b.getTuile(p.b.getBD(a)).aUnPingouin) && (p.b.getTuile(p.b.getBD(a)).nbPoissons != 0)) {
 
-            abr.noeudBD[0].add(CreationArbre(p.b.getBD(a), p, 2, nbcoupsmax - 1));
+            abr.noeudBD[0].add(CreationArbre(p.b.getBD(a), p, nbcoupsmax - 1));
 
             a = p.b.getBD(a);
         }
@@ -416,10 +567,29 @@ public class AlgoIA {
 
     }
 
-    /*
-     * dir = 6 a l'appel de la fonction
+    /**
+     * Parcours de l'ensemble des coups possibles pour un pingouin
+     *
+     * @param abr
+     *          L'ArbreGraphe a explorer.
+     * 
+     * @param nbCoupsmax
+     *          Profondeur maximale de l'arbre.
+     * 
+     * @param nbCoups
+     *          Profondeur actuelle de l'arbre.
+     * 
+     * @param somme
+     *          Valeur servant a la ponderation des feuilles de l'arbre.
+     * 
+     * @param coord1stchoice
+     *          Sauvegarde de la coordonnee du premier deplacement d'un chemin dans l'arbre.
+     * 
+     * 
+     * @return Renvoie un couple (coordonnes, int) = (coordonnees du deplacement,valeur de la ponderation).
      */
-    public CoupleGenerique<Coordonnees, Integer> parcoursGraphe(ArbreGraphe abr, int nbCoupsmax, int nbCoups, int dir, int somme, Coordonnees coord1stchoice) {
+    
+    public CoupleGenerique<Coordonnees, Integer> parcoursGraphe(ArbreGraphe abr, int nbCoupsmax, int nbCoups, int somme, Coordonnees coord1stchoice) {
 
         if ((nbCoups == nbCoupsmax - 1)) {
             coord1stchoice = abr.c;
@@ -438,54 +608,54 @@ public class AlgoIA {
         CoupleGenerique<Coordonnees, Integer> tmp = new CoupleGenerique<Coordonnees, Integer>(new Coordonnees(0, 0), 0);
 
         if ((abr.noeudBD[0] != null) && (!abr.noeudBD[0].isEmpty())) {
-            val1 = parcoursGraphe(abr.noeudBD[0].get(0), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            val1 = parcoursGraphe(abr.noeudBD[0].get(0), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             for (int i = 1; i < abr.noeudBD[0].size(); i++) {
-                tmp = parcoursGraphe(abr.noeudBD[0].get(i), nbCoupsmax, nbCoups - 1, 2, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                tmp = parcoursGraphe(abr.noeudBD[0].get(i), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
                 if (val1.e2 <= tmp.e2) {
                     val1 = tmp;
                 }
             }
         }
         if ((abr.noeudMD[0] != null) && (!abr.noeudMD[0].isEmpty())) {
-            val2 = parcoursGraphe(abr.noeudMD[0].get(0), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            val2 = parcoursGraphe(abr.noeudMD[0].get(0), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             for (int i = 1; i < abr.noeudMD[0].size(); i++) {
-                tmp = parcoursGraphe(abr.noeudMD[0].get(i), nbCoupsmax, nbCoups - 1, 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                tmp = parcoursGraphe(abr.noeudMD[0].get(i), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
                 if (val2.e2 <= tmp.e2) {
                     val2 = tmp;
                 }
             }
         }
         if ((abr.noeudHD[0] != null) && (!abr.noeudHD[0].isEmpty())) {
-            val3 = parcoursGraphe(abr.noeudHD[0].get(0), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            val3 = parcoursGraphe(abr.noeudHD[0].get(0), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             for (int i = 1; i < abr.noeudHD[0].size(); i++) {
-                tmp = parcoursGraphe(abr.noeudHD[0].get(i), nbCoupsmax, nbCoups - 1, 0, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                tmp = parcoursGraphe(abr.noeudHD[0].get(i), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
                 if (val3.e2 <= tmp.e2) {
                     val3 = tmp;
                 }
             }
         }
         if ((abr.noeudHG[0] != null) && (!abr.noeudHG[0].isEmpty())) {
-            val4 = parcoursGraphe(abr.noeudHG[0].get(0), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            val4 = parcoursGraphe(abr.noeudHG[0].get(0), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             for (int i = 1; i < abr.noeudHG[0].size(); i++) {
-                tmp = parcoursGraphe(abr.noeudHG[0].get(i), nbCoupsmax, nbCoups - 1, 5, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                tmp = parcoursGraphe(abr.noeudHG[0].get(i), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
                 if (val4.e2 <= tmp.e2) {
                     val4 = tmp;
                 }
             }
         }
         if ((abr.noeudMG[0] != null) && (!abr.noeudMG[0].isEmpty())) {
-            val5 = parcoursGraphe(abr.noeudMG[0].get(0), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+            val5 = parcoursGraphe(abr.noeudMG[0].get(0), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
             for (int i = 1; i < abr.noeudMG[0].size(); i++) {
-                tmp = parcoursGraphe(abr.noeudMG[0].get(i), nbCoupsmax, nbCoups - 1, 4, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
+                tmp = parcoursGraphe(abr.noeudMG[0].get(i), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case
                 if (val5.e2 <= tmp.e2) {
                     val5 = tmp;
                 }
             }
         }
         if ((abr.noeudBG[0] != null) && (!abr.noeudBG[0].isEmpty())) {
-            val6 = parcoursGraphe(abr.noeudBG[0].get(0), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
+            val6 = parcoursGraphe(abr.noeudBG[0].get(0), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
             for (int i = 1; i < abr.noeudBG[0].size(); i++) {
-                tmp = parcoursGraphe(abr.noeudBG[0].get(i), nbCoupsmax, nbCoups - 1, 3, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
+                tmp = parcoursGraphe(abr.noeudBG[0].get(i), nbCoupsmax, nbCoups - 1, somme + abr.poids, coord1stchoice);   // On s'arrete sur la case 
                 if (val6.e2 <= tmp.e2) {
                     val6 = tmp;
                 }
@@ -509,6 +679,15 @@ public class AlgoIA {
         }
     }
 
+    /**
+     * Algorithme de choix d'une case a jouer pour l'IA moyenne
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie un couple de coordonnee : (Position du pingouin choisi avant le deplacement, Position du pingouin choisi apres le deplacement) .
+     */
+    
     public CoupleGenerique<Coordonnees, Coordonnees> algoMoyen(Partie p) {
         int nbcoupsrecherches = 5; // Choix du "4" très réfléchi mais modifiable.
         if (p.b.nbTuilesLibres() <= 45) {
@@ -527,9 +706,11 @@ public class AlgoIA {
         ArrayList<CoupleGenerique<Coordonnees, Integer>> poidsPingouins = new ArrayList<>();
         HashMap<Coordonnees, ArbreGraphe> hash = new HashMap<>();
         for (int i = 0; i < myIA.nbPingouin; i++) {
-            ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, p, -1, nbcoupsrecherches);
-            CoupleGenerique<Coordonnees, Integer> coordint = parcoursGraphe(abr, nbcoupsrecherches, nbcoupsrecherches, 6, 0, new Coordonnees(0, 0));
-            poidsPingouins.add(coordint);
+            if(p.joueurs[notreNumeroDeJoueur(p)].myPingouins[i].actif){
+                ArbreGraphe abr = CreationArbre(myIA.myPingouins[i].position, p, nbcoupsrecherches);
+                CoupleGenerique<Coordonnees, Integer> coordint = parcoursGraphe(abr, nbcoupsrecherches, nbcoupsrecherches, 0, new Coordonnees(0, 0));
+                poidsPingouins.add(coordint);
+            }
         }
 
         for (int i = 0; i < poidsPingouins.size(); i++) {
@@ -543,8 +724,19 @@ public class AlgoIA {
         return new CoupleGenerique<Coordonnees, Coordonnees>(myIA.myPingouins[indx].position, coordmax);
     }
 
-    /* Renvoie le numero de Joueur correspondant à l'IA
+    /**
+     * ****************************************************************************************************
      */
+    
+    /**
+     * DOnne le numero de l'objet dans le tableau de joueur de la partie
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie le numero de joueur de l'IA
+     */
+    
     public int notreNumeroDeJoueur(Partie p) {
         int num = 0;
         while ((num != p.nbJoueurs) && !(p.joueurs[num].nom.equals(myIA.nom))) {   // mettre une methode equals dans la classe abstraite Joueur ????????????????????????????
@@ -553,20 +745,15 @@ public class AlgoIA {
         return num;
     }
 
-    public int numJoueurAdversaire(Partie p, int notreNum) {
-        int num = 0;
-        if (notreNum == 0) {
-            num = 1;
-        }
-        return num;
-    }
-
-
-    /* Placement des pingouins pour l'IA difficile
-     * On regarde si la banquise a une configuration speciale, par exemple :
+    /**
+     * Fonction de placement difficile
+     *
+     * @param p 
+     *          La partie.
      * 
-     * Sinon on utilise le Placement Moyen 
+     * @return Renvoie la coordonee de placement de pingouin la plus judicieuse.
      */
+    
     public Coordonnees PlacementDifficile(Partie p) {
 
         Coordonnees retour = new Coordonnees();
@@ -575,7 +762,7 @@ public class AlgoIA {
         Coordonnees riri = p.joueurs[notreNum].myPingouins[0].position;
 
         if (p.nbJoueurs == 2) {
-            int ennemiNum = numJoueurAdversaire(p, notreNum);
+            int ennemiNum = joueurSuivant(notreNum, p);
             int ennemiNbPingouin = p.nbPingouinActif(p.joueurs[ennemiNum]);
 
             if (ennemiNbPingouin <= 3) { // Si l'adversaire a placé 0, 1, 2 ou 3 pingouins
@@ -620,9 +807,18 @@ public class AlgoIA {
         return retour;
     }
 
-    /* joueurSuivant renvoie le numero du joueur qui suit le joueurActuel.
-     * Reprend à 0 si le joueur actuel est le dernier a jouer
-     */
+    /**
+     * Fonction donnant le numero de joueur suivant
+     *
+     * @param joueurActuel
+     *          numero du joueur actuel.
+     * 
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie la coordonee de placement de pingouin la plus judicieuse.
+     */    
+    
     public int joueurSuivant(int joueurActuel, Partie p) {
         if (joueurActuel == p.nbJoueurs - 1) {
             return 0;
@@ -783,10 +979,35 @@ public class AlgoIA {
      return abr;
      }
      }*/
-    /* Pour deux joueurs seulement
-     * Creation de l'arbre pour le minimax : 
-     * num est le numero du joueur actuel à la profondeur actuelle - 1er appel avec notreNum
-     */
+    
+    /**
+     * Creation de l'arbre minimax des coups possibles pour tous les pingouins
+     *
+     * @param c
+     *          Les coordonnees c de la racine de l'arbre.
+     * 
+     * @param partie
+     *          La partie.
+     * 
+     * @param num
+     *          Le numero du joueur actif.
+     * 
+     * @param nbcoupsmax
+     *          La profondeur de l'arbre = le nombre de coups restant que l'on veut evalue
+     * 
+     * @param hash
+     *          Tableau de hachage permettant de reduire le nombre de noeud cree.
+     * 
+     * @param somme
+     *          Somme servant a la ponderation des feuilles.
+     * 
+     * @param first
+     *          Vrai si on est dans la premiere execution recursive.
+     * 
+     * 
+     * @return Renvoie un ArbreGraphe.
+     */    
+    
     public ArbreGraphe CreationAbreMinimax(Coordonnees c, Partie partie, int num, int nbcoupsmax, ArrayList<HashMap<Banquise, ArbreGraphe>> hash, int somme, int first) {
 
         if (nbcoupsmax <= 0 || feuillePointDinterrogationPingu(partie, partie.joueurs[num])) {
@@ -932,10 +1153,40 @@ public class AlgoIA {
             return abr;
         }
     }
-
-    /* minimax renvoie un couple CoordonneesInt qui correspond
     
-     */
+    /**
+     * Algorithme Alpha-Beta
+     * 
+     * @param p
+     *          La partie.
+     * 
+     * @param abr
+     *          Noeud courant dans l'arbre.
+     * 
+     * @param nbCoupsmax
+     *          La profondeur de l'arbre = le nombre de coups que l'on veut evalue.
+     * 
+     * @param nbCoups
+     *          Le nombre de coups qui reste a evaluer.
+     * 
+     * @param coord1stchoice
+     *          Sauvegarde de la coordonnee du premier deplacement d'un chemin dans l'arbre.
+     * 
+     * @param coordPingu
+     *          Sauvegarde de la coordonnee du pingouin que l'on deplace en premier dans un chemin dans l'arbre.
+     * 
+     * @param a
+     *          Approximation de la borne inferieure de la valeur du noeud.
+     * 
+     * @param b
+     *          Approximation de la borne superieure de la valeur du noeud.
+     * 
+     * @param indicePingu
+     *          Indice du pingouin courant.
+     * 
+     * @return Renvoie un ArbreGraphe.
+     */    
+    
     public CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> minimax(Partie p, ArbreGraphe abr, int num, int nbCoupsmax, int nbCoups, Coordonnees coord1stchoice, Coordonnees coordPingu, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> a, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> b, int indicePingu) { //0 = c'est a nous - On maximise || 1 = autre joueur -on minimise
 
         if ((nbCoups == nbCoupsmax - 1)) {
@@ -1302,6 +1553,16 @@ public class AlgoIA {
      }
      */
 
+    
+    /**
+     * Algorithme de choix d'une case a jouer pour l'IA difficile
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie un couple de coordonnee : (Position du pingouin choisi avant le deplacement, Position du pingouin choisi apres le deplacement) .
+     */
+    
     public CoupleGenerique<Coordonnees, Coordonnees> algoDifficile(Partie p) {
         int nbCoupsmax = 3;
 
@@ -1323,7 +1584,16 @@ public class AlgoIA {
         System.out.println("retour " + retour.e1 + retour.e2);
         return retour;
     }
-
+    
+    /**
+     * Algorithme de TEST de choix d'une case a jouer pour l'IA difficile
+     *
+     * @param p 
+     *          La partie.
+     * 
+     * @return Renvoie un couple de coordonnee : (Position du pingouin choisi avant le deplacement, Position du pingouin choisi apres le deplacement) .
+     */
+    
     public CoupleGenerique<Coordonnees, Coordonnees> algoDifficileTEST(Partie p) {
 
         if (p.b.nbTuilesLibres() >= 40) {

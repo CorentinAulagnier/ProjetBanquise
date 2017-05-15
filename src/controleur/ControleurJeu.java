@@ -89,7 +89,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms, Label[] score_poissons, Label[] score_tuiles){
     	int compteurDhumain =0;
     	for(int k=0; k<gestionnaireFxmlCourant.partie.joueurs.length; k++){
-			majZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[k],(Label)noms[k],(Label)score_poissons[k],(Label)score_tuiles[k]);
+			majZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(gestionnaireFxmlCourant.partie.joueurs[k]).couleur],(Label)noms[k],(Label)score_poissons[k],(Label)score_tuiles[k]);
 			if ( ( Humain.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[k]).getClass() ) ){
 				compteurDhumain++;
 			}
@@ -165,6 +165,13 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     		for (int j = 0 ; j< 8 ; j++){
     			if (!( (i%2 == 1) && (j == 7) )){
     				banq [i][j] = (ImageView) banquise.getChildren().get(indice);
+    				if (gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons==1){
+    					banq [i][j].setImage(image1PoissonBlanc);
+    				}else if (gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons==2){
+    					banq [i][j].setImage(image2PoissonsBlancs);
+    				}else if (gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons==3){
+    					banq [i][j].setImage(image3PoissonsBlancs);
+    				}
     				indice++;
     			}
     		}
@@ -176,7 +183,6 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     
    public Coordonnees getXY(double x , double y){
    	int i = 0, j = 0;
-   	double c = 0;
    	double h = 48/3;;
    	
    	if ( ((int)(y/h))%2 == 1 ){
@@ -250,10 +256,24 @@ public class ControleurJeu  implements Initializable, EcranCourant {
    		i = -1;
    		j=-1;
    	}
-   	System.out.println(i + " " + j);
    	return new Coordonnees(i,j);
    }
     
+   public boolean coordValide(Coordonnees xy){
+	   return (xy.x!=-1)&&(xy.y!=-1);
+   }
+   
+   public void anchorClick(MouseEvent event){
+	   Coordonnees xy = getXY(event.getX(),event.getY());
+	   if (coordValide(xy)){
+		   Coordonnees[] ping = gestionnaireFxmlCourant.partie.pingouinsDeplacable();
+		   if (xy.equals(ping[0]) ||xy.equals(ping[1]) || xy.equals(ping[2]) || xy.equals(ping[3])){
+			   
+		   }
+	   }
+   }
+   
+   
   /* @FXML
    public void SelectPingouin(MouseEvent event){
    	if (EndOfTurn) {

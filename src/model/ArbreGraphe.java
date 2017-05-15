@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /* Classe qui sert a representer le terrain sous forme d'un graphe
  * Un noeud represente une Tuile qui a 6 noeuds qui sont les tuiles adjacentes sur la banquise
@@ -37,6 +38,14 @@ public class ArbreGraphe {
         this.poids = 0;
         this.estFeuille = false;
     }
+
+	@Override
+	public String toString() {
+		return "ArbreGraphe [noeudHD=" + Arrays.toString(noeudHD) + ", noeudMD=" + Arrays.toString(noeudMD)
+				+ ", noeudBD=" + Arrays.toString(noeudBD) + ", noeudBG=" + Arrays.toString(noeudBG) + ", noeudMG="
+				+ Arrays.toString(noeudMG) + ", noeudHG=" + Arrays.toString(noeudHG) + ", c=" + c + ", poids=" + poids
+				+ ", estFeuille=" + estFeuille + "]";
+	}
     
     
 }

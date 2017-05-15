@@ -579,6 +579,17 @@ public class Partie implements Serializable {
 		for(int i = 0; i<nbJoueurs; i++)
 			System.out.println(joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points et "+ joueurs[i].nbTuiles + " tuiles.");
 	}
+	
+	/**
+	 * Retourne le score de chaque joueur en string
+	 */
+	
+	public String scoresToString() {
+		String s = "";
+		for(int i = 0; i<nbJoueurs; i++)
+			s+=joueurs[i].nom + " : "+joueurs[i].poissonsManges + " points et "+ joueurs[i].nbTuiles + " tuiles.\n";
+		return s;
+	}
 
 	/**       
 	 * @return le score max parmis tout les joueurs.

@@ -80,7 +80,7 @@ public class PingouinServer {
                 while (true) {
                 	synchronized (p) {
 	                	if(phasePlacement) {
-		                	if(p.joueurActif == num) {
+		                	if(p.joueurActif == num || p.joueurs[p.joueurActif].getClass() == IA.class) {
 		                		Coordonnees c = null;
 								if (p.joueurs[p.joueurActif].getClass() == IA.class) { // Tour de l'IA
 									c = p.joueurs[p.joueurActif].placement(p);
@@ -94,41 +94,41 @@ public class PingouinServer {
 				                    }
 								}
 		                    	Tuile t = p.b.getTuile(c);
-	                    		Joueur j = p.joueurs[num];
+	                    		Joueur j = p.joueurs[p.joueurActif];
 								if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
 									t.mettrePingouin();
 									j.myPingouins[num_pingouin] = new Pingouin(c);
 									p.verifierPingouinActif();
 									
 									//Maj prochain joueur
-									p.joueurActif = (num+1)%MAXPLAYERS;
+									p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
 									
 									//envoie du placement à tout les joueurs
-									for(int i = 0; i<MAXPLAYERS; i++) {
-										writers[i].writeObject("MESSAGE "+j.nom+" a posé un pingouin en "+c.toString());
+									for(int i = 0; i<nbClients; i++) {
+										writers[i].writeObject("MESSAGE "+j.nom+" a posé un pingouin en "+c);
 										writers[i].writeObject(p.clone());
 									}
 									
 									//Maj numero du pingouin
-									if((num+1)%MAXPLAYERS < num) {
+									if(p.joueurActif == 0) {
 										num_pingouin++;
 									}
 									
 									
 									//Test fin de phase placement
-									if(num_pingouin>=NBPINGOUINS) {
+									if(num_pingouin == NBPINGOUINS && p.joueurActif == 0) {
 										phasePlacement = false;
-										for(int i = 0; i<MAXPLAYERS; i++) {
+										for(int i = 0; i<nbClients; i++) {
 											writers[i].writeObject("MESSAGE Début de la phase de jeu !\n\n"+p.joueurs[p.joueurActif].nom+" commence à jouer.");
 										}
 									} else {
 										//Affiche qui est le prochain joueur sur tout les clients
-										for(int i = 0; i<MAXPLAYERS; i++) {
+										for(int i = 0; i<nbClients; i++) {
 											writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de placer.");
 										}
 									}
 								} else {
-									out.writeObject("MESSAGE Impossible de poser un pingouin à cet emplacement.");
+									out.writeObject("MESSAGE Impossible de poser un pingouin à l'emplacement "+c);
 								}
 		                	}
 							
@@ -142,58 +142,62 @@ public class PingouinServer {
                 while (true) {
                 	synchronized (p) {
 	                	if(phaseJeu) {
-		                	if(p.joueurActif == num) {
-		                		Joueur j = p.joueurs[num];
-		                		if(p.peutJouer()) {//le joueur actif peut jouer
-			                		writers[num].writeObject("DEPLACEMENT");
+		                	if(p.peutJouer() && (p.joueurActif == num || p.joueurs[p.joueurActif].getClass()==IA.class)) {
+		                		Joueur j = p.joueurs[p.joueurActif];
+		                		CoupleCoordonnees cc = null;
+		                		if(p.joueurs[p.joueurActif].getClass()==IA.class && p.peutJouer()) {
+		                			CoupleGenerique<Coordonnees, Coordonnees> cg = p.joueurs[p.joueurActif].jouer(p);
+		                			cc = new CoupleCoordonnees(cg.e1,cg.e2);
+		                		} else {//le joueur actif peut jouer
+			                		writers[p.joueurActif].writeObject("DEPLACEMENT");
 				                    Object obj = in.readObject();
 				                    if (obj instanceof CoupleCoordonnees) {
-				                    	CoupleCoordonnees cc = (CoupleCoordonnees)obj;
-				                    	p.deplacement(cc);
-				                    	p.verifierPingouinActif();
-										//Maj prochain joueur
-										p.joueurActif = (num+1)%MAXPLAYERS;
-										
-										//envoie du deplacement à tout les joueurs
-										for(int i = 0; i<MAXPLAYERS; i++) {
-											writers[i].writeObject("MESSAGE "+j.nom+" a deplacé un pingouin de "+cc.c1+" vers "+cc.c2);
-											writers[i].writeObject(p.clone());
-										}
-										
-										//envoie du nom du prochain joueur devant jouer
-										for(int i = 0; i<MAXPLAYERS; i++) {
-											writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
-										}
-										
-										//Test fin de partie
-										if(p.estPartieFini()) {
-											phaseJeu = false;
-										}
-				                    } else {//le joueur actif ne peut plus jouer
-										for(int i = 0; i<MAXPLAYERS; i++) {
-											writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" ne peut plus jouer.");
-										}
-										//Maj prochain joueur
-										p.joueurActif = (num+1)%MAXPLAYERS;
-										for(int i = 0; i<MAXPLAYERS; i++) {
-											writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
-										}
-				                    }
-									
-			                    } else {
-			                    	so.println("Phase jeu, impossible de lire le couple de coordonnées envoyées par "+p.joueurs[p.joueurActif].nom);
-			                    }
-		                	}
+				                    	cc = (CoupleCoordonnees)obj;
+				                    } else {
+				                    	so.println("Lecture du couple envoyée par "+name+" impossible.");
+				                    }   	
+				                 }
+		                    	p.deplacement(cc);
+		                    	p.verifierPingouinActif();
+								//Maj prochain joueur
+								p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
+								
+								//envoie du deplacement à tout les joueurs
+								for(int i = 0; i<nbClients; i++) {
+									writers[i].writeObject("MESSAGE "+j.nom+" a deplacé un pingouin de "+cc.c1+" vers "+cc.c2);
+									writers[i].writeObject(p.clone());
+								}
+								
+								//envoie du nom du prochain joueur devant jouer
+								for(int i = 0; i<nbClients; i++) {
+									writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
+								}
+								
+								//Test fin de partie
+								if(p.estPartieFini()) {
+									phaseJeu = false;
+								}
+		                    } else {//le joueur actif ne peut plus jouer
+								for(int i = 0; i<nbClients; i++) {
+									writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" ne peut plus jouer.");
+								}
+								//Maj prochain joueur
+								p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
+								for(int i = 0; i<nbClients; i++) {
+									writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
+								}
+		                    }
+		                	
 	                	} else {
 	                		break;
 	                	}
                 	}
                 }
                 
-                out.writeObject("MESSAGE Fin de la partie ! "+p.getGagnant().get(0).nom+" a gagné !");
+                out.writeObject("MESSAGE Fin de la partie ! "+p.getGagnant().get(0).nom+" a gagné !\n"+p.scoresToString());
                 
             } catch (Exception e) {
-                //e.printStackTrace(System.err);
+                e.printStackTrace(System.err);
             	so.println("ERR : La connexion avec "+name+" a été perdue.");
             } finally {
                 if (name != null) {
@@ -229,7 +233,7 @@ public class PingouinServer {
                         	p.joueurs[num].myPingouins[i] = new Pingouin();
                         }
         	            nbClients++;
-        	            if(p.joueurs[nbClients].getClass()==IA.class) {
+        	            if(nbClients == MAXPLAYERS || p.joueurs[nbClients].getClass()==IA.class) {
         	            	phaseNoms = false;
         	            }
                         break;
@@ -253,7 +257,7 @@ public class PingouinServer {
 	            	out.writeObject("MESSAGE En attente d'autres joueurs pour lancer la partie.");
 	            }
 				//envoie du placement à tout les joueurs
-				for(int i = 0; i<MAXPLAYERS; i++) {
+				for(int i = 0; i<nbClients; i++) {
 					if(writers[i]!=null)
 					writers[i].writeObject("MESSAGE "+p.joueurs[num].nom + " a rejoint la partie.");
 				}

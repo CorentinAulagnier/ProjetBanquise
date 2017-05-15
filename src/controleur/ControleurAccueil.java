@@ -3,46 +3,25 @@ import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 
-public class ControleurAccueil  implements Initializable, EcranCourant {
-	GestionnaireEcransFxml gestionnaireFxmlCourant;
- 
-	 @FXML 
-	 private Button jouer;
-	 @FXML 
-	 private Button charger;
-	 @FXML 
-	 private Button regles;
-	 
+public class ControleurAccueil extends ControleurPere implements Initializable, EcranCourant {
 	
-	 public void miseAjour(){}
-	 
+	GestionnaireEcransFxml gestionnaireFxmlCourant;
+	@FXML private Button jouer, charger, regles, roue;
+	@FXML private AnchorPane optionbox;
+	@FXML private ImageView imageSon, imageMusique;
+	
+	/**
+	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
+	 */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	jouer.setStyle(model.Proprietes.STYLE_NORMAL);
@@ -50,121 +29,94 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
 		regles.setStyle(model.Proprietes.STYLE_NORMAL);
     }
     
+    
+    /**
+     * implementation demande par l'interface EcranCourant : vide car n'a pas d'utilite ici
+     */
+	public void miseAjour(){}
+	 
+	/**
+	 * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur
+	 */
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
     	gestionnaireFxmlCourant = ecranParent;
     }
 
-    @FXML
-    private void ouvrirPageRegle(MouseEvent event){
-    	netoyerEcran();
-    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
-    }
+     
     
+    /**
+     * change d'ecran pour celui d'une nouvelle partie
+     * @param event evenement souris attendu : clic
+     */
     @FXML
     private void ouvrirNouvellePartie (MouseEvent event){
-    	netoyerEcran();
+    	nettoyerRoue(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
     }
     
+    /**
+     * ouvre l'ecran de chargement (actuellement ouvre un explorateur windows)
+     * @param event evenement souris attendu : clic
+     */
     @FXML
     private void ouvrirPageCharger(MouseEvent event){
-    	netoyerEcran();
-    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    	nettoyerRoue(optionbox, roue);
+    	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
     }
     
+    /**
+     * change d'ecran pour celui des regles
+     * @param event evenement souris attendu : clic
+     */
     @FXML
-    private void quitter(MouseEvent event){
-    	netoyerEcran();
-    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
-    	popup_quitter("Bye bye ?", contenu, "Bien sûr", "" , "Euh.." );
-    }
-    
-    private void popup_quitter(String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
-    	Alert alert = new Alert(AlertType.CONFIRMATION);
-    	alert.setHeaderText(null);
-    	alert.setTitle(titre);
-    	alert.setContentText(contenu);
-    	
-    	ButtonType buttonOui = new ButtonType(boutonOk);
-    	ButtonType buttonJoker = new ButtonType(boutonPeutetre, ButtonData.CANCEL_CLOSE);
-    	ButtonType buttonNon= new ButtonType(boutonNok, ButtonData.CANCEL_CLOSE);
-    	
-    	if(boutonNok.equals("")){
-    		alert.getButtonTypes().setAll(buttonJoker, buttonOui);
-    	} 
-    	else {
-    		alert.getButtonTypes().setAll(buttonNon, buttonOui );
-    	}
-
-
-    	Optional<ButtonType> result = alert.showAndWait();
-    	if (result.get() == buttonOui){
-    		Platform.exit();
-    	} else if (result.get() == buttonJoker){
-    		String contenu2 = "Vous etes vraiment sur ? Ils vont se sentir très très seuls...";
-        	popup_quitter("Ne partez pas...", contenu2, "Partir sans un regard!", "D'accord je reste...", "");
-    	} else {
-    		gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
-    	}
+    private void ouvrirPageRegle(MouseEvent event){
+    	nettoyerRoue(optionbox, roue);
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
     
-/**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
     
-    @FXML
-    public void boutonPresse(MouseEvent event){
-    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-
-    
-    
-    /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
-    
-    @FXML
-    public void boutonLache(MouseEvent event){
-    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
-    }
-    
-    @FXML AnchorPane optionbox;
-    @FXML Button roue;
-    
-	 public void optionWheelOpen(){
-		 optionbox.setDisable(false);
- 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
- 	     tt.setByX(200); // A voir si on ne peut pas l'utiliser pour redimensionner la fenetre ???
- 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
- 		ft.setFromValue(0);
- 		ft.setToValue(1);
- 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
- 	     rt.setByAngle(180);
- 		ParallelTransition pt = new ParallelTransition(optionbox,ft, tt,rt );
- 	     pt.play();
-	    }
-	 public void optionWheelClose(){
-		 optionbox.setDisable(true);
- 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-	     	tt.setByX(-200);
-	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
-	     	ft.setFromValue(1);
-	     	ft.setToValue(0);
- 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
- 	     rt.setByAngle(-180);
-	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt,rt);
-	     	pt.play();
-	 }
- 
+    /**
+     * gere l'ouverture ou la fermeture du menu roue
+     * @param event evenement souris attendu : clic
+     */
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		optionWheelOpen();    		
+    		optionOuvrirRoue(optionbox, roue);    		
     	}else{
-    		optionWheelClose();
+    		optionFermerRoue(optionbox, roue);
     	}
     }
     
-    public void netoyerEcran(){
-    	if (!(optionbox.isDisable())){
-    		optionWheelClose();
-    	}
+    /**
+     * gere la modification du volume de la musique
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void gererMusique(MouseEvent event){
+    	changerMusique(imageMusique);
     }
+    
+    /**
+     * gere la modification des bruitages
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void gererSon(MouseEvent event){
+    	changerSon(imageSon);
+    }
+    
+    /**
+     * ouvre une popup de confirmatio avant de quitter l'application 
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void quitter(MouseEvent event){
+    	nettoyerRoue(optionbox, roue);
+    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
+    	alert_quitter("Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
+    }
+    
+    
 }

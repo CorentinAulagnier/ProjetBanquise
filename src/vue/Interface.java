@@ -1,9 +1,6 @@
 package vue;
 
-import model.Humain;
-import model.Joueur;
 import model.Partie;
-import model.Pingouin;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

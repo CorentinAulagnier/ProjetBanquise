@@ -171,44 +171,91 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	}
     }
 
-   double hauteurbanquise;
-   double largeurbanquise;
+   double hauteurbanquise =270 ;
+   double largeurbanquise=512 ;
     
-   public Coordonnees getXY(double x , double y){
+   @FXML
+   public void getXY(MouseEvent event){
+	double x = event.getX();
+	double y = event.getY();
    	int i = 0, j = 0;
    	double c = 0;
-   	double h = hauteurbanquise/3;;
-   	if ( (y/h)%2 == 1){
-   		i = (int) ( (y/h) / 2 ) +1;
-   		if (i%2 == 1){
-   			j = (int) (x/largeurbanquise);
+   	double h = 48/3;;
+   	
+   	if ( ((int)(y/h))%2 == 1 ){
+   		if(x>=32){
+	   		i = (int) ( (y/h) / 2 );
+	   		if (i%2 == 1){
+	   			j = (int) (x/64);
+	   			
+	   		}else{
+	   			j = (int) ( (x - 32) / 64    );
+	   		}
    		}else{
-   			j = (int) ((x - (largeurbanquise/2) ) / largeurbanquise);
+   			i=-1;
+   			j=-1;
    		}
    	}else{
+
+		j = (int) (x/32);
+   		double newX = x % 32;
+   		double newY = y % 16;
    		i = (int) (y/h);
-   		if (i%4 == 2){
-   			j = (int) (x/(largeurbanquise/2));
-   			c = (double) (i + j + 1 ) * h ;
-   			j = (int) (x/largeurbanquise);
-   			i = (int) ( (y/h) / 2 ) + 1 ;
-   			if ( (-0.5*x - y) < c ){
-   			i++;
-   			}
-   		
-   		}else if (i%4 ==0){
-   		j = (int) (x/(largeurbanquise/2));
-   			c = (i - j + 1 ) * h ;
-   			j = (int) (x/largeurbanquise );
-   			i = (int) ( (y/h) / 2 ) +1;
-   			if ((0.5*x - y) < c){
-   			i++;
-   			}
+   		 if (i%4 ==0){
+	   				
+   			if (j%2 == 0){
+				//0.5
+   				if (0.5*newX - newY > 0){
+   					i = (int) ( (y/h) / 2 ) -1 ;
+   					j = (int) (x/64) ;
+   				}else{
+   					i = (int) ( (y/h) / 2 ) ;
+   					j = (int) (x/64)-1;
+   				}
+   				
+			}else{
+				//-0.5
+				if (-0.5*newX - newY +16 > 0){
+   					i = (int) ( (y/h) / 2 ) -1;
+   					j = (int) (x/64);
+   				}else{
+   					i = (int) ( (y/h) / 2 )   ;
+   					j = (int) (x/64);
+   				}
+			}
+		}else if (i%4 ==2){	   				
+   			if (j%2 == 0){
+   			//-0.5
+				if (-0.5*newX - newY +16 > 0){
+   					i = (int) ( (y/h) / 2 ) -1;
+   					j = (int) (x/64) -1 ;
+   				}else{
+   					i = (int) ( (y/h) / 2 )   ;
+   					j = (int) (x/64);
+   				}
+			}else{
+				//0.5
+   				if (0.5*newX - newY > 0){
+   					i = (int) ( (y/h) / 2 ) -1 ;
+   					j = (int) (x/64) ;
+   				}else{
+   					i = (int) ( (y/h) / 2 ) ;
+   					j = (int) (x/64);
+   				}
+				
+			}
+		}
+   		 	
+   		 
    		}
+
+   	if ((i<0)||(j<0)||(i>7)||(i%2==0 && j >=7)){
+   		i = -1;
+   		j=-1;
    	}
+   	System.out.println(i + " " + j);
    	
-   	System.out.println(" i = " + i +" et j = "+j);
-   	return new Coordonnees(i,j);
+   	//return new Coordonnees(i,j);
    }
     
    /* 

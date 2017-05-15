@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controleur.ControleurAccueil">
-  <!-- TODO Add Nodes -->
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
+  <stylesheets>
+      <URL value="@../css/CssAccueil.css" />
+   </stylesheets>
   <children>
-    <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
+    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0">
       <image>
         <Image url="@../../ressources/decor/banquise.jpg" />
       </image>
     </ImageView>
-    <ImageView blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="229.52159118652344" fitWidth="361.16693900908734" layoutX="215.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="persos" blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="196.0" fitWidth="309.0" layoutX="239.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../../ressources/decor/Penguins-of-Madagascar-PNG-Clipart.png" />
       </image>
     </ImageView>
-    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="283.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageJeu" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
-      <graphic>
-        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
-          <image>
-            <Image url="@../../ressources/decor/jouer.png" />
-          </image>
-        </ImageView>
-      </graphic>
-    </Button>
-    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="283.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
+    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#ouvrirNouvellePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ressources/decor/jouer.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -46,8 +46,11 @@
           </image>
         </ImageView>
       </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
     </Button>
-    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="283.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Chargement Partie">
+    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Chargement Partie">
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -55,6 +58,9 @@
           </image>
         </ImageView>
       </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
     </Button>
     <Text fill="BLACK" layoutX="328.0" layoutY="55.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Hey ! That's my fish !">
       <font>
@@ -108,7 +114,7 @@
                 <Insets fx:id="x1" />
               </HBox.margin>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button" HBox.margin="$x1">
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#quitter" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button" HBox.margin="$x1">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -129,6 +135,9 @@
           </image>
         </ImageView>
       </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
     </Button>
   </children>
 </AnchorPane>

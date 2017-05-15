@@ -3,6 +3,7 @@ import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
@@ -10,14 +11,22 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
@@ -52,7 +61,7 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     }
     
     @FXML
-    private void ouvrirPageJeu (MouseEvent event){
+    private void ouvrirNouvellePartie (MouseEvent event){
     	netoyerEcran();
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
     }
@@ -63,6 +72,41 @@ public class ControleurAccueil  implements Initializable, EcranCourant {
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
+    @FXML
+    private void quitter(MouseEvent event){
+    	netoyerEcran();
+    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
+    	popup_quitter("Bye bye ?", contenu, "Bien sûr", "" , "Euh.." );
+    }
+    
+    private void popup_quitter(String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setHeaderText(null);
+    	alert.setTitle(titre);
+    	alert.setContentText(contenu);
+    	
+    	ButtonType buttonOui = new ButtonType(boutonOk);
+    	ButtonType buttonJoker = new ButtonType(boutonPeutetre, ButtonData.CANCEL_CLOSE);
+    	ButtonType buttonNon= new ButtonType(boutonNok, ButtonData.CANCEL_CLOSE);
+    	
+    	if(boutonNok.equals("")){
+    		alert.getButtonTypes().setAll(buttonJoker, buttonOui);
+    	} 
+    	else {
+    		alert.getButtonTypes().setAll(buttonNon, buttonOui );
+    	}
+
+
+    	Optional<ButtonType> result = alert.showAndWait();
+    	if (result.get() == buttonOui){
+    		Platform.exit();
+    	} else if (result.get() == buttonJoker){
+    		String contenu2 = "Vous etes vraiment sur ? Ils vont se sentir très très seuls...";
+        	popup_quitter("Ne partez pas...", contenu2, "Partir sans un regard!", "D'accord je reste...", "");
+    	} else {
+    		gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    	}
+    }
     
     
 /**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/

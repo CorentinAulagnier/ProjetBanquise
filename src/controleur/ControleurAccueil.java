@@ -2,14 +2,17 @@ package controleur;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
 
 public class ControleurAccueil extends ControleurPere implements Initializable, EcranCourant {
@@ -18,6 +21,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
 	@FXML private Button jouer, charger, regles, roue;
 	@FXML private AnchorPane optionbox;
 	@FXML private ImageView imageSon, imageMusique;
+	final FileChooser fileChooser = new FileChooser();
 	
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -61,6 +65,13 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     @FXML
     private void ouvrirPageCharger(MouseEvent event){
     	nettoyerRoue(optionbox, roue);
+    	File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+        	System.out.println(file.getName());
+        	gestionnaireFxmlCourant.partie.charger(file.getName());
+        	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
+        }
+    	
     	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
     }
     

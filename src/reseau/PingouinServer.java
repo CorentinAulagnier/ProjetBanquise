@@ -142,51 +142,53 @@ public class PingouinServer {
                 while (true) {
                 	synchronized (p) {
 	                	if(phaseJeu) {
-		                	if(p.peutJouer() && (p.joueurActif == num || p.joueurs[p.joueurActif].getClass()==IA.class)) {
-		                		Joueur j = p.joueurs[p.joueurActif];
-		                		CoupleCoordonnees cc = null;
-		                		if(p.joueurs[p.joueurActif].getClass()==IA.class && p.peutJouer()) {
-		                			CoupleGenerique<Coordonnees, Coordonnees> cg = p.joueurs[p.joueurActif].jouer(p);
-		                			cc = new CoupleCoordonnees(cg.e1,cg.e2);
-		                		} else {//le joueur actif peut jouer
-			                		writers[p.joueurActif].writeObject("DEPLACEMENT");
-				                    Object obj = in.readObject();
-				                    if (obj instanceof CoupleCoordonnees) {
-				                    	cc = (CoupleCoordonnees)obj;
-				                    } else {
-				                    	so.println("Lecture du couple envoyée par "+name+" impossible.");
-				                    }   	
-				                 }
-		                    	p.deplacement(cc);
-		                    	p.verifierPingouinActif();
-								//Maj prochain joueur
-								p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
-								
-								//envoie du deplacement à tout les joueurs
-								for(int i = 0; i<nbClients; i++) {
-									writers[i].writeObject("MESSAGE "+j.nom+" a deplacé un pingouin de "+cc.c1+" vers "+cc.c2);
-									writers[i].writeObject(p.clone());
-								}
-								
-								//envoie du nom du prochain joueur devant jouer
-								for(int i = 0; i<nbClients; i++) {
-									writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
-								}
-								
-								//Test fin de partie
-								if(p.estPartieFini()) {
-									phaseJeu = false;
-								}
-		                    } else {//le joueur actif ne peut plus jouer
-								for(int i = 0; i<nbClients; i++) {
-									writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" ne peut plus jouer.");
-								}
-								//Maj prochain joueur
-								p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
-								for(int i = 0; i<nbClients; i++) {
-									writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
-								}
-		                    }
+		                	if(p.joueurActif == num || p.joueurs[p.joueurActif].getClass()==IA.class) {
+		                		if(p.peutJouer()) {
+			                		Joueur j = p.joueurs[p.joueurActif];
+			                		CoupleCoordonnees cc = null;
+			                		if(p.joueurs[p.joueurActif].getClass()==IA.class && p.peutJouer()) {
+			                			CoupleGenerique<Coordonnees, Coordonnees> cg = p.joueurs[p.joueurActif].jouer(p);
+			                			cc = new CoupleCoordonnees(cg.e1,cg.e2);
+			                		} else {//le joueur actif peut jouer
+				                		writers[p.joueurActif].writeObject("DEPLACEMENT");
+					                    Object obj = in.readObject();
+					                    if (obj instanceof CoupleCoordonnees) {
+					                    	cc = (CoupleCoordonnees)obj;
+					                    } else {
+					                    	so.println("Lecture du couple envoyée par "+name+" impossible.");
+					                    }   	
+					                 }
+			                    	p.deplacement(cc);
+			                    	p.verifierPingouinActif();
+									//Maj prochain joueur
+									p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
+									
+									//envoie du deplacement à tout les joueurs
+									for(int i = 0; i<nbClients; i++) {
+										writers[i].writeObject("MESSAGE "+j.nom+" a deplacé un pingouin de "+cc.c1+" vers "+cc.c2);
+										writers[i].writeObject(p.clone());
+									}
+									
+									//envoie du nom du prochain joueur devant jouer
+									for(int i = 0; i<nbClients; i++) {
+										writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
+									}
+									
+									//Test fin de partie
+									if(p.estPartieFini()) {
+										phaseJeu = false;
+									}
+			                    } else {//le joueur actif ne peut plus jouer
+									for(int i = 0; i<nbClients; i++) {
+										writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" ne peut plus jouer.");
+									}
+									//Maj prochain joueur
+									p.joueurActif = (p.joueurActif+1)%MAXPLAYERS;
+									for(int i = 0; i<nbClients; i++) {
+										writers[i].writeObject("MESSAGE "+p.joueurs[p.joueurActif].nom+" est entrain de jouer.");
+									}
+			                    }
+		                	}
 		                	
 	                	} else {
 	                		break;

@@ -8,11 +8,8 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
-import com.sun.org.apache.xerces.internal.impl.xs.identity.Selector.Matcher;
-
-//java.net.ConnectException	152.77.82.225
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import model.*;
 
 public class PingouinClient {
@@ -22,35 +19,27 @@ public class PingouinClient {
     public static void main(String[] args) throws Exception {
     	 // Make connection and initialize streams
     	Socket socket = null;
-    	
-    	/*
-    	Pattern patAddr = Pattern.compile("[file://\\s*((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?]\\s*((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))"+":(6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]|[1-5][0-9]{4}|[0-9]{1,4})\\s*") ;
-    	
+    	Pattern pattern;
+    	Matcher matcher;
+    	final String REGEX_IP = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+    	pattern = Pattern.compile(REGEX_IP);
+
     	while (true) {
 	    	try {
 		        String serverAddress = getServerAddress();        		                                         
-		        Matcher matchAddr = patAddr.matcher(serverAddress);		        		                                         
-		        if (matchAddr.matches()) {
+		        Matcher matchAddr = pattern.matcher(serverAddress);		        		                                         
+		        if (matchAddr.matches() || serverAddress.equals("")) {
 		        	socket = new Socket(serverAddress, PORT);
 		        	break;
 		        } else {
 					System.out.println("Connexion impossible. Réessayer avec une IP valide.");
 		        }
-		        socket = new Socket(serverAddress, PORT);
-	    	} catch (ConnectException | UnknownHostException e) {
-				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
-			}
-    	}*/
-    	
-    	while (socket == null) {
-	    	try {
-		        String serverAddress = getServerAddress();        		                                         
-		        socket = new Socket(serverAddress, PORT);
-
 	    	} catch (ConnectException | UnknownHostException e) {
 				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
 			}
     	}
+    	
+
     	
         ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());

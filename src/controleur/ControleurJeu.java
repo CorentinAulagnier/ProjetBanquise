@@ -111,11 +111,11 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	for(int j=0; j < gestionnaireFxmlCourant.partie.joueurs.length; j++){
     		//String path = "/ressources/joueurs/" + String.valueOf(j+1) + String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].couleur) ;
     		//String path = model.Proprietes.IMAGE_JOUEUR_PATH + String.valueOf(j+1) + String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].couleur) ;
-    		//String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMignature
+    		String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMignature;
     		//System.out.println(gestionnaireFxmlCourant.partie.joueurs[j].nom+" : "+j+" "+path);
     		for(int p=0; p < gestionnaireFxmlCourant.partie.joueurs[j].nbPingouin ; p++){
-    			reglettes.get(j)[p].setImage(new Image("/ressources/joueurs/Pingouin.png"));
-    			//reglettes.get(j)[p].setImage(new Image(path));
+    			//reglettes.get(j)[p].setImage(new Image("/ressources/joueurs/Pingouin.png"));
+    			reglettes.get(j)[p].setImage(new Image(path));
     		}
     	}
 
@@ -140,7 +140,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     }
     
     ImageView[][] banq = new ImageView[8][8];
-    ImageView[][]  pingouin = new ImageView[4][4];
+    ImageView[][] pingouins = new ImageView[8][8];
     int fromX;
     int fromY;
     int toX;
@@ -174,10 +174,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
    double hauteurbanquise =270 ;
    double largeurbanquise=512 ;
     
-   @FXML
-   public void getXY(MouseEvent event){
-	double x = event.getX();
-	double y = event.getY();
+   public Coordonnees getXY(double x , double y){
    	int i = 0, j = 0;
    	double c = 0;
    	double h = 48/3;;
@@ -247,54 +244,54 @@ public class ControleurJeu  implements Initializable, EcranCourant {
 		}
    		 	
    		 
-   		}
+   	}
 
    	if ((i<0)||(j<0)||(i>7)||(i%2==0 && j >=7)){
    		i = -1;
    		j=-1;
    	}
    	System.out.println(i + " " + j);
-   	
-   	//return new Coordonnees(i,j);
+   	return new Coordonnees(i,j);
    }
     
-   /* 
-    @FXML
-    public void SelectPingouin(MouseEvent event){
-    	if (EndOfTurn) {
-    		shadowPingouin.setVisible(false);
-    	}    	
-    	for (int i = 0; i<8 ; i++){
-    		for (int j = 0; j<8 ; j++){
-    			if (!( (i%2 == 1) && (j == 7) )){
-    				if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsJaunes){
-    					((ImageView) (banq [i][j] )).setImage(image3PoissonsBlancs) ;
-    				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsJaunes){
-    					((ImageView) (banq [i][j] )).setImage(image2PoissonsBlancs) ;
-    				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonJaune){
-    					((ImageView) (banq [i][j] )).setImage(image1PoissonBlanc) ;
-    				}
-    			}
-        	}
-    	}
-    	EndOfTurn = false;
-    	fromX = getX();
-    	fromY = getY();
-    	 ArrayList<ArrayList<Coordonnees>> accessibles = deplacementPossible(pingouin[fromX][fromY]);
-    	for ( ArrayList<Coordonnees> path : accessibles){
-    		for (Coordonnees bloc : path){
-    			int i = bloc.x;
-    			int j = bloc.y;
-    			if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsBlancs){
+  /* @FXML
+   public void SelectPingouin(MouseEvent event){
+   	if (EndOfTurn) {
+   		shadowPingouin.setVisible(false);
+   	}    	
+   	for (int i = 0; i<8 ; i++){
+   		for (int j = 0; j<8 ; j++){
+   			if (!( (i%2 == 1) && (j == 7) )){
+   				if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsJaunes){
+   					((ImageView) (banq [i][j] )).setImage(image3PoissonsBlancs) ;
+   				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsJaunes){
+   					((ImageView) (banq [i][j] )).setImage(image2PoissonsBlancs) ;
+   				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonJaune){
+   					((ImageView) (banq [i][j] )).setImage(image1PoissonBlanc) ;
+   				}
+   			}
+       	}
+   	}
+   	EndOfTurn = false;
+   	Coordonnees xy = getXY(event.getX(),event.getY());
+   	 ArrayList<ArrayList<Coordonnees>> accessibles = deplacementPossible(pingouins[fromX][fromY]);
+   	for ( ArrayList<Coordonnees> path : accessibles){
+   		for (Coordonnees bloc : path){
+   			int i = bloc.x;
+   			int j = bloc.y;
+   			if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsBlancs){
 					((ImageView) (banq [i][j] )).setImage(image3PoissonsJaunes) ;
 				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsBlancs){
 					((ImageView) (banq [i][j] )).setImage(image2PoissonsJaunes) ;
 				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonBlanc){
 					((ImageView) (banq [i][j] )).setImage(image1PoissonJaune) ;
 				}
-    		}
-    	}
-    }
+   		}
+   	}
+   }*/
+   
+   /* 
+  
     @FXML
     public void GoToPingouin(MouseEvent event){
     	toX = getX();
@@ -308,7 +305,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	     EndOfTurn = true;
     	}
     }
-    */
+   
     public boolean estJaune(Image imag){
     	return (imag==image1PoissonJaune)||(imag==image2PoissonsJaunes)||(imag==image3PoissonsJaunes);
     }
@@ -323,9 +320,9 @@ public class ControleurJeu  implements Initializable, EcranCourant {
 	   	    tt.setToX( toX * largeurHexagone);
 		    tt.setToY(toY * hauteurHexagone);
 	   	    
-	   	    /*tour suivant*/
+	   	    
     	}
-    }
+    }*/
     
     
     /********************************************/

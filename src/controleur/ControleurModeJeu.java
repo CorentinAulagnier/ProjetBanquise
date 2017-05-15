@@ -81,16 +81,16 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     		tableauDeJoueur[i]=jjaune;
     		i++;
     	}
+    	if (jvert!=null){
+    		tableauDeJoueur[i]=jvert;
+    		i++;
+    	}
     	if (jrouge!=null){
     		tableauDeJoueur[i]=jrouge;
     		i++;
     	}
     	if (jbleu!=null){
     		tableauDeJoueur[i]=jbleu;
-    		i++;
-    	}
-    	if (jvert!=null){
-    		tableauDeJoueur[i]=jvert;
     		i++;
     	}
     	    	
@@ -122,7 +122,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	
     	
     	
-    		String path = modeJeu[couleur]+""+couleur+".png";
+    		String path = model.Proprietes.IMAGE_JOUEUR_PATH+modeJeu[couleur]+""+couleur+".png";
     				
 	    	    	
 	    	if (modeJeu[couleur] == model.Proprietes.JOUEUR){

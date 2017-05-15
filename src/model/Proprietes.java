@@ -12,7 +12,7 @@ public class Proprietes {
     public static final String ECRAN_VICTOIRE = "Victoire";
     public static final String ECRAN_VICTOIRE_FXML = "fxml/Victoire.fxml";
     
-   public static final String IMAGE_JOUEUR_PATH = "../ressources/joueurs/";
+   public static final String IMAGE_JOUEUR_PATH = "/ressources/joueurs/";
     /*MODEJEU+COULEUR.png*/
    
    public final static int AUCUN = 0 ;

@@ -45,7 +45,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
 
-    //recupere le fxml associe a  ce controleur (et donc la partie en cours)
+    //recupere le fxml associe aï¿½ ce controleur (et donc la partie en cours)
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
     	gestionnaireFxmlCourant = ecranParent;
     }
@@ -109,17 +109,12 @@ public class ControleurJeu  implements Initializable, EcranCourant {
   
     	//maj des pinguouins sur les reglettes 
     	for(int j=0; j < gestionnaireFxmlCourant.partie.joueurs.length; j++){
-    		//String path = "/ressources/joueurs/" + String.valueOf(j+1) + String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].couleur) ;
-    		//String path = model.Proprietes.IMAGE_JOUEUR_PATH + String.valueOf(j+1) + String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].couleur) ;
     		String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMignature;
-    		//System.out.println(gestionnaireFxmlCourant.partie.joueurs[j].nom+" : "+j+" "+path);
     		for(int p=0; p < gestionnaireFxmlCourant.partie.joueurs[j].nbPingouin ; p++){
-    			//reglettes.get(j)[p].setImage(new Image("/ressources/joueurs/Pingouin.png"));
     			reglettes.get(j)[p].setImage(new Image(path));
     		}
     	}
 
-    	
     	//maj de la banquise
     	
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
@@ -136,7 +131,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	nom.setText(gestionnaireFxmlCourant.partie.joueurs[joueur].nom);
     	score_poissons.setText( String.valueOf(gestionnaireFxmlCourant.partie.joueurs[joueur].poissonsManges) );
     	score_tuiles.setText( String.valueOf(gestionnaireFxmlCourant.partie.joueurs[joueur].nbTuiles) );
-    	//reglette
+    	//maj reglette ici
     }
     
     ImageView[][] banq = new ImageView[8][8];

@@ -7,14 +7,12 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -24,10 +22,8 @@ import model.Humain;
 import model.IA;
 import model.Joueur;
 import model.Partie;
-import model.Proprietes;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
-import vue.Interface;
 
 public class ControleurModeJeu implements Initializable,  EcranCourant {
 	GestionnaireEcransFxml monChargeurFxml;
@@ -67,13 +63,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	Joueur jjaune = creerJoueur(model.Proprietes.JAUNE,nbPingouins);
     	Joueur jrouge = creerJoueur(model.Proprietes.ROUGE,nbPingouins);
     	Joueur jbleu = creerJoueur(model.Proprietes.BLEU,nbPingouins);
-    	Joueur jvert = creerJoueur(model.Proprietes.VERT,nbPingouins);
-    	
-    	/*System.out.println(jjaune );
-    	System.out.println(jrouge );
-    	System.out.println(jbleu );
-    	System.out.println(jvert );*/
-    	
+    	Joueur jvert = creerJoueur(model.Proprietes.VERT,nbPingouins);    	
     	
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
     	int i = 0;

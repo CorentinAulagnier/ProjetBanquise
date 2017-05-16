@@ -67,7 +67,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	nettoyerRoue(optionbox, roue);
     	File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-        	System.out.println(file.getName());
+        	System.out.println("nom de fichier de sauvegarde  charger "+file.getName());
         	gestionnaireFxmlCourant.partie.charger(file.getName());
         	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
         }
@@ -126,7 +126,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     private void quitter(MouseEvent event){
     	nettoyerRoue(optionbox, roue);
     	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
-    	alert_quitter("Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
+    	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
     }
     
     

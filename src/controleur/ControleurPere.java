@@ -1,5 +1,7 @@
 package controleur;
 
+import vue.GestionnaireEcransFxml;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
@@ -12,10 +14,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-/*import javafx.scene.control.Alert;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;*/
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
+import javafx.application.Platform;
 
 public class ControleurPere {
 	
@@ -131,15 +135,14 @@ public class ControleurPere {
 	  * @param boutonNok texte a afficher sur le bouton annuler
 	  * @param boutonPeutetre texte optionnel a afficher a la place du bouton non pour rendre fou l'utilisateur
 	  */
-	 public void alert_quitter(String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
-		 System.out.println("quitter");
-	    	/*
-	    	Alert alert = new Alert(AlertType.CONFIRMATION);
-	    	alert.setHeaderText(null);
-	    	alert.setTitle(titre);
-	    	alert.setContentText(contenu);
-	    	
-	    	ButtonType buttonOui = new ButtonType(boutonOk);
+	 public void alert_quitter(GestionnaireEcransFxml gestionnaireFxmlCourant, String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
+		 
+		 Alert alert = new Alert(AlertType.CONFIRMATION);
+		 alert.setHeaderText(null);
+		 alert.setTitle(titre);
+		 alert.setContentText(contenu);
+		 
+		 ButtonType buttonOui = new ButtonType(boutonOk);
 	    	ButtonType buttonJoker = new ButtonType(boutonPeutetre, ButtonData.CANCEL_CLOSE);
 	    	ButtonType buttonNon= new ButtonType(boutonNok, ButtonData.CANCEL_CLOSE);
 	    	
@@ -154,10 +157,10 @@ public class ControleurPere {
 	    	} 
 	    	else if (result.get() == buttonJoker){
 	    		String contenu2 = "Vous etes vraiment sur ? Ils vont se sentir très très seuls...";
-	    		alert_quitter("Ne partez pas...", contenu2, "Partir sans un regard!", "D'accord je reste...", "");
+	    		alert_quitter(gestionnaireFxmlCourant, "Ne partez pas...", contenu2, "Partir sans un regard!", "D'accord je reste...", "");
 	    	} else {
 	    		gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
 	    	}
-	    	*/
+	    	
 	    }
 }

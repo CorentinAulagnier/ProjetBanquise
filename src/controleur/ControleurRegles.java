@@ -76,7 +76,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      * Gere la mise à jour des composnats de l'ecran regle en fonction de la page demande
      */
     public void metAjourRegle(){
-    	System.out.println(pageRegles);
+    	System.out.println("num de page regle "+pageRegles);
     	visibiliteBoutons();
     	reglesTitre.setText(model.Proprietes.reglesTitres[pageRegles]); //maj titre
     	reglesCorps.setText(model.Proprietes.reglesCorps[pageRegles]); //maj texte	   	

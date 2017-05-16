@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -468,6 +469,16 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     private void gererMusique(MouseEvent event){
     	changerMusique(imageMusique, monChargeurFxml.musique );
+    }
+    
+    
+    @FXML
+    private void majMusique(MouseEvent event){
+    	if (musique == false){
+    		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
+    	}else{
+    		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
+    	}
     }
     
     /**

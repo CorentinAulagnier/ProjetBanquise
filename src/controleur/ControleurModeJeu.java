@@ -25,7 +25,7 @@ import model.Partie;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
-public class ControleurModeJeu implements Initializable,  EcranCourant {
+public class ControleurModeJeu extends ControleurPere implements Initializable,  EcranCourant {
 	GestionnaireEcransFxml monChargeurFxml;
 	
 	 /**GESTION DES BOUTONS**/
@@ -84,9 +84,11 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     		i++;
     	}
     	    	
-    	bulleVisible(bulle,2);
+    	bulleVisible(bulle,1);
     	   	
     	monChargeurFxml.partie.joueurs=tableauDeJoueur;
+    	
+    	nettoyerRoue(optionbox, roue);
     	
     	monChargeurFxml.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
@@ -131,6 +133,7 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){
+    	nettoyerRoue(optionbox, roue);
     	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
@@ -414,10 +417,10 @@ public class ControleurModeJeu implements Initializable,  EcranCourant {
     	boolean VOK = (pileNom[model.Proprietes.VERT].getChildren().get(model.Proprietes.JOUEUR).isVisible() && ( (( (TextField)pileNom[model.Proprietes.VERT].getChildren().get(model.Proprietes.JOUEUR)).getText()).equals("")) ) ;
     	if (!(JRV||JRB||JBV||BRV||JOK||BOK||ROK||VOK)){
     		lancer.setDisable(false);
-    		bulleVisible(bulle,1);
+    		bulleVisible(bulle,0);
     	}else{
     		lancer.setDisable(true);
-    		bulleVisible(bulle,0);
+    		bulleVisible(bulle,2);
     	}
     }
 	

@@ -25,8 +25,8 @@ import model.Partie;
 	    public MediaPlayer media;
 	    public Partie partie;
 	    
-		public boolean musique = true;
-		public boolean son = true;
+		public boolean musique = false;
+		public boolean son = false;
 
 	    public GestionnaireEcransFxml(Partie p) {
 	        super();

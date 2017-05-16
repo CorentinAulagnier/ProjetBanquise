@@ -41,6 +41,7 @@ public class Proprietes {
     		"Fin de tour",
     		"Fin de la partie"
     };
+    
     public static final String[] reglesCorps = {
     		"Sur la banquise, les pingouins partent à la chasse au poisson en sautant d’un bloc de glace à l’autre.\n\n"
     				+"Pour cela, les joueurs essaient d’attraper un maximum de poissons, tout en veillant à ne pas être bloqués ou isolés sur la banquise.",

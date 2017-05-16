@@ -27,13 +27,15 @@ import model.Coordonnees;
 import model.Humain;
 import model.IA;
 
-public class ControleurJeu  implements Initializable, EcranCourant {
+public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
+	
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
 	
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
     @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
     
+    //zone joueur
     @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
     @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
     @FXML private Label nom_j1, nom_j2, nom_j3, nom_j4;
@@ -44,12 +46,13 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
-
-    //recupere le fxml associe a� ce controleur (et donc la partie en cours)
-    public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
-    	gestionnaireFxmlCourant = ecranParent;
-    }
     
+    //zone menu
+    @FXML private ImageView imageSon, imageMusique;
+    
+	/**
+	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
+	 */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	anchorPane_j3.setVisible(false);
@@ -59,80 +62,174 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	box_boutons_tour.setVisible(false);
     }
     
+	/**
+	 * implementation demandé par l'interface EcranCourant : met à jour le noeud fxml parent associe a ce controleur
+	 */
+    public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
+    	gestionnaireFxmlCourant = ecranParent;
+    }
     
+    /**
+     * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur dynamiquement à l'appel de l'écran de Jeu. 
+     * Appelle la mise initiale lors du chargement d'écran, ainsi que la mise à jour de chaque tour de jeu 
+     */
     public void miseAjour(){
     	
     	if(gestionnaireFxmlCourant!= null && gestionnaireFxmlCourant.partie!=null){
+    		
     		AnchorPane[] anchorPanes = {anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4};
     		Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
     		Paint[] p = {Paint.valueOf("ffda4a"),Paint.valueOf("37cc2c"),Paint.valueOf("950303"),Paint.valueOf("2394f1")};	
     	    Label[] noms = {nom_j1,nom_j2,nom_j3,nom_j4};
     	    Label[] score_poissons = {score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4};
-    	    Label[] score_tuiles = {score_tuiles_j1,score_tuiles_j2,score_tuiles_j3,score_tuiles_j4};
-    	   
+    	    Label[] score_tuiles = {score_tuiles_j1,score_tuiles_j2,score_tuiles_j3,score_tuiles_j4};  
     	    ImageView[] j1_reglette = {reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4};
     	    ImageView[] j2_reglette = {reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4};
     	    ImageView[] j3_reglette = {reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4};
     	    ImageView[] j4_reglette = {reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4};
     	    ArrayList<ImageView[]> reglettes = new ArrayList<ImageView[]>();
-    	    reglettes.add(j1_reglette); 
-    	    reglettes.add(j2_reglette);
-    	    reglettes.add(j3_reglette);
-    	    reglettes.add(j4_reglette);
+    	    reglettes.add(j1_reglette); reglettes.add(j2_reglette); reglettes.add(j3_reglette); reglettes.add(j4_reglette);
     	    
-    	    miseAjour_initiale(anchorPanes,banquises,p,noms,score_poissons,score_tuiles);
+    	    miseAjour_initiale(anchorPanes, banquises, p, noms);
     	    
-    	    miseAjour_tourDeJeu(reglettes);
+    	    miseAjour_tourDeJeu(reglettes, score_poissons, score_tuiles);
     	}
     }
     
-    public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms, Label[] score_poissons, Label[] score_tuiles){
-    	int compteurDhumain =0;
-    	for(int k=0; k<gestionnaireFxmlCourant.partie.joueurs.length; k++){
-			majZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(gestionnaireFxmlCourant.partie.joueurs[k]).couleur],(Label)noms[k],(Label)score_poissons[k],(Label)score_tuiles[k]);
-			if ( ( Humain.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[k]).getClass() ) ){
-				compteurDhumain++;
-			}
-
-			if( compteurDhumain == 1){
-		    	bouton_defaire.setVisible(true);
-		    	bouton_faire.setVisible(true);
-			}
+    
+    /**
+     * Charge l'interface depuis les informations de l'objet Partie, à l'ouverture de l'écran de Jeu. (pas à chaque tour)
+     * @param anchorPanes tableau des 4 zones réservées à chaque joueur (pour afficher ou cacher)
+     * @param banquises tableau des 4 encarts de couleurs réservées à chaque joueur (futures banquises)
+     * @param p tableau de couleurs pour les banquises
+     * @param noms tableau des noms des joueurs
+     * @param score_poissons tableau des scores (en poissons) des joueurs
+     * @param score_tuiles tableau des scores (en tuiles) des joueurs
+     */
+    public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms){
     	
-		}
+    	int compteurDhumain =0;
+    	
+    	for(int k=0; k<gestionnaireFxmlCourant.partie.joueurs.length; k++){
     		
+    		//maj de chaque zones réservées à un joueur
+    		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(gestionnaireFxmlCourant.partie.joueurs[k]).couleur],(Label)noms[k]);
+			
+			if ( ( Humain.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[k]).getClass() ) ){
+				compteurDhumain++;	//compte le nombre d'humain
+			}
+		}
+    	
+    	if( compteurDhumain == 1){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
+	    	bouton_defaire.setVisible(true);
+	    	bouton_faire.setVisible(true);
+		}
     }
     
-    public void miseAjour_tourDeJeu(ArrayList<ImageView[]> reglettes){
-    	//maj tour de untel
+    
+    /**
+     * met à jour toute la zone réservée à un joueur
+     * @param joueur numéro du joueur
+     * @param anchors zone entière réservée au joueur
+     * @param banquise encart de couleur sous la zone de joueur
+     * @param p couleur assoicée au joueur
+     * @param nom nom du joueur
+     */
+    public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquise, Paint p, Label nom){
+    	anchors.setVisible(true);
+    	banquise.setFill(p);
+    	nom.setText(gestionnaireFxmlCourant.partie.joueurs[joueur].nom);
+    }
+    
+    
+    /**
+     * Gere les modifications de l'interface l'interface appelées à chaque tour de jeu.
+     * @param reglettes liste des reglettes accueillant les miniatures de pingouins dans la zone joueur.
+     * @param score_poissons tableau des scores (en poissons) des joueurs
+     * @param score_tuiles tableau des scores (en tuiles) des joueurs
+     * 
+     */
+    public void miseAjour_tourDeJeu(ArrayList<ImageView[]> reglettes, Label[] score_poissons, Label[] score_tuiles){
+    	//maj du label "tour de untel"
     	label_tourDe.setText("Tour de "+gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].nom+" :");
-  
-    	//maj des pinguouins sur les reglettes 
+    	
     	for(int j=0; j < gestionnaireFxmlCourant.partie.joueurs.length; j++){
+    		//maj des scores du joueur
+    		((Label)score_poissons[j]).setText( String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].poissonsManges) );
+        	((Label)score_tuiles[j]).setText( String.valueOf(gestionnaireFxmlCourant.partie.joueurs[j].nbTuiles) );	
+        	
+    		//maj des pinguouins sur les reglettes 		
     		String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMiniature;
     		for(int p=0; p < gestionnaireFxmlCourant.partie.joueurs[j].nbPingouin ; p++){
     			reglettes.get(j)[p].setImage(new Image(path));
     		}
     	}
 
-    	//maj de la banquise
+    	//maj de l'affichage la banquise
+    	//TODO
     	
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
     	if ( !( IA.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif]).getClass() ) ){
     		box_boutons_tour.setVisible(true);
     	}
+    	else{
+    		//Affichage réservée IA
+    		//TODO
+    	}
+    } 
+    
+    
+    
+    @FXML private void annulerTours(MouseEvent event){
+    	System.out.println("annulerTours");
+    }
+    
+    @FXML private void demanderIndice(MouseEvent event){
+    	System.out.println("demanderIndice");
+    }
+    
+    @FXML private void reinitiailiserTour(MouseEvent event){
+    	System.out.println("reinitiailiserTour");
+    }
+    
+    @FXML private void validerTour(MouseEvent event){
+    	System.out.println("validerTour");
+    }
+    
+    @FXML private void refaireTours(MouseEvent event){
+    	System.out.println("refaireTours");
+    }
+    
+    /**
+     * gere la modification du volume de la musique
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void gererMusique(MouseEvent event){
+    	changerMusique(imageMusique);
+    }
+    
+    /**
+     * gere la modification des bruitages
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void gererSon(MouseEvent event){
+    	changerSon(imageSon);
     }
     
     
     
-    public void majZoneJoueur(int joueur, AnchorPane anchors, Arc banquise, Paint p, Label nom,Label score_poissons,Label score_tuiles){
-    	anchors.setVisible(true);
-    	banquise.setFill(p);
-    	nom.setText(gestionnaireFxmlCourant.partie.joueurs[joueur].nom);
-    	score_poissons.setText( String.valueOf(gestionnaireFxmlCourant.partie.joueurs[joueur].poissonsManges) );
-    	score_tuiles.setText( String.valueOf(gestionnaireFxmlCourant.partie.joueurs[joueur].nbTuiles) );
-    	//maj reglette ici
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     ImageView[][] banq = new ImageView[8][8];
     ImageView[][] pingouins = new ImageView[8][8];
@@ -339,30 +436,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
     	}
     }*/
     
-    
-    /********************************************/
-    /*			Gestion des boutons 			*/
-    /********************************************/
-    
-    @FXML private void annulerTours(MouseEvent event){
-    	System.out.println("annulerTours");
-    }
-    
-    @FXML private void demanderIndice(MouseEvent event){
-    	System.out.println("demanderIndice");
-    }
-    
-    @FXML private void reinitiailiserTour(MouseEvent event){
-    	System.out.println("reinitiailiserTour");
-    }
-    
-    @FXML private void validerTour(MouseEvent event){
-    	System.out.println("validerTour");
-    }
-    
-    @FXML private void refaireTours(MouseEvent event){
-    	System.out.println("refaireTours");
-    }
+   
     
     
     

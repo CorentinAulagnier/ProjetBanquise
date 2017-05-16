@@ -301,7 +301,7 @@ public class LauncherConsole {
 			boolean axeok = false;
 			ArrayList<ArrayList<Coordonnees>> chemins = p.b.deplacementPossible(pingouin);
 			while (!axeok) {
-				System.out.println(chemins);
+				System.out.println(p.b.cheminsToString(chemins));
 				System.out.println("Numero de l'axe choisi (0 pour retourner au choix du pingouin):");
 				numAxe = Integer.valueOf(br.readLine());
 				if(numAxe<1 || numAxe>6) {

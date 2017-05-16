@@ -1,0 +1,17 @@
+nbJoueurs 4
+joueurActif 0
+IA nbTuiles 0 poissonsManges 0 nbPingouin 2 nom IA0 niveau 1 myPingouins
+Pingouin position (0, 1) actif
+Pingouin position (0, 2) actif
+
+IA nbTuiles 0 poissonsManges 0 nbPingouin 2 nom IA1 niveau 1 myPingouins
+Pingouin position (0, 3) actif
+Pingouin position (0, 5) actif
+
+Joueur nbTuiles 0 poissonsManges 0 nbPingouin 2 nom Coco myPingouins
+Pingouin position (1, 0) actif
+Pingouin position (0, 6) actif
+
+Joueur nbTuiles 0 poissonsManges 0 nbPingouin 2 nom Mat myPingouins
+Pingouin position (1, 3) actif
+Pingouin position (1, 4) actif

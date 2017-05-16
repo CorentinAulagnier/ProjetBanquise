@@ -16,7 +16,7 @@
       <URL value="@../css/CssAccueil.css" />
    </stylesheets>
   <children>
-    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0">
+    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0">
       <image>
         <Image url="@../../ressources/decor/fond_banquise.jpg" />
       </image>
@@ -142,15 +142,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
     </Button>
-      <ImageView fitHeight="120.0" fitWidth="76.0" layoutX="719.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../ressources/decor/Pingouin.png" />
-         </image>
-      </ImageView>
-      <ImageView id="" fitHeight="149.9999942779541" fitWidth="180.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../ressources/decor/bulle1.png" />
-         </image>
-      </ImageView>
   </children>
 </AnchorPane>

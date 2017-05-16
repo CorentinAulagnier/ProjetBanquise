@@ -32,9 +32,9 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML 
     private Button retour;
     @FXML 
-    private MenuButton options;
-    @FXML 
     private Button lancer;
+    
+    
        
     
     @FXML

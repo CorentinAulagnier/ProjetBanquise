@@ -529,11 +529,11 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
             </Button>
-            <Button fx:id="igloo" contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+            <Button fx:id="igloo" contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true">
                   <image>
-                    <Image url="@../../ressources/decor/igloo.png" />
+                    <Image url="@../../ressources/decor/r_igloo.png" />
                   </image>
                 </ImageView>
               </graphic>
@@ -548,7 +548,7 @@
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@../../ressources/decor/quit.png" />
+                    <Image url="@../../ressources/decor/r_quitte.png" />
                   </image>
                 </ImageView>
               </graphic>

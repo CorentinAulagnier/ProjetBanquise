@@ -234,7 +234,6 @@ public class PingouinClient {
 	
     private static CoupleGenerique getDeplacement(Partie p) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		//boolean joue = false;
 		while(true) {
 			try {
 				Pingouin pingouin = LauncherConsole.choixPingouin(br,p);
@@ -246,19 +245,5 @@ public class PingouinClient {
 				System.out.println("Mauvaise entree, on recommence.");
     		}
 		}
-		/*
-    	CoupleGenerique cg = null;
-    	while (true) {
-    		try {
-            	cg = getDeplacement(p);
-        		if (cg != null) {
-        			break;
-        		}
-    		} catch (NumberFormatException e) {
-    			cg = null;
-    		}
-    	}*/
-    	
-    	
 	}
 }

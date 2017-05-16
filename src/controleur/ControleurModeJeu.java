@@ -35,7 +35,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     private MenuButton options;
     @FXML 
     private Button lancer;
-    
+       
     
     @FXML
     private void lancerPartie(MouseEvent event){
@@ -426,21 +426,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
 	
     
     
-    /**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
-    
-    @FXML
-    public void boutonPresse(MouseEvent event){
-    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-
-    
-    
-    /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
-    
-    @FXML
-    public void boutonLache(MouseEvent event){
-    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
-    }
+   
     
     @FXML AnchorPane optionbox;
     @FXML Button roue;

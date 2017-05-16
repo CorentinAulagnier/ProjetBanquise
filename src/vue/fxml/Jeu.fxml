@@ -542,7 +542,7 @@
         </AnchorPane>
         <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
           <children>
-            <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+            <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
               <graphic>
                 <ImageView fitHeight="45.0" fitWidth="45.0">
                   <image>
@@ -554,7 +554,7 @@
                 <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
               </HBox.margin>
             </Button>
-            <Button fx:id="bouton_indice" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+            <Button fx:id="bouton_indice" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
               <graphic>
                 <ImageView fitHeight="40.0" fitWidth="40.0">
                   <image>
@@ -566,17 +566,17 @@
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
               </HBox.margin>
             </Button>
-            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Annuler">
+            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" onTouchPressed="#boutonPresse" onTouchReleased="#boutonLache" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Annuler">
               <HBox.margin>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
               </HBox.margin>
             </Button>
-            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Fin de tour" textAlignment="CENTER">
+            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" onTouchPressed="#boutonPresse" onTouchReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Fin de tour" textAlignment="CENTER">
               <HBox.margin>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
               </HBox.margin>
             </Button>
-            <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
+            <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" onTouchPressed="#boutonPresse" onTouchReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45;">
               <graphic>
                 <ImageView fitHeight="45.0" fitWidth="45.0">
                   <image>
@@ -613,7 +613,7 @@
         </ImageView>
         <HBox id="optionbox" alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="67.0" prefWidth="354.0" style="-fx-background-color: transparent;" visible="true">
           <children>
-          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererMusique" onTouchPressed="#boutonPresse" onTouchReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fx:id="imageMusique" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -622,7 +622,7 @@
               </ImageView>
             </graphic>
           </Button>
-          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererSon" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fx:id="imageSon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -631,7 +631,7 @@
               </ImageView>
             </graphic>
           </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" mnemonicParsing="false" onMouseClicked="#sauvegarder" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -643,7 +643,7 @@
                 <Insets right="40.0" />
               </HBox.margin>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -655,7 +655,7 @@
                 <Insets left="40.0" />
               </HBox.margin>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -664,7 +664,7 @@
                 </ImageView>
               </graphic>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#quitter" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>

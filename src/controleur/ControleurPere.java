@@ -5,6 +5,7 @@ import vue.GestionnaireEcransFxml;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -59,6 +60,17 @@ public class ControleurPere {
     }
     
     /**
+	 * permet de fermer la roue si necessaire
+	 * @param optionbox zone du menu que l'on doit cacher
+	 * @param roue bouton provoquant l'action
+	 */
+    public void nettoyerRoueHorizontale(AnchorPane optionbox, Button roue){
+    	if (!(optionbox.isDisable())){
+    		optionWheelClose(optionbox, roue);
+    	}
+    }
+    
+    /**
      * gere l'ouverture du menu d'options cache par le bouton roue
 	 * @param optionbox zone du menu que l'on doit cacher
 	 * @param roue bouton provoquant l'action
@@ -77,24 +89,77 @@ public class ControleurPere {
 	     pt.play();
 	    }
     
-    /**
-     * gere la fermeture du menu d'options cache par le bouton roue
-	 * @param optionbox zone du menu que l'on doit cacher
-	 * @param roue bouton provoquant l'action
-     */
-	 public void optionFermerRoue(AnchorPane optionbox, Button roue){
+   
+	 
+	  /**
+	     * gere l'ouverture du menu d'options cache par le bouton roue
+		 * @param optionbox zone du menu que l'on doit cacher
+		 * @param roue bouton provoquant l'action
+	     */
+	 public void optionWheelOpen(AnchorPane optionbox, Button roue){
+		 optionbox.setDisable(false);
+ 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+ 		ft.setFromValue(0);
+ 		ft.setToValue(1);
+ 		
+ 		ScaleTransition st = new ScaleTransition(Duration.millis(500), optionbox);
+     	st.setFromX(0);
+     	st.setToX(1);
+ 		
+    	TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+     	tt.setByY(-100);
+     	
+     	
+ 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+ 	     rt.setByAngle(180);
+ 	     
+ 		ParallelTransition pt = new ParallelTransition(optionbox,ft,rt,st,tt );
+ 	     pt.play();
+	    }
+	 
+	 /**
+	     * gere la fermeture du menu d'options cache par le bouton roue
+		 * @param optionbox zone du menu que l'on doit cacher
+		 * @param roue bouton provoquant l'action
+	     */
+		 public void optionFermerRoue(AnchorPane optionbox, Button roue){
+			 optionbox.setDisable(true);
+				TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+				tt.setFromX(200);
+		     	tt.setToX(-150); 
+		     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+		     	ft.setFromValue(1);
+		     	ft.setToValue(0);
+			RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+		     rt.setByAngle(-180);
+		     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt,rt);
+		     	pt.play();
+		 }
+		 
+		 /**
+		     * gere la fermeture du menu d'options cache par le bouton roue
+			 * @param optionbox zone du menu que l'on doit cacher
+			 * @param roue bouton provoquant l'action
+		     */
+	 public void optionWheelClose(AnchorPane optionbox, Button roue){
 		 optionbox.setDisable(true);
-			TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-			tt.setFromX(200);
-	     	tt.setToX(-150); 
-	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
-	     	ft.setFromValue(1);
-	     	ft.setToValue(0);
-		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
-	     rt.setByAngle(-180);
-	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt,rt);
+		 	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
+	 		ft.setFromValue(1);
+	 		ft.setToValue(0);
+		 
+	     	ScaleTransition st = new ScaleTransition(Duration.millis(500), optionbox);
+	     	st.setFromX(1);
+	     	st.setToX(0);
+	     	
+	     	TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+	     	tt.setByY(100);
+	     	
+ 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
+ 	     rt.setByAngle(-180);
+	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, st ,rt,tt);
 	     	pt.play();
 	 }
+	 
 	 
 	 /**
 	  * gere la modification du volume de la musique

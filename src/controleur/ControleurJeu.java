@@ -206,7 +206,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique);
+    	changerMusique(imageMusique,gestionnaireFxmlCourant.musique);
     }
     
     /**

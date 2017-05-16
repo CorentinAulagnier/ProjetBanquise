@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 import model.Coordonnees;
 
-public class Test {
+public class Test extends MoteurConsole{
 
 	/**
 	 * Test l'affichage de la banquise
@@ -122,17 +122,17 @@ public class Test {
 			        	afficherVoisin(x, y, z);
 						break;
 					case 4:
-						Partie p1 = LauncherConsole.creerPartie(br);
-						LauncherConsole.phasePlacement(br, p1);
+						Partie p1 = creerPartie();
+						phasePlacement(p1);
 						System.out.println(p1.toString2());
 						System.out.println(" 1 seul joueur Humain ? " + p1.peutAnnulerCoup());
 						break;
 					case 5:
-						Partie p = LauncherConsole.creerPartie(br);
-						LauncherConsole.phasePlacement(br, p);
-						LauncherConsole.tourDeJeuConsole(br, p);
-						LauncherConsole.tourDeJeuConsole(br, p);
-						LauncherConsole.tourDeJeuConsole(br, p);
+						Partie p = creerPartie();
+						phasePlacement(p);
+						tourDeJeuConsole(p);
+						tourDeJeuConsole(p);
+						tourDeJeuConsole(p);
 						System.out.println("Banquise créée :\n"+p);
 						System.out.println("Historique créée :\n"+p.h);
 						p.sauvegarder();
@@ -141,8 +141,8 @@ public class Test {
 						System.out.println("Banquise restaurée :\n"+p);
 						System.out.println("Historique restaurée :\n"+p.h);
 					case 6:
-						Partie p_origine = LauncherConsole.creerPartie(br);
-						LauncherConsole.phasePlacement(br, p_origine);
+						Partie p_origine = creerPartie();
+						phasePlacement(p_origine);
 						System.out.println("Banquise créée :\n"+p_origine);
 						Partie p_clone = p_origine.clone();
 						System.out.println("Banquise clonée :\n"+p_clone);

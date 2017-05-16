@@ -64,15 +64,16 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void ouvrirPageCharger(MouseEvent event){
+    	// gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
+    	// ou 
+    	
     	nettoyerRoue(optionbox, roue);
     	File file = fileChooser.showOpenDialog(null);
         if (file != null) {
         	System.out.println("nom de fichier de sauvegarde  charger "+file.getName());
         	gestionnaireFxmlCourant.partie.charger(file.getName());
-        	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
-        }
-    	
-    	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
+        	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
+        }    	
     }
     
     /**

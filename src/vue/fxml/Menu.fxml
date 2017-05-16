@@ -11,26 +11,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
   <stylesheets>
       <URL value="@../css/CssAccueil.css" />
    </stylesheets>
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0">
       <image>
-        <Image url="@../../ressources/decor/banquise.jpg" />
+        <Image url="@../../ressources/decor/fond_banquise.jpg" />
       </image>
     </ImageView>
     <ImageView fx:id="persos" blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="200.0" fitWidth="300.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="@../../ressources/decor/Penguins-of-Madagascar-PNG-Clipart.png" />
+        <Image url="@../../ressources/decor/Pingouins.png" />
       </image>
     </ImageView>
     <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#ouvrirNouvellePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../ressources/decor/jouer.png" />
+                  <Image url="@../../ressources/decor/b_jouer.png" />
                </image>
             </ImageView>
          </graphic>
@@ -41,7 +41,7 @@
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../ressources/decor/charger.png" />
+            <Image url="@../../ressources/decor/b_charger.png" />
           </image>
         </ImageView>
       </graphic>
@@ -53,7 +53,7 @@
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../ressources/decor/regles.png" />
+            <Image url="@../../ressources/decor/b_regles.png" />
           </image>
         </ImageView>
       </graphic>
@@ -79,7 +79,7 @@
             <graphic>
               <ImageView fx:id="imageMusique" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                  <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+                  <Image url="@../../ressources/decor/r_music-on.png" />
                 </image>
               </ImageView>
             </graphic>
@@ -91,7 +91,7 @@
             <graphic>
               <ImageView fx:id="imageSon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                  <Image url="@../../ressources/decor/son.png" />
+                  <Image url="@../../ressources/decor/r_son-on.png" />
                 </image>
               </ImageView>
             </graphic>
@@ -103,7 +103,7 @@
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@../../ressources/decor/aide.png" />
+                    <Image url="@../../ressources/decor/r_aide.png" />
                   </image>
                 </ImageView>
               </graphic>
@@ -118,7 +118,7 @@
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@../../ressources/decor/quit.png" />
+                    <Image url="@../../ressources/decor/r_quitte.png" />
                   </image>
                 </ImageView>
               </graphic>
@@ -134,7 +134,7 @@
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
           <image>
-            <Image url="@../../ressources/decor/parametres.png" />
+            <Image url="@../../ressources/decor/r_parametres.png" />
           </image>
         </ImageView>
       </graphic>

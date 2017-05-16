@@ -430,13 +430,25 @@ public class Banquise implements Serializable {
 	 * 
 	 * @param p
 	 *            Le pingouin qui veut se deplacer.
-	 * @return Un ensemble de points d'arrivés possible.
+	 * @return Un ensemble de points d'arrives possible.
 	 */
 
 	public ArrayList<ArrayList<Coordonnees>> deplacementPossible(Pingouin p) {
+		return deplacementPossible(p.position);
+	}
+	
+	/**
+	 * Renvoie la liste de points en partant de dep, et en allant dans tout les sens.
+	 * 
+	 * @param c
+	 *            c la coordonnee du pingouin qu'on veut deplacer
+	 * @return Un ensemble de points d'arrives possible.
+	 */
+
+	public ArrayList<ArrayList<Coordonnees>> deplacementPossible(Coordonnees c) {
 		ArrayList<ArrayList<Coordonnees>> chemins = new ArrayList<ArrayList<Coordonnees>>();
 		for(int i = 0; i<NB_AXES;i++) {
-			chemins.add(construireChemin(i,p.position));
+			chemins.add(construireChemin(i,c));
 		}
 		return chemins;
 	}
@@ -460,6 +472,61 @@ public class Banquise implements Serializable {
 			next = getVoisin(axe, next);
 		}
 		return chemin;
+	}
+	
+	/**
+	 * Renvoie le string affichant tout les chemins et leur contennu
+	 * 
+	 * @param chemins
+	 *          les 6 chemins accessibles
+	 * 
+	 * @return le string affichant tout les chemins
+	 */
+	
+	public String cheminsToString(ArrayList<ArrayList<Coordonnees>> chemins) {
+		String s="Coordonnées accessibles:\n";
+		for(int i=0; i<NB_AXES;i++) {
+			s+=stringChemin(chemins.get(i), i)+"\n";
+		}
+		return s;
+	}
+	
+	/**
+	 * Renvoie le string affichant le chemin numAxe
+	 * 
+	 * @param chemin
+	 *          le chemins accessibles
+	 * @param numAxe
+	 *          l'entier codant le numero du chemin
+	 * 
+	 * @return le string affichant le contennu du chemin
+	 */
+	public String stringChemin(ArrayList<Coordonnees> chemin, int numAxe) {
+		String s = String.valueOf(numAxe+1)+") Axe "+getNomAxe(numAxe);
+		for(int i =0; i< chemin.size(); i++) {
+			s+="\t"+String.valueOf(i+1)+": "+chemin.get(i).toString();
+		}
+		return s;
+	}
+	
+	/**
+	 * Renvoie le string affichant le nomde l'axe
+	 * 
+	 * @param numAxe
+	 *          l'entier codant le numero du chemin
+	 * 
+	 * @return le string affichant le nom de l'axe
+	 */
+	public String getNomAxe(int axe) {
+		switch(axe) {
+			case 0: return "Haut Droit";
+			case 1: return "Milieu Droit";
+			case 2: return "Bas Droit";
+			case 3: return "Bas Gauche";
+			case 4: return "Milieu Gauche";
+			case 5: return "Haut Gauche";
+			default: return null;
+		}
 	}
 
 /*******************************************************************************************************/

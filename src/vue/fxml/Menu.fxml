@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -11,22 +10,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
-  <stylesheets>
-      <URL value="@../css/CssAccueil.css" />
-   </stylesheets>
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0">
       <image>
         <Image url="@../../ressources/decor/fond_banquise.jpg" />
       </image>
     </ImageView>
-    <ImageView fx:id="persos" blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="200.0" fitWidth="300.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="persos" blendMode="SRC_OVER" cache="true" cacheHint="DEFAULT" fitHeight="200.0" fitWidth="300.0" layoutX="240.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../../ressources/decor/Pingouins.png" />
       </image>
     </ImageView>
-    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#ouvrirNouvellePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
+    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="303.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#ouvrirNouvellePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,7 +33,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
+    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="303.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -49,9 +45,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
     </Button>
-    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Chargement Partie">
+    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="530.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Chargement Partie">
       <graphic>
-        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" visible="false">
           <image>
             <Image url="@../../ressources/decor/b_regles.png" />
           </image>

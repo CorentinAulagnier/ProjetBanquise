@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,19 +17,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" stylesheets="@../css/CssAccueil.css" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
-    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" style="">
+    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
       <image>
         <Image url="@../../ressources/decor/fond_banquise.jpg" />
       </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
     </ImageView>
     <GridPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" prefHeight="250.0" prefWidth="175.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
           <children>
-            <Arc id="zoneJ1" fx:id="banquise_j1" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="-90.0" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Arc id="zoneJ1" fx:id="banquise_j1" length="90.0" opacity="0.6" radiusX="160.0" radiusY="250.0" startAngle="-90.0" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
               <effect>
                 <Glow />
               </effect>
@@ -83,7 +87,7 @@
         </AnchorPane>
         <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
           <children>
-            <Arc id="zoneJ4" fx:id="banquise_j2" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="180.0" strokeType="INSIDE" type="ROUND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Arc id="zoneJ4" fx:id="banquise_j2" length="90.0" opacity="0.5" radiusX="160.0" radiusY="250.0" startAngle="180.0" strokeType="INSIDE" type="ROUND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <effect>
                 <Glow />
               </effect>
@@ -134,7 +138,7 @@
         </AnchorPane>
         <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
           <children>
-            <Arc id="zoneJ4" fx:id="banquise_j3" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" startAngle="90.0" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Arc id="zoneJ4" fx:id="banquise_j3" length="90.0" opacity="0.5" radiusX="160.0" radiusY="250.0" startAngle="90.0" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <fill>
                 <Color blue="0.012" green="0.012" red="0.584" fx:id="x4" />
               </fill>
@@ -182,7 +186,7 @@
         </AnchorPane>
         <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
           <children>
-            <Arc id="zoneJ3" fx:id="banquise_j4" length="90.0" opacity="0.3" radiusX="160.0" radiusY="250.0" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <Arc id="zoneJ3" fx:id="banquise_j4" length="90.0" opacity="0.6" radiusX="160.0" radiusY="250.0" strokeType="INSIDE" type="ROUND" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
               <fill>
                 <Color blue="0.945" green="0.580" red="0.137" fx:id="x5" />
               </fill>
@@ -566,15 +570,29 @@
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
               </HBox.margin>
             </Button>
-            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10; -fx-background-color: transparent" text="Annuler">
+            <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
               <HBox.margin>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
               </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="75.0">
+                           <image>
+                              <Image url="@../../ressources/decor/j_annuler.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
             </Button>
-            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" text="Fin de tour" textAlignment="CENTER">
+            <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" textAlignment="CENTER">
               <HBox.margin>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
               </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="150.0">
+                           <image>
+                              <Image url="@../../ressources/decor/j_findetour.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
             </Button>
             <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
               <graphic>

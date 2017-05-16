@@ -8,6 +8,12 @@ package model;
 public class Humain extends Joueur {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
+	/**
 	 * Constructeurs
 	 */	
 

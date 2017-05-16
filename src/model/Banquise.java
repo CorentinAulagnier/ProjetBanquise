@@ -1,12 +1,10 @@
 package model;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -16,6 +14,11 @@ import java.util.function.Function;
  */	
 
 public class Banquise implements Serializable, Cloneable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Tableau du terrain de jeu
 	 */

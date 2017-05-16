@@ -8,6 +8,11 @@ import java.io.Serializable;
 
 public class Tuile implements Serializable {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * nombre de poisson sur cette case
 	 * 0 si la case n'est pas accessible
 	 */

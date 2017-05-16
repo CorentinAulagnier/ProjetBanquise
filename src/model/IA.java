@@ -7,6 +7,11 @@ package model;
 
 public class IA extends Joueur {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Entier qui indique le niveau de l'ia : 
 	 * 	- 1 : facile
 	 *  - 2 : moyenne

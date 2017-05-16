@@ -4,7 +4,12 @@ import java.io.Serializable;
 
 public class CoupleGenerique<T1, T2> implements Serializable{
 
-    public T1 e1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public T1 e1;
     public T2 e2;
 
     public CoupleGenerique(T1 first, T2 second) {
@@ -12,7 +17,7 @@ public class CoupleGenerique<T1, T2> implements Serializable{
         this.e2 = second;
     }
 
-    public CoupleGenerique(CoupleGenerique c) {
+    public CoupleGenerique(CoupleGenerique<T1, T2> c) {
 
         this.e1 = (T1) c.e1;
         this.e2 = (T2) c.e2;
@@ -25,7 +30,7 @@ public class CoupleGenerique<T1, T2> implements Serializable{
      *
      * @return Vrai si this est identique au CoupleGenerique en parametre.
      */
-    public boolean equals(CoupleGenerique obj) {
+    public boolean equals(CoupleGenerique<T1, T2> obj) {
         return (this.e1.equals(obj.e1) && this.e2.equals(obj.e2));
     }
 

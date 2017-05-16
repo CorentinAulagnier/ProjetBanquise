@@ -20,7 +20,6 @@ public class PingouinClient {
     	 // Make connection and initialize streams
     	Socket socket = null;
     	Pattern pattern;
-    	Matcher matcher;
     	final String REGEX_IP = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
     	pattern = Pattern.compile(REGEX_IP);
 
@@ -232,7 +231,7 @@ public class PingouinClient {
 		}
 	}
 	
-    private static CoupleGenerique getDeplacement(Partie p) {
+    private static CoupleGenerique<Coordonnees,Coordonnees> getDeplacement(Partie p) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while(true) {
 			try {

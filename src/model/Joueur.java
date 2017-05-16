@@ -1,13 +1,17 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 /**
  * Class Joueur : gere un joueur
  */
 
 public abstract class Joueur implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Nombre de deplacements effectues
 	 */

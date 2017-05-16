@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class CoupleCoordonnees implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public Coordonnees c1;
 	public Coordonnees c2;
 	

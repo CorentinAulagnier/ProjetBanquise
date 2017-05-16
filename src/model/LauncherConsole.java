@@ -230,7 +230,7 @@ public class LauncherConsole {
 						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2);
 						joue = true;
 					} else {
-						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2+" mais cela est impossible.");
+						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue sur une case null.");
 					}
 							
 				} else { // Tour de l'Humain

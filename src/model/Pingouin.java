@@ -9,6 +9,11 @@ import java.io.Serializable;
 public class Pingouin implements Serializable {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Position du pingouin sur la grille
 	 */
 	

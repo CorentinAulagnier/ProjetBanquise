@@ -1,6 +1,5 @@
 package model;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -9,6 +8,11 @@ import java.io.Serializable;
 import java.util.Stack;
 
 public class Historique implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	public Stack<Partie> undo;
 	public Stack<Partie> redo;

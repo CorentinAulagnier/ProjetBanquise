@@ -50,37 +50,12 @@ public class Test {
 	
 	public static void afficherVoisin(int x, int y, int z){
 		Banquise b = new Banquise();
-
 		Coordonnees c = new Coordonnees(x, y);
 		System.out.print(c + " -> ");
-
-		switch (z) {
-			case 1:
-				System.out.println(b.getHD(c));
-				break;
-				
-			case 2: 
-				System.out.println(b.getMD(c));
-				break;
-				
-			case 3: 
-				System.out.println(b.getBD(c));
-				break;
-				
-			case 4:
-				System.out.println(b.getBG(c));
-				break;
-				
-			case 5:
-				System.out.println(b.getMG(c));
-				break;
-				
-			case 6:
-				System.out.println(b.getHG(c));
-				break;
-
-			default :
-				System.out.println("Voisin demande non reconnu");
+		if(z>=0 && z<=5) {
+			System.out.println(b.getVoisin(z,c));
+		} else {
+			System.out.println("Voisin demande non reconnu");
 		}
 	}
 	
@@ -147,7 +122,7 @@ public class Test {
 					case 4:
 						Partie p1 = LauncherConsole.creerPartie(br);
 						LauncherConsole.phasePlacement(br, p1);
-						System.out.println(p1);
+						System.out.println(p1.toString2());
 						System.out.println(" 1 seul joueur Humain ? " + p1.peutAnnulerCoup());
 						break;
 					case 5:

@@ -1,0 +1,23 @@
+  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+--|---|---|---|---|---|---|---|---|
+0 |  2|  1|  1| P0|  1|  2|  1|   |
+1 |1  |2  |1  |2  |P1 |P1 |2  |1  |
+2 |  1|  1|  2|  2|  2| P1|  2|   |
+3 |P0 |1  |2  |3  |3  |2  |1  |2  |
+4 |  1| P0|  2|  1|  2|  3| P0|   |
+5 |P1 |3  |1  |3  |3  |1  |1  |2  |
+6 |  2|  1|  2|  3|  2|  1|  1|   |
+7 |2  |1  |3  |1  |2  |1  |3  |3  |
+nbJoueurs 2
+joueurActif 0
+Joueur nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA0 niveau 1 myPingouins
+Pingouin position (3, 0) actif
+Pingouin position (4, 6) actif
+Pingouin position (0, 3) actif
+Pingouin position (4, 1) actif
+
+Joueur nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA1 niveau 1 myPingouins
+Pingouin position (1, 5) actif
+Pingouin position (2, 5) actif
+Pingouin position (5, 0) actif
+Pingouin position (1, 4) actif

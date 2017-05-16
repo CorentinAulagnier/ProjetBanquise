@@ -1,9 +1,12 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -216,7 +219,7 @@ public class Partie implements Serializable {
 	}
 	
 	/**
-	 * Charge la partie en parametre.
+	 * Charge la partie en parametre. (Avec Serializable)
 	 * 
 	 * @param name
 	 *            Nom du fichier a recuperer
@@ -247,8 +250,118 @@ public class Partie implements Serializable {
 	public void charger() {
 		charger("no_name");
 	}
+	
+	/**
+	 * Charge la partie en parametre. (Sans Serializable)
+	 * 
+	 * @param name
+	 *            Nom du fichier a recuperer
+	 */
+	
+	public void chargerTXT(String nameBanquise, String namePartie) {
+		try {
+			/* Fichier a lire
+			 * 
+			 * | 1 2 3 1 2 3 1 |
+			 * |1 2 3 1 2 3 1 2|
+			 * | 1 2 3 1 2 3 1 |
+			 * |1 2 3 1 2 3 1 2|
+			 * | 1 2 3 1 2 3 1 |
+			 * |1 2 3 1 2 3 1 2|
+			 * | 1 2 3 1 2 3 1 |
+			 * 
+			 */
+			this.b = new Banquise(nameBanquise);
+
+			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(namePartie)));
+			String ligne;
+			String[] elements;
+			
+			ligne=br.readLine();
+			elements=ligne.split(" ");
+			this.nbJoueurs = Integer.parseInt(elements[1]);
+
+			ligne=br.readLine();
+			elements=ligne.split(" ");
+			this.joueurActif = Integer.parseInt(elements[1]);
+		
+			this.joueurs = recupererJoueurs(br, nbJoueurs);
+			
+			this.utiliseHistorique = false;
+			br.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
 
 /*******************************************************************************************************/
+
+	/**
+	 * recupere les joueurs d'une partie.
+	 * 
+	 * @param br
+	 *            le BufferedReader
+	 * @param nbJoueurs
+	 *            le nombre de joueurs
+	 *            
+	 * @return le tableau des joueurs.
+	 * @throws IOException 
+	 */
+	
+	private Joueur[] recupererJoueurs(BufferedReader br, int nbJoueurs) throws IOException {
+		Joueur[] j = new Joueur[nbJoueurs];
+		
+		String ligne;
+		String[] elements;
+		
+		for(int i=0; i<nbJoueurs; i++) {
+			ligne=br.readLine();
+			elements=ligne.split(" ");
+			if (elements[9].equals("niveau")) {		//IA
+				j[i] = new IA(elements[8], Integer.parseInt(elements[6]), Integer.parseInt(elements[10]));
+				
+			} else {	//Humain
+				j[i] = new Humain(elements[8], Integer.parseInt(elements[6]));
+			}
+			j[i].poissonsManges = Integer.parseInt(elements[4]);
+			j[i].nbTuiles = Integer.parseInt(elements[2]);
+			j[i].myPingouins = recupererPingouins(br, j[i].nbPingouin);
+			ligne=br.readLine();
+
+		}
+		return j;
+	}
+
+	/**
+	 * recupere les pingouins d'un joueur.
+	 * 
+	 * @param br
+	 *            le BufferedReader
+	 * @param nbPingouin
+	 *            le nombre de pingouins
+	 *            
+	 * @return le tableau de ses pingouins.
+	 * @throws IOException 
+	 */
+	
+	private Pingouin[] recupererPingouins(BufferedReader br, int nbPingouin) throws IOException {
+		Pingouin[] p = new Pingouin[nbPingouin];
+		
+		String ligne;
+		String[] elements;
+		
+		for(int i=0; i<nbPingouin; i++) {
+			ligne=br.readLine();
+			elements=ligne.split(" ");
+			
+			p[i] = new Pingouin(new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1))));
+			if (elements[4].equals("inactif")) {
+				p[i].actif = false;
+			}
+		}	
+		return p;
+	}
 
 	/**
 	 * Execute un tour de jeu

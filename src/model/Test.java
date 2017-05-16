@@ -82,6 +82,8 @@ public class Test {
 	       		System.out.println("   - 4 -> affiche une partie");
 	       		System.out.println("   - 5 -> sauvegarder et charger une partie");
 	       		System.out.println("   - 6 -> création d'un clone");
+	       		System.out.println("   - 7 -> charger une partie en txt");
+
 
 	        	x = Integer.parseInt(br.readLine());
 	        	int y;
@@ -131,7 +133,6 @@ public class Test {
 						LauncherConsole.tourDeJeuConsole(br, p);
 						LauncherConsole.tourDeJeuConsole(br, p);
 						LauncherConsole.tourDeJeuConsole(br, p);
-						//LauncherConsole.tourDeJeuConsole(br, p);
 						System.out.println("Banquise créée :\n"+p);
 						System.out.println("Historique créée :\n"+p.h);
 						p.sauvegarder();
@@ -145,10 +146,14 @@ public class Test {
 						System.out.println("Banquise créée :\n"+p_origine);
 						Partie p_clone = p_origine.clone();
 						System.out.println("Banquise clonée :\n"+p_clone);
+					case 7:
+						Partie p_new = new Partie();
+						p_new.chargerTXT("saveBanquises/banquise1", "save/partie1");
+						System.out.println("Banquise clonée :\n"+p_new.toString2());
 					default :
 						System.out.println("Commande non reconnu");
 				}
-	            
+				
 	        }catch(Exception e){
 	            System.out.println("Exception : Commande");
 	            e.printStackTrace(System.err);

@@ -59,6 +59,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_defaire.setVisible(false);
     	bouton_faire.setVisible(false);
     	box_boutons_tour.setVisible(false);
+    	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL);
     }
     
 	/**
@@ -230,6 +235,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void sauvegarder(MouseEvent event){
     	nettoyerRoueHorizontale(optionbox, roue);
+    	System.out.println("sauvegarder");
     	/*File file = fileChooser.showOpenDialog(null);
     	String  path = file.getName();
         if (file != null) {
@@ -286,8 +292,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
        
     
-    
-    
+    /************************************/
+    /*		gestion banquise			*/
+    /************************************/
     
     ImageView[][] banq = new ImageView[8][8];
     ImageView[][] pingouins = new ImageView[8][8];
@@ -493,9 +500,5 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	   	    
     	}
     }*/
-    
-   
-    
-
     
 }

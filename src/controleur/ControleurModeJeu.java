@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +34,8 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     private Button retour;
     @FXML 
     private Button lancer;
-    
+    @FXML 
+    private ImageView imageSon, imageMusique;
     
        
     
@@ -426,51 +428,56 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
 	
     
     
-   
-    
     @FXML AnchorPane optionbox;
     @FXML Button roue;
-    
-	 public void optionWheelOpen(){
-		 optionbox.setDisable(false);
- 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
- 	     tt.setByX(200);
- 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
- 		ft.setFromValue(0);
- 		ft.setToValue(1);
- 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
- 	     rt.setByAngle(180);
- 		ParallelTransition pt = new ParallelTransition(optionbox,ft, tt,rt );
- 	     pt.play();
-	    }
-	 public void optionWheelClose(){
-		 optionbox.setDisable(true);
- 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-	     	tt.setByX(-200);
-	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
-	     	ft.setFromValue(1);
-	     	ft.setToValue(0);
- 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
- 	     rt.setByAngle(-180);
-	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, tt,rt);
-	     	pt.play();
-	 }
+   
  
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		optionWheelOpen();    		
+    		 optionOuvrirRoue(optionbox, roue) ;		
     	}else{
-    		optionWheelClose();
+    		 optionFermerRoue(optionbox, roue) ;
     	}
     }
     
-    public void netoyerEcran(){
-    	if (!(optionbox.isDisable())){
-    		optionWheelClose();
-    	}
-    }
-   
+      
     public void miseAjour(){}
+    
+    @FXML
+    private void quitter(MouseEvent event){
+    	nettoyerRoue(optionbox, roue);
+    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
+    	alert_quitter(monChargeurFxml, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
+    }
+    
+    /**
+     * change d'ecran pour celui des regles
+     * @param event evenement souris attendu : clic
+     */
+    @FXML
+    private void ouvrirPageRegle(MouseEvent event){
+    	nettoyerRoue(optionbox, roue);
+    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
+    }
+    
+    /**
+     * gere la modification du volume de la musique
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void gererMusique(MouseEvent event){
+    	changerMusique(imageMusique);
+    }
+    
+    /**
+     * gere la modification des bruitages
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void gererSon(MouseEvent event){
+    	changerSon(imageSon);
+    }
+    
     
 }

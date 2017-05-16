@@ -66,7 +66,7 @@
         <Font name="Arial" size="15.0" />
       </font>
     </Text>
-    <AnchorPane fx:id="optionbox" disable="true" layoutX="-150.0" layoutY="523.0" minHeight="85.0" minWidth="55.0" prefHeight="85.0" prefWidth="200.0" visible="false">
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="-150.0" layoutY="523.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="200.0">
       <children>
         <ImageView id="bckoption" fitHeight="66.87500807670635" fitWidth="200.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true">
           <image>

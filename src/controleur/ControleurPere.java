@@ -65,7 +65,8 @@ public class ControleurPere {
     public void optionOuvrirRoue(AnchorPane optionbox, Button roue){
 		 optionbox.setDisable(false);
 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-	     tt.setByX(200); // A voir si on ne peut pas l'utiliser pour redimensionner la fenetre ???
+		tt.setFromX(-150);
+     	tt.setToX(200);// A voir si on ne peut pas l'utiliser pour redimensionner la fenetre ???
 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
 		ft.setFromValue(0);
 		ft.setToValue(1);
@@ -82,8 +83,9 @@ public class ControleurPere {
      */
 	 public void optionFermerRoue(AnchorPane optionbox, Button roue){
 		 optionbox.setDisable(true);
-		TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-	     	tt.setByX(-200);
+			TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
+			tt.setFromX(200);
+	     	tt.setToX(-150); 
 	     	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
 	     	ft.setFromValue(1);
 	     	ft.setToValue(0);

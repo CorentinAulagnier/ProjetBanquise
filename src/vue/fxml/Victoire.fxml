@@ -12,29 +12,29 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurVictoire">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurVictoire">
   <!-- TODO Add Nodes -->
   <children>
       <ImageView fitHeight="200.0" fitWidth="119.0" layoutX="449.0" layoutY="350.0">
          <image>
-            <Image url="@../../ressources/joueurs/PingouinJaune.png" />
+            <Image url="@../../ressources/joueurs/13.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="200.0" fitWidth="119.0" layoutX="632.0" layoutY="333.0">
          <image>
-            <Image url="@../../ressources/joueurs/OrcVert.png" />
+            <Image url="@../../ressources/joueurs/12.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="600.0" fitWidth="800.0">
          <image>
-            <Image url="@../../ressources/decor/victoire.png" />
+            <Image url="@../../ressources/decor/fond_victoire.png" />
          </image>
       </ImageView>
     <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="14.0" layoutY="533.0" minHeight="56.866546630859375" minWidth="55.0" mnemonicParsing="false" popupSide="TOP" prefHeight="56.866546630859375" prefWidth="55.0" rotate="0.0" style="-fx-background-color: transparent;&#10;" text="">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="12.0" x="0.0">
           <image>
-            <Image url="@../../ressources/decor/parametres.png" />
+            <Image url="@../../ressources/decor/r_parametres.png" />
           </image>
         </ImageView>
       </graphic>
@@ -43,7 +43,7 @@
           <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+                <Image url="@../../ressources/decor/r_music-on.png" />
               </image>
             </ImageView>
           </graphic>
@@ -52,7 +52,7 @@
           <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../ressources/decor/son.png" />
+                <Image url="@../../ressources/decor/r_son-on.png" />
               </image>
             </ImageView>
           </graphic>
@@ -61,7 +61,7 @@
           <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../ressources/decor/aide.png" />
+                <Image url="@../../ressources/decor/r_aide.png" />
               </image>
             </ImageView>
           </graphic>
@@ -70,7 +70,7 @@
           <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../ressources/decor/quit.png" />
+                <Image url="@../../ressources/decor/r_quitte.png" />
               </image>
             </ImageView>
           </graphic>
@@ -101,12 +101,12 @@
             <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../ressources/decor/poissons.png" />
+                  <Image url="@../../ressources/decor/j_poisson.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../ressources/decor/hexagone.png" />
+                  <Image url="@../../ressources/decor/j_tuile.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="40.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -117,12 +117,12 @@
       </GridPane>
       <ImageView fitHeight="200.0" fitWidth="119.0" layoutX="191.0" layoutY="186.0">
          <image>
-            <Image url="@../../ressources/joueurs/PingouinBleu.png" />
+            <Image url="@../../ressources/joueurs/10.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="200.0" fitWidth="149.0" layoutX="69.0" layoutY="219.0">
+      <ImageView fitHeight="200.0" fitWidth="119.0" layoutX="69.0" layoutY="219.0">
          <image>
-            <Image url="@../../ressources/joueurs/everouge.png" />
+            <Image url="@../../ressources/joueurs/11.png" />
          </image>
       </ImageView>
       <Label layoutX="24.0" layoutY="29.0" text="Scores :" underline="true">

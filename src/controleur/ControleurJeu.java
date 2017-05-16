@@ -2,15 +2,9 @@ package controleur;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,7 +18,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 import model.Coordonnees;
 import model.Humain;
 import model.IA;
@@ -33,11 +26,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
 	
-	@FXML private Text label_tourDe;
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
+    @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
     
-    //zone menu
+  //zone menu
     @FXML private ImageView imageSon, imageMusique;
     final FileChooser fileChooser = new FileChooser();
     @FXML AnchorPane optionbox;
@@ -54,7 +47,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
-    
+
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -65,7 +58,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	anchorPane_j4.setVisible(false);
     	bouton_defaire.setVisible(false);
     	bouton_faire.setVisible(false);
-    	box_boutons_tour.setVisible(false);    	
+    	box_boutons_tour.setVisible(false);
     }
     
 	/**
@@ -217,7 +210,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique,gestionnaireFxmlCourant.musique);
+    	changerMusique(imageMusique,gestionnaireFxmlCourant.media,gestionnaireFxmlCourant);
     }
     
     /**
@@ -226,8 +219,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void gererSon(MouseEvent event){
-    	changerSon(imageSon);
+    	changerSon(imageSon,gestionnaireFxmlCourant);
     }
+    
     
     /**
      * change d'ecran pour celui des regles
@@ -290,9 +284,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		optionWheelClose(optionbox, roue);
     	}
     }
+       
     
     
-
+    
     
     ImageView[][] banq = new ImageView[8][8];
     ImageView[][] pingouins = new ImageView[8][8];
@@ -501,5 +496,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
    
     
+
     
 }

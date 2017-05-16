@@ -70,7 +70,7 @@
       <children>
         <ImageView id="bckoption" fitHeight="66.87500807670635" fitWidth="200.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true">
           <image>
-            <Image url="@../../ressources/decor/option.png" />
+            <Image url="@../../ressources/decor/r_option.png" />
           </image>
         </ImageView>
         <HBox id="optionbox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="66.875" prefWidth="200.0" style="-fx-background-color: transparent;" visible="true">

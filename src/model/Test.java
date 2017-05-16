@@ -88,7 +88,6 @@ public class Test extends MoteurConsole{
 	        	x = Integer.parseInt(br.readLine());
 	        	int y;
 	        	int z;
-				System.out.println(x);
 
 				switch (x) {
 					case 1:
@@ -148,20 +147,22 @@ public class Test extends MoteurConsole{
 						System.out.println("Banquise clonée :\n"+p_clone);
 					case 7:
 						Partie p_new = new Partie();
-						p_new.chargerTXT("saveBanquises/banquise1", "save/partie1");
-						System.out.println("Banquise clonée :\n"+p_new.toString2());
+						
+						System.out.print("Numero de la partie a charger");
+			        	String pa = br.readLine().substring(0, 1);
+			        	System.out.print("Numero de la banquise a charger");
+			        	String ba = br.readLine().substring(0, 1);
+
+		        		p_new.chargerTXT("saveBanquises/banquise"+ba, "saveParties/partie"+pa);
+						System.out.println("Banquise recupere :\n"+p_new.toString2());
 					default :
 						System.out.println("Commande non reconnu");
 				}
 				
 	        }catch(Exception e){
 	            System.out.println("Exception : Commande");
-	            e.printStackTrace(System.err);
+	            //e.printStackTrace(System.err);
 	        }
-			
-			
-			
-			
 		}		
 	}
 

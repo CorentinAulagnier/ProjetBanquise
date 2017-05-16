@@ -28,7 +28,7 @@ import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
 public class ControleurModeJeu extends ControleurPere implements Initializable,  EcranCourant {
-	GestionnaireEcransFxml monChargeurFxml;
+	GestionnaireEcransFxml gestionnaireFxmlCourant;
 	
 	 /**GESTION DES BOUTONS**/
     @FXML 
@@ -60,7 +60,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	    	nbPingouins = 2;
     	    }
     	    
-    	monChargeurFxml.partie = new Partie(nbJoueurs);
+    	    gestionnaireFxmlCourant.partie = new Partie(nbJoueurs);
     	
     	
     	Joueur jjaune = creerJoueur(model.Proprietes.JAUNE,nbPingouins);
@@ -89,13 +89,13 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	    	
     	bulleVisible(bulle,1);
     	   	
-    	monChargeurFxml.partie.joueurs=tableauDeJoueur;
+    	gestionnaireFxmlCourant.partie.joueurs=tableauDeJoueur;
     	
     	nettoyerRoue(optionbox, roue);
     	
-    	monChargeurFxml.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
+    	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
-    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
     	
     	System.out.println("lancement de la partie");
     	
@@ -137,11 +137,11 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){
     	nettoyerRoue(optionbox, roue);
-    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
-    	monChargeurFxml = ecranParent;
+    	gestionnaireFxmlCourant = ecranParent;
     }
 	
         
@@ -436,7 +436,12 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		 optionOuvrirRoue(optionbox, roue) ;		
+    		if (gestionnaireFxmlCourant.musique == false){
+        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
+        	}else{
+        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
+        	}
+    		 optionOuvrirRoue(optionbox, roue) ;
     	}else{
     		 optionFermerRoue(optionbox, roue) ;
     	}
@@ -449,7 +454,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     private void quitter(MouseEvent event){
     	nettoyerRoue(optionbox, roue);
     	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
-    	alert_quitter(monChargeurFxml, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
+    	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
     }
     
     /**
@@ -459,7 +464,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
     	nettoyerRoue(optionbox, roue);
-    	monChargeurFxml.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
     /**
@@ -468,18 +473,10 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique, monChargeurFxml.musique );
+    	changerMusique(imageMusique, gestionnaireFxmlCourant.media ,gestionnaireFxmlCourant);
     }
     
     
-    @FXML
-    private void majMusique(MouseEvent event){
-    	if (musique == false){
-    		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
-    	}else{
-    		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
-    	}
-    }
     
     /**
      * gere la modification des bruitages
@@ -487,7 +484,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererSon(MouseEvent event){
-    	changerSon(imageSon);
+    	changerSon(imageSon, gestionnaireFxmlCourant);
     }
     
     

@@ -25,9 +25,6 @@ import javafx.application.Platform;
 
 public class ControleurPere {
 	
-	protected boolean musique = true;
-	protected boolean son = true;
-
 	/**
      * gere la modification de l'affichage d'un bouton lorsque la souris est presse
      * @param event evenement souris attendu : pressed
@@ -164,16 +161,16 @@ public class ControleurPere {
 	 /**
 	  * gere la modification du volume de la musique
 	  */
-	 public void changerMusique(ImageView iv, MediaPlayer media){
+	 public void changerMusique(ImageView iv, MediaPlayer media, GestionnaireEcransFxml gestionnaireFxmlCourant){
 		// TODO
-		 if(musique){
-			 musique = false;
+		 if(gestionnaireFxmlCourant.musique){
+			 gestionnaireFxmlCourant.musique = false;
 			 media.pause();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
-			 musique = true;
+			 gestionnaireFxmlCourant.musique = true;
 			 media.seek(media.getStartTime());
 	    		media.play();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
@@ -184,15 +181,15 @@ public class ControleurPere {
 	 /**
 	  * gere la modification des bruitages
 	  */
-	 public void changerSon(ImageView iv){
+	 public void changerSon(ImageView iv, GestionnaireEcransFxml gestionnaireFxmlCourant){
 		// TODO
-		 if(son){
-			 son = false;
+		 if(gestionnaireFxmlCourant.son){
+			 gestionnaireFxmlCourant.son = false;
 			 iv.setImage(new Image(model.Proprietes.IMAGE_SONOFF_PATH));
 			 System.out.println("couper Son");
 		 }
 		 else{
-			 son = true;
+			 gestionnaireFxmlCourant.son = true;
 			 iv.setImage(new Image(model.Proprietes.IMAGE_SONON_PATH));
 			 System.out.println("remettre Son");
 		 }

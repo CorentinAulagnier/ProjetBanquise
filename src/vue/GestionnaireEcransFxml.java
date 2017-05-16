@@ -22,8 +22,11 @@ import model.Partie;
 
 	    private final HashMap<String, Node> listeEcrans = new HashMap<>();
 	    
-	    public MediaPlayer musique;
+	    public MediaPlayer media;
 	    public Partie partie;
+	    
+		public boolean musique = false;
+		public boolean son = false;
 
 	    public GestionnaireEcransFxml(Partie p) {
 	        super();

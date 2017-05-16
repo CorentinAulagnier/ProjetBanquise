@@ -90,7 +90,7 @@ public class IA extends Joueur {
 	 */	
 	
 	public String toString() {
-		String s =  "Joueur nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
+		String s =  "IA nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
 				+ " nom " + nom + " niveau " + niveau + " myPingouins\n";
 		for(int i = 0; i < nbPingouin; i++) 
 			s = s + myPingouins[i];

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -260,6 +261,8 @@ public class Partie implements Serializable {
 	
 	public void chargerTXT(String nameBanquise, String namePartie) {
 		try {
+			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(namePartie)));
+
 			/* Fichier a lire
 			 * 
 			 * | 1 2 3 1 2 3 1 |
@@ -273,7 +276,6 @@ public class Partie implements Serializable {
 			 */
 			this.b = new Banquise(nameBanquise);
 
-			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(namePartie)));
 			String ligne;
 			String[] elements;
 			
@@ -284,15 +286,17 @@ public class Partie implements Serializable {
 			ligne=br.readLine();
 			elements=ligne.split(" ");
 			this.joueurActif = Integer.parseInt(elements[1]);
-		
-			this.joueurs = recupererJoueurs(br, nbJoueurs);
 			
+			this.joueurs = recupererJoueurs(br, nbJoueurs);
 			this.utiliseHistorique = false;
 			br.close();
 			
+		} catch (FileNotFoundException e) {
+			System.out.println("Erreur : FileNotFoundException "+ nameBanquise + " ou " + namePartie + " introuvables");
+			
 		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+			System.out.println("Erreur : recuperation de la partie");
+		}
 	}
 
 /*******************************************************************************************************/
@@ -318,7 +322,7 @@ public class Partie implements Serializable {
 		for(int i=0; i<nbJoueurs; i++) {
 			ligne=br.readLine();
 			elements=ligne.split(" ");
-			if (elements[9].equals("niveau")) {		//IA
+			if (elements[0].equals("IA")) {		//IA
 				j[i] = new IA(elements[8], Integer.parseInt(elements[6]), Integer.parseInt(elements[10]));
 				
 			} else {	//Humain
@@ -456,17 +460,6 @@ public class Partie implements Serializable {
 		}
 	}
 
-	/**
-	 * Deplace un pingouin de "cc.c1" vers "cc.c2"
-	 * 	 
-	 * @param cc
-	 *            Le CoupleCoordonnees correspondant au deplacement d'un pingouin.
-	 */
-	
-	public void deplacement(CoupleCoordonnees cc) {
-		deplacement(cc.c1, cc.c2);
-	}
-	
 	/**
 	 * Deplace un pingouin de "cg.e1" vers "cg.e2"
 	 * 	 

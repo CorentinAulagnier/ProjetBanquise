@@ -116,15 +116,19 @@ public class LauncherConsole {
 								c = new Coordonnees(x, y);
 								t = p.b.getTuile(c);
 							}
-							if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
+							if(t!=null && t.nbPoissons == 1 && !t.aUnPingouin) {//Placement autorisé ici
 								t.mettrePingouin();
 								p.joueurs[num_joueur].myPingouins[num_pingouin] = new Pingouin(c);
 								
 								System.out.println("Le pingouin " + String.valueOf(num_pingouin)+ " de " + p.joueurs[num_joueur].nom +" a bien été positionné en ("+String.valueOf(x)+","+String.valueOf(y)+").");
 								position_dispo = true;
+							} else if (t.nbPoissons != 1) {
+								System.out.println("Trop de poissons sur la position ("+String.valueOf(x)+","+String.valueOf(y)+") ");
 							} else {
 								System.out.println("La position ("+String.valueOf(x)+","+String.valueOf(y)+") n'est pas disponible");
 							}
+				
+							
 						}catch (NumberFormatException e) {
 							System.out.println("Coordonnées incorrectes.");
 						}

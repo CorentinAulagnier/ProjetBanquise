@@ -145,11 +145,7 @@ public class PingouinServer {
 				                		writers[p.joueurActif].writeObject("DEPLACEMENT");
 					                    Object obj = in.readObject();
 					                    if (obj instanceof CoupleGenerique<?, ?>) {
-					                    	try {
-					                    		cg = (CoupleGenerique<Coordonnees,Coordonnees>)obj;
-					                    	} catch (ClassCastException e) {
-					                    		e.getStackTrace();
-					                    	}
+					                    	cg = asCoupleGeneriqueCoordonnees(obj);
 					                    } else {
 					                    	so.println("Lecture du couple de coordonnées envoyé par "+name+" impossible.");
 					                    }   	
@@ -206,6 +202,11 @@ public class PingouinServer {
                 }
             }
         }
+
+		@SuppressWarnings("unchecked")
+		private CoupleGenerique<Coordonnees, Coordonnees> asCoupleGeneriqueCoordonnees(Object obj) {
+			return (CoupleGenerique<Coordonnees,Coordonnees>)obj;
+		}
         
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {

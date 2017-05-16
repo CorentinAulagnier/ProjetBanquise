@@ -44,8 +44,8 @@ public class Proprietes {
     public static final String[] reglesCorps = {
     		"Sur la banquise, les pingouins partent à la chasse au poisson en sautant d’un bloc de glace à l’autre.\n\n"
     				+"Pour cela, les joueurs essaient d’attraper un maximum de poissons, tout en veillant à ne pas être bloqués ou isolés sur la banquise.",
-    		"Placement de la banquise :\n  - La banquise est générée aléatoire- ment selon 8 lignes de blocs de glaces, (alternativement 7 et 8).\n"
-    				+"  - La répartition du nombre de poissons sur les blocs est aléatoire.\n "
+    		"Placement de la banquise :\nLa banquise est générée aléatoire- ment selon 8 lignes de blocs de glaces, (alternativement 7 et 8).\n"
+    				+"La répartition du nombre de poissons sur les blocs est aléatoire.\n "
     				+"Placement des pinguouins :\n Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace contenant un et un seul poisson. "
     				+"Il ne peut y avoir qu’un seul pingouin par bloc de glace. On continue jusqu’à ce que tous les joueurs aient placé tous leurs pingouins",
     		"Durant son tour, un joueur peut déplacer un seul de ses pinguouins :\n   "

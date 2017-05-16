@@ -44,9 +44,9 @@
         <Font name="Arial" size="40.0" />
       </font>
     </Text>
-    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="43.0" style="-fx-background-color : transparent;" text="Button">
+    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="30.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
-        <ImageView fitHeight="150.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../../ressources/decor/retour.png" />
           </image>
@@ -434,7 +434,7 @@
         <Label id="Iadifficile3" fx:id="iadifficile3" font="$x2" text="IA Difficile" visible="false" />
       </children>
     </StackPane>
-    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="684.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="120.0" fitWidth="76.0" layoutX="709.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../../ressources/decor/Pingouin.png" />
       </image>
@@ -462,11 +462,6 @@
     </Button>
     <StackPane fx:id="bulle" blendMode="SRC_OVER" layoutX="619.0" layoutY="326.0" prefHeight="150.0" prefWidth="170.0">
       <children>
-        <ImageView id="" fitHeight="149.9999942779541" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../../ressources/decor/bulle1.png" />
-          </image>
-        </ImageView>
         <ImageView id="" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
           <image>
             <Image url="@../../ressources/decor/bulle2.png" />
@@ -477,9 +472,14 @@
             <Image url="@../../ressources/decor/bulle3.png" />
           </image>
         </ImageView>
+        <ImageView id="" fitHeight="149.9999942779541" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../ressources/decor/bulle1.png" />
+          </image>
+        </ImageView>
       </children>
     </StackPane>
-    <AnchorPane fx:id="optionbox" disable="true" layoutX="-170.0" layoutY="545.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="255.9998779296875" visible="true">
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="-150.0" layoutY="523.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="200.0" visible="true">
       <children>
         <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="246.97865295410156" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
           <image>
@@ -557,9 +557,9 @@
         </HBox>
       </children>
     </AnchorPane>
-    <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="-8.0" layoutY="539.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Button">
+    <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="17.0" layoutY="529.0" minHeight="55.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" text="Button">
       <graphic>
-        <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
           <image>
             <Image url="@../../ressources/decor/parametres.png" />
           </image>

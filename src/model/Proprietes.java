@@ -34,4 +34,31 @@ public class Proprietes {
     public static final String STYLE_NORMAL = "-fx-background-color: transparent; -fx-padding: 5 5 5 5 ;";
     public static final String STYLE_PRESSED = "-fx-background-color: transparent; -fx-padding: 6 5 5 6;";
     
+    public static final String[] reglesTitres = {
+    		"Objectif",
+    		"Préparation de la partie",
+    		"Tour de jeu (1)",
+    		"Tour de jeu (2)",
+    		"Fin de la partie"
+    };
+    public static final String[] reglesCorps = {
+    		"Sur la banquise, les pingouins partent à la chasse au poisson en sautant d’un bloc de glace à l’autre.\n"
+    				+"Pour cela, les joueurs essaient d’attraper un maximum de poissons, tout en veillant à ne pas être bloqués ou isolés sur la banquise. ",
+    		"Placement de la banquise :\nLa banquise est générée aléatoirement selon 8 lignes de blocs de glaces, (alternativement de 7 et 8 blocs) de glace. "
+    				+"La répartition du nombre de poissons sur les blocs est aléatoire.\n "
+    				+"Placement des pinguouins :\n Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace contenant un et un seul poisson. "
+    				+"Il ne peut y avoir qu’un seul pingouin par bloc de glace. On continue jusqu’à ce que tous les joueurs aient placé tous leurs pingouins",
+    		"Durant son tour, un joueur peut déplacer un seul de ses pinguouins :\n   "
+    				+"- en ligne droite (interdiction de changer de direction en chemin).\n   "
+    				+"- dans une des 6 directions qui entoure son bloc de glace.\n   "
+    				+"- d’autant de cases que le joueur le souhaite.\n   "
+    				+"- sans franchir d’obstacle ",
+    		"Un obstacle est soit une extrémité de la banquise, soit un trou dans la banquise, soit un bloc de glace occupé par un autre pingouin.\n"
+    				+"A la fin du tour, le joueur gagne le bloc de glace dont son pinguouin est parti et le nombre de poissons associés. Si l'un de ses pinguouins est bloqué, il est retiré du plateau. Le joueur gagne le bloc de glace et les poissons associés.",
+    		"Lorsqu'un joueur n'a plus de pinguouins, il s'arrête. Lorsqu'aucun joeur ne peut jouer, la partie s'arrête.\n"+
+    				"Le joueur qui a attrapé le plus de poissons gagne la partie. En cas d’égalité, le joueur qui a le plus de bloc de glace gagne la partie. "
+    				+"En cas de nouvelle égalité, les ex-aequo gagnent ensemble la partie."
+    };
+
+    
 }

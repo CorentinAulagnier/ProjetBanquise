@@ -23,7 +23,7 @@
         <Image url="@../../ressources/decor/banquise.jpg" />
       </image>
     </ImageView>
-    <Button fx:id="accueil" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAcceuil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color : transparent;" text="Button">
+    <Button fx:id="accueil" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAcceuil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color : transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
@@ -35,25 +35,25 @@
             <Cursor fx:constant="HAND" />
          </cursor>
     </Button>
-    <Text layoutX="366.0" layoutY="60.0" scaleX="3.781640393045433" scaleY="3.8068526676456194" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Règles " />
-    <StackPane id="Gif" layoutX="30.0" layoutY="130.0" prefHeight="340.0" prefWidth="400.0">
+    <Text fx:id="reglesTitre" layoutX="105.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectif" textAlignment="CENTER" wrappingWidth="590.0">
+         <font>
+            <Font name="Arial Bold Italic" size="44.0" />
+         </font>
+      </Text>
+    <StackPane id="Gif" layoutX="30.0" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="350.0">
       <children>
-        <ImageView fitHeight="370.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../../ressources/decor/Webp.net-gifmaker%20(1).gif" />
           </image>
         </ImageView>
       </children>
     </StackPane>
-    <StackPane id="Text" layoutX="459.0" layoutY="130.0" prefHeight="341.0" prefWidth="300.0">
-      <children>
-        <Text scaleX="1.0" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durant votre tour vous ne pouvez déplacer que vos pingouins, ils seront en surbrillance. Pour cela cliquez sur le pingouin puis faites le glisser sur une des cases jaune. Relachez la souris." wrappingWidth="300.0" StackPane.alignment="TOP_CENTER">
-          <font>
-            <Font size="24.0" />
-          </font>
-        </Text>
-      </children>
-    </StackPane>
+  <Text fx:id="reglesCorps" layoutX="410.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la banquise, les pingouins partent à la chasse au poisson en sautant d’un bloc de glace à l’autre. \nPour cela, les joueurs essaient d’attraper un maximum de poissons le plus rapidement possible, tout en veillant à ne pas être bloqués ou isolés sur la banquise. " textAlignment="JUSTIFY" wrappingWidth="350.0000052899122">
+    <font>
+      <Font size="18.0" />
+    </font>
+  </Text>
     <Button fx:id="precedent" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="505.0" mnemonicParsing="false" onMouseClicked="#pagePrecedente" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" rotate="180.0" style="-fx-background-color : transparent" text="Button" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -68,11 +68,11 @@
     </Button>
       <HBox layoutX="330.0" layoutY="529.0" prefHeight="5.0" prefWidth="130.0" spacing="20.0">
          <children>
-            <Circle radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="TRANSPARENT" layoutX="17.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="TRANSPARENT" layoutX="51.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="TRANSPARENT" layoutX="85.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="TRANSPARENT" layoutX="119.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="cercle1" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="cercle2" fill="TRANSPARENT" layoutX="17.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="cercle3" fill="TRANSPARENT" layoutX="51.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="cercle4" fill="TRANSPARENT" layoutX="85.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="cercle5" fill="TRANSPARENT" layoutX="119.0" layoutY="17.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </HBox>
     <Button fx:id="suivant" contentDisplay="GRAPHIC_ONLY" layoutX="695.0" layoutY="505.0" mnemonicParsing="false" onMouseClicked="#pageSuivante" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color : transparent" text="Button">

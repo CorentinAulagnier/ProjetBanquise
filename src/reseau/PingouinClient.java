@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.*;
 
-public class PingouinClient {
+public class PingouinClient extends MoteurConsole{
 
     private static final int PORT = 9001;
 
@@ -88,100 +88,7 @@ public class PingouinClient {
 
         }
     }
-    
-    /**
-	 *  - demande le nombre de joueurs et creee la partie adequate
-	 *  - genere aleatoirement la banquise
-	 *  - demande le nom/type de joueur
-	 *  
-	 * @param br
-	 *            Buffer de la console.
-	 * @return la partie cree
-	 */
-	
-	public static Partie creerPartie() {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		Partie p = null;
-		try {
-			System.out.println("Creation de la partie !");
-			/* ----- Choix du nombre de joueurs et IA----- */
-			//Humains
-			boolean nb_humain_ok = false;
-			int nb_humains = 1;
-			while (!nb_humain_ok) {
-				try {
-					System.out.println("A combien de joueurs (humains) voulez-vous jouer ? (1 à 4)");
-					nb_humains = Integer.valueOf(br.readLine());
-					if(nb_humains<= 4 && nb_humains>=1) {
-						nb_humain_ok = true;
-						System.out.println("Création d'une partie à "+String.valueOf(nb_humains)+" joueurs.");
-					} else {
-						System.out.println("Nombre de joueurs incorrect. Réessayez.");
-					}
-				} catch (NumberFormatException e) {
-					System.out.println("Nombre de joueurs incorrect. Réessayez.");
-				}
-			}
-			//IAs
-			int nb_ias = 0;
-			int min_ia = 0;
-			if(nb_humains==1) min_ia = 1;
-			if(nb_humains<4) {
-				boolean nb_ia_ok = false;
-				while (!nb_ia_ok) {
-					try {
-						System.out.println("Combien d'IA(s) voulez-vous ajouter ? ("+min_ia+" à "+(4-nb_humains)+")");
-						nb_ias = Integer.valueOf(br.readLine());
-						if(nb_ias<= (4-nb_humains) && nb_ias>=min_ia) {
-							nb_ia_ok = true;
-							if (nb_ias>0)
-								System.out.println("Ajout de "+String.valueOf(nb_ias)+" IAs à la partie.");
-						} else {
-							System.out.println("Nombre de joueurs incorrect. Réessayez.");
-						}
-					} catch (NumberFormatException e) {
-						System.out.println("Nombre de joueurs incorrect. Réessayez.");
-					}
-				}
-			}
-			
-			/* ----- Creation partie + init banquise ----- */
-			int nb_joueurs_tot = nb_humains+nb_ias;
-			p = new Partie(nb_joueurs_tot);
-			p.b = new Banquise();
-			
-			/* ----- Ajout des joueurs et IA à la partie ------*/
-			for(int i = 0; i<nb_joueurs_tot;i++) {
-				if(i<nb_humains) {
-					p.joueurs[i]= new Humain("",6-nb_joueurs_tot);
-				} else {
-					int niv_IA;
-					while(true) {
-						try {
-							System.out.println("Quel niveau voulez vous pour l'IA" + (i-nb_humains+1) + " ? (1 à 3)");
-							niv_IA = Integer.valueOf(br.readLine());
-							if(niv_IA<=3 && niv_IA>=1) {
-								break;
-							} else {
-								System.out.println("Entrée incorrecte. Réessayez.");
-							}
-						} catch (Exception e) {
-							e.printStackTrace(System.out);
-						}
-					}
-					p.joueurs[i] = new IA("IA"+(i-nb_humains+1), 6-nb_joueurs_tot, niv_IA);
-                    for(int j = 0; j<6-nb_joueurs_tot;j++) {
-                    	p.joueurs[i].myPingouins[j] = new Pingouin();
-                    }
-				}
-			}
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return p;
-	}
+
 
 	private static String getServerAddress() {
     	String s = null;
@@ -195,54 +102,6 @@ public class PingouinClient {
         return s;
     }
 
-    private static String getUsername() {
-    	String s = null;
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    	try {
-    		System.out.println("Entrez votre nom :");
-    		s = br.readLine();
-    	} catch (Exception e){
-    		e.printStackTrace(System.err);
-    	}
-        return s;
-    }
-
-	private static Coordonnees getPlacement(String num, Partie p) {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int x = -1;
-		int y = -1;
-		while(true) {
-			try {
-				System.out.println("Entrez le placement de votre pingouin "+num+" (/!\\ cases à 1 poisson seulement)");
-				System.out.print("x :");
-				x = Integer.valueOf(br.readLine());
-				System.out.print("y :");
-				y = Integer.valueOf(br.readLine());
-			} catch (Exception e) {
-				//e.printStackTrace(System.out);
-			}
-			Coordonnees c = new Coordonnees(x, y);
-			Tuile t = p.b.getTuile(c);
-			if(t!= null && t.nbPoissons==1) {
-				return c;
-			} else {
-				System.out.println("La case choisie ne contient pas qu'un poisson. Impossible de placer le pingouin ici.");
-			}
-		}
-	}
 	
-    private static CoupleGenerique<Coordonnees,Coordonnees> getDeplacement(Partie p) {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		while(true) {
-			try {
-				Pingouin pingouin = LauncherConsole.choixPingouin(br,p);
-				Coordonnees dep = LauncherConsole.choixDeplacement(br, p, pingouin);
-				if(dep!=null) {
-					return new CoupleGenerique<Coordonnees,Coordonnees>(pingouin.position,dep);
-				}
-    		} catch (Exception e) {
-				System.out.println("Mauvaise entree, on recommence.");
-    		}
-		}
-	}
+
 }

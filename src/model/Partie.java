@@ -461,17 +461,6 @@ public class Partie implements Serializable {
 	}
 
 	/**
-	 * Deplace un pingouin de "cc.c1" vers "cc.c2"
-	 * 	 
-	 * @param cc
-	 *            Le CoupleCoordonnees correspondant au deplacement d'un pingouin.
-	 */
-	
-	public void deplacement(CoupleCoordonnees cc) {
-		deplacement(cc.c1, cc.c2);
-	}
-	
-	/**
 	 * Deplace un pingouin de "cg.e1" vers "cg.e2"
 	 * 	 
 	 * @param cg

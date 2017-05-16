@@ -195,8 +195,8 @@ public class Partie implements Serializable {
 	
 	public void sauvegarder(String name) {
 		try {
-			File fichier =  new File("save/"+name+".partie") ;
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
+			//File fichier =  new File(name+".partie") ;
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));
 			oos.writeObject(this);
 			if(utiliseHistorique) {
 				h.sauvegarder(name);
@@ -212,7 +212,7 @@ public class Partie implements Serializable {
 	 */
 	
 	public void sauvegarder() {
-		sauvegarder("no_name");
+		sauvegarder("/home/a/aulagnco/git/save/no_name");
 	}
 	
 	/**
@@ -224,8 +224,11 @@ public class Partie implements Serializable {
 	
 	public void charger(String name) {
 		try {
-			File fichier =  new File("save/"+name+".partie") ;
-			ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;		
+			//File fichier =  new File(name+".partie") ;
+			System.out.println("Avant ouverture : "+ name);
+			ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(name)) ;		
+			System.out.println("name : "+ name);
+
 			Partie p = (Partie)ois.readObject() ;
 			this.b = p.b;
 			this.joueurActif = p.joueurActif;

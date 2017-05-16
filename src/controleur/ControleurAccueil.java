@@ -69,9 +69,13 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	
     	nettoyerRoue(optionbox, roue);
     	File file = fileChooser.showOpenDialog(null);
+    	String  path = file.getName();
         if (file != null) {
-        	System.out.println("nom de fichier de sauvegarde  charger "+file.getName());
-        	gestionnaireFxmlCourant.partie.charger(file.getName());
+        	System.out.println("nom de fichier de sauvegarde  charger "+ path);
+        	path = file.getAbsolutePath();
+        	System.out.println("PATH : "+ path);
+
+        	gestionnaireFxmlCourant.partie.charger(path);
         	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
         }    	
     }

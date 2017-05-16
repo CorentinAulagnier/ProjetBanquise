@@ -159,7 +159,7 @@ public class PingouinClient {
 					int niv_IA;
 					while(true) {
 						try {
-							System.out.println("Quel niveau voulez vous pour l'IA ? (1 à 3)");
+							System.out.println("Quel niveau voulez vous pour l'IA" + (i-nb_humains+1) + " ? (1 à 3)");
 							niv_IA = Integer.valueOf(br.readLine());
 							if(niv_IA<=3 && niv_IA>=1) {
 								break;

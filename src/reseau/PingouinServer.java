@@ -203,56 +203,58 @@ public class PingouinServer {
             }
         }
         
-        public synchronized void getNom(ObjectInputStream in, ObjectOutputStream out) {
+        public void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {
-            	if(nbClients==0) {
-            		initGame(in, out);
-            	}
-	            while (true) {
-	                out.writeObject("SUBMITNAME");
-	                Object obj = in.readObject();
-	                if (obj instanceof String) {
-	                	name = (String)obj;
-	                    if (name == null) {
-	                        return;
-	                    }
-                    	num = nbClients;
-                        p.joueurs[num].nom = name;
-                        for(int i = 0; i<NBPINGOUINS;i++) {
-                        	p.joueurs[num].myPingouins[i] = new Pingouin();
-                        }
-        	            nbClients++;
-        	            if(nbClients == MAXPLAYERS || p.joueurs[nbClients].getClass()==IA.class) {
-        	            	phaseNoms = false;
-        	            }
-                        break;
-	                    
-	                } else {
-	                	out.writeObject("NAMEREJECTED");
-	                }
-	            }
-	            out.writeObject("NAMEACCEPTED");
-	            //Joueurs deja presents dans la partie
-	            if(num>0) {
-		            String others = "Vous rejoignez ";
-					for(int i = 0; i<MAXPLAYERS; i++) {
-						if(p.joueurs[i]!=null && i!=num)
-							others+= p.joueurs[i].nom + ", ";
+        		synchronized (p) {
+	            	if(nbClients==0) {
+	            		initGame(in, out);
+	            	}
+		            while (true) {
+		                out.writeObject("SUBMITNAME");
+		                Object obj = in.readObject();
+		                if (obj instanceof String) {
+		                	name = (String)obj;
+		                    if (name == null) {
+		                        return;
+		                    }
+	                    	num = nbClients;
+	                        p.joueurs[num].nom = name;
+	                        for(int i = 0; i<NBPINGOUINS;i++) {
+	                        	p.joueurs[num].myPingouins[i] = new Pingouin();
+	                        }
+	        	            nbClients++;
+	        	            if(nbClients == MAXPLAYERS || p.joueurs[nbClients].getClass()==IA.class) {
+	        	            	phaseNoms = false;
+	        	            }
+	                        break;
+		                    
+		                } else {
+		                	out.writeObject("NAMEREJECTED");
+		                }
+		            }
+		            out.writeObject("NAMEACCEPTED");
+		            //Joueurs deja presents dans la partie
+		            if(num>0) {
+			            String others = "Vous rejoignez ";
+						for(int i = 0; i<MAXPLAYERS; i++) {
+							if(p.joueurs[i]!=null && i!=num)
+								others+= p.joueurs[i].nom + ", ";
+						}
+						out.writeObject("MESSAGE "+others.substring(0,others.length()-2)+" dans une partie.");
+		            }
+					//Si ils manquent d'autres joueurs
+		            if(num+1<MAXPLAYERS) {
+		            	out.writeObject("MESSAGE En attente d'autres joueurs pour lancer la partie.");
+		            }
+					//envoie du placement à tout les joueurs
+					for(int i = 0; i<nbClients; i++) {
+						if(writers[i]!=null)
+						writers[i].writeObject("MESSAGE "+p.joueurs[num].nom + " a rejoint la partie.");
 					}
-					out.writeObject("MESSAGE "+others.substring(0,others.length()-2)+" dans une partie.");
-	            }
-				//Si ils manquent d'autres joueurs
-	            if(num+1<MAXPLAYERS) {
-	            	out.writeObject("MESSAGE En attente d'autres joueurs pour lancer la partie.");
-	            }
-				//envoie du placement à tout les joueurs
-				for(int i = 0; i<nbClients; i++) {
-					if(writers[i]!=null)
-					writers[i].writeObject("MESSAGE "+p.joueurs[num].nom + " a rejoint la partie.");
-				}
-	            writers[num] = out;
-	            
-	            so.println(p.joueurs[num].nom + " vient de se connecter.");
+		            writers[num] = out;
+		            
+		            so.println(p.joueurs[num].nom + " vient de se connecter.");
+        		}
         	} catch (Exception e) {
         		e.printStackTrace(System.err);
         	}

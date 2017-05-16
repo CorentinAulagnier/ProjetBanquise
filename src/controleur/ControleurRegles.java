@@ -77,10 +77,12 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      */
     public void metAjourRegle(){
     	System.out.println("num de page regle "+pageRegles);
-    	visibiliteBoutons();
+    	visibiliteBoutons(); // maj fleches
     	reglesTitre.setText(model.Proprietes.reglesTitres[pageRegles]); //maj titre
-    	reglesCorps.setText(model.Proprietes.reglesCorps[pageRegles]); //maj texte	   	
-    	//maj image principale
+    	reglesCorps.setText(model.Proprietes.reglesCorps[pageRegles]); //maj texte	  
+    	
+    	//TODO maj image principale
+    	
     	switch(pageRegles){	//maj reglette petit point
     		case 0:	cercle1.setFill(Color.BLACK); cercle2.setFill(Color.TRANSPARENT);cercle3.setFill(Color.TRANSPARENT);cercle4.setFill(Color.TRANSPARENT);cercle5.setFill(Color.TRANSPARENT);break;
     		case 1:	cercle2.setFill(Color.BLACK); cercle1.setFill(Color.TRANSPARENT);cercle3.setFill(Color.TRANSPARENT);cercle4.setFill(Color.TRANSPARENT);cercle5.setFill(Color.TRANSPARENT);break;
@@ -96,8 +98,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      */
     @FXML
     private void pageSuivante(MouseEvent event){
-    	
-    	pageRegles++; //maj cmpteur
+    	pageRegles++;
     	metAjourRegle();
     }
     
@@ -107,7 +108,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      */
     @FXML
     private void pagePrecedente(MouseEvent event){
-    	pageRegles--; //maj cmpteur
+    	pageRegles--;
     	metAjourRegle();
     }
 }

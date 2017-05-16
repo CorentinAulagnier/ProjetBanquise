@@ -38,11 +38,11 @@ public class Interface extends Application {
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
 		
 		
-		String path = "src/ressources/decor/ping.mp3";
+		/*String path = "src/ressources/decor/ping.mp3";
 		Media media = new Media(new File(path).toURI().toString());
 		gestionnaireEcransFXML.musique = new MediaPlayer(media);
 		gestionnaireEcransFXML.musique.setAutoPlay(true);
-		gestionnaireEcransFXML.musique.play();
+		gestionnaireEcransFXML.musique.play();*/
         
 		gestionnaireEcransFXML.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
         

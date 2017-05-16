@@ -18,7 +18,7 @@ public abstract class Joueur implements Serializable{
 	 * Chemin pour retrouver sa photo
 	 */
 	
-	public String cheminMignature;
+	public String cheminMiniature;
 	
 	/**
 	 * Entier correspondant a la couleur du joueur

@@ -109,7 +109,7 @@ public class ControleurJeu  implements Initializable, EcranCourant {
   
     	//maj des pinguouins sur les reglettes 
     	for(int j=0; j < gestionnaireFxmlCourant.partie.joueurs.length; j++){
-    		String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMignature;
+    		String path = gestionnaireFxmlCourant.partie.joueurs[j].cheminMiniature;
     		for(int p=0; p < gestionnaireFxmlCourant.partie.joueurs[j].nbPingouin ; p++){
     			reglettes.get(j)[p].setImage(new Image(path));
     		}

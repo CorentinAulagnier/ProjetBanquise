@@ -26,7 +26,7 @@ public class IA extends Joueur {
 		this.myPingouins = new Pingouin[3];
 		this.niveau = 1;
 		this.nbPingouin = 3;
-		this.cheminMignature = "";
+		this.cheminMiniature = "";
 		this.couleur = -1;
 	}
 	
@@ -48,7 +48,7 @@ public class IA extends Joueur {
 		this.myPingouins = new Pingouin[nbP];
 		this.niveau = level;
 		this.nbPingouin = nbP;
-		this.cheminMignature = "";
+		this.cheminMiniature = "";
 		this.couleur = -1;
 	}
 	
@@ -74,7 +74,7 @@ public class IA extends Joueur {
 		this.myPingouins = new Pingouin[nbP];
 		this.niveau = level;
 		this.nbPingouin = nbP;
-		this.cheminMignature = cheminMigna;
+		this.cheminMiniature = cheminMigna;
 		this.couleur = color;
 	}
 

@@ -116,19 +116,15 @@ public class LauncherConsole {
 								c = new Coordonnees(x, y);
 								t = p.b.getTuile(c);
 							}
-							if(t!=null && t.nbPoissons == 1 && !t.aUnPingouin) {//Placement autorisé ici
+							if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
 								t.mettrePingouin();
 								p.joueurs[num_joueur].myPingouins[num_pingouin] = new Pingouin(c);
 								
 								System.out.println("Le pingouin " + String.valueOf(num_pingouin)+ " de " + p.joueurs[num_joueur].nom +" a bien été positionné en ("+String.valueOf(x)+","+String.valueOf(y)+").");
 								position_dispo = true;
-							} else if (t.nbPoissons != 1) {
-								System.out.println("Trop de poissons sur la position ("+String.valueOf(x)+","+String.valueOf(y)+") ");
 							} else {
 								System.out.println("La position ("+String.valueOf(x)+","+String.valueOf(y)+") n'est pas disponible");
 							}
-				
-							
 						}catch (NumberFormatException e) {
 							System.out.println("Coordonnées incorrectes.");
 						}
@@ -230,7 +226,7 @@ public class LauncherConsole {
 						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2);
 						joue = true;
 					} else {
-						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue sur une case null.");
+						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2+" mais cela est impossible.");
 					}
 							
 				} else { // Tour de l'Humain
@@ -300,57 +296,39 @@ public class LauncherConsole {
 	
 	public static Coordonnees choixDeplacement(BufferedReader br, Partie p, Pingouin pingouin) {
 		try {
-			ArrayList<Coordonnees> array = null;
+			int numAxe = 0;
 			int numDep = 0;
 			boolean axeok = false;
+			ArrayList<ArrayList<Coordonnees>> chemins = p.b.deplacementPossible(pingouin);
 			while (!axeok) {
-				Chemins chemins = new Chemins(p, pingouin.position);
 				System.out.println(chemins);
 				System.out.println("Numero de l'axe choisi (0 pour retourner au choix du pingouin):");
-				int numAxe = Integer.valueOf(br.readLine());
-				switch (numAxe) {
-					case 1: {
-						array = chemins.hautDroit;
-						break;
-					} case 2: {
-						array = chemins.milieuDroit;
-						break;
-					} case 3: {
-						array = chemins.basDroit;
-						break;
-					} case 4: {
-						array = chemins.basGauche;
-						break;
-					} case 5: {
-						array = chemins.milieuGauche;
-						break;
-					} case 6: {
-						array = chemins.hautGauche;
-						break;
-					} default : return null;
+				numAxe = Integer.valueOf(br.readLine());
+				if(numAxe<1 || numAxe>6) {
+					return null;
+				} else {
+					numAxe--; //pour correspondre au réel indice dans le tableau
 				}
-				if(array!=null) {
-					numDep =-1;
-					boolean numok = false;
-					while(!numok) {
-						try {
-							System.out.println("Numero du déplacement choisi: (0 pour changer d'axe)");
-							numDep = Integer.valueOf(br.readLine());
-							if(numDep>0 && numDep<=array.size()) {
-								numok = true;
-								axeok = true;
-							} else if (numDep == 0) {
-								numok = true;
-								axeok = false;
-								System.out.println("Retour au choix de l'axe !");
-							}
-						} catch (Exception e) {
-							System.out.println("Entrée incorrecte. Réessayez.");
+				boolean numok = false;
+				while(!numok) {
+					try {
+						System.out.println("Numero du déplacement choisi: (0 pour changer d'axe)");
+						numDep = Integer.valueOf(br.readLine());
+						if(numDep>0 && numDep<=chemins.get(numAxe).size()) {
+							numok = true;
+							axeok = true;
+						} else if (numDep == 0) {
+							numok = true;
+							axeok = false;
+							System.out.println("Retour au choix de l'axe !");
 						}
+					} catch (Exception e) {
+						System.out.println("Entrée incorrecte. Réessayez.");
 					}
 				}
+				
 			}
-			return array.get(numDep-1);
+			return chemins.get(numAxe).get(numDep-1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

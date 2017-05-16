@@ -6,24 +6,29 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.function.Function;
 
 /**
  * La banquise est le terrain de jeu,
  * elle indique le nombre de poissons sur chaque case
  */	
 
-public class Banquise implements Serializable, Cloneable{
+public class Banquise implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Tableau du terrain de jeu
 	 */
 	
 	public Tuile[][] terrain;
+	
+	/**
+	 * Nombre d'axes autour d'une tuile
+	 */
+	
+	private final static int NB_AXES = 6;
 
 	/**
 	 * Constructeur d'une banquise de taille 8x8, initialisé avec des poissons.
@@ -262,114 +267,90 @@ public class Banquise implements Serializable, Cloneable{
 /*******************************************************************************************************/
 
 	/**
-	 * Renvoie les coordonnees du voisin haut droit d'un point.
+	 * Renvoie les coordonnees du voisin coder par l'axe d'un point: 0->HD, 1->MD, 2->BD, 3->BG, 4->MG, 5->HG
 	 * 
 	 * @param c
 	 *            Position de depart.
+	 * @param axe
+	 * 			  Code de l'axe choisi
 	 * @return Les coordonnees de son voisin.
 	 */	
 	
-	public Coordonnees getHD(Coordonnees c) {
-		if(premiereLigne(c) || (boutLigne(c) && !lignePair(c))) { //pas de voisin haut droit
-			return null;
-		} else { //voisin
-			if(lignePair(c)) { //ligne pair
-				return new Coordonnees(c.x-1, c.y+1);
-			} else { //ligne impair
-				return new Coordonnees(c.x-1, c.y);
-			}		
-		}
-	}
-	
-	/**
-	 * Renvoie les coordonnees du voisin haut gauche d'un point.
-	 * 
-	 * @param c
-	 *            Position de depart.
-	 * @return Les coordonnees de son voisin.
-	 */	
-	
-	public Coordonnees getHG(Coordonnees c) {
-		if(premiereLigne(c) || (debutLigne(c) && !lignePair(c))) { //pas de voisin haut gauche
-			return null;
-		} else { //voisin
-			if(lignePair(c)) { //ligne pair
-				return new Coordonnees(c.x-1, c.y);
-			} else { //ligne impair
-				return new Coordonnees(c.x-1, c.y-1);
-			}		
-		}
-	}
-	
-	/**
-	 * Renvoie les coordonnees du voisin milieu droit d'un point.
-	 * 
-	 * @param c
-	 *            Position de depart.
-	 * @return Les coordonnees de son voisin.
-	 */	
-	
-	public Coordonnees getMD(Coordonnees c) {
-		if(boutLigne(c)) { //pas de voisin milieu droit
-			return null;
-		} else { //voisin
-			return new Coordonnees(c.x, c.y+1);
-		}
-	}
-	
-	/**
-	 * Renvoie les coordonnees du voisin milieu gauche d'un point.
-	 * 
-	 * @param c
-	 *            Position de depart.
-	 * @return Les coordonnees de son voisin.
-	 */	
-	
-	public Coordonnees getMG(Coordonnees c) {
-		if(debutLigne(c)) { //pas de voisin milieu gauche
-			return null;
-		} else { //voisin
-			return new Coordonnees(c.x, c.y-1);
-		}
-	}
-	
-	/**
-	 * Renvoie les coordonnees du voisin bas droit d'un point.
-	 * 
-	 * @param c
-	 *            Position de depart.
-	 * @return Les coordonnees de son voisin.
-	 */	
-	
-	public Coordonnees getBD(Coordonnees c) {
-		if(derniereLigne(c) || (boutLigne(c) && !lignePair(c))) { //pas de voisin bas droit
-			return null;
-		} else { //voisin
-			if(lignePair(c)) { //ligne pair
-				return new Coordonnees(c.x+1, c.y+1);
-			} else { //ligne impair
-				return new Coordonnees(c.x+1, c.y);
-			}		
-		}
-	}
-	
-	/**
-	 * Renvoie les coordonnees du voisin bas gauche d'un point.
-	 * 
-	 * @param c
-	 *            Position de depart.
-	 * @return Les coordonnees de son voisin.
-	 */	
-	
-	public Coordonnees getBG(Coordonnees c) {
-		if(derniereLigne(c) || (debutLigne(c) && !lignePair(c))) { //pas de voisin bas gauche
-			return null;
-		} else { //voisin
-			if(lignePair(c)) { //ligne pair
-				return new Coordonnees(c.x+1, c.y);
-			} else { //ligne impair
-				return new Coordonnees(c.x+1, c.y-1);
-			}		
+	public Coordonnees getVoisin(int axe, Coordonnees c) {
+		switch(axe) {
+		
+			// AXE HAUT DROIT
+			case 0: {
+				if(premiereLigne(c) || (boutLigne(c) && !lignePair(c))) { //pas de voisin haut droit
+					return null;
+				} else { //voisin
+					if(lignePair(c)) { //ligne pair
+						return new Coordonnees(c.x-1, c.y+1);
+					} else { //ligne impair
+						return new Coordonnees(c.x-1, c.y);
+					}		
+				}
+			}
+		
+			// AXE MILIEU DROIT
+			case 1: {
+				if(boutLigne(c)) { //pas de voisin milieu droit
+					return null;
+				} else { //voisin
+					return new Coordonnees(c.x, c.y+1);
+				}
+			}
+		
+			// AXE BAS DROIT
+			case 2: {
+				if(derniereLigne(c) || (boutLigne(c) && !lignePair(c))) { //pas de voisin bas droit
+					return null;
+				} else { //voisin
+					if(lignePair(c)) { //ligne pair
+						return new Coordonnees(c.x+1, c.y+1);
+					} else { //ligne impair
+						return new Coordonnees(c.x+1, c.y);
+					}		
+				}
+			}
+			
+			// AXE BAS GAUCHE
+			case 3: {
+				if(derniereLigne(c) || (debutLigne(c) && !lignePair(c))) { //pas de voisin bas gauche
+					return null;
+				} else { //voisin
+					if(lignePair(c)) { //ligne pair
+						return new Coordonnees(c.x+1, c.y);
+					} else { //ligne impair
+						return new Coordonnees(c.x+1, c.y-1);
+					}		
+				}
+			}
+			
+			// AXE MILIEU GAUCHE
+			case 4: {
+				if(debutLigne(c)) { //pas de voisin milieu gauche
+					return null;
+				} else { //voisin
+					return new Coordonnees(c.x, c.y-1);
+				}
+			}
+			
+			// AXE HAUT GAUCHE
+			case 5: {
+				if(premiereLigne(c) || (debutLigne(c) && !lignePair(c))) { //pas de voisin haut gauche
+					return null;
+				} else { //voisin
+					if(lignePair(c)) { //ligne pair
+						return new Coordonnees(c.x-1, c.y);
+					} else { //ligne impair
+						return new Coordonnees(c.x-1, c.y-1);
+					}		
+				}
+			}
+			default: {
+				return null;
+			}
 		}
 	}
 
@@ -398,14 +379,9 @@ public class Banquise implements Serializable, Cloneable{
 	public boolean estBloque(Pingouin p) { //p est cerné par de l'eau et au moins un autre pingouin
 		boolean voisinPingouin = false;
 		boolean pasDePoisson = true;
-		Tuile t[] = new Tuile[6];
-		t[0] = getTuile(getHD(p.position));
-		t[1] = getTuile(getMD(p.position));
-		t[2] = getTuile(getBD(p.position));
-		t[3] = getTuile(getBG(p.position));
-		t[4] = getTuile(getMG(p.position));
-		t[5] = getTuile(getHG(p.position));
-		for(int i = 0; i<6; i++) {
+		Tuile t[] = new Tuile[NB_AXES];
+		for(int i = 0; i<NB_AXES; i++) {
+			t[i] = getTuile(getVoisin(i,p.position));
 			if (t[i]==null || t[i].aUnPingouin) {
 					voisinPingouin=true;
 			} else if(t[i].nbPoissons!=0) {
@@ -425,15 +401,26 @@ public class Banquise implements Serializable, Cloneable{
 	 */
 	
 	public boolean estNoye(Pingouin p) {
-		return (
-				((getTuile(getHD(p.position))==null) || (getTuile(getHD(p.position)).nbPoissons==0))
-				&& ((getTuile(getMD(p.position))==null) || (getTuile(getMD(p.position)).nbPoissons==0))
-				&& ((getTuile(getBD(p.position))==null) || (getTuile(getBD(p.position)).nbPoissons==0))
-				&& ((getTuile(getBG(p.position))==null) || (getTuile(getBG(p.position)).nbPoissons==0))
-				&& ((getTuile(getMG(p.position))==null) || (getTuile(getMG(p.position)).nbPoissons==0))
-				&& ((getTuile(getHG(p.position))==null) || (getTuile(getHG(p.position)).nbPoissons==0))
-		);
-
+		boolean noye = true;
+		for(int i=0;i<NB_AXES && noye;i++) {
+			noye = noye && estNoyeSurAxe(i, p.position);
+		}
+		return noye;
+	}
+	
+	/**
+	 * Renvoie un boulean indiquant si la prochaine tuile sur un axe donne est accessible.
+	 * 
+	 * @param c
+	 *            Le pingouin que l'on test.
+	 * @param axe
+	 * 			  Code de l'axe choisi
+	 * 
+	 * @return Vrai si le pingouin est entoure de case avec 0 poisson, ou innaccessible.
+	 */
+	public boolean estNoyeSurAxe(int axe, Coordonnees c) {
+		Tuile t = getTuile(getVoisin(axe,c));
+		return (t==null || t.nbPoissons==0);
 	}
 
 /*******************************************************************************************************/
@@ -448,33 +435,29 @@ public class Banquise implements Serializable, Cloneable{
 
 	public ArrayList<ArrayList<Coordonnees>> deplacementPossible(Pingouin p) {
 		ArrayList<ArrayList<Coordonnees>> chemins = new ArrayList<ArrayList<Coordonnees>>();
-		//Function<Coordonnees, Coordonnees> HD = c -> getHD(c);
-		chemins.add(construireChemin(c -> getHD(c),p.position));
-		chemins.add(construireChemin(c -> getMD(c),p.position));
-		chemins.add(construireChemin(c -> getBD(c),p.position));
-		chemins.add(construireChemin(c -> getBG(c),p.position));
-		chemins.add(construireChemin(c -> getMG(c),p.position));
-		chemins.add(construireChemin(c -> getHG(c),p.position));
+		for(int i = 0; i<NB_AXES;i++) {
+			chemins.add(construireChemin(i,p.position));
+		}
 		return chemins;
 	}
 	
 	/**
 	 * Renvoie la liste de points en partant de dep, et en allant dans le sens de la fonction f.
 	 * 
-	 * @param f
-	 *          Une fonction de deplacement.
+	 * @param axe
+	 *          int qui code l'axe choisi
 	 * @param dep
 	 * 			Point de départ.
 	 * 
 	 * @return Une liste de point.
 	 */
 	
-	public ArrayList<Coordonnees> construireChemin(Function<Coordonnees, Coordonnees> f, Coordonnees dep) {
+	public ArrayList<Coordonnees> construireChemin(int axe, Coordonnees dep) {
 		ArrayList<Coordonnees> chemin = new ArrayList<>();
-		Coordonnees next = f.apply(dep);
+		Coordonnees next = getVoisin(axe, dep);
 		while(next!=null && getTuile(next).estAccessible()) {
 			chemin.add(next);
-			next = f.apply(next);
+			next = getVoisin(axe, next);
 		}
 		return chemin;
 	}

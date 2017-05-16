@@ -28,7 +28,7 @@
         </GaussianBlur>
       </effect>
       <image>
-        <Image url="@../../ressources/decor/banquise.jpg" />
+        <Image url="@../../ressources/decor/fond_banquise.jpg" />
       </image>
     </ImageView>
     <Circle layoutX="239.0" layoutY="423.0" opacity="1.0" radius="80.00006103515625" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.2">
@@ -479,7 +479,7 @@
         </ImageView>
       </children>
     </StackPane>
-    <AnchorPane fx:id="optionbox" disable="true" layoutX="-150.0" layoutY="523.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="200.0" visible="true">
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="-150.0" layoutY="523.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="200.0">
       <children>
         <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="246.97865295410156" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
           <image>
@@ -494,7 +494,7 @@
                   <graphic>
                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                       <image>
-                        <Image url="@../../ressources/decor/music-note-1275177_960_720.png" />
+                        <Image url="@../../ressources/decor/r_music-on.png" />
                       </image>
                     </ImageView>
                   </graphic>
@@ -507,7 +507,7 @@
                   <graphic>
                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                       <image>
-                        <Image url="@../../ressources/decor/son.png" />
+                        <Image url="@../../ressources/decor/r_son-on.png" />
                       </image>
                     </ImageView>
                   </graphic>
@@ -518,7 +518,7 @@
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@../../ressources/decor/aide.png" />
+                    <Image url="@../../ressources/decor/r_aide.png" />
                   </image>
                 </ImageView>
               </graphic>
@@ -529,9 +529,9 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
+            <Button fx:id="igloo" contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true">
                   <image>
                     <Image url="@../../ressources/decor/igloo.png" />
                   </image>
@@ -540,8 +540,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button" HBox.margin="$x3">
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;" text="Button">
               <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -552,6 +555,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
             </Button>
           </children>
         </HBox>
@@ -561,7 +567,7 @@
       <graphic>
         <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
           <image>
-            <Image url="@../../ressources/decor/parametres.png" />
+            <Image url="@../../ressources/decor/r_parametres.png" />
           </image>
         </ImageView>
       </graphic>

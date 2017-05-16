@@ -220,7 +220,7 @@ public class PingouinClient {
 				System.out.print("y :");
 				y = Integer.valueOf(br.readLine());
 			} catch (Exception e) {
-				e.printStackTrace(System.out);
+				//e.printStackTrace(System.out);
 			}
 			Coordonnees c = new Coordonnees(x, y);
 			Tuile t = p.b.getTuile(c);
@@ -234,13 +234,31 @@ public class PingouinClient {
 	
     private static CoupleGenerique getDeplacement(Partie p) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		boolean joue = false;
+		//boolean joue = false;
 		while(true) {
-			Pingouin pingouin = LauncherConsole.choixPingouin(br,p);
-			Coordonnees dep = LauncherConsole.choixDeplacement(br, p, pingouin);
-			if(dep!=null) {
-				return new CoupleGenerique<Coordonnees,Coordonnees>(pingouin.position,dep);
-			}
+			try {
+				Pingouin pingouin = LauncherConsole.choixPingouin(br,p);
+				Coordonnees dep = LauncherConsole.choixDeplacement(br, p, pingouin);
+				if(dep!=null) {
+					return new CoupleGenerique<Coordonnees,Coordonnees>(pingouin.position,dep);
+				}
+    		} catch (Exception e) {
+				System.out.println("Mauvaise entree, on recommence.");
+    		}
 		}
+		/*
+    	CoupleGenerique cg = null;
+    	while (true) {
+    		try {
+            	cg = getDeplacement(p);
+        		if (cg != null) {
+        			break;
+        		}
+    		} catch (NumberFormatException e) {
+    			cg = null;
+    		}
+    	}*/
+    	
+    	
 	}
 }

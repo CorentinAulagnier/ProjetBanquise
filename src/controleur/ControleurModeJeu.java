@@ -467,7 +467,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique);
+    	changerMusique(imageMusique, monChargeurFxml.musique );
     }
     
     /**

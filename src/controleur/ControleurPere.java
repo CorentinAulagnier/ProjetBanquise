@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import javafx.scene.control.Alert;
@@ -98,15 +99,18 @@ public class ControleurPere {
 	 /**
 	  * gere la modification du volume de la musique
 	  */
-	 public void changerMusique(ImageView iv){
+	 public void changerMusique(ImageView iv, MediaPlayer media){
 		// TODO
 		 if(musique){
 			 musique = false;
+			 media.pause();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
 			 musique = true;
+			 media.seek(media.getStartTime());
+	    		media.play();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
 			 System.out.println("remettre musique");
 		 }

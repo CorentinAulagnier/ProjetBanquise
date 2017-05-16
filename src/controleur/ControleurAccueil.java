@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -56,6 +57,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     private void ouvrirNouvellePartie (MouseEvent event){
     	nettoyerRoue(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
+    	
     }
     
     /**
@@ -108,7 +110,8 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique);
+    	changerMusique(imageMusique , gestionnaireFxmlCourant.musique);
+    	
     }
     
     /**

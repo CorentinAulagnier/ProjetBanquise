@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import model.Partie;
 
@@ -21,6 +22,7 @@ import model.Partie;
 
 	    private final HashMap<String, Node> listeEcrans = new HashMap<>();
 	    
+	    public MediaPlayer musique;
 	    public Partie partie;
 
 	    public GestionnaireEcransFxml(Partie p) {

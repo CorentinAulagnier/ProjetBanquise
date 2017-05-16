@@ -1,10 +1,16 @@
 package vue;
 
 import model.Partie;
+
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 public class Interface extends Application {   
@@ -22,13 +28,21 @@ public class Interface extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-
+		
+		 
 		GestionnaireEcransFxml gestionnaireEcransFXML = new GestionnaireEcransFxml(partie);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_ACCUEIL, model.Proprietes.ECRAN_ACCUEIL_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_REGLES, model.Proprietes.ECRAN_REGLES_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_MODE, model.Proprietes.ECRAN_MODE_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
+		
+		
+		String path = "C:/Users/super/workspace/ProjetBanquise/src/ressources/decor/ping.mp3";
+		Media media = new Media(new File(path).toURI().toString());
+		gestionnaireEcransFXML.musique = new MediaPlayer(media);
+		gestionnaireEcransFXML.musique.setAutoPlay(true);
+		gestionnaireEcransFXML.musique.play();
         
 		gestionnaireEcransFXML.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
         

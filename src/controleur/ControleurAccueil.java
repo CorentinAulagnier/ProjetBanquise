@@ -110,7 +110,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique , gestionnaireFxmlCourant.musique);
+    	changerMusique(imageMusique , gestionnaireFxmlCourant.media, gestionnaireFxmlCourant);
     	
     }
     
@@ -120,7 +120,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererSon(MouseEvent event){
-    	changerSon(imageSon);
+    	changerSon(imageSon, gestionnaireFxmlCourant);
     }
     
     /**

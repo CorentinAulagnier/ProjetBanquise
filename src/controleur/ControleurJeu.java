@@ -5,11 +5,6 @@ import vue.EcranCourant;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
+import javafx.stage.FileChooser;
 import model.Coordonnees;
 import model.Humain;
 import model.IA;
@@ -35,6 +30,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
     
+  //zone menu
+    @FXML private ImageView imageSon, imageMusique;
+    final FileChooser fileChooser = new FileChooser();
+    @FXML AnchorPane optionbox;
+    @FXML Button roue;
+    
     //zone joueur
     @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
     @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
@@ -46,9 +47,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
-    
-    //zone menu
-    @FXML private ImageView imageSon, imageMusique;
+
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -181,22 +180,27 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
     
     @FXML private void annulerTours(MouseEvent event){
+    	// TODO
     	System.out.println("annulerTours");
     }
     
     @FXML private void demanderIndice(MouseEvent event){
+    	// TODO
     	System.out.println("demanderIndice");
     }
     
     @FXML private void reinitiailiserTour(MouseEvent event){
+    	// TODO
     	System.out.println("reinitiailiserTour");
     }
     
     @FXML private void validerTour(MouseEvent event){
+    	// TODO
     	System.out.println("validerTour");
     }
     
     @FXML private void refaireTours(MouseEvent event){
+    	// TODO
     	System.out.println("refaireTours");
     }
     
@@ -219,14 +223,68 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
     
     
+    /**
+     * change d'ecran pour celui des regles
+     * @param event evenement souris attendu : clic
+     */
+    @FXML
+    private void sauvegarder(MouseEvent event){
+    	nettoyerRoueHorizontale(optionbox, roue);
+    	/*File file = fileChooser.showOpenDialog(null);
+    	String  path = file.getName();
+        if (file != null) {
+        	path = file.getAbsolutePath();
+        	//TODO
+        	//gestionnaireFxmlCourant.partie.charger(path);
+        }   */
+    }
+    
+    /**
+     * change d'ecran pour celui des regles
+     * @param event evenement souris attendu : clic
+     */
+    @FXML
+    private void ouvrirPageRegle(MouseEvent event){
+    	nettoyerRoueHorizontale(optionbox, roue);
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
+    }
+    
+    /**
+     * renvoi à l'écran accueil
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void ouvrirPageAccueil(MouseEvent event){
+    	nettoyerRoueHorizontale(optionbox, roue);
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    }
     
     
+    /**
+     * ouvre une popup de confirmatio avant de quitter l'application 
+     * @param event event evenement souris attendu : clic
+     */
+    @FXML
+    private void quitter(MouseEvent event){
+    	nettoyerRoueHorizontale(optionbox, roue);
+    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
+    	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Partir", "Annuler" , "" );
+    }
     
     
-    
-    
-    
-    
+    /**
+     * gere l'ouverture ou la fermeture du menu roue
+     * @param event evenement souris attendu : clic
+     */
+    @FXML
+    public void boutonOption(MouseEvent event){
+    	if (optionbox.isDisable()){
+    		optionWheelOpen(optionbox, roue);    		
+    	}else{
+    		optionWheelClose(optionbox, roue);
+    	}
+    }
+       
     
     
     
@@ -438,61 +496,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
    
     
-    
-    
-    
-    /** DESIGN AJOUTE CE WEEK END**/
-    
-    @FXML AnchorPane optionbox;
-    @FXML Button roue;
-    
-	 public void optionWheelOpen(){
-		 optionbox.setDisable(false);
- 		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
- 		ft.setFromValue(0);
- 		ft.setToValue(1);
- 		
- 		ScaleTransition st = new ScaleTransition(Duration.millis(500), optionbox);
-     	st.setFromX(0);
-     	st.setToX(1);
- 		
-    	TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-     	tt.setByY(-100);
-     	
-     	
- 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
- 	     rt.setByAngle(180);
- 	     
- 		ParallelTransition pt = new ParallelTransition(optionbox,ft,rt,st,tt );
- 	     pt.play();
-	    }
-	 public void optionWheelClose(){
-		 optionbox.setDisable(true);
-		 	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
-	 		ft.setFromValue(1);
-	 		ft.setToValue(0);
-		 
-	     	ScaleTransition st = new ScaleTransition(Duration.millis(500), optionbox);
-	     	st.setFromX(1);
-	     	st.setToX(0);
-	     	
-	     	TranslateTransition tt = new TranslateTransition(Duration.millis(500), optionbox);
-	     	tt.setByY(100);
-	     	
- 		RotateTransition rt = new RotateTransition(Duration.millis(500), roue);
- 	     rt.setByAngle(-180);
-	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, st ,rt,tt);
-	     	pt.play();
-	 }
- 
-    @FXML
-    public void boutonOption(MouseEvent event){
-    	if (optionbox.isDisable()){
-    		optionWheelOpen();    		
-    	}else{
-    		optionWheelClose();
-    	}
-    }
 
     
 }

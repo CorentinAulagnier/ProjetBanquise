@@ -102,6 +102,9 @@ public class Banquise implements Serializable {
 
 				nbCasesRestante --;
 			}
+			if (numligne == 7) {
+				this.terrain[i][numligne] = null;
+			}
 		}
 	}
 	
@@ -137,7 +140,6 @@ public class Banquise implements Serializable {
 			} else {		//Ligne impair
 				numligne = 8; 
 			}
-
 			for (int j = 0; j < numligne; j++) {
 				if (numligne == 7) {
 					a = j+1;
@@ -165,6 +167,9 @@ public class Banquise implements Serializable {
 						System.out.println("Erreur : Nombre de poisson sur la case "+i+" "+j);
 					} 
 				}
+			}
+			if (numligne == 7) {
+				this.terrain[i][numligne] = null;
 			}
 		}
 		br.close();

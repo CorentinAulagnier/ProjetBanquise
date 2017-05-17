@@ -240,7 +240,7 @@
             <Insets top="10.0" />
           </GridPane.margin>
         </Text>
-        <AnchorPane fx:id="banquise" maxHeight="256.0" maxWidth="512.0" minHeight="256.0" minWidth="512.0" prefHeight="256.0" prefWidth="512.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+        <AnchorPane fx:id="banquise" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: #cce6ff; -fx-border-width: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
           <children>
             <ImageView fx:id="t11" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
               <image>

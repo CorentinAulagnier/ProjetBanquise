@@ -384,7 +384,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				
 				
 				
-				if (gestionnaireFxmlCourant.partie.isPlacementValide(xy)){ //si tuile un poisson et innocuppé
+				
+				if (gestionnaireFxmlCourant.partie.isPlacementValide(xy) && 
+						( Humain.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif]).getClass() ) ){ //si tuile un poisson et innocuppé
 					//pas de pingouin placé pendant ce tour
 					if(place_pingouin_encours.x == -1 ) {
 						Image img = new Image(this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);

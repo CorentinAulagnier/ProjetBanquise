@@ -3,11 +3,12 @@ package reseau;
 
 public class Multijoueur {
 
+	// Lancement : main("CreeServer") OU main("ConnexionServer")
 	public static void main(String[] args) {
 		String[] s = new String[1];
 
 		try {
-			if (args[0].equals("")) {
+			if (args[0].equals("CreeServer")) {
 				new ExecServer().start();
 				s[0] = "local";
 

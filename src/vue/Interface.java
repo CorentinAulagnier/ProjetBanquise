@@ -26,15 +26,11 @@ public class Interface extends Application {
 	public static int largeurFenetre;
 	public static int hauteurFenetre;
 	public static Partie partie;  
-	public static int largeurInitiale;
-	public static int hauteurInitiale;
 
 	public static void creer(String[] args,Partie p,int h, int l) {
     	partie = p;
     	hauteurFenetre = h*100 +30;
     	largeurFenetre = l*100;
-    	largeurInitiale = largeurFenetre ;
-    	hauteurInitiale = hauteurFenetre;
         Application.launch(Interface.class, args);
     }
 	
@@ -70,42 +66,61 @@ public class Interface extends Application {
         primaryStage.getIcons().add(new Image("ressources/decor/favicon.png"));
         primaryStage.setTitle("Pinguouins");
         primaryStage.setResizable(true);
-        scene.setRoot(root);
-        primaryStage.setScene(scene);
-        gestionnaireEcransFXML.autosize();
-       // scene.setCamera();
         primaryStage.show();
         
         
         primaryStage.widthProperty().addListener(new ChangeListener<Number>() {
         	@Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
                 TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
-               
-                double ratio = (newSceneWidth.doubleValue() - largeurInitiale ) /2 ;
+                double ratio = (newSceneWidth.doubleValue() - largeurFenetre ) /2 ;
+                double decalage = oldSceneWidth.doubleValue() / largeurFenetre ;
+                tt.setToX(ratio-decalage);
                 
-                st.setToX( newSceneWidth.doubleValue()/ largeurInitiale);
-                tt.setToX(ratio);
-            
-                ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt);
-             	pt.play();
+                if (primaryStage.getHeight() > (6*primaryStage.getWidth()/8) ){ 
+                	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+                	 st.setToX( newSceneWidth.doubleValue()/ largeurFenetre);
+	                ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+	                TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+	                double fract = (6*newSceneWidth.doubleValue())/8;
+	                double ratio2 = (fract-hauteurFenetre) /2 ;
+	                st2.setToY( fract / hauteurFenetre);
+	                tt2.setToY( ratio2 );
+	            
+	                ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
+	                pt.play();
+	                
+                }else{
+                	
+                	tt.play();
+                }
              	
         	}
         });
         
       primaryStage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
-                TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+            	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+                double ratio = (newSceneHeight.doubleValue() - hauteurFenetre ) /2 ;
+                double decalage = oldSceneHeight.doubleValue() / hauteurFenetre ;
+                tt.setToY(ratio-decalage);
                 
-                double ratio = (newSceneHeight.doubleValue()-hauteurInitiale) /2 ;
-                
-                st.setToY( newSceneHeight.doubleValue()/ hauteurInitiale);
-                tt.setToY( ratio );
-                
-             	ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st ,tt);
-    	     	pt.play();
-             	
+                if (primaryStage.getWidth() > (8*primaryStage.getHeight()/6) ){ 
+                	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+                	 st.setToY( newSceneHeight.doubleValue()/ hauteurFenetre);
+	                ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+	                TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+	                double fract = (8*newSceneHeight.doubleValue())/6;
+	                double ratio2 = (fract-largeurFenetre) /2 ;
+	                st2.setToX( fract / largeurFenetre);
+	                tt2.setToX( ratio2 );
+	            
+	                ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
+	                pt.play();
+	                
+                }else{
+                	
+                	tt.play();
+                }
             }
         });
         

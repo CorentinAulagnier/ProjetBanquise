@@ -80,7 +80,7 @@ public abstract class MoteurConsole {
 					int niv_IA;
 					while(true) {
 						try {
-							System.out.println("Quel niveau voulez vous pour l'IA" + (i-nb_humains+1) + " ? (1 à 3)");
+							System.out.println("Quel niveau voulez vous pour l'IA" + (i-nb_humains) + " ? (1 à 3)");
 							niv_IA = Integer.valueOf(br.readLine());
 							if(niv_IA<=3 && niv_IA>=1) {
 								break;
@@ -91,7 +91,7 @@ public abstract class MoteurConsole {
 							e.printStackTrace(System.out);
 						}
 					}
-					p.joueurs[i] = new IA("IA"+(i-nb_humains+1), 6-nb_joueurs_tot, niv_IA);
+					p.joueurs[i] = new IA("IA"+(i-nb_humains), 6-nb_joueurs_tot, niv_IA);
                     for(int j = 0; j<6-nb_joueurs_tot;j++) {
                     	p.joueurs[i].myPingouins[j] = new Pingouin();
                     }

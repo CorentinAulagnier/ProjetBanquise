@@ -104,7 +104,7 @@ public class LauncherConsole extends MoteurConsole {
 		} else {
 			System.out.println(p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") ne peut plus jouer");
 		}	
-		p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
+		p.majProchainJoueur();
 	}
 	
 

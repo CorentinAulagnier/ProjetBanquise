@@ -66,6 +66,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     ArrayList<ArrayList<ImageView>> banquise;
     ArrayList <ImageView> banquiseLigne1, banquiseLigne2, banquiseLigne3, banquiseLigne4, banquiseLigne5, banquiseLigne6, banquiseLigne7, banquiseLigne8;
     
+    
+    Coordonnees place_pingouin_encours;
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
 	 */
@@ -87,6 +89,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
+    	
+    	place_pingouin_encours = new Coordonnees(-1,-1);
 
     }
     
@@ -217,17 +221,27 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	for (int i = 0 ; i < 8 ; i++){
     		for (int j = 0 ; j< 8 ; j++){
     			if ( !((i%2 == 0) && (j == 7)) ) {
-    				switch(gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons){
-    					case 1:	banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_1POISSON));break;
-    					case 2:	banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_2POISSON));break;
-    					case 3:	banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_3POISSON));break;
-    				}
+    				placeUneTuile(gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons, i, j);
     			}	
     		}
     	}
 
     }
     
+    
+	public void placeUneTuile(int nombreDePoissons, int i, int j) {
+		switch (nombreDePoissons) {
+		case 1:
+			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_1POISSON));
+			break;
+		case 2:
+			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_2POISSON));
+			break;
+		case 3:
+			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_3POISSON));
+			break;
+		}
+	}
     
     
     /****************************************/
@@ -340,6 +354,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private void validerTour(MouseEvent event){
     	// TODO
     	System.out.println("validerTour");
+    	gestionnaireFxmlCourant.partie.majProchainJoueur();
     }
     
     @FXML private void refaireTours(MouseEvent event){
@@ -361,25 +376,42 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     public void anchorClick(MouseEvent event) {
 		Coordonnees xy = getXY(event.getX(), event.getY());
 		if (coordValide(xy)) {
-			System.out.println("i:"+xy.x+" j:"+xy.y);
-			System.out.println(gestionnaireFxmlCourant.partie.placementPingouinsFini());
-			/*if( !gestionnaireFxmlCourant.partie.placementPingouinsFini() ){// phase placement
+			//System.out.println("i:"+xy.x+" j:"+xy.y);
+			//System.out.println(gestionnaireFxmlCourant.partie.placementPingouinsFini());
+			
+			// phase placement
+			if( !gestionnaireFxmlCourant.partie.placementPingouinsFini() ){
+				
+				
+				
 				if (gestionnaireFxmlCourant.partie.isPlacementValide(xy)){ //si tuile un poisson et innocuppé
-					//System.out.println("miniature "+this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);
-					//Image img = new Image(this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);
-					//this.banquise.get(i).get(j).setImage(img);
+					//pas de pingouin placé pendant ce tour
+					if(place_pingouin_encours.x == -1 ) {
+						Image img = new Image(this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);
+						this.banquise.get(xy.x).get(xy.y).setImage(img);
+						place_pingouin_encours.x=xy.x;place_pingouin_encours.y=xy.y;
+					}else{
+						placeUneTuile(gestionnaireFxmlCourant.partie.b.terrain[ place_pingouin_encours.x ][ place_pingouin_encours.y ].nbPoissons, place_pingouin_encours.x, place_pingouin_encours.y);
+						Image img = new Image(this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);
+						this.banquise.get(xy.x).get(xy.y).setImage(img);
+						place_pingouin_encours.x=xy.x;place_pingouin_encours.y=xy.y;
+					}
+					//deja place un pingouin avant de valider
+					
+					
 					
 					//retire une miniature de sa reglette = unset
 					//la place au centre de tuile du clic				
 				}	
-			} else {
-				// sinon phase jeu
+			} 
+			// phase jeu
+			else {
 				//Coordonnees[] pingouins = gestionnaireFxmlCourant.partie.pingouinsDeplacable();
 				//TODO
 				
 				// if (xy.equals(ping[0]) ||xy.equals(ping[1]) || xy.equals(ping[2])
 				// || xy.equals(ping[3])){ }
-			}*/
+			}
 			
 		}
 	}

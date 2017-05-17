@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
@@ -28,7 +28,7 @@
             <GaussianBlur />
          </effect>
     </ImageView>
-    <GridPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <GridPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" prefHeight="250.0" prefWidth="175.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
           <children>
@@ -636,7 +636,7 @@
         <RowConstraints maxHeight="50.0" minHeight="50.0" percentHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <AnchorPane fx:id="optionbox" disable="true" layoutX="215.0" layoutY="648.0" minHeight="85.0" minWidth="55.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="215.0" layoutY="648.0" maxHeight="85.0" maxWidth="354.0" minHeight="85.0" minWidth="354.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
       <children>
         <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="354.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
           <image>

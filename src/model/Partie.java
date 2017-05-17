@@ -592,6 +592,20 @@ public class Partie implements Serializable {
 	}
 	
 	/**
+	 * Retourne le numero du pingouin a placer du joueur actif
+	 * 
+	 * @param j
+	 *            Le joueur.
+	 *            
+	 * @return Retourne le numero du pingouin a placer du joueur actif.
+	 */
+
+
+	public int numPingouinAPlacer() {
+		return numPingouinAPlacer(joueurs[joueurActif]);
+	}
+	
+	/**
 	 * Retourne combien de pingouins le joueur j peut deplacer
 	 * 
 	 * @param j

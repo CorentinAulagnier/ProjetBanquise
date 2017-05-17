@@ -48,11 +48,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4,
     						reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4,
     						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
+    ArrayList<ImageView[]> reglettes;
+    
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
 
     //banquise
-    @FXML AnchorPane banquise;
+    @FXML AnchorPane anchorBanquise;
     @FXML private ImageView t11,t12,t13,t14,t15,t16,t17,
     						t21,t22,t23,t24,t25,t26,t27,t28,
     						t31,t32,t33,t34,t35,t36,t37,
@@ -61,6 +63,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t61,t62,t63,t64,t65,t66,t67,t68,
     						t71,t72,t73,t74,t75,t76,t77,
     						t81,t82,t83,t84,t85,t86,t87,t88;
+    ArrayList<ArrayList<ImageView>> banquise;
+    ArrayList <ImageView> banquiseLigne1, banquiseLigne2, banquiseLigne3, banquiseLigne4, banquiseLigne5, banquiseLigne6, banquiseLigne7, banquiseLigne8;
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -113,16 +117,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    ImageView[] j4_reglette = {reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4};
     	    ArrayList<ImageView[]> reglettes = new ArrayList<ImageView[]>();
     	    reglettes.add(j1_reglette); reglettes.add(j2_reglette); reglettes.add(j3_reglette); reglettes.add(j4_reglette);
-    	    ArrayList <ImageView> banq1 = new ArrayList <ImageView>(); Collections.addAll(banq1,t11,t12,t13,t14,t15,t16,t17,new ImageView());
-    	    ArrayList <ImageView> banq2 = new ArrayList <ImageView>(); Collections.addAll(banq2,t21,t22,t23,t24,t25,t26,t27,t28);
-    	    ArrayList <ImageView> banq3 = new ArrayList <ImageView>(); Collections.addAll(banq3,t31,t32,t33,t34,t35,t36,t37,new ImageView());
-    	    ArrayList <ImageView> banq4 = new ArrayList <ImageView>(); Collections.addAll(banq4,t41,t42,t43,t44,t45,t46,t47,t48);
-    	    ArrayList <ImageView> banq5 = new ArrayList <ImageView>(); Collections.addAll(banq5,t51,t52,t53,t54,t55,t56,t57,new ImageView());
-    	    ArrayList <ImageView> banq6 = new ArrayList <ImageView>(); Collections.addAll(banq6,t61,t62,t63,t64,t65,t66,t67,t68);
-    	    ArrayList <ImageView> banq7 = new ArrayList <ImageView>(); Collections.addAll(banq7,t71,t72,t73,t74,t75,t76,t77,new ImageView());
-    	    ArrayList <ImageView> banq8 = new ArrayList <ImageView>(); Collections.addAll(banq8,t81,t82,t83,t84,t85,t86,t87,t88);
-    	    ArrayList<ArrayList<ImageView>> banquise = new ArrayList<ArrayList<ImageView>>();
-    	    banquise.add(banq1);banquise.add(banq2);banquise.add(banq3);banquise.add(banq4);banquise.add(banq5);banquise.add(banq6);banquise.add(banq7);banquise.add(banq8);
+    	    banquiseLigne1 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne1,t11,t12,t13,t14,t15,t16,t17,new ImageView());
+    	    banquiseLigne2 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne2,t21,t22,t23,t24,t25,t26,t27,t28);
+    	    banquiseLigne3 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne3,t31,t32,t33,t34,t35,t36,t37,new ImageView());
+    	    banquiseLigne4 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne4,t41,t42,t43,t44,t45,t46,t47,t48);
+    	    banquiseLigne5 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne5,t51,t52,t53,t54,t55,t56,t57,new ImageView());
+    	    banquiseLigne6 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne6,t61,t62,t63,t64,t65,t66,t67,t68);
+    	    banquiseLigne7 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne7,t71,t72,t73,t74,t75,t76,t77,new ImageView());
+    	    banquiseLigne8 = new ArrayList <ImageView>(); Collections.addAll(banquiseLigne8,t81,t82,t83,t84,t85,t86,t87,t88);
+    	    banquise = new ArrayList<ArrayList<ImageView>>(); banquise.add(banquiseLigne1); banquise.add(banquiseLigne2); banquise.add(banquiseLigne3);
+    	    banquise.add(banquiseLigne4); banquise.add(banquiseLigne5); banquise.add(banquiseLigne6);banquise.add(banquiseLigne7);banquise.add(banquiseLigne8);
     	    
     	    
     	    miseAjour_initiale(anchorPanes, banquises, p, noms);
@@ -357,14 +361,17 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     public void anchorClick(MouseEvent event) {
 		Coordonnees xy = getXY(event.getX(), event.getY());
 		if (coordValide(xy)) {
-			System.out.println(xy);
-			
+			System.out.println("i:"+xy.x+" j:"+xy.y);
+			System.out.println(gestionnaireFxmlCourant.partie.placementPingouinsFini());
 			/*if( !gestionnaireFxmlCourant.partie.placementPingouinsFini() ){// phase placement
-				//si tuile un poisson
+				if (gestionnaireFxmlCourant.partie.isPlacementValide(xy)){ //si tuile un poisson et innocuppé
+					//System.out.println("miniature "+this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);
+					//Image img = new Image(this.gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].cheminMiniature);
+					//this.banquise.get(i).get(j).setImage(img);
+					
 					//retire une miniature de sa reglette = unset
-					//la place au centre de tuile du clic
-				
-				
+					//la place au centre de tuile du clic				
+				}	
 			} else {
 				// sinon phase jeu
 				//Coordonnees[] pingouins = gestionnaireFxmlCourant.partie.pingouinsDeplacable();

@@ -240,7 +240,7 @@
             <Insets top="10.0" />
           </GridPane.margin>
         </Text>
-        <AnchorPane fx:id="banquise" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: #cce6ff; -fx-border-width: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+        <AnchorPane fx:id="anchorBanquise" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: #cce6ff; -fx-border-width: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
           <children>
             <ImageView fx:id="t11" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -558,7 +558,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-        <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
           <children>
             <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
               <graphic>

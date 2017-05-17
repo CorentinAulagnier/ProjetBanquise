@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -398,6 +399,52 @@ public class Partie implements Serializable {
 		Tuile t = this.b.getTuile(c);
 		if(t!= null && t.nbPoissons==1 && !t.aUnPingouin) return true;
 		else return false;
+	}
+	
+	/**
+	 * Verifie que l'on peut deplacer un pingouin a cette case
+	 * 
+	 * @param cc
+	 * 			Le couple de coordonnees des cases a tester
+	 * 
+	 * @return si on peut placer un pingouin
+	 */
+	
+	public boolean isDeplacementValide(CoupleGenerique<Coordonnees,Coordonnees> cc) {
+		ArrayList<ArrayList<Coordonnees>> al = b.deplacementPossible(cc.e1);
+		return appartient(cc.e2, al);
+	}
+	
+	/**
+	 * regarde si c appartient a al
+	 * 
+	 * @param c
+	 * 			Ccoordonnees a retrouver
+	 * @param al
+	 * 			Dans cette liste
+	 * 
+	 * @return si c appartient a al
+	 */
+	
+	private boolean appartient(Coordonnees c, ArrayList<ArrayList<Coordonnees>> al) {
+		Iterator<ArrayList<Coordonnees>> itAl = al.iterator();
+		ArrayList<Coordonnees> ac = null;
+		
+		Iterator<Coordonnees> itC = null;
+		Coordonnees co = null;
+		
+		while (itAl.hasNext()) {
+			ac = itAl.next();
+			itC = ac.iterator();
+			
+			while (itC.hasNext()) {
+				co = itC.next();
+				if (co.equals(c)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 /*******************************************************************************************************/

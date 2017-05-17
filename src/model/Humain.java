@@ -21,8 +21,9 @@ public class Humain extends Joueur {
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
 		this.nom = "";
-		this.myPingouins = new Pingouin[3];
 		this.nbPingouin = 3;
+		this.myPingouins = new Pingouin[3];
+		this.initPingouins();
 		this.cheminMiniature = "";
 		this.couleur = -1;
 	}
@@ -40,8 +41,9 @@ public class Humain extends Joueur {
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
 		this.nom = name;
-		this.myPingouins = new Pingouin[nbP];
 		this.nbPingouin = nbP;
+		this.myPingouins = new Pingouin[nbP];
+		this.initPingouins();
 		this.cheminMiniature = "";
 		this.couleur = -1;
 	}
@@ -63,8 +65,9 @@ public class Humain extends Joueur {
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
 		this.nom = name;
-		this.myPingouins = new Pingouin[nbP];
 		this.nbPingouin = nbP;
+		this.myPingouins = new Pingouin[nbP];
+		this.initPingouins();
 		this.cheminMiniature = cheminMigna;
 		this.couleur = color;
 	}

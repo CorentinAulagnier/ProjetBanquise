@@ -28,9 +28,10 @@ public class IA extends Joueur {
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
 		this.nom = "";
-		this.myPingouins = new Pingouin[3];
-		this.niveau = 1;
 		this.nbPingouin = 3;
+		this.myPingouins = new Pingouin[3];
+		this.initPingouins();
+		this.niveau = 1;
 		this.cheminMiniature = "";
 		this.couleur = -1;
 	}
@@ -50,9 +51,10 @@ public class IA extends Joueur {
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
 		this.nom = name;
-		this.myPingouins = new Pingouin[nbP];
-		this.niveau = level;
 		this.nbPingouin = nbP;
+		this.myPingouins = new Pingouin[nbP];
+		this.initPingouins();
+		this.niveau = level;
 		this.cheminMiniature = "";
 		this.couleur = -1;
 	}
@@ -76,9 +78,10 @@ public class IA extends Joueur {
 		this.nbTuiles = 0;
 		this.poissonsManges = 0;
 		this.nom = name;
-		this.myPingouins = new Pingouin[nbP];
-		this.niveau = level;
 		this.nbPingouin = nbP;
+		this.myPingouins = new Pingouin[nbP];
+		this.initPingouins();
+		this.niveau = level;
 		this.cheminMiniature = cheminMigna;
 		this.couleur = color;
 	}

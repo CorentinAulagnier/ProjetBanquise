@@ -81,6 +81,17 @@ public abstract class Joueur implements Serializable{
 	 */	
 	
 	public abstract String toString();
+	
+	/**
+	 * Initialise le tableau de pingouins.
+	 */	
+	
+	public void initPingouins() {
+        for(int j = 0; j<nbPingouin;j++) {
+        	this.myPingouins[j] = new Pingouin();
+        }
+	}
+
 
 	/**
 	 * Verifie si deux Joueurs sont egaux.

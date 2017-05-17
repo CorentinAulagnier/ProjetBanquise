@@ -172,7 +172,7 @@ public abstract class MoteurConsole {
 				System.out.print("y :");
 				y = Integer.valueOf(br.readLine());
 			} catch (Exception e) {
-				e.printStackTrace(System.out);
+				//e.printStackTrace(System.out);
 				return null;
 			}
 			return new Coordonnees(x, y);

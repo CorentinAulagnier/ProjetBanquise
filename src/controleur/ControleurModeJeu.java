@@ -117,7 +117,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	
     	
     	
-    		String path = model.Proprietes.IMAGE_JOUEUR_PATH+modeJeu[couleur]+""+couleur+".png";
+    		String path = model.Proprietes.IMAGE_JOUEUR_PATH+image[couleur]+""+couleur+".png";
     				
 	    	    	
 	    	if (modeJeu[couleur] == model.Proprietes.JOUEUR){

@@ -2,6 +2,7 @@ package controleur;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
     @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
+    @FXML private AnchorPane box_tour_distant;
     
     //zone menu
     @FXML private ImageView imageSon, imageMusique;
@@ -50,6 +52,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
 
     //banquise
+    @FXML AnchorPane banquise;
     @FXML private ImageView t11,t12,t13,t14,t15,t16,t17,
     						t21,t22,t23,t24,t25,t26,t27,t28,
     						t31,t32,t33,t34,t35,t36,t37,
@@ -67,7 +70,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	anchorPane_j3.setVisible(false);
     	anchorPane_j4.setVisible(false);
     	
+    	box_tour_distant.setDisable(true);
     	box_boutons_tour.setDisable(true);
+    	box_tour_distant.setVisible(false);
+    	box_boutons_tour.setVisible(false);
     	
     	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_defaire.setDisable(true);
@@ -137,19 +143,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms){
     	
-    	int compteurDhumain =0;
-    	
     	for(int k=0; k<gestionnaireFxmlCourant.partie.joueurs.length; k++){
-    		
     		//maj de chaque zones réservées à un joueur
     		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(gestionnaireFxmlCourant.partie.joueurs[k]).couleur],(Label)noms[k]);
-			
-			if ( ( Humain.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[k]).getClass() ) ){
-				compteurDhumain++;	//compte le nombre d'humain
-			}
 		}
     	
-    	if( compteurDhumain == 1){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
+    	if( gestionnaireFxmlCourant.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
 	    	bouton_defaire.setDisable(false);
 	    	bouton_faire.setDisable(false);
 		}
@@ -200,10 +199,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
     	if ( !( IA.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif]).getClass() ) ){
     		box_boutons_tour.setDisable(false);
+    		box_boutons_tour.setVisible(true);
     	}
     	else{
-    		//Affichage réservée IA
-    		//TODO
+    		box_tour_distant.setDisable(false);
+    		box_tour_distant.setVisible(true);
+        	
     	}
     } 
     
@@ -257,13 +258,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     private void sauvegarder(MouseEvent event){
     	nettoyerRoueHorizontale(optionbox, roue);
     	System.out.println("sauvegarder");
-    	/*File file = fileChooser.showOpenDialog(null);
+    	File file = fileChooser.showOpenDialog(null);
     	String  path = file.getName();
         if (file != null) {
         	path = file.getAbsolutePath();
         	//TODO
-        	//gestionnaireFxmlCourant.partie.charger(path);
-        }   */
+        	gestionnaireFxmlCourant.partie.sauvegarder(path);        	
+        }   
     }
     
     /**
@@ -357,13 +358,22 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Coordonnees xy = getXY(event.getX(), event.getY());
 		if (coordValide(xy)) {
 			System.out.println(xy);
-			Coordonnees[] ping = gestionnaireFxmlCourant.partie.pingouinsDeplacable();
 			
-			// phase placement a faire
+			/*if( !gestionnaireFxmlCourant.partie.placementPingouinsFini() ){// phase placement
+				//si tuile un poisson
+					//retire une miniature de sa reglette = unset
+					//la place au centre de tuile du clic
+				
+				
+			} else {
+				// sinon phase jeu
+				//Coordonnees[] pingouins = gestionnaireFxmlCourant.partie.pingouinsDeplacable();
+				//TODO
+				
+				// if (xy.equals(ping[0]) ||xy.equals(ping[1]) || xy.equals(ping[2])
+				// || xy.equals(ping[3])){ }
+			}*/
 			
-			// sinon phase jeu
-			// if (xy.equals(ping[0]) ||xy.equals(ping[1]) || xy.equals(ping[2])
-			// || xy.equals(ping[3])){ }
 		}
 	}
    
@@ -452,16 +462,19 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	
 	
 	
+
 	
+	/*
     ImageView[][] banq;
     ImageView[][] pingouins = new ImageView[8][8];
     int fromX;
     int fromY;
     int toX;
     int toY;
-    //boolean EndOfTurn;
+    boolean EndOfTurn;
     int largeurHexagone ;
     int hauteurHexagone ;
+    
     Image image1PoissonJaune;
     Image image2PoissonsJaunes;
     Image image3PoissonsJaunes;
@@ -472,14 +485,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     double hauteurbanquise =270 ;
     double largeurbanquise=512 ;
     
-    //@FXML ImageView shadowPingouin;
-    @FXML AnchorPane banquise;
     
     
-   
-	
-   
-   /*
+    @FXML ImageView shadowPingouin;
+    
+    
    @FXML
    public void SelectPingouin(MouseEvent event){
    	if (EndOfTurn) {
@@ -514,10 +524,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}
    		}
    	}
-   }*/
+   }
    
    /* 
-  
     @FXML
     public void GoToPingouin(MouseEvent event){
     	toX = getX();
@@ -535,7 +544,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     public boolean estJaune(Image imag){
     	return (imag==image1PoissonJaune)||(imag==image2PoissonsJaunes)||(imag==image3PoissonsJaunes);
     }
+    */
     
+    /*
     @FXML
     public void ValidatePingouinTranslation(MouseEvent event){
     	if (EndOfTurn){
@@ -544,10 +555,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	tt.setFromX( fromX * largeurHexagone);
    	     	tt.setFromY( fromY * hauteurHexagone);
 	   	    tt.setToX( toX * largeurHexagone);
-		    tt.setToY(toY * hauteurHexagone);
-	   	    
-	   	    
+		    tt.setToY(toY * hauteurHexagone);    
     	}
-    }*/
-    
+    }
+    */ 
 }

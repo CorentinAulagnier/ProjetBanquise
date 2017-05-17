@@ -544,7 +544,21 @@
             </ImageView>
           </children>
         </AnchorPane>
-        <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <AnchorPane fx:id="box_tour_distant" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Text fx:id="label_box_tour_distant" fill="BLACK" layoutX="198.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour de IA" textAlignment="CENTER" wrappingWidth="201.1357181072235">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="48.0" fitWidth="64.0" layoutX="103.0" layoutY="26.0">
+                     <image>
+                        <Image url="@../../ressources/decor/sablier.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+        <HBox fx:id="box_boutons_tour" maxHeight="100.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
           <children>
             <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
               <graphic>

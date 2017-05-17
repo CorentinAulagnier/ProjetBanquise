@@ -11,6 +11,7 @@ public class Multijoueur {
 			if (args[0].equals("CreeServer")) {
 				new ExecServer().start();
 				s[0] = "local";
+				System.out.println("creationServer");
 
 			} else {
 				s[0] = "distant";
@@ -32,6 +33,7 @@ public class Multijoueur {
 
         public void run() {
         	try {
+				System.out.println("lancementServer");
 				PingouinServer.main(null);
 			} catch (Exception e) {
 				e.printStackTrace();

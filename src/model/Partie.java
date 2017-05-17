@@ -378,6 +378,31 @@ public class Partie implements Serializable {
 /*******************************************************************************************************/
 
 	/**
+	 * Mets a jour le prochain joueur de la partie
+	 */
+
+	public void majProchainJoueur() {
+		this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
+	}
+	
+	/**
+	 * Verifie que l'on peut placer un pingouin a cette case
+	 * 
+	 * @param c
+	 * 			Les coordonnees de la case a tester
+	 * 
+	 * @return si on peut placer un pingouin
+	 */
+	
+	public boolean isPlacementValide(Coordonnees c) {
+		Tuile t = this.b.getTuile(c);
+		if(t!= null && t.nbPoissons==1 && !t.aUnPingouin) return true;
+		else return false;
+	}
+	
+/*******************************************************************************************************/
+
+	/**
 	 * Verifie si la partie est termine.
 	 * 
 	 * @return Renvoie vrai, si tout les pingouins de tout les joueurs sont bloquees.
@@ -556,18 +581,7 @@ public class Partie implements Serializable {
 	public Coordonnees[] pingouinsDeplacable() {
 		return positionPingouins(joueurs[joueurActif]);
 	}
-	
-/*******************************************************************************************************/
-	
-	/**
-	 * Mets a jour le prochain joueur de la partie
-	 */
 
-
-	public void majProchainJoueur() {
-		this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
-	}
-	
 /*******************************************************************************************************/
 
 	/**

@@ -1,7 +1,6 @@
 package reseau;
 import java.io.BufferedReader;
 import java.io.EOFException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -51,13 +50,15 @@ public class PingouinClient extends MoteurConsole{
 				obj = in.readObject();
 	            if(obj instanceof Partie) {
 	            	p = (Partie)obj;
-	            	LauncherConsole.afficherPlateau(p);
+	            	afficherPlateau(p);
 	            } else if (obj instanceof String) {
 	            	String line = (String)obj;
 	                if (line.startsWith("SUBMITNAME")) {
 	                    out.writeObject(getUsername());
 	                } else if (line.startsWith("PLACEMENT")) {
-	                	out.writeObject(getPlacement(line.substring(10),p));
+	                	int numJoueur = Integer.valueOf(line.substring(10,11));
+	                	int numPingouin = Integer.valueOf(line.substring(12,13));
+	                	out.writeObject(getPlacementPingouin(numJoueur,numPingouin,p));
 	                } else if (line.startsWith("INITGAME")) {
 	                	out.writeObject(creerPartie());
 	                } else if (line.startsWith("DEPLACEMENT")) {
@@ -69,6 +70,9 @@ public class PingouinClient extends MoteurConsole{
 	                	out.writeObject(getUsername());
 	                } else if (line.startsWith("NOSLOT")) {
 	                	System.out.println("Le serveur de PINGOUINS est plein. Réessayez plus tard.");
+	                	socket.close();
+	                } else if (line.startsWith("ENDGAME")) {
+	                	finPartie(p);
 	                	socket.close();
 	                } else if (line.startsWith("MESSAGE")) {
 	                	System.out.println(line.substring(8) + "\n");

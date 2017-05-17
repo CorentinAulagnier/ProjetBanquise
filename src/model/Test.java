@@ -122,16 +122,16 @@ public class Test extends MoteurConsole{
 						break;
 					case 4:
 						Partie p1 = creerPartie();
-						phasePlacement(p1);
+						LauncherConsole.phasePlacement(p1);
 						System.out.println(p1.toString2());
 						System.out.println(" 1 seul joueur Humain ? " + p1.peutAnnulerCoup());
 						break;
 					case 5:
 						Partie p = creerPartie();
-						phasePlacement(p);
-						tourDeJeuConsole(p);
-						tourDeJeuConsole(p);
-						tourDeJeuConsole(p);
+						LauncherConsole.phasePlacement(p);
+						LauncherConsole.tourDeJeuConsole(p);
+						LauncherConsole.tourDeJeuConsole(p);
+						LauncherConsole.tourDeJeuConsole(p);
 						System.out.println("Banquise créée :\n"+p);
 						System.out.println("Historique créée :\n"+p.h);
 						p.sauvegarder();
@@ -141,7 +141,7 @@ public class Test extends MoteurConsole{
 						System.out.println("Historique restaurée :\n"+p.h);
 					case 6:
 						Partie p_origine = creerPartie();
-						phasePlacement(p_origine);
+						LauncherConsole.phasePlacement(p_origine);
 						System.out.println("Banquise créée :\n"+p_origine);
 						Partie p_clone = p_origine.clone();
 						System.out.println("Banquise clonée :\n"+p_clone);

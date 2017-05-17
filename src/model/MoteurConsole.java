@@ -20,7 +20,6 @@ public abstract class MoteurConsole {
 	 * @return la partie cree
 	 */
 	
-	//Commun
 	public static Partie creerPartie() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Partie p = null;
@@ -32,9 +31,9 @@ public abstract class MoteurConsole {
 			int nb_humains = 1;
 			while (!nb_humain_ok) {
 				try {
-					System.out.println("A combien de joueurs (humains) voulez-vous jouer ? (1 à 4)");
+					System.out.println("A combien de joueurs (humains) voulez-vous jouer ? (0 à 4)");
 					nb_humains = Integer.valueOf(br.readLine());
-					if(nb_humains<= 4 && nb_humains>=1) {
+					if(nb_humains<= 4 && nb_humains>=0) {
 						nb_humain_ok = true;
 						System.out.println("Création d'une partie à "+String.valueOf(nb_humains)+" joueurs.");
 					} else {
@@ -47,7 +46,8 @@ public abstract class MoteurConsole {
 			//IAs
 			int nb_ias = 0;
 			int min_ia = 0;
-			if(nb_humains==1) min_ia = 1;
+			if(nb_humains==0) min_ia = 2;
+			else if(nb_humains==1) min_ia = 1;
 			if(nb_humains<4) {
 				boolean nb_ia_ok = false;
 				while (!nb_ia_ok) {
@@ -119,6 +119,9 @@ public abstract class MoteurConsole {
 				System.out.println("Joueur "+String.valueOf(i)+", quel est votre nom ?");
 				String nom = br.readLine();
 				p.joueurs[i] = new Humain(nom, 6-p.nbJoueurs);
+                for(int j = 0; j<6-p.nbJoueurs;j++) {
+                	p.joueurs[i].myPingouins[j] = new Pingouin();
+                }
 			}
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
@@ -139,193 +142,64 @@ public abstract class MoteurConsole {
     }
 	
 /* ----------------------------------- PHASE PLACEMENT ----------------------------------- */
+ 
     
-	/**
-	 * place les pingouins de chaque joueur/IA a tour de role 	
-	 *   
-	 * @param p
-	 *            La partie.
-	 */
-  //Local
-	public static void phasePlacement(Partie p) {
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println(p.b);
-			int nb_pingouin_max = p.joueurs[0].nbPingouin;
-			for(int num_pingouin = 0; num_pingouin<nb_pingouin_max; num_pingouin++) {
-				for(int num_joueur = 0; num_joueur<p.nbJoueurs; num_joueur++) {
-					boolean position_dispo = false;
-					while(!position_dispo) {
-						Tuile t = null;
-						Coordonnees c = null;
-						int x, y;
-						try {
-							if (p.joueurs[num_joueur].getClass() == IA.class) { // Tour de l'IA
-								c = p.joueurs[num_joueur].placement(p);
-								System.out.println("Placement du pingouin en : "+c);
-								t = p.b.getTuile(c);
-								x = c.x;
-								y = c.y;
-								
-							} else { // Tour de l'Humain
-								System.out.println("Joueur "+String.valueOf(num_joueur)+": "+p.joueurs[num_joueur].nom+", choisissez la position initiale de votre pingouin "+String.valueOf(num_pingouin+1)+":");
-								System.out.print("x: ");
-								x = Integer.valueOf(br.readLine());
-								System.out.print("y: ");
-								y = Integer.valueOf(br.readLine());
-								c = new Coordonnees(x, y);
-								t = p.b.getTuile(c);
-							}
-							if(t!=null && t.nbPoissons != 0 && !t.aUnPingouin) {//Placement autorisé ici
-								t.mettrePingouin();
-								p.joueurs[num_joueur].myPingouins[num_pingouin] = new Pingouin(c);
-								
-								System.out.println("Le pingouin " + String.valueOf(num_pingouin)+ " de " + p.joueurs[num_joueur].nom +" a bien été positionné en ("+String.valueOf(x)+","+String.valueOf(y)+").");
-								position_dispo = true;
-							} else {
-								System.out.println("La position ("+String.valueOf(x)+","+String.valueOf(y)+") n'est pas disponible");
-							}
-						}catch (NumberFormatException e) {
-							System.out.println("Coordonnées incorrectes.");
-						}
-					}
+
+	public static Coordonnees getPlacementPingouin(int numJoueur, int numPingouin, Partie p) {
+			while(true) {
+				Coordonnees c = essaiPlacement(p, numJoueur, numPingouin);
+				Tuile t = p.b.getTuile(c);
+				if(t!= null && t.nbPoissons==1 && !t.aUnPingouin) {
+					return c;
+				} else {
+					System.out.println("La case choisie ne contient pas qu'un poisson. Impossible de placer le pingouin ici.\n");
 				}
 			}
-			System.out.println("Tout les pingouins on été positionnés.");
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
-    
-	//Réseau
-	public static Coordonnees getPlacement(String joueur_et_pingouin, Partie p) {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int x = -1;
-		int y = -1;
-		while(true) {
+	
+
+	public static Coordonnees essaiPlacement(Partie p, int numJoueur, int numPingouin) {
+		if (p.joueurs[numJoueur] instanceof IA) { // Tour de l'IA
+			return p.joueurs[numJoueur].placement(p);
+		} else {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			int x = -1;
+			int y = -1;
 			try {
-				System.out.println(joueur_et_pingouin+", entrez le placement (cases à 1 poisson seulement):");
+				System.out.println(p.joueurs[numJoueur].nom+", entrez le placement de votre pingouin n°"+numPingouin+" (cases à 1 poisson seulement):");
 				System.out.print("x :");
 				x = Integer.valueOf(br.readLine());
 				System.out.print("y :");
 				y = Integer.valueOf(br.readLine());
-			} catch (Exception e) {}
-			Coordonnees c = new Coordonnees(x, y);
-			Tuile t = p.b.getTuile(c);
-			if(t!= null && t.nbPoissons==1) {
-				return c;
-			} else {
-				System.out.println("La case choisie ne contient pas qu'un poisson. Impossible de placer le pingouin ici.");
+			} catch (Exception e) {
+				e.printStackTrace(System.out);
+				return null;
 			}
+			return new Coordonnees(x, y);
 		}
+	}
+	
+
+	public static void setPlacementPingouin(Coordonnees c, Partie p, int numJoueur, int numPingouin) {
+		p.b.getTuile(c).mettrePingouin();
+		p.joueurs[numJoueur].myPingouins[numPingouin] = new Pingouin(c);
+		System.out.println("Le pingouin " + String.valueOf(numPingouin)+ " de " + p.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
 	}
 	
 /* ----------------------------------- PHASE JEU ----------------------------------- */
 	
-	/**
-	 * deroulement du jeu explicit dans la fonction
-	 * 
-	 * @param p
-	 *            La partie.
-	 */
-	//Local
-	public static void phaseMangerLesPoissons(Partie p) {
-		while(!p.estPartieFini()) {
-			afficherPlateau(p);
-			tourDeJeuConsole( p);
-			p.verifierPingouinActif();
-		}
-	}
 	
-	/**
-	 * si le joueur actif peut jouer :
-	 * - affiche la liste des pingouins capable d'effectuer un deplacement
-	 * - affiche tous les deplacements possibles du pingouin selectionne
-	 * - effectue le deplacement choisi puis passe la main au joueur suivant
-	 * 
-	 * @param p
-	 *            La partie.
-	 */
-	//Local
-	public static void tourDeJeuConsole(Partie p) {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		if(p.utiliseHistorique && p.joueurs[p.joueurActif].getClass()==Humain.class) demandeAnnulerRefaire(br, p);
-		if(p.peutJouer()){
-			System.out.println("A "+p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") de jouer!");
-			boolean joue = false;
-			while(!joue) {
-				if (p.joueurs[p.joueurActif].getClass() == IA.class) { // Tour de l'IA
-					System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " cherche son coup.");
-					CoupleGenerique<Coordonnees, Coordonnees> cc = p.joueurs[p.joueurActif].jouer(p);
-					if(cc!=null) {
-						p.deplacement(cc.e1, cc.e2);
-						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue en "+cc.e2);
-						joue = true;
-					} else {
-						System.out.println("L'IA " + p.joueurs[p.joueurActif].nom + " joue a un endroit impossible.");
-					}
-							
-				} else { // Tour de l'Humain
-					CoupleGenerique<Coordonnees,Coordonnees> cg = getDeplacement(p);
-					p.deplacement(cg.e1, cg.e2);
-					joue = true;
-				}
-			}				
-			//Fin du tour 
-			System.out.println(""+p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") terminé.");
-		} else {
-			System.out.println(p.joueurs[p.joueurActif].nom+" (Joueur "+String.valueOf(p.joueurActif)+") ne peut plus jouer");
-		}	
-		p.joueurActif = (p.joueurActif+1)%p.nbJoueurs;
-	}
-	
-	//Local
-	private static void demandeAnnulerRefaire(BufferedReader br, Partie p) {
-		boolean fini = false;
-		boolean annuler = p.h.peutAnnuler();
-		boolean refaire = p.h.peutRefaire();
-		while(!fini && (annuler || refaire)) {
-			System.out.println("Entrez la valeur de l'action que vous voulez faire : (vide pour passer)");
-			if(annuler) {
-				System.out.println("1 - annuler coup précédent");
-			}
-			if(refaire) {
-				System.out.println("2 - refaire dernier coup annulé");
-			}
-			String entree = null;
-			try {
-				entree = br.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			if(entree.equals("1")) {
-				p.annuler();
-				afficherPlateau(p);
-				annuler = p.h.peutAnnuler();
-				refaire = p.h.peutRefaire();
-			} else if(entree.equals("2")) {
-				p.retablir();
-				afficherPlateau(p);
-				annuler = p.h.peutAnnuler();
-				refaire = p.h.peutRefaire();
-			} else {
-				fini = true;
-			}
-		}
-	}
-	
-	//Commun
     public static CoupleGenerique<Coordonnees,Coordonnees> getDeplacement(Partie p) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while(true) {
 			try {
-				Pingouin pingouin = LauncherConsole.choixPingouin(br,p);
-				Coordonnees dep = LauncherConsole.choixDeplacement(br, p, pingouin);
+				Pingouin pingouin = choixPingouin(br,p);
+				Coordonnees dep = choixDeplacement(br, p, pingouin);
 				if(dep!=null) {
 					return new CoupleGenerique<Coordonnees,Coordonnees>(pingouin.position,dep);
 				}
     		} catch (Exception e) {
-				System.out.println("Mauvaise entree, on recommence.");
+				System.out.println("Mauvaise entree, on recommence.\n");
     		}
 		}
 	}
@@ -340,7 +214,7 @@ public abstract class MoteurConsole {
 	 *            
 	 * @return Le pingouin choisi
 	 */
-	//Commun
+
 	public static Pingouin choixPingouin(BufferedReader br, Partie p) {
 		int num_p = -1;
 		Pingouin[] pingouins = p.joueurs[p.joueurActif].myPingouins; 
@@ -376,7 +250,7 @@ public abstract class MoteurConsole {
 	 *        
 	 * @return les coordonnees de deplacement choisis
 	 */
-	//Commun
+
 	public static Coordonnees choixDeplacement(BufferedReader br, Partie p, Pingouin pingouin) {
 		try {
 			int numAxe = 0;
@@ -395,7 +269,7 @@ public abstract class MoteurConsole {
 				boolean numok = false;
 				while(!numok) {
 					try {
-						System.out.println("Numero du déplacement choisi: (0 pour changer d'axe)");
+						System.out.println("Numero du déplacement choisi (0 pour changer d'axe):");
 						numDep = Integer.valueOf(br.readLine());
 						if(numDep>0 && numDep<=chemins.get(numAxe).size()) {
 							numok = true;
@@ -424,7 +298,7 @@ public abstract class MoteurConsole {
 	 * @param p
 	 *            La partie.
 	 */
-	//Commun
+
 	public static void afficherPlateau(Partie p) {
 		System.out.println("Etat du plateau de jeu :");
 		System.out.println(p);
@@ -438,7 +312,7 @@ public abstract class MoteurConsole {
 	 * @param p
 	 *            La partie.	 
 	 */
-	//Local
+
 	public static void finPartie(Partie p) {
 		afficherPlateau(p);
 		ArrayList<Joueur> joueurs = p.getGagnant();

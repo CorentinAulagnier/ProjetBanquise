@@ -558,6 +558,17 @@ public class Partie implements Serializable {
 	}
 	
 /*******************************************************************************************************/
+	
+	/**
+	 * Mets a jour le prochain joueur de la partie
+	 */
+
+
+	public void majProchainJoueur() {
+		this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
+	}
+	
+/*******************************************************************************************************/
 
 	/**
 	 * Retourne le numero du pingouin a placer

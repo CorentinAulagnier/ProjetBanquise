@@ -22,22 +22,27 @@ public class PingouinClient extends MoteurConsole{
     	Pattern pattern;
     	final String REGEX_IP = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
     	pattern = Pattern.compile(REGEX_IP);
-
-    	while (true) {
-	    	try {
-		        String serverAddress = getServerAddress();        		                                         
-		        Matcher matchAddr = pattern.matcher(serverAddress);		        		                                         
-		        if (matchAddr.matches() || serverAddress.equals("")) {
-		        	socket = new Socket(serverAddress, PORT);
-		        	break;
-		        } else {
-					System.out.println("Connexion impossible. Réessayer avec une IP valide.");
-		        }
-	    	} catch (ConnectException | UnknownHostException e) {
-				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
-			}
-    	}
+    	Matcher matchAddr = null;
     	
+    	if (args[0].equals("local")) {
+        	socket = new Socket("", PORT);
+        	
+    	} else {		//(args[0].equals("distant"))
+        	while (true) {
+    	    	try {
+    		        String serverAddress = getServerAddress();        		                                         
+    		        matchAddr = pattern.matcher(serverAddress);		        		                                         
+    		        if (matchAddr.matches() || serverAddress.equals("")) {
+    		        	socket = new Socket(serverAddress, PORT);
+    		        	break;
+    		        } else {
+    					System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+    		        }
+    	    	} catch (ConnectException | UnknownHostException e) {
+    				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+    			}
+        	}
+    	}
 
     	
         ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;

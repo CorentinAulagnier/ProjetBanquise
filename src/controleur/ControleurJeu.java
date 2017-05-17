@@ -4,6 +4,7 @@ import vue.EcranCourant;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,7 +31,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
     
-  //zone menu
+    //zone menu
     @FXML private ImageView imageSon, imageMusique;
     final FileChooser fileChooser = new FileChooser();
     @FXML AnchorPane optionbox;
@@ -48,6 +49,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
 
+    //banquise
+    @FXML private ImageView t11,t12,t13,t14,t15,t16,t17,
+    						t21,t22,t23,t24,t25,t26,t27,t28,
+    						t31,t32,t33,t34,t35,t36,t37,
+    						t41,t42,t43,t44,t45,t46,t47,t48,
+    						t51,t52,t53,t54,t55,t56,t57,
+    						t61,t62,t63,t64,t65,t66,t67,t68,
+    						t71,t72,t73,t74,t75,t76,t77,
+    						t81,t82,t83,t84,t85,t86,t87,t88;
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -56,14 +66,18 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     public void initialize(URL url, ResourceBundle rb) {
     	anchorPane_j3.setVisible(false);
     	anchorPane_j4.setVisible(false);
-    	bouton_defaire.setVisible(false);
-    	bouton_faire.setVisible(false);
-    	box_boutons_tour.setVisible(false);
+    	
+    	box_boutons_tour.setDisable(true);
+    	
     	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_defaire.setDisable(true);
+    	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_faire.setDisable(true);
+    	
     	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
-    	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL);
+
     }
     
 	/**
@@ -93,10 +107,21 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    ImageView[] j4_reglette = {reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4};
     	    ArrayList<ImageView[]> reglettes = new ArrayList<ImageView[]>();
     	    reglettes.add(j1_reglette); reglettes.add(j2_reglette); reglettes.add(j3_reglette); reglettes.add(j4_reglette);
+    	    ArrayList <ImageView> banq1 = new ArrayList <ImageView>(); Collections.addAll(banq1,t11,t12,t13,t14,t15,t16,t17,new ImageView());
+    	    ArrayList <ImageView> banq2 = new ArrayList <ImageView>(); Collections.addAll(banq2,t21,t22,t23,t24,t25,t26,t27,t28);
+    	    ArrayList <ImageView> banq3 = new ArrayList <ImageView>(); Collections.addAll(banq3,t31,t32,t33,t34,t35,t36,t37,new ImageView());
+    	    ArrayList <ImageView> banq4 = new ArrayList <ImageView>(); Collections.addAll(banq4,t41,t42,t43,t44,t45,t46,t47,t48);
+    	    ArrayList <ImageView> banq5 = new ArrayList <ImageView>(); Collections.addAll(banq5,t51,t52,t53,t54,t55,t56,t57,new ImageView());
+    	    ArrayList <ImageView> banq6 = new ArrayList <ImageView>(); Collections.addAll(banq6,t61,t62,t63,t64,t65,t66,t67,t68);
+    	    ArrayList <ImageView> banq7 = new ArrayList <ImageView>(); Collections.addAll(banq7,t71,t72,t73,t74,t75,t76,t77,new ImageView());
+    	    ArrayList <ImageView> banq8 = new ArrayList <ImageView>(); Collections.addAll(banq8,t81,t82,t83,t84,t85,t86,t87,t88);
+    	    ArrayList<ArrayList<ImageView>> banquise = new ArrayList<ArrayList<ImageView>>();
+    	    banquise.add(banq1);banquise.add(banq2);banquise.add(banq3);banquise.add(banq4);banquise.add(banq5);banquise.add(banq6);banquise.add(banq7);banquise.add(banq8);
+    	    
     	    
     	    miseAjour_initiale(anchorPanes, banquises, p, noms);
     	    
-    	    miseAjour_tourDeJeu(reglettes, score_poissons, score_tuiles);
+    	    miseAjour_tourDeJeu(reglettes, score_poissons, score_tuiles, banquise);
     	}
     }
     
@@ -125,8 +150,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
     	
     	if( compteurDhumain == 1){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
-	    	bouton_defaire.setVisible(true);
-	    	bouton_faire.setVisible(true);
+	    	bouton_defaire.setDisable(false);
+	    	bouton_faire.setDisable(false);
 		}
     }
     
@@ -139,9 +164,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param p couleur assoicée au joueur
      * @param nom nom du joueur
      */
-    public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquise, Paint p, Label nom){
+    public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
     	anchors.setVisible(true);
-    	banquise.setFill(p);
+    	banquisette.setFill(p);
     	nom.setText(gestionnaireFxmlCourant.partie.joueurs[joueur].nom);
     }
     
@@ -153,7 +178,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param score_tuiles tableau des scores (en tuiles) des joueurs
      * 
      */
-    public void miseAjour_tourDeJeu(ArrayList<ImageView[]> reglettes, Label[] score_poissons, Label[] score_tuiles){
+    public void miseAjour_tourDeJeu(ArrayList<ImageView[]> reglettes, Label[] score_poissons, Label[] score_tuiles, ArrayList<ArrayList<ImageView>> banquise ){
     	//maj du label "tour de untel"
     	label_tourDe.setText("Tour de "+gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif].nom+" :");
     	
@@ -170,11 +195,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	}
 
     	//maj de l'affichage la banquise
-    	//TODO
+    	majBanquise(banquise);
     	
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
     	if ( !( IA.class ).equals( (gestionnaireFxmlCourant.partie.joueurs[gestionnaireFxmlCourant.partie.joueurActif]).getClass() ) ){
-    		box_boutons_tour.setVisible(true);
+    		box_boutons_tour.setDisable(false);
     	}
     	else{
     		//Affichage réservée IA
@@ -182,32 +207,28 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	}
     } 
     
-    
-    
-    @FXML private void annulerTours(MouseEvent event){
-    	// TODO
-    	System.out.println("annulerTours");
+    public void majBanquise( ArrayList<ArrayList<ImageView>> banquise ){
+   	
+    	for (int i = 0 ; i < 8 ; i++){
+    		for (int j = 0 ; j< 8 ; j++){
+    			if ( !((i%2 == 0) && (j == 7)) ) {
+    				switch(gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons){
+    					case 1:	banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_1POISSON));break;
+    					case 2:	banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_2POISSON));break;
+    					case 3:	banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_3POISSON));break;
+    				}
+    			}	
+    		}
+    	}
+
     }
     
-    @FXML private void demanderIndice(MouseEvent event){
-    	// TODO
-    	System.out.println("demanderIndice");
-    }
     
-    @FXML private void reinitiailiserTour(MouseEvent event){
-    	// TODO
-    	System.out.println("reinitiailiserTour");
-    }
     
-    @FXML private void validerTour(MouseEvent event){
-    	// TODO
-    	System.out.println("validerTour");
-    }
-    
-    @FXML private void refaireTours(MouseEvent event){
-    	// TODO
-    	System.out.println("refaireTours");
-    }
+    /****************************************/
+    /* 			roue boutons				*/
+    /****************************************/
+
     
     /**
      * gere la modification du volume de la musique
@@ -293,16 +314,152 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
        
     
     /************************************/
+    /*		gestion action banquise		*/
+    /************************************/
+    
+    @FXML private void annulerTours(MouseEvent event){
+    	// TODO
+    	System.out.println("annulerTours");
+    }
+    
+    @FXML private void demanderIndice(MouseEvent event){
+    	// TODO
+    	System.out.println("demanderIndice");
+    }
+    
+    @FXML private void reinitiailiserTour(MouseEvent event){
+    	// TODO
+    	System.out.println("reinitiailiserTour");
+    }
+    
+    @FXML private void validerTour(MouseEvent event){
+    	// TODO
+    	System.out.println("validerTour");
+    }
+    
+    @FXML private void refaireTours(MouseEvent event){
+    	// TODO
+    	System.out.println("refaireTours");
+    }
+    
+    
+    
+    
+    /************************************/
     /*		gestion banquise			*/
     /************************************/
     
-    ImageView[][] banq = new ImageView[8][8];
+    /**
+     * action à produire après un clic sur la banquise
+     * @param event evenement souris attendu : clic
+     */
+    public void anchorClick(MouseEvent event) {
+		Coordonnees xy = getXY(event.getX(), event.getY());
+		if (coordValide(xy)) {
+			System.out.println(xy);
+			Coordonnees[] ping = gestionnaireFxmlCourant.partie.pingouinsDeplacable();
+			
+			// phase placement a faire
+			
+			// sinon phase jeu
+			// if (xy.equals(ping[0]) ||xy.equals(ping[1]) || xy.equals(ping[2])
+			// || xy.equals(ping[3])){ }
+		}
+	}
+   
+    
+
+	/**
+	 * Transorme les coodonnées du clic dans l'anchorPane banquise en coordonnées exploitables par la classe Banquise
+	 * @param x coordonnées liées à la hauteur (0 sur le haut de la fenetre)
+	 * @param y coordonnées liées à la largeur (0 sur la gauche de la fenetre)
+	 * @return un couple de coordonnées correspondant aux indices des tableaux banquise
+	 */
+	public Coordonnees getXY(double x, double y) {
+		int i = 0, j = 0;
+		double h = 48 / 3;
+
+		if (((int) (y / h)) % 2 == 1) {
+			if (x >= 32) {
+				i = (int) ((y / h) / 2);
+				if (i % 2 == 1) {
+					j = (int) (x / 64);
+				} else {
+					j = (int) ((x - 32) / 64);
+				}
+			} else {
+				i = -1; 
+				j = -1;
+			}
+		} else {
+			j = (int) (x / 32);
+			double newX = x % 32;
+			double newY = y % 16;
+			i = (int) (y / h);
+			if (i % 4 == 0) {
+				if (j % 2 == 0) {					// 0.5
+					if (0.5 * newX - newY > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64);
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64) - 1;
+					}
+				} else {							// -0.5
+					if (-0.5 * newX - newY + 16 > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64);
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64);
+					}
+				}
+			} else if (i % 4 == 2) {
+				if (j % 2 == 0) {					// -0.5
+					if (-0.5 * newX - newY + 16 > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64) - 1;
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64);
+					}
+				} else {							// 0.5
+					if (0.5 * newX - newY > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64);
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64);
+					}
+				}
+			}
+		}
+		if ((i < 0) || (j < 0) || (i > 7) || (i % 2 == 0 && j >= 7)) {
+			i = -1;
+			j = -1;
+		}
+		return new Coordonnees(i, j);
+	}
+	
+	/**
+	 * vérifie que les coordonnées du couple xy sont des indices valides dans un tableau Banquise
+	 * @param xy un couple de coordonnées correspondant aux indices des tableaux banquise
+	 * @return vrai si le couple est valide, faux sinon.
+	 */
+	public boolean coordValide(Coordonnees xy) {
+		return (xy.x != -1) && (xy.y != -1);
+	}
+	
+	
+	
+	
+    ImageView[][] banq;
     ImageView[][] pingouins = new ImageView[8][8];
     int fromX;
     int fromY;
     int toX;
     int toY;
-    boolean EndOfTurn;
+    //boolean EndOfTurn;
     int largeurHexagone ;
     int hauteurHexagone ;
     Image image1PoissonJaune;
@@ -312,126 +469,18 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     Image image2PoissonsBlancs;
     Image image3PoissonsBlancs;
     
+    double hauteurbanquise =270 ;
+    double largeurbanquise=512 ;
     
-    @FXML ImageView shadowPingouin;
+    //@FXML ImageView shadowPingouin;
     @FXML AnchorPane banquise;
     
-    public void majBanquise(){
-    	int indice = 0;
-    	for (int i = 0 ; i < 8 ; i++){
-    		for (int j = 0 ; j< 8 ; j++){
-    			if (!( (i%2 == 1) && (j == 7) )){
-    				banq [i][j] = (ImageView) banquise.getChildren().get(indice);
-    				if (gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons==1){
-    					banq [i][j].setImage(image1PoissonBlanc);
-    				}else if (gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons==2){
-    					banq [i][j].setImage(image2PoissonsBlancs);
-    				}else if (gestionnaireFxmlCourant.partie.b.terrain[i][j].nbPoissons==3){
-    					banq [i][j].setImage(image3PoissonsBlancs);
-    				}
-    				indice++;
-    			}
-    		}
-    	}
-    }
-
-   double hauteurbanquise =270 ;
-   double largeurbanquise=512 ;
     
-   public Coordonnees getXY(double x , double y){
-   	int i = 0, j = 0;
-   	double h = 48/3;;
-   	
-   	if ( ((int)(y/h))%2 == 1 ){
-   		if(x>=32){
-	   		i = (int) ( (y/h) / 2 );
-	   		if (i%2 == 1){
-	   			j = (int) (x/64);
-	   			
-	   		}else{
-	   			j = (int) ( (x - 32) / 64    );
-	   		}
-   		}else{
-   			i=-1;
-   			j=-1;
-   		}
-   	}else{
-
-		j = (int) (x/32);
-   		double newX = x % 32;
-   		double newY = y % 16;
-   		i = (int) (y/h);
-   		 if (i%4 ==0){
-	   				
-   			if (j%2 == 0){
-				//0.5
-   				if (0.5*newX - newY > 0){
-   					i = (int) ( (y/h) / 2 ) -1 ;
-   					j = (int) (x/64) ;
-   				}else{
-   					i = (int) ( (y/h) / 2 ) ;
-   					j = (int) (x/64)-1;
-   				}
-   				
-			}else{
-				//-0.5
-				if (-0.5*newX - newY +16 > 0){
-   					i = (int) ( (y/h) / 2 ) -1;
-   					j = (int) (x/64);
-   				}else{
-   					i = (int) ( (y/h) / 2 )   ;
-   					j = (int) (x/64);
-   				}
-			}
-		}else if (i%4 ==2){	   				
-   			if (j%2 == 0){
-   			//-0.5
-				if (-0.5*newX - newY +16 > 0){
-   					i = (int) ( (y/h) / 2 ) -1;
-   					j = (int) (x/64) -1 ;
-   				}else{
-   					i = (int) ( (y/h) / 2 )   ;
-   					j = (int) (x/64);
-   				}
-			}else{
-				//0.5
-   				if (0.5*newX - newY > 0){
-   					i = (int) ( (y/h) / 2 ) -1 ;
-   					j = (int) (x/64) ;
-   				}else{
-   					i = (int) ( (y/h) / 2 ) ;
-   					j = (int) (x/64);
-   				}
-				
-			}
-		}
-   		 	
-   		 
-   	}
-
-   	if ((i<0)||(j<0)||(i>7)||(i%2==0 && j >=7)){
-   		i = -1;
-   		j=-1;
-   	}
-   	return new Coordonnees(i,j);
-   }
-    
-   public boolean coordValide(Coordonnees xy){
-	   return (xy.x!=-1)&&(xy.y!=-1);
-   }
    
-   public void anchorClick(MouseEvent event){
-	   Coordonnees xy = getXY(event.getX(),event.getY());
-	   if (coordValide(xy)){
-		   Coordonnees[] ping = gestionnaireFxmlCourant.partie.pingouinsDeplacable();
-		   if (xy.equals(ping[0]) ||xy.equals(ping[1]) || xy.equals(ping[2]) || xy.equals(ping[3])){
-			   
-		   }
-	   }
-   }
+	
    
-   
-  /* @FXML
+   /*
+   @FXML
    public void SelectPingouin(MouseEvent event){
    	if (EndOfTurn) {
    		shadowPingouin.setVisible(false);

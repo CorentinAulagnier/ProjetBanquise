@@ -19,6 +19,9 @@ public class Proprietes {
     public static final String IMAGE_MUSIQUEOFF_PATH = "/ressources/decor/r_music-off.png";
     
     public static final String IMAGE_JOUEUR_PATH = "/ressources/joueurs/"; /* + MODEJEU +COULEUR.png*/
+    public static final String IMAGE_TUILE_1POISSON = "/ressources/decor/j_bloc_1poisson.png";
+    public static final String IMAGE_TUILE_2POISSON = "/ressources/decor/j_bloc_2poisson.png";
+    public static final String IMAGE_TUILE_3POISSON = "/ressources/decor/j_bloc_3poisson.png";
     
     public final static int AUCUN = 0 ;
     public final static int JOUEUR = 1 ;

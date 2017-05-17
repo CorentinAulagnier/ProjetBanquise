@@ -648,6 +648,7 @@ public class Partie implements Serializable {
 					manger(pin.position);
 					b.getTuile(pin.position).enlevePingouin();
 					pin.actif = false;
+					joueurs[i].nbTuiles ++;
 				}
 			}
 		}

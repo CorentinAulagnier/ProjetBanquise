@@ -33,8 +33,11 @@ public class Multijoueur {
 
         public void run() {
         	try {
-				System.out.println("lancementServer");
-				PingouinServer.main(null);
+        		while (true) {
+    				System.out.println("lancementServer");
+    				PingouinServer.main(null);
+        		}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

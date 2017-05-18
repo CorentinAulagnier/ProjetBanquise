@@ -620,14 +620,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    // Trouve la ligne et la colonne de la "boite"
 	    int ligne = (int) (y / tuileHauteur);
 	    boolean lignePaire = ligne % 2 == 0;
-	    String parite = lignePaire ? "ligne paire\n" : "ligne impaire\n";
 	    
 	    int colonne;
 	    if (lignePaire) // ajoute l'indentation si ligne paire
 	    	colonne = (int) ((x - moitieLargeur) / tuileLargeur);
 	    else
 	    	colonne = (int) (x / tuileLargeur);
-	    Coordonnees box = new Coordonnees((int)(x / tuileLargeur),ligne);
 	    
 	    // Trouve la position relative a l'interieur de la "boite"
 	    double relY = y - (ligne * tuileHauteur);
@@ -636,10 +634,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	        relX = (x - (colonne * tuileLargeur)) - moitieLargeur;
 	    else
 	        relX = x - (colonne * tuileLargeur);
-	    String cote = "côté ";
+	    
 	    // Ajuste ligne et colonne si le point est au dessus des arretes superieurs gauche ou droite
 	    if (relY < (-gradient * relX) + c) { // cote gauche
-	    	cote += "gauche\n";
 	    	ligne--;
 	        if (!lignePaire) {
 	        	colonne--;
@@ -651,7 +648,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	        }
 
 	    } else if (relY < (gradient * relX) - c) { // cote droit
-	    	cote += "droit\n";
 	    	ligne--;
 	        if (lignePaire) colonne++;
 	        

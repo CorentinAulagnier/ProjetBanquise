@@ -427,14 +427,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					ImageView tuileCliquee = banquise.get(xy.x).get(xy.y);
 					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
 					
-					TranslateTransition tt = new TranslateTransition(Duration.millis(1), miniatureActive );
-					tt.setFromX( miniatureActive.getX() );
-					tt.setFromY( miniatureActive.getY() );
-					tt.setToX( coordArrivee.getX()-miniatureActive.getX() );
-					tt.setToY( coordArrivee.getY()-miniatureActive.getY() );
+					TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive );
+					tt.setToX( coordArrivee.getX() - miniatureActive.getX()  );
+					tt.setToY( coordArrivee.getY() - miniatureActive.getY() );
 					tt.play();
-					
-					
 			
 						/*
 						 * placeUneTuile( liste_Ecran.partie.b.terrain[

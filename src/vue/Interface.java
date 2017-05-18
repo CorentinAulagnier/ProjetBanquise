@@ -20,6 +20,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.awt.Dimension;
 
 public class Interface extends Application {   
     
@@ -29,8 +30,12 @@ public class Interface extends Application {
 
 	public static void creer(String[] args,Partie p,int h, int l) {
     	partie = p;
-    	hauteurFenetre = h*100 +30;
-    	largeurFenetre = l*100;
+    	
+    	Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+    	int height = (int)dimension.getHeight();
+    	
+    	hauteurFenetre = (height);
+    	largeurFenetre = (hauteurFenetre*8)/6;
         Application.launch(Interface.class, args);
     }
 	

@@ -414,7 +414,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		int jActif = partie.joueurActif;
 		int pingouinActif;
 		
-		printCoordonnees(event.getX(), event.getY());
+		//printCoordonnees(event.getX(), event.getY());
 		
 		if ((partie.getJoueurActif() instanceof Humain) && coordValide(xy)) {
 			
@@ -427,20 +427,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					ImageView tuileCliquee = banquise.get(xy.x).get(xy.y);
 					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
 					
-					TranslateTransition tt = new TranslateTransition(Duration.millis(500), miniatureActive );
-					System.out.println("From :"+miniatureActive.getBoundsInParent().getMinX()+","+miniatureActive.getBoundsInParent().getMinY() );
-					System.out.println("To :"+ coordArrivee.getX()+","+coordArrivee.getY());
-					
-					tt.setFromX(miniatureActive.getBoundsInParent().getMinX());
-					tt.setFromY(miniatureActive.getBoundsInParent().getMinY());
-					
-					tt.setToX(coordArrivee.getX() - miniatureActive.getBoundsInParent().getMinX());
-					tt.setToY(coordArrivee.getY() - miniatureActive.getBoundsInParent().getMinY());
+					TranslateTransition tt = new TranslateTransition(Duration.millis(1), miniatureActive );
+					tt.setFromX( miniatureActive.getX() );
+					tt.setFromY( miniatureActive.getY() );
+					tt.setToX( coordArrivee.getX()-miniatureActive.getX() );
+					tt.setToY( coordArrivee.getY()-miniatureActive.getY() );
 					tt.play();
 					
-					//miniatureActive.setX(coordArrivee.getX());
-					//miniatureActive.setY(coordArrivee.getY());
-					System.out.println("AT :"+miniatureActive.getBoundsInParent().getMinX()+","+miniatureActive.getBoundsInParent().getMinY()+"\n");
+					
 			
 						/*
 						 * placeUneTuile( liste_Ecran.partie.b.terrain[
@@ -509,14 +503,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 * @return
 	 */
 	public Point2D ancrePourPingouin(ImageView tuile) {
-		double xDansBanquise = tuile.getBoundsInParent().getMinX(); // + (tuile.getBoundsInParent().getWidth() / 2);
-		double yDansBanquise = tuile.getBoundsInParent().getMinY(); // + tuile.getBoundsInParent().getHeight();
-		System.out.println("To dans banquise :"+ xDansBanquise+","+yDansBanquise);
+		double xDansBanquise = tuile.getBoundsInParent().getMinX() + (tuile.getBoundsInParent().getWidth() / 3);
+		double yDansBanquise = tuile.getBoundsInParent().getMinY();
 		
 		double xDansEcran = anchorBanquise.getBoundsInParent().getMinX() + xDansBanquise;
 		double yDansEcran = anchorBanquise.getBoundsInParent().getMinY() + yDansBanquise;
 		
-		System.out.println("To dans ecran :"+ xDansEcran+","+yDansEcran);
 		return new Point2D(xDansEcran, yDansEcran);
 	}
 	

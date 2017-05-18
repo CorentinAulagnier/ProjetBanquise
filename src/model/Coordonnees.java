@@ -33,13 +33,40 @@ public class Coordonnees implements Serializable{
 		return "(" + x + ", " + y + ")";		
 	}
 
-	public boolean equals(Coordonnees c) {
-		return (this.x == c.x && this.y == c.y);
-	}
+
 	
 	public boolean estInvalide() {
 		return (this.x >= 0 && this.y >= 0);
 	}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.x;
+        hash = 73 * hash + this.y;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Coordonnees other = (Coordonnees) obj;
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        return true;
+    }
+
+    
+        
 	
 }
 

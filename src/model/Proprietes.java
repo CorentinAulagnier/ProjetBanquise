@@ -1,10 +1,6 @@
 package model;
 
 public class Proprietes {
-	//Chemin CSS : 
-	public static final String CSS = "vue/css/styleGeneral.css";
-
-	// Chemin des fichiers FXML
 	public static final String ECRAN_ACCUEIL = "Menu";
     public static final String ECRAN_ACCUEIL_FXML = "fxml/Menu.fxml";
     public static final String ECRAN_REGLES = "Regles";
@@ -16,17 +12,16 @@ public class Proprietes {
     public static final String ECRAN_VICTOIRE = "Victoire";
     public static final String ECRAN_VICTOIRE_FXML = "fxml/Victoire.fxml";
     
-    // Chemin des images
-    public static final String FAVICON_PATH = "/ressources/decor/favicon.png";
+    
     public static final String IMAGE_SONON_PATH = "/ressources/decor/r_son-on.png";
     public static final String IMAGE_SONOFF_PATH = "/ressources/decor/r_son-off.png";
     public static final String IMAGE_MUSIQUEON_PATH = "/ressources/decor/r_music-on.png";
     public static final String IMAGE_MUSIQUEOFF_PATH = "/ressources/decor/r_music-off.png";
+    
     public static final String IMAGE_JOUEUR_PATH = "/ressources/joueurs/"; /* + MODEJEU +COULEUR.png*/
     public static final String IMAGE_TUILE_1POISSON = "/ressources/decor/j_bloc_1poisson.png";
     public static final String IMAGE_TUILE_2POISSON = "/ressources/decor/j_bloc_2poisson.png";
     public static final String IMAGE_TUILE_3POISSON = "/ressources/decor/j_bloc_3poisson.png";
-    
     
     public final static int AUCUN = 0 ;
     public final static int JOUEUR = 1 ;

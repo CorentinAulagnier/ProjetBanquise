@@ -48,14 +48,6 @@
                 <Font name="Arial" size="18.0" fx:id="x2" />
               </font>
             </Label>
-            <HBox fx:id="reglette_j1" prefHeight="40.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
-              <children>
-                <ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-              </children>
-            </HBox>
             <GridPane fx:id="score_j1" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
               <children>
                 <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
@@ -83,6 +75,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
+            <HBox fx:id="reglette_j1" prefHeight="40.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
+              <children>
+                <ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+              </children>
+            </HBox>
           </children>
         </AnchorPane>
         <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">

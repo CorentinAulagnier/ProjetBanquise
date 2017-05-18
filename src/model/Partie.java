@@ -367,6 +367,16 @@ public class Partie implements Serializable {
 		}	
 		return p;
 	}
+	
+	/**
+	 * recupere je joueur actif.
+	 * 
+	 * @return le joueur actif.
+	 */
+	
+	public Joueur getJoueurActif() {
+		return joueurs[joueurActif] ;
+	}
 
 
 /*******************************************************************************************************/

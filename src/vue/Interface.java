@@ -31,7 +31,7 @@ public class Interface extends Application {
 	public static void creer(String[] args,Partie p,int h, int l) {
     	partie = p;
     	    	
-    	hauteurFenetre = h*100 + 30;
+    	hauteurFenetre = h*100+20;
     	largeurFenetre = l*100;
         Application.launch(Interface.class, args);
     }
@@ -76,6 +76,7 @@ public class Interface extends Application {
         primaryStage.setHeight(height);
         primaryStage.setWidth( (8*height)/6);
         primaryStage.centerOnScreen();
+
         
         
         primaryStage.widthProperty().addListener(new ChangeListener<Number>() {

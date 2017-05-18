@@ -1,18 +1,14 @@
-import model.*;
-import vue.*;
-import controleur.*;
-import java.awt.Dimension;
+import model.Partie;
+import vue.Interface;
 
 public class Launcher {
 	
 	public static void main(String[] args) {	
-
-		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		int hauteurBanquise = 6;
-		int largeurBanquise  = 8;
-		
+		//int hauteurBanquise = 6;
+		//int largeurBanquise  = 8;
+		//TODO gerer la mise en mémoire des informations de Proprietes depuis un fichier texte
 		Partie p = new Partie();
-		Interface.creer(args, p,hauteurBanquise,largeurBanquise);
+		Interface.creer(args, p, 600, 800);
 	}	
 
 }

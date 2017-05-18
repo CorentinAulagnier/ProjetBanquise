@@ -34,6 +34,7 @@ public class Interface extends Application {
         Application.launch(Interface.class, args);
     }
 	
+		
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -69,69 +70,69 @@ public class Interface extends Application {
         primaryStage.show();
         
         
+        
         primaryStage.widthProperty().addListener(new ChangeListener<Number>() {
         	@Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-              
-                double fract = (6*newSceneWidth.doubleValue())/8;
-                
-                if (primaryStage.getHeight() > fract ){ 
-                	
-                	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
-                      double ratio = (newSceneWidth.doubleValue() - largeurFenetre ) /2 ;
-                     // double decalage = oldSceneWidth.doubleValue() / largeurFenetre ;
-                      tt.setToX(ratio/*-decalage*/);
-                      
-                	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
-                	 st.setToX( newSceneWidth.doubleValue()/ largeurFenetre);
-	                ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
-	                TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
-	                double ratio2 = (fract-hauteurFenetre) /2 ;
-	                st2.setToY( fract / hauteurFenetre);
-	                tt2.setToY( ratio2 );
-	            
-	                ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
-	                pt.play();
-	                
-                }else{
-                	
-                	//tt.play();
-                }
-             	
+        		scaleWidth(primaryStage ,gestionnaireEcransFXML, newSceneWidth);         
         	}
         });
         
       primaryStage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-            	
-                double fract = (8*newSceneHeight.doubleValue())/6;
-                
-                if (primaryStage.getWidth() > fract ){ 
-                	
-                	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
-                    double ratio = (newSceneHeight.doubleValue() - hauteurFenetre ) /2 ;
-                    //double decalage = oldSceneHeight.doubleValue() / hauteurFenetre ;
-                    tt.setToY(ratio/*-decalage*/);
-                    
-                    
-                	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
-                	 st.setToY( newSceneHeight.doubleValue()/ hauteurFenetre);
-	                ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
-	                TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
-	                double ratio2 = (fract-largeurFenetre) /2 ;
-	                st2.setToX( fract / largeurFenetre);
-	                tt2.setToX(ratio2);
-	            
-	                ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
-	                pt.play();
-	                
-                }else{
-                	
-                	//tt.play();
-                }
+            	scaleHeight(primaryStage ,gestionnaireEcransFXML, newSceneHeight);
             }
         });
         
 	    }
+	
+	public void scaleWidth(Stage primaryStage ,GestionnaireEcransFxml gestionnaireEcransFXML, Number newSceneWidth){
+		  double fract = (6*newSceneWidth.doubleValue())/8;
+        
+        if (primaryStage.getHeight() > fract ){ 
+        	
+        	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+              double ratio = (newSceneWidth.doubleValue() - largeurFenetre ) /2 ;
+             // double decalage = oldSceneWidth.doubleValue() / largeurFenetre ;
+              tt.setToX(ratio/*-decalage*/);
+              
+        	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+        	 st.setToX( newSceneWidth.doubleValue()/ largeurFenetre);
+            ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+            TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+            double ratio2 = (fract-(hauteurFenetre)) /2 ;
+            st2.setToY( fract / (hauteurFenetre));
+            tt2.setToY( ratio2 );
+        
+            ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
+            pt.play();
+            
+        }
+	}
+	
+	public void scaleHeight(Stage primaryStage ,GestionnaireEcransFxml gestionnaireEcransFXML,Number newSceneHeight){
+		double fract = (8*newSceneHeight.doubleValue())/6;
+        
+        if (primaryStage.getWidth() > fract ){ 
+        	
+        	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+            double ratio = (newSceneHeight.doubleValue() - (hauteurFenetre) ) /2 ;
+            //double decalage = oldSceneHeight.doubleValue() / hauteurFenetre ;
+            tt.setToY(ratio/*-decalage*/);
+            
+            
+        	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+        	 st.setToY( newSceneHeight.doubleValue()/ (hauteurFenetre));
+            ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+            TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
+            double ratio2 = (fract-largeurFenetre) /2 ;
+            st2.setToX( fract / largeurFenetre);
+            tt2.setToX(ratio2);
+        
+            ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
+            pt.play();
+            
+        }
+	}
 	
 
 }

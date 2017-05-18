@@ -30,12 +30,9 @@ public class Interface extends Application {
 
 	public static void creer(String[] args,Partie p,int h, int l) {
     	partie = p;
-    	
-    	Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-    	int height = (int)dimension.getHeight();
-    	
-    	hauteurFenetre = (height);
-    	largeurFenetre = (hauteurFenetre*8)/6;
+    	    	
+    	hauteurFenetre = h*100 + 30;
+    	largeurFenetre = l*100;
         Application.launch(Interface.class, args);
     }
 	
@@ -67,16 +64,18 @@ public class Interface extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         
-        primaryStage.setHeight(hauteurFenetre);
-        primaryStage.setWidth(largeurFenetre);
         primaryStage.getIcons().add(new Image("ressources/decor/favicon.png"));
         primaryStage.setTitle("Pinguouins");
         primaryStage.setResizable(true);
         primaryStage.sizeToScene();
-        largeurFenetre = (int) primaryStage.getWidth();
-        hauteurFenetre = (int) primaryStage.getHeight();
         primaryStage.show();
-        
+        Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        double height = (3*dimension.getHeight())/4;
+        scaleWidth(primaryStage ,gestionnaireEcransFXML,(8*height)/6);  
+        scaleHeight(primaryStage ,gestionnaireEcransFXML, height);
+        primaryStage.setHeight(height);
+        primaryStage.setWidth( (8*height)/6);
+        primaryStage.centerOnScreen();
         
         
         primaryStage.widthProperty().addListener(new ChangeListener<Number>() {

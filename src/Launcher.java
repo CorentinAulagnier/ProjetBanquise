@@ -8,8 +8,8 @@ public class Launcher {
 	public static void main(String[] args) {	
 
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		int hauteurBanquise = (int)dimension.getHeight();
-		int largeurBanquise  = (int)dimension.getWidth();
+		int hauteurBanquise = 6;
+		int largeurBanquise  = 8;
 		
 		Partie p = new Partie();
 		Interface.creer(args, p,hauteurBanquise,largeurBanquise);

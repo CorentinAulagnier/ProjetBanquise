@@ -91,7 +91,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	   	
     	gestionnaireFxmlCourant.partie.joueurs=tableauDeJoueur;
     	
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	
     	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
@@ -136,7 +136,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
@@ -452,7 +452,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     
     @FXML
     private void quitter(MouseEvent event){
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
     	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
     }
@@ -463,7 +463,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
      */
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     

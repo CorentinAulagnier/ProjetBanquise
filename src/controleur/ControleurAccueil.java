@@ -55,7 +55,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void ouvrirNouvellePartie (MouseEvent event){
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
     	
     }
@@ -69,7 +69,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	// gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
     	// ou 
     	
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	File file = fileChooser.showOpenDialog(null);
     	String  path = file.getName();
         if (file != null) {
@@ -85,7 +85,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
@@ -95,10 +95,16 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      * gere l'ouverture ou la fermeture du menu roue
      * @param event evenement souris attendu : clic
      */
+   
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		optionOuvrirRoue(optionbox, roue);    		
+    		if (gestionnaireFxmlCourant.musique == false){
+        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
+        	}else{
+        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
+        	}    	
+    		optionOuvrirRoue(optionbox, roue) ;
     	}else{
     		optionFermerRoue(optionbox, roue);
     	}
@@ -129,7 +135,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void quitter(MouseEvent event){
-    	nettoyerRoue(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
     	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
     }

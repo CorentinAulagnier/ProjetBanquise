@@ -252,6 +252,8 @@ public class Partie implements Serializable {
 	public void charger() {
 		charger("no_name");
 	}
+
+/*******************************************************************************************************/
 	
 	/**
 	 * Charge la partie en parametre. (Sans Serializable)
@@ -299,8 +301,6 @@ public class Partie implements Serializable {
 			System.out.println("Erreur : recuperation de la partie");
 		}
 	}
-
-/*******************************************************************************************************/
 
 	/**
 	 * recupere les joueurs d'une partie.
@@ -368,13 +368,6 @@ public class Partie implements Serializable {
 		return p;
 	}
 
-	/**
-	 * Execute un tour de jeu
-	 */
-	
-	public void tourDeJeu() {
-		// TODO implement me
-	}
 
 /*******************************************************************************************************/
 

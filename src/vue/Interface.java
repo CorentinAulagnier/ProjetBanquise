@@ -12,6 +12,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -21,6 +22,8 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.awt.Dimension;
+import java.awt.Container;
+
 
 public class Interface extends Application {   
     
@@ -30,7 +33,11 @@ public class Interface extends Application {
 
 	public static void creer(String[] args,Partie p,int h, int l) {
     	partie = p;
+    	
+    	Container c = new Container();
+        java.awt.Insets i = c.getInsets();
     	    	
+
     	hauteurFenetre = h*100+20;
     	largeurFenetre = l*100;
         Application.launch(Interface.class, args);

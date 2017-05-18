@@ -25,10 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import model.Coordonnees;
-import model.CoupleGenerique;
 import model.Humain;
-import model.IA;
-import model.MoteurConsole;
 import model.Partie;
 
 public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
@@ -73,7 +70,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t81,t82,t83,t84,t85,t86,t87,t88;
 
     Coordonnees place_pingouin_encours;
-    Coordonnees xy = new Coordonnees();
+   
     Coordonnees depart = new Coordonnees();
     Coordonnees arrivee = new Coordonnees();
     boolean first_clic = true;
@@ -407,44 +404,57 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     /************************************/
     
     /**
-     * action à produire après un clic sur la banquise
+     * action à produire après un clic sur la banquise, utile et dispobnible uniquement pour un joueur humain
      * @param event evenement souris attendu : clic
      */
 	public void anchorClick(MouseEvent event) {
-		
-		xy = getXY(event.getX(), event.getY());
 		Partie partie = liste_Ecran.partie;
+		 Coordonnees xy = getXY(event.getX(), event.getY());
+		
 		int jActif = partie.joueurActif;
-		if (coordValide(xy)) {
-			ImageView iv = banquise.get(xy.x).get(xy.y);
-			System.out.println("coordonnes clic "+event.getX()+","+ event.getY());
-			System.out.println("coordonnes bas tuile "+centreTuile(iv).getX()+","+ centreTuile(iv).getY());
-			// phase placement
+		int pingouinActif;
+		
+		printCoordonnees(event.getX(), event.getY());
+		
+		if ((partie.getJoueurActif() instanceof Humain) && coordValide(xy)) {
+			
+			
 			if (phasePlacement) {
-
-				if (partie.isPlacementValide(xy) 
-						&& (partie.joueurs[jActif] instanceof Humain)) {
+				
+				if ( partie.isPlacementValide(xy) ) {// si bloc innoccupé de 1poisson
+					pingouinActif = partie.numPingouinAPlacer();
+					ImageView miniatureActive = reglettes.get(jActif).get(pingouinActif);
+					ImageView tuileCliquee = banquise.get(xy.x).get(xy.y);
+					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
 					
-					// si tuile un poisson et innocuppé
-					if (first_clic) {// pas de pingouin placé pendant ce tour
-						//this.banquise.get(xy.x).get(xy.y).setImage( new Image(liste_Ecran.partie.joueurs[jActif].cheminMiniature));
-						TranslateTransition tt = new TranslateTransition(Duration.millis(500), reglettes.get(jActif).get(partie.numPingouinAPlacer()));
-						tt.setToX(centreTuile(iv).getX());
-						tt.setToY(centreTuile(iv).getY());
-						tt.play();
-						first_clic = false;
+					TranslateTransition tt = new TranslateTransition(Duration.millis(500), miniatureActive );
+					System.out.println("From :"+miniatureActive.getBoundsInParent().getMinX()+","+miniatureActive.getBoundsInParent().getMinY() );
+					System.out.println("To :"+ coordArrivee.getX()+","+coordArrivee.getY());
+					
+					tt.setFromX(miniatureActive.getBoundsInParent().getMinX());
+					tt.setFromY(miniatureActive.getBoundsInParent().getMinY());
+					
+					tt.setToX(coordArrivee.getX() - miniatureActive.getBoundsInParent().getMinX());
+					tt.setToY(coordArrivee.getY() - miniatureActive.getBoundsInParent().getMinY());
+					tt.play();
+					
+					//miniatureActive.setX(coordArrivee.getX());
+					//miniatureActive.setY(coordArrivee.getY());
+					System.out.println("AT :"+miniatureActive.getBoundsInParent().getMinX()+","+miniatureActive.getBoundsInParent().getMinY()+"\n");
+			
+						/*
+						 * placeUneTuile( liste_Ecran.partie.b.terrain[
+						 * place_pingouin_encours.x][place_pingouin_encours.
+						 * y].nbPoissons, place_pingouin_encours.x,
+						 * place_pingouin_encours.y); Image img = new Image(
+						 * this.liste_Ecran.partie.joueurs[liste_Ecran.
+						 * partie.joueurActif].cheminMiniature);
+						 * this.banquise.get(xy.x).get(xy.y).setImage(img);
+						 * place_pingouin_encours.x = xy.x;
+						 * place_pingouin_encours.y = xy.y;
+						 */
 
-					} else {
-						/*placeUneTuile(
-								liste_Ecran.partie.b.terrain[place_pingouin_encours.x][place_pingouin_encours.y].nbPoissons,
-								place_pingouin_encours.x, place_pingouin_encours.y);
-						Image img = new Image(
-								this.liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif].cheminMiniature);
-						this.banquise.get(xy.x).get(xy.y).setImage(img);
-						place_pingouin_encours.x = xy.x;
-						place_pingouin_encours.y = xy.y;*/
-
-					}
+					
 					place_pingouin_encours = xy;
 					// deja place un pingouin avant de valider
 
@@ -454,16 +464,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 			// phase jeu
 			else if (phaseJeu) {
-				
-				
+
 				if (first_clic && partie.appartientPingouin(xy) == partie.joueurActif) {
 					depart = xy;
 					first_clic = false;
-					
-				} else {				
-					if (partie.isDeplacementValide(depart, xy)) { 
+
+				} else {
+					if (partie.isDeplacementValide(depart, xy)) {
 						arrivee = xy;
-						
+
 					} else if (partie.appartientPingouin(xy) == partie.joueurActif) {
 						depart = xy;
 					}
@@ -477,31 +486,57 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				// || xy.equals(ping[3])){ }
 			}
 
-
 		}
-		/* Mise a jour de l'activation du bouton fin de tour
+
+		/*
+		 * Mise a jour de l'activation du bouton fin de tour
 		 * 
-		 * phasePlacement && !place_pingouin_encours.estInvalide()
-		 * 	||
-		 * phaseJeu && !depart.estInvalide() && !arrivee.estInvalide()
+		 * phasePlacement && !place_pingouin_encours.estInvalide() || phaseJeu
+		 * && !depart.estInvalide() && !arrivee.estInvalide()
 		 * 
 		 */
+		/*
+		 * tour suivant => pingouin place = -1 -1
+		 */
 	}
-    
-	public Point2D centreTuile(ImageView iv){
-		return new Point2D(iv.getBoundsInParent().getMinX() + (iv.getBoundsInParent().getWidth()/2),iv.getBoundsInParent().getMinY() + + iv.getBoundsInParent().getHeight());
-	}
-	/*
-	 * tour suivant => pingouin place = -1 -1
-	 */
+	
+	
 
 	/**
-	 * Transorme les coodonnées du clic dans l'anchorPane banquise en coordonnées exploitables par la classe Banquise
-	 * @param x coordonnées liées à la hauteur (0 sur le haut de la fenetre)
-	 * @param y coordonnées liées à la largeur (0 sur la gauche de la fenetre)
-	 * @return un couple de coordonnées correspondant aux indices des tableaux banquise
+	 * Rend les coordonées pour ancrer un pingouin audessus de la tuile selectionnée 
+	 * 
+	 * @param tuile
+	 * @return
+	 */
+	public Point2D ancrePourPingouin(ImageView tuile) {
+		double xDansBanquise = tuile.getBoundsInParent().getMinX(); // + (tuile.getBoundsInParent().getWidth() / 2);
+		double yDansBanquise = tuile.getBoundsInParent().getMinY(); // + tuile.getBoundsInParent().getHeight();
+		System.out.println("To dans banquise :"+ xDansBanquise+","+yDansBanquise);
+		
+		double xDansEcran = anchorBanquise.getBoundsInParent().getMinX() + xDansBanquise;
+		double yDansEcran = anchorBanquise.getBoundsInParent().getMinY() + yDansBanquise;
+		
+		System.out.println("To dans ecran :"+ xDansEcran+","+yDansEcran);
+		return new Point2D(xDansEcran, yDansEcran);
+	}
+	
+
+
+	/**
+	 * Transorme les coodonnées du clic dans l'anchorPane banquise en
+	 * coordonnées exploitables par la classe Banquise
+	 * 
+	 * @param x
+	 *            coordonnées liées à la hauteur (0 sur le haut de la fenetre)
+	 * @param y
+	 *            coordonnées liées à la largeur (0 sur la gauche de la fenetre)
+	 * @return un couple de coordonnées correspondant aux indices des tableaux
+	 *         banquise
 	 */
 	public Coordonnees getXY(double x, double y) {
+		//int hauteurTuile = 48;
+		//int largeurTuile = 64;
+		
 		int i = 0, j = 0;
 		double h = 48 / 3;
 
@@ -514,7 +549,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					j = (int) ((x - 32) / 64);
 				}
 			} else {
-				i = -1; 
+				i = -1;
 				j = -1;
 			}
 		} else {
@@ -523,7 +558,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			double newY = y % 16;
 			i = (int) (y / h);
 			if (i % 4 == 0) {
-				if (j % 2 == 0) {					// 0.5
+				if (j % 2 == 0) { // 0.5
 					if (0.5 * newX - newY > 0) {
 						i = (int) ((y / h) / 2) - 1;
 						j = (int) (x / 64);
@@ -531,7 +566,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						i = (int) ((y / h) / 2);
 						j = (int) (x / 64) - 1;
 					}
-				} else {							// -0.5
+				} else { // -0.5
 					if (-0.5 * newX - newY + 16 > 0) {
 						i = (int) ((y / h) / 2) - 1;
 						j = (int) (x / 64);
@@ -541,7 +576,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					}
 				}
 			} else if (i % 4 == 2) {
-				if (j % 2 == 0) {					// -0.5
+				if (j % 2 == 0) { // -0.5
 					if (-0.5 * newX - newY + 16 > 0) {
 						i = (int) ((y / h) / 2) - 1;
 						j = (int) (x / 64) - 1;
@@ -549,7 +584,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						i = (int) ((y / h) / 2);
 						j = (int) (x / 64);
 					}
-				} else {							// 0.5
+				} else { // 0.5
 					if (0.5 * newX - newY > 0) {
 						i = (int) ((y / h) / 2) - 1;
 						j = (int) (x / 64);
@@ -566,6 +601,44 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
 		return new Coordonnees(i, j);
 	}
+	
+	
+	public void printCoordonnees(double x, double y) { //trouve sur StackOverflow
+		//Valeurs
+		double tuileHauteur = 48*(2/3);
+		double tuileLargeur = 64;
+		double c = 48/3;
+		double moitieLargeur = tuileLargeur/2;
+		double gradient = c/moitieLargeur;
+		
+	    // Trouve la ligne et la colonne de la "boite"
+	    int ligne = (int) (y / tuileHauteur);
+	    boolean ligneImpaire = ligne % 2 == 1;
+	    int colonne;
+	    if (ligneImpaire) // ajoute l'indentation si ligne impaire
+	    	colonne = (int) ((x - moitieLargeur) / tuileLargeur);
+	    else
+	    	colonne = (int) (x / tuileLargeur);
+	    
+	    // Trouve la position relative a l'interieur de la "boite"
+	    double relY = y - (ligne * tuileHauteur);
+	    double relX;
+	    if (ligneImpaire) // ajoute l'indentation si ligne impaire
+	        relX = (x - (colonne * tuileLargeur)) - moitieLargeur;
+	    else
+	        relX = x - (colonne * tuileLargeur);
+	    
+	    // Ajuste ligne et colonne si le point est au dessus des arretes superieurs gauche ou droite
+	    if (relY < (-gradient * relX) + c) { // cote gauche
+	    	ligne--;
+	        if (!ligneImpaire) colonne--;
+	    } else if (relY < (gradient * relX) - c) { // cote droit
+	    	ligne--;
+	        if (ligneImpaire) colonne++;
+	    }
+	    System.out.println("new calcul dans un tableau : "+ new Coordonnees(colonne,ligne));  
+	}
+	
 	
 	/**
 	 * vérifie que les coordonnées du couple xy sont des indices valides dans un tableau Banquise

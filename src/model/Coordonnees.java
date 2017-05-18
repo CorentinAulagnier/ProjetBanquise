@@ -37,5 +37,9 @@ public class Coordonnees implements Serializable{
 		return (this.x == c.x && this.y == c.y);
 	}
 	
+	public boolean estInvalide() {
+		return (this.x >= 0 && this.y >= 0);
+	}
+	
 }
 

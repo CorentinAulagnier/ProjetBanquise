@@ -43,7 +43,7 @@ public class LauncherConsole extends MoteurConsole {
 		for(int numPingouin = 0; numPingouin<nbPingouinsMax; numPingouin++) {
 			for(int numJoueur = 0; numJoueur<p.nbJoueurs; numJoueur++) {
 				Coordonnees c = getPlacementPingouin(numJoueur, numPingouin, p);
-				setPlacementPingouin(c, p, numJoueur, numPingouin);
+				p.setPlacementPingouin(c, numJoueur, numPingouin);
 				afficherPlateau(p);
 			}
 		}

@@ -179,13 +179,6 @@ public abstract class MoteurConsole {
 		}
 	}
 	
-
-	public static void setPlacementPingouin(Coordonnees c, Partie p, int numJoueur, int numPingouin) {
-		p.b.getTuile(c).mettrePingouin();
-		p.joueurs[numJoueur].myPingouins[numPingouin] = new Pingouin(c);
-		System.out.println("Le pingouin " + String.valueOf(numPingouin)+ " de " + p.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
-	}
-	
 /* ----------------------------------- PHASE JEU ----------------------------------- */
 	
 	

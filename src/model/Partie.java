@@ -404,8 +404,23 @@ public class Partie implements Serializable {
 	 */
 	
 	public boolean isDeplacementValide(CoupleGenerique<Coordonnees,Coordonnees> cc) {
-		ArrayList<ArrayList<Coordonnees>> al = b.deplacementPossible(cc.e1);
-		return appartient(cc.e2, al);
+			return isDeplacementValide(cc.e1, cc.e2);
+	}
+	
+	/**
+	 * Verifie que l'on peut deplacer un pingouin a cette case
+	 * 
+	 * @param c1
+	 * 			Les coordonnees de depart
+	 * @param c2
+	 * 			Les coordonnees d'arrive
+	 * 
+	 * @return si on peut placer un pingouin
+	 */
+	
+	public boolean isDeplacementValide(Coordonnees c1, Coordonnees c2) {
+		ArrayList<ArrayList<Coordonnees>> al = b.deplacementPossible(c1);
+		return appartient(c2, al);
 	}
 	
 	/**
@@ -505,6 +520,12 @@ public class Partie implements Serializable {
 	
 
 /*******************************************************************************************************/
+	
+	public void setPlacementPingouin(Coordonnees c, int numJoueur, int numPingouin) {
+		this.b.getTuile(c).mettrePingouin();
+		this.joueurs[numJoueur].myPingouins[numPingouin] = new Pingouin(c);
+		System.out.println("Le pingouin " + String.valueOf(numPingouin)+ " de " + this.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
+	}
 
 	/**
 	 * Le joueur actif recupere les poissons de la case c.

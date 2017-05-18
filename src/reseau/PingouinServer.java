@@ -92,7 +92,7 @@ public class PingouinServer extends MoteurConsole{
 				                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+p.joueurs[num].nom);
 				                    }
 								}
-	                    		setPlacementPingouin(c, p, p.joueurActif, numPingouin);
+	                    		p.setPlacementPingouin(c, p.joueurActif, numPingouin);
 								p.verifierPingouinActif();
 								
 								//envoie du placement à tout les joueurs

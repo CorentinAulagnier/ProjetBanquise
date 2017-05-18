@@ -25,8 +25,11 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import model.Coordonnees;
+import model.CoupleGenerique;
 import model.Humain;
 import model.IA;
+import model.MoteurConsole;
+import model.Partie;
 
 public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
 	
@@ -70,7 +73,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t81,t82,t83,t84,t85,t86,t87,t88;
 
     Coordonnees place_pingouin_encours;
-    
+    Coordonnees xy = new Coordonnees();
+    Coordonnees depart = new Coordonnees();
+    Coordonnees arrivee = new Coordonnees();
+    boolean first_clic = true;
+    boolean phaseJeu = false;
+    boolean phasePlacement = true;
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -279,7 +287,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void sauvegarder(MouseEvent event){
-    	nettoyerRoueHorizontale(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	System.out.println("sauvegarder");
     	File file = fileChooser.showOpenDialog(null);
     	String  path = file.getName();
@@ -296,7 +304,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
-    	nettoyerRoueHorizontale(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
@@ -306,7 +314,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){
-    	nettoyerRoueHorizontale(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
@@ -317,7 +325,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void quitter(MouseEvent event){
-    	nettoyerRoueHorizontale(optionbox, roue);
+    	nettoyerMenu(optionbox, roue);
     	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
     	alert_quitter(liste_Ecran, "Bye bye ?", contenu, "Partir", "Annuler" , "" );
     }
@@ -330,9 +338,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		optionWheelOpen(optionbox, roue);    		
+    		optionOuvrirRoue(optionbox, roue);    		
     	}else{
-    		optionWheelClose(optionbox, roue);
+    		optionFermerRoue(optionbox, roue);
     	}
     }
        
@@ -343,6 +351,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
     @FXML private void annulerTours(MouseEvent event){
     	// TODO
+		first_clic = true;
     	System.out.println("annulerTours");
     }
     
@@ -357,9 +366,32 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
     
     @FXML private void validerTour(MouseEvent event){
-    	// TODO
+		Partie partie = liste_Ecran.partie;
+		
+    	if (phasePlacement) {
+			partie.setPlacementPingouin(place_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
+			phasePlacement = partie.placementPingouinsFini();
+			if (!phasePlacement) {
+				phaseJeu = true;
+			}
+			
+		}
+		// phase jeu
+		else if (phaseJeu) {
+	   
+			partie.deplacement(depart, arrivee);
+	    	depart = new Coordonnees();
+	    	phaseJeu = partie.estPartieFini();
+		}
+    	
+    	arrivee = new Coordonnees();
+    	first_clic = true;
     	System.out.println("validerTour");
-    	liste_Ecran.partie.majProchainJoueur();
+    	partie.majProchainJoueur();
+    
+        
+        
+        
     }
     
     @FXML private void refaireTours(MouseEvent event){
@@ -380,27 +412,28 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
 	public void anchorClick(MouseEvent event) {
 		
-		Coordonnees xy = getXY(event.getX(), event.getY());
-		int jActif = liste_Ecran.partie.joueurActif;
+		xy = getXY(event.getX(), event.getY());
+		Partie partie = liste_Ecran.partie;
+		int jActif = partie.joueurActif;
 		if (coordValide(xy)) {
 			ImageView iv = banquise.get(xy.x).get(xy.y);
 			System.out.println("coordonnes clic "+event.getX()+","+ event.getY());
 			System.out.println("coordonnes bas tuile "+centreTuile(iv).getX()+","+ centreTuile(iv).getY());
 			// phase placement
-			if (!liste_Ecran.partie.placementPingouinsFini()) {
+			if (phasePlacement) {
 
-				if (liste_Ecran.partie.isPlacementValide(xy) 
-						&& (Humain.class).equals((liste_Ecran.partie.joueurs[jActif]).getClass())) { 
-					// si tuile un poisson et innocuppé
+				if (partie.isPlacementValide(xy) 
+						&& (partie.joueurs[jActif] instanceof Humain)) {
 					
-					if (place_pingouin_encours.x == -1) {// pas de pingouin placé pendant ce tour
-						/*this.banquise.get(xy.x).get(xy.y).setImage( new Image(liste_Ecran.partie.joueurs[jActif].cheminMiniature));
-						place_pingouin_encours.x = xy.x;
-						place_pingouin_encours.y = xy.y;*/
-						TranslateTransition tt = new TranslateTransition(Duration.millis(500), reglettes.get(jActif).get(0));
+					// si tuile un poisson et innocuppé
+					if (first_clic) {// pas de pingouin placé pendant ce tour
+						//this.banquise.get(xy.x).get(xy.y).setImage( new Image(liste_Ecran.partie.joueurs[jActif].cheminMiniature));
+						TranslateTransition tt = new TranslateTransition(Duration.millis(500), reglettes.get(jActif).get(partie.numPingouinAPlacer()));
 						tt.setToX(centreTuile(iv).getX());
 						tt.setToY(centreTuile(iv).getY());
 						tt.play();
+						first_clic = false;
+
 					} else {
 						/*placeUneTuile(
 								liste_Ecran.partie.b.terrain[place_pingouin_encours.x][place_pingouin_encours.y].nbPoissons,
@@ -410,7 +443,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						this.banquise.get(xy.x).get(xy.y).setImage(img);
 						place_pingouin_encours.x = xy.x;
 						place_pingouin_encours.y = xy.y;*/
+
 					}
+					place_pingouin_encours = xy;
 					// deja place un pingouin avant de valider
 
 					// retire une miniature de sa reglette = unset
@@ -418,7 +453,18 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}
 			}
 			// phase jeu
-			else {
+			else if (phaseJeu) {
+				
+				if (first_clic) {
+					depart = xy;
+					first_clic = false;
+					
+				} else {				
+					if (partie.isDeplacementValide(depart, xy) 
+							&& (partie.joueurs[jActif] instanceof Humain)) { 
+						arrivee = xy;
+					}
+				}
 				// Coordonnees[] pingouins =
 				// liste_Ecran.partie.pingouinsDeplacable();
 				// TODO
@@ -428,7 +474,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				// || xy.equals(ping[3])){ }
 			}
 
+
 		}
+		/* Mise a jour de l'activation du bouton fin de tour
+		 * 
+		 * phasePlacement && !place_pingouin_encours.estInvalide()
+		 * 	||
+		 * phaseJeu && !depart.estInvalide() && !arrivee.estInvalide()
+		 * 
+		 */
 	}
     
 	public Point2D centreTuile(ImageView iv){

@@ -29,9 +29,17 @@ import model.Humain;
 import model.Partie;
 
 public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
-	
+	/**
+	 * Noeud FXML associe au controleur
+	 */
 	GestionnaireEcransFxml liste_Ecran;
+	Coordonnees coord_pingouin_encours;
+	boolean phaseJeu, phasePlacement, validerTour;
+    //Coordonnees depart = new Coordonnees();
+    //Coordonnees arrivee = new Coordonnees();
 	
+	
+	//boutons d'actions
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
     @FXML private Text label_tourDe;
     @FXML private HBox box_boutons_tour;
@@ -47,14 +55,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
     @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
     @FXML private Label nom_j1, nom_j2, nom_j3, nom_j4;
+    @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
+    @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
     ArrayList<ArrayList<ImageView>> reglettes;
     ArrayList<ImageView> reglette_j1, reglette_j2, reglette_j3, reglette_j4;
     @FXML private ImageView reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4,
     						reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4,
     						reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4,
     						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
-    @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
-    @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
 
     //banquise
     @FXML AnchorPane anchorBanquise;
@@ -69,13 +77,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t71,t72,t73,t74,t75,t76,t77,
     						t81,t82,t83,t84,t85,t86,t87,t88;
 
-    Coordonnees place_pingouin_encours;
-   
-    Coordonnees depart = new Coordonnees();
-    Coordonnees arrivee = new Coordonnees();
-    //boolean first_clic = true;
-    boolean phaseJeu = false;
-    boolean phasePlacement = true;
+
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -99,7 +101,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
     	
-    	place_pingouin_encours = new Coordonnees(-1,-1);	
+    	coord_pingouin_encours = new Coordonnees(-1,-1);
+    	phasePlacement = true;
+    	phaseJeu = false;
+    	validerTour = false;
     }
     
     
@@ -212,7 +217,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	}
 
     	//maj de l'affichage la banquise
-    	majBanquise(banquise);
+    	majBanquise();
     	
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
     	if( liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif] instanceof Humain){
@@ -226,7 +231,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	}
     } 
     
-    public void majBanquise( ArrayList<ArrayList<ImageView>> banquise ){
+    /**
+     * raffraichit la banquise
+     * @param banquise 
+     */
+    public void majBanquise(){
    	
     	for (int i = 0 ; i < 8 ; i++){
     		for (int j = 0 ; j< 8 ; j++){
@@ -235,7 +244,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     			}	
     		}
     	}
-
     }
     
     
@@ -371,27 +379,37 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Partie partie = liste_Ecran.partie;
 		
     	if (phasePlacement) {
-			partie.setPlacementPingouin(place_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
-			phasePlacement = partie.placementPingouinsFini();
+			partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
+			phasePlacement = !partie.placementPingouinsFini();
+			System.out.println("placement? "+phasePlacement);
 			if (!phasePlacement) {
 				phaseJeu = true;
 			}
+			System.out.println("placement? "+phasePlacement);
 		}
-		// phase jeu
 		else if (phaseJeu) {
 	   
-			partie.deplacement(depart, arrivee);
-	    	depart = new Coordonnees();
-	    	phaseJeu = partie.estPartieFini();
+			//partie.deplacement(depart, arrivee);
+	    	//depart = new Coordonnees();
+	    	//phaseJeu = partie.estPartieFini();
 		}
+    	System.out.println("placement? "+phasePlacement);
+    	//arrivee = new Coordonnees();
     	
-    	arrivee = new Coordonnees();
-    	//first_clic = true;
-    	System.out.println("validerTour");
     	partie.majProchainJoueur();
-    
-        
-        
+    	coord_pingouin_encours = new Coordonnees(-1,-1);
+    	
+    	
+		/*
+		 * Mise a jour de l'activation du bouton fin de tour
+		 * 
+		 * phasePlacement && !coord_pingouin_encours.estInvalide() || phaseJeu
+		 * && !depart.estInvalide() && !arrivee.estInvalide()
+		 * 
+		 */
+		/*
+		 * tour suivant => pingouin place = -1 -1
+		 */
         
     }
     
@@ -416,17 +434,24 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		int jActif = partie.joueurActif;
 		int pingouinAplacer;
 		
-		Coordonnees xy = getXY(event.getX(), event.getY());
-		place_pingouin_encours = new Coordonnees(-1,-1);
+		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
+		coord_pingouin_encours = new Coordonnees(-1,-1);
 		
-		if ((partie.getJoueurActif() instanceof Humain) && coordValide(xy)) {
+		System.out.println("Joueur actif est le "+jActif+" cad "+partie.getJoueurActif());
+		
+		
+		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			
 			if (phasePlacement) {
-				
-				if ( partie.isPlacementValide(xy) ) {// si bloc innoccupé de 1poisson
+				System.out.println("phase placement");
+				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
 					pingouinAplacer = partie.numPingouinAPlacer();
+					
+					System.out.println("phase de placement, clic valide, joueur "+jActif+" accede a "+reglettes.get(jActif).get(pingouinAplacer));
+					System.out.println(" cad le "+pingouinAplacer+"eme pingouin a  placer");
+					
 					ImageView miniatureActive = reglettes.get(jActif).get(pingouinAplacer);
-					ImageView tuileCliquee = banquise.get(xy.x).get(xy.y);
+					ImageView tuileCliquee = banquise.get(indicesBanquise.x).get(indicesBanquise.y);
 					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
 					
 					TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive );
@@ -434,13 +459,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					tt.setToY( coordArrivee.getY() - miniatureActive.getY() );
 					tt.play();
 					
-					place_pingouin_encours = xy;
+					coord_pingouin_encours = indicesBanquise;
 				}
 			}
-			// phase jeu
 			else if (phaseJeu) {
-
-				if ( partie.appartientPingouin(xy) == partie.joueurActif) {
+				// TODO
+				/*if ( partie.appartientPingouin(xy) == partie.joueurActif) {
 					depart = xy;
 					//first_clic = false;
 
@@ -451,32 +475,17 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					} else if (partie.appartientPingouin(xy) == partie.joueurActif) {
 						depart = xy;
 					}
-				}
+				}*/
+				
 				// Coordonnees[] pingouins =
 				// liste_Ecran.partie.pingouinsDeplacable();
-				// TODO
-
-				// if (xy.equals(ping[0]) ||xy.equals(ping[1]) ||
-				// xy.equals(ping[2])
-				// || xy.equals(ping[3])){ }
 			}
-
 		}
 
-		/*
-		 * Mise a jour de l'activation du bouton fin de tour
-		 * 
-		 * phasePlacement && !place_pingouin_encours.estInvalide() || phaseJeu
-		 * && !depart.estInvalide() && !arrivee.estInvalide()
-		 * 
-		 */
-		/*
-		 * tour suivant => pingouin place = -1 -1
-		 */
+
 	}
 	
 	
-
 	/**
 	 * Rend les coordonées pour ancrer un pingouin audessus de la tuile selectionnée 
 	 * 
@@ -493,7 +502,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		return new Point2D(xDansEcran, yDansEcran);
 	}
 	
-
 
 	/**
 	 * Transorme les coodonnées du clic dans l'anchorPane banquise en
@@ -623,9 +631,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	}
 	
 	
-	
 
-	
 	/*
     ImageView[][] banq;
     ImageView[][] pingouins = new ImageView[8][8];

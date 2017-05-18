@@ -472,10 +472,12 @@ public class Banquise implements Serializable {
 	public ArrayList<Coordonnees> construireChemin(int axe, Coordonnees dep) {
 		ArrayList<Coordonnees> chemin = new ArrayList<>();
 		Coordonnees next = getVoisin(axe, dep);
-		while(next!=null && getTuile(next).estAccessible()) {
+		
+		while (next!=null && getTuile(next)!=null && getTuile(next).estAccessible()) {
 			chemin.add(next);
 			next = getVoisin(axe, next);
 		}
+
 		return chemin;
 	}
 	

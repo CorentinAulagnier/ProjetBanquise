@@ -67,6 +67,9 @@ public class Interface extends Application {
         primaryStage.getIcons().add(new Image("ressources/decor/favicon.png"));
         primaryStage.setTitle("Pinguouins");
         primaryStage.setResizable(true);
+        primaryStage.sizeToScene();
+        largeurFenetre = (int) primaryStage.getWidth();
+        hauteurFenetre = (int) primaryStage.getHeight();
         primaryStage.show();
         
         
@@ -88,7 +91,7 @@ public class Interface extends Application {
 	public void scaleWidth(Stage primaryStage ,GestionnaireEcransFxml gestionnaireEcransFXML, Number newSceneWidth){
 		  double fract = (6*newSceneWidth.doubleValue())/8;
         
-        if (primaryStage.getHeight() > fract ){ 
+      // (primaryStage.getHeight() > fract ){ 
         	
         	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
               double ratio = (newSceneWidth.doubleValue() - largeurFenetre ) /2 ;
@@ -97,22 +100,22 @@ public class Interface extends Application {
               
         	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
         	 st.setToX( newSceneWidth.doubleValue()/ largeurFenetre);
-            ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+           /* ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
             TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
             double ratio2 = (fract-(hauteurFenetre)) /2 ;
             st2.setToY( fract / (hauteurFenetre));
-            tt2.setToY( ratio2 );
+            tt2.setToY( ratio2 );*/
         
-            ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
+            ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt/*, st2, tt2*/);
             pt.play();
             
-        }
+       // }
 	}
 	
 	public void scaleHeight(Stage primaryStage ,GestionnaireEcransFxml gestionnaireEcransFXML,Number newSceneHeight){
 		double fract = (8*newSceneHeight.doubleValue())/6;
         
-        if (primaryStage.getWidth() > fract ){ 
+      //  if (primaryStage.getWidth() > fract ){ 
         	
         	TranslateTransition tt = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
             double ratio = (newSceneHeight.doubleValue() - (hauteurFenetre) ) /2 ;
@@ -121,17 +124,17 @@ public class Interface extends Application {
             
             
         	ScaleTransition st = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
-        	 st.setToY( newSceneHeight.doubleValue()/ (hauteurFenetre));
-            ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
+        	st.setToY( newSceneHeight.doubleValue()/ (hauteurFenetre));
+            /*ScaleTransition st2 = new ScaleTransition(Duration.ONE, gestionnaireEcransFXML);
             TranslateTransition tt2 = new TranslateTransition(Duration.ONE, gestionnaireEcransFXML);
             double ratio2 = (fract-largeurFenetre) /2 ;
             st2.setToX( fract / largeurFenetre);
-            tt2.setToX(ratio2);
+            tt2.setToX(ratio2);*/
         
-            ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt, st2, tt2);
+            ParallelTransition pt = new ParallelTransition(gestionnaireEcransFXML, st, tt/*, st2, tt2*/);
             pt.play();
             
-        }
+       // }
 	}
 	
 

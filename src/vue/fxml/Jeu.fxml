@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
@@ -28,22 +28,6 @@
             <GaussianBlur />
          </effect>
     </ImageView>
-<ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="45.0" />
-<ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="45.0" y="45.0" />
-<ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="80.0" y="45.0" />
-<ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="115.0" y="45.0" />
-<ImageView fx:id="reglette_j2_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="765.0" y="45.0" />
-<ImageView fx:id="reglette_j2_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="730.0" y="45.0" />
-<ImageView fx:id="reglette_j2_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="695.0" y="45.0" />
-<ImageView fx:id="reglette_j2_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="660.0" y="45.0" />
-<ImageView fx:id="reglette_j3_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="765.0" y="515.0" />
-<ImageView fx:id="reglette_j3_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="730.0" y="515.0" />
-<ImageView fx:id="reglette_j3_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="695.0" y="515.0" />
-<ImageView fx:id="reglette_j3_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="660.0" y="515.0" />
-<ImageView fx:id="reglette_j4_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="515.0" />
-<ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
-<ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
-<ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
   <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
     <children>
       <Arc id="zoneJ1" fx:id="banquise_j1" length="90.0" opacity="0.6" radiusX="150.0" radiusY="200.0" startAngle="-90.0" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -704,5 +688,21 @@
         </ImageView>
       </graphic>
     </Button>
+<ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="45.0" />
+<ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="45.0" y="45.0" />
+<ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="80.0" y="45.0" />
+<ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="115.0" y="45.0" />
+<ImageView fx:id="reglette_j2_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="765.0" y="45.0" />
+<ImageView fx:id="reglette_j2_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="730.0" y="45.0" />
+<ImageView fx:id="reglette_j2_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="695.0" y="45.0" />
+<ImageView fx:id="reglette_j2_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="660.0" y="45.0" />
+<ImageView fx:id="reglette_j3_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="765.0" y="515.0" />
+<ImageView fx:id="reglette_j3_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="730.0" y="515.0" />
+<ImageView fx:id="reglette_j3_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="695.0" y="515.0" />
+<ImageView fx:id="reglette_j3_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="660.0" y="515.0" />
+<ImageView fx:id="reglette_j4_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="515.0" />
+<ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
+<ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
+<ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
   </children>
 </AnchorPane>

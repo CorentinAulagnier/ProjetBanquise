@@ -34,7 +34,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	GestionnaireEcransFxml liste_Ecran;
 	Coordonnees coord_pingouin_encours;
-	boolean phaseJeu, phasePlacement, validerTour;
+	boolean phaseJeu, phasePlacement, validerTour,phaseVictoire;
     //Coordonnees depart = new Coordonnees();
     //Coordonnees arrivee = new Coordonnees();
 	
@@ -100,11 +100,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_finTour.setDisable(true);
     	
     	coord_pingouin_encours = new Coordonnees(-1,-1);
     	phasePlacement = true;
     	phaseJeu = false;
+    	phaseVictoire=false;
     	validerTour = false;
+    	
+    	
+    	
     }
     
     
@@ -371,6 +376,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
     
     
+    
+    
     /**
      * Valide un tour de joueur actif
      * @param event
@@ -380,24 +387,45 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		
     	if (phasePlacement) {
 			partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
-			phasePlacement = !partie.placementPingouinsFini();
-			System.out.println("placement? "+phasePlacement);
+			
+			phasePlacement = !partie.placementPingouinsFini();			
 			if (!phasePlacement) {
 				phaseJeu = true;
 			}
-			System.out.println("placement? "+phasePlacement);
 		}
 		else if (phaseJeu) {
-	   
+			//TODO
 			//partie.deplacement(depart, arrivee);
 	    	//depart = new Coordonnees();
 	    	//phaseJeu = partie.estPartieFini();
+			
+			phaseJeu = !partie.jeuPingouinsFini();			
+			if (!phaseJeu) {
+				phaseVictoire = true;
+			}
+		} else if (phaseVictoire){
+			//TODO
 		}
-    	System.out.println("placement? "+phasePlacement);
+    	
     	//arrivee = new Coordonnees();
     	
     	partie.majProchainJoueur();
     	coord_pingouin_encours = new Coordonnees(-1,-1);
+    	
+    	
+    	if(partie.getJoueurActif() instanceof model.IA){
+    		this.box_boutons_tour.setDisable(true);
+    		this.box_boutons_tour.setVisible(false);
+    		
+    		this.box_tour_distant.setDisable(false);
+    		this.box_tour_distant.setVisible(true);
+    	} else {
+    		this.box_boutons_tour.setDisable(false);
+    		this.box_boutons_tour.setVisible(true);
+    		
+    		this.box_tour_distant.setDisable(true);
+    		this.box_tour_distant.setVisible(false);
+    	}
     	
     	
 		/*
@@ -447,9 +475,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
 					pingouinAplacer = partie.numPingouinAPlacer();
 					
-					System.out.println("phase de placement, clic valide, joueur "+jActif+" accede a "+reglettes.get(jActif).get(pingouinAplacer));
-					System.out.println(" cad le "+pingouinAplacer+"eme pingouin a  placer");
-					
 					ImageView miniatureActive = reglettes.get(jActif).get(pingouinAplacer);
 					ImageView tuileCliquee = banquise.get(indicesBanquise.x).get(indicesBanquise.y);
 					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
@@ -460,6 +485,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					tt.play();
 					
 					coord_pingouin_encours = indicesBanquise;
+					bouton_finTour.setDisable(false);
 				}
 			}
 			else if (phaseJeu) {
@@ -481,7 +507,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				// liste_Ecran.partie.pingouinsDeplacable();
 			}
 		}
-
 
 	}
 	

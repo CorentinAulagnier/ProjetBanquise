@@ -455,14 +455,17 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			// phase jeu
 			else if (phaseJeu) {
 				
-				if (first_clic) {
+				
+				if (first_clic && partie.appartientPingouin(xy) == partie.joueurActif) {
 					depart = xy;
 					first_clic = false;
 					
 				} else {				
-					if (partie.isDeplacementValide(depart, xy) 
-							&& (partie.joueurs[jActif] instanceof Humain)) { 
+					if (partie.isDeplacementValide(depart, xy)) { 
 						arrivee = xy;
+						
+					} else if (partie.appartientPingouin(xy) == partie.joueurActif) {
+						depart = xy;
 					}
 				}
 				// Coordonnees[] pingouins =

@@ -73,7 +73,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
    
     Coordonnees depart = new Coordonnees();
     Coordonnees arrivee = new Coordonnees();
-    boolean first_clic = true;
+    //boolean first_clic = true;
     boolean phaseJeu = false;
     boolean phasePlacement = true;
     
@@ -99,7 +99,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
     	
-    	place_pingouin_encours = new Coordonnees(-1,-1);
+    	place_pingouin_encours = new Coordonnees(-1,-1);	
     }
     
     
@@ -348,7 +348,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
     @FXML private void annulerTours(MouseEvent event){
     	// TODO
-		first_clic = true;
+		//first_clic = true;
     	System.out.println("annulerTours");
     }
     
@@ -362,6 +362,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	System.out.println("reinitiailiserTour");
     }
     
+    
+    /**
+     * Valide un tour de joueur actif
+     * @param event
+     */
     @FXML private void validerTour(MouseEvent event){
 		Partie partie = liste_Ecran.partie;
 		
@@ -371,7 +376,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			if (!phasePlacement) {
 				phaseJeu = true;
 			}
-			
 		}
 		// phase jeu
 		else if (phaseJeu) {
@@ -382,7 +386,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
     	
     	arrivee = new Coordonnees();
-    	first_clic = true;
+    	//first_clic = true;
     	System.out.println("validerTour");
     	partie.majProchainJoueur();
     
@@ -409,21 +413,19 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
 	public void anchorClick(MouseEvent event) {
 		Partie partie = liste_Ecran.partie;
-		 Coordonnees xy = getXY(event.getX(), event.getY());
-		
 		int jActif = partie.joueurActif;
-		int pingouinActif;
+		int pingouinAplacer;
 		
-		//printCoordonnees(event.getX(), event.getY());
+		Coordonnees xy = getXY(event.getX(), event.getY());
+		place_pingouin_encours = new Coordonnees(-1,-1);
 		
 		if ((partie.getJoueurActif() instanceof Humain) && coordValide(xy)) {
-			
 			
 			if (phasePlacement) {
 				
 				if ( partie.isPlacementValide(xy) ) {// si bloc innoccupé de 1poisson
-					pingouinActif = partie.numPingouinAPlacer();
-					ImageView miniatureActive = reglettes.get(jActif).get(pingouinActif);
+					pingouinAplacer = partie.numPingouinAPlacer();
+					ImageView miniatureActive = reglettes.get(jActif).get(pingouinAplacer);
 					ImageView tuileCliquee = banquise.get(xy.x).get(xy.y);
 					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
 					
@@ -431,33 +433,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					tt.setToX( coordArrivee.getX() - miniatureActive.getX()  );
 					tt.setToY( coordArrivee.getY() - miniatureActive.getY() );
 					tt.play();
-			
-						/*
-						 * placeUneTuile( liste_Ecran.partie.b.terrain[
-						 * place_pingouin_encours.x][place_pingouin_encours.
-						 * y].nbPoissons, place_pingouin_encours.x,
-						 * place_pingouin_encours.y); Image img = new Image(
-						 * this.liste_Ecran.partie.joueurs[liste_Ecran.
-						 * partie.joueurActif].cheminMiniature);
-						 * this.banquise.get(xy.x).get(xy.y).setImage(img);
-						 * place_pingouin_encours.x = xy.x;
-						 * place_pingouin_encours.y = xy.y;
-						 */
-
 					
 					place_pingouin_encours = xy;
-					// deja place un pingouin avant de valider
-
-					// retire une miniature de sa reglette = unset
-					// la place au centre de tuile du clic
 				}
 			}
 			// phase jeu
 			else if (phaseJeu) {
 
-				if (first_clic && partie.appartientPingouin(xy) == partie.joueurActif) {
+				if ( partie.appartientPingouin(xy) == partie.joueurActif) {
 					depart = xy;
-					first_clic = false;
+					//first_clic = false;
 
 				} else {
 					if (partie.isDeplacementValide(depart, xy)) {

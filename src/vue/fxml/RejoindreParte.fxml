@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,41 +24,17 @@
         <Image url="@../../ressources/decor/Pingouins.png" />
       </image>
     </ImageView>
-    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="280.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#ouvrirNouvellePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
+    <Button fx:id="pret" contentDisplay="GRAPHIC_ONLY" layoutX="566.0" layoutY="516.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../ressources/decor/b_jouer.png" />
+                  <Image url="@../../ressources/decor/m_rejoindre.png" />
                </image>
             </ImageView>
          </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="43.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
-      <graphic>
-        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../../ressources/decor/b_charger.png" />
-          </image>
-        </ImageView>
-      </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-    </Button>
-    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="518.0" layoutY="372.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="regle">
-      <graphic>
-        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../../ressources/decor/b_enligne.png" />
-          </image>
-        </ImageView>
-      </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-    </Button>
     <Text fill="BLACK" layoutX="370.0" layoutY="63.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Pingouins !">
       <font>
         <Font name="Arial" size="15.0" />
@@ -129,5 +107,23 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="30.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color : transparent;" text="Button">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ressources/decor/b_retour.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="118.0" layoutY="481.0" text="Connection à l'IP :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField layoutX="340.0" layoutY="483.0" prefHeight="31.0" prefWidth="322.0" />
   </children>
 </AnchorPane>

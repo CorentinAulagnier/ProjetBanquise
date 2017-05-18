@@ -371,7 +371,7 @@
     <StackPane id="lable2" fx:id="label2" layoutX="435.0" layoutY="255.0" prefHeight="50.0" prefWidth="200.0">
       <children>
         <Label id="rien" font="$x2" text="" visible="false" />
-        <TextField id="name" disable="false" editable="true" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" visible="false" />
+        <TextField id="name" disable="false" editable="true" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" text="Joueur 2" visible="false" />
         <Label fx:id="nomfacile2" font="$x2" text="Juliette la crevette" />
         <Label id="nomfacile2" font="$x2" text="Eve Green" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Garrosh" visible="false" />
@@ -380,7 +380,7 @@
     <StackPane id="label3" fx:id="label4" layoutX="438.0" layoutY="464.0" prefHeight="91.0" prefWidth="200.0">
       <children>
         <Label id="rien" font="$x2" text="" visible="false" />
-        <TextField id="name" disable="false" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" visible="false" />
+        <TextField id="name" disable="false" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" text="Joueur 4" visible="false" />
         <Label font="$x2" text="Georgette la crevette" visible="false" />
         <Label id="nomfacile2" font="$x2" text="R2D2" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Mr White" visible="false" />
@@ -389,7 +389,7 @@
     <StackPane fx:id="label3" layoutX="165.0" layoutY="463.0" prefHeight="91.0" prefWidth="200.0">
       <children>
         <Label id="rien" font="$x2" text="" visible="false" />
-        <TextField id="name" disable="false" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" visible="false" />
+        <TextField id="name" disable="false" onKeyPressed="#textEntre" onKeyReleased="#textEntre" opacity="1.0" prefWidth="136.0" text="Joueur 3" visible="false" />
         <Label font="$x2" text="Jeanette la crevette" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Ultron" visible="false" />
         <Label id="nomfacile2" font="$x2" text="Dexter" visible="false" />

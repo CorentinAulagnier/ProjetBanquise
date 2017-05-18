@@ -406,7 +406,12 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     
     @FXML
     public void textEntre(KeyEvent event){
-    	modeValide();
+    	String nom = ((TextField) event.getTarget() ).getText();
+    	if ( nom.length() <= 20){
+    		modeValide();
+    	}else{
+    		((TextField) event.getTarget()).deleteText(20, 21);
+    	}
     }
   
     public void modeValide(){

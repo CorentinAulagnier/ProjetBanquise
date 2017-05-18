@@ -22,34 +22,22 @@
         <Image url="@../../ressources/decor/Pingouins.png" />
       </image>
     </ImageView>
-    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="280.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#ouvrirNouvellePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
+    <Button fx:id="jouer" contentDisplay="GRAPHIC_ONLY" layoutX="418.0" layoutY="372.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie" visible="true">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../ressources/decor/b_jouer.png" />
+                  <Image url="@../../ressources/decor/m_rejoindre.png" />
                </image>
             </ImageView>
          </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="43.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageCharger" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
+    <Button fx:id="charger" contentDisplay="GRAPHIC_ONLY" layoutX="153.0" layoutY="372.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Didactitiel">
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../ressources/decor/b_charger.png" />
-          </image>
-        </ImageView>
-      </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-    </Button>
-    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="518.0" layoutY="372.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="regle">
-      <graphic>
-        <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../../ressources/decor/b_enligne.png" />
+            <Image url="@../../ressources/decor/m_creer.png" />
           </image>
         </ImageView>
       </graphic>

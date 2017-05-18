@@ -609,7 +609,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	}
 	
 	
-	public void printCoordonnees(double x, double y) { //trouve sur StackOverflow
+	public Coordonnees getCoordonnees(double x, double y) {
 		//Valeurs
 		double tuileHauteur = 48*2/3;
 		double tuileLargeur = 64;
@@ -666,7 +666,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    if(!((lignePaire && colonne>6) || colonne<0 || ligne<0 || ligne>7)) {
 	    	coord = new Coordonnees(colonne,ligne); 
 		}
-		System.out.println("Coordonnees : " + coord + "\n"+cote+parite+"box:"+box+"\n");
+		return coord;
 	}
 	
 	

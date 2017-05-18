@@ -17,94 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
-    <AnchorPane fx:id="optionbox" disable="true" layoutX="215.0" layoutY="648.0" maxHeight="85.0" maxWidth="354.0" minHeight="85.0" minWidth="354.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
-      <children>
-        <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="354.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
-          <image>
-            <Image url="@../../ressources/decor/r_option.png" />
-          </image>
-        </ImageView>
-        <HBox id="optionbox" alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="67.0" prefWidth="354.0" style="-fx-background-color: transparent" visible="true">
-          <children>
-          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererMusique" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-            <graphic>
-              <ImageView fx:id="imageMusique" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/decor/r_music-on.png" />
-                </image>
-              </ImageView>
-            </graphic>
-          </Button>
-          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererSon" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-            <graphic>
-              <ImageView fx:id="imageSon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/decor/r_son-on.png" />
-                </image>
-              </ImageView>
-            </graphic>
-          </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" mnemonicParsing="false" onMouseClicked="#sauvegarder" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-              <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/r_sauver.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-              <HBox.margin>
-                <Insets right="40.0" />
-              </HBox.margin>
-            </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-              <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/r_aide.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-              <HBox.margin>
-                <Insets left="40.0" />
-              </HBox.margin>
-            </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-              <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/r_igloo.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-            </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#quitter" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-              <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../../ressources/decor/r_quitte.png" />
-                  </image>
-                </ImageView>
-              </graphic>
-              <HBox.margin>
-                <Insets />
-              </HBox.margin>
-            </Button>
-          </children>
-        </HBox>
-      </children>
-    </AnchorPane>
-    <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="360.0" layoutY="559.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent" text="Button">
-      <graphic>
-        <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
-          <image>
-            <Image url="@../../ressources/decor/r_parametres.png" />
-          </image>
-        </ImageView>
-      </graphic>
-    </Button>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" style="">
       <image>
         <Image url="@../../ressources/decor/fond_banquise.jpg" />
@@ -704,5 +619,90 @@
             </ImageView>
          </children>
       </AnchorPane>
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="213.0" layoutY="523.0" maxHeight="85.0" maxWidth="354.0" minHeight="85.0" minWidth="354.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
+      <children>
+        <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="354.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
+          <image>
+            <Image url="@../../ressources/decor/r_option.png" />
+          </image>
+        </ImageView>
+        <HBox id="optionbox" alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="67.0" prefWidth="354.0" style="-fx-background-color: transparent" visible="true">
+          <children>
+          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererMusique" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+            <graphic>
+              <ImageView fx:id="imageMusique" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image url="@../../ressources/decor/r_music-on.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Button>
+          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererSon" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+            <graphic>
+              <ImageView fx:id="imageSon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image url="@../../ressources/decor/r_son-on.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" mnemonicParsing="false" onMouseClicked="#sauvegarder" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_sauver.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets right="40.0" />
+              </HBox.margin>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_aide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets left="40.0" />
+              </HBox.margin>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_igloo.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#quitter" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_quitte.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="355.0" layoutY="519.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent" text="Button">
+      <graphic>
+        <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
+          <image>
+            <Image url="@../../ressources/decor/r_parametres.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
   </children>
 </AnchorPane>

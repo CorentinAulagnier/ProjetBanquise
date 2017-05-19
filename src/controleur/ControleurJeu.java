@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -104,6 +109,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_finTour.setDisable(true);
     	
     	coord_pingouin_encours = new Coordonnees(-1,-1);
+    	
     }
     
     
@@ -151,6 +157,24 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_initiale(anchorPanes, banquises, p, noms);
     	    
     	    miseAjour_tourDeJeu();
+    	    System.out.println("creation time line");
+        	Timeline timeline = new Timeline(
+        			new KeyFrame(
+        					Duration.seconds(2),
+        					new EventHandler<ActionEvent>(){
+        						@Override public void handle(ActionEvent actionEvent) {
+        							// Call miseAjour_tourDeJeu method for every 2 sec.
+        							if(liste_Ecran.moteur.aRafraichir){
+        								System.out.println("ecran jeu se met à jour");
+        								miseAjour_tourDeJeu();
+        								liste_Ecran.moteur.partieRafraichie();
+        								}
+        						}
+        					}
+        					)
+        			);
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
     	}
     }
     
@@ -392,8 +416,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Partie partie = liste_Ecran.moteur.partie;
 		
     	if (liste_Ecran.moteur.phasePlacement) {
-			//partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
-			liste_Ecran.moteur.placement(coord_pingouin_encours);;
+			System.out.println("appelle fonction placement au clic valider tour");
+			liste_Ecran.moteur.placement(coord_pingouin_encours);
+			System.out.println("retour à mouse event valider tour");
 		}
 		else if (liste_Ecran.moteur.phaseJeu) {
 			//liste_Ecran.moteur.deplacement(cc);
@@ -408,8 +433,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
     	
     	//arrivee = new Coordonnees();
-    	
-    	partie.majProchainJoueur();
     	coord_pingouin_encours = new Coordonnees(-1,-1);
     	
     	
@@ -463,10 +486,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		int pingouinAplacer;
 		
 		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
-		coord_pingouin_encours = new Coordonnees(-1,-1);
-		
-		System.out.println("Joueur actif est le "+jActif+" cad "+partie.getJoueurActif());
-		
+		coord_pingouin_encours = new Coordonnees(-1,-1);		
 		
 		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			

@@ -12,13 +12,24 @@ public class Moteur {
 		this.phasePlacement = true;
 		this.phaseJeu = false;
 		this.phaseVictoire = false;
-		this.aRafraichir = false;
+		this.aRafraichir = true;
 	}
 	
 	public Partie getPartie() {
 		return partie;
 	}
+	
+	
+	public void partieRafraichie() {
+		aRafraichir = false;
+	} 
+	
+	public void partieARafraichir() {
+		aRafraichir = true;
+	} 
 
+/****************************************************************************************/
+	
 	public void placement(Coordonnees c) {
     	System.out.println("Placement en "+c);
 
@@ -31,7 +42,7 @@ public class Moteur {
 		partie.majProchainJoueur();
 		//Attendre IHM
 		
-		aRafraichir = true;
+		this.partieARafraichir();
 
 		if (partie.getJoueurActif() instanceof IA) {
 	    	System.out.println("attente rafraichissement");
@@ -54,7 +65,7 @@ public class Moteur {
 		partie.majProchainJoueur();
 		//Attendre IHM
 
-		aRafraichir = true;
+		this.partieARafraichir();
 		
 		if (partie.getJoueurActif() instanceof IA) {
 			while (aRafraichir);
@@ -63,7 +74,8 @@ public class Moteur {
 		
 	}
 	
-	
+/****************************************************************************************/
+
     
     public void faireJouerIAS() {
     	Joueur j = partie.getJoueurActif();
@@ -81,7 +93,8 @@ public class Moteur {
 
 	public void execPremiereIA() {
 		if (this.partie.getJoueurActif() instanceof IA) {
+			while (aRafraichir);
 			this.faireJouerIAS();
 		}		
-	}   
+	}
 }

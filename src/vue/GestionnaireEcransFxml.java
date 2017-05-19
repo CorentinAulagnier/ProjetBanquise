@@ -133,7 +133,8 @@ public class GestionnaireEcransFxml extends StackPane {
 			ajouteEcran(nomEcran, ecranACharger);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//e.printStackTrace(s);
+			//System.out.println(e.getMessage());
 			return false;
 		}
 	}

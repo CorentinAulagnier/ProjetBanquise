@@ -38,6 +38,18 @@ public class Banquise implements Serializable {
 		initBanquise();
 	}
 	
+	public Banquise(BufferedReader br){
+		terrain = new Tuile[8][8];
+		try {
+			recupBanquise(br);
+		} catch (IOException e) {
+			System.out.println("Erreur : fichier a lire, banquise initialisée aleatoirement");
+
+			initBanquise();
+			//e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Constructeur d'une banquise de taille 8x8, avec un fichie texte.
 	 */	

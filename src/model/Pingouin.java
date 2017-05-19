@@ -57,7 +57,7 @@ public class Pingouin implements Serializable {
 	 */	
 	
 	public String toString() {
-		return "Pingouin position " + position + (actif ? " actif" : " inactif") + "\n" ;
+		return "Pingouin position " + position + (actif ? " actif" : " inactif");
 	}
 
 	/**

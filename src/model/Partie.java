@@ -283,13 +283,8 @@ public class Partie implements Serializable {
 			 * | 1 2 3 1 2 3 1 |
 			 * 
 			 */
-			System.out.println("aa");
 
-			//this.b = new Banquise(nameBanquise);
-			this.b = new Banquise();
-			this.b.recupBanquise(br);
-
-			System.out.println("bb");
+			this.b = new Banquise(br);
 
 			ligne=br.readLine();
 			System.out.println(ligne);

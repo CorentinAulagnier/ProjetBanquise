@@ -215,7 +215,7 @@ public abstract class MoteurConsole {
 			System.out.println("Vos pingouins déplacables sont:");
 			for(int i =0; i<pingouins.length;i++) {
 				if(pingouins[i].actif) {
-					System.out.print(String.valueOf(i) + " - " + pingouins[i]);
+					System.out.print(String.valueOf(i) + " - " + pingouins[i]+"\n");
 				}
 			}
 			while (num_p < 0 || num_p >= pingouins.length) {

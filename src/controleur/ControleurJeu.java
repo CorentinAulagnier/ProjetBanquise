@@ -47,7 +47,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	//boutons d'actions
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
     @FXML private Text label_tourDe;
-    @FXML private HBox box_boutons_tour;
+    @FXML private HBox box_boutons_tour, box_demarrerIA;
     @FXML private AnchorPane box_tour_distant;
     
     //zone menu
@@ -98,6 +98,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	box_boutons_tour.setDisable(true);
     	box_tour_distant.setVisible(false);
     	box_boutons_tour.setVisible(false);
+    	
+    	/*debuterPartie*/
+    	box_demarrerIA.setDisable(false);
+    	box_demarrerIA.setVisible(false);
+    	
     	
     	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_defaire.setDisable(true);

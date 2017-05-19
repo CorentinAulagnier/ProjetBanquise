@@ -22,11 +22,11 @@ public class Moteur {
 	
 	public void partieRafraichie() {
 		aRafraichir = false;
-	} 
+	}
 	
 	public void partieARafraichir() {
 		aRafraichir = true;
-	} 
+	}
 
 /****************************************************************************************/
 	
@@ -41,8 +41,9 @@ public class Moteur {
 		}
 		partie.majProchainJoueur();
 		//Attendre IHM
-		
+
 		this.partieARafraichir();
+    	System.out.println("partieARafraichir");
 
 		if (partie.getJoueurActif() instanceof IA) {
 	    	System.out.println("attente rafraichissement");
@@ -66,6 +67,8 @@ public class Moteur {
 		//Attendre IHM
 
 		this.partieARafraichir();
+    	System.out.println("partieARafraichir");
+
 		
 		if (partie.getJoueurActif() instanceof IA) {
 			while (aRafraichir);

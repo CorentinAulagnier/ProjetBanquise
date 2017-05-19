@@ -813,6 +813,17 @@ public class Partie implements Serializable {
 	}
 	
 	/**
+	 * Renvoie le score du joueur j
+	 * 
+	 * @param j
+	 * 			le joueur 
+	 */
+	
+	public Coordonnees score(Joueur j) {
+		return new Coordonnees(j.poissonsManges, j.nbTuiles);
+	}
+	
+	/**
 	 * Retourne le score de chaque joueur en string
 	 */
 	

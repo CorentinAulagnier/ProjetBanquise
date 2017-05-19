@@ -110,7 +110,7 @@ public class Humain extends Joueur {
 		String s =  "Humain nbTuiles " + nbTuiles + " poissonsManges " + poissonsManges + " nbPingouin " + nbPingouin
 				+ " nom " + nom + " myPingouins\n";
 		for(int i = 0; i < nbPingouin; i++) 
-			s = s + myPingouins[i];
+			s = s + myPingouins[i] + "\n";
 		
 		return s;
 	}

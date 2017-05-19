@@ -216,9 +216,9 @@
       </GridPane>
     </children>
   </AnchorPane>
-  <Text fx:id="label_tourDe" fill="BLACK" layoutX="249.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour 1" textAlignment="CENTER" visible="false" wrappingWidth="301.1357181072235">
+  <Text fx:id="label_tourDe" fill="BLACK" layoutX="160.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour 1" textAlignment="CENTER" wrappingWidth="479.1357181072235">
     <font>
-      <Font size="30.0" />
+      <Font size="20.0" />
     </font>
   </Text>
   <AnchorPane fx:id="anchorBanquise" layoutX="144.0" layoutY="125.0" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: #cce6ff; -fx-border-width: 5;">
@@ -603,7 +603,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="box_demarrerIA" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0">
+      <AnchorPane fx:id="box_demarrerIA" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
          <children>
             <Button alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#lancerIA" text="LancerIA" />
          </children>
@@ -693,21 +693,21 @@
         </ImageView>
       </graphic>
     </Button>
-<ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="45.0" />
-<ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="45.0" y="45.0" />
-<ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="80.0" y="45.0" />
-<ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="115.0" y="45.0" />
-<ImageView fx:id="reglette_j2_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="765.0" y="45.0" />
-<ImageView fx:id="reglette_j2_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="730.0" y="45.0" />
-<ImageView fx:id="reglette_j2_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="695.0" y="45.0" />
-<ImageView fx:id="reglette_j2_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="660.0" y="45.0" />
-<ImageView fx:id="reglette_j3_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="765.0" y="515.0" />
-<ImageView fx:id="reglette_j3_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="730.0" y="515.0" />
-<ImageView fx:id="reglette_j3_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="695.0" y="515.0" />
-<ImageView fx:id="reglette_j3_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="660.0" y="515.0" />
-<ImageView fx:id="reglette_j4_1" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="515.0" />
-<ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
-<ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
-<ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
+<ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="10.0" y="45.0" />
+<ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="45.0" y="45.0" />
+<ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="80.0" y="45.0" />
+<ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="115.0" y="45.0" />
+<ImageView fx:id="reglette_j2_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="765.0" y="45.0" />
+<ImageView fx:id="reglette_j2_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="730.0" y="45.0" />
+<ImageView fx:id="reglette_j2_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="695.0" y="45.0" />
+<ImageView fx:id="reglette_j2_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="660.0" y="45.0" />
+<ImageView fx:id="reglette_j3_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="765.0" y="515.0" />
+<ImageView fx:id="reglette_j3_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="730.0" y="515.0" />
+<ImageView fx:id="reglette_j3_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="695.0" y="515.0" />
+<ImageView fx:id="reglette_j3_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="660.0" y="515.0" />
+<ImageView fx:id="reglette_j4_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="10.0" y="515.0" />
+<ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
+<ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
+<ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
   </children>
 </AnchorPane>

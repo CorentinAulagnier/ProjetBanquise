@@ -18,46 +18,6 @@ public class AlgoIA {
     IA myIA = null;
 
     /**
-     * Moitie superieure gauche du carre haut gauche
-     */
-    ArrayList<Coordonnees> platHHG;
-
-    /**
-     * Moitie inferieure droite du carre haut gauche
-     */
-    ArrayList<Coordonnees> platHBG;
-
-    /**
-     * Moitie superieure droite du carre haut droit
-     */
-    ArrayList<Coordonnees> platHHD;
-
-    /**
-     * Moitie inferieure gauche du carre haut droit
-     */
-    ArrayList<Coordonnees> platHBD;
-
-    /**
-     * Moitie superieure droite du carre bas gauche
-     */
-    ArrayList<Coordonnees> platBHG;
-
-    /**
-     * Moitie inferieure gauche du carre bas gauche
-     */
-    ArrayList<Coordonnees> platBBG;
-
-    /**
-     * Moitie superieure gauche du carre bas droit
-     */
-    ArrayList<Coordonnees> platBHD;
-
-    /**
-     * Moitie inferieure droit du carre bas droit
-     */
-    ArrayList<Coordonnees> platBBD;
-
-    /**
      * Constructeurs
      */
     /**
@@ -67,141 +27,6 @@ public class AlgoIA {
      */
     public AlgoIA(IA ia) {
         myIA = ia;
-    }
-
-    /**
-     * Rempli les structures de separation du terrain.
-     */
-    private void fillStructplat() {
-        fillplathhg();
-        fillplathbg();
-        fillplathhd();
-        fillplathbd();
-        fillplatbhg();
-        fillplatbbg();
-        fillplatbhd();
-        fillplatbbd();
-    }
-
-    /**
-     * Rempli la structure Haut Haut Gauche.
-     */
-    private void fillplathhg() {     /* Zone 1 : moitié superieure gauche du carre haut gauche */
-
-        platHHG.add(new Coordonnees(0, 0));
-        platHHG.add(new Coordonnees(0, 1));
-        platHHG.add(new Coordonnees(1, 0));
-        platHHG.add(new Coordonnees(1, 1));
-        platHHG.add(new Coordonnees(2, 0));
-    }
-
-    /**
-     * Rempli la structure Haut Bas Gauche.
-     */
-    private void fillplathbg() {    /* Zone 2 : moitié inferieure droite du carre haut gauche */
-
-        platHBG.add(new Coordonnees(0, 2));
-        platHBG.add(new Coordonnees(0, 3));
-        platHBG.add(new Coordonnees(1, 2));
-        platHBG.add(new Coordonnees(1, 3));
-        platHBG.add(new Coordonnees(2, 1));
-        platHBG.add(new Coordonnees(2, 2));
-        platHBG.add(new Coordonnees(3, 0));
-        platHBG.add(new Coordonnees(3, 1));
-        platHBG.add(new Coordonnees(3, 2));
-        platHBG.add(new Coordonnees(3, 3));
-    }
-
-    /**
-     * Rempli la structure Haut Haut Droite.
-     */
-    private void fillplathhd() {    /* Zone 3 : moitié superieure droite du carre haut droit */
-
-        platHHD.add(new Coordonnees(0, 5));
-        platHHD.add(new Coordonnees(0, 6));
-        platHHD.add(new Coordonnees(1, 6));
-        platHHD.add(new Coordonnees(1, 7));
-        platHHD.add(new Coordonnees(2, 6));
-    }
-
-    /**
-     * Rempli la structure Haut Bas Droit.
-     */
-    private void fillplathbd() {    /* Zone 4 : moitié inferieure gauche du carre haut droit */
-
-        platHBD.add(new Coordonnees(0, 4));
-        platHHD.add(new Coordonnees(1, 4));
-        platHHD.add(new Coordonnees(1, 5));
-        platHHD.add(new Coordonnees(2, 3));
-        platHHD.add(new Coordonnees(2, 4));
-        platHHD.add(new Coordonnees(2, 5));
-        platHHD.add(new Coordonnees(3, 4));
-        platHHD.add(new Coordonnees(3, 5));
-        platHHD.add(new Coordonnees(3, 6));
-        platHHD.add(new Coordonnees(3, 7));
-
-    }
-
-    /**
-     * Rempli la structure Bas Haut Gauche.
-     */
-    private void fillplatbhg() {    /* Zone 5 : moitié superieure droite du carre bas gauche */
-
-        platBHG.add(new Coordonnees(4, 0));
-        platHBD.add(new Coordonnees(4, 1));
-        platHBD.add(new Coordonnees(4, 2));
-        platHBD.add(new Coordonnees(5, 1));
-        platHBD.add(new Coordonnees(5, 2));
-        platHBD.add(new Coordonnees(5, 3));
-        platHBD.add(new Coordonnees(6, 1));
-        platHBD.add(new Coordonnees(6, 2));
-        platHBD.add(new Coordonnees(6, 3));
-        platHBD.add(new Coordonnees(7, 2));
-        platHBD.add(new Coordonnees(7, 3));
-
-    }
-
-    /**
-     * Rempli la structure Bas Bas Gauche.
-     */
-    private void fillplatbbg() {    /* Zone 6 : moitié inferieure gauche du carre bas gauche */
-
-        platBBG.add(new Coordonnees(5, 0));
-        platBBG.add(new Coordonnees(6, 0));
-        platBBG.add(new Coordonnees(7, 0));
-        platBBG.add(new Coordonnees(7, 1));
-
-    }
-
-    /**
-     * Rempli la structure Bas Haut Droite.
-     */
-    private void fillplatbhd() {    /* Zone 7 : moitié superieure gauche du carre bas droit */
-
-        platBHD.add(new Coordonnees(4, 3));
-        platBHD.add(new Coordonnees(4, 4));
-        platBHD.add(new Coordonnees(4, 5));
-        platBHD.add(new Coordonnees(4, 6));
-        platBHD.add(new Coordonnees(5, 4));
-        platBHD.add(new Coordonnees(5, 5));
-        platBHD.add(new Coordonnees(5, 6));
-        platBHD.add(new Coordonnees(6, 4));
-        platBHD.add(new Coordonnees(6, 5));
-        platBHD.add(new Coordonnees(7, 4));
-        platBHD.add(new Coordonnees(7, 5));
-
-    }
-
-    /**
-     * Rempli la structure Bas Bas Droite.
-     */
-    private void fillplatbbd() {     /* Zone 8 : moitié inferieure droit du carre bas droit */
-
-        platBBD.add(new Coordonnees(5, 7));
-        platBBD.add(new Coordonnees(6, 6));
-        platBBD.add(new Coordonnees(7, 6));
-        platBBD.add(new Coordonnees(7, 7));
-
     }
 
     /**
@@ -224,17 +49,12 @@ public class AlgoIA {
     }
 
     /**
-     * ****************************************************************************************************
-     */
-    /* Renvoie la coordonnees de la case choisie par l'IA Facile pour le placement du pingouin
-     * Case choisie aleatoirement 
-     */
-    /**
      * Algorithme de placement pour l'IA facile
      *
      * @param p La partie.
      *
-     * @return renvoie les coordonnees de la case choisie.
+     * @return renvoie les coordonnees de la case choisie (Case choisie
+     * aleatoirement )
      */
     public Coordonnees placementFacile(Partie p) {
         Random r = new Random();
@@ -289,16 +109,24 @@ public class AlgoIA {
 
     }
 
+    /**
+     * Algorithme de choix d'une case a jouer pour l'IA facile
+     *
+     * @param p La partie.
+     *
+     * @param c La coordonnee de la tuile a tester.
+     *
+     * @return Renvoie vrai si un pingouin se trouve a cote de la tuile, faux
+     * sinon.
+     */
     public boolean aUnPingouinACote(Partie p, Coordonnees c) {
 
         boolean trouve = false;
-
         for (int i = 0; i < 6; i++) {
             if ((p.b.getTuile(p.b.getVoisin(i, c)) != null) && (p.b.getTuile(p.b.getVoisin(i, c)).aUnPingouin)) {
                 trouve = true;
             }
         }
-
         return trouve;
     }
 
@@ -497,9 +325,6 @@ public class AlgoIA {
     }
 
     /**
-     * ****************************************************************************************************
-     */
-    /**
      * DOnne le numero de l'objet dans le tableau de joueur de la partie
      *
      * @param p La partie.
@@ -514,6 +339,13 @@ public class AlgoIA {
         return num;
     }
 
+    /**
+     * Donne le nombre de pingouins actifs encore en jeu
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie un entier representant la somme des pingouins actifs
+     */
     public int nbTotalPingouinsActifs(Partie p) {
         int res = 0;
         for (int i = 0; i < p.nbJoueurs; i++) {
@@ -526,6 +358,17 @@ public class AlgoIA {
         return res;
     }
 
+    /**
+     * Donne le nombre de pingouins actifs encore en jeu pour un joueur
+     * specifique
+     *
+     * @param p La partie.
+     *
+     * @param numjoueur Le numero du joueur.
+     *
+     * @return Renvoie un entier representant la somme des pingouins actifs du
+     * joueur
+     */
     public int nbTotalPingouinsActifsJoueur(Partie p, int numjoueur) {
         int res = 0;
 
@@ -538,6 +381,14 @@ public class AlgoIA {
         return res;
     }
 
+    /**
+     * Donne le nombre de pingouins total present au debut de la partie
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie un entier representant la somme des pingouins de la
+     * partie ( 8 pour 2 ou 4 joueurs, 9 pour 3 joueurs)
+     */
     public int nbTotalPingouins(Partie p) {
         int res = 0;
         for (int i = 0; i < p.nbJoueurs; i++) {
@@ -546,6 +397,13 @@ public class AlgoIA {
         return res;
     }
 
+    /**
+     * Donne le nombre de tuiles qui restent accessibles
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie un entier representant la somme des tuiles accessibles.
+     */
     public int nbTuileRestantes(Partie p) {
         int somme = 0;
         for (int i = 0; i < 8; i++) {
@@ -555,12 +413,21 @@ public class AlgoIA {
                 if ((p.b.getTuile(c) != null) && !(p.b.getTuile(c).aUnPingouin) && estSeul(c, p) == 0) {
                     somme = somme + p.b.getTuile(c).nbPoissons;
                 }
-                
+
             }
         }
         return somme;
     }
 
+    /**
+     * Donne les tuiles n'ayant qu'un poisson qui se trouvent a une intersection
+     * de 3
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie une liste de (coordonnees, entier) disponibles
+     * representant (tuile, nombre de 3 directement accessible) .
+     */
     public ArrayList<CoupleGenerique<Coordonnees, Integer>> carrefourDeTroyes(Partie p) {
 
         ArrayList<CoupleGenerique<Coordonnees, Integer>> caroufDe3 = new ArrayList();
@@ -606,6 +473,15 @@ public class AlgoIA {
         return caroufDe3;
     }
 
+    /**
+     * Indique si une tuile de coordonnee c est à côté d'un 3
+     *
+     * @param c Les coordonnees de la tuile à tester.
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie vrai si la tuile est à côté d'un 3
+     */
     public boolean cotoieUnTrois(Coordonnees c, Partie p) {
         ArrayList<ArrayList<Coordonnees>> coupPossible = p.b.deplacementPossible(c);
 
@@ -616,6 +492,13 @@ public class AlgoIA {
         return b;
     }
 
+    /**
+     * Donne le maximum d'une liste (coordonnee, entier) par rapport à l'entier
+     *
+     * @param liste la liste à explorer
+     *
+     * @return Renvoie l'element de la liste qui a l'entier maximum.
+     */
     public CoupleGenerique<Coordonnees, Integer> maximum(ArrayList<CoupleGenerique<Coordonnees, Integer>> liste) {
         int i = 0;
         CoupleGenerique<Coordonnees, Integer> max = new CoupleGenerique(new Coordonnees(0, 0), 0);
@@ -672,8 +555,17 @@ public class AlgoIA {
         }
     }
 
+    /**
+     * Donne la liste des pingouins bloqués d'une partie à l'autre
+     *
+     * @param p1 La partie avant le deplacement à tester.
+     *
+     * @param p2 La partie après le deplacement à tester.
+     *
+     * @return Renvoie une liste (entier, entier) représentant (numero du
+     * pingouin bloqué, somme des tuiles qu'il sera le seul à pouvoir atteindre)
+     */
     public ArrayList<CoupleGenerique<Integer, Integer>> aBloqueUnPingouin(Partie p1, Partie p2) {
-
         ArrayList<CoupleGenerique<Integer, Integer>> retour = new ArrayList<>();
         int res = 0;
         int pingu1;
@@ -681,19 +573,34 @@ public class AlgoIA {
         for (int i = 0; i < p1.nbJoueurs; i++) {
             for (int j = 0; j < p1.joueurs[i].nbPingouin; j++) {
                 if (p1.joueurs[i].myPingouins[j].actif) {
-                    pingu1 = estSeul(p1.joueurs[i].myPingouins[j].position, p1);
-                    pingu2 = estSeul(p2.joueurs[i].myPingouins[j].position, p2);
-                    if (pingu1 == 0 && pingu2 != 0) { // On vient de bloquer un pingouin
-                        retour.add(new CoupleGenerique(i, pingu2));
-                    }
 
+                    ArrayList<CoupleGenerique<Coordonnees, Integer>> temp1 = voisinsSeuls(p1.joueurs[i].myPingouins[j].position, p1);
+                    ArrayList<CoupleGenerique<Coordonnees, Integer>> temp2 = voisinsSeuls(p2.joueurs[i].myPingouins[j].position, p2);
+
+                    if(temp1.size() != temp2.size()){
+                        if(temp2.size() == 6){
+                            retour.add(new CoupleGenerique(i, temp2.get(0).e2));
+                        } else if(temp2.size() != 0){
+                            retour.add(new CoupleGenerique(i,maximum(temp2).e2));
+                        }                        
+                    }
+                }
+                if ((p1.joueurs[i].myPingouins[j].actif) && (!p2.joueurs[i].myPingouins[j].actif)) {
+                    retour.add(new CoupleGenerique(i, 20));
                 }
             }
         }
         return retour;
-
     }
 
+    /**
+     * Donne le nombre de pingouins seuls sur leur ilot dans la partie
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie un entier représentant la somme des pingouins seuls sur
+     * un ilot dans la partie
+     */
     public int nbTotalPingouinsSeuls(Partie p) {
         int res = 0;
         for (int i = 0; i < p.nbJoueurs; i++) {
@@ -708,9 +615,72 @@ public class AlgoIA {
         return res;
     }
 
-    // A appeler avec les coordonnees du pingouin a verifier : Coordonnees c = p.joueurs[num].myPingouins[indicePingu].position;
+    public boolean peutAccederA(Coordonnees c1, Coordonnees c2, Partie p) {
+        int somme = 0;
+        LinkedList<Coordonnees> file = new LinkedList<>();
+        HashMap<Coordonnees, Integer> hash = new HashMap<>();
+        Tuile tuileDep = p.b.getTuile(c1);
+        file.add(c1);
+        hash.put(c1, 0);
+
+
+        while (!file.isEmpty() && !c1.equals(c2)) {
+            for (int i = 0; i < 6; i++) {
+                if (p.b.getVoisin(i, c1) != null && p.b.getTuile(p.b.getVoisin(i, c1)).nbPoissons != 0) {
+                    if (!hash.containsKey(p.b.getVoisin(i, c1))) {
+                        file.add(p.b.getVoisin(i, c1));
+                        hash.put(p.b.getVoisin(i, c1), 0);
+                    }
+                }
+            }
+            c1 = file.pop();
+
+
+        }
+        return (c1.equals(c2));
+    }
+
+    /**
+     * Regarde si un pingouin bloque un morceau de banquise.
+     * - En regardant chacun de ses voisins, si aucun pingouin ne peut plus acceder à cette tuile (estSeul renvoie vrai), on enregistre le gain associé à cette ile
+     * 
+     * @param c1 La coordonnee du pingouin a tester.
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie une liste de (Coordonnees, Integer) représentant (un voisin de c1, la somme des poissons que l'on peut obtenir)
+     */
+    
+    public ArrayList<CoupleGenerique<Coordonnees, Integer>> voisinsSeuls(Coordonnees c1, Partie p) {
+        int i = 0;
+        ArrayList<CoupleGenerique<Coordonnees, Integer>> arraylist = new ArrayList<>();
+        while (i < 6) {
+            if (p.b.getVoisin(i, c1) != null && !p.b.getTuile(p.b.getVoisin(i, c1)).aUnPingouin && p.b.getTuile(p.b.getVoisin(i, c1)).nbPoissons != 0) {
+                int tmp = estSeul(p.b.getVoisin(i, c1), p);
+                if (tmp != 0) {
+                    arraylist.add(new CoupleGenerique(p.b.getVoisin(i, c1), tmp));
+                }
+            }
+            i++;
+        }
+        return arraylist;
+    }
+
+    /**
+     * Donne la somme des points que le pingouin est le seul à pouvoir
+     * atteindre.
+     *
+     * @param c La coordonnee du pingouin a tester.
+     *
+     * @param p La partie.
+     *
+     * @return Renvoie 0 si le pingouin n'est pas seul, la somme des points
+     * qu'il est le seul à pouvoir atteindre sinon
+     */
+// A appeler avec les coordonnees du pingouin a verifier : Coordonnees c = p.joueurs[num].myPingouins[indicePingu].position;
     public int estSeul(Coordonnees c, Partie p) {
         if (p.b.nbTuilesLibres() <= 50) {
+            Coordonnees debut = c;
             int somme = 0;
             LinkedList<Coordonnees> file = new LinkedList<>();
             HashMap<Coordonnees, Integer> hash = new HashMap<>();
@@ -722,8 +692,10 @@ public class AlgoIA {
                 c = file.pop();
                 tuileDep = p.b.getTuile(c);
 
-                if (tuileDep.aUnPingouin && (p.appartientPingouin(c) != notreNumeroDeJoueur(p))) {
-                    return 0;
+                if (tuileDep.aUnPingouin) {
+                    if (p.appartientPingouin(c) != notreNumeroDeJoueur(p)) {
+                        return 0;
+                    }
                 } else {
                     for (int i = 0; i < 6; i++) {
                         if (p.b.getVoisin(i, c) != null && p.b.getTuile(p.b.getVoisin(i, c)).nbPoissons != 0) {
@@ -742,123 +714,51 @@ public class AlgoIA {
         }
     }
 
+    public int calculDistance(Coordonnees c1, Coordonnees c2) {
+        int dist = 0;
+        if (c1.x % 2 == 0) {
+
+        } else {
+
+        }
+
+        return dist;
+    }
+
     /**
-     * Creation de l'arbre minimax des coups possibles pour tous les pingouins
+     * Algorithme Alpha-Beta
      *
-     * @param c Les coordonnees c de la racine de l'arbre.
+     * @param p La partie.
      *
-     * @param partie La partie.
+     * @param c Les coordonnees c de la tuile actuelle
      *
      * @param num Le numero du joueur actif.
      *
-     * @param nbcoupsmax La profondeur de l'arbre = le nombre de coups restant
-     * que l'on veut evalue
+     * @param nbCoupsmax La profondeur de l'arbre = le nombre de coups que l'on
+     * veut evalue.
      *
-     * @param hash Tableau de hachage permettant de reduire le nombre de noeud
-     * cree.
+     * @param nbCoups Le nombre de coups qui reste a evaluer.
      *
      * @param somme Somme servant a la ponderation des feuilles.
      *
      * @param first Vrai si on est dans la premiere execution recursive.
      *
+     * @param a Approximation de la borne inferieure de la valeur du noeud.
      *
-     * @return Renvoie un ArbreGraphe.
+     * @param b Approximation de la borne superieure de la valeur du noeud.
+     *
+     * @param indicePingu Indice du pingouin courant.
+     *
+     * @param coord1stchoice Sauvegarde de la coordonnee du premier deplacement
+     * d'un chemin dans l'arbre.
+     *
+     * @param coordPingu Sauvegarde de la coordonnee du pingouin que l'on
+     * deplace en premier dans un chemin dans l'arbre.
+     *
+     * @return Renvoie un ((Coordonnees, Coordonnees), Integer ) qui represente
+     * ((pingouin au depart, tuile choisie), ponderation associée)
      */
-    /*
-     public CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> alphaBeta(Partie p, Coordonnees c, int num, int nbCoupsmax, int nbCoups, int somme, int first, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> a, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> b, int indicePingu, Coordonnees coord1stchoice, Coordonnees coordPingu) {
-
-     if ((nbCoups == nbCoupsmax - 1)) {
-     coord1stchoice = c;
-     }
-
-     if (nbCoups <= 0 || isFeuillePingu(p, p.joueurs[num])) {
-     Tuile tuile = p.b.getTuile(c);
-     CoupleGenerique<Coordonnees, Coordonnees> cg = new CoupleGenerique(coordPingu, coord1stchoice);
-     return new CoupleGenerique(cg, somme + tuile.nbPoissons);
-
-     }
-
-     CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> alpha = new CoupleGenerique(a);
-     CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> beta = new CoupleGenerique(b);
-     CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> val = new CoupleGenerique(new CoupleGenerique(coordPingu, coord1stchoice), -100);
-     CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> tmp = new CoupleGenerique(new CoupleGenerique(coordPingu, coord1stchoice), -100);
-
-     if (num == notreNumeroDeJoueur(p)) { // c'est a nous - on maximise 
-     val = new CoupleGenerique(new CoupleGenerique(coordPingu, coord1stchoice), -100);
-
-     for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {
-
-     if (p.joueurs[num].myPingouins[i].actif) {
-
-     if (((nbCoups == nbCoupsmax) && !estSeul(p.joueurs[num].myPingouins[i].position, p)) || (nbCoups != nbCoupsmax)) {
-
-     if (nbCoups == nbCoupsmax) {
-     coordPingu = p.joueurs[notreNumeroDeJoueur(p)].myPingouins[i].position;
-     }
-
-     c = p.joueurs[num].myPingouins[i].position;
-     ArrayList<ArrayList<Coordonnees>> coupPossible = p.b.deplacementPossible(c);
-
-     for (int n = 0; n < 6; n++) {
-
-     for (int m = 0; m < coupPossible.get(n).size(); m++) {
-                       
-     Partie p2 = (Partie) p.clone();
-     p2.deplacement(c, coupPossible.get(n).get(m));
-     p2.verifierPingouinActif();
-     tmp = alphaBeta(p2, coupPossible.get(n).get(m), joueurSuivant(num, p2), nbCoupsmax, nbCoups - 1, somme + p.b.getTuile(c).nbPoissons, 0, alpha, beta, i, coord1stchoice, coordPingu);
-     if (val.e2 <= tmp.e2) { // c'est a nous - on maximise
-     val = tmp;
-     }
-     if (val.e2 >= beta.e2) {
-     return val;
-     }
-     if(alpha.e2 <= val.e2){
-     alpha = val;
-     }
-     }
-     }
-     }
-     }
-     }
-     return val;
-     } else {
-     val = new CoupleGenerique(new CoupleGenerique(coordPingu, coord1stchoice), 1000);
-
-     for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {
-
-     if (p.joueurs[num].myPingouins[i].actif) {
-
-     c = p.joueurs[num].myPingouins[i].position;
-     ArrayList<ArrayList<Coordonnees>> coupPossible = p.b.deplacementPossible(c);
-
-     for (int n = 0; n < 6; n++) {
-
-     for (int m = 0; m < coupPossible.get(n).size(); m++) {
-
-     Partie p2 = (Partie) p.clone();
-     p2.deplacement(c, coupPossible.get(n).get(m));
-     p2.verifierPingouinActif();
-
-     tmp = alphaBeta(p2, coupPossible.get(n).get(m), joueurSuivant(num, p2), nbCoupsmax, nbCoups - 1, somme, 0, alpha, beta, i, coord1stchoice, coordPingu);
-     if (val.e2 >= tmp.e2) { // c'est pas a nous - on minimise
-     val = tmp;
-     }
-     if (alpha.e2 >= val.e2) {
-     return val;
-     }
-     if(beta.e2 >= val.e2){
-     beta = val;
-     }
-     }
-     }
-     }
-     }
-     return val;
-     }
-     }
-     */
-    public CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> alphaBeta(Partie p, Coordonnees c, int num, int nbCoupsmax, int nbCoups, int somme, boolean first, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> a, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> b, int indicePingu, Coordonnees coord1stchoice, Coordonnees coordPingu, boolean pingPerdu) {
+    public CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> alphaBeta(Partie p, Coordonnees c, int num, int nbCoupsmax, int nbCoups, int somme, boolean first, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> a, CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> b, int indicePingu, Coordonnees coord1stchoice, Coordonnees coordPingu) {
 
         if ((nbCoups == nbCoupsmax - 1)) {
             coord1stchoice = c;
@@ -867,13 +767,8 @@ public class AlgoIA {
         if (nbCoups <= 0 || isFeuillePingu(p, p.joueurs[num])) {
             Tuile tuile = p.b.getTuile(c);
             CoupleGenerique<Coordonnees, Coordonnees> cg = new CoupleGenerique(coordPingu, coord1stchoice);
-            if (pingPerdu) {
-                return new CoupleGenerique(cg, 0);
-            } else {
-                // System.out.println("là bas : " + coordPingu + " - " + coord1stchoice + " avec un score : " + (somme + tuile.nbPoissons));
-                return new CoupleGenerique(cg, somme + tuile.nbPoissons);
-            }
-
+            //System.out.println("là bas : " + coordPingu + " - " + coord1stchoice + " avec un score : " + (somme + tuile.nbPoissons));
+            return new CoupleGenerique(cg, somme + tuile.nbPoissons);
         }
 
         ArrayList<CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer>> meilleurs_coups = null;
@@ -897,7 +792,7 @@ public class AlgoIA {
                     if (((first) && (estSeul(p.joueurs[num].myPingouins[i].position, p) == 0)) || (!first)) {
 
                         if (first) {
-                            System.out.println("pingouin num " + i + " position : " + p.joueurs[num].myPingouins[i].position + " poissons sur la case : " + p.b.getTuile(p.joueurs[num].myPingouins[i].position).nbPoissons);
+                            //System.out.println("pingouin num " + i + " position : " + p.joueurs[num].myPingouins[i].position + " poissons sur la case : " + p.b.getTuile(p.joueurs[num].myPingouins[i].position).nbPoissons);
                             coordPingu = p.joueurs[notreNumeroDeJoueur(p)].myPingouins[i].position;
                             somme_total = somme_total - p.b.getTuile(coordPingu).nbPoissons;
 
@@ -918,23 +813,23 @@ public class AlgoIA {
                                 if (pingouinsDevenusInactifs.size() != 0) {
                                     for (int h = 0; h < pingouinsDevenusInactifs.size(); h++) {
                                         if (pingouinsDevenusInactifs.get(h).e1 == num) {
-                                            if (pingouinsDevenusInactifs.get(h).e2 > nbTuileRestantes(p)) {
+                                            if (pingouinsDevenusInactifs.get(h).e2 > (nbTuileRestantes(p) / 5)) {
                                                 somme_total = somme_total + pingouinsDevenusInactifs.get(h).e2;
                                             } else {
-                                                somme_total = somme_total - (pingouinsDevenusInactifs.get(h).e2 * 2); // pif
+                                                somme_total = somme_total - pingouinsDevenusInactifs.get(h).e2; // pif
                                             }
                                         } else {
-                                            if (pingouinsDevenusInactifs.get(h).e2 > nbTuileRestantes(p)) {
+                                            if (pingouinsDevenusInactifs.get(h).e2 > (nbTuileRestantes(p) / 5)) {
                                                 somme_total = somme_total - pingouinsDevenusInactifs.get(h).e2;
                                             } else {
-                                                somme_total = somme_total + (pingouinsDevenusInactifs.get(h).e2 * 2);
+                                                somme_total = somme_total + pingouinsDevenusInactifs.get(h).e2;
                                             }
 
                                         }
                                     }
                                 }
 
-                                tmp = alphaBeta(p2, coupPossible.get(n).get(m), joueurSuivant(num, p2), nbCoupsmax, nbCoups - 1, somme_total + p.b.getTuile(c).nbPoissons, false, alpha, beta, i, coord1stchoice, coordPingu, pingPerdu);
+                                tmp = alphaBeta(p2, coupPossible.get(n).get(m), joueurSuivant(num, p2), nbCoupsmax, nbCoups - 1, somme_total + p.b.getTuile(c).nbPoissons, false, alpha, beta, i, coord1stchoice, coordPingu);
                                 if (alpha.e2 <= tmp.e2) { // c'est a nous - on maximise
                                     if (alpha.e2 == tmp.e2) {
                                         if (first) {
@@ -965,7 +860,7 @@ public class AlgoIA {
                     CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> temp = meilleurs_coups.get(l);
 
                     int distance = Math.abs(temp.e1.e1.x - temp.e1.e2.x) + Math.abs(temp.e1.e1.y - temp.e1.e2.y); // Distance de Manhattan
-                    System.out.println("coord : " + temp.e1.e1 + " : " + temp.e1.e2 + " Distance : " + distance);
+                    //System.out.println("coord : " + temp.e1.e1 + " : " + temp.e1.e2 + " Distance : " + distance);
                     if (distanceMin == distance) {
                         meilleurs_coupsProche.add(new CoupleGenerique(temp));
                     } else if (distanceMin > distance) {
@@ -975,7 +870,6 @@ public class AlgoIA {
                     }
                 }
                 Random r = new Random();
-                System.out.println("siezeze : " + meilleurs_coupsProche.size());
 
                 int choix = r.nextInt(meilleurs_coupsProche.size());
                 alpha = meilleurs_coupsProche.get(choix);
@@ -983,10 +877,10 @@ public class AlgoIA {
             return alpha;
         } else {
             tmp = new CoupleGenerique(new CoupleGenerique(coordPingu, coord1stchoice), 1000);
-
             for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {
 
                 if (p.joueurs[num].myPingouins[i].actif) {
+                    int somme_total = somme;
 
                     c = p.joueurs[num].myPingouins[i].position;
                     ArrayList<ArrayList<Coordonnees>> coupPossible = p.b.deplacementPossible(c);
@@ -1000,7 +894,27 @@ public class AlgoIA {
                             p2.deplacement(c, coupPossible.get(n).get(m));
                             p2.verifierPingouinActif();
 
-                            tmp = alphaBeta(p2, coupPossible.get(n).get(m), joueurSuivant(num, p2), nbCoupsmax, nbCoups - 1, somme, false, alpha, beta, i, coord1stchoice, coordPingu, pingPerdu);
+                            ArrayList<CoupleGenerique<Integer, Integer>> pingouinsDevenusInactifs = aBloqueUnPingouin(p, p2);
+                            if (pingouinsDevenusInactifs.size() != 0) {
+                                for (int h = 0; h < pingouinsDevenusInactifs.size(); h++) {
+                                    if (pingouinsDevenusInactifs.get(h).e1 == num) {
+                                        if (pingouinsDevenusInactifs.get(h).e2 > (nbTuileRestantes(p) / 5)) {
+                                            somme_total = somme_total - pingouinsDevenusInactifs.get(h).e2;
+                                        } else {
+                                            somme_total = somme_total + pingouinsDevenusInactifs.get(h).e2; // pif
+                                        }
+                                    } else {
+                                        if (pingouinsDevenusInactifs.get(h).e2 > (nbTuileRestantes(p) / 5)) {
+                                            somme_total = somme_total + pingouinsDevenusInactifs.get(h).e2;
+                                        } else {
+                                            somme_total = somme_total - pingouinsDevenusInactifs.get(h).e2;
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            tmp = alphaBeta(p2, coupPossible.get(n).get(m), joueurSuivant(num, p2), nbCoupsmax, nbCoups - 1, somme_total - p.b.getTuile(c).nbPoissons, false, alpha, beta, i, coord1stchoice, coordPingu);
                             if (beta.e2 > tmp.e2) { // c'est pas a nous - on minimise
                                 beta = tmp;
                             }
@@ -1017,32 +931,6 @@ public class AlgoIA {
 
     }
 
-    /**
-     * Algorithme Alpha-Beta
-     *
-     * @param p La partie.
-     *
-     * @param abr Noeud courant dans l'arbre.
-     *
-     * @param nbCoupsmax La profondeur de l'arbre = le nombre de coups que l'on
-     * veut evalue.
-     *
-     * @param nbCoups Le nombre de coups qui reste a evaluer.
-     *
-     * @param coord1stchoice Sauvegarde de la coordonnee du premier deplacement
-     * d'un chemin dans l'arbre.
-     *
-     * @param coordPingu Sauvegarde de la coordonnee du pingouin que l'on
-     * deplace en premier dans un chemin dans l'arbre.
-     *
-     * @param a Approximation de la borne inferieure de la valeur du noeud.
-     *
-     * @param b Approximation de la borne superieure de la valeur du noeud.
-     *
-     * @param indicePingu Indice du pingouin courant.
-     *
-     * @return Renvoie un ArbreGraphe.
-     */
     /**
      * Algorithme de choix d'une case a jouer pour l'IA difficile
      *
@@ -1073,11 +961,11 @@ public class AlgoIA {
             }
         }
         if (p.b.nbTuilesLibres() <= 30) {
-            nbCoupsmax = 7;
+            nbCoupsmax = 9;
             System.out.println("mAINTENANT 7");
         }
         if (p.b.nbTuilesLibres() <= 20) {
-            nbCoupsmax = 9;
+            nbCoupsmax = 11;
             System.out.println("mAINTENANT 9");
         }
 
@@ -1092,7 +980,7 @@ public class AlgoIA {
                 listHash.add(new HashMap<Banquise, ArbreGraphe>());
             }
 
-            CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> coucou = alphaBeta(p, c0, num, nbCoupsmax, nbCoupsmax, 0, true, alpha, beta, 0, c0, c0, false);
+            CoupleGenerique<CoupleGenerique<Coordonnees, Coordonnees>, Integer> coucou = alphaBeta(p, c0, num, nbCoupsmax, nbCoupsmax, 0, true, alpha, beta, 0, c0, c0);
             System.out.println("coco " + coucou.e2);
 
             CoupleGenerique<Coordonnees, Coordonnees> retour = new CoupleGenerique(coucou.e1.e1, coucou.e1.e2);

@@ -15,10 +15,15 @@ public class Moteur {
 		this.aRafraichir = true;
 	}
 	
+	/**
+	 * Renvoie la partie en cours
+	 * 
+	 * @return la partie en cours
+	 */
+	
 	public Partie getPartie() {
 		return partie;
 	}
-	
 	
 	public void partieRafraichie() {
 		aRafraichir = false;
@@ -30,86 +35,99 @@ public class Moteur {
 
 /****************************************************************************************/
 	
+	/**
+	 * Effectue le placement d'un pingouins et met a jour la partie
+	 * 
+	 * @param c
+	 * 			Les coordonnees de la case du pingouin
+	 */
+	
 	public void placement(Coordonnees c) {
-    	System.out.println("Placement en "+c);
-
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
+		
+/*************/
+System.out.println("Placement en "+c);
+System.out.println(partie);
+/*************/
 		
 		phasePlacement = !partie.placementPingouinsFini();			
 		if (!phasePlacement) {
 			phaseJeu = true;
 		}
-		partie.majProchainJoueur();
-		//Attendre IHM
-
+		
+		//Passage joueur suivant (majProchainJoueur a ete modifie)
+		partie.joueurActif = (partie.joueurActif+1)%partie.nbJoueurs;
+		
+		//Message IHM
 		this.partieARafraichir();
-    	System.out.println("partieARafraichir");
-    			
-    	System.out.println(partie);
 
 		if (partie.getJoueurActif() instanceof IA) {
-	    	System.out.println("attente rafraichissement");
-	    	
-	    	/*
-            while(true) {
-	            if(!aRafraichir) break;
-            }//while (aRafraichir);*/
 			faireJouerIAS();
-			
 		}
 	}
 	
+	/**
+	 * Effectue le deplacement d'un pingouins et met a jour la partie
+	 * 
+	 * @param cc
+	 * 			Les coordonnees de la case de depart et d'arrive du pingouin
+	 */
 	
 	public void deplacement(CoupleGenerique<Coordonnees, Coordonnees> cc) {
-    	System.out.println("Deplacement en "+cc);
-
 		partie.deplacement(cc);
 		
-		phaseJeu = !partie.jeuPingouinsFini();			
+/*************/
+System.out.println("Deplacement en "+cc);
+System.out.println(partie);
+/*************/
+    	
+		phaseJeu = !partie.jeuPingouinsFini();	
+		
 		if (!phaseJeu) {
 			phaseVictoire = true;
+			
+		} else {
+			//Suppression pingouins inactif
+			partie.verifierPingouinActif();
+			
+			//Maj prochain joueur (on passe les joueurs innactifs)
+			partie.majProchainJoueur();
 		}
-		partie.majProchainJoueur();
-		//Attendre IHM
-
-		this.partieARafraichir();
-    	System.out.println("partieARafraichir");
 		
-		if (partie.getJoueurActif() instanceof IA) {
-	    	System.out.println("attente rafraichissement");
+		//Message IHM
+		this.partieARafraichir();
 
-	    	/*
-            while(true) {
-	            if(!aRafraichir) break;
-            }//while (aRafraichir);*/
+		if (partie.getJoueurActif() instanceof IA) {
 			faireJouerIAS();
 		}
-		
 	}
 	
 /****************************************************************************************/
 
+	/**
+	 * Fait jouer une IA si c'est elle qui lance la partie
+	 */
+	
+	public void execPremiereIA() {
+		if (this.partie.getJoueurActif() instanceof IA) {
+			this.faireJouerIAS();
+		}		
+	}
     
+	/**
+	 * Fait jouer une IA suivant la phase de jeu ou l'on se trouve
+	 */
+	
     public void faireJouerIAS() {
     	Joueur j = partie.getJoueurActif();
-    	
-    	if (phasePlacement) {
-        	System.out.println("avant placement ");
+    	System.out.println("Tour IA");
 
+    	if (phasePlacement) {
 			placement(j.placement(partie));
-	    	System.out.println("apres placement");
 
 		} else if(phaseJeu) {
 			deplacement(j.jouer(partie));
 		}
 	}
 
-	public void execPremiereIA() {
-		if (this.partie.getJoueurActif() instanceof IA) {
-			//this.partieRafraichie();
-
-			this.faireJouerIAS();
-			//this.partieRafraichie();
-		}		
-	}
 }

@@ -47,20 +47,4 @@ public class ControleurVictoire  implements Initializable, EcranCourant {
     }
     
     
-    
-/**-------------------------------------------PRESSION DES BOUTONS-------------------------------------------**/
-    
-    @FXML
-    public void boutonPresse(MouseEvent event){
-    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    }
-
-    
-    
-    /**-------------------------------------------RELACHEMENT DES BOUTONS-------------------------------------------**/
-    
-    @FXML
-    public void boutonLache(MouseEvent event){
-    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
-    }
 }

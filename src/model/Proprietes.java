@@ -12,7 +12,7 @@ public class Proprietes {
     public static final String ECRAN_VICTOIRE = "Victoire";
     public static final String ECRAN_VICTOIRE_FXML = "fxml/Victoire.fxml";
     
-    public static final String MEDIA_PATH = "src/ressources/decor/ping.mp3";
+    public static final String MEDIA_PATH = "src/ressources/decor/christmas.mp3";
     public static final String IMAGE_SONON_PATH = "/ressources/decor/r_son-on.png";
     public static final String IMAGE_SONOFF_PATH = "/ressources/decor/r_son-off.png";
     public static final String IMAGE_MUSIQUEON_PATH = "/ressources/decor/r_music-on.png";

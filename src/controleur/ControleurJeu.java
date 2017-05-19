@@ -399,6 +399,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
+    	liste_Ecran.dernierePage = model.Proprietes.ECRAN_JEU;
     	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     

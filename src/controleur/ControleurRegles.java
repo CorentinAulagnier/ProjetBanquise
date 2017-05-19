@@ -52,8 +52,8 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      * @param event evenement souris attendu : clic
      */
     @FXML
-    private void ouvrirPageAcceuil(MouseEvent event){
-    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    private void retour(MouseEvent event){
+    	gestionnaireFxmlCourant.changeEcranCourant(gestionnaireFxmlCourant.dernierePage);
     }
     
     /**

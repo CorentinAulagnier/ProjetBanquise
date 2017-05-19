@@ -42,6 +42,7 @@ public class GestionnaireEcransFxml extends StackPane {
 	 * Objet partie implémentant une partie d'un jeu
 	 */
 	//public Partie partie;
+	public String dernierePage;
 	/**
 	 * permet de connaitre à tout moment l'état du mediaplayer (éteint, allumé).
 	 * A remplacer

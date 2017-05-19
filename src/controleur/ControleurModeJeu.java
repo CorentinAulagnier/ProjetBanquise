@@ -468,6 +468,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
+    	gestionnaireFxmlCourant.dernierePage = model.Proprietes.ECRAN_MODE;
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     

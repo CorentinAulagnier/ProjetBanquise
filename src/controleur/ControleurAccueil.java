@@ -74,7 +74,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	String  path = file.getName();
         if (file != null) {
         	path = file.getAbsolutePath();
-        	gestionnaireFxmlCourant.partie.charger(path);
+        	gestionnaireFxmlCourant.moteur.partie.charger(path);
         	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
         }    	
     }

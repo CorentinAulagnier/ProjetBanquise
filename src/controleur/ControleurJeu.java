@@ -392,10 +392,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Partie partie = liste_Ecran.moteur.partie;
 		
     	if (liste_Ecran.moteur.phasePlacement) {
-			partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
-				
+			//partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
+			liste_Ecran.moteur.placement(coord_pingouin_encours);;
 		}
 		else if (liste_Ecran.moteur.phaseJeu) {
+			//liste_Ecran.moteur.deplacement(cc);
+
 			//TODO
 			//partie.deplacement(depart, arrivee);
 	    	//depart = new Coordonnees();

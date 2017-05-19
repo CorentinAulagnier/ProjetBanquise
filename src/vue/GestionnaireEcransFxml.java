@@ -41,7 +41,7 @@ public class GestionnaireEcransFxml extends StackPane {
 	/**
 	 * Objet partie implémentant une partie d'un jeu
 	 */
-	public Partie partie;
+	//public Partie partie;
 	/**
 	 * permet de connaitre à tout moment l'état du mediaplayer (éteint, allumé).
 	 * A remplacer
@@ -66,7 +66,7 @@ public class GestionnaireEcransFxml extends StackPane {
 	public GestionnaireEcransFxml(Moteur m) {
 		super();
 		moteur = m;
-		partie = moteur.getPartie();
+		//partie = moteur.getPartie();
 		/*media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
 		media.setAutoPlay(true);
 		musique = true;

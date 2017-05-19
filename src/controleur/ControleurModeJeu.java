@@ -99,9 +99,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
-    	
-    	System.out.println("lancement de la partie");
-    	
+    	    	
     }
     
     public Joueur creerJoueur(int couleur, int nbP){

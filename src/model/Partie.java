@@ -378,7 +378,6 @@ public class Partie implements Serializable {
 	 */
 	
 	public Joueur getJoueurActif() {
-		System.out.println("joueurActif = " +joueurActif);
 		return joueurs[joueurActif] ;
 	}
 

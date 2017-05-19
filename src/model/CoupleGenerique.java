@@ -34,4 +34,12 @@ public class CoupleGenerique<T1, T2> implements Serializable{
         return (this.e1.equals(obj.e1) && this.e2.equals(obj.e2));
     }
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "( " + e1 + ", " + e2 + " )";
+	}
+
 }

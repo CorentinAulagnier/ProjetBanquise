@@ -49,12 +49,8 @@ public class Moteur {
 	    	System.out.println("attente rafraichissement");
 	    	
             while(true) {
-            	synchronized (partie) {
-	            	if(!aRafraichir) break;
-				}
-
-            }
-			//while (aRafraichir);
+	            if(!aRafraichir) break;
+            }//while (aRafraichir);
 			faireJouerIAS();
 		}
 	}
@@ -80,10 +76,7 @@ public class Moteur {
 	    	System.out.println("attente rafraichissement");
 
             while(true) {
-            	synchronized (partie) {
-	            	if(!aRafraichir) break;
-				}
-
+	            if(!aRafraichir) break;
             }//while (aRafraichir);
 			faireJouerIAS();
 		}

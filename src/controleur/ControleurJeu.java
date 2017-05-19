@@ -166,7 +166,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         							// Call miseAjour_tourDeJeu method for every 2 sec.
         							if(liste_Ecran.moteur.aRafraichir){
         								System.out.println("ecran jeu se met à jour");
-        								miseAjour_tourDeJeu();
+        								//miseAjour_tourDeJeu();
         								liste_Ecran.moteur.partieRafraichie();
         								}
         						}

@@ -89,6 +89,11 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	   	    	
     	gestionnaireFxmlCourant.partie = new Partie(new Banquise(), tableauDeJoueur);
 
+    	
+		if (gestionnaireFxmlCourant.moteur.partie.getJoueurActif() instanceof IA) {
+			gestionnaireFxmlCourant.moteur.faireJouerIAS();
+		}
+		
     	nettoyerMenu(optionbox, roue);
     	
     	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);

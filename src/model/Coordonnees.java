@@ -29,6 +29,11 @@ public class Coordonnees implements Serializable{
 		this.y = b;
 	}
 	
+	public Coordonnees(Coordonnees c){
+		this.x = c.x;
+		this.y = c.y;
+	}
+	
 	public String toString(){
 		return "(" + x + ", " + y + ")";		
 	}

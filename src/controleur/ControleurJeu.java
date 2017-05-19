@@ -30,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import model.Coordonnees;
+import model.CoupleGenerique;
 import model.Humain;
 import model.Partie;
 
@@ -39,8 +40,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	GestionnaireEcransFxml liste_Ecran;
 	Coordonnees coord_pingouin_encours;
-    //Coordonnees depart = new Coordonnees();
-    //Coordonnees arrivee = new Coordonnees();
+    Coordonnees depart = new Coordonnees();
+    Coordonnees arrivee = new Coordonnees();
 	
 	
 	//boutons d'actions
@@ -427,7 +428,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			//partie.deplacement(depart, arrivee);
 	    	//depart = new Coordonnees();
 	    	//phaseJeu = partie.estPartieFini();
-	
+			System.out.println("appelle fonction deplacement  valider tour");
+			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(depart, arrivee));
+			System.out.println("retour à mouse event deplacement valider");
+
+			
+			
+			
 		} else if (liste_Ecran.moteur.phaseVictoire){
 			//TODO
 		}
@@ -510,18 +517,20 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
 				// TODO
-				/*if ( partie.appartientPingouin(xy) == partie.joueurActif) {
-					depart = xy;
+				if ( partie.appartientPingouin(indicesBanquise) == partie.joueurActif) {
+					depart = new Coordonnees(indicesBanquise);
+					System.out.println("depart : "+depart);
+					arrivee = new Coordonnees();
+
 					//first_clic = false;
 
-				} else {
-					if (partie.isDeplacementValide(depart, xy)) {
-						arrivee = xy;
+				} else if (depart.estInvalide()){
+					if (partie.isDeplacementValide(depart, indicesBanquise)) {
+						arrivee = new Coordonnees(indicesBanquise);
+						System.out.println("arrivee : "+arrivee);
 
-					} else if (partie.appartientPingouin(xy) == partie.joueurActif) {
-						depart = xy;
-					}
-				}*/
+					} 
+				}
 				
 				// Coordonnees[] pingouins =
 				// liste_Ecran.moteur.partie.pingouinsDeplacable();

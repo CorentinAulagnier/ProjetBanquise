@@ -113,7 +113,7 @@ public class IA extends Joueur {
 		AlgoIA player = new AlgoIA(this);
 		int level = this.niveau;
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (Exception e) {e.printStackTrace();}
 		
 		switch (level) {
@@ -141,7 +141,7 @@ public class IA extends Joueur {
 		AlgoIA player = new AlgoIA(this);
 		int level = this.niveau;
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (Exception e) {e.printStackTrace();}
 		
 		switch (level) {

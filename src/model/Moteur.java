@@ -3,26 +3,22 @@ package model;
 
 public class Moteur {
     
-	Partie partie;
-	boolean phaseJeu, phasePlacement, phaseVictoire;
-	boolean peutJouer;
+	public Partie partie;
+	public boolean phaseJeu, phasePlacement, phaseVictoire;
+	public boolean aRafraichir;
 	
-	Moteur(Partie p) {
+	public Moteur(Partie p) {
 		this.partie = p;
 		this.phasePlacement = true;
 		this.phaseJeu = false;
 		this.phaseVictoire = false;
-		this.peutJouer = true;
+		this.aRafraichir = false;
 	}
 	
 	public Partie getPartie() {
-		return partie.clone();
+		return partie;
 	}
-	
-    public void rafraichissementDone() {
-    	peutJouer = true;
-    }
-	
+
 	public void placement(Coordonnees c) {
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
 		
@@ -33,10 +29,10 @@ public class Moteur {
 		partie.majProchainJoueur();
 		//Attendre IHM
 		
-		peutJouer = false;
-		while (!peutJouer);
+		aRafraichir = false;
 		
 		if (partie.getJoueurActif() instanceof IA) {
+			while (!aRafraichir);
 			faireJouerIAS();
 		}
 	}
@@ -50,12 +46,12 @@ public class Moteur {
 			phaseVictoire = true;
 		}
 		partie.majProchainJoueur();
-		//Attendte IHM
+		//Attendre IHM
 
-		peutJouer = false;
-		while (!peutJouer);
+		aRafraichir = true;
 		
 		if (partie.getJoueurActif() instanceof IA) {
+			while (aRafraichir);
 			faireJouerIAS();
 		}
 		

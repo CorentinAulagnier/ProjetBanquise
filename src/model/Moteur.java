@@ -5,17 +5,23 @@ public class Moteur {
     
 	Partie partie;
 	boolean phaseJeu, phasePlacement, phaseVictoire;
-
+	boolean peutJouer;
+	
 	Moteur(Partie p) {
 		this.partie = p;
 		this.phasePlacement = true;
 		this.phaseJeu = false;
 		this.phaseVictoire = false;
+		this.peutJouer = true;
 	}
 	
 	public Partie getPartie() {
 		return partie.clone();
 	}
+	
+    public void rafraichissementDone() {
+    	peutJouer = true;
+    }
 	
 	public void placement(Coordonnees c) {
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
@@ -25,8 +31,11 @@ public class Moteur {
 			phaseJeu = true;
 		}
 		partie.majProchainJoueur();
-		//Notifier IHM
-
+		//Attendre IHM
+		
+		peutJouer = false;
+		while (!peutJouer);
+		
 		if (partie.getJoueurActif() instanceof IA) {
 			faireJouerIAS();
 		}
@@ -41,8 +50,11 @@ public class Moteur {
 			phaseVictoire = true;
 		}
 		partie.majProchainJoueur();
-		//Notifier IHM
+		//Attendte IHM
 
+		peutJouer = false;
+		while (!peutJouer);
+		
 		if (partie.getJoueurActif() instanceof IA) {
 			faireJouerIAS();
 		}
@@ -60,9 +72,5 @@ public class Moteur {
 		} else if(phaseJeu) {
 			deplacement(j.jouer(partie));
 		}
-	}
-    
-    
-    
-    
+	}   
 }

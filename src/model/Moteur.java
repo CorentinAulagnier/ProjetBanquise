@@ -47,8 +47,14 @@ public class Moteur {
 
 		if (partie.getJoueurActif() instanceof IA) {
 	    	System.out.println("attente rafraichissement");
+	    	
+            while(true) {
+            	synchronized (partie) {
+	            	if(!aRafraichir) break;
+				}
 
-			while (aRafraichir);
+            }
+			//while (aRafraichir);
 			faireJouerIAS();
 		}
 	}
@@ -71,7 +77,14 @@ public class Moteur {
 
 		
 		if (partie.getJoueurActif() instanceof IA) {
-			while (aRafraichir);
+	    	System.out.println("attente rafraichissement");
+
+            while(true) {
+            	synchronized (partie) {
+	            	if(!aRafraichir) break;
+				}
+
+            }//while (aRafraichir);
 			faireJouerIAS();
 		}
 		

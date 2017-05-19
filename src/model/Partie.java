@@ -816,11 +816,29 @@ public class Partie implements Serializable {
 	 * Renvoie le score du joueur j
 	 * 
 	 * @param j
-	 * 			le joueur 
+	 * 			le joueur
+	 * 
+	 *  @return le score du joueur J (poissons, tuiles)
 	 */
 	
 	public Coordonnees score(Joueur j) {
 		return new Coordonnees(j.poissonsManges, j.nbTuiles);
+	}
+	
+	/**
+	 * Renvoie le score de tous les joueurs
+	 * 
+	 *  @return le score de tous les joueurs (poissons, tuiles)
+	 */
+	
+	public Coordonnees[] scores() {
+		Coordonnees[] c = new Coordonnees[this.nbJoueurs];
+		
+		for (int i = 0; i< this.nbJoueurs; i++) {
+			c[i] = score(this.joueurs[i]);
+		}
+		
+		return c;
 	}
 	
 	/**

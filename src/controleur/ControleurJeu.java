@@ -407,7 +407,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
     
     
-    
+    /**
+     * Debute une partie si c'est a une IA de jouer
+     * @param event
+     */
+    @FXML private void debuterPartie(MouseEvent event){
+		System.out.println("appelle fonction placement de la 1er IA");
+		liste_Ecran.moteur.execPremiereIA();
+		System.out.println("retour à mouse event debuterPartie");
+    }
     
     /**
      * Valide un tour de joueur actif

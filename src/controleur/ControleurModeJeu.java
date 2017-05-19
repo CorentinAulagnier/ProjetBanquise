@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import model.Banquise;
 import model.Humain;
 import model.IA;
 import model.Joueur;
@@ -58,10 +59,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	    	nbPingouins = 3;
     	    }else if(nbJoueurs == 4){
     	    	nbPingouins = 2;
-    	    }
-    	    
-    	    gestionnaireFxmlCourant.partie = new Partie(nbJoueurs);
-    	
+    	    }  	
     	
     	Joueur jjaune = creerJoueur(model.Proprietes.JAUNE,nbPingouins);
     	Joueur jrouge = creerJoueur(model.Proprietes.ROUGE,nbPingouins);
@@ -88,9 +86,9 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     	    	
     	bulleVisible(bulle,1);
-    	   	
-    	gestionnaireFxmlCourant.partie.joueurs=tableauDeJoueur;
-    	
+    	   	    	
+    	gestionnaireFxmlCourant.partie = new Partie(new Banquise(), tableauDeJoueur);
+
     	nettoyerMenu(optionbox, roue);
     	
     	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);

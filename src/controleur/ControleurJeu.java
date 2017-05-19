@@ -42,7 +42,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	Coordonnees coord_pingouin_encours;
     Coordonnees depart = new Coordonnees();
     Coordonnees arrivee = new Coordonnees();
-	
+    int pingouinAdeplacer;
 	
 	//boutons d'actions
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
@@ -115,7 +115,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setDisable(true);
     	
-    	coord_pingouin_encours = new Coordonnees(-1,-1);
+    	coord_pingouin_encours = new Coordonnees();
+    	pingouinAdeplacer = -1;
     	
     }
     
@@ -173,7 +174,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         							// Call miseAjour_tourDeJeu method for every 2 sec.
         							if(liste_Ecran.moteur.aRafraichir){
         								System.out.println("ecran jeu se met à jour");
-        								//miseAjour_tourDeJeu();
+        								miseAjour_tourDeJeu();
         								liste_Ecran.moteur.partieRafraichie();
         								}
         						}
@@ -201,7 +202,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		//maj de chaque zones réservées à un joueur
     		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.moteur.partie.joueurs[k]).couleur],(Label)noms[k]);	
 		}
-    	
+
     	if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
 	    	bouton_defaire.setDisable(false);
 	    	bouton_defaire.setVisible(false);
@@ -453,24 +454,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Partie partie = liste_Ecran.moteur.partie;
 		
     	if (liste_Ecran.moteur.phasePlacement) {
-			System.out.println("appelle fonction placement au clic valider tour");
 			liste_Ecran.moteur.placement(coord_pingouin_encours);
-			System.out.println("retour à mouse event valider tour");
+	    	coord_pingouin_encours = new Coordonnees();
+	    	
 		}
-		else if (liste_Ecran.moteur.phaseJeu) {
-			//liste_Ecran.moteur.deplacement(cc);
+		else if (liste_Ecran.moteur.phaseJeu){// && !coord_pingouin_encours.estInvalide()) {
+			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 
-			//TODO
-			//partie.deplacement(depart, arrivee);
-	    	//depart = new Coordonnees();
-	    	//phaseJeu = partie.estPartieFini();
-			System.out.println("appelle fonction deplacement  valider tour");
-			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(depart, arrivee));
-			System.out.println("retour à mouse event deplacement valider");
-
-			
-			
-			
 		} else if (liste_Ecran.moteur.phaseVictoire){
 			//TODO
 		}
@@ -495,6 +485,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	}
     	
     	*/
+    	
 		/*
 		 * Mise a jour de l'activation du bouton fin de tour
 		 * 
@@ -554,6 +545,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
 				// TODO
+				/*
 				if ( partie.appartientPingouin(indicesBanquise) == partie.joueurActif) {
 					depart = new Coordonnees(indicesBanquise);
 					System.out.println("depart : "+depart);
@@ -567,16 +559,61 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						System.out.println("arrivee : "+arrivee);
 
 					} 
+				}*/
+				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.joueurs[jActif].myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
+					
+					ImageView miniatureActive = reglettes.get(jActif).get(pingouinAdeplacer);
+					ImageView tuileCliquee = banquise.get(indicesBanquise.x).get(indicesBanquise.y);
+					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
+
+					TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive);
+					tt.setToX(coordArrivee.getX() - miniatureActive.getX());
+					tt.setToY(coordArrivee.getY() - miniatureActive.getY());
+					tt.play();
+					coord_pingouin_encours = indicesBanquise;
+					bouton_finTour.setDisable(false);
 				}
-				
-				// Coordonnees[] pingouins =
-				// liste_Ecran.moteur.partie.pingouinsDeplacable();
+
 			}
 		}
 
 	}
 	
+
+	/**
+     * action à produire après un clic sur un pingouin pendant la phase jeu
+     * @param event evenement souris attendu : clic
+     */
+	public void choisirPingouinAdeplacer(MouseEvent event) {
+		Partie partie = liste_Ecran.moteur.partie;
+		int jActif = partie.joueurActif;
+		
+		if (liste_Ecran.moteur.phaseJeu){
+			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer!=1){
+				//le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
+				//on veux en bouger un autre alors on annule son mouvement
+				System.out.println("coord_pingouin_encours="+coord_pingouin_encours+" pingouinAdeplacer="+pingouinAdeplacer);
+				ImageView miniatureActive = reglettes.get(jActif).get(pingouinAdeplacer);
+				Coordonnees pingouin_initial = partie.getJoueurActif().myPingouins[pingouinAdeplacer].position;
+				ImageView tuileCliquee = banquise.get(pingouin_initial.x).get(pingouin_initial.y);
+				Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
+
+				TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive);
+				tt.setToX(coordArrivee.getX() - miniatureActive.getX());
+				tt.setToY(coordArrivee.getY() - miniatureActive.getY());
+				tt.play();
+				coord_pingouin_encours = new Coordonnees(-1,-1);
+				bouton_finTour.setDisable(true);
+				
+			} 
+				pingouinAdeplacer = reglettes.get(liste_Ecran.moteur.partie.joueurActif).indexOf( (ImageView)event.getTarget() );
+				coord_pingouin_encours = new Coordonnees(-1,-1);
+				bouton_finTour.setDisable(true);
+			
+		}
+	}
 	
+
 	/**
 	 * Rend les coordonées pour ancrer un pingouin audessus de la tuile selectionnée 
 	 * 
@@ -742,102 +779,4 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	public boolean coordValide(Coordonnees xy) {
 		return (xy.x != -1) && (xy.y != -1);
 	}
-	
-	
-
-	/*
-    ImageView[][] banq;
-    ImageView[][] pingouins = new ImageView[8][8];
-    int fromX;
-    int fromY;
-    int toX;
-    int toY;
-    boolean EndOfTurn;
-    int largeurHexagone ;
-    int hauteurHexagone ;
-    
-    Image image1PoissonJaune;
-    Image image2PoissonsJaunes;
-    Image image3PoissonsJaunes;
-    Image image1PoissonBlanc;
-    Image image2PoissonsBlancs;
-    Image image3PoissonsBlancs;
-    
-    double hauteurbanquise =270 ;
-    double largeurbanquise=512 ;
-    
-    
-    
-    @FXML ImageView shadowPingouin;
-    
-    
-   @FXML
-   public void SelectPingouin(MouseEvent event){
-   	if (EndOfTurn) {
-   		shadowPingouin.setVisible(false);
-   	}    	
-   	for (int i = 0; i<8 ; i++){
-   		for (int j = 0; j<8 ; j++){
-   			if (!( (i%2 == 1) && (j == 7) )){
-   				if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsJaunes){
-   					((ImageView) (banq [i][j] )).setImage(image3PoissonsBlancs) ;
-   				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsJaunes){
-   					((ImageView) (banq [i][j] )).setImage(image2PoissonsBlancs) ;
-   				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonJaune){
-   					((ImageView) (banq [i][j] )).setImage(image1PoissonBlanc) ;
-   				}
-   			}
-       	}
-   	}
-   	EndOfTurn = false;
-   	Coordonnees xy = getXY(event.getX(),event.getY());
-   	 ArrayList<ArrayList<Coordonnees>> accessibles = deplacementPossible(pingouins[fromX][fromY]);
-   	for ( ArrayList<Coordonnees> path : accessibles){
-   		for (Coordonnees bloc : path){
-   			int i = bloc.x;
-   			int j = bloc.y;
-   			if ( ((ImageView) (banq [i][j] )).getImage() == image3PoissonsBlancs){
-					((ImageView) (banq [i][j] )).setImage(image3PoissonsJaunes) ;
-				}else if ( ((ImageView) (banq [i][j] )).getImage() == image2PoissonsBlancs){
-					((ImageView) (banq [i][j] )).setImage(image2PoissonsJaunes) ;
-				}else if ( ((ImageView) (banq [i][j] )).getImage() == image1PoissonBlanc){
-					((ImageView) (banq [i][j] )).setImage(image1PoissonJaune) ;
-				}
-   		}
-   	}
-   }
-   
-   /* 
-    @FXML
-    public void GoToPingouin(MouseEvent event){
-    	toX = getX();
-    	toY = getY();
-    	if ( estJaune(  ((ImageView) (banq[toX][toY])) .getImage() ) ){
-    		TranslateTransition tt = new TranslateTransition(Duration.millis(0), shadowPingouin);
-    	     tt.setToX( toX * largeurHexagone);
-    	     tt.setToY(toY * hauteurHexagone);
-    	     tt.play();
-    	     shadowPingouin.setVisible(true);
-    	     EndOfTurn = true;
-    	}
-    }
-   
-    public boolean estJaune(Image imag){
-    	return (imag==image1PoissonJaune)||(imag==image2PoissonsJaunes)||(imag==image3PoissonsJaunes);
-    }
-    */
-    
-    /*
-    @FXML
-    public void ValidatePingouinTranslation(MouseEvent event){
-    	if (EndOfTurn){
-	    	TranslateTransition tt = new TranslateTransition(Duration.millis(500),pingouin[toX][toY]);
-	    	shadowPingouin.setVisible(true);
-	    	tt.setFromX( fromX * largeurHexagone);
-   	     	tt.setFromY( fromY * hauteurHexagone);
-	   	    tt.setToX( toX * largeurHexagone);
-		    tt.setToY(toY * hauteurHexagone);    
-    	}
-    }
-    */ 
 }

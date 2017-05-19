@@ -265,8 +265,11 @@ public class Partie implements Serializable {
 	 *            Nom du fichier a recuperer
 	 */
 	
-	public void chargerTXT(String nameBanquise, String namePartie) {
+	public void chargerTXT(String namePartie) {
 		try {
+			String ligne;
+			String[] elements;
+			
 			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(namePartie)));
 
 			/* Fichier a lire
@@ -280,12 +283,17 @@ public class Partie implements Serializable {
 			 * | 1 2 3 1 2 3 1 |
 			 * 
 			 */
-			this.b = new Banquise(nameBanquise);
+			System.out.println("aa");
 
-			String ligne;
-			String[] elements;
-			
+			//this.b = new Banquise(nameBanquise);
+			this.b = new Banquise();
+			this.b.recupBanquise(br);
+
+			System.out.println("bb");
+
 			ligne=br.readLine();
+			System.out.println(ligne);
+
 			elements=ligne.split(" ");
 			this.nbJoueurs = Integer.parseInt(elements[1]);
 
@@ -294,11 +302,12 @@ public class Partie implements Serializable {
 			this.joueurActif = Integer.parseInt(elements[1]);
 			
 			this.joueurs = recupererJoueurs(br, nbJoueurs);
+			
 			this.utiliseHistorique = false;
 			br.close();
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("Erreur : FileNotFoundException "+ nameBanquise + " ou " + namePartie + " introuvables");
+			System.out.println("Erreur : FileNotFoundException "+ namePartie + " introuvables");
 			
 		} catch (Exception e) {
 			System.out.println("Erreur : recuperation de la partie");
@@ -335,7 +344,7 @@ public class Partie implements Serializable {
 			j[i].poissonsManges = Integer.parseInt(elements[4]);
 			j[i].nbTuiles = Integer.parseInt(elements[2]);
 			j[i].myPingouins = recupererPingouins(br, j[i].nbPingouin);
-			ligne=br.readLine();
+			//ligne=br.readLine();
 
 		}
 		return j;
@@ -540,7 +549,7 @@ public class Partie implements Serializable {
 	public void setPlacementPingouin(Coordonnees c, int numJoueur, int numPingouin) {
 		this.b.getTuile(c).mettrePingouin();
 		this.joueurs[numJoueur].myPingouins[numPingouin] = new Pingouin(c);
-		System.out.println("Le pingouin " + String.valueOf(numPingouin)+ " de " + this.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
+		System.out.println("Le pingouin " + numPingouin+ " de " + this.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
 	}
 
 	/**

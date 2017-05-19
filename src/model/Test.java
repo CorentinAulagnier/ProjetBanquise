@@ -139,22 +139,23 @@ public class Test extends MoteurConsole{
 						p2.charger();
 						System.out.println("Banquise restaurée :\n"+p);
 						System.out.println("Historique restaurée :\n"+p.h);
+						break;
 					case 6:
 						Partie p_origine = creerPartie();
 						LauncherConsole.phasePlacement(p_origine);
 						System.out.println("Banquise créée :\n"+p_origine);
 						Partie p_clone = p_origine.clone();
 						System.out.println("Banquise clonée :\n"+p_clone);
+						break;
 					case 7:
 						Partie p_new = new Partie();
 						
 						System.out.print("Numero de la partie a charger");
-			        	String pa = br.readLine().substring(0, 1);
-			        	System.out.print("Numero de la banquise a charger");
-			        	String ba = br.readLine().substring(0, 1);
+			        	int num = Integer.parseInt(br.readLine());
 
-		        		p_new.chargerTXT("saveBanquises/banquise"+ba, "saveParties/partie"+pa);
+		        		p_new.chargerTXT("save2/partie"+num);
 						System.out.println("Banquise recupere :\n"+p_new.toString2());
+						break;
 					default :
 						System.out.println("Commande non reconnu");
 				}

@@ -44,7 +44,7 @@ public class Banquise implements Serializable {
 	public Banquise(String filename){
 		terrain = new Tuile[8][8];
 		try {
-			recupBanquise(filename);
+			recupBanquise2(filename);
 		} catch (IOException e) {
 			System.out.println("Erreur : fichier a lire, banquise initialisée aleatoirement");
 			initBanquise();
@@ -108,10 +108,17 @@ public class Banquise implements Serializable {
 		}
 	}
 	
-	public void recupBanquise(String filename) throws IOException {
-		Tuile t = new Tuile();
-		
+	
+	public void recupBanquise2(String filename) throws IOException {
 		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+		this.recupBanquise(br);
+	}
+	
+	public void recupBanquise(BufferedReader br) throws IOException {
+		Tuile t = new Tuile();
+		System.out.println("recupBanquise debut");
+
+		//BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
 		
 		String ligne;
 		String[] poissons;
@@ -167,12 +174,12 @@ public class Banquise implements Serializable {
 						System.out.println("Erreur : Nombre de poisson sur la case "+i+" "+j);
 					} 
 				}
-			}
+			}/*
 			if (numligne == 7) {
-				this.terrain[i][numligne] = null;
-			}
+				this.terrain[i][7] = null;
+			}*/
 		}
-		br.close();
+		//br.close();
 	}
 
 /*******************************************************************************************************/

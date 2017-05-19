@@ -34,7 +34,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	GestionnaireEcransFxml liste_Ecran;
 	Coordonnees coord_pingouin_encours;
-	boolean phaseJeu, phasePlacement, validerTour,phaseVictoire;
     //Coordonnees depart = new Coordonnees();
     //Coordonnees arrivee = new Coordonnees();
 	
@@ -55,6 +54,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
     @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
     @FXML private Label nom_j1, nom_j2, nom_j3, nom_j4;
+    
+    ArrayList<Label> scores_poissons, scores_tuiles;
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
     ArrayList<ArrayList<ImageView>> reglettes;
@@ -103,13 +104,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_finTour.setDisable(true);
     	
     	coord_pingouin_encours = new Coordonnees(-1,-1);
-    	phasePlacement = true;
-    	phaseJeu = false;
-    	phaseVictoire=false;
-    	validerTour = false;
-    	
-    	
-    	
     }
     
     
@@ -121,7 +115,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
     
     /**
-     * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur dynamiquement à l'appel de l'écran de Jeu. 
+     * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associé à ce controleur dynamiquement à l'appel de l'écran de Jeu. 
      * Appelle la mise initiale lors du chargement d'écran, ainsi que la mise à jour de chaque tour de jeu 
      */
     public void miseAjour(){
@@ -132,8 +126,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
     		Paint[] p = {Paint.valueOf("ffda4a"),Paint.valueOf("37cc2c"),Paint.valueOf("950303"),Paint.valueOf("2394f1")};	
     	    Label[] noms = {nom_j1,nom_j2,nom_j3,nom_j4};
-    	    Label[] score_poissons = {score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4};
-    	    Label[] score_tuiles = {score_tuiles_j1,score_tuiles_j2,score_tuiles_j3,score_tuiles_j4};  
+    	    
+    	    scores_poissons = new ArrayList <Label>(); Collections.addAll(scores_poissons, score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4);
+    	    scores_tuiles = new ArrayList <Label>(); Collections.addAll(scores_tuiles, score_tuiles_j1, score_tuiles_j2,score_tuiles_j3,score_tuiles_j4);  
     	    
     	    reglette_j1 = new ArrayList <ImageView>(); Collections.addAll(reglette_j1, reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4);
     	    reglette_j2 = new ArrayList <ImageView>(); Collections.addAll(reglette_j2, reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4);
@@ -155,7 +150,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    
     	    miseAjour_initiale(anchorPanes, banquises, p, noms);
     	    
-    	    miseAjour_tourDeJeu(reglettes, score_poissons, score_tuiles, banquise);
+    	    miseAjour_tourDeJeu();
     	}
     }
     
@@ -173,12 +168,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	
     	for(int k=0; k<liste_Ecran.partie.joueurs.length; k++){
     		//maj de chaque zones réservées à un joueur
-    		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.partie.joueurs[k]).couleur],(Label)noms[k]);
+    		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.partie.joueurs[k]).couleur],(Label)noms[k]);	
 		}
     	
     	if( liste_Ecran.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
 	    	bouton_defaire.setDisable(false);
+	    	bouton_defaire.setVisible(false);
 	    	bouton_faire.setDisable(false);
+	    	bouton_faire.setVisible(false);
 		}
     }
     
@@ -195,6 +192,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	anchors.setVisible(true);
     	banquisette.setFill(p);
     	nom.setText(liste_Ecran.partie.joueurs[joueur].nom);
+    	
+    	//maj des miniatures des pinguouins 		
+		String path = liste_Ecran.partie.joueurs[joueur].cheminMiniature;
+		for(int ping = 0; ping < liste_Ecran.partie.joueurs[joueur].nbPingouin ; ping++){
+			reglettes.get(joueur).get(ping).setImage(new Image(path));
+		}
     }
     
     
@@ -205,25 +208,27 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param score_tuiles tableau des scores (en tuiles) des joueurs
      * 
      */
-    public void miseAjour_tourDeJeu(ArrayList<ArrayList<ImageView>> reglettes, Label[] score_poissons, Label[] score_tuiles, ArrayList<ArrayList<ImageView>> banquise ){
-    	//maj du label "tour de untel"
-    	label_tourDe.setText("Tour de "+liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif].nom+" :");
-    	
+    public void miseAjour_tourDeJeu(){
+
     	for(int j=0; j < liste_Ecran.partie.joueurs.length; j++){
     		//maj des scores du joueur
-    		((Label)score_poissons[j]).setText( String.valueOf(liste_Ecran.partie.joueurs[j].poissonsManges) );
-        	((Label)score_tuiles[j]).setText( String.valueOf(liste_Ecran.partie.joueurs[j].nbTuiles) );	
-        	
-    		//maj des pinguouins sur les reglettes 		
-    		String path = liste_Ecran.partie.joueurs[j].cheminMiniature;
-    		for(int p=0; p < liste_Ecran.partie.joueurs[j].nbPingouin ; p++){
-    			reglettes.get(j).get(p).setImage(new Image(path));
-    		}
+    		scores_poissons.get(j).setText( String.valueOf(liste_Ecran.partie.joueurs[j].poissonsManges) );
+    		scores_tuiles.get(j).setText( String.valueOf(liste_Ecran.partie.joueurs[j].nbTuiles) );	
     	}
 
     	//maj de l'affichage la banquise
     	majBanquise();
     	
+    	
+    	//maj affichage + interaction selon phase :
+    	//maj du label "tour X : placer ou jouer un pingouin"
+    	if(liste_Ecran.moteur.phasePlacement){
+    		label_tourDe.setText(liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif].nom+" place un pingouin sur la banquise.");
+    	}
+    	else if(this.liste_Ecran.moteur.phaseJeu){
+    		label_tourDe.setText(liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif].nom+" deplace un pingouin sur la banquise.");
+    	}
+    		
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
     	if( liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif] instanceof Humain){
     		box_boutons_tour.setDisable(false);
@@ -232,8 +237,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	else{
     		box_tour_distant.setDisable(false);
     		box_tour_distant.setVisible(true);
-        	
     	}
+    	
+    	
     } 
     
     /**
@@ -385,25 +391,17 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private void validerTour(MouseEvent event){
 		Partie partie = liste_Ecran.partie;
 		
-    	if (phasePlacement) {
+    	if (liste_Ecran.moteur.phasePlacement) {
 			partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
-			
-			phasePlacement = !partie.placementPingouinsFini();			
-			if (!phasePlacement) {
-				phaseJeu = true;
-			}
+				
 		}
-		else if (phaseJeu) {
+		else if (liste_Ecran.moteur.phaseJeu) {
 			//TODO
 			//partie.deplacement(depart, arrivee);
 	    	//depart = new Coordonnees();
 	    	//phaseJeu = partie.estPartieFini();
-			
-			phaseJeu = !partie.jeuPingouinsFini();			
-			if (!phaseJeu) {
-				phaseVictoire = true;
-			}
-		} else if (phaseVictoire){
+	
+		} else if (liste_Ecran.moteur.phaseVictoire){
 			//TODO
 		}
     	
@@ -470,7 +468,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		
 		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			
-			if (phasePlacement) {
+			if (liste_Ecran.moteur.phasePlacement) {
 				System.out.println("phase placement");
 				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
 					pingouinAplacer = partie.numPingouinAPlacer();
@@ -488,7 +486,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					bouton_finTour.setDisable(false);
 				}
 			}
-			else if (phaseJeu) {
+			else if (liste_Ecran.moteur.phaseJeu) {
 				// TODO
 				/*if ( partie.appartientPingouin(xy) == partie.joueurActif) {
 					depart = xy;

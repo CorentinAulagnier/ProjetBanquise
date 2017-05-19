@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import model.Moteur;
 import model.Partie;
 
 /**
@@ -34,7 +35,11 @@ public class GestionnaireEcransFxml extends StackPane {
 	 */
 	public MediaPlayer media;
 	/**
-	 * Objet partie implémentant le moteur de jeu
+	 * Objet moteur implémentant le moteur de jeu
+	 */
+	public Moteur moteur;
+	/**
+	 * Objet partie implémentant une partie d'un jeu
 	 */
 	public Partie partie;
 	/**
@@ -58,13 +63,14 @@ public class GestionnaireEcransFxml extends StackPane {
 	 * @param p
 	 *            partie
 	 */
-	public GestionnaireEcransFxml(Partie p) {
+	public GestionnaireEcransFxml(Moteur m) {
 		super();
-		partie = p;
-		media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
+		moteur = m;
+		partie = moteur.getPartie();
+		/*media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
 		media.setAutoPlay(true);
 		musique = true;
-		media.play();
+		media.play();*/
 	}
 
 	/**

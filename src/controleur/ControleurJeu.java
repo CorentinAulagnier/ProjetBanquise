@@ -608,10 +608,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	
 	
 	public Coordonnees getCoordonnees(double x, double y) {
-		//Valeurs
-		double tuileHauteur = 48*2/3;
-		double tuileLargeur = 64;
-		double c = 48/3;
+		//Valeurs a renseigner
+		double hauteurTotaleTuile = 48; //hauteur carré + triangles haut et bas
+		double tuileHauteur = hauteurTotaleTuile*2/3; //hauteur carré + triangle haut
+		double tuileLargeur = 64; //largeur d'une tuile
+		double c = hauteurTotaleTuile/3; //hauteur d'un "triangle"
+		//Valeurs deduites
 		double moitieLargeur = tuileLargeur/2;
 		double gradient = c/moitieLargeur;
 		

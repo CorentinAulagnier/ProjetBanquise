@@ -68,5 +68,11 @@ public class Moteur {
 		} else if(phaseJeu) {
 			deplacement(j.jouer(partie));
 		}
+	}
+
+	public void execPremiereIA() {
+		if (this.partie.getJoueurActif() instanceof IA) {
+			this.faireJouerIAS();
+		}		
 	}   
 }

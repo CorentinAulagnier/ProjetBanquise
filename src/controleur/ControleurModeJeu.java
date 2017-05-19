@@ -86,13 +86,13 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     	    	
     	bulleVisible(bulle,1);
-    	   	    	
-    	gestionnaireFxmlCourant.partie = new Partie(new Banquise(), tableauDeJoueur);
+    	gestionnaireFxmlCourant.moteur.partie = new Partie(nbJoueurs);
+
+
+    	gestionnaireFxmlCourant.moteur.partie.joueurs = tableauDeJoueur;
 
     	
-		if (gestionnaireFxmlCourant.moteur.partie.getJoueurActif() instanceof IA) {
-			gestionnaireFxmlCourant.moteur.faireJouerIAS();
-		}
+    	gestionnaireFxmlCourant.moteur.execPremiereIA();
 		
     	nettoyerMenu(optionbox, roue);
     	

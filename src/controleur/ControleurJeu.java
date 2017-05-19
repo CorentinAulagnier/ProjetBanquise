@@ -120,7 +120,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     public void miseAjour(){
     	
-    	if(liste_Ecran!= null && liste_Ecran.partie!=null){
+    	if(liste_Ecran!= null && liste_Ecran.moteur.partie!=null){
     		
     		AnchorPane[] anchorPanes = {anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4};
     		Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
@@ -166,12 +166,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms){
     	
-    	for(int k=0; k<liste_Ecran.partie.joueurs.length; k++){
+    	for(int k=0; k<liste_Ecran.moteur.partie.joueurs.length; k++){
     		//maj de chaque zones réservées à un joueur
-    		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.partie.joueurs[k]).couleur],(Label)noms[k]);	
+    		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.moteur.partie.joueurs[k]).couleur],(Label)noms[k]);	
 		}
     	
-    	if( liste_Ecran.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
+    	if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
 	    	bouton_defaire.setDisable(false);
 	    	bouton_defaire.setVisible(false);
 	    	bouton_faire.setDisable(false);
@@ -191,11 +191,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
     	anchors.setVisible(true);
     	banquisette.setFill(p);
-    	nom.setText(liste_Ecran.partie.joueurs[joueur].nom);
+    	nom.setText(liste_Ecran.moteur.partie.joueurs[joueur].nom);
     	
     	//maj des miniatures des pinguouins 		
-		String path = liste_Ecran.partie.joueurs[joueur].cheminMiniature;
-		for(int ping = 0; ping < liste_Ecran.partie.joueurs[joueur].nbPingouin ; ping++){
+		String path = liste_Ecran.moteur.partie.joueurs[joueur].cheminMiniature;
+		for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[joueur].nbPingouin ; ping++){
 			reglettes.get(joueur).get(ping).setImage(new Image(path));
 		}
     }
@@ -210,10 +210,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     public void miseAjour_tourDeJeu(){
 
-    	for(int j=0; j < liste_Ecran.partie.joueurs.length; j++){
+    	for(int j=0; j < liste_Ecran.moteur.partie.joueurs.length; j++){
     		//maj des scores du joueur
-    		scores_poissons.get(j).setText( String.valueOf(liste_Ecran.partie.joueurs[j].poissonsManges) );
-    		scores_tuiles.get(j).setText( String.valueOf(liste_Ecran.partie.joueurs[j].nbTuiles) );	
+    		scores_poissons.get(j).setText( String.valueOf(liste_Ecran.moteur.partie.joueurs[j].poissonsManges) );
+    		scores_tuiles.get(j).setText( String.valueOf(liste_Ecran.moteur.partie.joueurs[j].nbTuiles) );	
     	}
 
     	//maj de l'affichage la banquise
@@ -223,14 +223,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//maj affichage + interaction selon phase :
     	//maj du label "tour X : placer ou jouer un pingouin"
     	if(liste_Ecran.moteur.phasePlacement){
-    		label_tourDe.setText(liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif].nom+" place un pingouin sur la banquise.");
+    		label_tourDe.setText(liste_Ecran.moteur.partie.joueurs[liste_Ecran.moteur.partie.joueurActif].nom+" place un pingouin sur la banquise.");
     	}
     	else if(this.liste_Ecran.moteur.phaseJeu){
-    		label_tourDe.setText(liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif].nom+" deplace un pingouin sur la banquise.");
+    		label_tourDe.setText(liste_Ecran.moteur.partie.joueurs[liste_Ecran.moteur.partie.joueurActif].nom+" deplace un pingouin sur la banquise.");
     	}
     		
     	//si joueur actif = humain alors montrer hbox boutons sinon attente
-    	if( liste_Ecran.partie.joueurs[liste_Ecran.partie.joueurActif] instanceof Humain){
+    	if( liste_Ecran.moteur.partie.joueurs[liste_Ecran.moteur.partie.joueurActif] instanceof Humain){
     		box_boutons_tour.setDisable(false);
     		box_boutons_tour.setVisible(true);
     	}
@@ -251,7 +251,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	for (int i = 0 ; i < 8 ; i++){
     		for (int j = 0 ; j< 8 ; j++){
     			if ( !((i%2 == 0) && (j == 7)) ) {
-    				placeUneTuile(liste_Ecran.partie.b.terrain[i][j].nbPoissons, i, j);
+    				placeUneTuile(liste_Ecran.moteur.partie.b.terrain[i][j].nbPoissons, i, j);
     			}	
     		}
     	}
@@ -310,7 +310,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         if (file != null) {
         	path = file.getAbsolutePath();
         	//TODO
-        	liste_Ecran.partie.sauvegarder(path);        	
+        	liste_Ecran.moteur.partie.sauvegarder(path);        	
         }   
     }
     
@@ -389,7 +389,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void validerTour(MouseEvent event){
-		Partie partie = liste_Ecran.partie;
+		Partie partie = liste_Ecran.moteur.partie;
 		
     	if (liste_Ecran.moteur.phasePlacement) {
 			partie.setPlacementPingouin(coord_pingouin_encours, partie.joueurActif, partie.numPingouinAPlacer());
@@ -456,7 +456,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event evenement souris attendu : clic
      */
 	public void anchorClick(MouseEvent event) {
-		Partie partie = liste_Ecran.partie;
+		Partie partie = liste_Ecran.moteur.partie;
 		int jActif = partie.joueurActif;
 		int pingouinAplacer;
 		
@@ -502,7 +502,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}*/
 				
 				// Coordonnees[] pingouins =
-				// liste_Ecran.partie.pingouinsDeplacable();
+				// liste_Ecran.moteur.partie.pingouinsDeplacable();
 			}
 		}
 

@@ -123,8 +123,11 @@ public class Partie implements Serializable {
 	
 	public Partie(Banquise plateau, Joueur[] j){
 		this.b = plateau;
-		this.joueurs = j;
 		this.nbJoueurs = j.length;
+		this.joueurs = new Joueur[this.nbJoueurs];
+    	for (int k = 0; k<this.nbJoueurs; k++) {
+    		joueurs[k] = j[k];
+    	}
 		this.joueurActif = 0;
 	}
 
@@ -375,6 +378,7 @@ public class Partie implements Serializable {
 	 */
 	
 	public Joueur getJoueurActif() {
+		System.out.println("joueurActif = " +joueurActif);
 		return joueurs[joueurActif] ;
 	}
 

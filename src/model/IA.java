@@ -112,6 +112,9 @@ public class IA extends Joueur {
 	public CoupleGenerique<Coordonnees, Coordonnees> jouer(Partie p) {
 		AlgoIA player = new AlgoIA(this);
 		int level = this.niveau;
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {e.printStackTrace();}
 		
 		switch (level) {
 			case 1:
@@ -137,6 +140,9 @@ public class IA extends Joueur {
 	public Coordonnees placement(Partie p) {
 		AlgoIA player = new AlgoIA(this);
 		int level = this.niveau;
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {e.printStackTrace();}
 		
 		switch (level) {
 			case 1:

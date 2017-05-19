@@ -160,7 +160,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    System.out.println("creation time line");
         	Timeline timeline = new Timeline(
         			new KeyFrame(
-        					Duration.seconds(2),
+        					Duration.seconds(1),
         					new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							// Call miseAjour_tourDeJeu method for every 2 sec.

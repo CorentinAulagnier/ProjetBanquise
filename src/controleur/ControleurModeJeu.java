@@ -88,18 +88,16 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	bulleVisible(bulle,1);
     	gestionnaireFxmlCourant.moteur.partie = new Partie(nbJoueurs);
 
-
     	gestionnaireFxmlCourant.moteur.partie.joueurs = tableauDeJoueur;
-
-    	
-    	gestionnaireFxmlCourant.moteur.execPremiereIA();
-		
+    		
     	nettoyerMenu(optionbox, roue);
     	
     	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
-    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU);    	
-    	    	
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU);  
+
+       // liste_Ecran.moteur.execPremiereIA();
+
     }
     
     public Joueur creerJoueur(int couleur, int nbP){

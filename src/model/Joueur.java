@@ -60,9 +60,10 @@ public abstract class Joueur implements Serializable{
 	 * @param p
 	 *            L'etat de la partie.
 	 * @return Un Couple de Coordonnees representant le deplacement du pingouin (dep,arr) .
+	 * @throws InterruptedException 
 	 */	
 	
-	public abstract CoupleGenerique<Coordonnees, Coordonnees> jouer(Partie p) ;
+	public abstract CoupleGenerique<Coordonnees, Coordonnees> jouer(Partie p);
 
 	/**
 	 * Renvoie oû placer un pingouin.
@@ -70,6 +71,7 @@ public abstract class Joueur implements Serializable{
 	 * @param p
 	 *            L'etat de la partie.
 	 * @return Une Coordonnees representant la premiere position du pingouin.
+	 * @throws InterruptedException 
 	 */	
 	
 	public abstract Coordonnees placement(Partie p);

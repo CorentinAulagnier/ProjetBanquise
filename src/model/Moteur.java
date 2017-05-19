@@ -44,16 +44,16 @@ public class Moteur {
 
 		this.partieARafraichir();
     	System.out.println("partieARafraichir");
-
+    			
     	System.out.println(partie);
 
 		if (partie.getJoueurActif() instanceof IA) {
 	    	System.out.println("attente rafraichissement");
 	    	
-	    	
+	    	/*
             while(true) {
 	            if(!aRafraichir) break;
-            }//while (aRafraichir);
+            }//while (aRafraichir);*/
 			faireJouerIAS();
 			
 		}
@@ -74,15 +74,14 @@ public class Moteur {
 
 		this.partieARafraichir();
     	System.out.println("partieARafraichir");
-
 		
 		if (partie.getJoueurActif() instanceof IA) {
 	    	System.out.println("attente rafraichissement");
 
-	    	
+	    	/*
             while(true) {
 	            if(!aRafraichir) break;
-            }//while (aRafraichir);
+            }//while (aRafraichir);*/
 			faireJouerIAS();
 		}
 		
@@ -107,10 +106,10 @@ public class Moteur {
 
 	public void execPremiereIA() {
 		if (this.partie.getJoueurActif() instanceof IA) {
-            while(true) {
-	            if(!aRafraichir) break;
-            }//while (aRafraichir);
+			//this.partieRafraichie();
+
 			this.faireJouerIAS();
+			//this.partieRafraichie();
 		}		
 	}
 }

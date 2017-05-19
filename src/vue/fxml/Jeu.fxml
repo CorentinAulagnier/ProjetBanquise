@@ -216,9 +216,9 @@
       </GridPane>
     </children>
   </AnchorPane>
-  <Text fx:id="label_tourDe" fill="BLACK" layoutX="249.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour 1" textAlignment="CENTER" visible="false" wrappingWidth="301.1357181072235">
+  <Text fx:id="label_tourDe" fill="BLACK" layoutX="160.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour 1" textAlignment="CENTER" wrappingWidth="479.1357181072235">
     <font>
-      <Font size="30.0" />
+      <Font size="20.0" />
     </font>
   </Text>
   <AnchorPane fx:id="anchorBanquise" layoutX="144.0" layoutY="125.0" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: #cce6ff; -fx-border-width: 5;">

@@ -1,5 +1,6 @@
 package vue;
 
+import model.Moteur;
 import model.Partie;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
@@ -25,6 +26,7 @@ public class Interface extends Application {
 	private static int largeurFenetre;
 	private static int hauteurFenetre;
 	private static Partie partie;
+	private static Moteur moteur;
 
 	/**
 	 * Lie les paramètres de bases à l'interface
@@ -33,8 +35,9 @@ public class Interface extends Application {
 	 * @param h hauteur native du jeu
 	 * @param l largeur native du jeu
 	 */
-	public static void creer(String[] args, Partie parti, int hauteur, int largeur) {
-		partie = parti;
+	public static void creer(String[] args, Moteur m, int hauteur, int largeur) {
+		moteur = m;
+		partie = moteur.getPartie();
 		hauteurFenetre = hauteur;
 		largeurFenetre = largeur;
 		launch(args);
@@ -46,7 +49,7 @@ public class Interface extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		GestionnaireEcransFxml gestionnaireEcransFXML = new GestionnaireEcransFxml(partie);
+		GestionnaireEcransFxml gestionnaireEcransFXML = new GestionnaireEcransFxml(moteur);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_ACCUEIL, model.Proprietes.ECRAN_ACCUEIL_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_REGLES, model.Proprietes.ECRAN_REGLES_FXML);
 		gestionnaireEcransFXML.chargeEcran(model.Proprietes.ECRAN_MODE, model.Proprietes.ECRAN_MODE_FXML);

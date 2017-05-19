@@ -13,6 +13,10 @@ public class Moteur {
 		this.phaseJeu = false;
 		this.phaseVictoire = false;
 		this.aRafraichir = false;
+		
+		if (partie.getJoueurActif() instanceof IA) {
+			faireJouerIAS();
+		}
 	}
 	
 	public Partie getPartie() {
@@ -29,10 +33,10 @@ public class Moteur {
 		partie.majProchainJoueur();
 		//Attendre IHM
 		
-		aRafraichir = false;
+		aRafraichir = true;
 		
 		if (partie.getJoueurActif() instanceof IA) {
-			while (!aRafraichir);
+			while (aRafraichir);
 			faireJouerIAS();
 		}
 	}

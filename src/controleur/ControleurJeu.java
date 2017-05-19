@@ -47,8 +47,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	//boutons d'actions
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
     @FXML private Text label_tourDe;
-    @FXML private HBox box_boutons_tour, box_demarrerIA;
-    @FXML private AnchorPane box_tour_distant;
+    @FXML private HBox box_boutons_tour;
+    @FXML private AnchorPane box_tour_distant, box_demarrerIA;
     
     //zone menu
     @FXML private ImageView imageSon, imageMusique;
@@ -100,7 +100,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	box_boutons_tour.setVisible(false);
     	
     	/*debuterPartie*/
-    	box_demarrerIA.setDisable(false);
+    	
+    	box_demarrerIA.setDisable(true);
     	box_demarrerIA.setVisible(false);
     	
     	
@@ -259,17 +260,37 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		label_tourDe.setText(liste_Ecran.moteur.partie.joueurs[liste_Ecran.moteur.partie.joueurActif].nom+" deplace un pingouin sur la banquise.");
     	}
     		
-    	//si joueur actif = humain alors montrer hbox boutons sinon attente
-    	if( liste_Ecran.moteur.partie.joueurs[liste_Ecran.moteur.partie.joueurActif] instanceof Humain){
-    		box_boutons_tour.setDisable(false);
-    		box_boutons_tour.setVisible(true);
-    	}
-    	else{
-    		box_tour_distant.setDisable(false);
-    		box_tour_distant.setVisible(true);
-    	}
     	
     	
+    	
+    	
+    	if (liste_Ecran.moteur.partie.joueurActif == 0 && liste_Ecran.moteur.partie.numPingouinAPlacer() == 0) {
+        	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
+	        	box_demarrerIA.setDisable(true);
+	        	box_demarrerIA.setVisible(false);
+	        	
+	        	
+	    		box_boutons_tour.setDisable(false);
+	    		box_boutons_tour.setVisible(true);
+        	}
+    	} else {
+    		//si joueur actif = humain alors montrer hbox boutons sinon attente
+	    	if( liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
+	    		box_boutons_tour.setDisable(false);
+	    		box_boutons_tour.setVisible(true);
+	    		
+	    	}else{
+	    		box_tour_distant.setDisable(false);
+	    		box_tour_distant.setVisible(true);
+	    	}
+	    	
+	    	if (box_demarrerIA.isVisible()){
+	        	box_demarrerIA.setDisable(true);
+	        	box_demarrerIA.setVisible(false);
+	        	
+	    	} 
+    	}
+	    
     } 
     
     /**
@@ -282,7 +303,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		for (int j = 0 ; j< 8 ; j++){
     			if ( !((i%2 == 0) && (j == 7)) ) {
     				placeUneTuile(liste_Ecran.moteur.partie.b.terrain[i][j].nbPoissons, i, j);
-    			}	
+    			}	    	box_demarrerIA.setDisable(false);
+    	    	box_demarrerIA.setVisible(true);
     		}
     	}
     }
@@ -416,10 +438,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * Debute une partie si c'est a une IA de jouer
      * @param event
      */
-    @FXML private void debuterPartie(MouseEvent event){
+    @FXML private void lancerIA(MouseEvent event){
 		System.out.println("appelle fonction placement de la 1er IA");
 		liste_Ecran.moteur.execPremiereIA();
 		System.out.println("retour à mouse event debuterPartie");
+    	miseAjour_tourDeJeu();
     }
     
     /**
@@ -455,22 +478,23 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//arrivee = new Coordonnees();
     	coord_pingouin_encours = new Coordonnees(-1,-1);
     	
-    	
+    	miseAjour_tourDeJeu();
+/*
     	if(partie.getJoueurActif() instanceof model.IA){
-    		this.box_boutons_tour.setDisable(true);
-    		this.box_boutons_tour.setVisible(false);
+    		//this.box_boutons_tour.setDisable(true);
+    		//this.box_boutons_tour.setVisible(false);
     		
     		this.box_tour_distant.setDisable(false);
     		this.box_tour_distant.setVisible(true);
     	} else {
-    		this.box_boutons_tour.setDisable(false);
-    		this.box_boutons_tour.setVisible(true);
+    		//this.box_boutons_tour.setDisable(false);
+    		//this.box_boutons_tour.setVisible(true);
     		
     		this.box_tour_distant.setDisable(true);
     		this.box_tour_distant.setVisible(false);
     	}
     	
-    	
+    	*/
 		/*
 		 * Mise a jour de l'activation du bouton fin de tour
 		 * 

@@ -221,7 +221,7 @@
       <Font size="20.0" />
     </font>
   </Text>
-  <AnchorPane fx:id="anchorBanquise" layoutX="144.0" layoutY="125.0" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: #cce6ff; -fx-border-width: 5;">
+  <AnchorPane fx:id="anchorBanquise" layoutX="144.0" layoutY="125.0" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: transparent; -fx-border-width: 5;">
     <children>
       <ImageView fx:id="t11" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
         <image>

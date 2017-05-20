@@ -24,6 +24,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -230,10 +233,23 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");}
     	
     	//maj effet sur joueur actif
-    	//TODO
+    	Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
+
+    	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
+    		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
+    			if (j == liste_Ecran.moteur.partie.joueurActif){
+    				((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
+    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
+    			}else{
+    				((ImageView) reglettes.get(j).get(i)).setEffect(null);
+    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
+    			}
+	    	}
+    	}
 
     	//maj zone des boutons
     	majActionsDisponibles();	
+    	
     } 
     
     /**
@@ -379,7 +395,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
     	
     	coord_pingouin_encours = new Coordonnees();
-    	miseAjour_tourDeJeu();        
+    	miseAjour_tourDeJeu();
+    
     }
     
  

@@ -431,25 +431,27 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				//TODO on sélectionne un pingouin depuis sa tuile
 				//pingouinAdeplacer = rendPingouinAdeplacer(indicesBanquise);
 				int numPingTemporaire = rendPingouinAdeplacer(indicesBanquise);
-				System.out.println("ping a deplacer (clic sur tuile)"+numPingTemporaire);
+				System.out.println("ping a deplacer (clic sur tuile) "+numPingTemporaire);
 				if (numPingTemporaire!= -1){
 					pingouinAdeplacer = numPingTemporaire;
-					selectionnerPingouinAdeplacer(banquise.get(jActif).get(numPingTemporaire));
+					selectionnerPingouinAdeplacer(banquise.get(jActif).get(pingouinAdeplacer));
+	
 				}
 				 
 				//on a déjà selectionné un pingouin donc on peut le bouger
 				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.getJoueurActif().myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
+					System.out.println("pingouin bouge");
 					translaterPingouin(pingouinAdeplacer,jActif,indicesBanquise);
 					coord_pingouin_encours = indicesBanquise;
 					bouton_finTour.setDisable(false);
-				}
+				}else{	System.out.println("pingouin bouge pas");}
 			}
 			
 		}
 		
 	}
 	
-
+	//CETTE FONCTION EST DEVENUE INUTILE.  De la part de Seb.
 	/**
 	 * action à produire après un clic sur un pingouin pendant la phase jeu
 	 * @param event evenement souris attendu : clic
@@ -468,18 +470,20 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 * @param pingouinCible miniature sur laquelle on a cliqué
 	 */
 	public void selectionnerPingouinAdeplacer(ImageView pingouinCible){
-		Partie partie = liste_Ecran.moteur.partie;
-		int jActif = partie.joueurActif;
+		//Partie partie = liste_Ecran.moteur.partie;
+		int jActif =  liste_Ecran.moteur.partie.joueurActif;
 		bouton_finTour.setDisable(true);
 		
 		if (liste_Ecran.moteur.phaseJeu) {
+			//IL FAUDRAIT PEUT ETRE EVITER LE MAJ CI DESSOUS MAIS C'EST LE PLUS SIMPLE.  De la part de Seb.
+			majPingouins();
 			// le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
 			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer != 1) {
 				// on veux en bouger un autre alors on annule son mouvement
-				translaterPingouin(pingouinAdeplacer, jActif,partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
+				translaterPingouin(pingouinAdeplacer, jActif, liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
 			}
 			if(pingouinCible!=null){
-				pingouinAdeplacer = reglettes.get(partie.joueurActif).indexOf(pingouinCible);
+				//pingouinAdeplacer = reglettes.get( liste_Ecran.moteur.partie.joueurActif).indexOf(pingouinCible);
 				System.out.println("ping a deplacer (clic sur pingouin)"+pingouinAdeplacer);
 			}
 			coord_pingouin_encours = new Coordonnees();

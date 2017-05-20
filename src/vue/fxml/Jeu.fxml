@@ -660,22 +660,22 @@
         </ImageView>
       </graphic>
     </Button>
-<ImageView fx:id="reglette_j1_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="10.0" y="45.0" />
-<ImageView fx:id="reglette_j1_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="45.0" y="45.0" />
-<ImageView fx:id="reglette_j1_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="80.0" y="45.0" />
-<ImageView fx:id="reglette_j1_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="115.0" y="45.0" />
-<ImageView fx:id="reglette_j2_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="765.0" y="45.0" />
-<ImageView fx:id="reglette_j2_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="730.0" y="45.0" />
-<ImageView fx:id="reglette_j2_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="695.0" y="45.0" />
-<ImageView fx:id="reglette_j2_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="660.0" y="45.0" />
-<ImageView fx:id="reglette_j3_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="765.0" y="515.0" />
-<ImageView fx:id="reglette_j3_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="730.0" y="515.0" />
-<ImageView fx:id="reglette_j3_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="695.0" y="515.0" />
-<ImageView fx:id="reglette_j3_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="660.0" y="515.0" />
-<ImageView fx:id="reglette_j4_1" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="10.0" y="515.0" />
-<ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
-<ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
-<ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
+<ImageView fx:id="reglette_j1_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="10.0" y="45.0" />
+<ImageView fx:id="reglette_j1_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="45.0" y="45.0" />
+<ImageView fx:id="reglette_j1_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="80.0" y="45.0" />
+<ImageView fx:id="reglette_j1_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="115.0" y="45.0" />
+<ImageView fx:id="reglette_j2_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="765.0" y="45.0" />
+<ImageView fx:id="reglette_j2_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="730.0" y="45.0" />
+<ImageView fx:id="reglette_j2_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="695.0" y="45.0" />
+<ImageView fx:id="reglette_j2_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="660.0" y="45.0" />
+<ImageView fx:id="reglette_j3_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="765.0" y="515.0" />
+<ImageView fx:id="reglette_j3_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="730.0" y="515.0" />
+<ImageView fx:id="reglette_j3_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="695.0" y="515.0" />
+<ImageView fx:id="reglette_j3_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="660.0" y="515.0" />
+<ImageView fx:id="reglette_j4_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="10.0" y="515.0" />
+<ImageView fx:id="reglette_j4_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
+<ImageView fx:id="reglette_j4_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
+<ImageView fx:id="reglette_j4_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
 <Button fx:id="bouton_defaire" layoutX="58.0" layoutY="278.0" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
   <graphic>
     <ImageView fitHeight="45.0" fitWidth="45.0">

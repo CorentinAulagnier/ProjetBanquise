@@ -1,13 +1,18 @@
 package controleur;
+
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
+import model.Partie;
+import model.Banquise;
+import model.Coordonnees;
+import model.CoupleGenerique;
+import model.Humain;
+import model.IA;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,18 +28,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import model.Banquise;
-import model.Coordonnees;
-import model.CoupleGenerique;
-import model.Humain;
-import model.IA;
-import model.Partie;
 
 public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
 	/**
@@ -42,8 +39,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	GestionnaireEcransFxml liste_Ecran;
 	Coordonnees coord_pingouin_encours;
-    Coordonnees depart = new Coordonnees();
-    Coordonnees arrivee = new Coordonnees();
     int pingouinAdeplacer;
 	
 	//boutons d'actions
@@ -53,7 +48,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
     //zone menu
     @FXML private ImageView imageSon, imageMusique;
-    final FileChooser fileChooser = new FileChooser();
     @FXML AnchorPane optionbox;
     @FXML Button roue;
     
@@ -318,22 +312,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}  
 	}
     
-	public void activerAnchorPane(AnchorPane a){
-		a.setDisable(false);
-    	a.setVisible(true);
-	}
-	public void desactiverAnchorPane(AnchorPane a){
-		a.setDisable(true);
-    	a.setVisible(false);
-	}
-	public void activerBouton(Button b){
-		b.setDisable(false);
-    	b.setVisible(true);
-	}
-	public void desactiverBouton(Button b){
-		b.setDisable(true);
-    	b.setVisible(false);		
-	}
+
 	
     /****************************************/
     /*		gestion actions des joueurs		*/
@@ -677,7 +656,22 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		return coord;
 	}
 	
-	
+	public void activerAnchorPane(AnchorPane a){
+		a.setDisable(false);
+    	a.setVisible(true);
+	}
+	public void desactiverAnchorPane(AnchorPane a){
+		a.setDisable(true);
+    	a.setVisible(false);
+	}
+	public void activerBouton(Button b){
+		b.setDisable(false);
+    	b.setVisible(true);
+	}
+	public void desactiverBouton(Button b){
+		b.setDisable(true);
+    	b.setVisible(false);		
+	}
 
 	
 	
@@ -712,14 +706,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void sauvegarder(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	System.out.println("sauvegarder");
-    	File file = fileChooser.showOpenDialog(null);
-    	String  path = file.getName();
-        if (file != null) {
-        	path = file.getAbsolutePath();
-        	//TODO
-        	liste_Ecran.moteur.partie.sauvegarder(path);        	
-        }   
+    	sauver(liste_Ecran.moteur);
     }
     
     /**
@@ -729,8 +716,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	liste_Ecran.dernierePage = model.Proprietes.ECRAN_JEU;
-    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
+    	appelerRegles(liste_Ecran, model.Proprietes.ECRAN_JEU);
     }
     
     /**
@@ -740,7 +726,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    	alertAccueil(liste_Ecran, model.Proprietes.ECRAN_JEU);
     }
     
     
@@ -751,8 +737,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void quitter(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
-    	alert_quitter(liste_Ecran, "Bye bye ?", contenu, "Partir", "Annuler" , "" );
+    	alert_quitter(liste_Ecran);
     }
     
     

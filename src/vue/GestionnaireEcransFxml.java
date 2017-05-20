@@ -15,7 +15,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import model.Moteur;
-import model.Partie;
 
 /**
  * Controle le passage entre scenes FXML (comme dans le tutoriel de Angela
@@ -67,7 +66,6 @@ public class GestionnaireEcransFxml extends StackPane {
 	public GestionnaireEcransFxml(Moteur m) {
 		super();
 		moteur = m;
-		//partie = moteur.getPartie();
 		/*media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
 		media.setAutoPlay(true);
 		musique = true;

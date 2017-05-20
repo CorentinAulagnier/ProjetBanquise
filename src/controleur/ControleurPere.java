@@ -1,12 +1,14 @@
 package controleur;
 
 import vue.GestionnaireEcransFxml;
+import model.Moteur;
 
+import java.io.File;
+import java.util.Optional;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -15,12 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import java.util.Optional;
+import javafx.stage.FileChooser;
 import javafx.application.Platform;
 
 public class ControleurPere {
@@ -102,16 +103,16 @@ public class ControleurPere {
 	 /**
 	  * gere la modification du volume de la musique
 	  */
-	 public void changerMusique(ImageView iv, MediaPlayer media, GestionnaireEcransFxml gestionnaireFxmlCourant){
+	 public void changerMusique(ImageView iv, MediaPlayer media, GestionnaireEcransFxml liste_ecran){
 		// TODO
-		 if(gestionnaireFxmlCourant.musique){
-			 gestionnaireFxmlCourant.musique = false;
+		 if(liste_ecran.musique){
+			 liste_ecran.musique = false;
 			 media.pause();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
-			 gestionnaireFxmlCourant.musique = true;
+			 liste_ecran.musique = true;
 			 media.seek(media.getStartTime());
 	    		media.play();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
@@ -122,15 +123,15 @@ public class ControleurPere {
 	 /**
 	  * gere la modification des bruitages
 	  */
-	 public void changerSon(ImageView iv, GestionnaireEcransFxml gestionnaireFxmlCourant){
+	 public void changerSon(ImageView iv, GestionnaireEcransFxml liste_ecran){
 		// TODO
-		 if(gestionnaireFxmlCourant.son){
-			 gestionnaireFxmlCourant.son = false;
+		 if(liste_ecran.son){
+			 liste_ecran.son = false;
 			 iv.setImage(new Image(model.Proprietes.IMAGE_SONOFF_PATH));
 			 System.out.println("couper Son");
 		 }
 		 else{
-			 gestionnaireFxmlCourant.son = true;
+			 liste_ecran.son = true;
 			 iv.setImage(new Image(model.Proprietes.IMAGE_SONON_PATH));
 			 System.out.println("remettre Son");
 		 }
@@ -144,7 +145,7 @@ public class ControleurPere {
 	  * @param boutonNok texte a afficher sur le bouton annuler
 	  * @param boutonPeutetre texte optionnel a afficher a la place du bouton non pour rendre fou l'utilisateur
 	  */
-	 public void alert_quitter(GestionnaireEcransFxml gestionnaireFxmlCourant, String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
+	 public void alert_quitter(GestionnaireEcransFxml liste_ecran, String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
 		 
 		 Alert alert = new Alert(AlertType.CONFIRMATION);
 		 alert.setHeaderText(null);
@@ -166,10 +167,78 @@ public class ControleurPere {
 	    	} 
 	    	else if (result.get() == buttonJoker){
 	    		String contenu2 = "Vous etes vraiment sur ? Ils vont se sentir très très seuls...";
-	    		alert_quitter(gestionnaireFxmlCourant, "Ne partez pas...", contenu2, "Partir sans un regard!", "D'accord je reste...", "");
+	    		alert_quitter(liste_ecran, "Ne partez pas...", contenu2, "Partir sans un regard!", "D'accord je reste...", "");
 	    	} else {
-	    		gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+	    		liste_ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
 	    	}
 	    	
 	    }
+	 
+	/**
+	 * Fonction pour ouvrir la fenetre de confirmation de fermeture de
+	 * l'application (version jdk 8u40)
+	 * 
+	 * @param liste_ecran
+	 *            noeud FXML
+	 */
+	public void alert_quitter(GestionnaireEcransFxml liste_ecran) {
+		String titre = "Vous partez ?";
+		String contenu = "Etes vous sur de vouloir quitter nos amis les pingouins? Ils vont se sentir si seuls...";
+		String boutonOk = "Quitter";
+		String boutonNOk = "Annuler";
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setTitle(titre);
+		alert.setContentText(contenu);
+
+		ButtonType buttonOui = new ButtonType(boutonOk, ButtonData.OK_DONE);
+		ButtonType buttonNon = new ButtonType(boutonNOk, ButtonData.CANCEL_CLOSE);
+		alert.getButtonTypes().setAll(buttonNon, buttonOui);
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonOui) {
+			//TODO vider le gestionnaireFXML
+			Platform.exit();
+		} 
+		else {
+			//liste_ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+		}
+	}
+	
+	public void alertAccueil(GestionnaireEcransFxml liste_Ecran, String ecran){
+		String titre = "Quitter partie";
+		String contenu = "Etes vous sur de vouloir quitter cette partie?";
+		String boutonOk = "Oui";
+		String boutonNOk = "Annuler";
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setTitle(titre);
+		alert.setContentText(contenu);
+
+		ButtonType buttonOui = new ButtonType(boutonOk, ButtonData.OK_DONE);
+		ButtonType buttonNon = new ButtonType(boutonNOk, ButtonData.CANCEL_CLOSE);
+		alert.getButtonTypes().setAll(buttonNon, buttonOui);
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonOui) {
+			liste_Ecran.retireEcran(ecran);
+	    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+		}     	
+	}
+ 
+	public void sauver(Moteur moteur) {
+		final FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showOpenDialog(null);
+		String path = file.getName();
+		if (file != null) {
+			path = file.getAbsolutePath();
+			// TODO
+			moteur.partie.sauvegarder(path);
+		}
+	}
+
+	public void appelerRegles(GestionnaireEcransFxml liste_Ecran, String ecranAppelant) {
+		liste_Ecran.dernierePage = ecranAppelant;
+		liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
+	}
 }

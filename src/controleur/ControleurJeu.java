@@ -312,8 +312,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						translaterPingouin(pingEncours,jEncours, pingouin_en_memoire);
 					}
 				}else if (liste_Ecran.moteur.phaseJeu){
-					//TODO
-					//traiter pingouins qui ne sont plus en jeu
+					RotateTransition rt = new RotateTransition(Duration.millis(1000),miniature_pingouin);
+					rt.setByAngle(1000);
+					ScaleTransition st = new ScaleTransition(Duration.millis(1000),miniature_pingouin);
+					st.setToX(0);
+					st.setToY(0);
+					ParallelTransition pt = new ParallelTransition(miniature_pingouin,rt,st);
+					pt.play();
+										
 				}
 			}
 		}

@@ -216,7 +216,7 @@
       </GridPane>
     </children>
   </AnchorPane>
-  <Text fx:id="label_tourDe" fill="BLACK" layoutX="160.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour 1" textAlignment="CENTER" wrappingWidth="479.1357181072235">
+  <Text fx:id="text_tourDe" fill="BLACK" layoutX="160.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour 1" textAlignment="CENTER" wrappingWidth="479.1357181072235">
     <font>
       <Font size="20.0" />
     </font>
@@ -525,21 +525,9 @@
       </ImageView>
     </children>
   </AnchorPane>
-  <HBox fx:id="box_boutons_tour" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0">
-    <children>
-      <Button fx:id="bouton_defaire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
-        <graphic>
-          <ImageView fitHeight="45.0" fitWidth="45.0">
-            <image>
-              <Image url="@../../ressources/decor/j_reculeRapide.png" />
-            </image>
-          </ImageView>
-        </graphic>
-        <HBox.margin>
-          <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-        </HBox.margin>
-      </Button>
-      <Button fx:id="bouton_indice" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
+      <AnchorPane fx:id="box_tour_local" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0">
+         <children>
+      <Button fx:id="bouton_indice" layoutX="34.0" layoutY="15.0" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
         <graphic>
           <ImageView fitHeight="40.0" fitWidth="40.0">
             <image>
@@ -547,14 +535,8 @@
             </image>
           </ImageView>
         </graphic>
-        <HBox.margin>
-          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-        </HBox.margin>
       </Button>
-      <Button fx:id="bouton_annuler" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
-        <HBox.margin>
-          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-        </HBox.margin>
+      <Button fx:id="bouton_annuler" layoutX="142.0" layoutY="15.0" maxHeight="45.0" maxWidth="75.0" minHeight="45.0" minWidth="75.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="75.0">
                      <image>
@@ -563,10 +545,7 @@
                   </ImageView>
                </graphic>
       </Button>
-      <Button fx:id="bouton_finTour" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" textAlignment="CENTER">
-        <HBox.margin>
-          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-        </HBox.margin>
+      <Button fx:id="bouton_finTour" layoutX="257.0" layoutY="15.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="150.0">
                      <image>
@@ -575,25 +554,13 @@
                   </ImageView>
                </graphic>
       </Button>
-      <Button fx:id="bouton_faire" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
-        <graphic>
-          <ImageView fitHeight="45.0" fitWidth="45.0">
-            <image>
-              <Image url="@../../ressources/decor/j_avanceRapide.png" />
-            </image>
-          </ImageView>
-        </graphic>
-        <HBox.margin>
-          <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-        </HBox.margin>
-      </Button>
-    </children>
-  </HBox>
-      <AnchorPane fx:id="box_tour_distant" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0">
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="box_tour_distant" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
          <children>
-            <Text fx:id="label_box_tour_distant" fill="BLACK" layoutX="200.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour de IA" textAlignment="CENTER" wrappingWidth="201.1357181072235">
+            <Text fx:id="text_attenteJoueur" fill="BLACK" layoutX="161.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attente Joueur X" textAlignment="CENTER" wrappingWidth="262.1357181072235">
                <font>
-                  <Font size="30.0" />
+                  <Font size="18.0" />
                </font>
             </Text>
             <ImageView fitHeight="48.0" fitWidth="64.0" layoutX="62.0" layoutY="14.0">
@@ -603,9 +570,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="box_demarrerIA" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
+      <AnchorPane fx:id="box_demarrer" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#lancerIA" text="LancerIA" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="15.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#lancerIA" prefHeight="45.0" prefWidth="150.0" text="Démarrer" />
          </children>
       </AnchorPane>
     <AnchorPane fx:id="optionbox" disable="true" layoutX="213.0" layoutY="523.0" maxHeight="85.0" maxWidth="354.0" minHeight="85.0" minWidth="354.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
@@ -709,5 +676,23 @@
 <ImageView fx:id="reglette_j4_2" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="45.0" y="515.0" />
 <ImageView fx:id="reglette_j4_3" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="80.0" y="515.0" />
 <ImageView fx:id="reglette_j4_4" fitHeight="40.0" fitWidth="25.0" onMouseClicked="#choisirPingouinAdeplacer" pickOnBounds="true" preserveRatio="true" x="115.0" y="515.0" />
+<Button fx:id="bouton_defaire" layoutX="58.0" layoutY="278.0" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
+  <graphic>
+    <ImageView fitHeight="45.0" fitWidth="45.0">
+      <image>
+        <Image url="@../../ressources/decor/j_reculeRapide.png" />
+      </image>
+    </ImageView>
+  </graphic>
+</Button>
+<Button fx:id="bouton_faire" layoutX="703.0" layoutY="278.0" maxHeight="45.0" maxWidth="45.0" minHeight="45.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#refaireTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
+  <graphic>
+    <ImageView fitHeight="45.0" fitWidth="45.0">
+      <image>
+        <Image url="@../../ressources/decor/j_avanceRapide.png" />
+      </image>
+    </ImageView>
+  </graphic>
+</Button>
   </children>
 </AnchorPane>

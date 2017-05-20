@@ -33,6 +33,7 @@ import model.Banquise;
 import model.Coordonnees;
 import model.CoupleGenerique;
 import model.Humain;
+import model.IA;
 import model.Partie;
 
 public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
@@ -47,9 +48,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	
 	//boutons d'actions
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
-    @FXML private Text label_tourDe;
-    @FXML private HBox box_boutons_tour;
-    @FXML private AnchorPane box_tour_distant, box_demarrerIA;
+    @FXML private Text text_tourDe,text_attenteJoueur;
+    @FXML private AnchorPane box_tour_local, box_tour_distant, box_demarrer;
     
     //zone menu
     @FXML private ImageView imageSon, imageMusique;
@@ -92,33 +92,21 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	anchorPane_j3.setVisible(false);
-    	anchorPane_j4.setVisible(false);
-    	
-    	box_tour_distant.setDisable(true);
-    	box_boutons_tour.setDisable(true);
-    	box_tour_distant.setVisible(false);
-    	box_boutons_tour.setVisible(false);
-    	
-    	/*debuterPartie*/
-    	
-    	box_demarrerIA.setDisable(true);
-    	box_demarrerIA.setVisible(false);
-    	
+    	desactiverAnchorPane(anchorPane_j1); desactiverAnchorPane(anchorPane_j2); desactiverAnchorPane(anchorPane_j3); desactiverAnchorPane(anchorPane_j4);
+    	desactiverAnchorPane(box_demarrer); desactiverAnchorPane(box_tour_local); desactiverAnchorPane(box_tour_distant);
     	
     	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
-    	bouton_defaire.setDisable(true);
+    	desactiverBouton(bouton_defaire);
     	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL);
-    	bouton_faire.setDisable(true);
+    	desactiverBouton(bouton_faire);
     	
     	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
-    	bouton_finTour.setDisable(true);
     	
+    	bouton_finTour.setDisable(true);
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
-    	
     }
     
     
@@ -186,21 +174,19 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param banquises tableau des 4 encarts de couleurs réservées à chaque joueur (futures banquises)
      * @param p tableau de couleurs pour les banquises
      * @param noms tableau des noms des joueurs
-     * @param score_poissons tableau des scores (en poissons) des joueurs
-     * @param score_tuiles tableau des scores (en tuiles) des joueurs
      */
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms){
     	
-    	for(int k=0; k<liste_Ecran.moteur.partie.joueurs.length; k++){
-    		//maj de chaque zones réservées à un joueur
-    		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.moteur.partie.joueurs[k]).couleur],(Label)noms[k]);	
-		}
-
-    	if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
-	    	bouton_defaire.setDisable(false);
-	    	bouton_defaire.setVisible(false);
-	    	bouton_faire.setDisable(false);
-	    	bouton_faire.setVisible(false);
+    	for(int j=0 ; j < liste_Ecran.moteur.partie.joueurs.length ; j++){
+    		activerAnchorPane(anchorPanes[j]);
+    		banquises[j].setFill(p[(liste_Ecran.moteur.partie.joueurs[j]).couleur]);
+    		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
+    		
+    		//maj des miniatures des pingouins 		
+			String path = liste_Ecran.moteur.partie.joueurs[j].cheminMiniature;
+			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){
+				reglettes.get(j).get(ping).setImage(new Image(path));
+			}
 		}
     }
 			    /**
@@ -211,8 +197,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			     * @param p couleur assoicée au joueur
 			     * @param nom nom du joueur
 			     */
-			    public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
-			    	anchors.setVisible(true);
+			   /* public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
+			    	activerAnchorPane(anchors);
 			    	banquisette.setFill(p);
 			    	nom.setText(liste_Ecran.moteur.partie.joueurs[joueur].nom);
 			    	
@@ -221,7 +207,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[joueur].nbPingouin ; ping++){
 						reglettes.get(joueur).get(ping).setImage(new Image(path));
 					}
-			    }
+			    }*/
    
     /**
      * Gere les modifications de l'interface l'interface appelées à chaque tour de jeu.
@@ -245,45 +231,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//maj des pingouins
     	majPingouins();
     	
-    	//maj affichage + interaction selon phase :
-    	if(liste_Ecran.moteur.phasePlacement){
-    		label_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");
-    	}
-    	else if(liste_Ecran.moteur.phaseJeu){
-    		label_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");
-    	}
+    	//maj text tour de (temporaire) :
+    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");}
+    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");}
     	
-    	//maj joueur actif
+    	//maj effet sur joueur actif
     	//TODO
 
     	//maj zone des boutons
-    	//TODO ajouter le cas on arrive du chargement
-    	if (partie.joueurActif == 0 && liste_Ecran.moteur.partie.numPingouinAPlacer() == 0) {
-        	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-	        	box_demarrerIA.setDisable(true);
-	        	box_demarrerIA.setVisible(false);
-	        	
-	        	
-	    		box_boutons_tour.setDisable(false);
-	    		box_boutons_tour.setVisible(true);
-        	}
-    	} else {
-    		//si joueur actif = humain alors montrer hbox boutons sinon attente
-	    	if( liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-	    		box_boutons_tour.setDisable(false);
-	    		box_boutons_tour.setVisible(true);
-	    		
-	    	}else{
-	    		box_tour_distant.setDisable(false);
-	    		box_tour_distant.setVisible(true);
-	    	}
-	    	
-	    	if (box_demarrerIA.isVisible()){
-	        	box_demarrerIA.setDisable(true);
-	        	box_demarrerIA.setVisible(false);
-	        	
-	    	} 
-    	}    
+    	majActionsDisponibles();	
     } 
     
     /**
@@ -296,8 +252,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     			if ( !((i%2 == 0) && (j == 7)) ) {
     				placeUneTuile(banquiseEnMemoire.terrain[i][j].nbPoissons, i, j);
     			}	    	
-    			//box_demarrerIA.setDisable(false);
-    	    	//box_demarrerIA.setVisible(true);
     		}
     	}
     }
@@ -325,8 +279,62 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 		}
 	}
-    
+	
+	public void majActionsDisponibles(){
+		Partie partie = liste_Ecran.moteur.partie;
+		//TODO gerer les tours en fonctions du reseau
+		
+		// le joueur actif est humain
+		if(partie.getJoueurActif() instanceof Humain){
+			activerAnchorPane(box_tour_local);
+			desactiverAnchorPane(box_tour_distant);
+			desactiverAnchorPane(box_demarrer);
+			
+			//il est le seul humain => utilisation ou pas de faire defaire
+			if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
+		    	bouton_defaire.setDisable(false);
+		    	bouton_defaire.setVisible(false);
+		    	bouton_faire.setDisable(false);
+		    	bouton_faire.setVisible(false);
+			}
+		} 
+		//sinon si le joueur est une IA
+		else if (partie.getJoueurActif() instanceof IA){
+			
+			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
+			if( partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
+				desactiverAnchorPane(box_tour_local);
+				desactiverAnchorPane(box_tour_distant);
+				activerAnchorPane(box_demarrer);
 
+			}
+			// aux autres tours
+			else {
+				desactiverAnchorPane(box_tour_local);
+				activerAnchorPane(box_tour_distant);
+				this.text_attenteJoueur.setText("Attente de "+partie.getJoueurActif().nom);
+				desactiverAnchorPane(box_demarrer);
+			}
+		}  
+	}
+    
+	public void activerAnchorPane(AnchorPane a){
+		a.setDisable(false);
+    	a.setVisible(true);
+	}
+	public void desactiverAnchorPane(AnchorPane a){
+		a.setDisable(true);
+    	a.setVisible(false);
+	}
+	public void activerBouton(Button b){
+		b.setDisable(false);
+    	b.setVisible(true);
+	}
+	public void desactiverBouton(Button b){
+		b.setDisable(true);
+    	b.setVisible(false);		
+	}
+	
     /****************************************/
     /*		gestion actions des joueurs		*/
     /****************************************/

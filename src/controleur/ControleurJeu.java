@@ -403,7 +403,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void reinitiailiserTour(MouseEvent event){
     	// TODO
-    	majPingouins();
+    	//majPingouins();
     	System.out.println("reinitiailiserTour");
     }
     

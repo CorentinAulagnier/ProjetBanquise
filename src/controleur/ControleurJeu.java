@@ -412,10 +412,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
 				//TODO on sélectionne un pingouin depuis sa tuile
-				//selectionnerPingouinAdeplacer( rendPingouinAdeplacer((ImageView)event.getTarget()) );
-				 ImageView iv = rendPingouinAdeplacer((ImageView)event.getTarget());
-				 if(iv != null)
-					 System.out.println("ping a deplacer (clic sur tuile)" + reglettes.get(partie.joueurActif).indexOf(iv)+"\n");
+				//pingouinAdeplacer = rendPingouinAdeplacer(indicesBanquise);
+				int numPingTemporaire = rendPingouinAdeplacer(indicesBanquise);
+				System.out.println("ping a deplacer (clic sur tuile)"+numPingTemporaire);
+				if (numPingTemporaire!= -1){
+					pingouinAdeplacer = numPingTemporaire;
+					selectionnerPingouinAdeplacer(banquise.get(jActif).get(numPingTemporaire));
+				}
 				 
 				//on a déjà selectionné un pingouin donc on peut le bouger
 				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.getJoueurActif().myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
@@ -465,31 +468,22 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			coord_pingouin_encours = new Coordonnees();
 		}
 	}
+	
+	
 	/**
 	 * rend le pingouin(ImageView) positionné au dessus de la tuile cliquée, s'il est au joueur actif
 	 * @param tuileCliquee une tuile du plateau
 	 * @return rend le pingouin(ImageView) positionné au dessus de la tuile cliquée s'il est au joueur actif
 	 */
-	public ImageView rendPingouinAdeplacer(ImageView tuileCliquee){
-		//recuperer ancre potentiel d'un pingouin
-		Point2D ancrePossible = ancrePourPingouin(tuileCliquee);
-		System.out.println("\nPoint2D ancrepossible : ("+ancrePossible.getX()+","+ancrePossible.getY()+")");
-		
-		//comparer à l'ancre de tous les pingouins actifs du joueur actif
+	public int rendPingouinAdeplacer( Coordonnees indicesBanquise){
 		for(int p=0 ;  p < liste_Ecran.moteur.partie.getJoueurActif().myPingouins.length ; p++){
 			if(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[p].actif){
-				ImageView pingouiAtester = banquise.get(liste_Ecran.moteur.partie.joueurActif).get(p);
-				System.out.println("Coordonnees layout de la miniature ("+pingouiAtester.getX()+","+pingouiAtester.getY()+")");
-				System.out.println("Coordonnees layout de la miniature ("+pingouiAtester.getLayoutX()+","+pingouiAtester.getLayoutY()+")");
-				System.out.println("Coordonnees boundinlocal de la miniature ("+pingouiAtester.getBoundsInLocal().getMinX()+","+pingouiAtester.getBoundsInLocal().getMinY()+")");
-				System.out.println("Coordonnees boundinparent  de la miniature ("+pingouiAtester.getBoundsInParent().getMinX()+","+pingouiAtester.getBoundsInParent().getMinY()+")");
-				if( pingouiAtester.getBoundsInParent().getMinX()==ancrePossible.getX() && pingouiAtester.getBoundsInParent().getMinY()==ancrePossible.getY()){
-					
-					return pingouiAtester;
+				if( indicesBanquise.equals(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[p].position) ){
+					return p;
 				}
 			}
 		}
-		return new ImageView();
+		return -1;
 	}
 	
 	 /**

@@ -15,6 +15,9 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -298,15 +301,19 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
 			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
 				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
+
+				Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
+				ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
 				if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
-					Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
-					ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
 					Coordonnees pingouin_en_ihm = getXY(miniature_pingouin.getX(), miniature_pingouin.getY());
 					
 					//verifier si le pingouin en mémoire est pas à la même place sur l'ihm
 					if(!pingouin_en_memoire.equals(pingouin_en_ihm)){
 						translaterPingouin(pingEncours,jEncours, pingouin_en_memoire);
 					}
+				}else if (liste_Ecran.moteur.phaseJeu){
+					//TODO
+					//traiter pingouins qui ne sont plus en jeu
 				}
 			}
 		}

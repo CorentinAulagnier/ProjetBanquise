@@ -259,11 +259,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
 				if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
 					Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
-					System.out.println("coordonnes pingouin_en_memoire "+pingouin_en_memoire);
-					
 					ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
 					Coordonnees pingouin_en_ihm = getXY(miniature_pingouin.getX(), miniature_pingouin.getY());
-					System.out.println("coorddonnes pingouin_en_ihm "+pingouin_en_ihm);
 					
 					//verifier si le pingouin en mémoire est pas à la même place sur l'ihm
 					if(!pingouin_en_memoire.equals(pingouin_en_ihm)){
@@ -399,13 +396,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		int jActif = partie.joueurActif;
 		int pingouinAplacer;
 		
+		bouton_finTour.setDisable(true);
+		coord_pingouin_encours = new Coordonnees();	
 		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
-		coord_pingouin_encours = new Coordonnees(-1,-1);		
 		
 		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
+			
 			if (liste_Ecran.moteur.phasePlacement) {
 				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
-					bouton_finTour.setDisable(true);
 					pingouinAplacer = partie.numPingouinAPlacer();
 					translaterPingouin(pingouinAplacer,jActif,indicesBanquise);
 					coord_pingouin_encours = indicesBanquise;
@@ -413,14 +411,22 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
-				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.joueurs[jActif].myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
-					bouton_finTour.setDisable(true);
+				//TODO on sélectionne un pingouin depuis sa tuile
+				//selectionnerPingouinAdeplacer( rendPingouinAdeplacer((ImageView)event.getTarget()) );
+				 ImageView iv = rendPingouinAdeplacer((ImageView)event.getTarget());
+				 if(iv != null)
+					 System.out.println("ping a deplacer (clic sur tuile)" + reglettes.get(partie.joueurActif).indexOf(iv)+"\n");
+				 
+				//on a déjà selectionné un pingouin donc on peut le bouger
+				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.getJoueurActif().myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
 					translaterPingouin(pingouinAdeplacer,jActif,indicesBanquise);
 					coord_pingouin_encours = indicesBanquise;
 					bouton_finTour.setDisable(false);
 				}
 			}
+			
 		}
+		
 	}
 	
 
@@ -429,31 +435,63 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 * @param event evenement souris attendu : clic
 	 */
 	public void choisirPingouinAdeplacer(MouseEvent event) {
-		Partie partie = liste_Ecran.moteur.partie;
-		int jActif = partie.joueurActif;
-
-		if (liste_Ecran.moteur.phaseJeu) {
-			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer != 1) {
-				// le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
-				// on veux en bouger un autre alors on annule son mouvement
-				bouton_finTour.setDisable(true);
-				translaterPingouin(pingouinAdeplacer, jActif,partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
-				coord_pingouin_encours = new Coordonnees(-1, -1);
-				bouton_finTour.setDisable(true);
-			}
-			bouton_finTour.setDisable(true);
-			pingouinAdeplacer = reglettes.get(liste_Ecran.moteur.partie.joueurActif).indexOf((ImageView) event.getTarget());
-			
-			coord_pingouin_encours = new Coordonnees(-1, -1);
-			bouton_finTour.setDisable(true);
-		}
+		selectionnerPingouinAdeplacer((ImageView)event.getTarget());
 	}
 	
 
 	/************************************************/
 	/*			méthodes spécifiques au jeu			*/
 	/************************************************/
-	  
+	
+	/**
+	 * met dans pingouinAdeplacer le numéro du pingouin a deplacer en fonction d'une miniature de pingouin cliquée
+	 * @param pingouinCible miniature sur laquelle on a cliqué
+	 */
+	public void selectionnerPingouinAdeplacer(ImageView pingouinCible){
+		Partie partie = liste_Ecran.moteur.partie;
+		int jActif = partie.joueurActif;
+		bouton_finTour.setDisable(true);
+		
+		if (liste_Ecran.moteur.phaseJeu) {
+			// le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
+			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer != 1) {
+				// on veux en bouger un autre alors on annule son mouvement
+				translaterPingouin(pingouinAdeplacer, jActif,partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
+			}
+			if(pingouinCible!=null){
+				pingouinAdeplacer = reglettes.get(partie.joueurActif).indexOf(pingouinCible);
+				System.out.println("ping a deplacer (clic sur pingouin)"+pingouinAdeplacer);
+			}
+			coord_pingouin_encours = new Coordonnees();
+		}
+	}
+	/**
+	 * rend le pingouin(ImageView) positionné au dessus de la tuile cliquée, s'il est au joueur actif
+	 * @param tuileCliquee une tuile du plateau
+	 * @return rend le pingouin(ImageView) positionné au dessus de la tuile cliquée s'il est au joueur actif
+	 */
+	public ImageView rendPingouinAdeplacer(ImageView tuileCliquee){
+		//recuperer ancre potentiel d'un pingouin
+		Point2D ancrePossible = ancrePourPingouin(tuileCliquee);
+		System.out.println("\nPoint2D ancrepossible : ("+ancrePossible.getX()+","+ancrePossible.getY()+")");
+		
+		//comparer à l'ancre de tous les pingouins actifs du joueur actif
+		for(int p=0 ;  p < liste_Ecran.moteur.partie.getJoueurActif().myPingouins.length ; p++){
+			if(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[p].actif){
+				ImageView pingouiAtester = banquise.get(liste_Ecran.moteur.partie.joueurActif).get(p);
+				System.out.println("Coordonnees layout de la miniature ("+pingouiAtester.getX()+","+pingouiAtester.getY()+")");
+				System.out.println("Coordonnees layout de la miniature ("+pingouiAtester.getLayoutX()+","+pingouiAtester.getLayoutY()+")");
+				System.out.println("Coordonnees boundinlocal de la miniature ("+pingouiAtester.getBoundsInLocal().getMinX()+","+pingouiAtester.getBoundsInLocal().getMinY()+")");
+				System.out.println("Coordonnees boundinparent  de la miniature ("+pingouiAtester.getBoundsInParent().getMinX()+","+pingouiAtester.getBoundsInParent().getMinY()+")");
+				if( pingouiAtester.getBoundsInParent().getMinX()==ancrePossible.getX() && pingouiAtester.getBoundsInParent().getMinY()==ancrePossible.getY()){
+					
+					return pingouiAtester;
+				}
+			}
+		}
+		return new ImageView();
+	}
+	
 	 /**
      * affiche la bonne tuile (image) dans l'objet Imageview correspondant aux coordonnées données et au nombre de poissons attendus
      * @param nombreDePoissons
@@ -503,7 +541,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		double xDansBanquise = tuile.getBoundsInParent().getMinX() + (tuile.getBoundsInParent().getWidth() / 3);
 		double yDansBanquise = tuile.getBoundsInParent().getMinY();
 		
-		double xDansEcran = anchorBanquise.getBoundsInParent().getMinX() + xDansBanquise;
+		double xDansEcran = Math.floor(anchorBanquise.getBoundsInParent().getMinX() + xDansBanquise);
 		double yDansEcran = anchorBanquise.getBoundsInParent().getMinY() + yDansBanquise;
 		
 		return new Point2D(xDansEcran, yDansEcran);

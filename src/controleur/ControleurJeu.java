@@ -456,12 +456,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
 
-				nettoyerBanquise();
 				//TODO on sélectionne un pingouin depuis sa tuile
 				//pingouinAdeplacer = rendPingouinAdeplacer(indicesBanquise);
 				int numPingTemporaire = rendPingouinAdeplacer(indicesBanquise);
 				System.out.println("ping a deplacer (clic sur tuile) "+numPingTemporaire);
 				if (numPingTemporaire!= -1){
+					nettoyerBanquise();
 					pingouinAdeplacer = numPingTemporaire;
 					selectionnerPingouinAdeplacer(banquise.get(jActif).get(pingouinAdeplacer));
 					

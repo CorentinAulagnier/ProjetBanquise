@@ -29,6 +29,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import model.Banquise;
 import model.Coordonnees;
 import model.CoupleGenerique;
 import model.Humain;
@@ -165,27 +166,19 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_initiale(anchorPanes, banquises, p, noms);
     	    
     	    miseAjour_tourDeJeu();
-    	    System.out.println("creation time line");
-        	Timeline timeline = new Timeline(
-        			new KeyFrame(
-        					Duration.seconds(1),
-        					new EventHandler<ActionEvent>(){
+    	    
+    	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
+        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(0.5) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
-        							// Call miseAjour_tourDeJeu method for every 2 sec.
         							if(liste_Ecran.moteur.aRafraichir){
-        								System.out.println("ecran jeu se met à jour");
         								miseAjour_tourDeJeu();
         								liste_Ecran.moteur.partieRafraichie();
         								}
-        						}
-        					}
-        					)
-        			);
+        							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
     	}
     }
-    
     
     /**
      * Charge l'interface depuis les informations de l'objet Partie, à l'ouverture de l'écran de Jeu. (pas à chaque tour)
@@ -203,36 +196,33 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		initZoneJoueur(k,(AnchorPane)anchorPanes[k],(Arc)banquises[k], p[(liste_Ecran.moteur.partie.joueurs[k]).couleur],(Label)noms[k]);	
 		}
 
-    	if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire, sinon ces boutons sont initialisés à false
+    	if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
 	    	bouton_defaire.setDisable(false);
 	    	bouton_defaire.setVisible(false);
 	    	bouton_faire.setDisable(false);
 	    	bouton_faire.setVisible(false);
 		}
     }
-    
-    
-    /**
-     * met à jour toute la zone réservée à un joueur
-     * @param joueur numéro du joueur
-     * @param anchors zone entière réservée au joueur
-     * @param banquise encart de couleur sous la zone de joueur
-     * @param p couleur assoicée au joueur
-     * @param nom nom du joueur
-     */
-    public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
-    	anchors.setVisible(true);
-    	banquisette.setFill(p);
-    	nom.setText(liste_Ecran.moteur.partie.joueurs[joueur].nom);
-    	
-    	//maj des miniatures des pinguouins 		
-		String path = liste_Ecran.moteur.partie.joueurs[joueur].cheminMiniature;
-		for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[joueur].nbPingouin ; ping++){
-			reglettes.get(joueur).get(ping).setImage(new Image(path));
-		}
-    }
-    
-    
+			    /**
+			     * met à jour toute la zone réservée à un joueur
+			     * @param joueur numéro du joueur
+			     * @param anchors zone entière réservée au joueur
+			     * @param banquise encart de couleur sous la zone de joueur
+			     * @param p couleur assoicée au joueur
+			     * @param nom nom du joueur
+			     */
+			    public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
+			    	anchors.setVisible(true);
+			    	banquisette.setFill(p);
+			    	nom.setText(liste_Ecran.moteur.partie.joueurs[joueur].nom);
+			    	
+			    	//maj des miniatures des pinguouins 		
+					String path = liste_Ecran.moteur.partie.joueurs[joueur].cheminMiniature;
+					for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[joueur].nbPingouin ; ping++){
+						reglettes.get(joueur).get(ping).setImage(new Image(path));
+					}
+			    }
+   
     /**
      * Gere les modifications de l'interface l'interface appelées à chaque tour de jeu.
      * @param reglettes liste des reglettes accueillant les miniatures de pingouins dans la zone joueur.
@@ -241,11 +231,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * 
      */
     public void miseAjour_tourDeJeu(){
-
-    	for(int j=0; j < liste_Ecran.moteur.partie.joueurs.length; j++){
-    		//maj des scores du joueur
-    		scores_poissons.get(j).setText( String.valueOf(liste_Ecran.moteur.partie.joueurs[j].poissonsManges) );
-    		scores_tuiles.get(j).setText( String.valueOf(liste_Ecran.moteur.partie.joueurs[j].nbTuiles) );	
+    	Partie partie = liste_Ecran.moteur.partie;
+    	
+    	//maj des scores du joueur
+    	for( int j=0 ; j < partie.joueurs.length ; j++ ){
+    		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
+    		scores_tuiles.get(j).setText( String.valueOf(partie.joueurs[j].nbTuiles) );	
     	}
 
     	//maj de l'affichage la banquise
@@ -256,16 +247,18 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	
     	//maj affichage + interaction selon phase :
     	if(liste_Ecran.moteur.phasePlacement){
-    		label_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin sur la banquise.");
+    		label_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");
     	}
     	else if(liste_Ecran.moteur.phaseJeu){
-    		label_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin sur la banquise.");
+    		label_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");
     	}
-    		
+    	
+    	//maj joueur actif
+    	//TODO
 
     	//maj zone des boutons
     	//TODO ajouter le cas on arrive du chargement
-    	if (liste_Ecran.moteur.partie.joueurActif == 0 && liste_Ecran.moteur.partie.numPingouinAPlacer() == 0) {
+    	if (partie.joueurActif == 0 && liste_Ecran.moteur.partie.numPingouinAPlacer() == 0) {
         	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
 	        	box_demarrerIA.setDisable(true);
 	        	box_demarrerIA.setVisible(false);
@@ -290,46 +283,28 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	        	box_demarrerIA.setVisible(false);
 	        	
 	    	} 
-    	}
-	    
+    	}    
     } 
     
     /**
      * raffraichit la banquise
-     * @param banquise 
      */
     public void majBanquise(){
-   	
-    	for (int i = 0 ; i < 8 ; i++){
-    		for (int j = 0 ; j< 8 ; j++){
+    	Banquise banquiseEnMemoire = liste_Ecran.moteur.partie.b;
+    	for (int i = 0 ; i < banquiseEnMemoire.terrain.length ; i++){
+    		for (int j = 0 ; j <  banquiseEnMemoire.terrain[i].length ; j++){
     			if ( !((i%2 == 0) && (j == 7)) ) {
-    				placeUneTuile(liste_Ecran.moteur.partie.b.terrain[i][j].nbPoissons, i, j);
+    				placeUneTuile(banquiseEnMemoire.terrain[i][j].nbPoissons, i, j);
     			}	    	
-    			box_demarrerIA.setDisable(false);
-    	    	box_demarrerIA.setVisible(true);
+    			//box_demarrerIA.setDisable(false);
+    	    	//box_demarrerIA.setVisible(true);
     		}
     	}
     }
     
-    
-	public void placeUneTuile(int nombreDePoissons, int i, int j) {
-		switch (nombreDePoissons) {
-		case 0:
-			banquise.get(i).get(j).setImage(null);
-			break;
-		case 1:
-			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_1POISSON));
-			break;
-		case 2:
-			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_2POISSON));
-			break;
-		case 3:
-			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_3POISSON));
-			break;
-		}
-	}
-    
-	
+	/**
+	 * verifie si chaque pingouin de chaque joueur est bien à sa place attendue en mémoire, sinon le déplace là où il devrait être
+	 */
 	public void majPingouins(){
 		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
 			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
@@ -351,11 +326,358 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
 	}
     
+
     /****************************************/
-    /* 			roue boutons				*/
+    /*		gestion actions des joueurs		*/
+    /****************************************/
+    
+	/**
+	 * 
+	 * @param event
+	 */
+    @FXML private void annulerTours(MouseEvent event){
+    	// TODO
+		//first_clic = true;
+    	System.out.println("annulerTours");
+    }
+    
+    /**
+     * 
+     * @param event
+     */
+    @FXML private void refaireTours(MouseEvent event){
+    	// TODO
+    	System.out.println("refaireTours");
+    }
+    
+    /**
+     * 
+     * @param event
+     */
+    @FXML private void demanderIndice(MouseEvent event){
+    	// TODO
+    	System.out.println("demanderIndice");
+    }
+     
+    /**
+     * 
+     * @param event
+     */
+    @FXML private void reinitiailiserTour(MouseEvent event){
+    	// TODO
+    	System.out.println("reinitiailiserTour");
+    }
+    
+    /**
+     * Debute une partie si c'est a une IA de jouer
+     * @param event
+     */
+    @FXML private void lancerIA(MouseEvent event){
+		liste_Ecran.moteur.execPremiereIA();
+    	miseAjour_tourDeJeu();
+    }
+    
+    /**
+     * Valide un tour de joueur actif
+     * @param event
+     */
+    @FXML private void validerTour(MouseEvent event){
+		
+    	if (liste_Ecran.moteur.phasePlacement) {
+			liste_Ecran.moteur.placement(coord_pingouin_encours);
+	    	coord_pingouin_encours = new Coordonnees();
+		}
+		else if (liste_Ecran.moteur.phaseJeu){
+			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
+			coord_pingouin_encours = new Coordonnees();
+		} else if (liste_Ecran.moteur.phaseVictoire){
+			//TODO
+		}
+    	
+    	coord_pingouin_encours = new Coordonnees();
+    	miseAjour_tourDeJeu();        
+    }
+    
+ 
+    /************************************************/
+    /*		gestion clics sur la banquise			*/
+    /************************************************/
+    
+    /**
+     * action à produire après un clic sur la banquise, utile et dispobnible uniquement pour un joueur humain
+     * @param event evenement souris attendu : clic
+     */
+	public void anchorClick(MouseEvent event) {
+		Partie partie = liste_Ecran.moteur.partie;
+		int jActif = partie.joueurActif;
+		int pingouinAplacer;
+		
+		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
+		coord_pingouin_encours = new Coordonnees(-1,-1);		
+		
+		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
+			if (liste_Ecran.moteur.phasePlacement) {
+				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
+					bouton_finTour.setDisable(true);
+					pingouinAplacer = partie.numPingouinAPlacer();
+					translaterPingouin(pingouinAplacer,jActif,indicesBanquise);
+					coord_pingouin_encours = indicesBanquise;
+					bouton_finTour.setDisable(false);
+				}
+			}
+			else if (liste_Ecran.moteur.phaseJeu) {
+				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.joueurs[jActif].myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
+					bouton_finTour.setDisable(true);
+					translaterPingouin(pingouinAdeplacer,jActif,indicesBanquise);
+					coord_pingouin_encours = indicesBanquise;
+					bouton_finTour.setDisable(false);
+				}
+			}
+		}
+	}
+	
+
+	/**
+	 * action à produire après un clic sur un pingouin pendant la phase jeu
+	 * @param event evenement souris attendu : clic
+	 */
+	public void choisirPingouinAdeplacer(MouseEvent event) {
+		Partie partie = liste_Ecran.moteur.partie;
+		int jActif = partie.joueurActif;
+
+		if (liste_Ecran.moteur.phaseJeu) {
+			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer != 1) {
+				// le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
+				// on veux en bouger un autre alors on annule son mouvement
+				bouton_finTour.setDisable(true);
+				translaterPingouin(pingouinAdeplacer, jActif,partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
+				coord_pingouin_encours = new Coordonnees(-1, -1);
+				bouton_finTour.setDisable(true);
+			}
+			bouton_finTour.setDisable(true);
+			pingouinAdeplacer = reglettes.get(liste_Ecran.moteur.partie.joueurActif).indexOf((ImageView) event.getTarget());
+			
+			coord_pingouin_encours = new Coordonnees(-1, -1);
+			bouton_finTour.setDisable(true);
+		}
+	}
+	
+
+	/************************************************/
+	/*			méthodes spécifiques au jeu			*/
+	/************************************************/
+	  
+	 /**
+     * affiche la bonne tuile (image) dans l'objet Imageview correspondant aux coordonnées données et au nombre de poissons attendus
+     * @param nombreDePoissons
+     * @param i indice de la ligne de la tuile dans le tableau banquise 
+     * @param j indice de la colonne de la tuile dans le tableau banquise
+     */
+	public void placeUneTuile(int nombreDePoissons, int i, int j) {
+		switch (nombreDePoissons) {
+		case 0:
+			banquise.get(i).get(j).setImage(null);
+			break;
+		case 1:
+			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_1POISSON));
+			break;
+		case 2:
+			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_2POISSON));
+			break;
+		case 3:
+			banquise.get(i).get(j).setImage(new Image(model.Proprietes.IMAGE_TUILE_3POISSON));
+			break;
+		}
+	}
+	
+	/**
+	 * Déplace le n-ième pingouin du joueur j aux coordonnees "to" (de type indice de tableau)
+	 * @param n numéro du pinguoin à déplacer
+	 * @param j numéro du joueur possédant le pingouin à déplacer
+	 * @param to couple d'indice représentant une tuile de la banquise
+	 */
+	public void translaterPingouin (int n, int j, Coordonnees to ){
+		ImageView miniatureAdeplacer = reglettes.get(j).get(n);
+		ImageView tuileTo = banquise.get(to.x).get(to.y);
+		Point2D coord2DTo = ancrePourPingouin(tuileTo);
+
+		TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureAdeplacer);
+		tt.setToX(coord2DTo.getX() - miniatureAdeplacer.getX());
+		tt.setToY(coord2DTo.getY() - miniatureAdeplacer.getY());
+		tt.play();
+	}
+	
+	/**
+	 * Rend les coordonées pour ancrer un pingouin au dessus de la tuile donnée 
+	 * @param tuile tuile de la banquise au dessus de laquelle on veux déposer un pingouin
+	 * @return coordonnées dans le noeud FXML expoitable pour ancrer un pingouin au dessus de la tuile donnée
+	 */
+	public Point2D ancrePourPingouin(ImageView tuile) {
+		double xDansBanquise = tuile.getBoundsInParent().getMinX() + (tuile.getBoundsInParent().getWidth() / 3);
+		double yDansBanquise = tuile.getBoundsInParent().getMinY();
+		
+		double xDansEcran = anchorBanquise.getBoundsInParent().getMinX() + xDansBanquise;
+		double yDansEcran = anchorBanquise.getBoundsInParent().getMinY() + yDansBanquise;
+		
+		return new Point2D(xDansEcran, yDansEcran);
+	}
+	
+	/**
+	 * Transorme les coodonnées du clic dans l'anchorPane banquise en coordonnées exploitables par la classe Banquise (tuile spécifique)
+	 * @param x coordonnées liées à la hauteur (0 sur le haut de la fenetre)
+	 * @param y coordonnées liées à la largeur (0 sur la gauche de la fenetre)
+	 * @return un couple de coordonnées correspondant aux indices des tableaux banquise
+	 */
+	public Coordonnees getXY(double x, double y) {
+		//int hauteurTuile = 48;
+		//int largeurTuile = 64;
+		
+		int i = 0, j = 0;
+		double h = 48 / 3;
+
+		if (((int) (y / h)) % 2 == 1) {
+			if (x >= 32) {
+				i = (int) ((y / h) / 2);
+				if (i % 2 == 1) {
+					j = (int) (x / 64);
+				} else {
+					j = (int) ((x - 32) / 64);
+				}
+			} else {
+				i = -1;
+				j = -1;
+			}
+		} else {
+			j = (int) (x / 32);
+			double newX = x % 32;
+			double newY = y % 16;
+			i = (int) (y / h);
+			if (i % 4 == 0) {
+				if (j % 2 == 0) { // 0.5
+					if (0.5 * newX - newY > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64);
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64) - 1;
+					}
+				} else { // -0.5
+					if (-0.5 * newX - newY + 16 > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64);
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64);
+					}
+				}
+			} else if (i % 4 == 2) {
+				if (j % 2 == 0) { // -0.5
+					if (-0.5 * newX - newY + 16 > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64) - 1;
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64);
+					}
+				} else { // 0.5
+					if (0.5 * newX - newY > 0) {
+						i = (int) ((y / h) / 2) - 1;
+						j = (int) (x / 64);
+					} else {
+						i = (int) ((y / h) / 2);
+						j = (int) (x / 64);
+					}
+				}
+			}
+		}
+		if ((i < 0) || (j < 0) || (i > 7) || (i % 2 == 0 && j >= 7)) {
+			i = -1;
+			j = -1;
+		}
+		return new Coordonnees(i, j);
+	}
+
+	/**
+	 * vérifie que les coordonnées du couple xy sont des indices valides dans un tableau Banquise
+	 * @param xy un couple de coordonnées correspondant aux indices des tableaux banquise
+	 * @return vrai si le couple est valide, faux sinon.
+	 */
+	public boolean coordValide(Coordonnees xy) {
+		return (xy.x != -1) && (xy.y != -1);
+	}
+	
+	/**
+	 * Transorme les coodonnées du clic dans l'anchorPane banquise en coordonnées exploitables par la classe Banquise (taille de tuile indiférente
+	 * @param x coordonnées liées à la hauteur (0 sur le haut de la fenetre)
+	 * @param y coordonnées liées à la largeur (0 sur la gauche de la fenetre)
+	 * @return un couple de coordonnées correspondant aux indices des tableaux banquise
+	 */
+	public Coordonnees getCoordonnees(double x, double y) {
+		//Valeurs à renseigner
+		double hauteurTotaleTuile = 48; //hauteur carré + triangles haut et bas
+		double tuileHauteur = hauteurTotaleTuile*2/3; //hauteur carré + triangle haut
+		double tuileLargeur = 64; //largeur d'une tuile
+		double c = hauteurTotaleTuile/3; //hauteur d'un "triangle"
+		//Valeurs deduites
+		double moitieLargeur = tuileLargeur/2;
+		double gradient = c/moitieLargeur;
+		
+	    // Trouve la ligne et la colonne de la "boite"
+	    int ligne = (int) (y / tuileHauteur);
+	    boolean lignePaire = ligne % 2 == 0;
+	    
+	    int colonne;
+	    if (lignePaire) // ajoute l'indentation si ligne paire
+	    	colonne = (int) ((x - moitieLargeur) / tuileLargeur);
+	    else
+	    	colonne = (int) (x / tuileLargeur);
+	    
+	    // Trouve la position relative a l'interieur de la "boite"
+	    double relY = y - (ligne * tuileHauteur);
+	    double relX;
+	    if (lignePaire) // ajoute l'indentation si ligne paire
+	        relX = (x - (colonne * tuileLargeur)) - moitieLargeur;
+	    else
+	        relX = x - (colonne * tuileLargeur);
+	    
+	    // Ajuste ligne et colonne si le point est au dessus des arretes superieurs gauche ou droite
+	    if (relY < (-gradient * relX) + c) { // cote gauche
+	    	ligne--;
+	        if (!lignePaire) {
+	        	colonne--;
+	        } else {
+	        	if(x<moitieLargeur && (relY > (gradient * relX) + c)) {
+	        		colonne--;
+	        		ligne++;
+	        	}
+	        }
+
+	    } else if (relY < (gradient * relX) - c) { // cote droit
+	    	ligne--;
+	        if (lignePaire) colonne++;
+	            
+	    } else {
+        	if(lignePaire && x<moitieLargeur) {
+        		colonne--;
+        	}
+	    }
+	    
+	    Coordonnees coord = new Coordonnees();
+	    if(!((lignePaire && colonne>6) || colonne<0 || ligne<0 || ligne>7)) {
+	    	coord = new Coordonnees(colonne,ligne); 
+		}
+		return coord;
+	}
+	
+	
+
+	
+	
+	
+	/****************************************/
+    /* 			boutons de la roue			*/
     /****************************************/
 
-    
     /**
      * gere la modification du volume de la musique
      * @param event event evenement souris attendu : clic
@@ -438,339 +760,4 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		optionFermerRoue(optionbox, roue);
     	}
     }
-       
-    
-    /************************************/
-    /*		gestion action banquise		*/
-    /************************************/
-    
-    @FXML private void annulerTours(MouseEvent event){
-    	// TODO
-		//first_clic = true;
-    	System.out.println("annulerTours");
-    }
-    @FXML private void refaireTours(MouseEvent event){
-    	// TODO
-    	System.out.println("refaireTours");
-    }
-    
-    @FXML private void demanderIndice(MouseEvent event){
-    	// TODO
-    	System.out.println("demanderIndice");
-    }
-    
-    
-    @FXML private void reinitiailiserTour(MouseEvent event){
-    	// TODO
-    	System.out.println("reinitiailiserTour");
-    }
-    
-    
-    /**
-     * Debute une partie si c'est a une IA de jouer
-     * @param event
-     */
-    @FXML private void lancerIA(MouseEvent event){
-		liste_Ecran.moteur.execPremiereIA();
-    	miseAjour_tourDeJeu();
-    }
-    
-    /**
-     * Valide un tour de joueur actif
-     * @param event
-     */
-    @FXML private void validerTour(MouseEvent event){
-		
-    	if (liste_Ecran.moteur.phasePlacement) {
-			liste_Ecran.moteur.placement(coord_pingouin_encours);
-	    	coord_pingouin_encours = new Coordonnees();
-		}
-		else if (liste_Ecran.moteur.phaseJeu){
-			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
-			coord_pingouin_encours = new Coordonnees();
-		} else if (liste_Ecran.moteur.phaseVictoire){
-			//TODO
-		}
-    	
-    	coord_pingouin_encours = new Coordonnees();
-    	
-    	miseAjour_tourDeJeu();        
-    }
-    
- 
-    
-    /************************************/
-    /*		gestion banquise			*/
-    /************************************/
-    
-    /**
-     * action à produire après un clic sur la banquise, utile et dispobnible uniquement pour un joueur humain
-     * @param event evenement souris attendu : clic
-     */
-	public void anchorClick(MouseEvent event) {
-		Partie partie = liste_Ecran.moteur.partie;
-		int jActif = partie.joueurActif;
-		int pingouinAplacer;
-		
-		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
-		coord_pingouin_encours = new Coordonnees(-1,-1);		
-		
-		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
-			
-			if (liste_Ecran.moteur.phasePlacement) {
-				
-				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
-					bouton_finTour.setDisable(true);
-					pingouinAplacer = partie.numPingouinAPlacer();
-					translaterPingouin(pingouinAplacer,jActif,indicesBanquise);
-					/*ImageView miniatureActive = reglettes.get(jActif).get(pingouinAplacer);
-					ImageView tuileCliquee = banquise.get(indicesBanquise.x).get(indicesBanquise.y);
-					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
-					
-					TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive );
-					tt.setToX( coordArrivee.getX() - miniatureActive.getX()  );
-					tt.setToY( coordArrivee.getY() - miniatureActive.getY() );
-					tt.play();*/
-					coord_pingouin_encours = indicesBanquise;
-					bouton_finTour.setDisable(false);
-				}
-			}
-			else if (liste_Ecran.moteur.phaseJeu) {
-				// TODO
-				if ( (pingouinAdeplacer!= -1 ) && partie.isDeplacementValide( partie.joueurs[jActif].myPingouins[pingouinAdeplacer].position , indicesBanquise ) ) {
-					bouton_finTour.setDisable(true);
-					translaterPingouin(pingouinAdeplacer,jActif,indicesBanquise);
-					/*ImageView miniatureActive = reglettes.get(jActif).get(pingouinAdeplacer);
-					ImageView tuileCliquee = banquise.get(indicesBanquise.x).get(indicesBanquise.y);
-					Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
-
-					TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive);
-					tt.setToX(coordArrivee.getX() - miniatureActive.getX());
-					tt.setToY(coordArrivee.getY() - miniatureActive.getY());
-					tt.play();*/
-					coord_pingouin_encours = indicesBanquise;
-					bouton_finTour.setDisable(false);
-				}
-			}
-		}
-	}
-	
-
-	/**
-	 * action à produire après un clic sur un pingouin pendant la phase jeu
-	 * 
-	 * @param event
-	 *            evenement souris attendu : clic
-	 */
-	public void choisirPingouinAdeplacer(MouseEvent event) {
-		Partie partie = liste_Ecran.moteur.partie;
-		int jActif = partie.joueurActif;
-
-		if (liste_Ecran.moteur.phaseJeu) {
-			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer != 1) {
-				// le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
-				// on veux en bouger un autre alors on annule son mouvement
-				bouton_finTour.setDisable(true);
-				translaterPingouin(pingouinAdeplacer, jActif,
-						partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
-				/*ImageView miniatureActive = reglettes.get(jActif).get(pingouinAdeplacer);
-				Coordonnees pingouin_initial = partie.getJoueurActif().myPingouins[pingouinAdeplacer].position;
-				ImageView tuileCliquee = banquise.get(pingouin_initial.x).get(pingouin_initial.y);
-				Point2D coordArrivee = ancrePourPingouin(tuileCliquee);
-
-				TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureActive);
-				tt.setToX(coordArrivee.getX() - miniatureActive.getX());
-				tt.setToY(coordArrivee.getY() - miniatureActive.getY());
-				tt.play();*/
-				coord_pingouin_encours = new Coordonnees(-1, -1);
-				bouton_finTour.setDisable(true);
-			}
-			bouton_finTour.setDisable(true);
-			pingouinAdeplacer = reglettes.get(liste_Ecran.moteur.partie.joueurActif).indexOf((ImageView) event.getTarget());
-			coord_pingouin_encours = new Coordonnees(-1, -1);
-			bouton_finTour.setDisable(true);
-		}
-	}
-	
-	/**
-	 * Déplace le n-ième pingouin du joueur j aux coordonnees "to" (de type indice de tableau)
-	 * @param n numéro du pinguoin à déplacer
-	 * @param j numéro du joueur possédant le pingouin à déplacer
-	 * @param to couple d'indice représentant une tuile de la banquise
-	 */
-	public void translaterPingouin (int n, int j, Coordonnees to ){
-		ImageView miniatureAdeplacer = reglettes.get(j).get(n);
-		ImageView tuileTo = banquise.get(to.x).get(to.y);
-		Point2D coord2DTo = ancrePourPingouin(tuileTo);
-
-		TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureAdeplacer);
-		tt.setToX(coord2DTo.getX() - miniatureAdeplacer.getX());
-		tt.setToY(coord2DTo.getY() - miniatureAdeplacer.getY());
-		tt.play();
-	}
-	/**
-	 * Rend les coordonées pour ancrer un pingouin audessus de la tuile selectionnée 
-	 * 
-	 * @param tuile
-	 * @return
-	 */
-	public Point2D ancrePourPingouin(ImageView tuile) {
-		double xDansBanquise = tuile.getBoundsInParent().getMinX() + (tuile.getBoundsInParent().getWidth() / 3);
-		double yDansBanquise = tuile.getBoundsInParent().getMinY();
-		
-		double xDansEcran = anchorBanquise.getBoundsInParent().getMinX() + xDansBanquise;
-		double yDansEcran = anchorBanquise.getBoundsInParent().getMinY() + yDansBanquise;
-		
-		return new Point2D(xDansEcran, yDansEcran);
-	}
-	
-
-	/**
-	 * Transorme les coodonnées du clic dans l'anchorPane banquise en
-	 * coordonnées exploitables par la classe Banquise
-	 * 
-	 * @param x
-	 *            coordonnées liées à la hauteur (0 sur le haut de la fenetre)
-	 * @param y
-	 *            coordonnées liées à la largeur (0 sur la gauche de la fenetre)
-	 * @return un couple de coordonnées correspondant aux indices des tableaux
-	 *         banquise
-	 */
-	public Coordonnees getXY(double x, double y) {
-		//int hauteurTuile = 48;
-		//int largeurTuile = 64;
-		
-		int i = 0, j = 0;
-		double h = 48 / 3;
-
-		if (((int) (y / h)) % 2 == 1) {
-			if (x >= 32) {
-				i = (int) ((y / h) / 2);
-				if (i % 2 == 1) {
-					j = (int) (x / 64);
-				} else {
-					j = (int) ((x - 32) / 64);
-				}
-			} else {
-				i = -1;
-				j = -1;
-			}
-		} else {
-			j = (int) (x / 32);
-			double newX = x % 32;
-			double newY = y % 16;
-			i = (int) (y / h);
-			if (i % 4 == 0) {
-				if (j % 2 == 0) { // 0.5
-					if (0.5 * newX - newY > 0) {
-						i = (int) ((y / h) / 2) - 1;
-						j = (int) (x / 64);
-					} else {
-						i = (int) ((y / h) / 2);
-						j = (int) (x / 64) - 1;
-					}
-				} else { // -0.5
-					if (-0.5 * newX - newY + 16 > 0) {
-						i = (int) ((y / h) / 2) - 1;
-						j = (int) (x / 64);
-					} else {
-						i = (int) ((y / h) / 2);
-						j = (int) (x / 64);
-					}
-				}
-			} else if (i % 4 == 2) {
-				if (j % 2 == 0) { // -0.5
-					if (-0.5 * newX - newY + 16 > 0) {
-						i = (int) ((y / h) / 2) - 1;
-						j = (int) (x / 64) - 1;
-					} else {
-						i = (int) ((y / h) / 2);
-						j = (int) (x / 64);
-					}
-				} else { // 0.5
-					if (0.5 * newX - newY > 0) {
-						i = (int) ((y / h) / 2) - 1;
-						j = (int) (x / 64);
-					} else {
-						i = (int) ((y / h) / 2);
-						j = (int) (x / 64);
-					}
-				}
-			}
-		}
-		if ((i < 0) || (j < 0) || (i > 7) || (i % 2 == 0 && j >= 7)) {
-			i = -1;
-			j = -1;
-		}
-		return new Coordonnees(i, j);
-	}
-	
-	
-	public Coordonnees getCoordonnees(double x, double y) {
-		//Valeurs a renseigner
-		double hauteurTotaleTuile = 48; //hauteur carré + triangles haut et bas
-		double tuileHauteur = hauteurTotaleTuile*2/3; //hauteur carré + triangle haut
-		double tuileLargeur = 64; //largeur d'une tuile
-		double c = hauteurTotaleTuile/3; //hauteur d'un "triangle"
-		//Valeurs deduites
-		double moitieLargeur = tuileLargeur/2;
-		double gradient = c/moitieLargeur;
-		
-	    // Trouve la ligne et la colonne de la "boite"
-	    int ligne = (int) (y / tuileHauteur);
-	    boolean lignePaire = ligne % 2 == 0;
-	    
-	    int colonne;
-	    if (lignePaire) // ajoute l'indentation si ligne paire
-	    	colonne = (int) ((x - moitieLargeur) / tuileLargeur);
-	    else
-	    	colonne = (int) (x / tuileLargeur);
-	    
-	    // Trouve la position relative a l'interieur de la "boite"
-	    double relY = y - (ligne * tuileHauteur);
-	    double relX;
-	    if (lignePaire) // ajoute l'indentation si ligne paire
-	        relX = (x - (colonne * tuileLargeur)) - moitieLargeur;
-	    else
-	        relX = x - (colonne * tuileLargeur);
-	    
-	    // Ajuste ligne et colonne si le point est au dessus des arretes superieurs gauche ou droite
-	    if (relY < (-gradient * relX) + c) { // cote gauche
-	    	ligne--;
-	        if (!lignePaire) {
-	        	colonne--;
-	        } else {
-	        	if(x<moitieLargeur && (relY > (gradient * relX) + c)) {
-	        		colonne--;
-	        		ligne++;
-	        	}
-	        }
-
-	    } else if (relY < (gradient * relX) - c) { // cote droit
-	    	ligne--;
-	        if (lignePaire) colonne++;
-	        
-	        
-	    } else {
-        	if(lignePaire && x<moitieLargeur) {
-        		colonne--;
-        	}
-	    }
-	    
-	    Coordonnees coord = new Coordonnees();
-	    if(!((lignePaire && colonne>6) || colonne<0 || ligne<0 || ligne>7)) {
-	    	coord = new Coordonnees(colonne,ligne); 
-		}
-		return coord;
-	}
-	
-	
-	/**
-	 * vérifie que les coordonnées du couple xy sont des indices valides dans un tableau Banquise
-	 * @param xy un couple de coordonnées correspondant aux indices des tableaux banquise
-	 * @return vrai si le couple est valide, faux sinon.
-	 */
-	public boolean coordValide(Coordonnees xy) {
-		return (xy.x != -1) && (xy.y != -1);
-	}
 }

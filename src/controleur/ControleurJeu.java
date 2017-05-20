@@ -206,6 +206,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					}
 			    }*/
    
+    public void nettoyerBanquise(){
+    	for (int i = 0; i< 8; i++){
+			for(int j = 0; j< 8; j++){
+					banquise.get(i).get(j).setEffect(null);
+			}
+		}
+    }
+    
     /**
      * Gere les modifications de l'interface l'interface appelées à chaque tour de jeu.
      * @param reglettes liste des reglettes accueillant les miniatures de pingouins dans la zone joueur.
@@ -234,14 +242,31 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	
     	//maj effet sur joueur actif
     	Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
+    	
+    	nettoyerBanquise();
+    	
+    	if (liste_Ecran.moteur.phasePlacement){
+	    	for (int i = 0; i< 8; i++){
+				for(int j = 0; j< 8; j++){
+					if ( partie.isPlacementValide(new Coordonnees(i,j)) ){
+						banquise.get(i).get(j).setEffect(new Glow(1));
+					}
+				}
+			}
+    	}
+    	
 
     	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
     		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
     			if (j == liste_Ecran.moteur.partie.joueurActif){
-    				((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
+    				if (liste_Ecran.moteur.phaseJeu){
+    					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
+    				}
     				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
     			}else{
-    				((ImageView) reglettes.get(j).get(i)).setEffect(null);
+    				if (liste_Ecran.moteur.phaseJeu){
+    					((ImageView) reglettes.get(j).get(i)).setEffect(null);
+    				}
     				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
     			}
 	    	}
@@ -365,6 +390,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void reinitiailiserTour(MouseEvent event){
     	// TODO
+    	majPingouins();
     	System.out.println("reinitiailiserTour");
     }
     
@@ -420,6 +446,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			
 			if (liste_Ecran.moteur.phasePlacement) {
+				
 				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
 					pingouinAplacer = partie.numPingouinAPlacer();
 					translaterPingouin(pingouinAplacer,jActif,indicesBanquise);
@@ -428,6 +455,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
+
+				nettoyerBanquise();
 				//TODO on sélectionne un pingouin depuis sa tuile
 				//pingouinAdeplacer = rendPingouinAdeplacer(indicesBanquise);
 				int numPingTemporaire = rendPingouinAdeplacer(indicesBanquise);
@@ -435,6 +464,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				if (numPingTemporaire!= -1){
 					pingouinAdeplacer = numPingTemporaire;
 					selectionnerPingouinAdeplacer(banquise.get(jActif).get(pingouinAdeplacer));
+					
+					//affichage des chemins
+					ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(indicesBanquise);
+					for( ArrayList<Coordonnees> col : accessibles ){
+						for ( Coordonnees lin : col){
+							banquise.get(lin.x).get(lin.y).setEffect(new Glow(1));
+						}
+					}
+					
+					
 	
 				}
 				 

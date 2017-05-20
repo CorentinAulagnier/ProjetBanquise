@@ -556,7 +556,6 @@ public class Partie implements Serializable {
 	
 	public void manger(Coordonnees c) {
 		Tuile t = b.getTuile(c);
-		
 		if (t.aUnPingouin) { //La case contient bien un pingouin
 			joueurs[joueurActif].poissonsManges += t.nbPoissons;
 			t. enlevePoissons();	

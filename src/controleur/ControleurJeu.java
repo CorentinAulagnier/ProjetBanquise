@@ -247,10 +247,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	public void majPingouins(){
 		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
 			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
-				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
+				
 
 				Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
 				ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
+				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
 				if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
 					Coordonnees pingouin_en_ihm = getXY(miniature_pingouin.getX(), miniature_pingouin.getY());
 					
@@ -396,8 +397,34 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void reinitiailiserTour(MouseEvent event){
     	coord_pingouin_encours = new Coordonnees();
+    	pingouinAdeplacer = -1;
+    	
+		// TODO dégager ce patch dégeulasse surtout si on enlève la reglette
+		if (liste_Ecran.moteur.phasePlacement) {
+			ImageView miniature_pingouin_aReset = reglettes.get(liste_Ecran.moteur.partie.joueurActif).get(liste_Ecran.moteur.partie.numPingouinAPlacer());
+			Point2D coord2DTo = new Point2D(0, 0);
+			switch (liste_Ecran.moteur.partie.joueurActif) {
+			case 0:
+				coord2DTo = new Point2D(10, 45);
+				break;
+			case 1:
+				coord2DTo = new Point2D(765, 45);
+				break;
+			case 2:
+				coord2DTo = new Point2D(765, 515);
+				break;
+			case 3:
+				coord2DTo = new Point2D(10, 515);
+				break;
+			}
+			TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniature_pingouin_aReset);
+			tt.setToX(coord2DTo.getX() - miniature_pingouin_aReset.getX());
+			tt.setToY(coord2DTo.getY() - miniature_pingouin_aReset.getY());
+			tt.play();
+
+		}
+
     	miseAjour_tourDeJeu();
-    	this.miseAjour_tourDeJeu();
     }
     
     /**
@@ -517,7 +544,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			coord_pingouin_encours = new Coordonnees();
 		}
 	}
-	
 	
 	/**
 	 * rend le pingouin(ImageView) positionné au dessus de la tuile cliquée, s'il est au joueur actif
@@ -796,8 +822,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     private void gererSon(MouseEvent event){
     	changerSon(imageSon,liste_Ecran);
     }
-    
-    
+       
     /**
      * change d'ecran pour celui des regles
      * @param event evenement souris attendu : clic
@@ -828,7 +853,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	alertAccueil(liste_Ecran, model.Proprietes.ECRAN_JEU);
     }
     
-    
     /**
      * ouvre une popup de confirmatio avant de quitter l'application 
      * @param event event evenement souris attendu : clic
@@ -838,7 +862,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	nettoyerMenu(optionbox, roue);
     	alert_quitter(liste_Ecran);
     }
-    
     
     /**
      * gere l'ouverture ou la fermeture du menu roue

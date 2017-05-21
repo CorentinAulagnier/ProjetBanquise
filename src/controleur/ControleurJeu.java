@@ -368,8 +368,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
     @FXML private void annulerTours(MouseEvent event){
     	// TODO
-		//first_clic = true;
-    	System.out.println("annulerTours");
+    	System.out.println("coup précédent");
     }
     
     /**
@@ -378,7 +377,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void refaireTours(MouseEvent event){
     	// TODO
-    	System.out.println("refaireTours");
+    	System.out.println("rétablir tours");
     }
     
     /**
@@ -395,9 +394,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void reinitiailiserTour(MouseEvent event){
-    	// TODO
-    	//majPingouins();
-    	System.out.println("reinitiailiserTour");
+    	coord_pingouin_encours = new Coordonnees();
+    	miseAjour_tourDeJeu();
+    	this.miseAjour_tourDeJeu();
     }
     
     /**
@@ -425,10 +424,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		} else if (liste_Ecran.moteur.phaseVictoire){
 			//TODO
 		}
-    	
     	coord_pingouin_encours = new Coordonnees();
     	miseAjour_tourDeJeu();
-    
     }
     
  

@@ -2,18 +2,14 @@ package controleur;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 
 
 public class ControleurAccueil extends ControleurPere implements Initializable, EcranCourant {
@@ -22,7 +18,6 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
 	@FXML private Button jouer, charger, regles, roue;
 	@FXML private AnchorPane optionbox;
 	@FXML private ImageView imageSon, imageMusique;
-	final FileChooser fileChooser = new FileChooser();
 	
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -47,8 +42,6 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	gestionnaireFxmlCourant = ecranParent;
     }
 
-     
-    
     /**
      * change d'ecran pour celui d'une nouvelle partie
      * @param event evenement souris attendu : clic
@@ -66,22 +59,10 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      */
     @FXML
     private void ouvrirPageCharger(MouseEvent event){
-    	// gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
+    	// TODO gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CHARGER);
     	// ou 
-    	
     	nettoyerMenu(optionbox, roue);
-    	File file = fileChooser.showOpenDialog(null);
-    	String  path = file.getName();
-        if (file != null) {
-        	path = file.getAbsolutePath();
-        	try {
-        		gestionnaireFxmlCourant.moteur.partie.charger(path);
-        	} catch (Exception e) {
-            	gestionnaireFxmlCourant.moteur.partie.chargerTXT(path);
-        	}
-        	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
-            System.out.println(gestionnaireFxmlCourant.moteur.partie.toString2());
-        }    	
+    	charger(this.gestionnaireFxmlCourant);
     }
     
     /**
@@ -95,8 +76,6 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_REGLES);
     }
     
-    
-    
     /**
      * gere l'ouverture ou la fermeture du menu roue
      * @param event evenement souris attendu : clic
@@ -105,11 +84,14 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		if (gestionnaireFxmlCourant.musique == false){
+    		majBoutonMusique(gestionnaireFxmlCourant,imageMusique);
+    		majBoutonSon(gestionnaireFxmlCourant,imageSon);
+    		//TODO si ok nettoyer
+    		/*if (gestionnaireFxmlCourant.musique == false){
         		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
         	}else{
         		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
-        	}    	
+        	}    	*/
     		optionOuvrirRoue(optionbox, roue) ;
     	}else{
     		optionFermerRoue(optionbox, roue);
@@ -123,7 +105,6 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     @FXML
     private void gererMusique(MouseEvent event){
     	changerMusique(imageMusique , gestionnaireFxmlCourant.media, gestionnaireFxmlCourant);
-    	
     }
     
     /**
@@ -142,8 +123,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     @FXML
     private void quitter(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
-    	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
+    	alert_quitter(gestionnaireFxmlCourant);
     }
     
     

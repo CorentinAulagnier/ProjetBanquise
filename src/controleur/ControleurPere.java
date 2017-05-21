@@ -25,6 +25,8 @@ import javafx.stage.FileChooser;
 import javafx.application.Platform;
 
 public class ControleurPere {
+
+	final FileChooser fileChooserCharger = new FileChooser();
 	
 	/**
      * gere la modification de l'affichage d'un bouton lorsque la souris est presse
@@ -99,6 +101,17 @@ public class ControleurPere {
 	 }
 	 
 	 /**
+	  * gere la modification du bouton musique
+	  */
+	 public void majBoutonMusique(GestionnaireEcransFxml liste_ecran, ImageView imageMusique){
+		 if (liste_ecran.musique == false){
+     		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
+     	}else{
+     		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
+     	}    
+	 }
+	 
+	 /**
 	  * gere la modification du volume de la musique
 	  */
 	 public void changerMusique(ImageView iv, MediaPlayer media, GestionnaireEcransFxml liste_ecran){
@@ -106,16 +119,28 @@ public class ControleurPere {
 		 if(liste_ecran.musique){
 			 liste_ecran.musique = false;
 			// media.pause();
-			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
+			// iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
 			 liste_ecran.musique = true;
 			 //media.seek(media.getStartTime());
 	    	//	media.play();
-			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
+			 //iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
 			 System.out.println("remettre musique");
 		 }
+		 majBoutonMusique(liste_ecran,iv);
+	 }
+	 
+	 /**
+	  * gere la modification du bouton musique
+	  */
+	 public void majBoutonSon(GestionnaireEcransFxml liste_ecran, ImageView imageSon){
+		 if (liste_ecran.son == false){
+			 imageSon.setImage(new Image(model.Proprietes.IMAGE_SONOFF_PATH));
+     	}else{
+     		imageSon.setImage(new Image(model.Proprietes.IMAGE_SONON_PATH));
+     	}    
 	 }
 	 
 	 /**
@@ -125,14 +150,15 @@ public class ControleurPere {
 		// TODO
 		 if(liste_ecran.son){
 			 liste_ecran.son = false;
-			 iv.setImage(new Image(model.Proprietes.IMAGE_SONOFF_PATH));
+			// iv.setImage(new Image(model.Proprietes.IMAGE_SONOFF_PATH));
 			 System.out.println("couper Son");
 		 }
 		 else{
 			 liste_ecran.son = true;
-			 iv.setImage(new Image(model.Proprietes.IMAGE_SONON_PATH));
+			// iv.setImage(new Image(model.Proprietes.IMAGE_SONON_PATH));
 			 System.out.println("remettre Son");
 		 }
+		 majBoutonSon(liste_ecran,iv);
 	 }
 	 
 	 /**
@@ -245,8 +271,19 @@ public class ControleurPere {
 	/**
 	 * appeler le chargement d'une partie
 	 */
-	public void charger() {
-		
+	public void charger(GestionnaireEcransFxml liste_Ecran) {
+		File file = fileChooserCharger.showOpenDialog(null);
+    	String  path = file.getName();
+        if (file != null) {
+        	path = file.getAbsolutePath();
+        	try {
+        		liste_Ecran.moteur.partie.charger(path);
+        	} catch (Exception e) {
+        		liste_Ecran.moteur.partie.chargerTXT(path);
+        	}
+        	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
+            System.out.println(liste_Ecran.moteur.partie.toString2());
+        }   
 	}
 	
 	/**

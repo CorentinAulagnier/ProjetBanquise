@@ -46,10 +46,7 @@ public class GestionnaireEcransFxml extends StackPane {
 	 * permet de connaitre à tout moment l'état du mediaplayer (éteint, allumé).
 	 * A remplacer
 	 */
-	// TODO remplacer par media.mute : BooleanProperty mute Whether the player
-	// audio is muted.
-	// ou BooleanProperty muteProperty() Whether the player audio is muted.
-	// ou isMute() Retrieves the muteProperty() value
+	// TODO remplacer par media.status avec played or paused
 	public boolean musique = false;
 	/**
 	 * permet de connaitre l'été des bruitages

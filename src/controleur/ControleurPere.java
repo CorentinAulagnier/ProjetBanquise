@@ -105,14 +105,14 @@ public class ControleurPere {
 		// TODO
 		 if(liste_ecran.musique){
 			 liste_ecran.musique = false;
-			 media.pause();
+			// media.pause();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
 			 liste_ecran.musique = true;
-			 media.seek(media.getStartTime());
-	    		media.play();
+			 //media.seek(media.getStartTime());
+	    	//	media.play();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
 			 System.out.println("remettre musique");
 		 }

@@ -80,7 +80,6 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
      * gere l'ouverture ou la fermeture du menu roue
      * @param event evenement souris attendu : clic
      */
-   
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){

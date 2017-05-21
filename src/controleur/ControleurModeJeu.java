@@ -1,26 +1,5 @@
 package controleur;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
-import model.Banquise;
 import model.Humain;
 import model.IA;
 import model.Joueur;
@@ -28,21 +7,125 @@ import model.Partie;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+
 public class ControleurModeJeu extends ControleurPere implements Initializable,  EcranCourant {
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
 	
-	 /**GESTION DES BOUTONS**/
-    @FXML 
-    private Button retour;
-    @FXML 
-    private Button lancer;
-    @FXML 
-    private ImageView imageSon, imageMusique;
+    @FXML private Button retour, lancer, roue;
+    @FXML private ImageView imageSon, imageMusique;
+    @FXML private AnchorPane optionbox;
     
-       
+/**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/
+    @FXML private StackPane bulle;
     
-    @FXML
-    private void lancerPartie(MouseEvent event){
+    int[] modeJeu = new int[4];    
+    int[] image = new int[4];
+    StackPane[] pileMode = new StackPane[4];
+    StackPane[] pileNom = new StackPane[4];
+    StackPane[] pileImage = new StackPane[4];
+    @FXML private StackPane name1, name2, name3, name4,
+    						label1, label2, label3,label4, 
+    						pilerouge, pilejaune, pileverte, pilebleue ;
+    Button[] flecheDroiteImage = new Button[4];
+    Button[] flecheGaucheImage = new Button[4];
+    Button[] flecheDroiteMode = new Button[4];
+    Button[] flecheGaucheMode = new Button[4];
+    @FXML private Button droitjaune, droitrouge, droitbleu, droitvert,
+    					 gauchejaune, gaucherouge, gauchebleu, gauchevert,
+    					 modejaunedroit, modejaunegauche, moderougedroit, moderougegauche, modevertdroit, modevertgauche, modebleudroit, modebleugauche ;
+
+    /**
+	 * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur
+	 */
+    public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
+    	gestionnaireFxmlCourant = ecranParent;
+    }
+    
+    /**
+     * implementation demande par l'interface EcranCourant : vide car n'a pas d'utilite ici
+     */
+    public void miseAjour(){}
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override public void initialize(URL url, ResourceBundle rb) {
+    	
+    	/*MODE DE JEU ET IMAGE INITIALES*/
+    	modeJeu[model.Proprietes.JAUNE]= model.Proprietes.JOUEUR;
+ 		modeJeu[model.Proprietes.VERT]= model.Proprietes.CREVETTE;
+ 		modeJeu[model.Proprietes.ROUGE]= model.Proprietes.AUCUN;
+ 		modeJeu[model.Proprietes.BLEU]= model.Proprietes.AUCUN;
+ 		
+ 		image[model.Proprietes.JAUNE]=model.Proprietes.JOUEUR;
+ 		image[model.Proprietes.VERT]=model.Proprietes.CREVETTE;
+ 		image[model.Proprietes.ROUGE]=model.Proprietes.AUCUN;
+ 		image[model.Proprietes.BLEU]=model.Proprietes.AUCUN;
+ 		
+ 		/*INITIALISATION DES PILES*/
+    	
+    	pileMode[model.Proprietes.JAUNE]=name1;
+    	pileMode[model.Proprietes.VERT]=name2;
+    	pileMode[model.Proprietes.ROUGE]=name3;
+        pileMode[model.Proprietes.BLEU]=name4;
+        
+        pileNom[model.Proprietes.JAUNE]=label1;
+    	pileNom[model.Proprietes.VERT]=label2;
+    	pileNom[model.Proprietes.ROUGE]=label3;
+        pileNom[model.Proprietes.BLEU]=label4;
+        
+        pileImage[model.Proprietes.JAUNE]=pilejaune;
+    	pileImage[model.Proprietes.VERT]=pileverte;
+    	pileImage[model.Proprietes.ROUGE]=pilerouge;
+        pileImage[model.Proprietes.BLEU]=pilebleue;
+        
+       	flecheDroiteImage[model.Proprietes.JAUNE]= droitjaune;
+		flecheDroiteImage[model.Proprietes.VERT] = droitvert;
+		flecheDroiteImage[model.Proprietes.ROUGE] = droitrouge;
+		flecheDroiteImage[model.Proprietes.BLEU]= droitbleu;
+		
+		flecheGaucheImage[model.Proprietes.JAUNE] = gauchejaune;
+		flecheGaucheImage[model.Proprietes.VERT] = gauchevert;
+		flecheGaucheImage[model.Proprietes.ROUGE] = gaucherouge;
+		flecheGaucheImage[model.Proprietes.BLEU] = gauchebleu;
+		
+		flecheDroiteMode[model.Proprietes.JAUNE]= modejaunedroit;
+		flecheDroiteMode[model.Proprietes.VERT] = modevertdroit;
+		flecheDroiteMode[model.Proprietes.ROUGE] = moderougedroit;
+		flecheDroiteMode[model.Proprietes.BLEU]= modebleudroit;
+		
+		flecheGaucheMode[model.Proprietes.JAUNE] = modejaunegauche;
+		flecheGaucheMode[model.Proprietes.VERT] = modevertgauche;
+		flecheGaucheMode[model.Proprietes.ROUGE] = moderougegauche;
+		flecheGaucheMode[model.Proprietes.BLEU] = modebleugauche;
+		
+		retour.setStyle(model.Proprietes.STYLE_NORMAL);
+		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
+		
+		modeValide();
+		
+    }
+ 
+    /**
+     * créer les joueurs
+     * @param couleur indice de la couleur
+     * @param nbP nombre de joueurs
+     * @return un joueur
+     */
+    
+    @FXML private void lancerPartie(MouseEvent event){
     	
     	int nbJoueurs = 0;
     	for (int i = 0 ; i < 4 ; i++){
@@ -133,168 +216,20 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     }
     
     
-    @FXML
-    private void ouvrirPageAccueil(MouseEvent event){
+    @FXML private void ouvrirPageAccueil(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     
-    public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
-    	gestionnaireFxmlCourant = ecranParent;
-    }
+    
 	
-        
-    /**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/
-    
-    int[] modeJeu = new int[4];
-    
-    int[] image = new int[4];
-    
-    @FXML 
-    private StackPane bulle;
-    
-    @FXML 
-    private StackPane name1;
-    @FXML 
-    private StackPane name2;
-    @FXML 
-    private StackPane name3;
-    @FXML 
-    private StackPane name4;
-   
-        
-    StackPane[] pileMode = new StackPane[4];
-    
-    @FXML 
-    private StackPane label1;
-    @FXML 
-    private StackPane label2;
-    @FXML 
-    private StackPane label3;
-    @FXML 
-    private StackPane label4;
-    
-    StackPane[] pileNom = new StackPane[4];
-    
-    @FXML 
-    private StackPane pilerouge;
-    @FXML 
-    private StackPane pilejaune;
-    @FXML 
-    private StackPane pileverte;
-    @FXML 
-    private StackPane pilebleue;
-   
-    StackPane[] pileImage = new StackPane[4];
-    
-    @FXML 
-    private Button droitjaune;
-    @FXML 
-    private Button droitrouge;
-    @FXML 
-    private Button droitbleu;
-    @FXML 
-    private Button droitvert;
-    @FXML 
-    private Button gauchejaune;
-    @FXML 
-    private Button gaucherouge;
-    @FXML 
-    private Button gauchebleu;
-    @FXML 
-    private Button gauchevert;
-    
-    Button[] flecheDroiteImage = new Button[4];
-    Button[] flecheGaucheImage = new Button[4];
-    
-    @FXML 
-    private Button modejaunedroit ;
-    @FXML 
-    private Button modejaunegauche ;
-    @FXML 
-    private Button moderougedroit ;
-    @FXML 
-    private Button moderougegauche ;
-     @FXML 
-    private Button modevertdroit ;
-    @FXML 
-    private Button modevertgauche ;
-     @FXML 
-    private Button modebleudroit ;
-    @FXML 
-    private Button modebleugauche ;
-    
-    
-    
-    
-    Button[] flecheDroiteMode = new Button[4];
-    Button[] flecheGaucheMode = new Button[4];
-    
-    
     /**
-     * Initializes the controller class.
+     * SELECTION D'UN SKIN DE PERSONNAGE
+     * @param stck
+     * @param indice
+     * @param direction
+     * @return
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    	
-    	/*MODE DE JEU ET IMAGE INITIALES*/
-    	modeJeu[model.Proprietes.JAUNE]= model.Proprietes.JOUEUR;
- 		modeJeu[model.Proprietes.VERT]= model.Proprietes.CREVETTE;
- 		modeJeu[model.Proprietes.ROUGE]= model.Proprietes.AUCUN;
- 		modeJeu[model.Proprietes.BLEU]= model.Proprietes.AUCUN;
- 		
- 		image[model.Proprietes.JAUNE]=model.Proprietes.JOUEUR;
- 		image[model.Proprietes.VERT]=model.Proprietes.CREVETTE;
- 		image[model.Proprietes.ROUGE]=model.Proprietes.AUCUN;
- 		image[model.Proprietes.BLEU]=model.Proprietes.AUCUN;
- 		
- 		/*INITIALISATION DES PILES*/
-    	
-    	pileMode[model.Proprietes.JAUNE]=name1;
-    	pileMode[model.Proprietes.VERT]=name2;
-    	pileMode[model.Proprietes.ROUGE]=name3;
-        pileMode[model.Proprietes.BLEU]=name4;
-        
-        pileNom[model.Proprietes.JAUNE]=label1;
-    	pileNom[model.Proprietes.VERT]=label2;
-    	pileNom[model.Proprietes.ROUGE]=label3;
-        pileNom[model.Proprietes.BLEU]=label4;
-        
-        pileImage[model.Proprietes.JAUNE]=pilejaune;
-    	pileImage[model.Proprietes.VERT]=pileverte;
-    	pileImage[model.Proprietes.ROUGE]=pilerouge;
-        pileImage[model.Proprietes.BLEU]=pilebleue;
-        
-       	flecheDroiteImage[model.Proprietes.JAUNE]= droitjaune;
-		flecheDroiteImage[model.Proprietes.VERT] = droitvert;
-		flecheDroiteImage[model.Proprietes.ROUGE] = droitrouge;
-		flecheDroiteImage[model.Proprietes.BLEU]= droitbleu;
-		
-		flecheGaucheImage[model.Proprietes.JAUNE] = gauchejaune;
-		flecheGaucheImage[model.Proprietes.VERT] = gauchevert;
-		flecheGaucheImage[model.Proprietes.ROUGE] = gaucherouge;
-		flecheGaucheImage[model.Proprietes.BLEU] = gauchebleu;
-		
-		flecheDroiteMode[model.Proprietes.JAUNE]= modejaunedroit;
-		flecheDroiteMode[model.Proprietes.VERT] = modevertdroit;
-		flecheDroiteMode[model.Proprietes.ROUGE] = moderougedroit;
-		flecheDroiteMode[model.Proprietes.BLEU]= modebleudroit;
-		
-		flecheGaucheMode[model.Proprietes.JAUNE] = modejaunegauche;
-		flecheGaucheMode[model.Proprietes.VERT] = modevertgauche;
-		flecheGaucheMode[model.Proprietes.ROUGE] = moderougegauche;
-		flecheGaucheMode[model.Proprietes.BLEU] = modebleugauche;
-		
-		retour.setStyle(model.Proprietes.STYLE_NORMAL);
-		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
-		
-		modeValide();
-		
-    }
-   
-    
-    /** SELECTION D'UN SKIN DE PERSONNAGE **/
-    
     public int selectImage(StackPane stck, int indice , boolean direction){//false = gauche, true = droite
     	
     	stck.getChildren().get(indice).setVisible(false);
@@ -310,7 +245,10 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	return indice;
     }
     
-    
+    /**
+     * 
+     * @param event
+     */
     @FXML
     public void flecheImageEvent(MouseEvent event){
     	if ( ((Button) event.getTarget() ) ==  flecheDroiteImage[model.Proprietes.ROUGE]){
@@ -332,11 +270,11 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     }
     
-   
-    
-    
-    /** SELECTION D'UN MODE DE PERSONNAGE **/
-
+    /**
+     * SELECTION D'UN MODE DE PERSONNAGE
+     * @param stck
+     * @param indice
+     */
     public void justOneVisible(StackPane stck, int indice){
     	for (int i = 0; i<5 ; i++){
     		if (i==indice){
@@ -347,6 +285,11 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     }
     
+    /**
+     * 
+     * @param stck
+     * @param indice
+     */
     public void bulleVisible(StackPane stck, int indice){
     	for (int i = 0; i<3 ; i++){
     		if (i==indice){
@@ -357,6 +300,13 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     }
     
+    /**
+     * 
+     * @param stck
+     * @param indice
+     * @param direction
+     * @return
+     */
     public int selectType(StackPane stck, int indice, boolean direction){//false = gauche, true = droit	
     	stck.getChildren().get(indice).setVisible(false);
     	if (direction){	indice = (indice+1)%5;
@@ -367,6 +317,11 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	
     }
     
+    /**
+     * 
+     * @param couleur
+     * @param direction
+     */
     public void selectMode(int couleur, boolean direction){
     	modeJeu[couleur] = selectType(pileMode[couleur],modeJeu[couleur],direction);
     	if(modeJeu[couleur] != 1) {
@@ -381,6 +336,10 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
 		image[couleur]=modeJeu[couleur];
     }
     
+    /**
+     * 
+     * @param event
+     */
     @FXML
     public void flecheModeEvent(MouseEvent event){
     	if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.ROUGE]){
@@ -403,6 +362,10 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	modeValide();
     }
     
+    /**
+     * 
+     * @param event
+     */
     @FXML
     public void textEntre(KeyEvent event){
     	String nom = ((TextField) event.getTarget() ).getText();
@@ -412,7 +375,10 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     		((TextField) event.getTarget()).deleteText(20, 21);
     	}
     }
-  
+
+    /**
+     * 
+     */
     public void modeValide(){
     	boolean JRV = ((modeJeu[model.Proprietes.JAUNE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.ROUGE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.VERT] == model.Proprietes.AUCUN));
     	boolean JRB = ((modeJeu[model.Proprietes.JAUNE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.ROUGE] == model.Proprietes.AUCUN) && (modeJeu[model.Proprietes.BLEU] == model.Proprietes.AUCUN));
@@ -431,34 +397,28 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     }
 	
-    
-    
-    @FXML AnchorPane optionbox;
-    @FXML Button roue;
-   
- 
+    /**
+     * gere l'ouverture ou la fermeture du menu roue
+     * @param event evenement souris attendu : clic
+     */
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		if (gestionnaireFxmlCourant.musique == false){
-        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
-        	}else{
-        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
-        	}
-    		 optionOuvrirRoue(optionbox, roue) ;
+    		majBoutonMusique(gestionnaireFxmlCourant,imageMusique);
+    		majBoutonSon(gestionnaireFxmlCourant,imageSon);;
+    		optionOuvrirRoue(optionbox, roue) ;
     	}else{
     		 optionFermerRoue(optionbox, roue) ;
     	}
     }
     
       
-    public void miseAjour(){}
+    
     
     @FXML
     private void quitter(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	String contenu = "Etes vous sur de vouloir quitter nos amis les pinguouins? Ils vont se sentir si seuls...";
-    	alert_quitter(gestionnaireFxmlCourant, "Bye bye ?", contenu, "Bien sur", "" , "Euh.." );
+    	alert_quitter(gestionnaireFxmlCourant);
     }
     
     /**
@@ -478,10 +438,8 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
      */
     @FXML
     private void gererMusique(MouseEvent event){
-    	changerMusique(imageMusique, gestionnaireFxmlCourant.media ,gestionnaireFxmlCourant);
+    	changerMusique(imageMusique , gestionnaireFxmlCourant.media, gestionnaireFxmlCourant);
     }
-    
-    
     
     /**
      * gere la modification des bruitages
@@ -490,7 +448,6 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     private void gererSon(MouseEvent event){
     	changerSon(imageSon, gestionnaireFxmlCourant);
-    }
-    
+    }    
     
 }

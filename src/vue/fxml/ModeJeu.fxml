@@ -101,6 +101,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererSon" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
                      <graphic>
@@ -113,6 +116,9 @@
                      <HBox.margin>
                         <Insets right="40.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
                      <graphic>
@@ -125,6 +131,9 @@
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#quitter" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
                      <graphic>
@@ -137,6 +146,9 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </HBox>

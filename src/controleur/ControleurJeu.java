@@ -332,6 +332,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		// le joueur actif est humain
 		if(partie.getJoueurActif() instanceof Humain){
 			activerAnchorPane(box_tour_local);
+			bouton_finTour.setDisable(true);
 			desactiverAnchorPane(box_tour_distant);
 			desactiverAnchorPane(box_demarrer);
 			

@@ -155,7 +155,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_tourDeJeu();
     	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
-        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(0.5) , new EventHandler<ActionEvent>(){
+        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(2) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.aRafraichir){
         								miseAjour_tourDeJeu();
@@ -199,6 +199,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     public void miseAjour_tourDeJeu(){
     	Partie partie = liste_Ecran.moteur.partie;
+    	bouton_finTour.setDisable(true);
     	
     	//TODO y a une fonction plus propre je crois pour les scores...
     	//maj des scores du joueur
@@ -415,10 +416,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private void validerTour(MouseEvent event){
 		
     	if (liste_Ecran.moteur.phasePlacement) {
+        	this.bouton_finTour.setDisable(true);
 			liste_Ecran.moteur.placement(coord_pingouin_encours);
 	    	coord_pingouin_encours = new Coordonnees();
 		}
 		else if (liste_Ecran.moteur.phaseJeu){
+	    	this.bouton_finTour.setDisable(true);
 			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 			coord_pingouin_encours = new Coordonnees();
 		} else if (liste_Ecran.moteur.phaseVictoire){

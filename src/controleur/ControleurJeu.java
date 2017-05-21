@@ -390,7 +390,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
      
     /**
-     * 
+     * annule tous les mouvements en cours, comme si l'on reprenait le tour en cours à son début
      * @param event
      */
     @FXML private void reinitiailiserTour(MouseEvent event){
@@ -458,11 +458,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}
 			}
 			else if (liste_Ecran.moteur.phaseJeu) {
-
-				//TODO on sélectionne un pingouin depuis sa tuile
-				//pingouinAdeplacer = rendPingouinAdeplacer(indicesBanquise);
 				int numPingTemporaire = rendPingouinAdeplacer(indicesBanquise);
-				System.out.println("ping a deplacer (clic sur tuile) "+numPingTemporaire);
+				
 				if (numPingTemporaire!= -1){
 					nettoyerBanquise();
 					pingouinAdeplacer = numPingTemporaire;
@@ -475,9 +472,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 							banquise.get(lin.x).get(lin.y).setEffect(new Glow(1));
 						}
 					}
-					
-					
-	
 				}
 				 
 				//on a déjà selectionné un pingouin donc on peut le bouger
@@ -488,18 +482,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					bouton_finTour.setDisable(false);
 				}else{	System.out.println("pingouin bouge pas");}
 			}
-			
 		}
-		
-	}
-	
-	//CETTE FONCTION EST DEVENUE INUTILE.  De la part de Seb.
-	/**
-	 * action à produire après un clic sur un pingouin pendant la phase jeu
-	 * @param event evenement souris attendu : clic
-	 */
-	public void choisirPingouinAdeplacer(MouseEvent event) {
-		selectionnerPingouinAdeplacer((ImageView)event.getTarget());
 	}
 	
 
@@ -751,24 +734,42 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		return coord;
 	}
 	
+	/**
+	 * Active et rend visible le noeud donné
+	 * @param a zone anchorpane
+	 */
 	public void activerAnchorPane(AnchorPane a){
 		a.setDisable(false);
     	a.setVisible(true);
 	}
+	
+	/**
+	 * Desctive et rend invisible le noeud donné
+	 * @param a zone anchorpane
+	 */
 	public void desactiverAnchorPane(AnchorPane a){
 		a.setDisable(true);
     	a.setVisible(false);
 	}
+	
+	/**
+	 * Active et rend visible le bouton donné
+	 * @param b bouton
+	 */
 	public void activerBouton(Button b){
 		b.setDisable(false);
     	b.setVisible(true);
 	}
+	
+	/**
+	 * Desctive et rend invisible le bouton donné
+	 * @param b bouton
+	 */
 	public void desactiverBouton(Button b){
 		b.setDisable(true);
     	b.setVisible(false);		
 	}
 
-	
 	
 	
 	/****************************************/

@@ -44,7 +44,6 @@ public class ControleurPere {
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_NORMAL);
     }
     
-    
     /**
 	 * permet de fermer la roue si necessaire
 	 * @param optionbox zone du menu que l'on doit cacher
@@ -56,11 +55,11 @@ public class ControleurPere {
     	}
     }
 	 
-	  /**
-	     * gere l'ouverture du menu d'options cache par le bouton roue
-		 * @param optionbox zone du menu que l'on doit cacher
-		 * @param roue bouton provoquant l'action
-	     */
+	/**
+	 * gere l'ouverture du menu d'options cache par le bouton roue	 * 
+	 * @param optionbox zone du menu que l'on doit cacher
+	 * @param roue bouton provoquant l'action
+	 */
 	 public void optionOuvrirRoue(AnchorPane optionbox, Button roue){
 		 optionbox.setDisable(false);
  		FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
@@ -78,11 +77,11 @@ public class ControleurPere {
  	     pt.play();
 	    }
 	 
-		 /**
-		     * gere la fermeture du menu d'options cache par le bouton roue
-			 * @param optionbox zone du menu que l'on doit cacher
-			 * @param roue bouton provoquant l'action
-		     */
+	/**
+	 * gere la fermeture du menu d'options cache par le bouton roue
+	 * @param optionbox zone du menu que l'on doit cacher
+	 * @param roue bouton provoquant l'action
+	 */
 	 public void optionFermerRoue(AnchorPane optionbox, Button roue){
 		 optionbox.setDisable(true);
 		 	FadeTransition ft = new FadeTransition(Duration.millis(500), optionbox);
@@ -98,7 +97,6 @@ public class ControleurPere {
 	     	ParallelTransition pt = new ParallelTransition(optionbox, ft, st ,rt/*,tt*/);
 	     	pt.play();
 	 }
-	 
 	 
 	 /**
 	  * gere la modification du volume de la musique
@@ -145,6 +143,7 @@ public class ControleurPere {
 	  * @param boutonNok texte a afficher sur le bouton annuler
 	  * @param boutonPeutetre texte optionnel a afficher a la place du bouton non pour rendre fou l'utilisateur
 	  */
+	 //TODO a dégager
 	 public void alert_quitter(GestionnaireEcransFxml liste_ecran, String titre, String contenu, String boutonOk, String boutonNok, String boutonPeutetre){
 		 
 		 Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -175,11 +174,8 @@ public class ControleurPere {
 	    }
 	 
 	/**
-	 * Fonction pour ouvrir la fenetre de confirmation de fermeture de
-	 * l'application (version jdk 8u40)
-	 * 
-	 * @param liste_ecran
-	 *            noeud FXML
+	 * Fonction pour ouvrir la fenetre de confirmation de fermeture de l'application (version jdk 8u40)
+	 * @param liste_ecran noeud FXML
 	 */
 	public void alert_quitter(GestionnaireEcransFxml liste_ecran) {
 		String titre = "Vous partez ?";
@@ -205,6 +201,11 @@ public class ControleurPere {
 		}
 	}
 	
+	/**
+	 * Fonction pour ouvrir la fenetre de confirmation de retour à l'accueil (version jdk 8u40)
+	 * @param liste_Ecran noeud FXML
+	 * @param ecran nom de l'écran que l'on quitte
+	 */
 	public void alertAccueil(GestionnaireEcransFxml liste_Ecran, String ecran){
 		String titre = "Quitter partie";
 		String contenu = "Etes vous sur de vouloir quitter cette partie?";
@@ -226,6 +227,10 @@ public class ControleurPere {
 		}     	
 	}
  
+	/**
+	 * appeler la sauvegarde du jeu
+	 * @param moteur 
+	 */
 	public void sauver(Moteur moteur) {
 		final FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(null);
@@ -237,6 +242,18 @@ public class ControleurPere {
 		}
 	}
 
+	/**
+	 * appeler le chargement d'une partie
+	 */
+	public void charger() {
+		
+	}
+	
+	/**
+	 * charger la page règles
+	 * @param liste_Ecran noeud FXML
+	 * @param ecranAppelant écran d'où on a appelé les règles
+	 */
 	public void appelerRegles(GestionnaireEcransFxml liste_Ecran, String ecranAppelant) {
 		liste_Ecran.dernierePage = ecranAppelant;
 		liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_REGLES);

@@ -85,7 +85,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t71,t72,t73,t74,t75,t76,t77,
     						t81,t82,t83,t84,t85,t86,t87,t88;
 
-
     
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -189,34 +188,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}
 		}
     }
-			    /**
-			     * met à jour toute la zone réservée à un joueur
-			     * @param joueur numéro du joueur
-			     * @param anchors zone entière réservée au joueur
-			     * @param banquise encart de couleur sous la zone de joueur
-			     * @param p couleur assoicée au joueur
-			     * @param nom nom du joueur
-			     */
-			   /* public void initZoneJoueur(int joueur, AnchorPane anchors, Arc banquisette, Paint p, Label nom){
-			    	activerAnchorPane(anchors);
-			    	banquisette.setFill(p);
-			    	nom.setText(liste_Ecran.moteur.partie.joueurs[joueur].nom);
-			    	
-			    	//maj des miniatures des pinguouins 		
-					String path = liste_Ecran.moteur.partie.joueurs[joueur].cheminMiniature;
-					for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[joueur].nbPingouin ; ping++){
-						reglettes.get(joueur).get(ping).setImage(new Image(path));
-					}
-			    }*/
-   
-    public void nettoyerBanquise(){
-    	for (int i = 0; i< 8; i++){
-			for(int j = 0; j< 8; j++){
-					banquise.get(i).get(j).setEffect(null);
-			}
-		}
-    }
-    
+
+
     /**
      * Gere les modifications de l'interface l'interface appelées à chaque tour de jeu.
      * @param reglettes liste des reglettes accueillant les miniatures de pingouins dans la zone joueur.
@@ -227,6 +200,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     public void miseAjour_tourDeJeu(){
     	Partie partie = liste_Ecran.moteur.partie;
     	
+    	//TODO y a une fonction plus propre je crois pour les scores...
     	//maj des scores du joueur
     	for( int j=0 ; j < partie.joueurs.length ; j++ ){
     		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
@@ -239,45 +213,17 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//maj des pingouins
     	majPingouins();
     	
+    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
     	//maj text tour de (temporaire) :
     	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");}
     	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");}
     	
     	//maj effet sur joueur actif
-    	Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
-    	
     	nettoyerBanquise();
-    	
-    	if (liste_Ecran.moteur.phasePlacement){
-	    	for (int i = 0; i< 8; i++){
-				for(int j = 0; j< 8; j++){
-					if ( partie.isPlacementValide(new Coordonnees(i,j)) ){
-						banquise.get(i).get(j).setEffect(new Glow(1));
-					}
-				}
-			}
-    	}
-    	
-
-    	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
-    		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
-    			if (j == liste_Ecran.moteur.partie.joueurActif){
-    				if (liste_Ecran.moteur.phaseJeu){
-    					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
-    				}
-    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
-    			}else{
-    				if (liste_Ecran.moteur.phaseJeu){
-    					((ImageView) reglettes.get(j).get(i)).setEffect(null);
-    				}
-    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
-    			}
-	    	}
-    	}
+    	majEffets();
 
     	//maj zone des boutons
     	majActionsDisponibles();	
-    	
     } 
     
     /**
@@ -295,7 +241,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     }
     
 	/**
-	 * verifie si chaque pingouin de chaque joueur est bien à sa place attendue en mémoire, sinon le déplace là où il devrait être
+	 * raffraichit l'affichage des pingouins. Vérifie si chaque pingouin de chaque joueur est bien à sa place attendue en mémoire, sinon le déplace là où il devrait être
 	 */
 	public void majPingouins(){
 		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
@@ -325,6 +271,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}
 	}
 	
+	/**
+	 * raffraichit l'affichage des boutons d'actions en fonction de la personne qui joue
+	 */
 	public void majActionsDisponibles(){
 		Partie partie = liste_Ecran.moteur.partie;
 		//TODO gerer les tours en fonctions du reseau
@@ -364,7 +313,50 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		}  
 	}
     
-
+	/**
+	 * raffraichit les efets visuels 
+	 */
+	public void majEffets(){
+		Partie partie =liste_Ecran.moteur.partie;
+		Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
+		
+		if (liste_Ecran.moteur.phasePlacement){
+	    	for (int i = 0; i< 8; i++){
+				for(int j = 0; j< 8; j++){
+					if ( partie.isPlacementValide(new Coordonnees(i,j)) ){
+						banquise.get(i).get(j).setEffect(new Glow(1));
+					}
+				}
+			}
+    	}
+    	
+    	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
+    		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
+    			if (j == liste_Ecran.moteur.partie.joueurActif){
+    				if (liste_Ecran.moteur.phaseJeu){
+    					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
+    				}
+    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
+    			}else{
+    				if (liste_Ecran.moteur.phaseJeu){
+    					((ImageView) reglettes.get(j).get(i)).setEffect(null);
+    				}
+    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
+    			}
+	    	}
+    	}
+	}
+	
+	/**
+	 * nettoie les effets visuels sur la banquise
+	 */
+	public void nettoyerBanquise(){
+    	for (int i = 0; i< 8; i++){
+			for(int j = 0; j< 8; j++){
+					banquise.get(i).get(j).setEffect(null);
+			}
+		}
+    }
 	
     /****************************************/
     /*		gestion actions des joueurs		*/

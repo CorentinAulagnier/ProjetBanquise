@@ -204,31 +204,36 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	Partie partie = liste_Ecran.moteur.partie;
     	bouton_finTour.setDisable(true);
     	
-    	//maj zone des boutons
-    	majActionsDisponibles();	
-    	
-    	//maj des pingouins
-    	majPingouins();
-    	
-    	//maj effet sur joueur actif
-    	nettoyerBanquise();
-    	majEffets();
-    	
-    	//maj de l'affichage la banquise
-    	majBanquise();
-
-    	//TODO y a une fonction plus propre je crois pour les scores...
-    	//maj des scores du joueur
-    	for( int j=0 ; j < partie.joueurs.length ; j++ ){
-    		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
-    		scores_tuiles.get(j).setText( String.valueOf(partie.joueurs[j].nbTuiles) );	
-    	}
-    	
-    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
-    	//maj text tour de (temporaire) :
-    	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-	    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
-	    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
+    	if (liste_Ecran.moteur.phaseVictoire){
+	    	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
+			liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
+    	}else{
+	    	//maj zone des boutons
+	    	majActionsDisponibles();	
+	    	
+	    	//maj des pingouins
+	    	majPingouins();
+	    	
+	    	//maj effet sur joueur actif
+	    	nettoyerBanquise();
+	    	majEffets();
+	    	
+	    	//maj de l'affichage la banquise
+	    	majBanquise();
+	
+	    	//TODO y a une fonction plus propre je crois pour les scores...
+	    	//maj des scores du joueur
+	    	for( int j=0 ; j < partie.joueurs.length ; j++ ){
+	    		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
+	    		scores_tuiles.get(j).setText( String.valueOf(partie.joueurs[j].nbTuiles) );	
+	    	}
+	    	
+	    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
+	    	//maj text tour de (temporaire) :
+	    	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
+		    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
+		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
+	    	}
     	}
     } 
     
@@ -506,11 +511,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 			coord_pingouin_encours = new Coordonnees();
 		} else if (liste_Ecran.moteur.phaseVictoire){
-
-			liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
-			liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);  
+			  //on fait quoi
 		}
-    	coord_pingouin_encours = new Coordonnees();
+
     	miseAjour_tourDeJeu();
     }
     

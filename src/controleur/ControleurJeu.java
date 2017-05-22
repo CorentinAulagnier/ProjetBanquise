@@ -158,11 +158,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_tourDeJeu();
     	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
-        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(2) , new EventHandler<ActionEvent>(){
+        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(0.5) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.aRafraichir){
+
         								miseAjour_tourDeJeu();
         								liste_Ecran.moteur.partieRafraichie();
+        								liste_Ecran.moteur.faireJouerIAS();
         								}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
@@ -226,10 +228,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
     	//maj text tour de (temporaire) :
     	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
+    		text_tourDe.setVisible(true);
 	    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
 	    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
     	}else{
-    		liste_Ecran.moteur.faireJouerIAS();
+    		text_tourDe.setVisible(false);
     	}
     } 
     
@@ -460,16 +463,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			Point2D coord2DTo = new Point2D(0, 0);
 			switch (liste_Ecran.moteur.partie.joueurActif) {
 			case 0:
-				coord2DTo = new Point2D(20, 130);
+				coord2DTo = new Point2D(100, 40);
 				break;
 			case 1:
-				coord2DTo = new Point2D(760, 130);
+				coord2DTo = new Point2D(680, 40);
 				break;
 			case 2:
-				coord2DTo = new Point2D(760, 440);
+				coord2DTo = new Point2D(680, 530);
 				break;
 			case 3:
-				coord2DTo = new Point2D(20, 440);
+				coord2DTo = new Point2D(100, 530);
 				break;
 			}
 			TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniature_pingouin_aReset);

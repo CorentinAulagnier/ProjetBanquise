@@ -8,8 +8,6 @@ import model.Coordonnees;
 import model.CoupleGenerique;
 import model.Humain;
 import model.IA;
-import model.Joueur;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,8 +32,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -417,44 +413,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void demanderIndice(MouseEvent event){
     	// TODO
-    	Partie p = liste_Ecran.moteur.partie.clone();
-    	Joueur j = p.getJoueurActif();
-    	
-    	IA i = new IA(j.nom, j.nbPingouin, 2, j.cheminMiniature, j.couleur);
-    	i.myPingouins = j.myPingouins;
-    	i.nbTuiles = j.nbTuiles;
-    	i.poissonsManges = j.poissonsManges;
-    	
-    	p.joueurs[p.joueurActif] = i;
-    	CoupleGenerique<Coordonnees, Coordonnees> cc = i.jouer(p);
-    	System.out.println(cc);
-
-    	
-    	
-		nettoyerBanquise();/*
-		pingouinAdeplacer = liste_Ecran.moteur.partie.rechercheNumPingouin(liste_Ecran.moteur.partie.joueurActif, cc.e1);
-		selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
-		*/
-		
-		ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(cc.e1);
-		for( ArrayList<Coordonnees> col : accessibles ){
-			for ( Coordonnees lin : col){
-				banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.7));
-			}
-		}
-		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
-
-		/*
-		banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
-
-		translaterPingouin(pingouinAdeplacer, liste_Ecran.moteur.partie.joueurActif, cc.e2);
-		coord_pingouin_encours = cc.e2;
-		bouton_finTour.setDisable(false);
-		
-		*/
-		
-		
-    	
     	System.out.println("demanderIndice");
     }
      
@@ -567,7 +525,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(indicesBanquise);
 					for( ArrayList<Coordonnees> col : accessibles ){
 						for ( Coordonnees lin : col){
-							banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.7));
+							banquise.get(lin.x).get(lin.y).setEffect(new Glow(1));
 						}
 					}
 				}

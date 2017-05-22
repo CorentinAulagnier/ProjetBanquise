@@ -902,27 +902,21 @@ public class Partie implements Serializable {
 		
 		
 		
-		int joueurMax =0;
+		int joueurMax = 0;
 		int scoreMax = 0;
 		int nbTuilesMax = 0;
 		for(int i = 0; i<nbJoueurs;i++ ) {
 			for(int j = i; j<nbJoueurs;j++ ) {
-				if (joueurs[j].nbPingouin > scoreMax) {
-					scoreMax = joueurs[j].nbPingouin;
+				if (joueurs[j].poissonsManges > scoreMax || (joueurs[j].poissonsManges == scoreMax && joueurs[j].nbTuiles > nbTuilesMax)) {
+					scoreMax = joueurs[j].poissonsManges;
 					joueurMax = j;
 					nbTuilesMax = joueurs[j].nbTuiles;
-					
-				} else if(joueurs[j].nbPingouin == scoreMax) {
-					//if (joueurs[j].nbTuiles) {
-						
-					//}
-	
-				}
+				} 
 			}
-			jo[i] = joueurs[joueurMax];
 			
-			
-
+			temp = jo[i];
+			jo[i] = jo[joueurMax];
+			jo[joueurMax] = temp;
 		}
 		return jo;
 	}

@@ -307,7 +307,7 @@ public abstract class MoteurConsole {
 	 */
 
 	public static void finPartie(Partie p) {
-		afficherPlateau(p);
+		afficherPlateau(p);/*
 		ArrayList<Joueur> joueurs = p.getGagnant();
 		if(joueurs.size()>1) {
 			System.out.print("Partie terminée.\nLes joueurs ");
@@ -319,7 +319,11 @@ public abstract class MoteurConsole {
 			System.out.println("Partie terminée.\nLe joueur "+joueurs.get(0).nom+" a gagné la partie avec "+String.valueOf(joueurs.get(0).poissonsManges)+" poissons mangés !");
 		}
 		//score de chaque joueur
-		p.afficherScores();
+		p.afficherScores();*/
+		Joueur[] classement = p.classement();
+		for (int i = 0; i < p.nbJoueurs; i++) {
+			System.out.println(classement[i]);
+		}
 	}
 
 }

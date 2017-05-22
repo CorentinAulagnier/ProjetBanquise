@@ -168,6 +168,7 @@
       </Button>
       <AnchorPane layoutX="40.0" layoutY="90.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0">
          <children>
+          <Circle fill="#ffffff5a" layoutX="120.0" layoutY="145.0" radius="80.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2" />
           <Button fx:id="modejaunegauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
@@ -260,10 +261,13 @@
           </Button>
           <StackPane fx:id="pilejaune" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="60.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="160.0" prefWidth="160.0">
             <children>
-              <ImageView fx:id="croixjaune" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+              <ImageView fx:id="croixjaune" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="TOP_CENTER">
                 <image>
                   <Image url="@../../ressources/joueurs/cross.png" />
                 </image>
+                     <StackPane.margin>
+                        <Insets top="40.0" />
+                     </StackPane.margin>
               </ImageView>
               <ImageView fx:id="pingjaune" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="true">
                 <image>
@@ -274,6 +278,9 @@
                 <image>
                   <Image url="@../../ressources/joueurs/20.png" />
                 </image>
+                     <StackPane.margin>
+                        <Insets top="5.0" />
+                     </StackPane.margin>
               </ImageView>
               <ImageView fx:id="evejaune" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
@@ -287,7 +294,6 @@
               </ImageView>
             </children>
           </StackPane>
-          <Circle fill="#ffffff5a" layoutX="120.0" layoutY="145.0" radius="80.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2" />
           <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheImageEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
             <graphic>
               <ImageView fitHeight="45.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
@@ -304,6 +310,11 @@
       </AnchorPane>
       <AnchorPane layoutX="518.0" layoutY="90.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0">
          <children>
+          <Circle layoutX="120.0" layoutY="145.0" radius="80.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2">
+               <fill>
+                  <Color blue="1.000" green="1.000" opacity="0.353" red="1.000" fx:id="x31" />
+               </fill>
+            </Circle>
           <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
@@ -399,10 +410,13 @@
           </Button>
           <StackPane fx:id="pileverte" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="60.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="160.0" prefWidth="160.0">
             <children>
-              <ImageView fx:id="croixverte" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+              <ImageView fx:id="croixverte" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="TOP_CENTER">
                 <image>
                   <Image url="@../../ressources/joueurs/cross.png" />
                 </image>
+                     <StackPane.margin>
+                        <Insets top="40.0" />
+                     </StackPane.margin>
               </ImageView>
               <ImageView fx:id="pingvert" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
@@ -413,6 +427,9 @@
                 <image>
                   <Image url="@../../ressources/joueurs/21.png" />
                 </image>
+                     <StackPane.margin>
+                        <Insets top="5.0" />
+                     </StackPane.margin>
               </ImageView>
               <ImageView fx:id="eveverte" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
@@ -426,10 +443,6 @@
               </ImageView>
             </children>
           </StackPane>
-          <Circle layoutX="120.0" layoutY="145.0" radius="80.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2">
-               <fill>
-                  <Color blue="1.000" green="1.000" opacity="0.353" red="1.000" fx:id="x31" />
-               </fill></Circle>
           <Button fx:id="droitvert" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheImageEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
             <graphic>
               <ImageView fitHeight="45.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
@@ -446,6 +459,11 @@
       </AnchorPane>
       <AnchorPane layoutX="518.0" layoutY="340.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0">
          <children>
+          <Circle layoutX="120.0" layoutY="145.0" opacity="1.0" radius="80.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2">
+               <fill>
+                  <Color blue="1.000" green="1.000" opacity="0.353" red="1.000" fx:id="x32" />
+               </fill>
+            </Circle>
           <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
@@ -542,11 +560,6 @@
           </Button>
           <StackPane fx:id="pilebleue" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="60.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="160.0" prefWidth="160.0">
             <children>
-              <ImageView fx:id="croixbleue" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true">
-                <image>
-                  <Image url="@../../ressources/joueurs/cross.png" />
-                </image>
-              </ImageView>
               <ImageView fx:id="pingbleu" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
                   <Image url="@../../ressources/joueurs/13.png" />
@@ -556,6 +569,9 @@
                 <image>
                   <Image url="@../../ressources/joueurs/23.png" />
                 </image>
+                     <StackPane.margin>
+                        <Insets top="5.0" />
+                     </StackPane.margin>
               </ImageView>
               <ImageView fx:id="evebleue" fitHeight="150.0" fitWidth="200.0" focusTraversable="false" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
@@ -567,13 +583,16 @@
                   <Image url="@../../ressources/joueurs/43.png" />
                 </image>
               </ImageView>
+              <ImageView fx:id="croixbleue" fitHeight="90.0" fitWidth="120.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="TOP_CENTER">
+                <image>
+                  <Image url="@../../ressources/joueurs/cross.png" />
+                </image>
+                     <StackPane.margin>
+                        <Insets top="40.0" />
+                     </StackPane.margin>
+              </ImageView>
             </children>
           </StackPane>
-          <Circle layoutX="120.0" layoutY="145.0" opacity="1.0" radius="80.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2">
-               <fill>
-                  <Color blue="1.000" green="1.000" opacity="0.353" red="1.000" fx:id="x32" />
-               </fill>
-            </Circle>
           <Button fx:id="droitbleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheImageEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" opacity="1.0" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
             <graphic>
               <ImageView fitHeight="45.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
@@ -589,6 +608,7 @@
          </children></AnchorPane>
       <AnchorPane layoutX="40.0" layoutY="340.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0">
          <children>
+          <Circle fill="#ffffff59" layoutX="120.0" layoutY="145.0" opacity="1.0" radius="80.00006103515625" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2" />
           <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
@@ -688,11 +708,6 @@
           </Button>
           <StackPane fx:id="pilerouge" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="60.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="160.0" prefWidth="160.0">
             <children>
-              <ImageView fx:id="croixrouge" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/joueurs/cross.png" />
-                </image>
-              </ImageView>
               <ImageView fx:id="pingrouge" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
                   <Image url="@../../ressources/joueurs/12.png" />
@@ -702,6 +717,9 @@
                 <image>
                   <Image url="@../../ressources/joueurs/22.png" />
                 </image>
+                     <StackPane.margin>
+                        <Insets top="5.0" />
+                     </StackPane.margin>
               </ImageView>
               <ImageView fx:id="everouge" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
@@ -713,9 +731,16 @@
                   <Image url="@../../ressources/joueurs/42.png" />
                 </image>
               </ImageView>
+              <ImageView fx:id="croixrouge" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                <image>
+                  <Image url="@../../ressources/joueurs/cross.png" />
+                </image>
+                     <StackPane.margin>
+                        <Insets top="40.0" />
+                     </StackPane.margin>
+              </ImageView>
             </children>
           </StackPane>
-          <Circle fill="#ffffff59" layoutX="120.0" layoutY="145.0" opacity="1.0" radius="80.00006103515625" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2" />
           <Button fx:id="droitrouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheImageEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" opacity="1.0" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
             <graphic>
               <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">

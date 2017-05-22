@@ -172,11 +172,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
-        								
         								liste_Ecran.moteur.faireJouerIAS();
         								miseAjour_tourDeJeu();
-        								//liste_Ecran.moteur.partieRafraichie();
         								}
+        							System.out.println("placement:"+liste_Ecran.moteur.phasePlacement);
+        							System.out.println("phaseJeu:"+liste_Ecran.moteur.phaseJeu);
+        							System.out.println("victoire:"+liste_Ecran.moteur.phaseVictoire);
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
@@ -216,12 +217,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	Partie partie = liste_Ecran.moteur.partie;
     	bouton_finTour.setDisable(true);
     	
-    	if (liste_Ecran.moteur.phaseVictoire){
-	    	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
-			liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
-    	}else{
-	    	//maj zone des boutons
-	    	majActionsDisponibles();	
+    		
 	    	
 	    	//maj des pingouins
 	    	majPingouins();
@@ -246,7 +242,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
 		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
 	    	}
-    	}
+	    	
+	    	/*if (liste_Ecran.moteur.phaseVictoire){
+	    		//Govictoire
+	    		System.out.println("Go Victoire");
+		    	//liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
+				//liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
+	    	}else{*/
+		    	//maj zone des boutons
+		    	majActionsDisponibles();
+    	//}
     } 
     
     /**
@@ -526,9 +531,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	this.bouton_finTour.setDisable(true);
 			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 			coord_pingouin_encours = new Coordonnees();
-		} else if (liste_Ecran.moteur.phaseVictoire){
+		} /*else if (liste_Ecran.moteur.phaseVictoire){
 			  //on fait quoi
-		}
+		}*/
 
     	miseAjour_tourDeJeu();
     }

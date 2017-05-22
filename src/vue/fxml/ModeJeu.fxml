@@ -560,6 +560,14 @@
           </Button>
           <StackPane fx:id="pilebleue" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="60.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="160.0" prefWidth="160.0">
             <children>
+              <ImageView fx:id="croixbleue" fitHeight="90.0" fitWidth="120.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="TOP_CENTER">
+                <image>
+                  <Image url="@../../ressources/joueurs/cross.png" />
+                </image>
+                     <StackPane.margin>
+                        <Insets top="40.0" />
+                     </StackPane.margin>
+              </ImageView>
               <ImageView fx:id="pingbleu" fitHeight="150.0" fitWidth="200.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
                   <Image url="@../../ressources/joueurs/13.png" />
@@ -582,14 +590,6 @@
                 <image>
                   <Image url="@../../ressources/joueurs/43.png" />
                 </image>
-              </ImageView>
-              <ImageView fx:id="croixbleue" fitHeight="90.0" fitWidth="120.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="TOP_CENTER">
-                <image>
-                  <Image url="@../../ressources/joueurs/cross.png" />
-                </image>
-                     <StackPane.margin>
-                        <Insets top="40.0" />
-                     </StackPane.margin>
               </ImageView>
             </children>
           </StackPane>
@@ -708,6 +708,14 @@
           </Button>
           <StackPane fx:id="pilerouge" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="60.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="160.0" prefWidth="160.0">
             <children>
+              <ImageView fx:id="croixrouge" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                <image>
+                  <Image url="@../../ressources/joueurs/cross.png" />
+                </image>
+                     <StackPane.margin>
+                        <Insets top="40.0" />
+                     </StackPane.margin>
+              </ImageView>
               <ImageView fx:id="pingrouge" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
                 <image>
                   <Image url="@../../ressources/joueurs/12.png" />
@@ -730,14 +738,6 @@
                 <image>
                   <Image url="@../../ressources/joueurs/42.png" />
                 </image>
-              </ImageView>
-              <ImageView fx:id="croixrouge" fitHeight="90.0" fitWidth="90.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                <image>
-                  <Image url="@../../ressources/joueurs/cross.png" />
-                </image>
-                     <StackPane.margin>
-                        <Insets top="40.0" />
-                     </StackPane.margin>
               </ImageView>
             </children>
           </StackPane>

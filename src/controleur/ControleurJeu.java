@@ -27,7 +27,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
@@ -201,30 +200,30 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	Partie partie = liste_Ecran.moteur.partie;
     	bouton_finTour.setDisable(true);
     	
+    	//maj zone des boutons
+    	majActionsDisponibles();	
+    	
+    	//maj effet sur joueur actif
+    	nettoyerBanquise();
+    	majEffets();
+    	
+    	//maj des pingouins
+    	majPingouins();
+    	
+    	//maj de l'affichage la banquise
+    	majBanquise();
+    	
+    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
+    	//maj text tour de (temporaire) :
+    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");}
+    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");}
+
     	//TODO y a une fonction plus propre je crois pour les scores...
     	//maj des scores du joueur
     	for( int j=0 ; j < partie.joueurs.length ; j++ ){
     		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
     		scores_tuiles.get(j).setText( String.valueOf(partie.joueurs[j].nbTuiles) );	
     	}
-
-    	//maj de l'affichage la banquise
-    	majBanquise();
-    	
-    	//maj des pingouins
-    	majPingouins();
-    	
-    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
-    	//maj text tour de (temporaire) :
-    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");}
-    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");}
-    	
-    	//maj effet sur joueur actif
-    	nettoyerBanquise();
-    	majEffets();
-
-    	//maj zone des boutons
-    	majActionsDisponibles();	
     } 
     
     /**
@@ -280,6 +279,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Partie partie = liste_Ecran.moteur.partie;
 		//TODO gerer les tours en fonctions du reseau
 		
+		desactiverBouton(bouton_defaire);
+		desactiverBouton(bouton_faire);
+		
 		// le joueur actif est humain
 		if(partie.getJoueurActif() instanceof Humain){
 			activerAnchorPane(box_tour_local);
@@ -288,10 +290,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			
 			//il est le seul humain => utilisation ou pas de faire defaire
 			if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
-		    	bouton_defaire.setDisable(false);
-		    	bouton_defaire.setVisible(false);
-		    	bouton_faire.setDisable(false);
-		    	bouton_faire.setVisible(false);
+				if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
+			    	activerBouton(bouton_defaire);
+				}
+				if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
+					activerBouton(bouton_faire);
+				}
 			}
 		} 
 		//sinon si le joueur est une IA
@@ -370,8 +374,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 * @param event
 	 */
     @FXML private void annulerTours(MouseEvent event){
+    	
     	// TODO
-    	System.out.println("coup précédent");
+    	if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
+	    	this.liste_Ecran.moteur.partie.annuler();
+	    	miseAjour_tourDeJeu();
+    	}
     }
     
     /**
@@ -380,7 +388,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void refaireTours(MouseEvent event){
     	// TODO
-    	System.out.println("rétablir tours");
+    	if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
+	    	this.liste_Ecran.moteur.partie.retablir();
+	    	miseAjour_tourDeJeu();
+    	}
     }
     
     /**

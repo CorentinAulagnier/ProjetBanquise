@@ -74,21 +74,11 @@ System.out.println(partie);
 		
 		//Message IHM
 		this.partieARafraichir();
-
+		/*
 		if (partie.getJoueurActif() instanceof IA) {
 			//this.IAProchainJoueur = true;
-			/*try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}*/
-			/*
-			while (true) {
-				synchronized (partie) {
-					if (!aRafraichir) {break;}	
-				}
-			}*/
 			faireJouerIAS();
-		}
+		}*/
 	}
 	
 	/**
@@ -120,15 +110,13 @@ System.out.println(partie);
 		
 			//Message IHM
 			this.partieARafraichir();
-	
+			
+			/*
 			if (partie.getJoueurActif() instanceof IA) {
 				//this.IAProchainJoueur = true;
-				/*
-				while (true) {
-					if (!aRafraichir) {break;}
-				}*/
+
 				faireJouerIAS();
-			}
+			}*/
 		}
 	}
 	

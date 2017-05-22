@@ -100,7 +100,7 @@ public abstract class MoteurConsole {
 			
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return p;
 	}

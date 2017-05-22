@@ -173,6 +173,8 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
 
     	gestionnaireFxmlCourant.moteur.partie.joueurs = tableauDeJoueur;
     		
+    	gestionnaireFxmlCourant.moteur.partie.setHistorique();
+
     	nettoyerMenu(optionbox, roue);
     	
     	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);

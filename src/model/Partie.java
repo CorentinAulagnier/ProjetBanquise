@@ -331,10 +331,10 @@ public class Partie implements Serializable {
 			ligne=br.readLine();
 			elements=ligne.split(" ");
 			if (elements[0].equals("IA")) {		//IA
-				j[i] = new IA(elements[8], Integer.parseInt(elements[6]), Integer.parseInt(elements[10]));
+				j[i] = new IA(elements[8], Integer.parseInt(elements[6]), Integer.parseInt(elements[14]), elements[12], Integer.parseInt(elements[10]));
 				
 			} else {	//Humain
-				j[i] = new Humain(elements[8], Integer.parseInt(elements[6]));
+				j[i] = new Humain(elements[8], Integer.parseInt(elements[6]), elements[12], Integer.parseInt(elements[10]));
 			}
 			j[i].poissonsManges = Integer.parseInt(elements[4]);
 			j[i].nbTuiles = Integer.parseInt(elements[2]);
@@ -608,6 +608,10 @@ public class Partie implements Serializable {
 	
 	public void deplacement(Pingouin p, Coordonnees arr) {
 		
+		if (this.utiliseHistorique && this.getJoueurActif() instanceof Humain) {
+			this.h.undo.push(this.clone());
+			
+		}
 		manger(p.position);
 		Tuile tuileDep = b.getTuile(p.position);
 		Tuile tuileArr = b.getTuile(arr);

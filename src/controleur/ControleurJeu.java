@@ -288,8 +288,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			desactiverAnchorPane(box_tour_distant);
 			desactiverAnchorPane(box_demarrer);
 			
+			System.out.println("Historique "+liste_Ecran.moteur.partie.utiliseHistorique);
+			
 			//il est le seul humain => utilisation ou pas de faire defaire
 			if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
+				System.out.println("Refaire "+this.liste_Ecran.moteur.partie.h.peutRefaire());
+
+				System.out.println("Annuler : "+this.liste_Ecran.moteur.partie.h.peutAnnuler());
+
 				if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
 			    	activerBouton(bouton_defaire);
 				}

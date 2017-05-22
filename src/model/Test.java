@@ -137,7 +137,7 @@ public class Test extends MoteurConsole{
 						p.sauvegarder();
 						Partie p2 = new Partie();
 						p2.charger();
-						System.out.println("Banquise restaurée :\n"+p);
+						System.out.println("Banquise restaurée :\n"+p.toString2());
 						System.out.println("Historique restaurée :\n"+p.h);
 						break;
 					case 6:

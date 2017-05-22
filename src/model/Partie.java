@@ -610,6 +610,7 @@ public class Partie implements Serializable {
 		
 		if (this.utiliseHistorique && this.getJoueurActif() instanceof Humain) {
 			this.h.undo.push(this.clone());
+			this.h.redo.clear();
 			
 		}
 		manger(p.position);

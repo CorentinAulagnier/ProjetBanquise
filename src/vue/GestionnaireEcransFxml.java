@@ -123,7 +123,7 @@ public class GestionnaireEcransFxml extends StackPane {
 			Parent ecranACharger = (Parent) monChargeurFXML.load();
 			EcranCourant monControleurDecran = ((EcranCourant) monChargeurFXML.getController());
 			monControleurDecran.fixeEcranParent(this);
-			if (nomEcran.equals(model.Proprietes.ECRAN_JEU)) {
+			if (nomEcran.equals(model.Proprietes.ECRAN_JEU)||nomEcran.equals(model.Proprietes.ECRAN_VICTOIRE)) {
 				monControleurDecran.miseAjour();
 			}
 			ajouteEcran(nomEcran, ecranACharger);

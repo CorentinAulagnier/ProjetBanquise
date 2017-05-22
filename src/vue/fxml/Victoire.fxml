@@ -35,14 +35,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" minHeight="30.0" minWidth="100.0" text="Joueur1_Nom" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label alignment="CENTER" layoutX="47.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur2_Nom" GridPane.columnIndex="2" />
-            <Label alignment="CENTER" layoutX="147.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur3_Nom" GridPane.columnIndex="3" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur4_Nom" GridPane.columnIndex="4" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="147.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label fx:id="nomPremier" alignment="CENTER" minHeight="30.0" minWidth="100.0" text="Joueur1_Nom" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="nomDeuxieme" alignment="CENTER" layoutX="47.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur2_Nom" visible="false" GridPane.columnIndex="2" />
+            <Label fx:id="nomTroisieme" alignment="CENTER" layoutX="147.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur3_Nom" visible="false" GridPane.columnIndex="3" />
+            <Label fx:id="nomQuatieme" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur4_Nom" visible="false" GridPane.columnIndex="4" />
+            <Label fx:id="poissonsPremier" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="poissonsDeuxieme" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="poissonsTroisieme" alignment="CENTER" layoutX="147.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="poissonsQuatrieme" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../ressources/decor/j_poisson.png" />
@@ -53,10 +53,10 @@
                   <Image url="@../../ressources/decor/j_tuile.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="40.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" layoutX="140.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" layoutX="240.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" layoutX="340.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="banquisePremier" alignment="CENTER" layoutX="40.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="banquiseDeuxieme" alignment="CENTER" layoutX="140.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="banquiseTroisieme" alignment="CENTER" layoutX="240.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="banquiseQuatrieme" alignment="CENTER" layoutX="340.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="29.0" text="Scores :" underline="true">
@@ -88,37 +88,37 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <ImageView fx:id="winner_1" fitHeight="200.0" fitWidth="70.0" layoutX="195.0" layoutY="234.0" preserveRatio="true">
+      <ImageView fx:id="winner_1" fitHeight="200.0" fitWidth="70.0" layoutX="195.0" layoutY="234.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/10.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="winner_3" fitHeight="200.0" fitWidth="70.0" layoutX="125.0" layoutY="263.0" preserveRatio="true">
+      <ImageView fx:id="winner_3" fitHeight="200.0" fitWidth="70.0" layoutX="122.0" layoutY="262.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/11.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="winner_2" fitHeight="200.0" fitWidth="70.0" layoutX="268.0" layoutY="242.0" preserveRatio="true">
+      <ImageView fx:id="winner_2" fitHeight="200.0" fitWidth="70.0" layoutX="268.0" layoutY="242.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/13.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="winner_4" fitHeight="200.0" fitWidth="70.0" layoutX="346.0" layoutY="283.0" preserveRatio="true">
+      <ImageView fx:id="winner_4" fitHeight="200.0" fitWidth="70.0" layoutX="346.0" layoutY="283.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/12.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loser_1" fitHeight="200.0" fitWidth="70.0" layoutX="511.0" layoutY="380.0" preserveRatio="true">
+      <ImageView fx:id="loser_1" fitHeight="200.0" fitWidth="70.0" layoutX="511.0" layoutY="380.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/12.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loser_2" fitHeight="200.0" fitWidth="70.0" layoutX="603.0" layoutY="380.0" preserveRatio="true">
+      <ImageView fx:id="loser_2" fitHeight="200.0" fitWidth="70.0" layoutX="603.0" layoutY="380.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/12.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loser_3" fitHeight="200.0" fitWidth="70.0" layoutX="687.0" layoutY="380.0" preserveRatio="true">
+      <ImageView fx:id="loser_3" fitHeight="200.0" fitWidth="70.0" layoutX="687.0" layoutY="380.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../ressources/joueurs/12.png" />
          </image>

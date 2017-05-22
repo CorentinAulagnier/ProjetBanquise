@@ -92,6 +92,7 @@ public class Historique implements Serializable {
 	
 	public void charger(String name) {
 		try {
+			System.out.println("name :" + name);
 			ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(name)) ;		
 			Historique h = (Historique)ois.readObject() ;
 			this.undo = h.undo;

@@ -238,9 +238,12 @@ public class Partie implements Serializable {
 			this.joueurActif = p.joueurActif;
 			this.nbJoueurs = p.nbJoueurs;
 			this.joueurs = p.joueurs;
-			this.utiliseHistorique = p.utiliseHistorique;
+			//this.utiliseHistorique = p.utiliseHistorique;
+			this.setHistorique();// = p.setHistorique();
+
 			if(utiliseHistorique) {
-				this.h.charger(name);
+				this.h.charger(name.substring(0, name.length()-9)+".historique");
+				
 			}
 			ois.close();
 		} catch (Exception e) {

@@ -38,7 +38,7 @@ public class Interface extends Application {
 	public static void creer(String[] args, Moteur m, int hauteur, int largeur) {
 		moteur = m;
 		partie = moteur.getPartie();
-		hauteurFenetre = hauteur;
+		hauteurFenetre = hauteur +30;
 		largeurFenetre = largeur;
 		launch(args);
 	}

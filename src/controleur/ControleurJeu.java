@@ -176,9 +176,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         							}
         							if(liste_Ecran.moteur.phaseVictoire){
         							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
-        							    liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
-        								//liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
-        								//liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
+        							    //liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+        								liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
+        								liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
         							    timeline.stop();
         							}
         							}}));

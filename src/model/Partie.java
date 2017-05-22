@@ -398,9 +398,11 @@ public class Partie implements Serializable {
 	 */
 
 	public void majProchainJoueur() {
+		int i = 0;
 		this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
-		while (this.nbPingouinActif() == 0) {
+		while (i < 8 && this.nbPingouinActif() == 0) {
 			this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
+			i ++;
 		}
 	}
 	

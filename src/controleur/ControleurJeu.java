@@ -413,6 +413,35 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML private void demanderIndice(MouseEvent event){
     	// TODO
+    	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.moteur.demanderIndice();
+    	System.out.println(cc);
+
+    	
+    	
+		nettoyerBanquise();/*
+		pingouinAdeplacer = liste_Ecran.moteur.partie.rechercheNumPingouin(liste_Ecran.moteur.partie.joueurActif, cc.e1);
+		selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
+		*/
+		
+		ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(cc.e1);
+		for( ArrayList<Coordonnees> col : accessibles ){
+			for ( Coordonnees lin : col){
+				banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.7));
+			}
+		}
+		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
+
+		/*
+		banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
+
+		translaterPingouin(pingouinAdeplacer, liste_Ecran.moteur.partie.joueurActif, cc.e2);
+		coord_pingouin_encours = cc.e2;
+		bouton_finTour.setDisable(false);
+		
+		*/
+		
+		
+    	
     	System.out.println("demanderIndice");
     }
      

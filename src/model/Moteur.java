@@ -144,5 +144,18 @@ System.out.println(partie);
 			deplacement(j.jouer(partie));
 		}
 	}
+    
+    public CoupleGenerique<Coordonnees, Coordonnees> demanderIndice() {
+    	Partie p = this.partie.clone();
+    	Joueur j = p.getJoueurActif();
+    	
+    	IA i = new IA(j.nom, j.nbPingouin, 2, j.cheminMiniature, j.couleur);
+    	i.myPingouins = j.myPingouins;
+    	i.nbTuiles = j.nbTuiles;
+    	i.poissonsManges = j.poissonsManges;
+    	
+    	p.joueurs[p.joueurActif] = i;
+    	return i.jouer(p);
+    }
 
 }

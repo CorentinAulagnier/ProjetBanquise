@@ -283,7 +283,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		// le joueur actif est humain
 		if(partie.getJoueurActif() instanceof Humain){
 			activerAnchorPane(box_tour_local);
-			bouton_finTour.setDisable(true);
 			desactiverAnchorPane(box_tour_distant);
 			desactiverAnchorPane(box_demarrer);
 			
@@ -313,6 +312,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				desactiverAnchorPane(box_demarrer);
 			}
 		}  
+
+		bouton_finTour.setDisable(true);
 	}
     
 	/**
@@ -396,6 +397,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void reinitiailiserTour(MouseEvent event){
+    	bouton_finTour.setDisable(true);
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
     	
@@ -527,7 +529,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	public void selectionnerPingouinAdeplacer(ImageView pingouinCible){
 		//Partie partie = liste_Ecran.moteur.partie;
 		int jActif =  liste_Ecran.moteur.partie.joueurActif;
-		bouton_finTour.setDisable(true);
 		
 		if (liste_Ecran.moteur.phaseJeu) {
 			//IL FAUDRAIT PEUT ETRE EVITER LE MAJ CI DESSOUS MAIS C'EST LE PLUS SIMPLE.  De la part de Seb.
@@ -542,6 +543,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				System.out.println("ping a deplacer (clic sur pingouin)"+pingouinAdeplacer);
 			}
 			coord_pingouin_encours = new Coordonnees();
+			bouton_finTour.setDisable(true);
 		}
 	}
 	

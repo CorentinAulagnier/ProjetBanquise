@@ -261,12 +261,14 @@ public class ControleurPere {
 	public void sauver(Moteur moteur) {
 		final FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showSaveDialog(null);
-		String path = file.getName();
-		if (file != null) {
-			path = file.getAbsolutePath();
-			// TODO
-			moteur.partie.sauvegarder(path);
-		}
+		try{
+			String path = file.getName();
+			if (file != null) {
+				path = file.getAbsolutePath();
+				// TODO
+				moteur.partie.sauvegarder(path);
+			}
+		}catch(Exception e){}
 	}
 
 	/**
@@ -274,8 +276,8 @@ public class ControleurPere {
 	 */
 	public void charger(GestionnaireEcransFxml liste_Ecran) {
 		File file = fileChooserCharger.showOpenDialog(null);
-    	String  path = file.getName();
         if (file != null) {
+        	String  path = file.getName();
         	path = file.getAbsolutePath();
 			Partie p = new Partie();
         	try {

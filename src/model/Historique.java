@@ -75,7 +75,7 @@ public class Historique implements Serializable {
 	
 	public void sauvegarder(String name) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name+".historique"));
 			oos.writeObject(this);
 			oos.close();
 		} catch (Exception e) {

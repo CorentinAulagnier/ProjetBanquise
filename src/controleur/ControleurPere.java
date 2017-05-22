@@ -277,9 +277,15 @@ public class ControleurPere {
         if (file != null) {
         	path = file.getAbsolutePath();
         	try {
-        		liste_Ecran.moteur.partie.charger(path);
+        		//System.out.println(path.substring(path.length()-9, path.length()));
+        		if ((path.substring(path.length()-9, path.length())).equals(".banquise")) {
+            		liste_Ecran.moteur.partie.charger(path);
+
+        		} else {
+            		liste_Ecran.moteur.partie.chargerTXT(path);
+
+        		}
         	} catch (Exception e) {
-        		liste_Ecran.moteur.partie.chargerTXT(path);
         	}
         	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
             System.out.println(liste_Ecran.moteur.partie.toString2());

@@ -9,10 +9,21 @@ public class Moteur {
 	
 	public Moteur(Partie p) {
 		this.partie = p;
-		this.phasePlacement = true;
+		this.phasePlacement = false;
 		this.phaseJeu = false;
 		this.phaseVictoire = false;
 		this.aRafraichir = true;
+		verifPhase();
+	}
+	
+	public void verifPhase() {
+		phasePlacement = !this.partie.placementPingouinsFini();			
+		if (!phasePlacement) {
+			phaseJeu = !this.partie.jeuPingouinsFini();	
+			if (!phaseJeu) {
+				phaseVictoire = true;
+			}
+		}
 	}
 	
 	/**

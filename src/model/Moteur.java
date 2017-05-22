@@ -73,11 +73,11 @@ System.out.println(partie);
 		
 		//Message IHM
 		this.partieARafraichir();
-
+/*
 		if (partie.getJoueurActif() instanceof IA) {
 			this.IAProchainJoueur = true;
 			//faireJouerIAS();
-		}
+		}*/
 	}
 	
 	/**
@@ -110,11 +110,11 @@ System.out.println(partie);
 		
 		//Message IHM
 		this.partieARafraichir();
-
+/*
 		if (partie.getJoueurActif() instanceof IA) {
 			this.IAProchainJoueur = true;
 			//faireJouerIAS();
-		}
+		}*/
 	}
 	
 /****************************************************************************************/

@@ -795,6 +795,15 @@ public class Partie implements Serializable {
 		}
 		return null;
 	}
+	
+	public int rechercheNumPingouin(int numJoueur, Coordonnees c) {
+		for(int j = 0; j<joueurs[numJoueur].nbPingouin; j++) {
+			if (joueurs[numJoueur].myPingouins[j].position.equals(c)) {
+				return j;
+			}
+		}
+		return -1;
+	}
 
 /*******************************************************************************************************/
 

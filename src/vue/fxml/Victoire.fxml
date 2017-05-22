@@ -35,14 +35,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="nomPremier" alignment="CENTER" minHeight="30.0" minWidth="100.0" text="Joueur1_Nom" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label fx:id="nomDeuxieme" alignment="CENTER" layoutX="47.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur2_Nom" visible="false" GridPane.columnIndex="2" />
-            <Label fx:id="nomTroisieme" alignment="CENTER" layoutX="147.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur3_Nom" visible="false" GridPane.columnIndex="3" />
-            <Label fx:id="nomQuatieme" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur4_Nom" visible="false" GridPane.columnIndex="4" />
-            <Label fx:id="poissonsPremier" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="poissonsDeuxieme" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="poissonsTroisieme" alignment="CENTER" layoutX="147.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label fx:id="poissonsQuatrieme" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label fx:id="nom_1" alignment="CENTER" minHeight="30.0" minWidth="100.0" text="Joueur1_Nom" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="nom_2" alignment="CENTER" layoutX="47.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur2_Nom" visible="false" GridPane.columnIndex="2" />
+            <Label fx:id="nom_3" alignment="CENTER" layoutX="147.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur3_Nom" visible="false" GridPane.columnIndex="3" />
+            <Label fx:id="nom_4" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Joueur4_Nom" visible="false" GridPane.columnIndex="4" />
+            <Label fx:id="pois_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="pois_2" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="pois_3" alignment="CENTER" layoutX="147.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="pois_4" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../ressources/decor/j_poisson.png" />
@@ -53,10 +53,10 @@
                   <Image url="@../../ressources/decor/j_tuile.png" />
                </image>
             </ImageView>
-            <Label fx:id="banquisePremier" alignment="CENTER" layoutX="40.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="banquiseDeuxieme" alignment="CENTER" layoutX="140.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label fx:id="banquiseTroisieme" alignment="CENTER" layoutX="240.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label fx:id="banquiseQuatrieme" alignment="CENTER" layoutX="340.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="banq_1" alignment="CENTER" layoutX="40.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="banq_2" alignment="CENTER" layoutX="140.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="banq_3" alignment="CENTER" layoutX="240.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="banq_4" alignment="CENTER" layoutX="340.0" layoutY="40.0" minHeight="30.0" minWidth="100.0" text="Label" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="29.0" text="Scores :" underline="true">
@@ -64,7 +64,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button fx:id="nouvelle_manche" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageJeu" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Manche">
+      <Button fx:id="nouvelle_manche" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageJeu" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Manche">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -72,7 +72,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="nouvelle_partie" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageMode" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie">
+      <Button fx:id="nouvelle_partie" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageMode" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Nouvelle Partie">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -80,7 +80,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="accueil" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Accueil">
+      <Button fx:id="accueil" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Accueil">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -128,14 +128,14 @@
             <Image url="@../../ressources/decor/loser.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="optionbox" disable="true" layoutX="213.0" layoutY="523.0" maxHeight="85.0" maxWidth="354.0" minHeight="85.0" minWidth="354.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
+      <AnchorPane fx:id="optionbox" disable="true" layoutX="251.0" layoutY="523.0" maxHeight="85.0" maxWidth="354.0" minHeight="69.0" minWidth="279.0" opacity="0.0" prefHeight="69.0" prefWidth="279.0">
          <children>
-            <ImageView id="bckoption" fitHeight="66.87500762939453" fitWidth="354.00001525878906" focusTraversable="false" layoutX="0.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
+            <ImageView id="bckoption" fitHeight="67.0" fitWidth="273.0" focusTraversable="false" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
                <image>
                   <Image url="@../../ressources/decor/r_option.png" />
                </image>
             </ImageView>
-            <HBox id="optionbox" alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="67.0" prefWidth="354.0" style="-fx-background-color: transparent" visible="true">
+            <HBox id="optionbox" alignment="CENTER" layoutX="21.0" prefHeight="67.0" prefWidth="236.0" style="-fx-background-color: transparent" visible="true">
                <children>
                   <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererMusique" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
                      <graphic>
@@ -160,21 +160,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" mnemonicParsing="false" onMouseClicked="#sauvegarder" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../ressources/decor/r_sauver.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <HBox.margin>
                         <Insets right="40.0" />
                      </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
                   </Button>
                   <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
                      <graphic>
@@ -187,18 +175,6 @@
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../ressources/decor/r_igloo.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

@@ -204,7 +204,7 @@ public class Partie implements Serializable {
 	
 	public void sauvegarder(String name) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name+".banquise"));
 			oos.writeObject(this);
 			if(utiliseHistorique) {
 				h.sauvegarder(name);
@@ -220,7 +220,7 @@ public class Partie implements Serializable {
 	 */
 	
 	public void sauvegarder() {
-		sauvegarder("/home/a/aulagnco/git/save/no_name");
+		sauvegarder("/home/a/aulagnco/git/ProjetBanquise/save1/no_name");
 	}
 	
 	/**

@@ -83,9 +83,6 @@ System.out.println(partie);
 	 */
 	
 	public void deplacement(CoupleGenerique<Coordonnees, Coordonnees> cc) {
-		
-		System.out.println("dans moteur avant deplacement, phaseJeu:"+phaseJeu);
-		System.out.println("dans moteur avant deplacement, victoire:"+phaseVictoire);
 		partie.deplacement(cc);
 		
 /*************/
@@ -93,8 +90,9 @@ System.out.println("Deplacement en "+cc);
 System.out.println(partie);
 /*************/
 
-//Suppression pingouins inactif
-partie.verifierPingouinActif();
+		//Suppression pingouins inactif
+		partie.verifierPingouinActif();
+		
 		phaseJeu = !partie.jeuPingouinsFini();
 		if (!phaseJeu) {
 			phaseVictoire = true;
@@ -107,9 +105,6 @@ partie.verifierPingouinActif();
 	
 		//Message IHM
 		this.partieARafraichir();
-		
-		System.out.println("dans moteur enbas, phaseJeu:"+phaseJeu);
-		System.out.println("dans moteur en bas deplacement, victoire:"+phaseVictoire);
 	}
 	
 /****************************************************************************************/

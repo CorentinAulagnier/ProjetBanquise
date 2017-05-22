@@ -183,6 +183,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		activerAnchorPane(anchorPanes[j]);
     		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
     		
+    		auras.get(j).setImage(new Image(model.Proprietes.AURAS[liste_Ecran.moteur.partie.joueurs[j].couleur]));
+    		
     		//maj des miniatures des pingouins 		
 			String path = liste_Ecran.moteur.partie.joueurs[j].cheminMiniature;
 			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){

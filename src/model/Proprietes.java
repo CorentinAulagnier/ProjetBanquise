@@ -23,6 +23,13 @@ public class Proprietes {
     public static final String IMAGE_TUILE_2POISSON = "/ressources/decor/j_bloc_2poisson.png";
     public static final String IMAGE_TUILE_3POISSON = "/ressources/decor/j_bloc_3poisson.png";
     
+    public static final String AURA_JAUNE = "/ressources/decor/AuraJaune.png";
+    public static final String AURA_VERTE = "/ressources/decor/AuraVerte.png";
+	public static final String AURA_ROUGE = "/ressources/decor/AuraRouge.png";
+	public static final String AURA_BLEUE = "/ressources/decor/AuraBleue.png";
+    
+    public static final String[] AURAS = { AURA_JAUNE, AURA_VERTE, AURA_ROUGE, AURA_BLEUE} ;
+    
     public final static int AUCUN = 0 ;
     public final static int JOUEUR = 1 ;
     public final static int CREVETTE = 2 ;

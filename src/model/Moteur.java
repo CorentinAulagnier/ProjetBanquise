@@ -5,7 +5,7 @@ public class Moteur {
     
 	public Partie partie;
 	public boolean phaseJeu, phasePlacement, phaseVictoire;
-	public boolean aRafraichir;
+	public boolean aRafraichir, IAProchainJoueur;
 	
 	public Moteur(Partie p) {
 		this.partie = p;
@@ -13,12 +13,13 @@ public class Moteur {
 		this.phaseJeu = false;
 		this.phaseVictoire = false;
 		this.aRafraichir = true;
+		this.IAProchainJoueur = false;
 		verifPhase();
-		//System.out.println("phasePlacement : "+phasePlacement+" phaseVictoire : "+phaseVictoire+" phaseVictoire : "+phaseVictoire);
+		//System.out.println("phasePlacement : "+phasePlacement+" phaseJeu : "+phaseJeu+" phaseVictoire : "+phaseVictoire);
 	}
 	
 	public void verifPhase() {
-		phasePlacement = this.partie.placementPingouinsFini();			
+		phasePlacement = !this.partie.placementPingouinsFini();			
 		if (!phasePlacement) {
 			phaseJeu = !this.partie.jeuPingouinsFini();	
 			if (!phaseJeu) {
@@ -74,7 +75,8 @@ System.out.println(partie);
 		this.partieARafraichir();
 
 		if (partie.getJoueurActif() instanceof IA) {
-			faireJouerIAS();
+			this.IAProchainJoueur = true;
+			//faireJouerIAS();
 		}
 	}
 	
@@ -110,7 +112,8 @@ System.out.println(partie);
 		this.partieARafraichir();
 
 		if (partie.getJoueurActif() instanceof IA) {
-			faireJouerIAS();
+			this.IAProchainJoueur = true;
+			//faireJouerIAS();
 		}
 	}
 	

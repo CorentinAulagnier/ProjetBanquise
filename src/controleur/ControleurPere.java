@@ -2,6 +2,7 @@ package controleur;
 
 import vue.GestionnaireEcransFxml;
 import model.Moteur;
+import model.Partie;
 
 import java.io.File;
 import java.util.Optional;
@@ -276,17 +277,20 @@ public class ControleurPere {
     	String  path = file.getName();
         if (file != null) {
         	path = file.getAbsolutePath();
+			Partie p = new Partie();
         	try {
         		//System.out.println(path.substring(path.length()-9, path.length()));
         		if ((path.substring(path.length()-9, path.length())).equals(".banquise")) {
-            		liste_Ecran.moteur.partie.charger(path);
-
+        			p.charger(path);
+        			
         		} else {
-            		liste_Ecran.moteur.partie.chargerTXT(path);
+        			p.chargerTXT(path);
 
         		}
         	} catch (Exception e) {
         	}
+			liste_Ecran.moteur = new Moteur(p);
+
         	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
         	
         	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_JEU);

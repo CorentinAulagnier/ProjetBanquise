@@ -161,13 +161,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
     	    	int jActif = liste_Ecran.moteur.partie.joueurActif;
     	    	switch (((IA) liste_Ecran.moteur.partie.joueurs[jActif]).niveau){
-    	    		case(1) :temps=1;break;
+    	    		case(1) :temps=2;break;
     	    		case(2) :temps=6;break;
     	    		case(3) :temps=30;break;
     	    	}
     	    }
     	    	
-    	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
@@ -175,9 +174,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         								liste_Ecran.moteur.faireJouerIAS();
         								miseAjour_tourDeJeu();
         								}
-        							System.out.println("placement:"+liste_Ecran.moteur.phasePlacement);
-        							System.out.println("phaseJeu:"+liste_Ecran.moteur.phaseJeu);
-        							System.out.println("victoire:"+liste_Ecran.moteur.phaseVictoire);
+        							if(liste_Ecran.moteur.phaseVictoire){
+        							    //liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
+        							    liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+        								//liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
+        								//liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
+        							}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
@@ -246,8 +248,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	/*if (liste_Ecran.moteur.phaseVictoire){
 	    		//Govictoire
 	    		System.out.println("Go Victoire");
+	    		liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
 		    	//liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
 				//liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
+	    		liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
 	    	}else{*/
 		    	//maj zone des boutons
 		    	majActionsDisponibles();

@@ -83,6 +83,9 @@ System.out.println(partie);
 	 */
 	
 	public void deplacement(CoupleGenerique<Coordonnees, Coordonnees> cc) {
+		
+		System.out.println("dans moteur avant deplacement, phaseJeu:"+phaseJeu);
+		System.out.println("dans moteur avant deplacement, victoire:"+phaseVictoire);
 		partie.deplacement(cc);
 		
 /*************/
@@ -104,6 +107,9 @@ System.out.println(partie);
 	
 		//Message IHM
 		this.partieARafraichir();
+		
+		System.out.println("dans moteur enbas, phaseJeu:"+phaseJeu);
+		System.out.println("dans moteur en bas deplacement, victoire:"+phaseVictoire);
 	}
 	
 /****************************************************************************************/

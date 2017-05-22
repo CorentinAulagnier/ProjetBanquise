@@ -405,16 +405,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			Point2D coord2DTo = new Point2D(0, 0);
 			switch (liste_Ecran.moteur.partie.joueurActif) {
 			case 0:
-				coord2DTo = new Point2D(10, 45);
+				coord2DTo = new Point2D(20, 130);
 				break;
 			case 1:
-				coord2DTo = new Point2D(765, 45);
+				coord2DTo = new Point2D(760, 130);
 				break;
 			case 2:
-				coord2DTo = new Point2D(765, 515);
+				coord2DTo = new Point2D(760, 440);
 				break;
 			case 3:
-				coord2DTo = new Point2D(10, 515);
+				coord2DTo = new Point2D(20, 440);
 				break;
 			}
 			TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniature_pingouin_aReset);

@@ -202,12 +202,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//maj zone des boutons
     	majActionsDisponibles();	
     	
+    	//maj des pingouins
+    	majPingouins();
+    	
     	//maj effet sur joueur actif
     	nettoyerBanquise();
     	majEffets();
-    	
-    	//maj des pingouins
-    	majPingouins();
     	
     	//maj de l'affichage la banquise
     	majBanquise();
@@ -249,6 +249,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 
 				Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
 				ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
+				
 				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
 				if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
 					Coordonnees pingouin_en_ihm = getXY(miniature_pingouin.getX(), miniature_pingouin.getY());

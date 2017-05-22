@@ -158,13 +158,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_tourDeJeu();
     	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
-        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(0.5) , new EventHandler<ActionEvent>(){
+        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(1) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.aRafraichir){
-
         								miseAjour_tourDeJeu();
         								liste_Ecran.moteur.partieRafraichie();
-        								liste_Ecran.moteur.faireJouerIAS();
         								}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
@@ -185,17 +183,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		activerAnchorPane(anchorPanes[j]);
     		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
     		
-
-    		auras.get(j).setImage(new Image(model.Proprietes.AURAS[liste_Ecran.moteur.partie.joueurs[j].couleur]));
-    		
     		//maj des miniatures des pingouins 		
 			String path = liste_Ecran.moteur.partie.joueurs[j].cheminMiniature;
 			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){
 				reglettes.get(j).get(ping).setImage(new Image(path));
 			}
 		}
-    	
-    	
     }
 
 
@@ -233,11 +226,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
     	//maj text tour de (temporaire) :
     	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-    		text_tourDe.setVisible(true);
 	    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
 	    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
-    	}else{
-    		text_tourDe.setVisible(false);
     	}
     } 
     

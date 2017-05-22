@@ -151,7 +151,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    
     	    miseAjour_initiale(anchorPanes, noms);
     	    
-    	   /* miseAjour_tourDeJeu();
+    	    miseAjour_tourDeJeu();
     	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(2) , new EventHandler<ActionEvent>(){
@@ -162,7 +162,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         								}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
-            timeline.play();*/
+            timeline.play();
     	}
     }
     

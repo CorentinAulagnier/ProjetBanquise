@@ -259,7 +259,7 @@ public class ControleurPere {
 	 */
 	public void sauver(Moteur moteur) {
 		final FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog(null);
+		File file = fileChooser.showSaveDialog(null);
 		String path = file.getName();
 		if (file != null) {
 			path = file.getAbsolutePath();

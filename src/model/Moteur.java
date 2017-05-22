@@ -56,6 +56,7 @@ public class Moteur {
 	 */
 	
 	public void placement(Coordonnees c) {
+		System.out.println("placement : "+c);
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
 		
 /*************/
@@ -73,11 +74,11 @@ System.out.println(partie);
 		
 		//Message IHM
 		this.partieARafraichir();
-/*
+
 		if (partie.getJoueurActif() instanceof IA) {
-			this.IAProchainJoueur = true;
-			//faireJouerIAS();
-		}*/
+			//this.IAProchainJoueur = true;
+			faireJouerIAS();
+		}
 	}
 	
 	/**
@@ -109,12 +110,11 @@ System.out.println(partie);
 		}
 		
 		//Message IHM
-		
+		this.partieARafraichir();
 
 		if (partie.getJoueurActif() instanceof IA) {
 			//this.IAProchainJoueur = true;
-			this.partieARafraichir();
-			//faireJouerIAS();
+			faireJouerIAS();
 		}
 	}
 	

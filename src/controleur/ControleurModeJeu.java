@@ -3,6 +3,7 @@ package controleur;
 import model.Humain;
 import model.IA;
 import model.Joueur;
+import model.Moteur;
 import model.Partie;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
@@ -169,11 +170,18 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     	}
     	    	
     	bulleVisible(bulle,1);
+    	
+    	Partie p = new Partie(nbJoueurs);
+    	p.joueurs = tableauDeJoueur;
+    	p.setHistorique();
+    	
+    	gestionnaireFxmlCourant.moteur = new Moteur(p);
+    			/*
     	gestionnaireFxmlCourant.moteur.partie = new Partie(nbJoueurs);
 
     	gestionnaireFxmlCourant.moteur.partie.joueurs = tableauDeJoueur;
     		
-    	gestionnaireFxmlCourant.moteur.partie.setHistorique();
+    	gestionnaireFxmlCourant.moteur.partie.setHistorique();*/
 
     	nettoyerMenu(optionbox, roue);
     	

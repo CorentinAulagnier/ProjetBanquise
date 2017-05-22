@@ -58,7 +58,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
     //zone joueur
     @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
-   // @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
+    @FXML private ImageView aura_j1, aura_j2, aura_j3, aura_j4;
+    ArrayList<ImageView> auras;
     @FXML private Label nom_j1, nom_j2, nom_j3, nom_j4;
     
     ArrayList<Label> scores_poissons, scores_tuiles;
@@ -83,6 +84,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t61,t62,t63,t64,t65,t66,t67,t68,
     						t71,t72,t73,t74,t75,t76,t77,
     						t81,t82,t83,t84,t85,t86,t87,t88;
+    
 
     
 	/**
@@ -91,6 +93,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	desactiverAnchorPane(anchorPane_j1); desactiverAnchorPane(anchorPane_j2); desactiverAnchorPane(anchorPane_j3); desactiverAnchorPane(anchorPane_j4);
+
+    	aura_j1.setVisible(false);
+    	aura_j2.setVisible(false);
+    	aura_j3.setVisible(false);
+    	aura_j4.setVisible(false);
+    	
     	desactiverAnchorPane(box_demarrer); desactiverAnchorPane(box_tour_local); desactiverAnchorPane(box_tour_distant);
     	
     	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
@@ -106,6 +114,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
     }
+   
     
     
 	/**
@@ -124,10 +133,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	if(liste_Ecran!= null && liste_Ecran.moteur.partie!=null){
     		
     		AnchorPane[] anchorPanes = {anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4};
-    		//Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
-    		//Paint[] p = {Paint.valueOf("ffda4a"),Paint.valueOf("37cc2c"),Paint.valueOf("950303"),Paint.valueOf("2394f1")};	
-    	    Label[] noms = {nom_j1,nom_j2,nom_j3,nom_j4};
-    	    
+    		auras = new ArrayList <ImageView>(); Collections.addAll(auras,aura_j1, aura_j2, aura_j3, aura_j4);
+    		Label[] noms = {nom_j1,nom_j2,nom_j3,nom_j4}; 
     	    scores_poissons = new ArrayList <Label>(); Collections.addAll(scores_poissons, score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4);
     	    scores_tuiles = new ArrayList <Label>(); Collections.addAll(scores_tuiles, score_tuiles_j1, score_tuiles_j2,score_tuiles_j3,score_tuiles_j4);  
     	    
@@ -211,17 +218,21 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	
     	//maj de l'affichage la banquise
     	majBanquise();
-    	
-    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
-    	//maj text tour de (temporaire) :
-    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : placez un pingouin.");}
-    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText(liste_Ecran.moteur.partie.getJoueurActif().nom+" : déplacez un pingouin.");}
 
     	//TODO y a une fonction plus propre je crois pour les scores...
     	//maj des scores du joueur
     	for( int j=0 ; j < partie.joueurs.length ; j++ ){
     		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
     		scores_tuiles.get(j).setText( String.valueOf(partie.joueurs[j].nbTuiles) );	
+    	}
+    	
+    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
+    	//maj text tour de (temporaire) :
+    	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
+	    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
+	    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
+    	}else{
+    		liste_Ecran.moteur.faireJouerIAS();
     	}
     } 
     
@@ -331,7 +342,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	public void majEffets(){
 		Partie partie =liste_Ecran.moteur.partie;
-		//Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
 		
 		if (liste_Ecran.moteur.phasePlacement){
 	    	for (int i = 0; i< 8; i++){
@@ -346,15 +356,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
     		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
     			if (j == liste_Ecran.moteur.partie.joueurActif){
+    				auras.get(j).setVisible(true);
     				if (liste_Ecran.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
     				}
-    				//banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
     			}else{
+    				auras.get(j).setVisible(false);
     				if (liste_Ecran.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(null);
     				}
-    				//banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
     			}
 	    	}
     	}

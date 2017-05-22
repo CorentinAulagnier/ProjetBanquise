@@ -506,7 +506,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 			coord_pingouin_encours = new Coordonnees();
 		} else if (liste_Ecran.moteur.phaseVictoire){
-			//TODO
+
+			liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
+	    	
+			liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);  
 		}
     	coord_pingouin_encours = new Coordonnees();
     	miseAjour_tourDeJeu();

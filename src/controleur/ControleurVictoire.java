@@ -19,7 +19,15 @@ public class ControleurVictoire  implements Initializable, EcranCourant {
 	 private Button nouvelle_partie;
 	 @FXML 
 	 private Button nouvelle_manche;
-	 public void miseAjour(){}
+	 
+	 public void miseAjour(){
+		 
+		 
+		 
+		 
+		 
+	 }
+	 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	accueil.setStyle(model.Proprietes.STYLE_NORMAL);

@@ -111,24 +111,25 @@ System.out.println(partie);
 		if (!phaseJeu) {
 			phaseVictoire = true;
 			
+			
 		} else {
 			//Suppression pingouins inactif
 			partie.verifierPingouinActif();
 			
 			//Maj prochain joueur (on passe les joueurs innactifs)
 			partie.majProchainJoueur();
-		}
 		
-		//Message IHM
-		this.partieARafraichir();
-
-		if (partie.getJoueurActif() instanceof IA) {
-			//this.IAProchainJoueur = true;
-			/*
-			while (true) {
-				if (!aRafraichir) {break;}
-			}*/
-			faireJouerIAS();
+			//Message IHM
+			this.partieARafraichir();
+	
+			if (partie.getJoueurActif() instanceof IA) {
+				//this.IAProchainJoueur = true;
+				/*
+				while (true) {
+					if (!aRafraichir) {break;}
+				}*/
+				faireJouerIAS();
+			}
 		}
 	}
 	

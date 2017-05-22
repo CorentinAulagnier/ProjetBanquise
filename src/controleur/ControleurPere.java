@@ -287,7 +287,9 @@ public class ControleurPere {
         		}
         	} catch (Exception e) {
         	}
-        	//gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU_FXML);
+        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
+        	
+        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_JEU);
             System.out.println(liste_Ecran.moteur.partie.toString2());
         }   
 	}

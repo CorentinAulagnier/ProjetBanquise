@@ -14,7 +14,7 @@ public class Moteur {
 		this.phaseVictoire = false;
 		this.aRafraichir = true;
 		verifPhase();
-		System.out.println("phasePlacement : "+phasePlacement+" phaseVictoire : "+phaseVictoire+" phaseVictoire : "+phaseVictoire);
+		//System.out.println("phasePlacement : "+phasePlacement+" phaseVictoire : "+phaseVictoire+" phaseVictoire : "+phaseVictoire);
 	}
 	
 	public void verifPhase() {

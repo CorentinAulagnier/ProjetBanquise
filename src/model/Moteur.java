@@ -19,7 +19,7 @@ public class Moteur {
 	}
 	
 	public void verifPhase() {
-		phasePlacement = !this.partie.placementPingouinsFini();			
+		phasePlacement = this.partie.placementPingouinsFini();			
 		if (!phasePlacement) {
 			phaseJeu = !this.partie.jeuPingouinsFini();	
 			if (!phaseJeu) {

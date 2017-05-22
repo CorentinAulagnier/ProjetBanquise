@@ -58,7 +58,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     
     //zone joueur
     @FXML private AnchorPane anchorPane_j1, anchorPane_j2, anchorPane_j3, anchorPane_j4;
-    @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
+   // @FXML private Arc banquise_j1, banquise_j2, banquise_j3, banquise_j4;
     @FXML private Label nom_j1, nom_j2, nom_j3, nom_j4;
     
     ArrayList<Label> scores_poissons, scores_tuiles;
@@ -124,8 +124,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	if(liste_Ecran!= null && liste_Ecran.moteur.partie!=null){
     		
     		AnchorPane[] anchorPanes = {anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4};
-    		Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
-    		Paint[] p = {Paint.valueOf("ffda4a"),Paint.valueOf("37cc2c"),Paint.valueOf("950303"),Paint.valueOf("2394f1")};	
+    		//Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
+    		//Paint[] p = {Paint.valueOf("ffda4a"),Paint.valueOf("37cc2c"),Paint.valueOf("950303"),Paint.valueOf("2394f1")};	
     	    Label[] noms = {nom_j1,nom_j2,nom_j3,nom_j4};
     	    
     	    scores_poissons = new ArrayList <Label>(); Collections.addAll(scores_poissons, score_poissons_j1,score_poissons_j2,score_poissons_j3,score_poissons_j4);
@@ -149,9 +149,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    banquise = new ArrayList<ArrayList<ImageView>>(); banquise.add(banquiseLigne1); banquise.add(banquiseLigne2); banquise.add(banquiseLigne3);
     	    banquise.add(banquiseLigne4); banquise.add(banquiseLigne5); banquise.add(banquiseLigne6);banquise.add(banquiseLigne7);banquise.add(banquiseLigne8);
     	    
-    	    miseAjour_initiale(anchorPanes, banquises, p, noms);
+    	    miseAjour_initiale(anchorPanes, noms);
     	    
-    	    miseAjour_tourDeJeu();
+    	   /* miseAjour_tourDeJeu();
     	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(2) , new EventHandler<ActionEvent>(){
@@ -162,7 +162,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         								}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
-            timeline.play();
+            timeline.play();*/
     	}
     }
     
@@ -173,11 +173,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param p tableau de couleurs pour les banquises
      * @param noms tableau des noms des joueurs
      */
-    public void miseAjour_initiale(AnchorPane[] anchorPanes, Arc[] banquises, Paint[] p, Label[] noms){
+    public void miseAjour_initiale(AnchorPane[] anchorPanes, Label[] noms){
     	
     	for(int j=0 ; j < liste_Ecran.moteur.partie.joueurs.length ; j++){
     		activerAnchorPane(anchorPanes[j]);
-    		banquises[j].setFill(p[(liste_Ecran.moteur.partie.joueurs[j]).couleur]);
     		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
     		
     		//maj des miniatures des pingouins 		
@@ -331,7 +330,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	public void majEffets(){
 		Partie partie =liste_Ecran.moteur.partie;
-		Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
+		//Arc[] banquises = {banquise_j1,banquise_j2,banquise_j3,banquise_j4};
 		
 		if (liste_Ecran.moteur.phasePlacement){
 	    	for (int i = 0; i< 8; i++){
@@ -349,12 +348,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     				if (liste_Ecran.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
     				}
-    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
+    				//banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Glow(1));
     			}else{
     				if (liste_Ecran.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(null);
     				}
-    				banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
+    				//banquises[liste_Ecran.moteur.partie.joueurs[j].couleur].setEffect(new Lighting());
     			}
 	    	}
     	}

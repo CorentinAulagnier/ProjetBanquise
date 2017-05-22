@@ -17,7 +17,7 @@ public class Multijoueur {
 
 			}
 
-			PingouinClient.main(s);
+			PingouinClientConsole.main(s);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,7 +33,7 @@ public class Multijoueur {
         public void run() {
         	try {
         		while (true) {
-    				PingouinServer.main(null);
+    				PingouinServerConsole.main(null);
         		}
 
 			} catch (Exception e) {

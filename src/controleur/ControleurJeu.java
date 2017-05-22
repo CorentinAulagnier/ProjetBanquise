@@ -157,8 +157,19 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    
     	    miseAjour_tourDeJeu();
     	    
+    	    int temps = 1;
+    	    if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
+    	    	int jActif = liste_Ecran.moteur.partie.joueurActif;
+    	    	switch (((IA) liste_Ecran.moteur.partie.joueurs[jActif]).niveau){
+    	    		case(1) :temps=1;break;
+    	    		case(2) :temps=6;break;
+    	    		case(3) :temps=30;break;
+    	    	}
+    	    }
+    	    	
+    	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
-        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(6) , new EventHandler<ActionEvent>(){
+        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
         								

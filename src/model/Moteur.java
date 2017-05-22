@@ -111,7 +111,6 @@ System.out.println(partie);
 		if (!phaseJeu) {
 			phaseVictoire = true;
 			
-			
 		} else {
 			//Suppression pingouins inactif
 			partie.verifierPingouinActif();

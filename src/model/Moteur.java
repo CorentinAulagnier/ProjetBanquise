@@ -14,10 +14,11 @@ public class Moteur {
 		this.phaseVictoire = false;
 		this.aRafraichir = true;
 		verifPhase();
+		System.out.println("phasePlacement : "+phasePlacement+" phaseVictoire : "+phaseVictoire+" phaseVictoire : "+phaseVictoire);
 	}
 	
 	public void verifPhase() {
-		phasePlacement = !this.partie.placementPingouinsFini();			
+		phasePlacement = this.partie.placementPingouinsFini();			
 		if (!phasePlacement) {
 			phaseJeu = !this.partie.jeuPingouinsFini();	
 			if (!phaseJeu) {

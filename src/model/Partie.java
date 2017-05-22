@@ -888,6 +888,44 @@ public class Partie implements Serializable {
 		}
 		return NbTuiles;
 	}
+	
+	/**       
+	 * @return un tableau de joueurs trie par classement a la fin de la partie.
+	 */
+	
+	public Joueur[] classement() {
+		Joueur[] jo = joueurs.clone();
+
+		
+		Joueur temp;
+
+		
+		
+		
+		int joueurMax =0;
+		int scoreMax = 0;
+		int nbTuilesMax = 0;
+		for(int i = 0; i<nbJoueurs;i++ ) {
+			for(int j = i; j<nbJoueurs;j++ ) {
+				if (joueurs[j].nbPingouin > scoreMax) {
+					scoreMax = joueurs[j].nbPingouin;
+					joueurMax = j;
+					nbTuilesMax = joueurs[j].nbTuiles;
+					
+				} else if(joueurs[j].nbPingouin == scoreMax) {
+					//if (joueurs[j].nbTuiles) {
+						
+					//}
+	
+				}
+			}
+			jo[i] = joueurs[joueurMax];
+			
+			
+
+		}
+		return jo;
+	}
 
 /*******************************************************************************************************/
 	

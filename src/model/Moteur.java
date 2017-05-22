@@ -56,7 +56,6 @@ public class Moteur {
 	 */
 	
 	public void placement(Coordonnees c) {
-		System.out.println("placement : "+c);
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
 		
 /*************/
@@ -74,11 +73,6 @@ System.out.println(partie);
 		
 		//Message IHM
 		this.partieARafraichir();
-		/*
-		if (partie.getJoueurActif() instanceof IA) {
-			//this.IAProchainJoueur = true;
-			faireJouerIAS();
-		}*/
 	}
 	
 	/**
@@ -96,28 +90,20 @@ System.out.println("Deplacement en "+cc);
 System.out.println(partie);
 /*************/
     	
-		phaseJeu = !partie.jeuPingouinsFini();	
-		
+		phaseJeu = !partie.jeuPingouinsFini();
 		if (!phaseJeu) {
 			phaseVictoire = true;
 			
-		} else {
-			//Suppression pingouins inactif
-			partie.verifierPingouinActif();
-			
-			//Maj prochain joueur (on passe les joueurs innactifs)
-			partie.majProchainJoueur();
-		
-			//Message IHM
-			this.partieARafraichir();
-			
-			/*
-			if (partie.getJoueurActif() instanceof IA) {
-				//this.IAProchainJoueur = true;
-
-				faireJouerIAS();
-			}*/
 		}
+		
+		//Suppression pingouins inactif
+		partie.verifierPingouinActif();
+		
+		//Maj prochain joueur (on passe les joueurs innactifs)
+		partie.majProchainJoueur();
+	
+		//Message IHM
+		this.partieARafraichir();
 	}
 	
 /****************************************************************************************/
@@ -138,7 +124,6 @@ System.out.println(partie);
 	
     public void faireJouerIAS() {
     	Joueur j = partie.getJoueurActif();
-    	System.out.println("Tour IA");
 
     	if (phasePlacement) {
 			placement(j.placement(partie));
@@ -147,6 +132,12 @@ System.out.println(partie);
 			deplacement(j.jouer(partie));
 		}
 	}
+    
+	/**
+	 * Fait jouer une IA a la place d un joueur pour lui proposer un coup
+	 * 
+	 * @return Un couple generique correspondant a un deplacement
+	 */
     
     public CoupleGenerique<Coordonnees, Coordonnees> demanderIndice() {
     	Partie p = this.partie.clone();

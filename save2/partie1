@@ -8,12 +8,12 @@
 1 2 3 1 2 3 1 2
 nbJoueurs 2
 joueurActif 0
-IA nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA0 couleur 0 cheminMiniature coco niveau 1 myPingouins
+IA nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA0 couleur 0 cheminMiniature /ressources/joueurs/20 niveau 1 myPingouins
 Pingouin position (3, 0) actif
 Pingouin position (4, 6) actif
 Pingouin position (0, 3) actif
 Pingouin position (4, 1) actif
-IA nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA1 couleur 1 cheminMiniature mat niveau 1 myPingouins
+IA nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA1 couleur 1 cheminMiniature /ressources/joueurs/31 niveau 1 myPingouins
 Pingouin position (1, 5) actif
 Pingouin position (2, 5) actif
 Pingouin position (5, 0) actif

@@ -92,15 +92,15 @@ System.out.println(partie);
 System.out.println("Deplacement en "+cc);
 System.out.println(partie);
 /*************/
-    	
+
+//Suppression pingouins inactif
+partie.verifierPingouinActif();
 		phaseJeu = !partie.jeuPingouinsFini();
 		if (!phaseJeu) {
 			phaseVictoire = true;
 			
 		}
-		
-		//Suppression pingouins inactif
-		partie.verifierPingouinActif();
+
 		
 		//Maj prochain joueur (on passe les joueurs innactifs)
 		partie.majProchainJoueur();

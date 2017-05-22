@@ -81,7 +81,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t61,t62,t63,t64,t65,t66,t67,t68,
     						t71,t72,t73,t74,t75,t76,t77,
     						t81,t82,t83,t84,t85,t86,t87,t88;
-    
+    Timeline timeline;
 
     
 	/**
@@ -168,17 +168,18 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    }
     	    	
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
-        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
+        	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
         								liste_Ecran.moteur.faireJouerIAS();
         								miseAjour_tourDeJeu();
-        								}
+        							}
         							if(liste_Ecran.moteur.phaseVictoire){
-        							    //liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
+        							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
         							    liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
         								//liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
         								//liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
+        							    timeline.stop();
         							}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);

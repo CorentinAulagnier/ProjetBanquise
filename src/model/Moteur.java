@@ -109,12 +109,13 @@ System.out.println(partie);
 		}
 		
 		//Message IHM
-		this.partieARafraichir();
-/*
+		
+
 		if (partie.getJoueurActif() instanceof IA) {
-			this.IAProchainJoueur = true;
+			//this.IAProchainJoueur = true;
+			this.partieARafraichir();
 			//faireJouerIAS();
-		}*/
+		}
 	}
 	
 /****************************************************************************************/

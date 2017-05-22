@@ -162,6 +162,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.aRafraichir){
         								miseAjour_tourDeJeu();
+        								System.out.println("Rafraichissement OK");
         								liste_Ecran.moteur.partieRafraichie();
         								}
         							}}));

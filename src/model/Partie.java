@@ -370,9 +370,11 @@ public class Partie implements Serializable {
 			ligne=br.readLine();
 			elements=ligne.split(" ");
 			
-			p[i] = new Pingouin(new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1))));
-			if (elements[4].equals("inactif")) {
-				p[i].actif = false;
+			p[i] = new Pingouin();
+			//new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1))));
+			if (elements[4].equals("actif")) {
+				p[i].position = new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1)));
+				p[i].actif = true;
 			}
 		}	
 		return p;

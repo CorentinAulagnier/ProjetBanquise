@@ -1,0 +1,20 @@
+ 1 3 1 1 3 1 1
+3 1 1 2 3 1 1 2
+ 1 1 2 1 2 1 1
+1 3 1 1 2 1 3 1
+ 2 1 2 1 2 2 1
+3 2 3 2 3 3 1 1
+ 2 2 1 1 2 1 1
+2 3 1 2 1 2 1 1
+nbJoueurs 2  
+joueurActif 0
+Humain nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA0 couleur 0 cheminMiniature /ressources/joueurs/20.png niveau 1 myPingouins
+Pingouin position (-1, -1) inactif
+Pingouin position (-1, -1) inactif
+Pingouin position (-1, -1) inactif
+Pingouin position (-1, -1) inactif
+IA nbTuiles 0 poissonsManges 0 nbPingouin 4 nom IA1 couleur 1 cheminMiniature /ressources/joueurs/31.png niveau 1 myPingouins
+Pingouin position (-1, -1) inactif
+Pingouin position (-1, -1) inactif
+Pingouin position (-1, -1) inactif
+Pingouin position (-1, -1) inactif

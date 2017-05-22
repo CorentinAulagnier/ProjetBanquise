@@ -158,12 +158,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_tourDeJeu();
     	    
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
-        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(1) , new EventHandler<ActionEvent>(){
+        	Timeline timeline = new Timeline( new KeyFrame(  Duration.seconds(6) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
-        							if(liste_Ecran.moteur.aRafraichir){
+        							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
+        								
+        								liste_Ecran.moteur.faireJouerIAS();
         								miseAjour_tourDeJeu();
-        								System.out.println("Rafraichissement OK");
-        								liste_Ecran.moteur.partieRafraichie();
+        								//liste_Ecran.moteur.partieRafraichie();
         								}
         							}}));
             timeline.setCycleCount(Animation.INDEFINITE);
@@ -299,15 +300,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			activerAnchorPane(box_tour_local);
 			desactiverAnchorPane(box_tour_distant);
 			desactiverAnchorPane(box_demarrer);
-			
-			System.out.println("Historique "+liste_Ecran.moteur.partie.utiliseHistorique);
-			
+					
 			//il est le seul humain => utilisation ou pas de faire defaire
 			if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
-				System.out.println("Refaire "+this.liste_Ecran.moteur.partie.h.peutRefaire());
-
-				System.out.println("Annuler : "+this.liste_Ecran.moteur.partie.h.peutAnnuler());
-
 				if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
 			    	activerBouton(bouton_defaire);
 				}
@@ -319,6 +314,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		//sinon si le joueur est une IA
 		else if (partie.getJoueurActif() instanceof IA){
 			
+			
+			//TODO
+			/*desactiverAnchorPane(box_tour_local);
+			desactiverAnchorPane(box_tour_distant);
+			activerAnchorPane(box_demarrer);*/
+			
+
+			//TODO
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
 			if( partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
@@ -491,7 +494,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void lancerIA(MouseEvent event){
-		liste_Ecran.moteur.execPremiereIA();
+		//liste_Ecran.moteur.execPremiereIA();
+    	//TODO
+		liste_Ecran.moteur.faireJouerIAS();
     	miseAjour_tourDeJeu();
     }
     

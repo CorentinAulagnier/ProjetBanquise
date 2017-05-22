@@ -77,6 +77,11 @@ System.out.println(partie);
 
 		if (partie.getJoueurActif() instanceof IA) {
 			//this.IAProchainJoueur = true;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+
 			faireJouerIAS();
 		}
 	}

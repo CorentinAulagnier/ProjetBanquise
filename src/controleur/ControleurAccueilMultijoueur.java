@@ -103,6 +103,12 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     	}
     }
     
+    @FXML
+    private void ouvrirPageRegle(MouseEvent event){
+    	nettoyerMenu(optionbox, roue);
+    	appelerRegles(liste_Ecran, model.Proprietes.ECRAN_JEU);
+    }
+    
     /**
      * gere la modification du volume de la musique
      * @param event event evenement souris attendu : clic

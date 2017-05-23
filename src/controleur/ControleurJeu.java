@@ -189,7 +189,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			avatars.get(j).setImage(new Image(path));
 			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){
 				reglettes.get(j).get(ping).setImage(new Image(path));	
-				actif[j][ping] = true;
+				actif[j][ping] = liste_Ecran.moteur.partie.joueurs[j].myPingouins[ping].actif;
 			}
 		}
     }

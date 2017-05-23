@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.scene.control.Alert;
@@ -37,6 +38,10 @@ public class ControleurPere {
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
+    	/*
+    	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
+		media.play();*/
+    	
     }
 
     /**

@@ -55,7 +55,6 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	 * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur
 	 */
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
-    	System.out.println("init ecran parent");
     	liste_Ecran = ecranParent;
     }
     

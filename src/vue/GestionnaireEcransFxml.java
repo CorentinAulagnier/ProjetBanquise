@@ -147,10 +147,8 @@ public class GestionnaireEcransFxml extends StackPane {
 	 * @return
 	 */
 	public boolean changeEcranCourant(final String nomEcran) {
-		System.out.println(listeEcrans.get(nomEcran));
 		if (listeEcrans.get(nomEcran) != null) {
 			final DoubleProperty opacity = opacityProperty();
-System.out.println("1");
 			if (!getChildren().isEmpty()) { // il y a bien un autre ecran en memoire = l'écran courant
 				Timeline fade = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1.0)),
 						new KeyFrame(new Duration(500), (ActionEvent t) -> {
@@ -161,15 +159,12 @@ System.out.println("1");
 									new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
 							fadeIn.play();
 						}, new KeyValue(opacity, 0.0)));
-System.out.println("2");
 				fade.play();
 			} else {// cas du premier écran
-System.out.println("3");
 				setOpacity(0.0);
 				getChildren().add(listeEcrans.get(nomEcran));
 				Timeline fadeIn = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
 						new KeyFrame(new Duration(200), new KeyValue(opacity, 1.0)));
-System.out.println("4");
 
 				fadeIn.play();
 			}

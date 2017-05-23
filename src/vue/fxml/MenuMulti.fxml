@@ -68,12 +68,12 @@
               </ImageView>
                </graphic>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
           <Button fx:id="rejoindre" contentDisplay="GRAPHIC_ONLY" layoutX="306.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#rejoindrePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="rejoindre_Partie" visible="true">
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
                   <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

@@ -870,7 +870,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     private void ouvrirPageAccueil(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	alertAccueil(liste_Ecran, model.Proprietes.ECRAN_JEU);
+    	alertAccueilJeu(liste_Ecran, model.Proprietes.ECRAN_JEU, timeline);
     }
     
     /**

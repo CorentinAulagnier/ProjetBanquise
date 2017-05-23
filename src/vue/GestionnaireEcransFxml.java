@@ -63,10 +63,10 @@ public class GestionnaireEcransFxml extends StackPane {
 	public GestionnaireEcransFxml(Moteur m) {
 		super();
 		moteur = m;
-		media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
+		/*media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
 		media.setAutoPlay(true);
 		musique = true;
-		media.play();
+		media.play();*/
 	}
 
 	/**

@@ -10,6 +10,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -119,14 +120,14 @@ public class ControleurPere {
 		// TODO
 		 if(liste_ecran.musique){
 			 liste_ecran.musique = false;
-			media.pause();
+			//media.pause();
 			iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
 			 liste_ecran.musique = true;
-			 media.seek(media.getStartTime());
-			 media.play();
+			// media.seek(media.getStartTime());
+			// media.play();
 			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
 			 System.out.println("remettre musique");
 		 }
@@ -253,6 +254,31 @@ public class ControleurPere {
 	    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
 		}     	
 	}
+	
+	
+	public void alertAccueilJeu(GestionnaireEcransFxml liste_Ecran, String ecran,Timeline time){
+		String titre = "Quitter partie";
+		String contenu = "Etes vous sur de vouloir quitter cette partie?";
+		String boutonOk = "Oui";
+		String boutonNOk = "Annuler";
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setTitle(titre);
+		alert.setContentText(contenu);
+
+		ButtonType buttonOui = new ButtonType(boutonOk, ButtonData.OK_DONE);
+		ButtonType buttonNon = new ButtonType(boutonNOk, ButtonData.CANCEL_CLOSE);
+		alert.getButtonTypes().setAll(buttonNon, buttonOui);
+		Optional<ButtonType> result = alert.showAndWait();
+		time.stop();
+		if (result.get() == buttonOui) {
+			liste_Ecran.retireEcran(ecran);
+	    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+		}else{
+			time.play();
+		}
+	}
+ 
  
 	/**
 	 * appeler la sauvegarde du jeu

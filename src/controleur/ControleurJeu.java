@@ -43,7 +43,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	
 	//boutons d'actions
     @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
-    @FXML private Text text_tourDe,text_attenteJoueur;
+    @FXML private Label text_tourDe,text_attenteJoueur;
     @FXML private AnchorPane box_tour_local, box_tour_distant, box_demarrer;
     
     //zone menu

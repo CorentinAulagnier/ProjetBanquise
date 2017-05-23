@@ -149,21 +149,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    
     	    miseAjour_tourDeJeu();
     	   
-    	    int temps = 1;
-    	    if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
-    	    	int jActif = liste_Ecran.moteur.partie.joueurActif;
-    	    	switch (((IA) liste_Ecran.moteur.partie.joueurs[jActif]).niveau){
-    	    		case(1) :temps=2;break;
-    	    		case(2) :temps=6;break;
-    	    		case(3) :temps=30;break;
-    	    	}
-    	    }
-    	    	
+    	    int temps = 2;
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
-        								liste_Ecran.moteur.faireJouerIAS();
+        								liste_Ecran.moteur.faireJouerIAS(timeline);
         								miseAjour_tourDeJeu();
         							}
         							if(liste_Ecran.moteur.phaseVictoire){
@@ -274,7 +265,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						translaterPingouin(pingEncours,jEncours, pingouin_en_memoire);
 					}
 					
-				}else if (liste_Ecran.moteur.phaseJeu){//TODO					
+				}else if (liste_Ecran.moteur.phaseJeu){				
 					RotateTransition rt = new RotateTransition(Duration.millis(1000),miniature_pingouin);
 					rt.setByAngle(1000);
 					ScaleTransition st = new ScaleTransition(Duration.millis(1000),miniature_pingouin);
@@ -470,7 +461,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				coord2DTo = new Point2D(100, 530);
 				break;
 			}
-			TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniature_pingouin_aReset);
+			TranslateTransition tt = new TranslateTransition(Duration.millis(700), miniature_pingouin_aReset);
 			tt.setToX(coord2DTo.getX() - miniature_pingouin_aReset.getX());
 			tt.setToY(coord2DTo.getY() - miniature_pingouin_aReset.getY());
 			tt.play();
@@ -485,7 +476,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void lancerIA(MouseEvent event){
-		liste_Ecran.moteur.faireJouerIAS();
+		liste_Ecran.moteur.faireJouerIAS(timeline);
     	miseAjour_tourDeJeu();
     }
     
@@ -645,7 +636,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		ImageView tuileTo = banquise.get(to.x).get(to.y);
 		Point2D coord2DTo = ancrePourPingouin(tuileTo);
 
-		TranslateTransition tt = new TranslateTransition(Duration.millis(300), miniatureAdeplacer);
+		TranslateTransition tt = new TranslateTransition(Duration.millis(700), miniatureAdeplacer);
 		tt.setToX(coord2DTo.getX() - miniatureAdeplacer.getX());
 		tt.setToY(coord2DTo.getY() - miniatureAdeplacer.getY());
 		tt.play();

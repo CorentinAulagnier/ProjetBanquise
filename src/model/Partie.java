@@ -922,31 +922,34 @@ public class Partie implements Serializable {
 	public Joueur[] classement() {
 		Joueur[] jo = joueurs.clone();
 
+		System.out.println(jo);
 		
 		Joueur temp;
 
-		
-		
-		
 		int joueurMax = 0;
 		int scoreMax = 0;
 		int nbTuilesMax = 0;
+		
+		
 		for(int i = 0; i<nbJoueurs;i++ ) {
+			
+			scoreMax = joueurs[i].poissonsManges;
+			joueurMax = i;
+			nbTuilesMax = joueurs[i].nbTuiles;
+
 			for(int j = i; j<nbJoueurs;j++ ) {
 				if (joueurs[j].poissonsManges > scoreMax || (joueurs[j].poissonsManges == scoreMax && joueurs[j].nbTuiles > nbTuilesMax)) {
 					scoreMax = joueurs[j].poissonsManges;
 					joueurMax = j;
 					nbTuilesMax = joueurs[j].nbTuiles;
-				} 
+				}
 			}
-			
-			joueurMax = 0;
-			scoreMax = 0;
-			nbTuilesMax = 0;
-			
+
 			temp = jo[i];
 			jo[i] = jo[joueurMax];
 			jo[joueurMax] = temp;
+			System.out.println(jo);
+
 		}
 		return jo;
 	}

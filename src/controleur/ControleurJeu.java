@@ -61,6 +61,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
     ArrayList<ArrayList<ImageView>> reglettes;
+    boolean[][] actif;
     ArrayList<ImageView> reglette_j1, reglette_j2, reglette_j3, reglette_j4, avatars;
     @FXML private ImageView reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4,
     						reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4,
@@ -147,7 +148,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    miseAjour_initiale(anchorPanes, noms);
     	    
     	    miseAjour_tourDeJeu();
-    	    
+    	   
     	    int temps = 1;
     	    if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
     	    	int jActif = liste_Ecran.moteur.partie.joueurActif;
@@ -185,16 +186,17 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param noms tableau des noms des joueurs
      */
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Label[] noms){
-    	
+    	actif = new boolean[liste_Ecran.moteur.partie.joueurs.length][liste_Ecran.moteur.partie.joueurs[0].nbPingouin];
     	for(int j=0 ; j < liste_Ecran.moteur.partie.joueurs.length ; j++){
     		activerAnchorPane(anchorPanes[j]);
     		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
     		
     		//maj des miniatures des pingouins 		
 			String path = liste_Ecran.moteur.partie.joueurs[j].cheminMiniature;
+			avatars.get(j).setImage(new Image(path));
 			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){
-				reglettes.get(j).get(ping).setImage(new Image(path));
-				avatars.get(j).setImage(new Image(path));
+				reglettes.get(j).get(ping).setImage(new Image(path));	
+				actif[j][ping] = true;
 			}
 		}
     }
@@ -235,6 +237,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	}
 	    	
 		    majActionsDisponibles();
+		        
     } 
     
     /**
@@ -256,10 +259,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	public void majPingouins(){
 		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
-			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
+			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[0].myPingouins.length ; pingEncours++ ){	
 				
 				Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
 				ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
+				
 				
 				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
 				if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
@@ -269,14 +273,16 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					if(!pingouin_en_memoire.equals(pingouin_en_ihm)){
 						translaterPingouin(pingEncours,jEncours, pingouin_en_memoire);
 					}
-				}else if (liste_Ecran.moteur.phaseJeu){//TODO
+					
+				}else if (liste_Ecran.moteur.phaseJeu){//TODO					
 					RotateTransition rt = new RotateTransition(Duration.millis(1000),miniature_pingouin);
 					rt.setByAngle(1000);
 					ScaleTransition st = new ScaleTransition(Duration.millis(1000),miniature_pingouin);
 					st.setToX(0);
 					st.setToY(0);
 					ParallelTransition pt = new ParallelTransition(miniature_pingouin,rt,st);
-					pt.play();								
+					pt.play();
+					actif[jEncours][pingEncours]=false;
 				}
 			}
 		}
@@ -388,6 +394,23 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private void annulerTours(MouseEvent event){
     	if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
 	    	this.liste_Ecran.moteur.partie.annuler();
+	    	
+	    	//replacer les pingouins inactifs qui redeviendraientt actif
+		    if(liste_Ecran.moteur.phaseJeu){
+			    for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
+					for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
+						
+						if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif && actif[jEncours][pingEncours]==false){
+							ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
+							miniature_pingouin.setRotate(0);
+							miniature_pingouin.setScaleX(1);
+							miniature_pingouin.setScaleY(1);
+
+							actif[jEncours][pingEncours] = true;
+						}
+					}
+			    }
+		    }
 	    	miseAjour_tourDeJeu();
     	}
     }

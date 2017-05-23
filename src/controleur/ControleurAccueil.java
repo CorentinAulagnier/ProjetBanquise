@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -86,11 +87,11 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     		majBoutonMusique(gestionnaireFxmlCourant,imageMusique);
     		majBoutonSon(gestionnaireFxmlCourant,imageSon);
     		//TODO si ok nettoyer
-    		/*if (gestionnaireFxmlCourant.musique == false){
+    		if (gestionnaireFxmlCourant.musique == false){
         		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
         	}else{
         		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
-        	}    	*/
+        	}   
     		optionOuvrirRoue(optionbox, roue) ;
     	}else{
     		optionFermerRoue(optionbox, roue);

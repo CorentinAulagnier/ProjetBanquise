@@ -11,6 +11,8 @@ public class Proprietes {
     public static final String ECRAN_JEU_FXML = "fxml/Jeu.fxml";
     public static final String ECRAN_VICTOIRE = "Victoire";
     public static final String ECRAN_VICTOIRE_FXML = "fxml/Victoire.fxml";
+    public static final String ECRAN_MENU_MULTI = "MenuMulti";
+    public static final String ECRAN_MENU_MULTI_FXML = "fxml/MenuMulti.fxml";
     
     public static final String MEDIA_PATH = "src/ressources/decor/christmas.mp3";
     public static final String IMAGE_SONON_PATH = "/ressources/decor/r_son-on.png";

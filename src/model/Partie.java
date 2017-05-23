@@ -921,8 +921,6 @@ public class Partie implements Serializable {
 	
 	public Joueur[] classement() {
 		Joueur[] jo = joueurs.clone();
-
-		System.out.println(jo);
 		
 		Joueur temp;
 
@@ -948,7 +946,6 @@ public class Partie implements Serializable {
 			temp = jo[i];
 			jo[i] = jo[joueurMax];
 			jo[joueurMax] = temp;
-			System.out.println(jo);
 
 		}
 		return jo;

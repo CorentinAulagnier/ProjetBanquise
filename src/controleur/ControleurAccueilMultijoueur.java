@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.Coordonnees;
+import reseau.PingouinClient;
 import vue.EcranCourant;
 import vue.GestionnaireEcransFxml;
 
@@ -77,12 +78,16 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     }
 
     @FXML private void connexion(MouseEvent event){
-    	
-    	String ip = this.ip.getText();
-    	String name = this.name.getText();
-    	//TODO verif champs ok
-    	
-    	System.out.println("connexion");
+    	try {
+	    	System.out.println("connexion");
+	    	String ip = this.ip.getText();
+	    	String name = this.name.getText();
+	    	PingouinClient client = new PingouinClient(liste_Ecran.moteur);
+	    	String[] args = {"distant",ip,name};
+	    	client.main(args);
+    	} catch(Exception e) {
+    		e.printStackTrace(System.err);
+    	}
     }
     /****************************************/
     /*		gestion menu roue				*/

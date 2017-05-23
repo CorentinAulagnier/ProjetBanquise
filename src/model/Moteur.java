@@ -1,6 +1,5 @@
 package model;
 import javafx.animation.Timeline;
-import reseau.*;
 
 
 public class Moteur {
@@ -8,7 +7,6 @@ public class Moteur {
 	public Partie partie;
 	public boolean phaseJeu, phasePlacement, phaseVictoire;
 	public boolean aRafraichir, IAProchainJoueur;
-	public static PingouinClient client = null;
 	
 	public Moteur(Partie p) {
 		this.partie = p;
@@ -28,19 +26,6 @@ public class Moteur {
 			if (!phaseJeu) {
 				phaseVictoire = true;
 			}
-		}
-	}
-	
-	public void initClient(String ip) {
-		try {
-			this.client = new PingouinClient();
-			String[] args = new String[2];
-			args[0] = ip;
-			args[1] = null;
-			client.main(args);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	

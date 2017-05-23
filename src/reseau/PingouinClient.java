@@ -1,6 +1,7 @@
 package reseau;
 import java.io.BufferedReader;
 import java.io.EOFException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,9 +12,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.*;
 
-public class PingouinClient extends MoteurConsole{
+public class PingouinClient {
 
     private static final int PORT = 9001;
+    private static Moteur moteur;
+    private static int numClient;
+    
+    public PingouinClient(Moteur m) {
+    	this.moteur = m;
+    }
+    
+    public static void majMoteurSurServeur(Moteur m, ObjectOutputStream out) {
+    	try {
+			out.writeObject(m);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
     public static void main(String[] args) throws Exception {
     	 // Make connection and initialize streams
@@ -24,12 +39,12 @@ public class PingouinClient extends MoteurConsole{
     	Matcher matchAddr = null;
     	
     	if (args[0].equals("local")) {
-        	socket = new Socket("", PORT);
+        	socket = new Socket(args[1], PORT);
         	
     	} else {		//(args[0].equals("distant"))
         	while (true) {
     	    	try {
-    		        String serverAddress = getServerAddress();        		                                         
+    		        String serverAddress = args[1];        		                                         
     		        matchAddr = pattern.matcher(serverAddress);		        		                                         
     		        if (matchAddr.matches() || serverAddress.equals("")) {
     		        	socket = new Socket(serverAddress, PORT);
@@ -46,42 +61,24 @@ public class PingouinClient extends MoteurConsole{
     	
         ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        Partie p = null;
 
         // Process all messages from server, according to the protocol.
-        while (true) {
+        while (!moteur.phaseVictoire) {
             Object obj;
 			try {
 				obj = in.readObject();
-	            if(obj instanceof Partie) {
-	            	p = (Partie)obj;
-	            	afficherPlateau(p);
+	            if(obj instanceof Moteur) {
+	            	moteur = (Moteur)obj;
+	            	//refresh plateau
 	            } else if (obj instanceof String) {
 	            	String line = (String)obj;
 	                if (line.startsWith("SUBMITNAME")) {
-	                    out.writeObject(getUsername());
-	                } else if (line.startsWith("PLACEMENT")) {
-	                	int numJoueur = Integer.valueOf(line.substring(10,11));
-	                	int numPingouin = Integer.valueOf(line.substring(12,13));
-	                	out.writeObject(getPlacementPingouin(numJoueur,numPingouin,p));
-	                } else if (line.startsWith("INITGAME")) {
-	                	out.writeObject(creerPartie());
-	                } else if (line.startsWith("DEPLACEMENT")) {
-	                	out.writeObject(getDeplacement(p));
-	                } else if (line.startsWith("NAMEACCEPTED")) {
-	                	System.out.println("Bienvenue sur PINGOUINS !\n");
-	                } else if (line.startsWith("NAMEREJECTED")) {
-	                	System.out.println("Le nom envoyé au serveur est invalide !\n");
-	                	out.writeObject(getUsername());
+	                	numClient = Integer.valueOf(line.substring(11));
+	                    out.writeObject(args[2]);
 	                } else if (line.startsWith("NOSLOT")) {
 	                	System.out.println("Le serveur de PINGOUINS est plein. Réessayez plus tard.");
 	                	socket.close();
-	                } else if (line.startsWith("ENDGAME")) {
-	                	finPartie(p);
-	                	socket.close();
-	                } else if (line.startsWith("MESSAGE")) {
-	                	System.out.println(line.substring(8) + "\n");
-	                }         	
+	                }        	
 	            } else {
 	            	System.out.println("Impossible de récupérer le type de l'objet.");
 	            }
@@ -96,20 +93,11 @@ public class PingouinClient extends MoteurConsole{
 			}
 
         }
+        socket.close();
     }
 
 
-	private static String getServerAddress() {
-    	String s = null;
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    	try {
-	    	System.out.println("Entrez l'IP du serveur (vide pour localhost) :");
-	        s = br.readLine();
-    	} catch (Exception e){
-    		e.printStackTrace(System.err);
-    	}
-        return s;
-    }
+    
 
 	
 

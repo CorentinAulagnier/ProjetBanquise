@@ -187,4 +187,19 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
     	changerSon(imageSon, gestionnaireFxmlCourant);
     } 
     
+    /**
+     * gere la modification de l'affichage d'un bouton lorsque la souris est presse
+     * @param event evenement souris attendu : pressed
+     */
+    @FXML
+    public void boutonPresse(MouseEvent event){
+    	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
+    	/*
+    	if (gestionnairefxml.son){
+    	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
+		media.play();
+		}
+		*/
+    	
+    }
 }

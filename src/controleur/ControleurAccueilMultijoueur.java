@@ -18,13 +18,11 @@ import vue.GestionnaireEcransFxml;
 public class ControleurAccueilMultijoueur extends ControleurPere implements Initializable, EcranCourant {
 	
 	GestionnaireEcransFxml liste_Ecran;
-	Coordonnees coord_pingouin_encours;
-    int pingouinAdeplacer;
 	
 	//boutons d'actions
-    //@FXML private Button connexion, rejoindre, creer;
-   // @FXML private TextField ip,name;
-   //@FXML private AnchorPane pane_connexion, pane_menumulti;
+    @FXML private Button connexion, rejoindre, creer;
+    @FXML private TextField ip, name;
+    @FXML private AnchorPane pane_connexion, pane_menumulti;
     
     //zone menu
     @FXML private ImageView imageSon, imageMusique;
@@ -36,13 +34,16 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	 */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	/*connexion.setStyle(model.Proprietes.STYLE_NORMAL);
+    	connexion.setStyle(model.Proprietes.STYLE_NORMAL);
     	rejoindre.setStyle(model.Proprietes.STYLE_NORMAL);
 		creer.setStyle(model.Proprietes.STYLE_NORMAL);
 		
 		pane_connexion.setDisable(true);
-		pane_connexion.setVisible(false);*/
+		pane_connexion.setVisible(false);
+		
+		//liste_Ecran
     }
+    
     
     /**
      * implementation demande par l'interface EcranCourant : vide car n'a pas d'utilite ici
@@ -53,6 +54,7 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	 * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur
 	 */
     public void fixeEcranParent(GestionnaireEcransFxml ecranParent){
+    	System.out.println("init ecran parent");
     	liste_Ecran = ecranParent;
     }
     
@@ -61,7 +63,7 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     /****************************************/
     
 
-  /*  @FXML private void creerPartie(MouseEvent event){
+    @FXML private void creerPartie(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
     	System.out.println("creer partie");
     }
@@ -76,7 +78,7 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
     @FXML private void connexion(MouseEvent event){
     	System.out.println("connexion");
-    }*/
+    }
     /****************************************/
     /*		gestion menu roue				*/
     /****************************************/    

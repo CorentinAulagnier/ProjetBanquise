@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -10,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueil">
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0">
       <image>
@@ -45,7 +52,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
     </Button>
-    <Button fx:id="regles" contentDisplay="GRAPHIC_ONLY" layoutX="518.0" layoutY="372.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="regle">
+    <Button fx:id="online" contentDisplay="GRAPHIC_ONLY" layoutX="518.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#ouvrirMultijoueur" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="en_ligne">
       <graphic>
         <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
           <image>

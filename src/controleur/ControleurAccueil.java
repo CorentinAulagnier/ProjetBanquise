@@ -11,12 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.event.ActionEvent;
 
 public class ControleurAccueil extends ControleurPere implements Initializable, EcranCourant {
 	
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
-	@FXML private Button jouer, charger, regles, roue;
+	@FXML private Button jouer, charger, online, roue;
 	@FXML private AnchorPane optionbox;
 	@FXML private ImageView imageSon, imageMusique;
 	
@@ -27,7 +27,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     public void initialize(URL url, ResourceBundle rb) {
     	jouer.setStyle(model.Proprietes.STYLE_NORMAL);
 		charger.setStyle(model.Proprietes.STYLE_NORMAL);
-		regles.setStyle(model.Proprietes.STYLE_NORMAL);
+		online.setStyle(model.Proprietes.STYLE_NORMAL);
     }
     
     
@@ -51,6 +51,19 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     private void ouvrirNouvellePartie (MouseEvent event){
     	nettoyerMenu(optionbox, roue);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MODE);
+    	
+    }
+    
+    /**
+     * change d'ecran pour celui de l'acceuil multijoueur
+     * @param event evenement souris attendu : clic
+     */
+    @FXML
+    private void ouvrirMultijoueur (MouseEvent event){
+    	nettoyerMenu(optionbox, roue);
+    	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_MENU_MULTI, model.Proprietes.ECRAN_MENU_MULTI_FXML);
+		//System.out.println(gestionnaireFxmlCourant.get(model.Proprietes.ECRAN_MENU_MULTI));
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_MENU_MULTI);
     	
     }
     

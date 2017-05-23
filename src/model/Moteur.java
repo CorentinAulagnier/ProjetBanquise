@@ -141,20 +141,18 @@ System.out.println(partie);
 	 */
     
     public CoupleGenerique<Coordonnees, Coordonnees> demanderIndice() {
-    	Partie p = this.partie.clone();
-    	Joueur j = p.getJoueurActif();
-    	
-    	IA i = new IA(j.nom, j.nbPingouin, 2, j.cheminMiniature, j.couleur);
+
+    	Joueur j = this.partie.getJoueurActif();
+    	IA i = new IA("", j.nbPingouin, 2);
     	i.myPingouins = j.myPingouins;
     	i.nbTuiles = j.nbTuiles;
     	i.poissonsManges = j.poissonsManges;
-    	p.joueurs[p.joueurActif] = i;
     	
     	if (phasePlacement) {
-    		return new CoupleGenerique<Coordonnees, Coordonnees>(new Coordonnees(-1, -1), i.placement(p));
+    		return new CoupleGenerique<Coordonnees, Coordonnees>(new Coordonnees(-1, -1), i.placement(this.partie));
 
 		} else {
-			return i.jouer(p);
+			return i.jouer(this.partie);
 		}
     }
 

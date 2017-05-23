@@ -326,9 +326,9 @@ public class AlgoIA {
         int indx = 0;
         ArrayList<CoupleGenerique<Coordonnees, Integer>> poidsPingouins = new ArrayList<>();
 
-        for (int i = 0; i < p.joueurs[notreNumeroDeJoueur(p)].nbPingouin; i++) {
-            if (p.joueurs[notreNumeroDeJoueur(p)].myPingouins[i].actif) {
-                CoupleGenerique<Coordonnees, Integer> coordint = parcoursGraphe(p.joueurs[notreNumeroDeJoueur(p)].myPingouins[i].position, p, nbcoupsrecherches, nbcoupsrecherches, 0, new Coordonnees(0, 0));
+        for (int i = 0; i < p.joueurs[p.joueurActif].nbPingouin; i++) {
+            if (p.joueurs[p.joueurActif].myPingouins[i].actif) {
+                CoupleGenerique<Coordonnees, Integer> coordint = parcoursGraphe(p.joueurs[p.joueurActif].myPingouins[i].position, p, nbcoupsrecherches, nbcoupsrecherches, 0, new Coordonnees(0, 0));
                 poidsPingouins.add(i, coordint);
             } else {
                 CoupleGenerique<Coordonnees, Integer> cc = new CoupleGenerique(new Coordonnees(0, 0), 0);
@@ -344,7 +344,7 @@ public class AlgoIA {
             }
         }
 
-        return new CoupleGenerique<Coordonnees, Coordonnees>(p.joueurs[notreNumeroDeJoueur(p)].myPingouins[indx].position, coordmax);
+        return new CoupleGenerique<Coordonnees, Coordonnees>(p.joueurs[p.joueurActif].myPingouins[indx].position, coordmax);
     }
 
     /**

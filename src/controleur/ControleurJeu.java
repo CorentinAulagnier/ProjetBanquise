@@ -1,3 +1,4 @@
+
 package controleur;
 
 import vue.GestionnaireEcransFxml;
@@ -92,8 +93,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	
     	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_defaire);	
     	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_faire);
-    	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_indice);
-    	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
+    	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL); //desactiverBouton(bouton_indice);
+    	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);	
+    	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setDisable(true);
     	
     	coord_pingouin_encours = new Coordonnees();
@@ -335,14 +337,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		
 		
 		//eclairage des cases accessibles pour un pingouin
-		if (liste_Ecran.moteur.phasePlacement){
+		if (liste_Ecran.moteur.phasePlacement){/*
 	    	for (int i = 0; i< 8; i++){
 				for(int j = 0; j< 8; j++){
 					if ( partie.isPlacementValide(new Coordonnees(i,j)) ){
 						banquise.get(i).get(j).setEffect(new Glow(1));
 					}
 				}
-			}
+			}*/
     	}
     	
     	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
@@ -408,10 +410,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private void demanderIndice(MouseEvent event){
     	//TODO retirer aura si pingouin selectionne 
     	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.moteur.demanderIndice();
+    	miseAjour_tourDeJeu();
 		nettoyerBanquise();
 		
 		if (!cc.e1.equals(new Coordonnees(-1, -1))) {
 			banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
+			pingouinAdeplacer = liste_Ecran.moteur.partie.rechercheNumPingouin(liste_Ecran.moteur.partie.joueurActif, cc.e1);
+			selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
 		}
 		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
     }

@@ -24,7 +24,13 @@ public class Pingouin implements Serializable {
 	 */
 	
 	public boolean actif;
+        
+        /**
+	 * Indique si le pingouin est seul ou bien positionné
+	 */
 
+        public boolean resteSurPlace;
+        
 	/**
 	 * Constructeurs.
 	 * Ne place pas le pingouin et le met inactif.
@@ -33,6 +39,7 @@ public class Pingouin implements Serializable {
 	public Pingouin(){
 		this.position = new Coordonnees();
 		this.actif = false;
+                this.resteSurPlace = false;
 	}
 	
 	/**

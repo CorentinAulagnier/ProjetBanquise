@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutY="0.0" pickOnBounds="true" style="">
@@ -687,10 +687,22 @@
             <Cursor fx:constant="HAND" />
          </cursor>
     </Button>
-<ImageView fx:id="reglette_j1_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0" />
-<ImageView fx:id="reglette_j1_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0" />
-<ImageView fx:id="reglette_j1_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0" />
-<ImageView fx:id="reglette_j1_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0" />
+<ImageView fx:id="reglette_j1_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j1_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j1_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j1_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
 <ImageView fx:id="reglette_j2_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
 <ImageView fx:id="reglette_j2_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
 <ImageView fx:id="reglette_j2_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
@@ -727,5 +739,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
 </Button>
+      <ImageView fx:id="avatar_j1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0" />
+      <ImageView fx:id="avatar_j2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
+      <ImageView fx:id="avatar_j3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
+      <ImageView fx:id="avatar_j4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
   </children>
 </AnchorPane>

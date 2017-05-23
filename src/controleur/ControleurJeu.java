@@ -349,6 +349,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
     			if (j == liste_Ecran.moteur.partie.joueurActif){
     				auras.get(j).setVisible(true);
+    				int color = liste_Ecran.moteur.partie.joueurs[j].couleur;
+    				auras.get(j).setImage( new Image(model.Proprietes.AURAS [color] ));
     				if (liste_Ecran.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
     				}

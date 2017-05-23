@@ -66,26 +66,25 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 			 banquise.get(i).setText(""+players.nbTuiles);
 			 i++;
 		}
-		 int k = i;
-		 for( int v = 0; v<gestionnaireFxmlCourant.moteur.partie.nbJoueurs; v++){
-			 System.out.println("v " + v + " " + Classement[v].nom + "score : " + Classement[v].poissonsManges);
-		 }
-		 for(int j = 0 ; j<(gestionnaireFxmlCourant.moteur.partie.nbJoueurs-(i+1)); j++ ){
+		 int k = 0;
+		 
+		 for(int j = i ; j<gestionnaireFxmlCourant.moteur.partie.nbJoueurs; j++ ){
 			 losers.get(k).setVisible(true);
 			 losers.get(k).setImage(new Image(Classement[j].cheminMiniature));
-			 noms.get(k).setVisible(true);
-			 noms.get(k).setText(Classement[j].nom);
-			 poissons.get(k).setVisible(true);
-			 poissons.get(k).setText(""+Classement[j].poissonsManges);
-			 banquise.get(k).setVisible(true);
-			 banquise.get(k).setText(""+Classement[j].nbTuiles);
-			/* TranslateTransition tt = new TranslateTransition(Duration.millis(2000), losers.get(k));
-			 tt.setFromY(-7);
+			 noms.get(k+i).setVisible(true);
+			 noms.get(k+i).setText(Classement[j].nom);
+			 poissons.get(k+i).setVisible(true);
+			 poissons.get(k+i).setText(""+Classement[j].poissonsManges);
+			 banquise.get(k+i).setVisible(true);
+			 banquise.get(k+i).setText(""+Classement[j].nbTuiles);
+			 
+			 TranslateTransition tt = new TranslateTransition(Duration.millis(2000), losers.get(k));
+			 tt.setFromY(0);
 			 tt.setToY(10);
 			 tt.setAutoReverse(true);
 			 tt.setCycleCount(Timeline.INDEFINITE);
-			 tt.setDelay(Duration.millis(k*100));
-			 tt.play();*/
+			 tt.setDelay(Duration.millis(k*1000));
+			 tt.play();
 			 k++;
 		 }		 
 		 

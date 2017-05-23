@@ -399,10 +399,15 @@ public class Partie implements Serializable {
 
 	public void majProchainJoueur() {
 		int i = 0;
+		int sauvJoueur= this.joueurActif;
 		this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
+		
 		while (i < 8 && this.nbPingouinActif() == 0) {
 			this.joueurActif = (this.joueurActif+1)%this.nbJoueurs;
 			i ++;
+		}
+		if (i==8) {
+			this.joueurActif = sauvJoueur;
 		}
 	}
 	
@@ -934,6 +939,10 @@ public class Partie implements Serializable {
 					nbTuilesMax = joueurs[j].nbTuiles;
 				} 
 			}
+			
+			joueurMax = 0;
+			scoreMax = 0;
+			nbTuilesMax = 0;
 			
 			temp = jo[i];
 			jo[i] = jo[joueurMax];

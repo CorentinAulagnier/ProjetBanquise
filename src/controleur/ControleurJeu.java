@@ -27,7 +27,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
-import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -36,9 +35,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class ControleurJeu extends ControleurPere implements Initializable, EcranCourant {
-	/**
-	 * Noeud FXML associe au controleur
-	 */
+
 	GestionnaireEcransFxml liste_Ecran;
 	Coordonnees coord_pingouin_encours;
     int pingouinAdeplacer;
@@ -63,11 +60,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private Label score_poissons_j1, score_poissons_j2, score_poissons_j3, score_poissons_j4;
     @FXML private Label score_tuiles_j1, score_tuiles_j2, score_tuiles_j3, score_tuiles_j4;
     ArrayList<ArrayList<ImageView>> reglettes;
-    ArrayList<ImageView> reglette_j1, reglette_j2, reglette_j3, reglette_j4;
+    ArrayList<ImageView> reglette_j1, reglette_j2, reglette_j3, reglette_j4, avatars;
     @FXML private ImageView reglette_j1_1, reglette_j1_2, reglette_j1_3, reglette_j1_4,
     						reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4,
     						reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4,
-    						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4;
+    						reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4,
+    						avatar_j1, avatar_j2, avatar_j3, avatar_j4;
 
     //banquise
     @FXML AnchorPane anchorBanquise;
@@ -83,31 +81,21 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     						t81,t82,t83,t84,t85,t86,t87,t88;
     Timeline timeline;
 
-    
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
 	 */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	desactiverAnchorPane(anchorPane_j1); desactiverAnchorPane(anchorPane_j2); desactiverAnchorPane(anchorPane_j3); desactiverAnchorPane(anchorPane_j4);
-
-    	aura_j1.setVisible(false);
-    	aura_j2.setVisible(false);
-    	aura_j3.setVisible(false);
-    	aura_j4.setVisible(false);
-    	
+    	aura_j1.setVisible(false); aura_j2.setVisible(false); aura_j3.setVisible(false); aura_j4.setVisible(false);
     	desactiverAnchorPane(box_demarrer); desactiverAnchorPane(box_tour_local); desactiverAnchorPane(box_tour_distant);
     	
-    	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL);
-    	desactiverBouton(bouton_defaire);
-    	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL);
-    	desactiverBouton(bouton_faire);
-    	
-    	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL);
-    	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);
-    	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
-    	
+    	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_defaire);	
+    	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_faire);
+    	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_indice);
+    	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setDisable(true);
+    	
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
     }
@@ -139,6 +127,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	    reglette_j2 = new ArrayList <ImageView>(); Collections.addAll(reglette_j2, reglette_j2_1, reglette_j2_2, reglette_j2_3, reglette_j2_4);
     	    reglette_j3 = new ArrayList <ImageView>(); Collections.addAll(reglette_j3, reglette_j3_1, reglette_j3_2, reglette_j3_3, reglette_j3_4);
     	    reglette_j4 = new ArrayList <ImageView>(); Collections.addAll(reglette_j4, reglette_j4_1, reglette_j4_2, reglette_j4_3, reglette_j4_4);
+    	    avatars = new ArrayList <ImageView>(); Collections.addAll(avatars, avatar_j1, avatar_j2, avatar_j3, avatar_j4);
     	    reglettes = new ArrayList<ArrayList<ImageView>>();
     	    reglettes.add(reglette_j1); reglettes.add(reglette_j2); reglettes.add(reglette_j3); reglettes.add(reglette_j4);
     	    
@@ -176,7 +165,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         							}
         							if(liste_Ecran.moteur.phaseVictoire){
         							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
-        							    //liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
         								liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
         								liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
         							    timeline.stop();
@@ -204,6 +192,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			String path = liste_Ecran.moteur.partie.joueurs[j].cheminMiniature;
 			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){
 				reglettes.get(j).get(ping).setImage(new Image(path));
+				avatars.get(j).setImage(new Image(path));
 			}
 		}
     }
@@ -220,8 +209,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	Partie partie = liste_Ecran.moteur.partie;
     	bouton_finTour.setDisable(true);
     	
-    		
-	    	
 	    	//maj des pingouins
 	    	majPingouins();
 	    	
@@ -232,7 +219,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	//maj de l'affichage la banquise
 	    	majBanquise();
 	
-	    	//TODO y a une fonction plus propre je crois pour les scores...
 	    	//maj des scores du joueur
 	    	for( int j=0 ; j < partie.joueurs.length ; j++ ){
 	    		scores_poissons.get(j).setText( String.valueOf(partie.joueurs[j].poissonsManges) );
@@ -246,17 +232,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
 	    	}
 	    	
-	    	/*if (liste_Ecran.moteur.phaseVictoire){
-	    		//Govictoire
-	    		System.out.println("Go Victoire");
-	    		liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
-		    	//liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
-				//liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
-	    		liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
-	    	}else{*/
-		    	//maj zone des boutons
-		    	majActionsDisponibles();
-    	//}
+		    majActionsDisponibles();
     } 
     
     /**
@@ -280,7 +256,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
 			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
 				
-
 				Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
 				ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
 				
@@ -292,15 +267,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					if(!pingouin_en_memoire.equals(pingouin_en_ihm)){
 						translaterPingouin(pingEncours,jEncours, pingouin_en_memoire);
 					}
-				}else if (liste_Ecran.moteur.phaseJeu){
+				}else if (liste_Ecran.moteur.phaseJeu){//TODO
 					RotateTransition rt = new RotateTransition(Duration.millis(1000),miniature_pingouin);
 					rt.setByAngle(1000);
 					ScaleTransition st = new ScaleTransition(Duration.millis(1000),miniature_pingouin);
 					st.setToX(0);
 					st.setToY(0);
 					ParallelTransition pt = new ParallelTransition(miniature_pingouin,rt,st);
-					pt.play();
-										
+					pt.play();								
 				}
 			}
 		}
@@ -334,15 +308,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		} 
 		//sinon si le joueur est une IA
 		else if (partie.getJoueurActif() instanceof IA){
-			
-			
-			//TODO
-			/*desactiverAnchorPane(box_tour_local);
-			desactiverAnchorPane(box_tour_distant);
-			activerAnchorPane(box_demarrer);*/
-			
-
-			//TODO
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
 			if( partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
@@ -368,6 +333,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	public void majEffets(){
 		Partie partie =liste_Ecran.moteur.partie;
 		
+		
+		//eclairage des cases accessibles pour un pingouin
 		if (liste_Ecran.moteur.phasePlacement){
 	    	for (int i = 0; i< 8; i++){
 				for(int j = 0; j< 8; j++){
@@ -415,8 +382,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 * @param event
 	 */
     @FXML private void annulerTours(MouseEvent event){
-    	
-    	// TODO
     	if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
 	    	this.liste_Ecran.moteur.partie.annuler();
 	    	miseAjour_tourDeJeu();
@@ -428,7 +393,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void refaireTours(MouseEvent event){
-    	// TODO
     	if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
 	    	this.liste_Ecran.moteur.partie.retablir();
 	    	miseAjour_tourDeJeu();
@@ -440,25 +404,14 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void demanderIndice(MouseEvent event){
-    	// TODO
+    	//TODO retirer aura si pingouin selectionne 
     	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.moteur.demanderIndice();
-    	System.out.println(cc);
-
-    	
-    	
 		nettoyerBanquise();
-		/*
-		ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(cc.e1);
-		for( ArrayList<Coordonnees> col : accessibles ){
-			for ( Coordonnees lin : col){
-				banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.7));
-			}
-		}*/
+		
 		if (!cc.e1.equals(new Coordonnees(-1, -1))) {
 			banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
 		}
 		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
-
     }
      
     /**
@@ -469,8 +422,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	bouton_finTour.setDisable(true);
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
-    	
-		// TODO dégager ce patch dégeulasse surtout si on enlève la reglette
+
 		if (liste_Ecran.moteur.phasePlacement) {
 			ImageView miniature_pingouin_aReset = reglettes.get(liste_Ecran.moteur.partie.joueurActif).get(liste_Ecran.moteur.partie.numPingouinAPlacer());
 			Point2D coord2DTo = new Point2D(0, 0);
@@ -503,8 +455,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void lancerIA(MouseEvent event){
-		//liste_Ecran.moteur.execPremiereIA();
-    	//TODO
 		liste_Ecran.moteur.faireJouerIAS();
     	miseAjour_tourDeJeu();
     }
@@ -524,10 +474,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	this.bouton_finTour.setDisable(true);
 			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 			coord_pingouin_encours = new Coordonnees();
-		} /*else if (liste_Ecran.moteur.phaseVictoire){
-			  //on fait quoi
-		}*/
-
+		} 
     	miseAjour_tourDeJeu();
     }
     
@@ -872,8 +819,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	b.setVisible(false);		
 	}
 
-	
-	
 	/****************************************/
     /* 			boutons de la roue			*/
     /****************************************/

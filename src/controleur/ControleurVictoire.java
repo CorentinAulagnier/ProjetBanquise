@@ -6,6 +6,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
+
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import model.Joueur;
 
 
@@ -60,11 +64,13 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 			 poissons.get(i).setText(""+players.poissonsManges);
 			 banquise.get(i).setVisible(true);
 			 banquise.get(i).setText(""+players.nbTuiles);
-			 
 			 i++;
+		}
+		 int k = i;
+		 for( int v = 0; v<gestionnaireFxmlCourant.moteur.partie.nbJoueurs; v++){
+			 System.out.println("v " + v + " " + Classement[v].nom + "score : " + Classement[v].poissonsManges);
 		 }
-		 int k = 0;
-		 for(int j = i ; j<gestionnaireFxmlCourant.moteur.partie.nbJoueurs; j++ ){
+		 for(int j = 0 ; j<(gestionnaireFxmlCourant.moteur.partie.nbJoueurs-(i+1)); j++ ){
 			 losers.get(k).setVisible(true);
 			 losers.get(k).setImage(new Image(Classement[j].cheminMiniature));
 			 noms.get(k).setVisible(true);
@@ -73,6 +79,14 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 			 poissons.get(k).setText(""+Classement[j].poissonsManges);
 			 banquise.get(k).setVisible(true);
 			 banquise.get(k).setText(""+Classement[j].nbTuiles);
+			/* TranslateTransition tt = new TranslateTransition(Duration.millis(2000), losers.get(k));
+			 tt.setFromY(-7);
+			 tt.setToY(10);
+			 tt.setAutoReverse(true);
+			 tt.setCycleCount(Timeline.INDEFINITE);
+			 tt.setDelay(Duration.millis(k*100));
+			 tt.play();*/
+			 k++;
 		 }		 
 		 
 	 }

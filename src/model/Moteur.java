@@ -148,9 +148,14 @@ System.out.println(partie);
     	i.myPingouins = j.myPingouins;
     	i.nbTuiles = j.nbTuiles;
     	i.poissonsManges = j.poissonsManges;
-    	
     	p.joueurs[p.joueurActif] = i;
-    	return i.jouer(p);
+    	
+    	if (phasePlacement) {
+    		return new CoupleGenerique<Coordonnees, Coordonnees>(new Coordonnees(-1, -1), i.placement(p));
+
+		} else {
+			return i.jouer(p);
+		}
     }
 
 }

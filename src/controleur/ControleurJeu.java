@@ -454,9 +454,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.7));
 			}
 		}*/
-		
-		banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
-
+		if (!cc.e1.equals(new Coordonnees(-1, -1))) {
+			banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
+		}
 		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
 
     }

@@ -112,6 +112,7 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     @FXML
     private void boutonRetour(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
+    	faireTourner(retour);
     	if (pane_connexion.isVisible()){
     		pane_connexion.setVisible(false);
     		pane_connexion.setDisable(true);

@@ -77,6 +77,11 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     }
 
     @FXML private void connexion(MouseEvent event){
+    	
+    	String ip = this.ip.getText();
+    	String name = this.name.getText();
+    	//TODO verif champs ok
+    	
     	System.out.println("connexion");
     }
     /****************************************/

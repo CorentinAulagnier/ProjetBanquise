@@ -380,10 +380,11 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     public void textEntre(KeyEvent event){
     	String nom = ((TextField) event.getTarget() ).getText();
-    	if ( nom.length() <= 20){
+    	if ( nom.length() <= 25){
     		modeValide();
     	}else{
-    		((TextField) event.getTarget()).deleteText(20, 21);
+    		((TextField) event.getTarget()).deleteText(25, nom.length());
+    		((TextField) event.getTarget()).setCenterShape(true);
     	}
     }
 

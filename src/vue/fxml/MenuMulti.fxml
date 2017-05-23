@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueilMultijoueur">
+<AnchorPane minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAccueilMultijoueur">
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0">
       <image>
@@ -30,32 +24,42 @@
         <Image url="@../../ressources/decor/Pingouins.png" />
       </image>
     </ImageView>
-    <Text fill="BLACK" layoutX="370.0" layoutY="63.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoindre Partie">
+    <Text fill="BLACK" layoutX="336.0" layoutY="66.0" scaleX="3.269079021152351" scaleY="3.2968907086578323" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoindre Partie">
       <font>
         <Font name="Arial" size="15.0" />
       </font>
     </Text>
-      <AnchorPane fx:id="pane_connexion" layoutX="271.0" layoutY="300.0" prefHeight="222.0" prefWidth="200.0">
+      <AnchorPane fx:id="pane_connexion" layoutX="17.0" layoutY="297.0" prefHeight="293.0" prefWidth="761.0">
          <children>
-            <Button fx:id="connexion" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#rejoindrePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="rejoindre_Partie" visible="true">
+            <Button fx:id="connexion" contentDisplay="GRAPHIC_ONLY" layoutX="547.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#rejoindrePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="rejoindre_Partie" visible="true" AnchorPane.bottomAnchor="9.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
                   <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../ressources/decor/m_rejoindre.png" />
+                        <Image url="@../../ressources/decor/m_connexion.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <TextField fx:id="ip" layoutX="24.0" layoutY="74.0" />
-            <TextField fx:id="name" layoutX="24.0" layoutY="111.0" />
+            <TextField fx:id="ip" alignment="CENTER" layoutX="234.0" layoutY="85.0" prefWidth="300.0" promptText="Entrez l'adresse IP de votre hôte." />
+            <TextField fx:id="name" alignment="CENTER" layoutX="234.0" layoutY="122.0" prefWidth="300.0" promptText="Entrez votre nom de joueur." />
+            <Label layoutX="149.0" layoutY="76.0" text="IP:">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Label>
+            <Label layoutX="125.0" layoutY="113.0" text="Nom:">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="pane_menumulti" layoutX="128.0" layoutY="310.0" prefHeight="202.0" prefWidth="524.0">
          <children>
-            <Button fx:id="creer" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#creerPartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+            <Button fx:id="creer" contentDisplay="GRAPHIC_ONLY" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#creerPartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;">
                <graphic>
               <ImageView fitHeight="70.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -67,7 +71,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
-          <Button fx:id="rejoindre" layoutX="306.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#rejoindrePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="rejoindre_Partie" visible="true">
+          <Button fx:id="rejoindre" contentDisplay="GRAPHIC_ONLY" layoutX="306.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#rejoindrePartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="rejoindre_Partie" visible="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -144,6 +148,18 @@
             <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
                <image>
                   <Image url="@../../ressources/decor/r_parametres.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="20.0" layoutY="13.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#boutonRetour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color : transparent;" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ressources/decor/b_retour.png" />
                </image>
             </ImageView>
          </graphic>

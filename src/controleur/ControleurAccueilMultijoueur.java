@@ -21,7 +21,7 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	GestionnaireEcransFxml liste_Ecran;
 	
 	//boutons d'actions
-    @FXML private Button connexion, rejoindre, creer;
+    @FXML private Button connexion, rejoindre, creer, retour;
     @FXML private TextField ip, name;
     @FXML private AnchorPane pane_connexion, pane_menumulti;
     
@@ -113,10 +113,25 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     	}
     }
     
+    
+    @FXML
+    private void boutonRetour(MouseEvent event){
+    	nettoyerMenu(optionbox, roue);
+    	faireTourner(retour);
+    	if (pane_connexion.isVisible()){
+    		pane_connexion.setVisible(false);
+    		pane_connexion.setDisable(true);
+    		pane_menumulti.setDisable(false);
+    		pane_menumulti.setVisible(true);
+    	}else{
+    		liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
+    	}
+    }
+    
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	appelerRegles(liste_Ecran, model.Proprietes.ECRAN_JEU);
+    	appelerRegles(liste_Ecran, model.Proprietes.ECRAN_MENU_MULTI);
     }
     
     /**

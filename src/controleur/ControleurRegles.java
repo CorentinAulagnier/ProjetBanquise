@@ -53,6 +53,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      */
     @FXML
     private void retour(MouseEvent event){
+    	faireTourner(accueil);
     	gestionnaireFxmlCourant.changeEcranCourant(gestionnaireFxmlCourant.dernierePage);
     }
     

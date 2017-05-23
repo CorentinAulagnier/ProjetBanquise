@@ -145,6 +145,12 @@ public class ControleurPere {
      	}    
 	 }
 	 
+	 public void faireTourner(Button b){
+		 RotateTransition rt = new RotateTransition(Duration.millis(500), b);
+		 rt.setByAngle(360);
+		 rt.play();
+	 }
+	 
 	 /**
 	  * gere la modification des bruitages
 	  */

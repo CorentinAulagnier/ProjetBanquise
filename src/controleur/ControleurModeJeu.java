@@ -228,6 +228,7 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     
     @FXML private void ouvrirPageAccueil(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
+    	faireTourner(retour);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
     }
     

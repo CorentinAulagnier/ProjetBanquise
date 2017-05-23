@@ -154,8 +154,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
-        								liste_Ecran.moteur.faireJouerIAS(timeline);
-        								miseAjour_tourDeJeu();
+        								if( !liste_Ecran.moteur.phasePlacement || liste_Ecran.moteur.partie.numPingouinAPlacer() != 0 || liste_Ecran.moteur.partie.joueurActif != 0){
+	        								liste_Ecran.moteur.faireJouerIAS(timeline);
+	        								miseAjour_tourDeJeu();
+        								}
         							}
         							if(liste_Ecran.moteur.phaseVictoire){
         							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
@@ -308,7 +310,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		//sinon si le joueur est une IA
 		else if (partie.getJoueurActif() instanceof IA){
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
-			if( partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
+			if(liste_Ecran.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
 				desactiverAnchorPane(box_tour_distant);
 				activerAnchorPane(box_demarrer);

@@ -92,6 +92,7 @@ public class PingouinServer extends Thread{
 	                	if(!m.phaseVictoire) {
 							if (m.partie.joueurs[m.partie.joueurActif] instanceof IA) { // Tour de l'IA
 								m.faireJouerIAS(new Timeline());
+								envoyerMoteurAuxClients(m.clone());	
 							} else if (m.partie.joueurActif == num) { 							
 			                    Object obj = in.readObject();
 			                    if (obj instanceof Moteur) {
@@ -100,10 +101,8 @@ public class PingouinServer extends Thread{
 			                    } else {
 			                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+m.partie.joueurs[num].nom);
 			                    }
+								envoyerMoteurAuxClients(m.clone());	
 							}
-	                    	//System.out.println("HELLO\n"+m.partie.toString2());
-
-							envoyerMoteurAuxClients(m.clone());	
 	                	} else {
 	                		break;
 	                	}

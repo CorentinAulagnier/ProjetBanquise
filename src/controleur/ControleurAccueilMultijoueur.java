@@ -78,7 +78,7 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     	liste_Ecran.chargeEcran(model.Proprietes., model.Proprietes.);
     	liste_Ecran.changeEcranCourant(model.Proprietes.);
     	*/
-    	System.out.println("creer partie");
+    	//System.out.println("creer partie");
     }
 
     @FXML private void rejoindrePartie(MouseEvent event){
@@ -103,10 +103,14 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	        
 	        if (matchAddr.matches()) {
 	        	String[] args = {"distant", ip, name};
+	        	
+	    		liste_Ecran.moteur = null;
 
 	        	client = new PingouinClient(liste_Ecran.moteur, args);
 	    		client.start();
 
+	    		while (liste_Ecran.moteur == null);
+	    		
 	        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
 	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
 	        	

@@ -130,16 +130,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     		}
     	}
     	
-    	int nbPingouins = 0;
-    	    
-	    if (nbJoueurs == 2){
-	    	nbPingouins = 4 ;
-	    }else if(nbJoueurs == 3){
-	    	nbPingouins = 3;
-	    }else if(nbJoueurs == 4){
-	    	nbPingouins = 2;
-	    }  	
-    	
+    	int nbPingouins = 6-nbJoueurs;
 	    
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
     	
@@ -173,6 +164,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     
     public Joueur creerJoueur(int couleur, int nbP){
     	String name = "";
+    	String path = "";
 
     	if (couleur == 0 || !(modeJeu[couleur] == model.Proprietes.JOUEUR)) {
         	int i = 0;
@@ -186,12 +178,8 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
         		}
         		i++;
         	}	
-    	} else {
-    		name = "";
-    	}
-
-    	String path = model.Proprietes.IMAGE_JOUEUR_PATH+image[couleur]+""+couleur+".png";
-				
+        	path = model.Proprietes.IMAGE_JOUEUR_PATH+image[couleur]+""+couleur+".png";
+    	}	
     	    	
     	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
     		return new Humain(name, nbP, path, couleur);

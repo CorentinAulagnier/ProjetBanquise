@@ -160,6 +160,7 @@ public class PingouinServer extends Thread{
 		            writers[num] = out;		            
 		            so.println(m.partie.joueurs[num].nom + " vient de se connecter.");
         		}
+				envoyerMoteurAuxClients(m.clone());	
         	} catch (Exception e) {
         		e.printStackTrace(System.err);
         	}

@@ -111,6 +111,8 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
 	    		while (liste_Ecran.moteur == null);
 	    		
+	    		System.out.println("OK \n"+liste_Ecran.moteur);
+	    		
 	        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
 	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
 	        	

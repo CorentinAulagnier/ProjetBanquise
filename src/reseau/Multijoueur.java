@@ -28,7 +28,7 @@ public class Multijoueur {
 				
 			}
 			
-			pc = new PingouinClient(m);
+			//pc = new PingouinClient(m);
 			
 			ExecClient ec = new ExecClient(args, pc);
 			
@@ -53,7 +53,7 @@ public class Multijoueur {
         public void run() {
         	try {
         		while (true) {
-        			PingouinServer.main(mot);
+        			//PingouinServer.main(mot);
         		}
 
 			} catch (Exception e) {

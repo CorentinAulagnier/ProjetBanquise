@@ -59,7 +59,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 						    
 							
     @FXML private Button droitjaune, gauchejaune, 
-						 modejaunedroit, modejaunegauche, moderougedroit, moderougegauche, modevertdroit, modevertgauche, modebleudroit, modebleugauche ;
+						 moderougedroit, moderougegauche, modevertdroit, modevertgauche, modebleudroit, modebleugauche ;
     
     /**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -97,12 +97,10 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 
 		flecheGaucheImage = gauchejaune;
 		
-		flecheDroiteMode[model.Proprietes.JAUNE]= modejaunedroit;
 		flecheDroiteMode[model.Proprietes.VERT] = modevertdroit;
 		flecheDroiteMode[model.Proprietes.ROUGE] = moderougedroit;
 		flecheDroiteMode[model.Proprietes.BLEU]= modebleudroit;
 		
-		flecheGaucheMode[model.Proprietes.JAUNE] = modejaunegauche;
 		flecheGaucheMode[model.Proprietes.VERT] = modevertgauche;
 		flecheGaucheMode[model.Proprietes.ROUGE] = moderougegauche;
 		flecheGaucheMode[model.Proprietes.BLEU] = modebleugauche;
@@ -111,6 +109,8 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
 		*/
 		//modeValide();
+		
+		
     }
     
 
@@ -160,6 +160,8 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	Multijoueur m = new Multijoueur(liste_Ecran.moteur, args);
 
     	nettoyerMenu(optionbox, roue);
+    	
+    	System.out.println(liste_Ecran.moteur.partie);
     	/*
     	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
@@ -252,11 +254,11 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     		selectMode(model.Proprietes.VERT,true);
     	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.VERT]){
     		selectMode(model.Proprietes.VERT,false);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.JAUNE]){
+    	}/*else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.JAUNE]){
     		selectMode(model.Proprietes.JAUNE,true);
     	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.JAUNE]){
     		selectMode(model.Proprietes.JAUNE,false);
-    	}
+    	}*/
     	//modeValide();
     }
     

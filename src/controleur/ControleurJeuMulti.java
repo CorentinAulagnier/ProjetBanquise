@@ -121,7 +121,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      */
     public void miseAjour(){
     	
-    	if(liste_Ecran!= null && liste_Ecran.moteur.partie!=null){
+    	if(liste_Ecran!= null && liste_Ecran.moteur!=null && liste_Ecran.moteur.partie!=null){
     		
     		AnchorPane[] anchorPanes = {anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4};
     		auras = new ArrayList <ImageView>(); Collections.addAll(auras,aura_j1, aura_j2, aura_j3, aura_j4);

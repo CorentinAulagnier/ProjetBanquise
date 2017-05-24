@@ -95,6 +95,7 @@ System.out.println(moteur.partie.toString2());
 	                if (line.startsWith("SUBMITNAME")) {
 	                	numClient = Integer.valueOf(line.substring(11));
 	                    out.writeObject(args[2]);
+	                    System.out.println("|"+args[2]+"|");
 	                } else if (line.startsWith("NOSLOT")) {
 	                	System.out.println("Le serveur de PINGOUINS est plein. Réessayez plus tard.");
 	                	socket.close();

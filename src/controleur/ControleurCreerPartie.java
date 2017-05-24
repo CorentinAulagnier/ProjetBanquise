@@ -41,17 +41,21 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     
     int[] modeJeu = new int[4];    
     int[] image = new int[4];
-    StackPane pileMode = new StackPane();
+    StackPane[] pileMode = new StackPane[4];
     StackPane[] pileNom = new StackPane[4];
+    /*************/
+    Label NOM = new Label();
+    /*************/
     StackPane pileImage = new StackPane();
     Button flecheDroiteImage = new Button();
     Button flecheGaucheImage = new Button();
     Button[] flecheDroiteMode = new Button[4];
     Button[] flecheGaucheMode = new Button[4];
+    @FXML private TextField nom1;
+    @FXML private StackPane pilejaune, 
+    						name1, name2, name3, name4;
     
-    @FXML private StackPane nom1, pilejaune,
-							label1, label2, label3,label4;
-
+    @FXML private Label label1;
 						    
 							
     @FXML private Button droitjaune, gauchejaune, 
@@ -76,12 +80,16 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
  		
  		/*INITIALISATION DES PILES*/
     	
-    	pileMode=nom1;
+    	pileMode[model.Proprietes.JAUNE]=name1;
+    	pileMode[model.Proprietes.VERT]=name2;
+    	pileMode[model.Proprietes.ROUGE]=name3;
+        pileMode[model.Proprietes.BLEU]=name4;
         
-        pileNom[model.Proprietes.JAUNE]=label1;
+        NOM = label1;
+        /*pileNom[model.Proprietes.JAUNE]=label1;
     	pileNom[model.Proprietes.VERT]=label2;
     	pileNom[model.Proprietes.ROUGE]=label3;
-        pileNom[model.Proprietes.BLEU]=label4;
+        pileNom[model.Proprietes.BLEU]=label4;*/
         
         pileImage=pilejaune;
 
@@ -224,6 +232,62 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 		*/
     	
     }
+    
+    
+    /**
+     * 
+     * @param event
+     */
+    @FXML
+    public void flecheModeEvent(MouseEvent event){
+    	if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.ROUGE]){
+    		selectMode(model.Proprietes.ROUGE,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.ROUGE]){
+    		selectMode(model.Proprietes.ROUGE,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.BLEU]){
+    		selectMode(model.Proprietes.BLEU,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.BLEU]){
+    		selectMode(model.Proprietes.BLEU,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.VERT]){
+    		selectMode(model.Proprietes.VERT,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.VERT]){
+    		selectMode(model.Proprietes.VERT,false);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.JAUNE]){
+    		selectMode(model.Proprietes.JAUNE,true);
+    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.JAUNE]){
+    		selectMode(model.Proprietes.JAUNE,false);
+    	}
+    	//modeValide();
+    }
+    
+    /**
+     * 
+     * @param couleur
+     * @param direction
+     */
+    public void selectMode(int couleur, boolean direction){
+    	modeJeu[couleur] = selectType(pileMode[couleur],modeJeu[couleur],direction);
+    	justOneVisible(pileNom[couleur], modeJeu[couleur]);
+		justOneVisible(pileImage[couleur], modeJeu[couleur]);
+		image[couleur]=modeJeu[couleur];
+    }
+    
+    /**
+     * SELECTION D'UN MODE DE PERSONNAGE
+     * @param stck
+     * @param indice
+     */
+    public void justOneVisible(StackPane stck, int indice){
+    	for (int i = 0; i<5 ; i++){
+    		if (i==indice){
+    			stck.getChildren().get(i).setVisible(true);
+    		}else{
+    			stck.getChildren().get(i).setVisible(false);
+    		}
+    	}
+    }
+    
+    
     
     @FXML
     public void fleche(MouseEvent event){

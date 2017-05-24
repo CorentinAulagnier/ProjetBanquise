@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 
 public class ControleurAccueil extends ControleurPere implements Initializable, EcranCourant {

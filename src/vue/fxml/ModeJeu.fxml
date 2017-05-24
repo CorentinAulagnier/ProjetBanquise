@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="fenetre" minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurModeJeu">
+<AnchorPane fx:id="fenetre" minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurModeJeu">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView id="" fx:id="background" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" style="">
@@ -529,7 +529,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-              <Label alignment="CENTER" text="Georgette la crevette" visible="false">
+              <Label alignment="CENTER" text="Jeanette la crevette" visible="false">
                      <font>
                         <Font size="14.0" fx:id="x8" />
                      </font>
@@ -677,7 +677,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-              <Label alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Jeanette la crevette" visible="false">
+              <Label alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Scarlette la crevette" visible="false">
                      <font>
                         <Font size="14.0" fx:id="x12" />
                      </font>

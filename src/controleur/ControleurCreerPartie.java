@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.sun.java.swing.plaf.motif.resources.motif_sv;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -185,6 +186,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
      * implementation demande par l'interface EcranCourant : vide car n'a pas d'utilite ici
      */
 	public void miseAjour(){}
+	public void donnerTimeline(Timeline timeline){}
 	 
 	/**
 	 * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur

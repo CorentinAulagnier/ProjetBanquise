@@ -40,14 +40,15 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	GestionnaireEcransFxml liste_Ecran;
 	Coordonnees coord_pingouin_encours;
     int pingouinAdeplacer;
+    boolean timePaused;
 	
 	//boutons d'actions
-    @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
+    @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire,iaPause;
     @FXML private Label text_tourDe,text_attenteJoueur;
     @FXML private AnchorPane box_tour_local, box_tour_distant, box_demarrer;
     
     //zone menu
-    @FXML private ImageView imageSon, imageMusique;
+    @FXML private ImageView imageSon, imageMusique,imageIApause;
     @FXML AnchorPane optionbox;
     @FXML Button roue;
     
@@ -101,6 +102,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
+    	timePaused= false;
     }
    
     
@@ -222,12 +224,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    		scores_tuiles.get(j).setText( String.valueOf(partie.joueurs[j].nbTuiles) );	
 	    	}
 	    	
-	    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
-	    	//maj text tour de (temporaire) :
-	    	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-		    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin");}
-		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
-	    	}
+	    	
 	    	
 		    majActionsDisponibles();
 		        
@@ -306,9 +303,20 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					activerBouton(bouton_faire);
 				}
 			}
+			
+			//TODO
+	    	//maj text tour de (explication) :	 
+			text_tourDe.setVisible(true);
+		    if(liste_Ecran.moteur.phasePlacement){ 	text_tourDe.setText("Placez un pingouin");	   }
+		    	
+		    else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
+	    	
 		} 
 		//sinon si le joueur est une IA
 		else if (partie.getJoueurActif() instanceof IA){
+			//maj text tour de (explication) :	 
+			text_tourDe.setVisible(false);
+			
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
 			if(liste_Ecran.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
@@ -322,6 +330,13 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				activerAnchorPane(box_tour_distant);
 				this.text_attenteJoueur.setText("Attente de "+partie.getJoueurActif().nom);
 				desactiverAnchorPane(box_demarrer);
+				
+				if(timePaused){
+					imageIApause.setImage(new Image("/ressources/decor/j_play.png"));
+				}else{
+					imageIApause.setImage(new Image("/ressources/decor/j_pause.png"));
+					//TODO
+				}
 			}
 		}  
 
@@ -480,6 +495,18 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML private void lancerIA(MouseEvent event){
 		liste_Ecran.moteur.faireJouerIAS(timeline);
     	miseAjour_tourDeJeu();
+    }
+    
+    @FXML private void pauser_IA(MouseEvent event){
+		if(this.timePaused){
+			this.timeline.play();
+			imageIApause.setImage(new Image("/ressources/decor/j_play.png"));
+		}else{
+			this.timeline.stop();
+			imageIApause.setImage(new Image("/ressources/decor/j_pause.png"));
+		}
+		timePaused=!timePaused;
+		
     }
     
     /**
@@ -880,6 +907,9 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      */
     @FXML
     private void ouvrirPageRegle(MouseEvent event){
+    	this.timeline.stop();
+    	this.timePaused=true;
+    	this.miseAjour_tourDeJeu();
     	nettoyerMenu(optionbox, roue);
     	appelerRegles(liste_Ecran, model.Proprietes.ECRAN_JEU);
     }

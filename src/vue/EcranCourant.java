@@ -1,5 +1,7 @@
 package vue;
 
+import javafx.animation.Timeline;
+
 /**
  * Permet de donner un nouvel écran à afficher parmi ceux créés (comme présenté dans le tutoriel de Angela Caicedo).
  * @author Riou Sebastien, Thisse Noémi, Angela Caicedo.
@@ -16,4 +18,5 @@ public interface EcranCourant {
 	 * @param GestionnaireEcransFxml écran parent
 	 */
     public void miseAjour();
+    
 }

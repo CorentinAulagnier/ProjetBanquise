@@ -31,7 +31,7 @@
             </ImageView>
       <Label fx:id="nom_j1" layoutX="10.0" prefHeight="40.0" prefWidth="200.0" text="Joueur 1" textAlignment="CENTER" wrapText="true">
         <font>
-          <Font name="Arial" size="18.0" fx:id="x2" />
+          <Font size="17.0" fx:id="x2" />
         </font>
       </Label>
       <GridPane fx:id="score_j1" layoutX="10.0" layoutY="40.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0">
@@ -74,7 +74,7 @@
             </ImageView>
       <Label fx:id="nom_j2" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" text="Joueur 2" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0">
                <font>
-                  <Font name="Arial" size="18.0" fx:id="x13" />
+                  <Font size="17.0" fx:id="x13" />
                </font>
             </Label>
       <GridPane fx:id="score_j2" layoutX="60.0" layoutY="40.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
@@ -125,7 +125,7 @@
             </ImageView>
       <Label fx:id="nom_j3" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" text="Joueur 3" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
                <font>
-                  <Font name="Arial" size="18.0" fx:id="x10" />
+                  <Font size="17.0" fx:id="x10" />
                </font>
             </Label>
       <GridPane layoutX="60.0" layoutY="90.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
@@ -174,7 +174,10 @@
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j4" font="$x2" layoutX="10.0" layoutY="160.0" prefHeight="40.0" prefWidth="200.0" text="Joueur 4" textAlignment="CENTER" wrapText="true" />
+      <Label fx:id="nom_j4" layoutX="10.0" layoutY="160.0" prefHeight="40.0" prefWidth="200.0" text="Joueur 4" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
       <GridPane alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="80.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0">
         <children>
           <ImageView fitHeight="30.0" fitWidth="30.0">
@@ -208,7 +211,16 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ProgressIndicator layoutX="40.0" layoutY="19.0" />
+            <ProgressIndicator fx:id="iaTourne" layoutX="40.0" layoutY="30.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-progress-color: #7B7474;" />
+            <Button fx:id="iaPause" contentDisplay="GRAPHIC_ONLY" layoutX="40.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#pauser_IA" prefHeight="40.0" prefWidth="40.0" style="-fx-border-radius: 45; -fx-background-color: transparent;" text="Button">
+               <graphic>
+                  <ImageView fx:id="imageIApause" fitHeight="25.0" fitWidth="25.0">
+                     <image>
+                        <Image url="@../../ressources/decor/j_pause.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="box_demarrer" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">

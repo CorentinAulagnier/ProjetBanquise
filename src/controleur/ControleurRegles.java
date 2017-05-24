@@ -42,7 +42,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
      * implementation demande par l'interface EcranCourant : vide car n'a pas d'utilite ici
      */
 	public void miseAjour(){}
-	 
+	
 	/**
 	 * implementation demande par l'interface EcranCourant : met a jour le noeud fxml parent associe a ce controleur
 	 */

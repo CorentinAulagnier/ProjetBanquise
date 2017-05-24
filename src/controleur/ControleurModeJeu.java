@@ -10,6 +10,8 @@ import vue.EcranCourant;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -58,7 +60,6 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
      * implementation demande par l'interface EcranCourant : vide car n'a pas d'utilite ici
      */
     public void miseAjour(){}
-    
     /**
      * Initializes the controller class.
      */

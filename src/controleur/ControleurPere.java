@@ -32,7 +32,6 @@ public class ControleurPere {
 
 	final FileChooser fileChooserCharger = new FileChooser();
 	
-	public PingouinClient client = null;
 	
     /**
      * gere la modification de l'affichage d'un bouton lorsque la souris est relache

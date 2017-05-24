@@ -15,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import model.Moteur;
+import reseau.PingouinClient;
 
 /**
  * Controle le passage entre scenes FXML (comme dans le tutoriel de Angela
@@ -29,6 +30,9 @@ public class GestionnaireEcransFxml extends StackPane {
 	 * retrouver ces couples nom / fichier FXML dans la classe propriétés
 	 */
 	private final HashMap<String, Node> listeEcrans = new HashMap<>();
+	
+	public PingouinClient client = null;
+
 	/**
 	 * Composant media pour jouer la musique
 	 */

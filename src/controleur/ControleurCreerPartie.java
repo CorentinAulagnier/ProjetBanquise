@@ -137,8 +137,8 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	ps.start();
 
     	
-    	client = new PingouinClient(liste_Ecran.moteur, args);
-		client.start();
+    	liste_Ecran.client = new PingouinClient(liste_Ecran.moteur, args);
+    	liste_Ecran.client.start();
 
     	
     	nettoyerMenu(optionbox, roue);

@@ -295,7 +295,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		//desactiverBouton(bouton_faire);
 		
 		// le joueur actif est humain
-		if(partie.getJoueurActif() instanceof Humain && client.numClient == partie.joueurActif){
+		if(partie.getJoueurActif() instanceof Humain && liste_Ecran.client.numClient == partie.joueurActif){
 			activerAnchorPane(box_tour_local);
 			desactiverAnchorPane(box_tour_distant);
 			desactiverAnchorPane(box_demarrer);
@@ -504,7 +504,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		} 
     	miseAjour_tourDeJeu();
     	//System.out.println("FinValiderTour");
-    	client.majMoteurSurServeur(liste_Ecran.moteur);
+    	liste_Ecran.client.majMoteurSurServeur(liste_Ecran.moteur);
     }
     
  
@@ -525,7 +525,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		coord_pingouin_encours = new Coordonnees();	
 		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
 		
-		if ( partie.joueurActif == client.numClient && (partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
+		if ( partie.joueurActif == liste_Ecran.client.numClient && (partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			
 			if (liste_Ecran.moteur.phasePlacement) {
 				

@@ -106,8 +106,8 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	        	
 	    		liste_Ecran.moteur = null;
 
-	        	client = new PingouinClient(liste_Ecran.moteur, args);
-	    		client.start();
+	    		liste_Ecran.client = new PingouinClient(liste_Ecran.moteur, args);
+	    		liste_Ecran.client.start();
 /*
 	    		while (true) {
 	    			synchronized (liste_Ecran.moteur) {

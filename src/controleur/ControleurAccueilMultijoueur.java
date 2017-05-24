@@ -1,7 +1,10 @@
 package controleur;
 
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -88,21 +91,32 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
     @FXML private void connexion(MouseEvent event){
     	try {
+    		
 	    	String ip = this.ip.getText();
 	    	String name = this.name.getText();
-	    	PingouinClient client = new PingouinClient(liste_Ecran.moteur);
-	    	String[] args = {"distant",ip,name};
-	    	client.main(args);
+
+	    	Pattern pattern;
+	    	final String REGEX_IP = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+	    	pattern = Pattern.compile(REGEX_IP);
+	    	Matcher matchAddr = null;
+	        matchAddr = pattern.matcher(ip);
+	        
+	        if (matchAddr.matches()) {
+	        	String[] args = {"distant", ip, name};
+
+	        	client = new PingouinClient(liste_Ecran.moteur, args);
+	    		client.start();
+
+	        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
+	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
+	        	
+	        } else {
+				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+	        }
     	} catch(Exception e) {
     		e.printStackTrace(System.err);
     	}
-    	System.out.println("connexion");
-    	
-    	/*
-    	nettoyerMenu(optionbox, roue);
-    	liste_Ecran.chargeEcran(model.Proprietes., model.Proprietes.);
-    	liste_Ecran.changeEcranCourant(model.Proprietes.);
-    	*/
+
 
     }
     /****************************************/

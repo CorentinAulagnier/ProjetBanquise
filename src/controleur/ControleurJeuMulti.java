@@ -45,7 +45,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     int pingouinAdeplacer;
 	
 	//boutons d'actions
-    @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire;
+    @FXML private Button bouton_annuler, bouton_finTour;
     @FXML private Label text_tourDe,text_attenteJoueur;
     @FXML private AnchorPane box_tour_local, box_tour_distant, box_demarrer;
     
@@ -95,9 +95,9 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     	aura_j1.setVisible(false); aura_j2.setVisible(false); aura_j3.setVisible(false); aura_j4.setVisible(false);
     	desactiverAnchorPane(box_demarrer); desactiverAnchorPane(box_tour_local); desactiverAnchorPane(box_tour_distant);
     	
-    	bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_defaire);	
-    	bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_faire);
-    	bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL); //desactiverBouton(bouton_indice);
+    	//bouton_defaire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_defaire);	
+    	//bouton_faire.setStyle(model.Proprietes.STYLE_NORMAL); desactiverBouton(bouton_faire);
+    	//bouton_indice.setStyle(model.Proprietes.STYLE_NORMAL); //desactiverBouton(bouton_indice);
     	bouton_annuler.setStyle(model.Proprietes.STYLE_NORMAL);	
     	bouton_finTour.setStyle(model.Proprietes.STYLE_NORMAL);
     	bouton_finTour.setDisable(true);
@@ -291,16 +291,17 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		Partie partie = liste_Ecran.moteur.partie;
 		//TODO gerer les tours en fonctions du reseau
 		
-		desactiverBouton(bouton_defaire);
-		desactiverBouton(bouton_faire);
+		//desactiverBouton(bouton_defaire);
+		//desactiverBouton(bouton_faire);
 		
 		// le joueur actif est humain
-		if(partie.getJoueurActif() instanceof Humain){
+		if(partie.getJoueurActif() instanceof Humain && client.numClient == partie.joueurActif){
 			activerAnchorPane(box_tour_local);
 			desactiverAnchorPane(box_tour_distant);
 			desactiverAnchorPane(box_demarrer);
 					
 			//il est le seul humain => utilisation ou pas de faire defaire
+			/*
 			if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
 				if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
 			    	activerBouton(bouton_defaire);
@@ -308,10 +309,10 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 				if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
 					activerBouton(bouton_faire);
 				}
-			}
+			}*/
 		} 
 		//sinon si le joueur est une IA
-		else if (partie.getJoueurActif() instanceof IA){
+		else { //if (partie.getJoueurActif() instanceof IA){
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
 			if(liste_Ecran.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
@@ -414,18 +415,18 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     /**
      * 
      * @param event
-     */
+     *//*
     @FXML private void refaireTours(MouseEvent event){
     	if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
 	    	this.liste_Ecran.moteur.partie.retablir();
 	    	miseAjour_tourDeJeu();
     	}
-    }
+    }*/
     
     /**
      * 
      * @param event
-     */
+     *//*
     @FXML private void demanderIndice(MouseEvent event){
     	//TODO retirer aura si pingouin selectionne 
     	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.moteur.demanderIndice();
@@ -438,7 +439,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 			selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
 		}
 		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
-    }
+    }*/
      
     /**
      * annule tous les mouvements en cours, comme si l'on reprenait le tour en cours à son début

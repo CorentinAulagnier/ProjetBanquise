@@ -16,7 +16,7 @@ public class PingouinClient {
 
     private static final int PORT = 9001;
     private static Moteur moteur;
-    private static int numClient;
+    public static int numClient;
     public static ObjectOutputStream out;
     
     public PingouinClient(Moteur m) {

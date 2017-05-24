@@ -5,16 +5,20 @@ import model.Moteur;
 public class Multijoueur {
 
 	public static PingouinClient pc;
+	public static Moteur m;
+	public static String[] args;
 	//public PingouinServer ps;
 	
-	public Multijoueur() {
+	public Multijoueur(Moteur mo, String[] a) {
+		m = mo;
+		args = a;
 		pc = null;
 		//ps = null;
 	}
 	
 	// Lancement : main("local", IP, NOM) OU main("Distant", IP, NOM)
 	
-	public static void main(Moteur m, String[] args) {
+	public static void run() {
 		
 		try {
 			if (args[0].equals("local")) {

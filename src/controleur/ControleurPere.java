@@ -3,6 +3,7 @@ package controleur;
 import vue.GestionnaireEcransFxml;
 import model.Moteur;
 import model.Partie;
+import reseau.PingouinClient;
 
 import java.io.File;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class ControleurPere {
 
 	final FileChooser fileChooserCharger = new FileChooser();
 	
+	public PingouinClient client = null;
 	
     /**
      * gere la modification de l'affichage d'un bouton lorsque la souris est relache

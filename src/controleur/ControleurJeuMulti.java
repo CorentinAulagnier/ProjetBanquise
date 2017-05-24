@@ -13,6 +13,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
+
+import com.sun.security.ntlm.Client;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
@@ -499,6 +502,8 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 			coord_pingouin_encours = new Coordonnees();
 		} 
     	miseAjour_tourDeJeu();
+    	
+    	client.majMoteurSurServeur();
     }
     
  

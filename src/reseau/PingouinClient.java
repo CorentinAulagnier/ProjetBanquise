@@ -23,9 +23,9 @@ public class PingouinClient {
     	this.moteur = m;
     }
     
-    public static void majMoteurSurServeur(Moteur m, ObjectOutputStream out) {
+    public static void majMoteurSurServeur() {
     	try {
-			out.writeObject(m);
+			out.writeObject(moteur);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

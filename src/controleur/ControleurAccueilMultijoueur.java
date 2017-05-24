@@ -64,7 +64,14 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     
 
     @FXML private void creerPartie(MouseEvent event){
+    	
+    	
+    	
+    	/*
     	nettoyerMenu(optionbox, roue);
+    	liste_Ecran.chargeEcran(model.Proprietes., model.Proprietes.);
+    	liste_Ecran.changeEcranCourant(model.Proprietes.);
+    	*/
     	System.out.println("creer partie");
     }
 
@@ -87,6 +94,12 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     		e.printStackTrace(System.err);
     	}
     	System.out.println("connexion");
+    	
+    	/*
+    	nettoyerMenu(optionbox, roue);
+    	liste_Ecran.chargeEcran(model.Proprietes., model.Proprietes.);
+    	liste_Ecran.changeEcranCourant(model.Proprietes.);
+    	*/
 
     }
     /****************************************/

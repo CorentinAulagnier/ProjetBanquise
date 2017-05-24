@@ -17,6 +17,7 @@ public class PingouinClient {
     private static final int PORT = 9001;
     private static Moteur moteur;
     private static int numClient;
+    public static ObjectOutputStream out;
     
     public PingouinClient(Moteur m) {
     	this.moteur = m;
@@ -60,7 +61,7 @@ public class PingouinClient {
 
     	
         ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out = new ObjectOutputStream(socket.getOutputStream());
 
         // Process all messages from server, according to the protocol.
         while (!moteur.phaseVictoire) {

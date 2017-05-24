@@ -1,23 +1,22 @@
 package reseau;
 
+import model.Moteur;
 
 public class Multijoueur {
 
-	// Lancement : main("CreeServer") OU main("ConnexionServer")
-	public static void main(String[] args) {
-		String[] s = new String[1];
-
+	// Lancement : main("local", IP, NOM) OU main("Distant", IP, NOM)
+	
+	public static void main(Moteur m, String[] args) {
+		
 		try {
-			if (args[0].equals("CreeServer")) {
-				new ExecServer().start();
-				s[0] = "local";
+			if (args[0].equals("local")) {
+				new ExecServer(m).start();
 
 			} else {
-				s[0] = "distant";
-
+				
 			}
 
-			PingouinClientConsole.main(s);
+			PingouinClient.main(args);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,12 +27,16 @@ public class Multijoueur {
 	
     private static class ExecServer extends Thread {
 
-        public ExecServer() {}
+    	Moteur mot;
+    	
+        public ExecServer(Moteur m) {
+        	this.mot = m;
+        }
 
         public void run() {
         	try {
         		while (true) {
-    				PingouinServerConsole.main(null);
+    				PingouinServer.main(mot);
         		}
 
 			} catch (Exception e) {

@@ -108,13 +108,13 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
 	        	client = new PingouinClient(liste_Ecran.moteur, args);
 	    		client.start();
-
+/*
 	    		while (true) {
 	    			synchronized (liste_Ecran.moteur) {
 		    			if (liste_Ecran.moteur != null) break;
 					}
 	    		}
-	    		
+	    		*/
 	    		
 	        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
 	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  

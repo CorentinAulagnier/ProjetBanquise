@@ -33,9 +33,6 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     @FXML private ImageView imageSon, imageMusique;
     @FXML AnchorPane optionbox;
     @FXML Button roue;
-    //@FXML StackPane pilejaune;
-   // @FXML Button droitjaune;
-    int indice = model.Proprietes.JOUEUR;;
 	
 /**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/
     
@@ -46,9 +43,6 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     /*************/
     Label NOM = new Label();
     /*************/
-    StackPane pileImage = new StackPane();
-    Button flecheDroiteImage = new Button();
-    Button flecheGaucheImage = new Button();
     Button[] flecheDroiteMode = new Button[4];
     Button[] flecheGaucheMode = new Button[4];
     @FXML private TextField nom1;
@@ -69,14 +63,11 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	/*MODE DE JEU ET IMAGE INITIALES*/
     	modeJeu[model.Proprietes.JAUNE]= model.Proprietes.JOUEUR;
- 		modeJeu[model.Proprietes.VERT]= model.Proprietes.JOUEUR;
- 		modeJeu[model.Proprietes.ROUGE]= model.Proprietes.JOUEUR;
- 		modeJeu[model.Proprietes.BLEU]= model.Proprietes.JOUEUR;
+ 		modeJeu[model.Proprietes.VERT]= model.Proprietes.CREVETTE;
+ 		modeJeu[model.Proprietes.ROUGE]= model.Proprietes.AUCUN;
+ 		modeJeu[model.Proprietes.BLEU]= model.Proprietes.AUCUN;
  		
  		image[model.Proprietes.JAUNE]=model.Proprietes.JOUEUR;
- 		image[model.Proprietes.VERT]=model.Proprietes.JOUEUR;
- 		image[model.Proprietes.ROUGE]=model.Proprietes.JOUEUR;
- 		image[model.Proprietes.BLEU]=model.Proprietes.JOUEUR;
  		
  		/*INITIALISATION DES PILES*/
     	
@@ -86,16 +77,6 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
         pileMode[model.Proprietes.BLEU]=name4;
         
         NOM = label1;
-        /*pileNom[model.Proprietes.JAUNE]=label1;
-    	pileNom[model.Proprietes.VERT]=label2;
-    	pileNom[model.Proprietes.ROUGE]=label3;
-        pileNom[model.Proprietes.BLEU]=label4;*/
-        
-        pileImage=pilejaune;
-
-       	flecheDroiteImage= droitjaune;
-
-		flecheGaucheImage = gauchejaune;
 		
 		flecheDroiteMode[model.Proprietes.VERT] = modevertdroit;
 		flecheDroiteMode[model.Proprietes.ROUGE] = moderougedroit;
@@ -130,20 +111,13 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     		}
     	}
     	
-    	int nbPingouins = 0;
+    	int nbPingouins = 6 - nbJoueurs;
     	    
-	    if (nbJoueurs == 2){
-	    	nbPingouins = 4 ;
-	    }else if(nbJoueurs == 3){
-	    	nbPingouins = 3;
-	    }else if(nbJoueurs == 4){
-	    	nbPingouins = 2;
-	    }  	
     	
 	    
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
     	
-    	for (int i = 0 ; i < 4 ; i++){
+    	for (int i = 0 ; i < nbJoueurs ; i++){
     		tableauDeJoueur[i] = creerJoueur(i,nbPingouins);
     	}
 	    
@@ -162,6 +136,11 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	nettoyerMenu(optionbox, roue);
     	
     	System.out.println(liste_Ecran.moteur.partie);
+    	
+    	
+    	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
+    	
+    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
     	/*
     	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	
@@ -173,26 +152,16 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     
     public Joueur creerJoueur(int couleur, int nbP){
     	String name = "";
+    	String path = "";
 
-    	if (couleur == 0 || !(modeJeu[couleur] == model.Proprietes.JOUEUR)) {
-        	int i = 0;
-        	while ((i<5)&&(name.equals(""))){
-        		if (pileNom[couleur].getChildren().get(i).isVisible()){
-        			if (pileNom[couleur].getChildren().get(i) instanceof Label){
-        				name = ((Label)pileNom[couleur].getChildren().get(i)).getText();
-        			}else if (pileNom[couleur].getChildren().get(i) instanceof TextField){
-        				name = ((TextField)pileNom[couleur].getChildren().get(i)).getText();
-        			}
-        		}
-        		i++;
-        	}	
+    	if (couleur == model.Proprietes.JAUNE) {
+    		name = nom1.getText();
+        	path = model.Proprietes.IMAGE_JOUEUR_PATH+image[couleur]+""+couleur+".png";
     	} else {
     		name = "";
+    		path = model.Proprietes.IMAGE_JOUEUR_PATH+modeJeu[couleur]+""+couleur+".png";
     	}
 
-    	String path = model.Proprietes.IMAGE_JOUEUR_PATH+image[couleur]+""+couleur+".png";
-				
-    	    	
     	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
     		return new Humain(name, nbP, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.CREVETTE){
@@ -254,11 +223,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     		selectMode(model.Proprietes.VERT,true);
     	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.VERT]){
     		selectMode(model.Proprietes.VERT,false);
-    	}/*else if ( ((Button) event.getTarget() ) ==  flecheDroiteMode[model.Proprietes.JAUNE]){
-    		selectMode(model.Proprietes.JAUNE,true);
-    	}else if ( ((Button) event.getTarget() ) ==  flecheGaucheMode[model.Proprietes.JAUNE]){
-    		selectMode(model.Proprietes.JAUNE,false);
-    	}*/
+    	}
     	//modeValide();
     }
     
@@ -269,8 +234,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
      */
     public void selectMode(int couleur, boolean direction){
     	modeJeu[couleur] = selectType(pileMode[couleur],modeJeu[couleur],direction);
-    	justOneVisible(pileNom[couleur], modeJeu[couleur]);
-		//justOneVisible(pileImage[couleur], modeJeu[couleur]);
+    	justOneVisible(pileMode[couleur], modeJeu[couleur]);
 		image[couleur]=modeJeu[couleur];
     }
     
@@ -309,15 +273,17 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     
     @FXML
     public void fleche(MouseEvent event){
-    	
+    	int indice = image[model.Proprietes.JAUNE];
     	pilejaune.getChildren().get(indice).setVisible(false);
     	if (((Button) event.getTarget() ) == droitjaune ){							// 0 1 2 3 4
     		indice = (indice+1)%5;
     		if (indice == 0){indice=1;}
+    		
     	}else{
     			indice= (indice+4)%5;
     			if (indice == 0){indice=4;}
     	}
+    	image[model.Proprietes.JAUNE]=indice;
     	pilejaune.getChildren().get(indice).setVisible(true);  	
     }
     

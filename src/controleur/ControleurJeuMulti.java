@@ -504,7 +504,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		} 
     	miseAjour_tourDeJeu();
     	//System.out.println("FinValiderTour");
-    	client.majMoteurSurServeur();
+    	client.majMoteurSurServeur(liste_Ecran.moteur);
     }
     
  

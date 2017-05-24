@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javafx.animation.Timeline;
 import model.*;
 
 
@@ -18,12 +19,10 @@ public class PingouinServer extends MoteurConsole{
     private static ObjectOutputStream writers[];
     private static int nbClients = 0;
     private static Moteur m;
-    private static boolean phaseNoms = true;
-    private static boolean partieCree = false;
-	private static int numPingouin = 0;
+    private static boolean phaseConnexion = true;
 	private static PrintStream so = System.out;
     
-    public static void main(String[] args) throws Exception {
+    public static void main(Moteur m) throws Exception {
         System.out.println("Pingouins's server is running.");
         ServerSocket listener = new ServerSocket(PORT);
         try {
@@ -53,7 +52,7 @@ public class PingouinServer extends MoteurConsole{
             try {
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in =  new ObjectInputStream(socket.getInputStream()) ;
-	            if(phaseNoms) {
+	            if(phaseConnexion) {
 	            	getNom(in,out);
 	            	envoyerMoteurAuxClients(m);
 	            } else {
@@ -65,37 +64,17 @@ public class PingouinServer extends MoteurConsole{
 	            /* ----- ATTENTE AUTRES JOUEURS ----- */
 	            while(true) {
 	            	synchronized (m) {
-		            	if(!phaseNoms && partieCree) break;
+		            	if(!phaseConnexion) break;
 					}
 
 	            }
-	                
+	            
+	            /* ----- PHASE PLACEMENT & DEPLACEMENT ----- */
                 while (true) {
                 	synchronized (m) {
 	                	if(!m.phaseVictoire) {
 							if (m.partie.joueurs[m.partie.joueurActif] instanceof IA) { // Tour de l'IA
-								if(m.phasePlacement) {
-									Coordonnees c = getPlacementPingouin(m.partie.joueurActif, numPingouin, m.partie);
-		                    		m.partie.setPlacementPingouin(c, m.partie.joueurActif, numPingouin);
-		                    		m.partie.verifierPingouinActif();
-									m.partie.majProchainJoueur();
-									if(m.partie.joueurActif == 0) {
-										numPingouin++;
-									}
-									if(numPingouin == NBPINGOUINS && m.partie.joueurActif == 0) {
-										m.phasePlacement = false;
-										m.phaseJeu = true;
-									}
-								} else if(m.phaseJeu) {
-			                		CoupleGenerique<Coordonnees, Coordonnees>  cc = m.partie.joueurs[m.partie.joueurActif].jouer(m.partie);
-			                		m.partie.deplacement(cc);
-			                    	m.partie.verifierPingouinActif();
-			                    	m.partie.majProchainJoueur();
-									if(m.partie.estPartieFini()) {
-										m.phaseJeu = false;
-										m.phaseVictoire = true;
-									}
-								}
+								m.faireJouerIAS(new Timeline());
 							} else if (m.partie.joueurActif == num) { 							
 			                    Object obj = in.readObject();
 			                    if (obj instanceof Moteur) {
@@ -104,9 +83,7 @@ public class PingouinServer extends MoteurConsole{
 			                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+m.partie.joueurs[num].nom);
 			                    }
 							}
-							
-							//maj partie chez tout les clients
-							envoyerMoteurAuxClients(m);	
+							envoyerMoteurAuxClients(m, num);	
 	                	} else {
 	                		break;
 	                	}
@@ -132,32 +109,32 @@ public class PingouinServer extends MoteurConsole{
             }
         }
         
+        /*
+         * Recupere le nom auprès du client et ajoute ce client à la liste des clients connectés
+         */
+        
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {
         		synchronized (m) {
-	            	if(nbClients==0) {
-	            		initGame(in, out);
-	            	}
-	                out.writeObject("SUBMITNAME");
+	                out.writeObject("SUBMITNAME "+String.valueOf(num));
 	                Object obj = in.readObject();
 	                if (obj instanceof String) {
-	                	name = (String)obj;
-	                    if (name == null) {
-	                        return;
-	                    }
-                    	num = nbClients;
-                    	m.partie.joueurs[num].nom = name;
-                        for(int i = 0; i<NBPINGOUINS;i++) {
-                        	m.partie.joueurs[num].myPingouins[i] = new Pingouin();
-                        }
-        	            nbClients++;
-        	            if(nbClients == m.partie.nbJoueurs || m.partie.joueurs[nbClients].getClass()==IA.class) {
-        	            	phaseNoms = false;
-        	            }
-		            }
+	                	name = ((String)obj).substring(0, 13); //limite la taille du nmo à 12 caractères
+	                } else {
+	                	name = "inconnu";
+	                }
+                	num = nbClients;
+                	m.partie.joueurs[num].nom = name;
+                    for(int i = 0; i<NBPINGOUINS;i++) {
+                    	m.partie.joueurs[num].myPingouins[i] = new Pingouin();
+                    }
+                    //Maj phaseConnexion
+    	            nbClients++;
+    	            if(nbClients == m.partie.nbJoueurs || m.partie.joueurs[nbClients].getClass()==IA.class) {
+    	            	phaseConnexion = false;
+    	            }
 
-		            writers[num] = out;
-		            
+		            writers[num] = out;		            
 		            so.println(m.partie.joueurs[num].nom + " vient de se connecter.");
         		}
         	} catch (Exception e) {
@@ -165,29 +142,26 @@ public class PingouinServer extends MoteurConsole{
         	}
         }
         
-        public void initGame(ObjectInputStream in, ObjectOutputStream out) {
-        	try {
-	            out.writeObject("INITGAME");
-                Object obj = in.readObject();
-                if(obj instanceof Partie) {
-                	m.partie = (Partie)obj;
-	            	NBPINGOUINS = m.partie.joueurs[0].nbPingouin;
-	            	writers = new ObjectOutputStream[m.partie.nbJoueurs];
-	            	partieCree = true;
-	            }
-        	} catch (Exception e){
-        		e.printStackTrace(so);
-        	}
-        }
+        /*
+         * Envois le moteur à tout les clients sauf au num
+         */
         
-        public void envoyerMoteurAuxClients(Moteur m) {
+        public void envoyerMoteurAuxClients(Moteur m, int num) {
         	try {
 	        	for(int i = 0; i<nbClients; i++) {
-	        		writers[i].writeObject(m);
+	        		if(i!=num) writers[i].writeObject(m);
 	        	}
         	}catch (Exception e) {
         		e.printStackTrace(System.err);
         	}
+        }
+        
+        /*
+         * Envois le moteur à tout les clients
+         */
+        
+        public void envoyerMoteurAuxClients(Moteur m) {
+        	envoyerMoteurAuxClients(m, -1);
         }
         
     }

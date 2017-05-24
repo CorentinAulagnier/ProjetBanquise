@@ -15,7 +15,7 @@ import model.*;
 public class PingouinClient extends Thread{
 
     private static final int PORT = 9001;
-    private static Moteur moteur;
+    public static Moteur moteur;
     public static int numClient;
     public static ObjectOutputStream out;
     public String[] args;

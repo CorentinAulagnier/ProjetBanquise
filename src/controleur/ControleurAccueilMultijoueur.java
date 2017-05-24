@@ -108,16 +108,15 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
 	    		liste_Ecran.client = new PingouinClient(liste_Ecran.moteur, args);
 	    		liste_Ecran.client.start();
-/*
-	    		while (true) {
-	    			synchronized (liste_Ecran.moteur) {
-		    			if (liste_Ecran.moteur != null) break;
-					}
-	    		}
-	    		*/
+	    		/*
+	    		while (liste_Ecran.moteur == null) {
+	    			liste_Ecran.moteur = liste_Ecran.client.moteur;
+	    		}*/
 	    		
+	    		/*
 	        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
-	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
+	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  */
+	    		//System.out.println(liste_Ecran.moteur.partie);
 	        	
 	        } else {
 	        	this.ip.setStyle("-fx-background-color: #DBB1B1;");

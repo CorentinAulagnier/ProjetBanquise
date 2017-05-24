@@ -22,8 +22,9 @@ public class PingouinServer extends MoteurConsole{
     private static boolean phaseConnexion = true;
 	private static PrintStream so = System.out;
     
-    public static void main(Moteur m) throws Exception {
+    public static void main(Moteur moteur) throws Exception {
         System.out.println("Pingouins's server is running.");
+        m = moteur;
         ServerSocket listener = new ServerSocket(PORT);
         try {
             while (true) {

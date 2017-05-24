@@ -120,10 +120,13 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
 	        	
 	        } else {
-				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
+	        	this.ip.setStyle("-fx-background-color: #DBB1B1;");
+	        	
 	        }
     	} catch(Exception e) {
-    		e.printStackTrace(System.err);
+        	this.ip.setStyle("-fx-background-color: #DBB1B1;");
+
+    		e.printStackTrace(System.out);
     	}
 
 

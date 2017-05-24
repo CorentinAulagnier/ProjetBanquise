@@ -268,10 +268,26 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     public void selectMode(int couleur, boolean direction){
     	modeJeu[couleur] = selectType(pileMode[couleur],modeJeu[couleur],direction);
     	justOneVisible(pileNom[couleur], modeJeu[couleur]);
-		justOneVisible(pileImage[couleur], modeJeu[couleur]);
+		//justOneVisible(pileImage[couleur], modeJeu[couleur]);
 		image[couleur]=modeJeu[couleur];
     }
     
+    /**
+     * 
+     * @param stck
+     * @param indice
+     * @param direction
+     * @return
+     */
+    public int selectType(StackPane stck, int indice, boolean direction){//false = gauche, true = droit	
+    	stck.getChildren().get(indice).setVisible(false);
+    	if (direction){	indice = (indice+1)%5;
+    	}else{			
+    		indice = (indice+4)%5;}
+    	stck.getChildren().get(indice).setVisible(true);
+    	return indice;
+    	
+    }
     /**
      * SELECTION D'UN MODE DE PERSONNAGE
      * @param stck

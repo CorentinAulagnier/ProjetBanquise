@@ -81,14 +81,13 @@ public class PingouinClient extends Thread{
 		}
 
         // Process all messages from server, according to the protocol.
-        while (!moteur.phaseVictoire) {
+        while (true) {
             Object obj;
 			try {
 				
 				obj = in.readObject();
 	            if(obj instanceof Moteur) {
 	            	moteur = (Moteur)obj;
-System.out.println(moteur.partie.toString2());
 	            	//refresh plateau
 	            } else if (obj instanceof String) {
 	            	String line = (String)obj;
@@ -112,6 +111,9 @@ System.out.println(moteur.partie.toString2());
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
+			if (moteur.phaseVictoire) {
+				break;
 			}
 		}
         try {

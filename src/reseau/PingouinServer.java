@@ -72,7 +72,7 @@ public class PingouinServer extends Thread{
                 in =  new ObjectInputStream(socket.getInputStream()) ;
 	            if(phaseConnexion) {
 	            	getNom(in,out);
-	            	envoyerMoteurAuxClients(m);
+	            	envoyerMoteurAuxClients(m.clone());
 	            } else {
 	            	out.writeObject("NOSLOT");
 	            	so.println("Tentative de connexion depuis "+socket.getRemoteSocketAddress().toString()+" impossible.\nCAUSE : Nombre maximum de joueurs atteint.");

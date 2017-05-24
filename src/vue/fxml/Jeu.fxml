@@ -29,7 +29,7 @@
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j1" layoutX="10.0" prefHeight="40.0" prefWidth="150.0" text="Joueur 1" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="nom_j1" layoutX="10.0" prefHeight="40.0" prefWidth="200.0" text="Joueur 1" textAlignment="CENTER" wrapText="true">
         <font>
           <Font name="Arial" size="18.0" fx:id="x2" />
         </font>
@@ -72,7 +72,7 @@
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j2" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="150.0" text="Joueur 2" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0">
+      <Label fx:id="nom_j2" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" text="Joueur 2" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font name="Arial" size="18.0" fx:id="x13" />
                </font>
@@ -123,7 +123,7 @@
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j3" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="150.0" text="Joueur 3" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
+      <Label fx:id="nom_j3" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" text="Joueur 3" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font name="Arial" size="18.0" fx:id="x10" />
                </font>
@@ -174,7 +174,7 @@
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j4" font="$x2" layoutX="10.0" layoutY="160.0" prefHeight="40.0" prefWidth="150.0" text="Joueur 4" textAlignment="CENTER" wrapText="true" />
+      <Label fx:id="nom_j4" font="$x2" layoutX="10.0" layoutY="160.0" prefHeight="40.0" prefWidth="200.0" text="Joueur 4" textAlignment="CENTER" wrapText="true" />
       <GridPane alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="80.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0">
         <children>
           <ImageView fitHeight="30.0" fitWidth="30.0">
@@ -213,15 +213,22 @@
       </AnchorPane>
       <AnchorPane fx:id="box_demarrer" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="15.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#lancerIA" prefHeight="45.0" prefWidth="150.0" text="Démarrer">
+            <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="150.0" layoutY="25.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#lancerIA" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/decor/j_lancer.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="box_tour_local" layoutX="175.0" layoutY="49.0" minHeight="75.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0">
          <children>
-      <Button fx:id="bouton_indice" layoutX="145.0" layoutY="20.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
+      <Button fx:id="bouton_indice" contentDisplay="GRAPHIC_ONLY" layoutX="145.0" layoutY="20.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
         <graphic>
           <ImageView fitHeight="45.0" fitWidth="150.0">
             <image>
@@ -233,7 +240,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
       </Button>
-      <Button fx:id="bouton_annuler" layoutX="40.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
+      <Button fx:id="bouton_annuler" contentDisplay="GRAPHIC_ONLY" layoutX="40.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="150.0">
                      <image>
@@ -245,7 +252,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
       </Button>
-      <Button fx:id="bouton_finTour" layoutX="250.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" textAlignment="CENTER">
+      <Button fx:id="bouton_finTour" contentDisplay="GRAPHIC_ONLY" layoutX="250.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="150.0">
                      <image>

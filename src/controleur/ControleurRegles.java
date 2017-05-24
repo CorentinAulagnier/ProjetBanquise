@@ -20,7 +20,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
 	@FXML private Button accueil, precedent, suivant;
 	@FXML private Text reglesTitre, reglesCorps;
 	@FXML private Circle cercle1, cercle2, cercle3, cercle4, cercle5;
-	@FXML private ImageView reglesImages;
+	@FXML private ImageView reglesImg;
 	
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -30,7 +30,7 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
     	pageRegles=0;
     	precedent.setVisible(false);
     	suivant.setVisible(true);
-    	reglesImages.setVisible(false);
+    	reglesImg.setVisible(false);
     	reglesTitre.setText(model.Proprietes.reglesTitres[pageRegles]);
     	reglesCorps.setText(model.Proprietes.reglesCorps[pageRegles]);
     	accueil.setStyle(model.Proprietes.STYLE_NORMAL);
@@ -88,15 +88,15 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
     	
     	switch(pageRegles){	//maj reglette petit point
     		case 0:	cercle1.setFill(Color.BLACK); cercle2.setFill(Color.TRANSPARENT);cercle3.setFill(Color.TRANSPARENT);cercle4.setFill(Color.TRANSPARENT);cercle5.setFill(Color.TRANSPARENT);
-    			reglesImages.setVisible(false);break;
+    		reglesImg.setVisible(false);break;
     		case 1:	cercle2.setFill(Color.BLACK); cercle1.setFill(Color.TRANSPARENT);cercle3.setFill(Color.TRANSPARENT);cercle4.setFill(Color.TRANSPARENT);cercle5.setFill(Color.TRANSPARENT);
-    			reglesImages.setVisible(false);break;
+    		reglesImg.setVisible(false);break;
     		case 2:	cercle3.setFill(Color.BLACK); cercle2.setFill(Color.TRANSPARENT);cercle1.setFill(Color.TRANSPARENT);cercle4.setFill(Color.TRANSPARENT);cercle5.setFill(Color.TRANSPARENT);
-    			reglesImages.setVisible(true);break;
+    		reglesImg.setVisible(true);break;
     		case 3:	cercle4.setFill(Color.BLACK); cercle2.setFill(Color.TRANSPARENT);cercle3.setFill(Color.TRANSPARENT);cercle1.setFill(Color.TRANSPARENT);cercle5.setFill(Color.TRANSPARENT);
-    			reglesImages.setVisible(false);break;
+    		reglesImg.setVisible(false);break;
     		case 4:	cercle5.setFill(Color.BLACK); cercle2.setFill(Color.TRANSPARENT);cercle3.setFill(Color.TRANSPARENT);cercle4.setFill(Color.TRANSPARENT);cercle1.setFill(Color.TRANSPARENT);
-    			reglesImages.setVisible(false);break;
+    		reglesImg.setVisible(false);break;
     	}
     }
     

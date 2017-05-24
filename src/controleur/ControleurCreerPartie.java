@@ -110,10 +110,9 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     			nbJoueurs++;
     		}
     	}
-    	
+
     	int nbPingouins = 6 - nbJoueurs;
-    	    
-    	
+
 	    
     	Joueur[] tableauDeJoueur = new Joueur[nbJoueurs];
     	

@@ -182,8 +182,8 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * @param noms tableau des noms des joueurs
      */
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Label[] noms){
-    	actif = new boolean[liste_Ecran.moteur.partie.joueurs.length][liste_Ecran.moteur.partie.joueurs[0].nbPingouin];
-    	for(int j=0 ; j < liste_Ecran.moteur.partie.joueurs.length ; j++){
+    	actif = new boolean[liste_Ecran.moteur.partie.nbJoueurs][liste_Ecran.moteur.partie.joueurs[0].nbPingouin];
+    	for(int j=0 ; j < liste_Ecran.moteur.partie.nbJoueurs ; j++){
     		activerAnchorPane(anchorPanes[j]);
     		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
     		

@@ -111,7 +111,7 @@ public class PingouinServer extends MoteurConsole{
         }
         
         /*
-         * Recupere le nom auprès du client et ajoute ce client à la liste des clients connectés
+         * Recupere le nom aupres du client et ajoute ce client a� la liste des clients connectes
          */
         
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
@@ -120,7 +120,7 @@ public class PingouinServer extends MoteurConsole{
 	                out.writeObject("SUBMITNAME "+String.valueOf(num));
 	                Object obj = in.readObject();
 	                if (obj instanceof String) {
-	                	name = ((String)obj).substring(0, 13); //limite la taille du nmo à 12 caractères
+	                	name = ((String)obj).substring(0, 13); //limite la taille du nom a 12 caractares
 	                } else {
 	                	name = "inconnu";
 	                }
@@ -144,7 +144,7 @@ public class PingouinServer extends MoteurConsole{
         }
         
         /*
-         * Envois le moteur à tout les clients sauf au num
+         * Envois le moteur a tout les clients sauf au num
          */
         
         public void envoyerMoteurAuxClients(Moteur m, int num) {
@@ -158,7 +158,7 @@ public class PingouinServer extends MoteurConsole{
         }
         
         /*
-         * Envois le moteur à tout les clients
+         * Envois le moteur a tout les clients
          */
         
         public void envoyerMoteurAuxClients(Moteur m) {

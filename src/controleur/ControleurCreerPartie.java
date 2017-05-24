@@ -124,7 +124,6 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	Partie p = new Partie(nbJoueurs);
     	p.joueurs = tableauDeJoueur;
-    	p.setHistorique();
     	
     	liste_Ecran.moteur = new Moteur(p);
 
@@ -134,7 +133,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 
     	nettoyerMenu(optionbox, roue);
     	
-    	System.out.println(liste_Ecran.moteur.partie);
+    	System.out.println(liste_Ecran.moteur.partie.toString2());
     	
     	
     	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
@@ -164,11 +163,11 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
     		return new Humain(name, nbP, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.CREVETTE){
-    		return new IA(name, nbP, 1 ,path, couleur);
+    		return new IA(name, nbP, 1,path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.EVE){
-    		return new IA(name, nbP, 2 ,path, couleur);
+    		return new IA(name, nbP, 2,path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.ORQUE){
-    		return new IA(name, nbP, 3 , path, couleur);
+    		return new IA(name, nbP, 3, path, couleur);
     	}else{
     		return null;
     	}

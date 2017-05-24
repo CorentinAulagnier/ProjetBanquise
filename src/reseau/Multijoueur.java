@@ -22,14 +22,18 @@ public class Multijoueur {
 		
 		try {
 			if (args[0].equals("local")) {
-				new ExecServer(m).start();
+				(new ExecServer(m)).start();
 
 			} else {
 				
 			}
-
+			
 			pc = new PingouinClient(m);
-			pc.main(args);
+			
+			ExecClient ec = new ExecClient(args, pc);
+			
+			ec.start();
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,7 +53,30 @@ public class Multijoueur {
         public void run() {
         	try {
         		while (true) {
-    				PingouinServer.main(mot);
+        			PingouinServer.main(mot);
+        		}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        }
+    }
+    
+    private static class ExecClient extends Thread {
+
+    	String[] args;
+    	PingouinClient pc;
+
+        public ExecClient(String[] s, PingouinClient p) {
+        	args = s;
+        	pc = p;
+
+        }
+
+        public void run() {
+        	try {
+        		while (true) {
+    				pc.main(args);
         		}
 
 			} catch (Exception e) {

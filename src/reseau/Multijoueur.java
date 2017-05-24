@@ -4,6 +4,14 @@ import model.Moteur;
 
 public class Multijoueur {
 
+	public static PingouinClient pc;
+	//public PingouinServer ps;
+	
+	public Multijoueur() {
+		pc = null;
+		//ps = null;
+	}
+	
 	// Lancement : main("local", IP, NOM) OU main("Distant", IP, NOM)
 	
 	public static void main(Moteur m, String[] args) {
@@ -16,7 +24,8 @@ public class Multijoueur {
 				
 			}
 
-			PingouinClient.main(args);
+			pc = new PingouinClient(m);
+			pc.main(args);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -28,9 +28,10 @@ public class PingouinClient extends Thread{
 	public static void main(String[] args) {
 	}
 	
-    public static void majMoteurSurServeur() {
+    public static void majMoteurSurServeur(Moteur m) {
     	try {
-			out.writeObject(moteur);
+			out.writeObject(m.clone());
+			moteur = m;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,6 +88,7 @@ public class PingouinClient extends Thread{
 				obj = in.readObject();
 	            if(obj instanceof Moteur) {
 	            	moteur = (Moteur)obj;
+System.out.println(moteur.partie.toString2());
 	            	//refresh plateau
 	            } else if (obj instanceof String) {
 	            	String line = (String)obj;

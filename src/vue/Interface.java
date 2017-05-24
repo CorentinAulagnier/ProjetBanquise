@@ -59,11 +59,10 @@ public class Interface extends Application {
 		gestionnaireEcransFXML.changeEcranCourant(model.Proprietes.ECRAN_ACCUEIL);
 		Group root = new Group();
 		root.getChildren().addAll(gestionnaireEcransFXML);
-
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.getIcons().add(new Image("ressources/decor/favicon.png"));
-		primaryStage.setTitle("Pinguouins");
+		primaryStage.setTitle("Pingouins");
 		primaryStage.setResizable(true);
 		primaryStage.sizeToScene();
 		

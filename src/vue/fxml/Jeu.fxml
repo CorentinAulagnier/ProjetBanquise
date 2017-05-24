@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,35 +13,27 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #64B5E4" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
-    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutY="0.0" pickOnBounds="true" style="">
-      <image>
-        <Image url="@../../ressources/decor/fond_jeu.jpg" />
-      </image>
-         <effect>
-            <GaussianBlur />
-         </effect>
-    </ImageView>
-  <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0">
     <children>
-            <ImageView fx:id="aura_j1" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+            <ImageView fx:id="aura_j1" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/AuraJaune.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="400.0" layoutX="-9.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+            <ImageView fitHeight="250.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j1" layoutY="1.0" prefHeight="40.0" prefWidth="150.0" text="Joueur 1" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="10.0">
+      <Label fx:id="nom_j1" layoutX="10.0" prefHeight="40.0" prefWidth="150.0" text="Joueur 1" textAlignment="CENTER" wrapText="true">
         <font>
           <Font name="Arial" size="18.0" fx:id="x2" />
         </font>
       </Label>
-      <GridPane fx:id="score_j1" layoutX="10.0" layoutY="40.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
+      <GridPane fx:id="score_j1" layoutX="10.0" layoutY="40.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0">
         <children>
           <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <image>
@@ -68,14 +59,14 @@
       </GridPane>
     </children>
   </AnchorPane>
-  <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" layoutX="650.0" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0">
     <children>
-            <ImageView fx:id="aura_j2" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+            <ImageView fx:id="aura_j2" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/AuraVerte.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
@@ -119,14 +110,14 @@
       </GridPane>
     </children>
   </AnchorPane>
-  <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+  <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" layoutX="650.0" layoutY="400.0" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0">
     <children>
-            <ImageView fx:id="aura_j3" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
+            <ImageView fx:id="aura_j3" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/AuraRouge.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-5.0">
                <image>
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
@@ -170,20 +161,20 @@
       </GridPane>
     </children>
   </AnchorPane>
-  <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+  <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" layoutY="400.0" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0">
     <children>
-            <ImageView fx:id="aura_j4" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" scaleX="-1.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="-5.0">
+            <ImageView fx:id="aura_j4" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" scaleX="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/AuraBleue.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleY="-1.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="-5.0">
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleY="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <image>
                   <Image url="@../../ressources/decor/Arc.png" />
                </image>
             </ImageView>
-      <Label fx:id="nom_j4" font="$x2" prefHeight="40.0" prefWidth="150.0" text="Joueur 4" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" />
-      <GridPane alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="90.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
+      <Label fx:id="nom_j4" font="$x2" layoutX="10.0" layoutY="160.0" prefHeight="40.0" prefWidth="150.0" text="Joueur 4" textAlignment="CENTER" wrapText="true" />
+      <GridPane alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="80.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="10.0">
         <children>
           <ImageView fitHeight="30.0" fitWidth="30.0">
             <image>
@@ -233,7 +224,7 @@
       </AnchorPane>
       <AnchorPane fx:id="box_tour_local" layoutX="175.0" layoutY="49.0" minHeight="75.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0">
          <children>
-      <Button fx:id="bouton_indice" layoutX="195.0" layoutY="15.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
+      <Button fx:id="bouton_indice" layoutX="145.0" layoutY="20.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#demanderIndice" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
         <graphic>
           <ImageView fitHeight="50.0" fitWidth="50.0">
             <image>
@@ -247,7 +238,7 @@
       </Button>
       <Button fx:id="bouton_annuler" layoutX="30.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
                <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="138.0">
+                  <ImageView fitHeight="45.0" fitWidth="150.0">
                      <image>
                         <Image url="@../../ressources/decor/j_annuler.png" />
                      </image>
@@ -709,7 +700,7 @@
 <ImageView fx:id="reglette_j4_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
 <ImageView fx:id="reglette_j4_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
 <ImageView fx:id="reglette_j4_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
-<Button fx:id="bouton_defaire" layoutX="72.0" layoutY="268.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
+<Button fx:id="bouton_defaire" layoutX="72.0" layoutY="268.0" minHeight="50.0" minWidth="45.0" mnemonicParsing="false" onMouseClicked="#annulerTours" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 45; -fx-background-color: transparent">
   <graphic>
     <ImageView fitHeight="50.0" fitWidth="50.0">
       <image>
@@ -741,9 +732,6 @@
          <font>
             <Font size="18.0" />
          </font>
-         <padding>
-            <Insets left="10.0" top="10.0" />
-         </padding>
       </Label>
   </children>
 </AnchorPane>

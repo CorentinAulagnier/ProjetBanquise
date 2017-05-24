@@ -51,25 +51,26 @@ public class Proprietes {
     
     public static final String[] reglesTitres = {
     		"Objectif",
-    		"Préparation de la partie",
-    		"Tour de jeu",
+    		"Phases de jeu",
+    		"Phases de jeu",
     		"Fin de tour",
     		"Fin de la partie"
     };
     
     public static final String[] reglesCorps = {
     		"Sur la banquise, les pingouins partent à la chasse au poisson en sautant d’un bloc de glace à l’autre.\n\n"
-    				+"Pour cela, les joueurs essaient d’attraper un maximum de poissons, tout en veillant à ne pas être bloqués ou isolés sur la banquise.",
-    		"Placement de la banquise :\nLa banquise est générée aléatoire- ment selon 8 lignes de blocs de glaces, (alternativement 7 et 8).\n"
-    				+"La répartition du nombre de poissons sur les blocs est aléatoire.\n\n"
-    				+"Placement des pingouins :\nChacun place, tour à tour, un de ses pingouins sur un bloc de glace innoccupé, ayant un seul poisson.\n\n"
-    				+"On continue jusqu’à ce que tous les pingouins soient placés.",
-    		"Durant son tour, un joueur peut déplacer un seul de ses pinguouins :\n\n"
-    				+"- en ligne droite,\n"
-    				+"- dans une des 6 directions qui entoure son bloc de glace,\n"
-    				+"- d’autant de cases que souhaité,\n"
-    				+"- sans franchir d’obstacle.\n\n"
+    				+"Pour cela, les joueurs essaient d’attraper un maximum de poissons, tout en veillant à ne pas être bloqués ou isolés sur la banquise.\n\n"
+    				+"Cette banquise est générée aléatoirement selon 8 lignes de blocs de glaces, (alternativement 7 et 8 blocs). "
+    				+"La répartition du nombre de poissons sur ces blocs est aléatoire.",
+    		"Dans un premier temps, chacun son tour, les joueurs placent un de leurs pingouins sur un bloc de glace innoccupé ayant un seul poisson. "
+    				+"Ils continuent jusqu’à ce que tous les pingouins soient placés.\n\n"
+    				+"Ensuite, chacun son tour, un joueur peut déplacer un seul de ses pinguouins :\n"
+    				+"\t- en ligne droite,\n"
+    				+"\t- dans une des 6 directions qui entoure son bloc de glace,\n"
+    				+"\t- d’autant de cases que souhaité,\n"
+    				+"\t- sans franchir d’obstacle.\n\n"
     				+"Un obstacle est soit une extrémité de la banquise, soit un trou dans la banquise, soit un bloc de glace occupé par un autre pingouin.\n",
+    		"",
     		"A la fin d'un tour, le joueur gagne le bloc de glace dont son pinguouin est parti ainsi que le nombre de poissons associés.\n\n"
     				+"Si l'un de ses pinguouins est isolé sur un bloc de glace entièrement entouré d'eau, le pingouin est retiré de la banquise. "
     				+"Le joueur gagne ce bloc de glace et les poissons associés.",

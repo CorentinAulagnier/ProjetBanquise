@@ -225,8 +225,8 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
 	    	//maj text tour de (temporaire) :
 	    	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-		    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin.");}
-		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin.");}
+		    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin");}
+		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
 	    	}
 	    	
 		    majActionsDisponibles();

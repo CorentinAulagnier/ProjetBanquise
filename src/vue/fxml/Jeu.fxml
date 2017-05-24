@@ -25,11 +25,6 @@
             <GaussianBlur />
          </effect>
     </ImageView>
-      <Label fx:id="text_tourDe" alignment="CENTER" layoutX="250.0" prefHeight="40.0" prefWidth="300.0" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
   <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
     <children>
             <ImageView fx:id="aura_j1" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="-5.0">
@@ -742,5 +737,13 @@
       <ImageView fx:id="avatar_j2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
       <ImageView fx:id="avatar_j3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
       <ImageView fx:id="avatar_j4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
+      <Label fx:id="text_tourDe" alignment="CENTER" layoutX="250.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #D0D3DC; -fx-border-width: 4; -fx-background-color: #F0F4FF;" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </Label>
   </children>
 </AnchorPane>

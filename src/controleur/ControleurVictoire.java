@@ -91,7 +91,7 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 	 }
 	 
 	 public void nettoyage(){
-		 for (int i = 1; i < 4 ; i++){
+		 for (int i = 0; i < 4 ; i++){
 		 winners.get(i).setVisible(false);
 		 noms.get(i).setVisible(false);
 		 poissons.get(i).setVisible(false);

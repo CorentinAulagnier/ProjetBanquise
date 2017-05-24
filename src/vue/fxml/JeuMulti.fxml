@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,17 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeuMulti">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7dc1e8;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeuMulti">
   <!-- TODO Add Nodes -->
   <children>
-    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutY="0.0" pickOnBounds="true" style="">
-      <image>
-        <Image url="@../../ressources/decor/fond_jeu.jpg" />
-      </image>
-         <effect>
-            <GaussianBlur />
-         </effect>
-    </ImageView>
   <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
     <children>
             <ImageView fx:id="aura_j1" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="-5.0">

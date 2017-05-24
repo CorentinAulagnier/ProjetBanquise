@@ -78,7 +78,6 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
     @FXML private void connexion(MouseEvent event){
     	try {
-	    	System.out.println("connexion");
 	    	String ip = this.ip.getText();
 	    	String name = this.name.getText();
 	    	PingouinClient client = new PingouinClient(liste_Ecran.moteur);
@@ -87,6 +86,8 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     	} catch(Exception e) {
     		e.printStackTrace(System.err);
     	}
+    	System.out.println("connexion");
+
     }
     /****************************************/
     /*		gestion menu roue				*/

@@ -1,4 +1,8 @@
 package model;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javafx.animation.Timeline;
@@ -50,6 +54,29 @@ public class Moteur implements Serializable {
 	
 	public void partieARafraichir() {
 		aRafraichir = true;
+	}
+
+/*******************************************************************************************************/
+
+	/**
+	 * Clone de le moteur actuel.
+	 * 
+	 * @return Renvoie le moteur clonne
+	 */
+	
+	@Override
+	public Moteur clone() {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(this);
+	
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			return (Moteur) ois.readObject();
+		} catch (Exception e){
+			return null;
+		}
 	}
 
 /****************************************************************************************/

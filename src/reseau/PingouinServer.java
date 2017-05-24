@@ -86,7 +86,7 @@ public class PingouinServer extends Thread{
 					}
 
 	            }
-	            
+
 	            /* ----- PHASE PLACEMENT & DEPLACEMENT ----- */
                 while (true) {
                 	synchronized (m) {
@@ -102,9 +102,9 @@ public class PingouinServer extends Thread{
 			                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+m.partie.joueurs[num].nom);
 			                    }
 							}
-	                    	System.out.println("HELLO\n"+m.partie);
+	                    	//System.out.println("HELLO\n"+m.partie.toString2());
 
-							envoyerMoteurAuxClients(m);	
+							envoyerMoteurAuxClients(m.clone());	
 	                	} else {
 	                		break;
 	                	}
@@ -154,6 +154,7 @@ public class PingouinServer extends Thread{
     	            nbClients++;
     	            if(nbClients == m.partie.nbJoueurs || m.partie.joueurs[nbClients].getClass()==IA.class) {
     	            	phaseConnexion = false;
+    	            	m.phasePlacement = true;
     	            }
 
 		            writers[num] = out;		            

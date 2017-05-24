@@ -126,6 +126,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	p.joueurs = tableauDeJoueur;
     	
     	liste_Ecran.moteur = new Moteur(p);
+    	liste_Ecran.moteur.phasePlacement = false;
 
     	String[] args = {"local", "", "COCO"};
     	

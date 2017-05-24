@@ -89,6 +89,9 @@ public class PingouinClient extends Thread{
 	            if(obj instanceof Moteur) {
 	            	moteur = (Moteur)obj;
 	            	//refresh plateau
+	    			if (moteur.phaseVictoire) {
+	    				break;
+	    			}
 	            } else if (obj instanceof String) {
 	            	String line = (String)obj;
 	                if (line.startsWith("SUBMITNAME")) {
@@ -111,9 +114,6 @@ public class PingouinClient extends Thread{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-			if (moteur.phaseVictoire) {
-				break;
 			}
 		}
         try {

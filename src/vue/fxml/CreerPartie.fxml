@@ -47,7 +47,7 @@
         </ImageView>
          </graphic>
     </Button>
-    <Button fx:id="connexion" cancelButton="false" contentDisplay="GRAPHIC_ONLY" defaultButton="false" disable="false" layoutX="489.0" layoutY="389.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="277.0" rotate="0.0" style="-fx-background-color:transparent;" text="Button">
+    <Button fx:id="connexion" cancelButton="false" contentDisplay="GRAPHIC_ONLY" defaultButton="false" disable="false" layoutX="489.0" layoutY="389.0" minHeight="43.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#lancerPartie" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="277.0" rotate="0.0" style="-fx-background-color:transparent;" text="Button">
       <graphic>
         <ImageView fitHeight="115.0" fitWidth="283.0" pickOnBounds="true" preserveRatio="true" rotate="0.0">
           <image>
@@ -141,7 +141,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <AnchorPane layoutX="40.0" layoutY="84.0" minHeight="240.0" minWidth="240.0" prefHeight="422.0" prefWidth="402.0">
+      <AnchorPane layoutX="40.0" layoutY="89.0" minHeight="240.0" minWidth="240.0" prefHeight="422.0" prefWidth="402.0">
          <children>
           <Circle fill="#ffffff5a" layoutX="202.0" layoutY="240.0" radius="162.0" stroke="#7a7373" strokeType="INSIDE" strokeWidth="7.2" />
             <Label fx:id="label1" alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="-2.0" prefHeight="77.0" prefWidth="240.0" text="Joueur 1" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" visible="false">
@@ -154,18 +154,6 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-          <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutY="191.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#fleche" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="40.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
-            <graphic>
-              <ImageView fitHeight="90.0" fitWidth="60.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
           <StackPane fx:id="pilejaune" blendMode="SRC_OVER" cache="false" layoutX="40.0" layoutY="79.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="324.0" prefWidth="325.0">
             <children>
               <ImageView fx:id="croixjaune" fitHeight="186.0" fitWidth="185.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER">
@@ -201,23 +189,11 @@
               </ImageView>
             </children>
           </StackPane>
-          <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="363.0" layoutY="192.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#fleche" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="40.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
-            <graphic>
-              <ImageView fitHeight="90.0" fitWidth="60.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="508.0" layoutY="95.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
          <children>
-          <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
+          <Button fx:id="modevertgauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                 <image>
@@ -258,7 +234,7 @@
                   </Label>
             </children>
           </StackPane>
-          <Button fx:id="modevertdroit" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
+          <Button fx:id="modevertdroit" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                 <image>
@@ -274,7 +250,7 @@
       </AnchorPane>
       <AnchorPane layoutX="508.0" layoutY="180.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
          <children>
-          <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
+          <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                 <image>
@@ -315,7 +291,7 @@
                   </Label>
             </children>
           </StackPane>
-          <Button fx:id="modebleudroit" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
+          <Button fx:id="modebleudroit" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                 <image>
@@ -330,7 +306,7 @@
          </children></AnchorPane>
       <AnchorPane layoutX="508.0" layoutY="265.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
          <children>
-          <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
+          <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                 <image>
@@ -374,7 +350,7 @@
                   </Label>
             </children>
           </StackPane>
-          <Button fx:id="moderougedroit" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
+          <Button fx:id="moderougedroit" contentDisplay="GRAPHIC_ONLY" layoutX="210.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                 <image>

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeuMulti">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutY="0.0" pickOnBounds="true" style="">
@@ -170,6 +170,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+            <ProgressIndicator layoutX="25.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" />
     </children>
   </AnchorPane>
   <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
@@ -209,6 +210,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+            <ProgressIndicator layoutX="94.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" />
     </children>
   </AnchorPane>
       <AnchorPane fx:id="box_tour_distant" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
@@ -699,7 +701,5 @@
             <Insets bottom="5.0" left="10.0" top="5.0" />
          </padding>
       </Label>
-      <ProgressIndicator layoutX="673.0" layoutY="530.0" prefHeight="40.0" prefWidth="40.0" />
-      <ProgressIndicator layoutX="93.0" layoutY="530.0" prefHeight="40.0" prefWidth="40.0" />
   </children>
 </AnchorPane>

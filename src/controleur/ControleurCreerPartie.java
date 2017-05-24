@@ -3,6 +3,8 @@ package controleur;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.java.swing.plaf.motif.resources.motif_sv;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +24,7 @@ import model.Moteur;
 import model.Partie;
 import reseau.Multijoueur;
 import reseau.PingouinClient;
+import reseau.PingouinServer;
 import vue.EcranCourant;
 import vue.GestionnaireEcransFxml;
 
@@ -124,13 +127,21 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	liste_Ecran.moteur = new Moteur(p);
 
-    	String[] args = {"Local", "", "COCO"};
+    	String[] args = {"local", "", "COCO"};
     	
-    	Multijoueur m = new Multijoueur(liste_Ecran.moteur, args);
+    	System.out.println("Client K");
+    	
+    	PingouinServer ps = new PingouinServer(liste_Ecran.moteur);
+    	ps.start();
 
+    	
+    	client = new PingouinClient(liste_Ecran.moteur, args);
+		client.start();
+
+    	
     	nettoyerMenu(optionbox, roue);
     	
-    	System.out.println(liste_Ecran.moteur.partie.toString2());
+    	//System.out.println(liste_Ecran.moteur.partie.toString2());
     	
     	
     	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);

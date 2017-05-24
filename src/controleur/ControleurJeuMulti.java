@@ -503,7 +503,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 			coord_pingouin_encours = new Coordonnees();
 		} 
     	miseAjour_tourDeJeu();
-    	
+    	//System.out.println("FinValiderTour");
     	client.majMoteurSurServeur();
     }
     

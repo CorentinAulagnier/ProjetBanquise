@@ -12,17 +12,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.*;
 
-public class PingouinClient {
+public class PingouinClient extends Thread{
 
     private static final int PORT = 9001;
     private static Moteur moteur;
     public static int numClient;
     public static ObjectOutputStream out;
+    public String[] args;
     
-    public PingouinClient(Moteur m) {
+    public PingouinClient(Moteur m, String[] a) {
+    	this.args = a;
     	this.moteur = m;
     }
     
+	public static void main(String[] args) {
+	}
+	
     public static void majMoteurSurServeur() {
     	try {
 			out.writeObject(moteur);
@@ -31,7 +36,8 @@ public class PingouinClient {
 		}
     }
 
-    public static void main(String[] args) throws Exception {
+   // public static void main(String[] args) throws Exception 
+    public void run() {
     	 // Make connection and initialize streams
     	Socket socket = null;
     	Pattern pattern;
@@ -40,7 +46,11 @@ public class PingouinClient {
     	Matcher matchAddr = null;
     	
     	if (args[0].equals("local")) {
-        	socket = new Socket(args[1], PORT);
+        	try {
+				socket = new Socket(args[1], PORT);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         	
     	} else {		//(args[0].equals("distant"))
         	while (true) {
@@ -48,25 +58,32 @@ public class PingouinClient {
     		        String serverAddress = args[1];        		                                         
     		        matchAddr = pattern.matcher(serverAddress);		        		                                         
     		        if (matchAddr.matches() || serverAddress.equals("")) {
-    		        	socket = new Socket(serverAddress, PORT);
+							socket = new Socket(serverAddress, PORT);
     		        	break;
     		        } else {
     					System.out.println("Connexion impossible. Réessayer avec une IP valide.");
     		        }
-    	    	} catch (ConnectException | UnknownHostException e) {
+    	    	} catch (Exception e) {
     				System.out.println("Connexion impossible. Réessayer avec une IP valide.");
     			}
         	}
     	}
 
     	
-        ObjectInputStream in =  new ObjectInputStream(socket.getInputStream()) ;
-        out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = null;
+		try {
+			in = new ObjectInputStream(socket.getInputStream());
+	        out = new ObjectOutputStream(socket.getOutputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         // Process all messages from server, according to the protocol.
         while (!moteur.phaseVictoire) {
             Object obj;
 			try {
+				
 				obj = in.readObject();
 	            if(obj instanceof Moteur) {
 	            	moteur = (Moteur)obj;
@@ -84,22 +101,23 @@ public class PingouinClient {
 	            	System.out.println("Impossible de récupérer le type de l'objet.");
 	            }
 	            
-			}  catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (EOFException e) {
+			} catch (Exception e) {
 				System.out.println("Vous avez été déconnecté du serveur. Relancez l'application pour réessayer.");
-				socket.close();
 				System.exit(0);
+				try {
+					socket.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-
-        }
-        socket.close();
-    }
-
-
-    
-
-	
+		}
+        try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

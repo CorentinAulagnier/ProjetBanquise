@@ -1,9 +1,14 @@
 package model;
+import java.io.Serializable;
+
 import javafx.animation.Timeline;
 
 
-public class Moteur {
+public class Moteur implements Serializable {
     
+	private static final long serialVersionUID = 1L;
+
+	
 	public Partie partie;
 	public boolean phaseJeu, phasePlacement, phaseVictoire;
 	public boolean aRafraichir, IAProchainJoueur;
@@ -59,7 +64,7 @@ public class Moteur {
 	public void placement(Coordonnees c) {
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
 		
-/*************/
+/*************
 System.out.println("Placement en "+c);
 System.out.println(partie);
 /*************/
@@ -86,7 +91,7 @@ System.out.println(partie);
 	public void deplacement(CoupleGenerique<Coordonnees, Coordonnees> cc) {
 		partie.deplacement(cc);
 		
-/*************/
+/*************
 System.out.println("Deplacement en "+cc);
 System.out.println(partie);
 /*************/

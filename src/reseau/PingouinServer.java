@@ -11,27 +11,44 @@ import javafx.animation.Timeline;
 import model.*;
 
 
-public class PingouinServer extends MoteurConsole{
+public class PingouinServer extends Thread{
 
 
     private static final int PORT = 9001;
     private static int NBPINGOUINS;
-    private static ObjectOutputStream writers[];
+    private static ObjectOutputStream writers[] = new ObjectOutputStream[4];
     private static int nbClients = 0;
     private static Moteur m;
     private static boolean phaseConnexion = true;
 	private static PrintStream so = System.out;
     
-    public static void main(Moteur moteur) throws Exception {
+	
+	public static void main(String[] args) {
+	}
+	
+	public PingouinServer(Moteur mot) {
+		this.m= mot;
+	}
+	
+    public void run()  {
         System.out.println("Pingouins's server is running.");
-        m = moteur;
-        ServerSocket listener = new ServerSocket(PORT);
+        ServerSocket listener = null;
+
         try {
+			listener = new ServerSocket(PORT);
             while (true) {
                 new Handler(listener.accept()).start();
             }
-        } finally {
-            listener.close();
+        } catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				listener.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
             System.out.println("Pingouins's server stopped.");
         }
     }
@@ -80,11 +97,14 @@ public class PingouinServer extends MoteurConsole{
 			                    Object obj = in.readObject();
 			                    if (obj instanceof Moteur) {
 			                    	m = (Moteur)obj;
+
 			                    } else {
 			                    	so.println("Phase placement, impossible de lire les coordonnées envoyées par "+m.partie.joueurs[num].nom);
 			                    }
 							}
-							envoyerMoteurAuxClients(m, num);	
+	                    	System.out.println("HELLO\n"+m.partie);
+
+							envoyerMoteurAuxClients(m);	
 	                	} else {
 	                		break;
 	                	}
@@ -111,7 +131,7 @@ public class PingouinServer extends MoteurConsole{
         }
         
         /*
-         * Recupere le nom aupres du client et ajoute ce client a� la liste des clients connectes
+         * Recupere le nom aupres du client et ajoute ce client a� la liste des clients connectes
          */
         
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
@@ -120,7 +140,8 @@ public class PingouinServer extends MoteurConsole{
 	                out.writeObject("SUBMITNAME "+String.valueOf(num));
 	                Object obj = in.readObject();
 	                if (obj instanceof String) {
-	                	name = ((String)obj).substring(0, 13); //limite la taille du nom a 12 caractares
+	                	name = ((String)obj);
+	                	if (name.length() >= 13) name.substring(0, 13); //limite la taille du nom a 12 caractares
 	                } else {
 	                	name = "inconnu";
 	                }

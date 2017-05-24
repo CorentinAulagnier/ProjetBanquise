@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView fx:id="iceberg" fitHeight="600.0" fitWidth="800.0" layoutY="0.0" pickOnBounds="true" style="">
+      <image>
+        <Image url="@../../ressources/decor/fond_jeu.jpg" />
+      </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+    </ImageView>
+  <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <children>
+            <ImageView fx:id="aura_j1" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/AuraJaune.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="250.0" fitWidth="400.0" layoutX="-9.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/Arc.png" />
+               </image>
+            </ImageView>
+      <Label fx:id="nom_j1" layoutY="1.0" prefHeight="40.0" prefWidth="150.0" text="Joueur 1" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="10.0">
+        <font>
+          <Font name="Arial" size="18.0" fx:id="x2" />
+        </font>
+      </Label>
+      <GridPane fx:id="score_j1" layoutX="10.0" layoutY="40.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
+        <children>
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <image>
+              <Image url="@../../ressources/decor/j_tuile.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_poissons_j1" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <image>
+              <Image url="@../../ressources/decor/j_poisson.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_tuiles_j1" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        </children>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+    </children>
+  </AnchorPane>
+  <AnchorPane id="BoiteJoueur2" fx:id="anchorPane_j2" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <children>
+            <ImageView fx:id="aura_j2" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/AuraVerte.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/Arc.png" />
+               </image>
+            </ImageView>
+      <Label fx:id="nom_j2" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="150.0" text="Joueur 2" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="10.0">
+               <font>
+                  <Font name="Arial" size="18.0" fx:id="x13" />
+               </font>
+            </Label>
+      <GridPane fx:id="score_j2" layoutX="60.0" layoutY="40.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
+        <children>
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <image>
+              <Image url="@../../ressources/decor/j_tuile.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_poissons_j2" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="18.0" fx:id="x14" />
+                     </font>
+                  </Label>
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <image>
+              <Image url="@../../ressources/decor/j_poisson.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_tuiles_j2" alignment="CENTER" contentDisplay="CENTER" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="18.0" fx:id="x15" />
+                     </font>
+                  </Label>
+        </children>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+            <ProgressIndicator layoutX="24.0" layoutY="40.0" prefHeight="40.0" prefWidth="40.0" />
+    </children>
+  </AnchorPane>
+  <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <children>
+            <ImageView fx:id="aura_j3" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/AuraRouge.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/Arc.png" />
+               </image>
+            </ImageView>
+      <Label fx:id="nom_j3" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="150.0" text="Joueur 3" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
+               <font>
+                  <Font name="Arial" size="18.0" fx:id="x10" />
+               </font>
+            </Label>
+      <GridPane layoutX="60.0" layoutY="90.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
+        <children>
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <image>
+              <Image url="@../../ressources/decor/j_tuile.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_tuiles_j3" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="18.0" fx:id="x11" />
+                     </font>
+                  </Label>
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <image>
+              <Image url="@../../ressources/decor/j_poisson.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_poissons_j3" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="18.0" fx:id="x12" />
+                     </font>
+                  </Label>
+        </children>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+    </children>
+  </AnchorPane>
+  <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+    <children>
+            <ImageView fx:id="aura_j4" fitHeight="400.0" fitWidth="600.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" scaleX="-1.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/AuraBleue.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleY="-1.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="-5.0">
+               <image>
+                  <Image url="@../../ressources/decor/Arc.png" />
+               </image>
+            </ImageView>
+      <Label fx:id="nom_j4" font="$x2" prefHeight="40.0" prefWidth="150.0" text="Joueur 4" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" />
+      <GridPane alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="90.0" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="80.0">
+        <children>
+          <ImageView fitHeight="30.0" fitWidth="30.0">
+            <image>
+              <Image url="@../../ressources/decor/j_tuile.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_tuiles_j4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+          <ImageView fitHeight="30.0" fitWidth="30.0" GridPane.rowIndex="1">
+            <image>
+              <Image url="@../../ressources/decor/j_poisson.png" />
+            </image>
+          </ImageView>
+          <Label fx:id="score_poissons_j4" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="30.0" prefWidth="30.0" text="0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        </children>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+    </children>
+  </AnchorPane>
+      <AnchorPane fx:id="box_tour_distant" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
+         <children>
+            <Label fx:id="text_attenteJoueur" layoutX="120.0" layoutY="30.0" minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="35.0" layoutY="20.0">
+               <image>
+                  <Image url="@../../ressources/decor/sablier.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="box_demarrer" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="15.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#lancerIA" prefHeight="45.0" prefWidth="150.0" text="Démarrer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="box_tour_local" layoutX="175.0" layoutY="49.0" minHeight="75.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0">
+         <children>
+      <Button fx:id="bouton_annuler" layoutX="30.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#reinitiailiserTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="138.0">
+                     <image>
+                        <Image url="@../../ressources/decor/j_annuler.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+      </Button>
+      <Button fx:id="bouton_finTour" layoutX="250.0" layoutY="400.0" maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#validerTour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: transparent" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="150.0">
+                     <image>
+                        <Image url="@../../ressources/decor/j_findetour.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+      </Button>
+         </children>
+      </AnchorPane>
+  <AnchorPane fx:id="anchorBanquise" layoutX="140.0" layoutY="140.0" maxHeight="272.0" maxWidth="512.0" minHeight="272.0" minWidth="512.0" onMouseClicked="#anchorClick" prefHeight="272.0" prefWidth="512.0" style="-fx-background-color: transparent; -fx-border-width: 5;">
+    <children>
+      <ImageView fx:id="t11" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t12" fitHeight="48.0" fitWidth="64.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t13" fitHeight="48.0" fitWidth="64.0" layoutX="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t14" fitHeight="48.0" fitWidth="64.0" layoutX="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t15" fitHeight="48.0" fitWidth="64.0" layoutX="288.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t16" fitHeight="48.0" fitWidth="64.0" layoutX="352.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t17" fitHeight="48.0" fitWidth="64.0" layoutX="416.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t21" fitHeight="48.0" fitWidth="64.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t22" fitHeight="48.0" fitWidth="64.0" layoutX="64.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t23" fitHeight="48.0" fitWidth="64.0" layoutX="128.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t24" fitHeight="48.0" fitWidth="64.0" layoutX="192.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t25" fitHeight="48.0" fitWidth="64.0" layoutX="256.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t26" fitHeight="48.0" fitWidth="64.0" layoutX="320.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t27" fitHeight="48.0" fitWidth="64.0" layoutX="384.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t28" fitHeight="48.0" fitWidth="64.0" layoutX="448.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t31" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t32" fitHeight="48.0" fitWidth="64.0" layoutX="96.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t33" fitHeight="48.0" fitWidth="64.0" layoutX="160.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t34" fitHeight="48.0" fitWidth="64.0" layoutX="224.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t35" fitHeight="48.0" fitWidth="64.0" layoutX="288.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t36" fitHeight="48.0" fitWidth="64.0" layoutX="352.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t37" fitHeight="48.0" fitWidth="64.0" layoutX="416.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t41" fitHeight="48.0" fitWidth="64.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t42" fitHeight="48.0" fitWidth="64.0" layoutX="64.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t43" fitHeight="48.0" fitWidth="64.0" layoutX="128.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t44" fitHeight="48.0" fitWidth="64.0" layoutX="192.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView id="t82" fx:id="t45" fitHeight="48.0" fitWidth="64.0" layoutX="256.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView id="t82" fx:id="t46" fitHeight="48.0" fitWidth="64.0" layoutX="320.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t47" fitHeight="48.0" fitWidth="64.0" layoutX="384.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t48" fitHeight="48.0" fitWidth="64.0" layoutX="448.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t51" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t52" fitHeight="48.0" fitWidth="64.0" layoutX="96.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t53" fitHeight="48.0" fitWidth="64.0" layoutX="160.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t54" fitHeight="48.0" fitWidth="64.0" layoutX="224.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t55" fitHeight="48.0" fitWidth="64.0" layoutX="288.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t56" fitHeight="48.0" fitWidth="64.0" layoutX="352.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t57" fitHeight="48.0" fitWidth="64.0" layoutX="416.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t61" fitHeight="48.0" fitWidth="64.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t62" fitHeight="48.0" fitWidth="64.0" layoutX="64.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t63" fitHeight="48.0" fitWidth="64.0" layoutX="128.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t64" fitHeight="48.0" fitWidth="64.0" layoutX="192.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t65" fitHeight="48.0" fitWidth="64.0" layoutX="256.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t66" fitHeight="48.0" fitWidth="64.0" layoutX="320.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t67" fitHeight="48.0" fitWidth="64.0" layoutX="384.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t68" fitHeight="48.0" fitWidth="64.0" layoutX="448.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t71" fitHeight="48.0" fitWidth="64.0" layoutX="32.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t72" fitHeight="48.0" fitWidth="64.0" layoutX="96.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t73" fitHeight="48.0" fitWidth="64.0" layoutX="160.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t74" fitHeight="48.0" fitWidth="64.0" layoutX="224.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t75" fitHeight="48.0" fitWidth="64.0" layoutX="288.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t76" fitHeight="48.0" fitWidth="64.0" layoutX="352.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t77" fitHeight="48.0" fitWidth="64.0" layoutX="416.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t81" fitHeight="48.0" fitWidth="64.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t82" fitHeight="48.0" fitWidth="64.0" layoutX="64.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t83" fitHeight="48.0" fitWidth="64.0" layoutX="128.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t84" fitHeight="48.0" fitWidth="64.0" layoutX="192.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t85" fitHeight="48.0" fitWidth="64.0" layoutX="256.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t86" fitHeight="48.0" fitWidth="64.0" layoutX="320.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t87" fitHeight="48.0" fitWidth="64.0" layoutX="384.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="t88" fitHeight="48.0" fitWidth="64.0" layoutX="448.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../ressources/decor/j_tuilettes.png" />
+        </image>
+      </ImageView>
+    </children>
+  </AnchorPane>
+    <AnchorPane fx:id="optionbox" disable="true" layoutX="218.0" layoutY="523.0" maxHeight="85.0" maxWidth="354.0" minHeight="85.0" minWidth="354.0" opacity="0.0" prefHeight="85.0" prefWidth="354.0" visible="true">
+      <children>
+        <ImageView id="bckoption" fitHeight="67.0" fitWidth="307.0" focusTraversable="false" layoutX="47.0" layoutY="0.0" opacity="1.0" pickOnBounds="true" preserveRatio="false" visible="true">
+          <image>
+            <Image url="@../../ressources/decor/r_option.png" />
+          </image>
+        </ImageView>
+        <HBox id="optionbox" alignment="CENTER" layoutX="62.0" prefHeight="67.0" prefWidth="287.0" style="-fx-background-color: transparent" visible="true">
+          <children>
+          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererMusique" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+            <graphic>
+              <ImageView fx:id="imageMusique" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image url="@../../ressources/decor/r_music-on.png" />
+                </image>
+              </ImageView>
+            </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+          </Button>
+          <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#gererSon" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+            <graphic>
+              <ImageView fx:id="imageSon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image url="@../../ressources/decor/r_son-on.png" />
+                </image>
+              </ImageView>
+            </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+          </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageRegle" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_aide.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets left="40.0" />
+              </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#ouvrirPageAccueil" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_igloo.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+            </Button>
+            <Button contentDisplay="GRAPHIC_ONLY" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#quitter" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent" text="Button">
+              <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../ressources/decor/r_quitte.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <Button fx:id="roue" contentDisplay="GRAPHIC_ONLY" layoutX="360.0" layoutY="519.0" minWidth="55.0" mnemonicParsing="false" onMouseClicked="#boutonOption" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent" text="Button">
+      <graphic>
+        <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0" translateX="0.0" x="0.0">
+          <image>
+            <Image url="@../../ressources/decor/r_parametres.png" />
+          </image>
+        </ImageView>
+      </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+    </Button>
+<ImageView fx:id="reglette_j1_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j1_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j1_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j1_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+<ImageView fx:id="reglette_j2_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
+<ImageView fx:id="reglette_j2_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
+<ImageView fx:id="reglette_j2_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
+<ImageView fx:id="reglette_j2_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
+<ImageView fx:id="reglette_j3_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
+<ImageView fx:id="reglette_j3_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
+<ImageView fx:id="reglette_j3_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
+<ImageView fx:id="reglette_j3_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
+<ImageView fx:id="reglette_j4_1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
+<ImageView fx:id="reglette_j4_2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
+<ImageView fx:id="reglette_j4_3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
+<ImageView fx:id="reglette_j4_4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
+      <ImageView fx:id="avatar_j1" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="40.0" />
+      <ImageView fx:id="avatar_j2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
+      <ImageView fx:id="avatar_j3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
+      <ImageView fx:id="avatar_j4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
+      <Label fx:id="text_tourDe" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #D0D3DC; -fx-border-width: 4; -fx-background-color: #F0F4FF;" text="En attente des Joueurs..." textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </padding>
+      </Label>
+      <ProgressIndicator layoutX="673.0" layoutY="530.0" prefHeight="40.0" prefWidth="40.0" />
+      <ProgressIndicator layoutX="93.0" layoutY="530.0" prefHeight="40.0" prefWidth="40.0" />
+  </children>
+</AnchorPane>

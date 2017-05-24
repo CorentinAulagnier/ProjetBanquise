@@ -231,27 +231,27 @@
           </Button>
           <StackPane fx:id="name2" layoutX="40.0" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" style="-fx-border-color: #7b7474;">
             <children>
-              <Label id="Aucun2" fx:id="aucun2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Aucun" textAlignment="CENTER" textFill="#035295" visible="false">
+              <Label id="Aucun2" fx:id="aucun2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Aucun" textAlignment="CENTER" textFill="#006e00" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x15" />
                      </font>
                   </Label>
-              <Label id="Joueur2" fx:id="joueur2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Joueur" textAlignment="CENTER" textFill="#035295" visible="false">
+              <Label id="Joueur2" fx:id="joueur2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Joueur" textAlignment="CENTER" textFill="#006e00" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x16" />
                      </font>
                   </Label>
-              <Label id="Iafacile2" fx:id="iafacile2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Facile" textAlignment="CENTER" textFill="#035295" visible="true">
+              <Label id="Iafacile2" fx:id="iafacile2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Facile" textAlignment="CENTER" textFill="#006e00" visible="true">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-              <Label id="Iamoyen2" fx:id="iamoyen2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Moyen" textAlignment="CENTER" textFill="#035295" visible="false">
+              <Label id="Iamoyen2" fx:id="iamoyen2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Moyen" textAlignment="CENTER" textFill="#006e00" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x17" />
                      </font>
                   </Label>
-              <Label id="Iadifficile2" fx:id="iadifficile2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Difficile" textAlignment="CENTER" textFill="#035295" visible="false">
+              <Label id="Iadifficile2" fx:id="iadifficile2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Difficile" textAlignment="CENTER" textFill="#006e00" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x18" />
                      </font>
@@ -312,27 +312,27 @@
           </Button>
           <StackPane fx:id="name4" layoutX="40.0" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" style="-fx-border-color: #7b7474;" visible="true">
             <children>
-              <Label id="Aucun4" fx:id="aucun4" alignment="CENTER" text="Aucun" textFill="#006e00" visible="true">
+              <Label id="Aucun4" fx:id="aucun4" alignment="CENTER" text="Aucun" textFill="#035295" visible="true">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-              <Label id="Joueur4" fx:id="joeur4" alignment="CENTER" text="Joueur" textFill="#006e00" visible="false">
+              <Label id="Joueur4" fx:id="joeur4" alignment="CENTER" text="Joueur" textFill="#035295" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x23" />
                      </font>
                   </Label>
-              <Label id="Iafacile4" fx:id="iafacile4" alignment="CENTER" text="IA Facile" textFill="#006e00" visible="false">
+              <Label id="Iafacile4" fx:id="iafacile4" alignment="CENTER" text="IA Facile" textFill="#035295" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x24" />
                      </font>
                   </Label>
-              <Label id="Iamoyen4" fx:id="iamoyen4" alignment="CENTER" text="IA Moyen" textFill="#006e00" visible="false">
+              <Label id="Iamoyen4" fx:id="iamoyen4" alignment="CENTER" text="IA Moyen" textFill="#035295" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x25" />
                      </font>
                   </Label>
-              <Label id="Iadifficile4" fx:id="iadifficile4" alignment="CENTER" text="IA Difficile" textFill="#006e00" visible="false">
+              <Label id="Iadifficile4" fx:id="iadifficile4" alignment="CENTER" text="IA Difficile" textFill="#035295" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x26" />
                      </font>
@@ -460,20 +460,5 @@
           </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="548.0" layoutY="71.0" prefHeight="27.0" prefWidth="100.0" text="En Attente">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="548.0" layoutY="153.0" prefHeight="27.0" prefWidth="100.0" text="En Attente">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="545.0" layoutY="238.0" prefHeight="27.0" prefWidth="100.0" text="En Attente">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
   </children>
 </AnchorPane>

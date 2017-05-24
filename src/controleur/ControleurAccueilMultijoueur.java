@@ -65,7 +65,10 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 
     @FXML private void creerPartie(MouseEvent event){
     	
+
+    	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_CREATION, model.Proprietes.ECRAN_CREATION_FXML);
     	
+    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_CREATION);  
     	
     	/*
     	nettoyerMenu(optionbox, roue);

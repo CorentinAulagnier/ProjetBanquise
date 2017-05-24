@@ -525,7 +525,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		coord_pingouin_encours = new Coordonnees();	
 		Coordonnees indicesBanquise = getXY(event.getX(), event.getY());
 		
-		if ((partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
+		if ( partie.joueurActif == client.numClient && (partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			
 			if (liste_Ecran.moteur.phasePlacement) {
 				

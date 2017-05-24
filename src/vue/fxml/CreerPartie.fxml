@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="fenetre" minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurModeJeu">
+<AnchorPane fx:id="fenetre" minHeight="600.0" opacity="1.0" prefHeight="600.0" prefWidth="792.5234375" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurCreerPartie">
   <!-- TODO Add Nodes -->
   <children>
     <ImageView id="" fx:id="background" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" style="">
@@ -154,7 +154,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-          <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutY="191.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="40.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
+          <Button fx:id="gauchejaune" contentDisplay="GRAPHIC_ONLY" layoutY="191.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#fleche" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="40.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
             <graphic>
               <ImageView fitHeight="90.0" fitWidth="60.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -201,7 +201,7 @@
               </ImageView>
             </children>
           </StackPane>
-          <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="363.0" layoutY="192.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="40.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
+          <Button fx:id="droitjaune" contentDisplay="GRAPHIC_ONLY" layoutX="363.0" layoutY="192.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#fleche" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="98.0" prefWidth="40.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button">
             <graphic>
               <ImageView fitHeight="90.0" fitWidth="60.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                 <image>
@@ -270,30 +270,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
           </Button>
-          <Button fx:id="gauchevert" contentDisplay="GRAPHIC_ONLY" disable="false" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheImageEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
-            <graphic>
-              <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
-          <Button fx:id="droitvert" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheImageEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
-            <graphic>
-              <ImageView fitHeight="45.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="508.0" layoutY="180.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
@@ -344,30 +320,6 @@
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                 <image>
                   <Image url="@../../ressources/decor/select.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
-          <Button fx:id="gauchebleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" opacity="1.0" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
-            <graphic>
-              <ImageView fitHeight="45.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
-          <Button fx:id="droitbleu" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" opacity="1.0" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
-            <graphic>
-              <ImageView fitHeight="45.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
                 </image>
               </ImageView>
             </graphic>
@@ -427,30 +379,6 @@
               <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                 <image>
                   <Image url="@../../ressources/decor/select.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
-          <Button fx:id="gaucherouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" opacity="1.0" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
-            <graphic>
-              <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
-                </image>
-              </ImageView>
-            </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-          </Button>
-          <Button fx:id="droitrouge" contentDisplay="GRAPHIC_ONLY" disable="false" layoutX="210.0" layoutY="120.0" maxWidth="-1.0" minHeight="45.0" minWidth="30.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" opacity="1.0" prefHeight="45.0" prefWidth="30.0" style="-fx-background-color: transparent;&#10;-fx-background-radius: 100 100 100 100;" text="Button" visible="false">
-            <graphic>
-              <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                <image>
-                  <Image url="@../../ressources/decor/selectImg.png" />
                 </image>
               </ImageView>
             </graphic>

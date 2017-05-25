@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7dc1e8;" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7dc1e8;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
   <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -212,7 +212,7 @@
                </font>
             </Label>
             <ProgressIndicator fx:id="iaTourne" layoutX="40.0" layoutY="30.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-progress-color: #7B7474;" />
-            <Button fx:id="iaPause" contentDisplay="GRAPHIC_ONLY" layoutX="40.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#pauser_IA" prefHeight="40.0" prefWidth="40.0" style="-fx-border-radius: 45; -fx-background-color: transparent;" text="Button">
+            <Button fx:id="iaPause" contentDisplay="GRAPHIC_ONLY" layoutX="40.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#pauser_IA" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-border-radius: 45; -fx-background-color: transparent;" text="Button">
                <graphic>
                   <ImageView fx:id="imageIApause" fitHeight="25.0" fitWidth="25.0">
                      <image>
@@ -225,7 +225,7 @@
       </AnchorPane>
       <AnchorPane fx:id="box_demarrer" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">
          <children>
-            <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="150.0" layoutY="25.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#lancerIA" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: transparent;">
+            <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="150.0" layoutY="25.0" minHeight="45.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#lancerIA" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

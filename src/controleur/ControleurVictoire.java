@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -18,7 +19,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import model.Banquise;
 import model.Joueur;
+import model.Moteur;
+import model.Partie;
 
 
 public class ControleurVictoire  extends ControleurPere implements Initializable, EcranCourant  {
@@ -130,6 +134,35 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
     private void ouvrirPageJeu (MouseEvent event){
     	nettoyerMenu(optionbox, roue);
     	nettoyage();
+    	
+    //TODO rendre tout ça plus propre
+    
+    // recuperation du debut de partie
+    int taillePile = gestionnaireFxmlCourant.moteur.partie.h.undo.size();
+    for (int i = 0; i < taillePile ; i++){
+		gestionnaireFxmlCourant.moteur.partie.annuler();
+    }
+	gestionnaireFxmlCourant.moteur.partie.h.redo= new Stack<Partie>();
+	
+	// nettoyage de la banquise
+	Banquise b = gestionnaireFxmlCourant.moteur.partie.b;
+	for(int i =0 ; i< 8 ; i++){
+		for(int j =0 ; j< 8 ; j++){
+			if(b.terrain[i][j]!=null){
+				b.terrain[i][j].enlevePingouin();
+			}
+		}
+	}
+	
+	// nettoyage des joueurs
+	for(int i =0 ; i< gestionnaireFxmlCourant.moteur.partie.nbJoueurs ; i++){
+		gestionnaireFxmlCourant.moteur.partie.joueurs[i].initPingouins();
+	}
+
+	//TODO penser a suprimer l'ecran avant meme si ca marche et que normalement ca devrait pas le rajouter
+	// reinitialisation
+	gestionnaireFxmlCourant.moteur = new Moteur( new Partie(b, gestionnaireFxmlCourant.moteur.partie.joueurs));
+	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
     	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_JEU);
     }
     

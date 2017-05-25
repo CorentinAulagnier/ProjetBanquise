@@ -316,6 +316,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		else if (partie.getJoueurActif() instanceof IA){
 			//maj text tour de (explication) :	 
 			text_tourDe.setVisible(false);
+			if(timePaused){
+				imageIApause.setImage(new Image("/ressources/decor/j_play.png"));
+			}else{
+				imageIApause.setImage(new Image("/ressources/decor/j_pause.png"));
+				//TODO
+			}
 			
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
 			if(liste_Ecran.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
@@ -330,13 +336,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				activerAnchorPane(box_tour_distant);
 				this.text_attenteJoueur.setText("Attente de "+partie.getJoueurActif().nom);
 				desactiverAnchorPane(box_demarrer);
-				
-				if(timePaused){
-					imageIApause.setImage(new Image("/ressources/decor/j_play.png"));
-				}else{
-					imageIApause.setImage(new Image("/ressources/decor/j_pause.png"));
-					//TODO
-				}
 			}
 		}  
 

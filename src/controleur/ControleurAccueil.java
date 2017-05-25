@@ -17,7 +17,7 @@ import javafx.event.ActionEvent;
 public class ControleurAccueil extends ControleurPere implements Initializable, EcranCourant {
 	
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
-	@FXML private Button jouer, charger, online, roue;
+	@FXML private Button jouer, charger, online, credits, roue;
 	@FXML private AnchorPane optionbox;
 	@FXML private ImageView imageSon, imageMusique;
 	
@@ -29,6 +29,7 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	jouer.setStyle(model.Proprietes.STYLE_NORMAL);
 		charger.setStyle(model.Proprietes.STYLE_NORMAL);
 		online.setStyle(model.Proprietes.STYLE_NORMAL);
+		credits.setStyle(model.Proprietes.STYLE_NORMAL);
     }
     
     
@@ -44,6 +45,12 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     	gestionnaireFxmlCourant = ecranParent;
     }
 
+    @FXML
+    public void ouvrirCredits(MouseEvent event){
+    	gestionnaireFxmlCourant.chargeEcran(model.Proprietes.ECRAN_CREDITS, model.Proprietes.ECRAN_CREDITS_FXML);
+    	gestionnaireFxmlCourant.changeEcranCourant(model.Proprietes.ECRAN_CREDITS);
+    }
+    
     /**
      * change d'ecran pour celui d'une nouvelle partie
      * @param event evenement souris attendu : clic

@@ -36,7 +36,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     //zone menu
     @FXML private ImageView imageSon, imageMusique;
     @FXML AnchorPane optionbox;
-    @FXML Button roue;
+    @FXML Button roue,retour;
 	
 /**RECUPERATION DE TOUS LES ELEMENTS DE FXML**/
     
@@ -93,6 +93,12 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 		//modeValide();
 		
 		
+    }
+    
+    @FXML
+    public void retour(MouseEvent event){   
+    	faireTourner(retour);
+    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MENU_MULTI);
     }
     
 

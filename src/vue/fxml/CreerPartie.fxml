@@ -35,7 +35,7 @@
         <Font name="System Bold" size="40.0" />
       </font>
     </Text>
-    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="20.0" layoutY="13.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color : transparent;" text="Button">
+    <Button fx:id="retour" contentDisplay="GRAPHIC_ONLY" layoutX="20.0" layoutY="13.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onMouseClicked="#retour" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color : transparent;" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -942,9 +942,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     public void  recommencer (MouseEvent event) {
 
-		RotateTransition rt = new RotateTransition(Duration.millis(500),reset);
-		rt.setByAngle(-360);
-		rt.play();
+    	faireTourner(reset);
 		String contenu = "Etes vous sur de vouloir recommencer la partie ?";
 		String boutonOk = "Oui";
 		String boutonNOk = "Annuler";

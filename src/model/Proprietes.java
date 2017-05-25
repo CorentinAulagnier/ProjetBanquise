@@ -17,6 +17,9 @@ public class Proprietes {
     public static final String ECRAN_CREATION_FXML = "fxml/CreerPartie.fxml";
     public static final String ECRAN_MULTI = "JeuMulti";
     public static final String ECRAN_MULTI_FXML = "fxml/JeuMulti.fxml";
+    public static final String  ECRAN_CREDITS = "Credits";
+    public static final String  ECRAN_CREDITS_FXML = "fxml/Credits.fxml";
+    
     
     public static final String BUTTON_PATH = "src/ressources/decor/button.wav";
     public static final String MEDIA_PATH = "src/ressources/decor/christmas.mp3";

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7dc1e8;" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" opacity="1.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7dc1e8;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurJeu">
   <!-- TODO Add Nodes -->
   <children>
   <AnchorPane id="BoiteJoueur1" fx:id="anchorPane_j1" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="219.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -744,7 +744,7 @@
       <ImageView fx:id="avatar_j2" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="40.0" />
       <ImageView fx:id="avatar_j3" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="680.0" y="530.0" />
       <ImageView fx:id="avatar_j4" depthTest="DISABLE" disable="true" fitHeight="40.0" fitWidth="25.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="100.0" y="530.0" />
-      <Label fx:id="text_tourDe" alignment="CENTER" layoutX="250.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #D0D3DC; -fx-border-width: 4; -fx-background-color: #F0F4FF;" textAlignment="CENTER">
+      <Label fx:id="text_tourDe" alignment="CENTER" layoutX="239.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #D0D3DC; -fx-border-width: 4; -fx-background-color: #F0F4FF;" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
@@ -752,5 +752,14 @@
             <Insets bottom="5.0" top="5.0" />
          </padding>
       </Label>
+      <Button fx:id="reset" contentDisplay="GRAPHIC_ONLY" layoutX="545.0" layoutY="8.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#recommencer" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="14.0">
+               <image>
+                  <Image url="@../../ressources/decor/j_restart.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
   </children>
 </AnchorPane>

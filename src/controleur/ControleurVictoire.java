@@ -135,25 +135,25 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
     	nettoyerMenu(optionbox, roue);
     	nettoyage();
     	
-    //TODO rendre tout ça plus propre
-    
-    // recuperation du debut de partie
-    int taillePile = gestionnaireFxmlCourant.moteur.partie.h.undo.size();
-    for (int i = 0; i < taillePile ; i++){
-		gestionnaireFxmlCourant.moteur.partie.annuler();
-    }
-	gestionnaireFxmlCourant.moteur.partie.h.redo= new Stack<Partie>();
-	
-	// nettoyage de la banquise
-	Banquise b = gestionnaireFxmlCourant.moteur.partie.b;
-	for(int i =0 ; i< 8 ; i++){
-		for(int j =0 ; j< 8 ; j++){
-			if(b.terrain[i][j]!=null){
-				b.terrain[i][j].enlevePingouin();
+    	//TODO arranger tout ca , c'est un peu lourd
+    	if (gestionnaireFxmlCourant.moteur.partie.h !=null){
+	    	int taillePile = 0;
+	    	if (gestionnaireFxmlCourant.moteur.partie.h!= null){
+	    		taillePile = gestionnaireFxmlCourant.moteur.partie.h.undo.size();
+	    	}
+		    for (int i = 0; i < taillePile ; i++){
+		    	gestionnaireFxmlCourant.moteur.partie.annuler();
+		    }
+		    gestionnaireFxmlCourant.moteur.partie.h.redo= new Stack<Partie>();
+    	}
+		Banquise b = gestionnaireFxmlCourant.moteur.partie.b;
+		for(int i =0 ; i< 8 ; i++){
+			for(int j =0 ; j< 8 ; j++){
+				if(b.terrain[i][j]!=null){
+					b.terrain[i][j].enlevePingouin();
+				}
 			}
 		}
-	}
-	
 	// nettoyage des joueurs
 	for(int i =0 ; i< gestionnaireFxmlCourant.moteur.partie.nbJoueurs ; i++){
 		gestionnaireFxmlCourant.moteur.partie.joueurs[i].initPingouins();

@@ -9,10 +9,15 @@ import model.Coordonnees;
 import model.CoupleGenerique;
 import model.Humain;
 import model.IA;
+import model.Moteur;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Stack;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
@@ -20,13 +25,18 @@ import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,7 +53,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     boolean timePaused;
 	
 	//boutons d'actions
-    @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire,iaPause;
+    @FXML private Button bouton_defaire, bouton_indice, bouton_annuler, bouton_finTour, bouton_faire,iaPause,reset;
     @FXML private Label text_tourDe,text_attenteJoueur;
     @FXML private AnchorPane box_tour_local, box_tour_distant, box_demarrer;
     
@@ -900,6 +910,59 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	nettoyerMenu(optionbox, roue);
     	sauver(liste_Ecran.moteur);
     }
+    
+    private void restart (){
+    	nettoyerMenu(optionbox, roue);
+    	if (liste_Ecran.moteur.partie.h !=null){
+	    	int taillePile = 0;
+	    	if (liste_Ecran.moteur.partie.h!= null){
+	    		taillePile = liste_Ecran.moteur.partie.h.undo.size();
+	    	}
+		    for (int i = 0; i < taillePile ; i++){
+		    	liste_Ecran.moteur.partie.annuler();
+		    }
+		    liste_Ecran.moteur.partie.h.redo= new Stack<Partie>();
+    	}
+		Banquise b = liste_Ecran.moteur.partie.b;
+		for(int i =0 ; i< 8 ; i++){
+			for(int j =0 ; j< 8 ; j++){
+				if(b.terrain[i][j]!=null){
+					b.terrain[i][j].enlevePingouin();
+				}
+			}
+		}
+		for(int i =0 ; i< liste_Ecran.moteur.partie.nbJoueurs ; i++){
+			liste_Ecran.moteur.partie.joueurs[i].initPingouins();
+		}
+		timeline.stop();
+		liste_Ecran.moteur = new Moteur( new Partie(b, liste_Ecran.moteur.partie.joueurs));
+		liste_Ecran.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
+		liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_JEU);
+    }
+    
+    @FXML
+    public void  recommencer (MouseEvent event) {
+
+		RotateTransition rt = new RotateTransition(Duration.millis(500),reset);
+		rt.setByAngle(-360);
+		rt.play();
+		String contenu = "Etes vous sur de vouloir recommencer la partie ?";
+		String boutonOk = "Oui";
+		String boutonNOk = "Annuler";
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText(contenu);
+
+		ButtonType buttonOui = new ButtonType(boutonOk, ButtonData.OK_DONE);
+		ButtonType buttonNon = new ButtonType(boutonNOk, ButtonData.CANCEL_CLOSE);
+		alert.getButtonTypes().setAll(buttonNon, buttonOui);
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonOui) {
+			restart();
+		} 
+	}
+    
     
     /**
      * change d'ecran pour celui des regles

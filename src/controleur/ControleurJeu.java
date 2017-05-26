@@ -38,6 +38,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
@@ -363,15 +364,20 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 		Partie partie =liste_Ecran.moteur.partie;
 
 		//eclairage des cases accessibles pour un pingouin
-		if (liste_Ecran.moteur.phasePlacement){/*
+		/*if (liste_Ecran.moteur.phasePlacement){
 	    	for (int i = 0; i< 8; i++){
 				for(int j = 0; j< 8; j++){
 					if ( partie.isPlacementValide(new Coordonnees(i,j)) ){
-						banquise.get(i).get(j).setEffect(new Glow(1));
+						InnerShadow innerShado = new InnerShadow();
+						innerShado.setOffsetX(2.0f);
+						innerShado.setOffsetY(2.0f);
+						innerShado.setColor(Color.web("#D0D3DC"));
+						innerShado.setInput(new Glow(0.85));
+						banquise.get(lin.x).get(lin.y).setEffect(innerShado);
 					}
 				}
-			}*/
-    	}
+			}
+    	}*/
     	
     	for (int j = 0; j<partie.nbJoueurs;j++ ){
     		for (int i = 0; i< partie.joueurs[j].nbPingouin; i++){
@@ -392,7 +398,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 						dropShadow.setSpread(0.6);
 						dropShadow.setInput(new Glow(0.4));
 						pingouinActif.setEffect(dropShadow);   
-						((ImageView) banquise.get(j).get(i)).setCursor(Cursor.HAND);
+						//((ImageView) banquise.get(j).get(i)).setCursor(Cursor.HAND);
     				}
     			}else{
     				auras.get(j).setVisible(false);
@@ -475,7 +481,24 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
 		}
 		//TODO modifier effet d'indice
-		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
+		//banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
+		//ou tout ça
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setContrast(0.8);
+		colorAdjust.setHue(-0.1);
+		colorAdjust.setInput(new Glow(0.7));
+		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(colorAdjust);
+		TranslateTransition tt = new TranslateTransition(Duration.millis(500),banquise.get(cc.e2.x).get(cc.e2.y));
+		 tt.setFromY(0);
+		 tt.setToY(-5);
+		 tt.setDelay(Duration.millis(100));
+		 tt.play();
+		 TranslateTransition tt2 = new TranslateTransition(Duration.millis(1500),banquise.get(cc.e2.x).get(cc.e2.y));
+		 tt2.setFromY(-5);
+		 tt2.setToY(0);
+		 tt2.setDelay(Duration.millis(100));
+		 tt2.play();
+		
     }
      
     /**

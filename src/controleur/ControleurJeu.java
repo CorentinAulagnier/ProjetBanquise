@@ -42,6 +42,7 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -595,7 +596,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(indicesBanquise);
 					for( ArrayList<Coordonnees> col : accessibles ){
 						for ( Coordonnees lin : col){
-							banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.9));
+							
+							InnerShadow innerShado = new InnerShadow();
+							innerShado.setOffsetX(2.0f);innerShado.setOffsetY(2.0f);
+							innerShado.setColor(Color.web("#D0D3DC"));
+					        innerShado.setInput(new Glow(0.85));
+							banquise.get(lin.x).get(lin.y).setEffect(innerShado);
 						}
 					}
 				}

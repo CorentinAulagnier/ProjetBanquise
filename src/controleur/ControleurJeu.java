@@ -31,17 +31,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -293,7 +298,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	public void majActionsDisponibles(){
 		Partie partie = liste_Ecran.moteur.partie;
-		//TODO gerer les tours en fonctions du reseau
 		
 		desactiverBouton(bouton_defaire);
 		desactiverBouton(bouton_faire);
@@ -314,23 +318,22 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 				}
 			}
 			
-			//TODO
-	    	//maj text tour de (explication) :	 
+			//TODO ici pour retirer le text d'explication text tour :	 
 			text_tourDe.setVisible(true);
 		    if(liste_Ecran.moteur.phasePlacement){ 	text_tourDe.setText("Placez un pingouin");	   }
-		    	
 		    else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
 	    	
 		} 
 		//sinon si le joueur est une IA
 		else if (partie.getJoueurActif() instanceof IA){
-			//maj text tour de (explication) :	 
+			//TODO ici pour retirer le text d'explication text tour :	 
 			text_tourDe.setVisible(false);
+			
+			//TODO ici pour corriger les effets de pause pour l'ia
 			if(timePaused){
 				imageIApause.setImage(new Image("/ressources/decor/j_play.png"));
 			}else{
 				imageIApause.setImage(new Image("/ressources/decor/j_pause.png"));
-				//TODO
 			}
 			
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
@@ -357,8 +360,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 	 */
 	public void majEffets(){
 		Partie partie =liste_Ecran.moteur.partie;
-		
-		
+
 		//eclairage des cases accessibles pour un pingouin
 		if (liste_Ecran.moteur.phasePlacement){/*
 	    	for (int i = 0; i< 8; i++){
@@ -370,19 +372,32 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			}*/
     	}
     	
-    	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
-    		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
-    			if (j == liste_Ecran.moteur.partie.joueurActif){
+    	for (int j = 0; j<partie.nbJoueurs;j++ ){
+    		for (int i = 0; i< partie.joueurs[j].nbPingouin; i++){
+    			if (j == partie.joueurActif){
     				auras.get(j).setVisible(true);
-    				int color = liste_Ecran.moteur.partie.joueurs[j].couleur;
+    				int color = partie.joueurs[j].couleur;
     				auras.get(j).setImage( new Image(model.Proprietes.AURAS [color] ));
     				if (liste_Ecran.moteur.phaseJeu){
-    					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
+						ImageView pingouinActif = reglettes.get(j).get(i);
+						// TODO choisir effet sur pingouin actif
+						//pingouinActif.setEffect(new Glow(0.8)); 
+						// ou
+						DropShadow dropShadow = new DropShadow();
+						dropShadow.setBlurType(BlurType.GAUSSIAN);
+						dropShadow.setColor(Color.web("#989898"));
+						dropShadow.setOffsetX(1);
+						dropShadow.setOffsetY(3);
+						dropShadow.setSpread(0.6);
+						dropShadow.setInput(new Glow(0.4));
+						pingouinActif.setEffect(dropShadow);   
+						((ImageView) banquise.get(j).get(i)).setCursor(Cursor.HAND);
     				}
     			}else{
     				auras.get(j).setVisible(false);
     				if (liste_Ecran.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(null);
+    					
     				}
     			}
 	    	}
@@ -396,6 +411,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     	for (int i = 0; i< 8; i++){
 			for(int j = 0; j< 8; j++){
 					banquise.get(i).get(j).setEffect(null);
+					//banquise.get(j).get(i).setCursor(Cursor.DEFAULT);
 			}
 		}
     }
@@ -448,7 +464,6 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
      * @param event
      */
     @FXML private void demanderIndice(MouseEvent event){
-    	//TODO retirer aura si pingouin selectionne 
     	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.moteur.demanderIndice();
     	miseAjour_tourDeJeu();
 		nettoyerBanquise();
@@ -458,6 +473,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			pingouinAdeplacer = liste_Ecran.moteur.partie.rechercheNumPingouin(liste_Ecran.moteur.partie.joueurActif, cc.e1);
 			selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
 		}
+		//TODO modifier effet d'indice
 		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
     }
      
@@ -574,11 +590,12 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 					pingouinAdeplacer = numPingTemporaire;
 					selectionnerPingouinAdeplacer(banquise.get(jActif).get(pingouinAdeplacer));
 					
-					//affichage des chemins
+					//affichage des chemins 
+					//TODO modifier glow chemins
 					ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(indicesBanquise);
 					for( ArrayList<Coordonnees> col : accessibles ){
 						for ( Coordonnees lin : col){
-							banquise.get(lin.x).get(lin.y).setEffect(new Glow(1));
+							banquise.get(lin.x).get(lin.y).setEffect(new Glow(0.9));
 						}
 					}
 				}

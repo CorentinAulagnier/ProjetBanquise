@@ -31,6 +31,8 @@ public class Pingouin implements Serializable {
 
         public boolean resteSurPlace;
         
+        
+        public CoupleGenerique<Boolean,Integer> peutAtteindre;
 	/**
 	 * Constructeurs.
 	 * Ne place pas le pingouin et le met inactif.
@@ -40,6 +42,7 @@ public class Pingouin implements Serializable {
 		this.position = new Coordonnees();
 		this.actif = false;
                 this.resteSurPlace = false;
+                this.peutAtteindre = new CoupleGenerique(false,0);
 	}
 	
 	/**

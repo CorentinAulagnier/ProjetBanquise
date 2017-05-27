@@ -105,7 +105,7 @@ public class AlgoIA {
 
         boolean trouve = false;
         for (int i = 0; i < 6; i++) {
-            if ((p.b.getTuile(p.b.getVoisin(i, c)) != null) && (p.b.getTuile(p.b.getVoisin(i, c)).aUnPingouin)) {
+            if ((p.b.getTuile(p.b.getVoisin(i, c)) != null) && (p.b.getTuile(p.b.getVoisin(i, c)).aUnPingouin && p.appartientPingouin(p.b.getVoisin(i, c)) == p.joueurActif)) {
                 trouve = true;
             }
         }
@@ -380,8 +380,8 @@ public class AlgoIA {
 
         ArrayList<CoupleGenerique<Coordonnees, Integer>> caroufDe3 = new ArrayList();
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 1; i < 7; i++) {
+            for (int j = 1; j < 7; j++) {
 
                 Coordonnees c = new Coordonnees(i, j);
 
@@ -569,50 +569,126 @@ public class AlgoIA {
         return retour;
     }
 
-    public CoupleGenerique<Boolean, Integer> nbPointsAccessibles(Coordonnees pinguBase, Partie p, int somme, HashMap<Coordonnees, Integer> hash, boolean pinguDansZone, int numJoueur, int numPingouin) {
-        CoupleGenerique<Boolean, Integer> val = new CoupleGenerique(pinguDansZone, somme);
-        CoupleGenerique<Boolean, Integer> cg = new CoupleGenerique(pinguDansZone, somme);
-        hash.put(pinguBase, 0);
-        if (p.joueurs[numJoueur].myPingouins[numPingouin].actif) {
-            for (int i = 0; i < 6; i++) {
-                if (p.b.getVoisin(i, pinguBase) != null && p.b.getTuile(p.b.getVoisin(i, pinguBase)).nbPoissons != 0 && !hash.containsKey(p.b.getVoisin(i, pinguBase))) {
-                    if (p.b.getTuile(p.b.getVoisin(i, pinguBase)).aUnPingouin) {
-                        pinguDansZone = false;
-                    }
+    public int nbPointsAccessiblesPourTous(Partie p, int numjoueur) {
+        HashMap<Coordonnees, Integer> hash = new HashMap<>();
+        int somme = 0;
 
-                    cg = nbPointsAccessibles(p.b.getVoisin(i, pinguBase), p, somme + p.b.getTuile(p.b.getVoisin(i, pinguBase)).nbPoissons, hash, pinguDansZone, numJoueur, numPingouin);
-                    cg.e1 = val.e1;
-                    if (cg.e2 > val.e2) {
-                        val = cg;
+        for (int j = 0; j < p.joueurs[numjoueur].nbPingouin; j++) {
+            if (p.joueurs[numjoueur].myPingouins[j].actif) {
+                Coordonnees c = p.joueurs[numjoueur].myPingouins[j].position;
+                LinkedList<Coordonnees> file = new LinkedList<>();
+                Tuile tuileDep = p.b.getTuile(c);
+                file.add(c);
+                hash.put(c, 0);
+
+                while (!file.isEmpty()) {
+                    c = file.pop();
+                    tuileDep = p.b.getTuile(c);
+
+                    if (tuileDep.aUnPingouin && tuileDep != p.b.getTuile(p.joueurs[numjoueur].myPingouins[j].position)) {
+
+                    } else {
+                        for (int i = 0; i < 6; i++) {
+                            if (p.b.getVoisin(i, c) != null && p.b.getTuile(p.b.getVoisin(i, c)).nbPoissons != 0 && !p.b.getTuile(p.b.getVoisin(i, c)).aUnPingouin) {
+                                if (!hash.containsKey(p.b.getVoisin(i, c))) {
+                                    somme = somme + p.b.getTuile(c).nbPoissons;
+                                    file.add(p.b.getVoisin(i, c));
+                                    hash.put(p.b.getVoisin(i, c), 0);
+                                }
+                            }
+                        }
                     }
                 }
             }
-
-            return val;
-        } else {
-            return new CoupleGenerique(true, 0);
         }
+
+        return somme;
 
     }
 
+    public int listePingu2(Partie p1, Partie p2, int numjoueur) {
+     
+        int ponderation = 0;
+        for (int j = 0; j < p1.nbJoueurs; j++) {
+
+            int valAvant = nbPointsAccessiblesPourTous(p1, j);
+            int valApres = nbPointsAccessiblesPourTous(p2, j);
+
+            if (j == p1.joueurActif) {
+                if (valAvant - valApres > 3) {
+                    ponderation = ponderation - (valAvant - valApres);
+                }
+            } else if (valAvant - valApres > 3) {
+                ponderation = ponderation + (valAvant - valApres);
+            }
+        }
+        return ponderation;
+    }
+    // Le maximum de points théorique que le pingouin à la coordonnée pinguBase peut atteindre.
+
+    public CoupleGenerique<Boolean, Integer> nbPointsAccessibles(Coordonnees pinguBase, Partie p) {
+
+        Coordonnees c = pinguBase;
+        boolean estSeul = true;
+        int somme = 0;
+        LinkedList<Coordonnees> file = new LinkedList<>();
+        HashMap<Coordonnees, Integer> hash = new HashMap<>();
+        Tuile tuileDep = p.b.getTuile(c);
+        file.add(c);
+        hash.put(c, 0);
+
+        while (!file.isEmpty()) {
+            c = file.pop();
+            tuileDep = p.b.getTuile(c);
+
+            if (tuileDep.aUnPingouin && tuileDep != p.b.getTuile(pinguBase)) {
+
+                estSeul = false;
+
+            } else {
+                for (int i = 0; i < 6; i++) {
+                    if (p.b.getVoisin(i, c) != null && p.b.getTuile(p.b.getVoisin(i, c)).nbPoissons != 0 && !p.b.getTuile(p.b.getVoisin(i, c)).aUnPingouin) {
+                        if (!hash.containsKey(p.b.getVoisin(i, c))) {
+                            somme = somme + p.b.getTuile(c).nbPoissons;
+                            file.add(p.b.getVoisin(i, c));
+                            hash.put(p.b.getVoisin(i, c), 0);
+                        }
+                    }
+                }
+            }
+        }
+        return new CoupleGenerique(estSeul, somme);
+
+    }
+
+    //Calcule la pondération associé au coup joué entre la partie p1 et la partie p2
     public int listePingu(Partie p1, Partie p2, int numjoueur) {
         CoupleGenerique<Boolean, Integer> cgAvant = new CoupleGenerique(false, 0);
         CoupleGenerique<Boolean, Integer> cgApres = new CoupleGenerique(false, 0);
+        int sommePointsPlayerAv = 0;
+        int sommePointsPlayerAp = 0;
+        int nbPing = 0;
         int ponderation = 0;
         int nbTuilesRestantes = nbTuileRestantes(p2);
         for (int j = 0; j < p1.nbJoueurs; j++) {
             for (int p = 0; p < p1.joueurs[j].nbPingouin; p++) {
                 if (p1.joueurs[j].myPingouins[p].actif) {
-                    HashMap<Coordonnees, Integer> hash = new HashMap();
-                    HashMap<Coordonnees, Integer> hash2 = new HashMap();
-                    cgAvant = nbPointsAccessibles(p1.joueurs[j].myPingouins[p].position, p1, 0, hash, true, j, p);
-                    cgApres = nbPointsAccessibles(p2.joueurs[j].myPingouins[p].position, p2, 0, hash2, true, j, p);
+
+                    cgAvant = p1.joueurs[j].myPingouins[p].peutAtteindre;
+                    cgApres = nbPointsAccessibles(p2.joueurs[j].myPingouins[p].position, p2);
+
+                    if (j == p1.joueurActif) {
+                        sommePointsPlayerAv += cgAvant.e2;
+                        sommePointsPlayerAp += cgApres.e2;
+                        nbPing++;
+                    }
+                    p2.joueurs[j].myPingouins[p].peutAtteindre = cgApres;
 
                     if ((j != p1.joueurActif) && (!p2.joueurs[j].myPingouins[p].actif)) { // Si le pingouin de l'autre devient inactif! 
                         ponderation = ponderation + 300;
                     }
                     if ((j == p1.joueurActif) && (!p2.joueurs[j].myPingouins[p].actif)) { // Si un de nos pingouins devient inactif...
-                        ponderation = ponderation - 200;
+                        ponderation = ponderation - 300;
                     }
                     if (!cgAvant.e1 && cgApres.e1) { // Le pingouin devient seul
                         if ((j == p1.joueurActif) && cgApres.e2 > nbTuilesRestantes / 6) { // Si c'est notre pingouin et que c'est interessant pour nous
@@ -624,20 +700,34 @@ public class AlgoIA {
                         } else { // Si c'est pas nous, mais c'est pas bien, donc on est content
                             ponderation = ponderation + nbTuilesRestantes;
                         }
-                    } else {
-                        if (p1.appartientPingouin(p1.joueurs[j].myPingouins[p].position) != numjoueur) {                    
-                            System.out.println("coucou : " + (cgAvant.e2 - cgApres.e2));
-                            if (j == p1.joueurActif) { // Si c'est nous et que c'est pas notre pingouin
-                                ponderation = ponderation - (cgAvant.e2 - cgApres.e2);
-                            } else if (j != p1.joueurActif) {
-                                ponderation = ponderation + (cgAvant.e2 - cgApres.e2);
-                            }
+                    } else if (p1.appartientPingouin(p1.joueurs[j].myPingouins[p].position) != numjoueur) {
+                        if (j == p1.joueurActif) { // Si c'est nous et que c'est pas notre pingouin
+                            ponderation = ponderation - (cgAvant.e2 - cgApres.e2);
+                        } else if (j != p1.joueurActif) {
+                            ponderation = ponderation + ((cgAvant.e2 - cgApres.e2) * 2);
+                        }
+                    } else if (p1.appartientPingouin(p1.joueurs[j].myPingouins[p].position) == numjoueur) {
+                        if (j == p1.joueurActif) { // Si c'est nous et que c'est pas notre pingouin
+                            ponderation = ponderation - (cgAvant.e2 - cgApres.e2);
+                        } else if (j != p1.joueurActif) {
+                            ponderation = ponderation + ((cgAvant.e2 - cgApres.e2) * 2);
                         }
                     }
                 }
             }
         }
         return ponderation;
+    }
+
+    //Mets à jour l'attribut "peutAtteindre" de pingouin ||| appelé à chaque 'algoDifficile'
+    public void majValeurZonePing(Partie p) {
+        for (int j = 0; j < p.nbJoueurs; j++) {
+            for (int i = 0; i < p.joueurs[j].nbPingouin; i++) {
+                if (p.joueurs[j].myPingouins[i].actif) {
+                    p.joueurs[j].myPingouins[i].peutAtteindre = nbPointsAccessibles(p.joueurs[j].myPingouins[i].position, p);
+                }
+            }
+        }
     }
 
     /**
@@ -682,7 +772,7 @@ public class AlgoIA {
      * somme des points du morceau de banquise sinon
      */
     public int estZoneSeule(Coordonnees c, Coordonnees pinguBase, Partie p) {
-        if (p.b.nbTuilesLibres() <= 55) {
+        if (p.b.nbTuilesLibres() <= 40) {
             Coordonnees debut = c;
             int somme = 0;
             LinkedList<Coordonnees> file = new LinkedList<>();
@@ -730,7 +820,7 @@ public class AlgoIA {
      * banquise sinon
      */
     public int estSeul(Coordonnees c, Partie p) {
-        if (p.b.nbTuilesLibres() <= 55) {
+        if (p.b.nbTuilesLibres() <= 40) {
             Coordonnees debut = c;
             int somme = 0;
             LinkedList<Coordonnees> file = new LinkedList<>();
@@ -743,7 +833,7 @@ public class AlgoIA {
                 c = file.pop();
                 tuileDep = p.b.getTuile(c);
 
-                if (tuileDep.aUnPingouin && (!c.equals(debut))) {
+                if (tuileDep.aUnPingouin && (!c.equals(debut)) && p.appartientPingouin(c) != p.joueurActif) {
 
                     return 0;
 
@@ -878,13 +968,13 @@ public class AlgoIA {
             for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {
                 if (p.joueurs[num].myPingouins[i].actif && !p.joueurs[num].myPingouins[i].resteSurPlace) {
                     /* Si une zone accessible par le pingouin ne contient aucun autre pingouin et que le nombre de tuile a gagner est suffisant : le pingouin reste dans cette zone */
-                    for (int u = 0; u < 6; u++) { // Pour chaque direction 
+ /* for (int u = 0; u < 6; u++) { // Pour chaque direction 
                         if (p.b.getTuile(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position)) != null && !p.b.getTuile(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position)).aUnPingouin && p.b.getTuile(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position)).nbPoissons != 0) {
                             if (estZoneSeule(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position), p.joueurs[num].myPingouins[i].position, p) > (nbTuileRestantes(p) / 6)) {
                                 p.joueurs[num].myPingouins[i].resteSurPlace = true;
                             }
                         }
-                    }
+                    } */
                     if (estSeul(p.joueurs[num].myPingouins[i].position, p) != 0) {
                         p.joueurs[num].myPingouins[i].resteSurPlace = true;
                     }
@@ -929,8 +1019,8 @@ public class AlgoIA {
                                 p2.deplacement(c, coupPossible.get(n).get(m));
                                 p2.verifierPingouinActif();
 
-                                int pond = listePingu(p, p2, num);
-                                System.out.println("pond : " + pond);
+                                int pond = listePingu2(p, p2, num);
+                                //System.out.println("pond : " + pond);
                                 somme_total2 += pond;
 
                                 /* On regarde si le pingouin se rapproche trop d'un autre que dans notre cas */
@@ -1010,22 +1100,24 @@ public class AlgoIA {
      * avant le deplacement, Position du pingouin choisi apres le deplacement) .
      */
     public CoupleGenerique<Coordonnees, Coordonnees> algoDifficile(Partie p) {
+        majValeurZonePing(p);
         int nbCoupsmax = 3;
         Coordonnees c0 = new Coordonnees(0, 0);
         int num = p.joueurActif;
+        int nbTuiles = p.b.nbTuilesLibres();
 
         boolean tousTousSeul = true;
         for (int i = 0; i < p.joueurs[num].nbPingouin; i++) {
             if ((p.joueurs[num].myPingouins[i].actif) && (!p.joueurs[num].myPingouins[i].resteSurPlace)) {
                 int tmp = estSeul(p.joueurs[num].myPingouins[i].position, p);
                 boolean reste = false;
-                for (int u = 0; u < 6; u++) {
+                /*for (int u = 0; u < 6; u++) {
                     if (p.b.getTuile(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position)) != null && !p.b.getTuile(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position)).aUnPingouin && p.b.getTuile(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position)).nbPoissons != 0) {
                         if (estZoneSeule(p.b.getVoisin(u, p.joueurs[num].myPingouins[i].position), p.joueurs[num].myPingouins[i].position, p) > (nbTuileRestantes(p) / 6)) {
                             reste = true;
                         }
                     }
-                }
+                } */
                 if ((tmp != 0) || reste) {
                     p.joueurs[num].myPingouins[i].resteSurPlace = true;
                 } else {
@@ -1034,25 +1126,29 @@ public class AlgoIA {
             }
         }
 
-        if (p.b.nbTuilesLibres() <= 55) {
+        if (nbTuiles <= 55) {
             //    System.out.println("Maintenant 3");
             nbCoupsmax = 3;
         }
-        if (p.b.nbTuilesLibres() <= 43) {
+        if (nbTuiles <= 47) {
             System.out.println("Maintenant 5");
             nbCoupsmax = 5;
 
         }
-        if (p.b.nbTuilesLibres() <= 35) {
+        if (nbTuiles <= 37) {
             System.out.println("Maintenant 7");
             nbCoupsmax = 7;
 
         }
-        if (p.b.nbTuilesLibres() <= 20) {
+        if (nbTuiles <= 25) {
             nbCoupsmax = 9;
             //   System.out.println("Maintenant 9");
         }
-        if (p.b.nbTuilesLibres() <= 10) {
+        if (nbTuiles <= 17) {
+            nbCoupsmax = 13;
+            //   System.out.println("Maintenant 9");
+        }
+        if (nbTuiles <= 10) {
             nbCoupsmax = 17;
             //  System.out.println("Maintenant 17");
         }

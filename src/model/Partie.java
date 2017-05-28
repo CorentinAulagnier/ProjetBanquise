@@ -373,7 +373,9 @@ public class Partie implements Serializable {
 			p[i] = new Pingouin();
 			//new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1))));
 			if (elements[4].equals("actif")) {
-				p[i].position = new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1)));
+				Coordonnees c = new Coordonnees(Integer.parseInt(elements[2].substring(1, 2)), Integer.parseInt(elements[3].substring(0, 1)));
+				this.b.getTuile(c).mettrePingouin();
+				p[i].position = c;
 				p[i].actif = true;
 			}
 		}	

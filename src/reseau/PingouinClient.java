@@ -88,6 +88,7 @@ public class PingouinClient extends Thread{
 				obj = in.readObject();
 	            if(obj instanceof Moteur) {
 	            	moteur = (Moteur)obj;
+	            	moteur.aRafraichir = true;
 	            	System.out.println(moteur.partie.toString2());
 	            	//refresh plateau
 	    			if (moteur.phaseVictoire) {

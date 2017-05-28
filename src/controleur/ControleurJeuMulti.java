@@ -121,7 +121,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      */
     public void miseAjour(){
     	
-    	if(liste_Ecran!= null && liste_Ecran.moteur!=null && liste_Ecran.moteur.partie!=null){
+    	if(liste_Ecran!= null && liste_Ecran.client.moteur!=null && liste_Ecran.client.moteur.partie!=null){
     		
     		AnchorPane[] anchorPanes = {anchorPane_j1,anchorPane_j2,anchorPane_j3,anchorPane_j4};
     		auras = new ArrayList <ImageView>(); Collections.addAll(auras,aura_j1, aura_j2, aura_j3, aura_j4);
@@ -156,13 +156,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
-        							if(liste_Ecran.moteur.partie.getJoueurActif() instanceof IA){
-        								if( !liste_Ecran.moteur.phasePlacement || liste_Ecran.moteur.partie.numPingouinAPlacer() != 0 || liste_Ecran.moteur.partie.joueurActif != 0){
-	        								liste_Ecran.moteur.faireJouerIAS(timeline);
-	        								miseAjour_tourDeJeu();
-        								}
-        							}
-        							if(liste_Ecran.moteur.phaseVictoire){
+        							if(liste_Ecran.client.moteur.phaseVictoire){
         							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
         								liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
         								liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_VICTOIRE);
@@ -182,17 +176,17 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * @param noms tableau des noms des joueurs
      */
     public void miseAjour_initiale(AnchorPane[] anchorPanes, Label[] noms){
-    	actif = new boolean[liste_Ecran.moteur.partie.nbJoueurs][liste_Ecran.moteur.partie.joueurs[0].nbPingouin];
-    	for(int j=0 ; j < liste_Ecran.moteur.partie.nbJoueurs ; j++){
+    	actif = new boolean[liste_Ecran.client.moteur.partie.nbJoueurs][liste_Ecran.client.moteur.partie.joueurs[0].nbPingouin];
+    	for(int j=0 ; j < liste_Ecran.client.moteur.partie.nbJoueurs ; j++){
     		activerAnchorPane(anchorPanes[j]);
-    		noms[j].setText(liste_Ecran.moteur.partie.joueurs[j].nom);	
+    		noms[j].setText(liste_Ecran.client.moteur.partie.joueurs[j].nom);	
     		
     		//maj des miniatures des pingouins 		
-			String path = liste_Ecran.moteur.partie.joueurs[j].cheminMiniature;
+			String path = liste_Ecran.client.moteur.partie.joueurs[j].cheminMiniature;
 			avatars.get(j).setImage(new Image(path));
-			for(int ping = 0; ping < liste_Ecran.moteur.partie.joueurs[j].nbPingouin ; ping++){
+			for(int ping = 0; ping < liste_Ecran.client.moteur.partie.joueurs[j].nbPingouin ; ping++){
 				reglettes.get(j).get(ping).setImage(new Image(path));	
-				actif[j][ping] = liste_Ecran.moteur.partie.joueurs[j].myPingouins[ping].actif;
+				actif[j][ping] = liste_Ecran.client.moteur.partie.joueurs[j].myPingouins[ping].actif;
 			}
 		}
     }
@@ -206,7 +200,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * 
      */
     public void miseAjour_tourDeJeu(){
-    	Partie partie = liste_Ecran.moteur.partie;
+    	Partie partie = liste_Ecran.client.moteur.partie;
     	bouton_finTour.setDisable(true);
     	
 	    	//maj des pingouins
@@ -227,9 +221,9 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	    	
 	    	//TODO retirer cette partie quand le jeu sera suffisamment compréhensible
 	    	//maj text tour de (temporaire) :
-	    	if(liste_Ecran.moteur.partie.getJoueurActif() instanceof Humain){
-		    	if(liste_Ecran.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin");}
-		    	else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
+	    	if(liste_Ecran.client.moteur.partie.getJoueurActif() instanceof Humain){
+		    	if(liste_Ecran.client.moteur.phasePlacement){text_tourDe.setText("Placez un pingouin");}
+		    	else if(liste_Ecran.client.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
 	    	}
 	    	
 		    majActionsDisponibles();
@@ -240,7 +234,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * raffraichit la banquise
      */
     public void majBanquise(){
-    	Banquise banquiseEnMemoire = liste_Ecran.moteur.partie.b;
+    	Banquise banquiseEnMemoire = liste_Ecran.client.moteur.partie.b;
     	for (int i = 0 ; i < banquiseEnMemoire.terrain.length ; i++){
     		for (int j = 0 ; j <  banquiseEnMemoire.terrain[i].length ; j++){
     			if ( !((i%2 == 0) && (j == 7)) ) {
@@ -254,15 +248,15 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	 * raffraichit l'affichage des pingouins. Vérifie si chaque pingouin de chaque joueur est bien à sa place attendue en mémoire, sinon le déplace là où il devrait être
 	 */
 	public void majPingouins(){
-		for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
-			for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[0].myPingouins.length ; pingEncours++ ){	
+		for(int jEncours = 0; jEncours < liste_Ecran.client.moteur.partie.joueurs.length ; jEncours++){
+			for( int pingEncours = 0; pingEncours < liste_Ecran.client.moteur.partie.joueurs[0].myPingouins.length ; pingEncours++ ){	
 				
-				Coordonnees pingouin_en_memoire = liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
+				Coordonnees pingouin_en_memoire = liste_Ecran.client.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].position;
 				ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
 				
 				
 				//si ce pingouin est actif ( a été placé et n'a pas encore été noyé )
-				if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
+				if(liste_Ecran.client.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif){
 					Coordonnees pingouin_en_ihm = getXY(miniature_pingouin.getX(), miniature_pingouin.getY());
 					
 					//verifier si le pingouin en mémoire est pas à la même place sur l'ihm
@@ -270,7 +264,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 						translaterPingouin(pingEncours,jEncours, pingouin_en_memoire);
 					}
 					
-				}else if (liste_Ecran.moteur.phaseJeu){				
+				}else if (liste_Ecran.client.moteur.phaseJeu){				
 					RotateTransition rt = new RotateTransition(Duration.millis(1000),miniature_pingouin);
 					rt.setByAngle(1000);
 					ScaleTransition st = new ScaleTransition(Duration.millis(1000),miniature_pingouin);
@@ -288,7 +282,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	 * raffraichit l'affichage des boutons d'actions en fonction de la personne qui joue
 	 */
 	public void majActionsDisponibles(){
-		Partie partie = liste_Ecran.moteur.partie;
+		Partie partie = liste_Ecran.client.moteur.partie;
 		//TODO gerer les tours en fonctions du reseau
 		
 		//desactiverBouton(bouton_defaire);
@@ -302,11 +296,11 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 					
 			//il est le seul humain => utilisation ou pas de faire defaire
 			/*
-			if( liste_Ecran.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
-				if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
+			if( liste_Ecran.client.moteur.partie.utiliseHistorique){// s'il y a un et un seul humain alors on peut defaire et faire
+				if(this.liste_Ecran.client.moteur.partie.h.peutAnnuler()){
 			    	activerBouton(bouton_defaire);
 				}
-				if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
+				if(this.liste_Ecran.client.moteur.partie.h.peutRefaire()){
 					activerBouton(bouton_faire);
 				}
 			}*/
@@ -314,7 +308,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		//sinon si le joueur est une IA
 		else { //if (partie.getJoueurActif() instanceof IA){
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
-			if(liste_Ecran.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
+			if(liste_Ecran.client.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
 				desactiverAnchorPane(box_tour_distant);
 				activerAnchorPane(box_demarrer);
@@ -336,11 +330,11 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	 * raffraichit les efets visuels 
 	 */
 	public void majEffets(){
-		Partie partie =liste_Ecran.moteur.partie;
+		Partie partie =liste_Ecran.client.moteur.partie;
 		
 		
 		//eclairage des cases accessibles pour un pingouin
-		if (liste_Ecran.moteur.phasePlacement){/*
+		if (liste_Ecran.client.moteur.phasePlacement){/*
 	    	for (int i = 0; i< 8; i++){
 				for(int j = 0; j< 8; j++){
 					if ( partie.isPlacementValide(new Coordonnees(i,j)) ){
@@ -350,18 +344,18 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 			}*/
     	}
     	
-    	for (int j = 0; j<liste_Ecran.moteur.partie.nbJoueurs;j++ ){
-    		for (int i = 0; i< 	liste_Ecran.moteur.partie.joueurs[j].nbPingouin; i++){
-    			if (j == liste_Ecran.moteur.partie.joueurActif){
+    	for (int j = 0; j<liste_Ecran.client.moteur.partie.nbJoueurs;j++ ){
+    		for (int i = 0; i< 	liste_Ecran.client.moteur.partie.joueurs[j].nbPingouin; i++){
+    			if (j == liste_Ecran.client.moteur.partie.joueurActif){
     				auras.get(j).setVisible(true);
-    				int color = liste_Ecran.moteur.partie.joueurs[j].couleur;
+    				int color = liste_Ecran.client.moteur.partie.joueurs[j].couleur;
     				auras.get(j).setImage( new Image(model.Proprietes.AURAS [color] ));
-    				if (liste_Ecran.moteur.phaseJeu){
+    				if (liste_Ecran.client.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(new Glow(1));
     				}
     			}else{
     				auras.get(j).setVisible(false);
-    				if (liste_Ecran.moteur.phaseJeu){
+    				if (liste_Ecran.client.moteur.phaseJeu){
     					((ImageView) reglettes.get(j).get(i)).setEffect(null);
     				}
     			}
@@ -389,15 +383,15 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	 * @param event
 	 */
     @FXML private void annulerTours(MouseEvent event){
-    	if(this.liste_Ecran.moteur.partie.h.peutAnnuler()){
-	    	this.liste_Ecran.moteur.partie.annuler();
+    	if(this.liste_Ecran.client.moteur.partie.h.peutAnnuler()){
+	    	this.liste_Ecran.client.moteur.partie.annuler();
 	    	
 	    	//replacer les pingouins inactifs qui redeviendraientt actif
-		    if(liste_Ecran.moteur.phaseJeu){
-			    for(int jEncours = 0; jEncours < liste_Ecran.moteur.partie.joueurs.length ; jEncours++){
-					for( int pingEncours = 0; pingEncours < liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
+		    if(liste_Ecran.client.moteur.phaseJeu){
+			    for(int jEncours = 0; jEncours < liste_Ecran.client.moteur.partie.joueurs.length ; jEncours++){
+					for( int pingEncours = 0; pingEncours < liste_Ecran.client.moteur.partie.joueurs[jEncours].myPingouins.length ; pingEncours++ ){	
 						
-						if(liste_Ecran.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif && actif[jEncours][pingEncours]==false){
+						if(liste_Ecran.client.moteur.partie.joueurs[jEncours].myPingouins[pingEncours].actif && actif[jEncours][pingEncours]==false){
 							ImageView miniature_pingouin = reglettes.get(jEncours).get(pingEncours);
 							miniature_pingouin.setRotate(0);
 							miniature_pingouin.setScaleX(1);
@@ -417,8 +411,8 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * @param event
      *//*
     @FXML private void refaireTours(MouseEvent event){
-    	if(this.liste_Ecran.moteur.partie.h.peutRefaire()){
-	    	this.liste_Ecran.moteur.partie.retablir();
+    	if(this.liste_Ecran.client.moteur.partie.h.peutRefaire()){
+	    	this.liste_Ecran.client.moteur.partie.retablir();
 	    	miseAjour_tourDeJeu();
     	}
     }*/
@@ -429,14 +423,14 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      *//*
     @FXML private void demanderIndice(MouseEvent event){
     	//TODO retirer aura si pingouin selectionne 
-    	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.moteur.demanderIndice();
+    	CoupleGenerique<Coordonnees, Coordonnees> cc = liste_Ecran.client.moteur.demanderIndice();
     	miseAjour_tourDeJeu();
 		nettoyerBanquise();
 		
 		if (!cc.e1.equals(new Coordonnees(-1, -1))) {
 			banquise.get(cc.e1.x).get(cc.e1.y).setEffect(new Glow(1));
-			pingouinAdeplacer = liste_Ecran.moteur.partie.rechercheNumPingouin(liste_Ecran.moteur.partie.joueurActif, cc.e1);
-			selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.moteur.partie.joueurActif).get(pingouinAdeplacer));
+			pingouinAdeplacer = liste_Ecran.client.moteur.partie.rechercheNumPingouin(liste_Ecran.client.moteur.partie.joueurActif, cc.e1);
+			selectionnerPingouinAdeplacer(banquise.get(liste_Ecran.client.moteur.partie.joueurActif).get(pingouinAdeplacer));
 		}
 		banquise.get(cc.e2.x).get(cc.e2.y).setEffect(new Glow(1));
     }*/
@@ -450,10 +444,10 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     	coord_pingouin_encours = new Coordonnees();
     	pingouinAdeplacer = -1;
 
-		if (liste_Ecran.moteur.phasePlacement) {
-			ImageView miniature_pingouin_aReset = reglettes.get(liste_Ecran.moteur.partie.joueurActif).get(liste_Ecran.moteur.partie.numPingouinAPlacer());
+		if (liste_Ecran.client.moteur.phasePlacement) {
+			ImageView miniature_pingouin_aReset = reglettes.get(liste_Ecran.client.moteur.partie.joueurActif).get(liste_Ecran.client.moteur.partie.numPingouinAPlacer());
 			Point2D coord2DTo = new Point2D(0, 0);
-			switch (liste_Ecran.moteur.partie.joueurActif) {
+			switch (liste_Ecran.client.moteur.partie.joueurActif) {
 			case 0:
 				coord2DTo = new Point2D(100, 40);
 				break;
@@ -482,7 +476,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * @param event
      */
     @FXML private void lancerIA(MouseEvent event){
-		liste_Ecran.moteur.faireJouerIAS(timeline);
+		liste_Ecran.client.moteur.faireJouerIAS(timeline);
     	miseAjour_tourDeJeu();
     }
     
@@ -492,19 +486,19 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      */
     @FXML private void validerTour(MouseEvent event){
 		
-    	if (liste_Ecran.moteur.phasePlacement) {
+    	if (liste_Ecran.client.moteur.phasePlacement) {
         	this.bouton_finTour.setDisable(true);
-			liste_Ecran.moteur.placement(coord_pingouin_encours);
+			liste_Ecran.client.moteur.placement(coord_pingouin_encours);
 	    	coord_pingouin_encours = new Coordonnees();
 		}
-		else if (liste_Ecran.moteur.phaseJeu){
+		else if (liste_Ecran.client.moteur.phaseJeu){
 	    	this.bouton_finTour.setDisable(true);
-			liste_Ecran.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
+			liste_Ecran.client.moteur.deplacement(new CoupleGenerique<Coordonnees, Coordonnees>(liste_Ecran.client.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position, coord_pingouin_encours));		
 			coord_pingouin_encours = new Coordonnees();
 		} 
     	miseAjour_tourDeJeu();
     	//System.out.println("FinValiderTour");
-    	liste_Ecran.client.majMoteurSurServeur(liste_Ecran.moteur);
+    	liste_Ecran.client.majMoteurSurServeur(liste_Ecran.client.moteur);
     }
     
  
@@ -517,7 +511,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
      * @param event evenement souris attendu : clic
      */
 	public void anchorClick(MouseEvent event) {
-		Partie partie = liste_Ecran.moteur.partie;
+		Partie partie = liste_Ecran.client.moteur.partie;
 		int jActif = partie.joueurActif;
 		int pingouinAplacer;
 		
@@ -527,7 +521,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		
 		if ( partie.joueurActif == liste_Ecran.client.numClient && (partie.getJoueurActif() instanceof Humain) && coordValide(indicesBanquise)) {
 			
-			if (liste_Ecran.moteur.phasePlacement) {
+			if (liste_Ecran.client.moteur.phasePlacement) {
 				
 				if ( partie.isPlacementValide(indicesBanquise) ) {// si bloc innoccupé de 1poisson
 					pingouinAplacer = partie.numPingouinAPlacer();
@@ -536,7 +530,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 					bouton_finTour.setDisable(false);
 				}
 			}
-			else if (liste_Ecran.moteur.phaseJeu) {
+			else if (liste_Ecran.client.moteur.phaseJeu) {
 				int numPingTemporaire = rendPingouinAdeplacer(indicesBanquise);
 				
 				if (numPingTemporaire!= -1){
@@ -545,7 +539,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 					selectionnerPingouinAdeplacer(banquise.get(jActif).get(pingouinAdeplacer));
 					
 					//affichage des chemins
-					ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.moteur.partie.b.deplacementPossible(indicesBanquise);
+					ArrayList<ArrayList<Coordonnees>> accessibles = liste_Ecran.client.moteur.partie.b.deplacementPossible(indicesBanquise);
 					for( ArrayList<Coordonnees> col : accessibles ){
 						for ( Coordonnees lin : col){
 							banquise.get(lin.x).get(lin.y).setEffect(new Glow(1));
@@ -574,19 +568,19 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	 * @param pingouinCible miniature sur laquelle on a cliqué
 	 */
 	public void selectionnerPingouinAdeplacer(ImageView pingouinCible){
-		//Partie partie = liste_Ecran.moteur.partie;
-		int jActif =  liste_Ecran.moteur.partie.joueurActif;
+		//Partie partie = liste_Ecran.client.moteur.partie;
+		int jActif =  liste_Ecran.client.moteur.partie.joueurActif;
 		
-		if (liste_Ecran.moteur.phaseJeu) {
+		if (liste_Ecran.client.moteur.phaseJeu) {
 			//IL FAUDRAIT PEUT ETRE EVITER LE MAJ CI DESSOUS MAIS C'EST LE PLUS SIMPLE.  De la part de Seb.
 			majPingouins();
 			// le pingouin numéro "pingouinAdeplacer" a déjà été déplacé aux coordonnées coord_pingouin_encours
 			if (coord_pingouin_encours.estInvalide() && pingouinAdeplacer != 1) {
 				// on veux en bouger un autre alors on annule son mouvement
-				translaterPingouin(pingouinAdeplacer, jActif, liste_Ecran.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
+				translaterPingouin(pingouinAdeplacer, jActif, liste_Ecran.client.moteur.partie.getJoueurActif().myPingouins[pingouinAdeplacer].position);
 			}
 			if(pingouinCible!=null){
-				//pingouinAdeplacer = reglettes.get( liste_Ecran.moteur.partie.joueurActif).indexOf(pingouinCible);
+				//pingouinAdeplacer = reglettes.get( liste_Ecran.client.moteur.partie.joueurActif).indexOf(pingouinCible);
 				System.out.println("ping a deplacer (clic sur pingouin)"+pingouinAdeplacer);
 			}
 			coord_pingouin_encours = new Coordonnees();
@@ -600,9 +594,9 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 	 * @return rend le pingouin(ImageView) positionné au dessus de la tuile cliquée s'il est au joueur actif
 	 */
 	public int rendPingouinAdeplacer( Coordonnees indicesBanquise){
-		for(int p=0 ;  p < liste_Ecran.moteur.partie.getJoueurActif().myPingouins.length ; p++){
-			if(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[p].actif){
-				if( indicesBanquise.equals(liste_Ecran.moteur.partie.getJoueurActif().myPingouins[p].position) ){
+		for(int p=0 ;  p < liste_Ecran.client.moteur.partie.getJoueurActif().myPingouins.length ; p++){
+			if(liste_Ecran.client.moteur.partie.getJoueurActif().myPingouins[p].actif){
+				if( indicesBanquise.equals(liste_Ecran.client.moteur.partie.getJoueurActif().myPingouins[p].position) ){
 					return p;
 				}
 			}
@@ -877,7 +871,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     @FXML
     private void sauvegarder(MouseEvent event){
     	nettoyerMenu(optionbox, roue);
-    	sauver(liste_Ecran.moteur);
+    	sauver(liste_Ecran.client.moteur);
     }
     
     /**

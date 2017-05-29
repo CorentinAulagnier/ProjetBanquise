@@ -91,10 +91,7 @@ public class PingouinServer extends Thread{
                 while (true) {
                 	synchronized (m) {
 	                	if(!m.phaseVictoire) {
-							if (m.partie.joueurs[m.partie.joueurActif] instanceof IA) { // Tour de l'IA
-								m.faireJouerIAS(new Timeline());
-								envoyerMoteurAuxClients(m.clone());	
-							} else if (m.partie.joueurActif == num) { 							
+							if (m.partie.joueurActif == num) { 							
 			                    Object obj = in.readObject();
 			                    if (obj instanceof Moteur) {
 			                    	m = (Moteur)obj;

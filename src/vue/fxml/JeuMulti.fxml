@@ -109,7 +109,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-            <ProgressIndicator layoutX="24.0" layoutY="40.0" prefHeight="40.0" prefWidth="40.0" />
+            <ProgressIndicator layoutX="24.0" layoutY="40.0" prefHeight="40.0" prefWidth="40.0" visible="false" />
     </children>
   </AnchorPane>
   <AnchorPane id="BoiteJoueur3" fx:id="anchorPane_j3" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -161,7 +161,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-            <ProgressIndicator layoutX="25.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" />
+            <ProgressIndicator layoutX="25.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" visible="false" />
     </children>
   </AnchorPane>
   <AnchorPane id="BoiteJoueur4" fx:id="anchorPane_j4" minHeight="200.0" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
@@ -201,7 +201,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-            <ProgressIndicator layoutX="94.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" />
+            <ProgressIndicator layoutX="94.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" visible="false" />
     </children>
   </AnchorPane>
       <AnchorPane fx:id="box_tour_distant" disable="true" layoutX="175.0" layoutY="425.0" minHeight="75.0" minWidth="450.0" prefHeight="75.0" prefWidth="450.0" visible="false">

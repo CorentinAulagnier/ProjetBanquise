@@ -104,6 +104,7 @@ public class PingouinServer extends Thread{
 								envoyerMoteurAuxClients(m.clone());	
 							}
 	                	} else {
+							envoyerMoteurAuxClients(m.clone());	
 	                		break;
 	                	}
                 	}
@@ -135,6 +136,7 @@ public class PingouinServer extends Thread{
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {
         		synchronized (m) {
+                	num = nbClients;
 	                out.writeObject("SUBMITNAME "+String.valueOf(num));
 	                Object obj = in.readObject();
 	                if (obj instanceof String) {
@@ -143,7 +145,7 @@ public class PingouinServer extends Thread{
 	                } else {
 	                	name = "inconnu";
 	                }
-                	num = nbClients;
+                	//num = nbClients;
                 	m.partie.joueurs[num].nom = name;
                     for(int i = 0; i<NBPINGOUINS;i++) {
                     	m.partie.joueurs[num].myPingouins[i] = new Pingouin();

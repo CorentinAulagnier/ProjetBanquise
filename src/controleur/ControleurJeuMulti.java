@@ -160,6 +160,10 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
+        							if (liste_Ecran.client.moteur.aRafraichir) {
+        								miseAjour_tourDeJeu();
+        								liste_Ecran.client.moteur.aRafraichir = false;
+        							}
         							if(liste_Ecran.client.moteur.phaseVictoire){
         							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
         								liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);
@@ -312,19 +316,19 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
 		//sinon si le joueur est une IA
 		else { //if (partie.getJoueurActif() instanceof IA){
 			// si la partie commence (aucun pingouin n'est placé) par une IA (le joueur actif est le joueur 0) 
-			if(liste_Ecran.client.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
+		/*	if(liste_Ecran.client.moteur.phasePlacement && partie.numPingouinAPlacer() == 0 && partie.joueurActif == 0){
 				desactiverAnchorPane(box_tour_local);
 				desactiverAnchorPane(box_tour_distant);
 				activerAnchorPane(box_demarrer);
 
 			}
 			// aux autres tours
-			else {
+			else {*/
 				desactiverAnchorPane(box_tour_local);
 				activerAnchorPane(box_tour_distant);
 				this.text_attenteJoueur.setText("Attente de "+partie.getJoueurActif().nom);
 				desactiverAnchorPane(box_demarrer);
-			}
+			//}
 		}  
 
 		bouton_finTour.setDisable(true);

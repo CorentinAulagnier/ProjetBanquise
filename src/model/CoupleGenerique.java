@@ -3,11 +3,6 @@ package model;
 import java.io.Serializable;
 
 public class CoupleGenerique<T1, T2> implements Serializable{
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	public T1 e1;
     public T2 e2;

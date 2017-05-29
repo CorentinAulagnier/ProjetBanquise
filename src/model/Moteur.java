@@ -9,10 +9,7 @@ import javafx.animation.Timeline;
 
 
 public class Moteur implements Serializable {
-    
-	private static final long serialVersionUID = 1L;
-
-	
+  	
 	public Partie partie;
 	public boolean phaseJeu, phasePlacement, phaseVictoire;
 	public boolean aRafraichir, IAProchainJoueur;

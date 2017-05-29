@@ -13,10 +13,6 @@ import java.util.Random;
  */	
 
 public class Banquise implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Tableau du terrain de jeu

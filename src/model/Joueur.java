@@ -7,10 +7,6 @@ import java.io.Serializable;
  */
 
 public abstract class Joueur implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Nombre de deplacements effectues

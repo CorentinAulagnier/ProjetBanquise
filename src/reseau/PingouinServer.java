@@ -152,7 +152,7 @@ public class PingouinServer extends Thread{
                     }
                     //Maj phaseConnexion
     	            nbClients++;
-    	            if(nbClients == m.partie.nbJoueurs || m.partie.joueurs[nbClients].getClass()==IA.class) {
+    	            if(nbClients == m.partie.nbJoueurs) {// || m.partie.joueurs[nbClients].getClass()==IA.class) {
     	            	phaseConnexion = false;
     	            	m.phasePlacement = true;
     	            }

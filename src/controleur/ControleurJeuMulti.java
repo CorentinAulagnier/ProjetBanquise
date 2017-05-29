@@ -160,6 +160,10 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     	    //lance une timeline, qui verifie toutes 0.5secondes si l'inteface doit être raffraichie (une IA a joué...) et lance "miseAjour_tourDeJeu()"
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
+        							if (liste_Ecran.client.moteur.aRafraichir) {
+        								miseAjour_tourDeJeu();
+        								liste_Ecran.client.moteur.aRafraichir = false;
+        							}
         							if(liste_Ecran.client.moteur.phaseVictoire){
         							    liste_Ecran.retireEcran(model.Proprietes.ECRAN_JEU);
         								liste_Ecran.chargeEcran(model.Proprietes.ECRAN_VICTOIRE, model.Proprietes.ECRAN_VICTOIRE_FXML);

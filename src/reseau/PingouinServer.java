@@ -104,6 +104,7 @@ public class PingouinServer extends Thread{
 								envoyerMoteurAuxClients(m.clone());	
 							}
 	                	} else {
+							envoyerMoteurAuxClients(m.clone());	
 	                		break;
 	                	}
                 	}

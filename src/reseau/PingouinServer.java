@@ -104,7 +104,6 @@ public class PingouinServer extends Thread{
 								envoyerMoteurAuxClients(m.clone());	
 							}
 	                	} else {
-							envoyerMoteurAuxClients(m.clone());	
 	                		break;
 	                	}
                 	}
@@ -136,8 +135,6 @@ public class PingouinServer extends Thread{
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {
         		synchronized (m) {
-                	num = nbClients;
-                	                	
 	                out.writeObject("SUBMITNAME "+String.valueOf(num));
 	                Object obj = in.readObject();
 	                if (obj instanceof String) {
@@ -146,26 +143,23 @@ public class PingouinServer extends Thread{
 	                } else {
 	                	name = "inconnu";
 	                }
-                	//num = nbClients;
-                	m.partie.joueurs[num].nom = name;/*
+                	num = nbClients;
+                	m.partie.joueurs[num].nom = name;
                     for(int i = 0; i<NBPINGOUINS;i++) {
                     	m.partie.joueurs[num].myPingouins[i] = new Pingouin();
-                    }*/
+                    }
+                    //Maj phaseConnexion
+                    num = nbClients;
+    	            nbClients++;
+    	            if(nbClients == m.partie.nbJoueurs || m.partie.joueurs[nbClients].getClass()==IA.class) {
+    	            	phaseConnexion = false;
+    	            	m.phasePlacement = true;
+    	            }
 
 		            writers[num] = out;		            
 		            so.println(m.partie.joueurs[num].nom + " vient de se connecter.");
 	            	envoyerMoteurAuxClients(m.clone());
 
-                    //Maj phaseConnexion
-    	            nbClients++;
-                	while (nbClients != m.partie.nbJoueurs && m.partie.joueurs[nbClients].getClass() == IA.class) {nbClients ++; }
-                	
-                	 System.out.println(nbClients);
-                	 
-    	            if(nbClients == m.partie.nbJoueurs) {// || m.partie.joueurs[nbClients].getClass()==IA.class) {
-    	            	phaseConnexion = false;
-    	            	m.phasePlacement = true;
-    	            }
         		}
         	} catch (Exception e) {
         		e.printStackTrace(System.err);
@@ -179,7 +173,7 @@ public class PingouinServer extends Thread{
         public void envoyerMoteurAuxClients(Moteur m, int num) {
         	try {
 	        	for(int i = 0; i<nbClients; i++) {
-	        		if(i!=num && writers[i] != null) writers[i].writeObject(m);
+	        		if(i!=num) writers[i].writeObject(m);
 	        	}
         	}catch (Exception e) {
         		e.printStackTrace(System.err);

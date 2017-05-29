@@ -107,6 +107,7 @@ public class PingouinClient extends Thread{
 	            	System.out.println("Impossible de récupérer le type de l'objet.");
 	            }
 	            
+			} catch (IOException a) {
 			} catch (Exception e) {
 				System.out.println("Vous avez été déconnecté du serveur. Relancez l'application pour réessayer.");
 				try {
@@ -115,7 +116,7 @@ public class PingouinClient extends Thread{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				System.exit(0);
+				//System.exit(0);
 
 			}
 		}

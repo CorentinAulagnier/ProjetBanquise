@@ -88,9 +88,9 @@ public class Moteur implements Serializable {
 	public void placement(Coordonnees c) {
 		partie.setPlacementPingouin(c, partie.joueurActif, partie.numPingouinAPlacer());
 		
-/*************
+/*************/
 System.out.println("Placement en "+c);
-System.out.println(partie);
+//System.out.println(partie);
 /*************/
 		
 		phasePlacement = !partie.placementPingouinsFini();			
@@ -115,9 +115,9 @@ System.out.println(partie);
 	public void deplacement(CoupleGenerique<Coordonnees, Coordonnees> cc) {
 		partie.deplacement(cc);
 		
-/*************
+/*************/
 System.out.println("Deplacement en "+cc);
-System.out.println(partie);
+//System.out.println(partie);
 /*************/
 
 		//Suppression pingouins inactif

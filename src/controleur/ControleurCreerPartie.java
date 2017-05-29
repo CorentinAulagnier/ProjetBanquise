@@ -26,6 +26,7 @@ import model.IA;
 import model.Joueur;
 import model.Moteur;
 import model.Partie;
+import model.Pingouin;
 import reseau.Multijoueur;
 import reseau.PingouinClient;
 import reseau.PingouinServer;
@@ -124,6 +125,9 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	for (int i = 0 ; i < nbJoueurs ; i++){
     		tableauDeJoueur[i] = creerJoueur(i,nbPingouins);
+            for(int j = 0; j<nbPingouins;i++) {
+            	tableauDeJoueur[i].myPingouins[j] = new Pingouin();
+            }
     	}
 	    
 	    

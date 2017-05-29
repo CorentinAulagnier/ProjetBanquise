@@ -147,10 +147,10 @@ public class PingouinServer extends Thread{
 	                	name = "inconnu";
 	                }
                 	//num = nbClients;
-                	m.partie.joueurs[num].nom = name;
+                	m.partie.joueurs[num].nom = name;/*
                     for(int i = 0; i<NBPINGOUINS;i++) {
                     	m.partie.joueurs[num].myPingouins[i] = new Pingouin();
-                    }
+                    }*/
 
 		            writers[num] = out;		            
 		            so.println(m.partie.joueurs[num].nom + " vient de se connecter.");

@@ -49,7 +49,7 @@ public class PingouinServer extends Thread{
 				e.printStackTrace();
 			}
             System.out.println("Pingouins's server stopped.");
-            System.exit(0);
+            //System.exit(0);
 
         }
     }
@@ -126,7 +126,7 @@ public class PingouinServer extends Thread{
                     socket.close();
                 } catch (IOException e) {
                 }
-                System.exit(0);
+                //System.exit(0);
             }
         }
         

@@ -553,7 +553,7 @@ public class Partie implements Serializable {
 	public void setPlacementPingouin(Coordonnees c, int numJoueur, int numPingouin) {
 		this.b.getTuile(c).mettrePingouin();
 		this.joueurs[numJoueur].myPingouins[numPingouin] = new Pingouin(c);
-		System.out.println("Le pingouin " + numPingouin+ " de " + this.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
+		//System.out.println("Le pingouin " + numPingouin+ " de " + this.joueurs[numJoueur].nom +" a bien été positionné en "+c+".");
 	}
 
 	/**

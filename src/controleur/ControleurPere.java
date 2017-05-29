@@ -114,15 +114,19 @@ public class ControleurPere {
 		// TODO
 		 if(liste_ecran.musique){
 			 liste_ecran.musique = false;
-			//media.pause();
-			iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
+			 if (liste_ecran.sonActive){
+				 media.pause();
+			 }
+			//iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
 			 System.out.println("couper Musique");
 		 }
 		 else{
 			 liste_ecran.musique = true;
-			// media.seek(media.getStartTime());
-			// media.play();
-			 iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
+			 if (liste_ecran.sonActive){
+				media.seek(media.getStartTime());
+			 	media.play();
+			 }
+			// iv.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
 			 System.out.println("remettre musique");
 		 }
 		 majBoutonMusique(liste_ecran,iv);
@@ -152,12 +156,10 @@ public class ControleurPere {
 		// TODO
 		 if(liste_ecran.son){
 			 liste_ecran.son = false;
-			// iv.setImage(new Image(model.Proprietes.IMAGE_SONOFF_PATH));
 			 System.out.println("couper Son");
 		 }
 		 else{
 			 liste_ecran.son = true;
-			// iv.setImage(new Image(model.Proprietes.IMAGE_SONON_PATH));
 			 System.out.println("remettre Son");
 		 }
 		 majBoutonSon(liste_ecran,iv);

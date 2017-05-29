@@ -2,6 +2,7 @@ package controleur;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 
@@ -106,16 +109,10 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
     		majBoutonMusique(gestionnaireFxmlCourant,imageMusique);
-    		majBoutonSon(gestionnaireFxmlCourant,imageSon);
-    		//TODO si ok nettoyer
-    		if (gestionnaireFxmlCourant.musique == false){
-        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
-        	}else{
-        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
-        	}   
+    		majBoutonSon(gestionnaireFxmlCourant,imageSon);;
     		optionOuvrirRoue(optionbox, roue) ;
     	}else{
-    		optionFermerRoue(optionbox, roue);
+    		 optionFermerRoue(optionbox, roue) ;
     	}
     }
     
@@ -154,12 +151,11 @@ public class ControleurAccueil extends ControleurPere implements Initializable, 
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    	/*
-    	if (gestionnairefxml.son){
+    	if ((gestionnaireFxmlCourant.son)&&(gestionnaireFxmlCourant.sonActive)){
     	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
 		media.play();
 		}
-		*/
+		
     	
     }
     

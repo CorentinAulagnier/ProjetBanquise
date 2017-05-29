@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import model.Coordonnees;
 import model.Humain;
@@ -208,12 +211,10 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    	/*
-    	if (gestionnairefxml.son){
+    	if ((liste_Ecran.son)&&(liste_Ecran.sonActive)){
     	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
 		media.play();
 		}
-		*/
     	
     }
     
@@ -349,4 +350,6 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     		((TextField) event.getTarget()).setCenterShape(true);
     	}
     }
+    
+    
 }

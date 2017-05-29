@@ -11,6 +11,7 @@ import model.Humain;
 import model.IA;
 import model.Moteur;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +49,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -1047,9 +1050,11 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     public void boutonOption(MouseEvent event){
     	if (optionbox.isDisable()){
-    		optionOuvrirRoue(optionbox, roue);    		
+    		majBoutonMusique(liste_Ecran,imageMusique);
+    		majBoutonSon(liste_Ecran,imageSon);;
+    		optionOuvrirRoue(optionbox, roue) ;
     	}else{
-    		optionFermerRoue(optionbox, roue);
+    		 optionFermerRoue(optionbox, roue) ;
     	}
     }
     
@@ -1060,12 +1065,10 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    	/*
-    	if (gestionnairefxml.son){
+    	if ((liste_Ecran.son)&&(liste_Ecran.sonActive)){
     	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
 		media.play();
 		}
-		*/
     	
     }
 }

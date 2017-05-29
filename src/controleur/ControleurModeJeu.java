@@ -8,6 +8,7 @@ import model.Partie;
 import vue.GestionnaireEcransFxml;
 import vue.EcranCourant;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,6 +23,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class ControleurModeJeu extends ControleurPere implements Initializable,  EcranCourant {
 	GestionnaireEcransFxml gestionnaireFxmlCourant;
@@ -470,12 +473,10 @@ public class ControleurModeJeu extends ControleurPere implements Initializable, 
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    	/*
-    	if (gestionnairefxml.son){
+    	if ((gestionnaireFxmlCourant.son)&&(gestionnaireFxmlCourant.sonActive)){
     	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
 		media.play();
 		}
-		*/
     	
     }
     

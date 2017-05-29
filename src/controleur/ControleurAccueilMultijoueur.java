@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.File;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import model.Coordonnees;
 import reseau.PingouinClient;
@@ -142,12 +145,6 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     	if (optionbox.isDisable()){
     		majBoutonMusique(liste_Ecran,imageMusique);
     		majBoutonSon(liste_Ecran,imageSon);
-    		//TODO si ok nettoyer
-    		/*if (gestionnaireFxmlCourant.musique == false){
-        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEOFF_PATH));
-        	}else{
-        		imageMusique.setImage(new Image(model.Proprietes.IMAGE_MUSIQUEON_PATH));
-        	}    	*/
     		optionOuvrirRoue(optionbox, roue) ;
     	}else{
     		optionFermerRoue(optionbox, roue);
@@ -210,12 +207,10 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    	/*
-    	if (gestionnairefxml.son){
+    	if ((liste_Ecran.son)&&(liste_Ecran.sonActive)){
     	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
 		media.play();
 		}
-		*/
     	
     }
     

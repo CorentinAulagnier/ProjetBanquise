@@ -63,24 +63,24 @@ public class Proprietes {
     };
     
     public static final String[] reglesCorps = {
-    		"Sur la banquise, les pingouins partent à la chasse au poisson en sautant d’un bloc de glace à l’autre.\n\n"
+    		"Sur la banquise, les pingouins partent à la chasse aux poissons en sautant d’un bloc de glace à l’autre.\n\n"
     				+"Pour cela, les joueurs essaient d’attraper un maximum de poissons, tout en veillant à ne pas être bloqués ou isolés sur la banquise.\n\n"
     				+"Cette banquise est générée aléatoirement selon 8 lignes de blocs de glaces, (alternativement 7 et 8 blocs). "
     				+"La répartition du nombre de poissons sur ces blocs est aléatoire.",
     		"Dans un premier temps, chacun son tour, les joueurs placent un de leurs pingouins sur un bloc de glace innoccupé ayant un seul poisson. "
     				+"Ils continuent jusqu’à ce que tous les pingouins soient placés.\n\n"
-    				+"Ensuite, chacun son tour, un joueur peut déplacer un seul de ses pinguouins :\n"
+    				+"Ensuite, chacun son tour, un joueur peut déplacer un seul de ses pingouins :\n"
     				+"\t- en ligne droite,\n"
     				+"\t- dans une des 6 directions qui entoure son bloc de glace,\n"
-    				+"\t- d’autant de cases que souhaité,\n"
+    				+"\t- d’autant de cases souhaitées,\n"
     				+"\t- sans franchir d’obstacle.\n\n"
     				+"Un obstacle est soit une extrémité de la banquise, soit un trou dans la banquise, soit un bloc de glace occupé par un autre pingouin.\n",
     		"",
-    		"A la fin d'un tour, le joueur gagne le bloc de glace dont son pinguouin est parti ainsi que le nombre de poissons associés.\n\n"
+    		"A la fin d'un tour, le joueur gagne le bloc de glace dont son pingouin est parti ainsi que le nombre de poissons associé.\n\n"
     				+"Si l'un de ses pinguouins est isolé sur un bloc de glace entièrement entouré d'eau, le pingouin est retiré de la banquise. "
     				+"Le joueur gagne ce bloc de glace et les poissons associés.",
-    		"Lorsqu'un joueur n'a plus aucun pingouins sur la banquise, il passe son tour jusqu'à la fin de la partie. Quand tous les joueurs sont dans ce cas, la partie s'arrête.\n\n"+
-    				"Le joueur qui a attrapé le plus de poissons gagne la partie. En cas d’égalité, le joueur qui a le plus de bloc de glace gagne la partie. "
+    		"Lorsqu'un joueur n'a plus aucun pingouin sur la banquise, il passe son tour jusqu'à la fin de la partie. Quand tous les joueurs sont dans ce cas, la partie s'arrête.\n\n"+
+    				"Le joueur qui a attrapé le plus de poissons gagne la partie. En cas d’égalité, le joueur qui a le plus de blocs de glace gagne la partie. "
     				+"En cas de nouvelle égalité, les ex-aequo gagnent ensemble la partie."
     };
 

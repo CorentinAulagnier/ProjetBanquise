@@ -5,11 +5,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import vue.EcranCourant;
 import vue.GestionnaireEcransFxml;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -127,12 +131,10 @@ public class ControleurRegles extends ControleurPere implements Initializable, E
     @FXML
     public void boutonPresse(MouseEvent event){
     	((Button) event.getTarget() ).setStyle(model.Proprietes.STYLE_PRESSED);
-    	/*
-    	if (gestionnairefxml.son){
+    	if ((gestionnaireFxmlCourant.son)&&(gestionnaireFxmlCourant.sonActive)){
     	MediaPlayer media = new MediaPlayer(new Media(new File(model.Proprietes.BUTTON_PATH).toURI().toString()));
 		media.play();
 		}
-		*/
     	
     }
 }

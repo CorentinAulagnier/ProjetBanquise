@@ -56,6 +56,8 @@ public class GestionnaireEcransFxml extends StackPane {
 	 * permet de connaitre l'été des bruitages
 	 */
 	public boolean son = false;
+	
+	public final boolean sonActive = false;
 
 	/**
 	 * Créé un gestionnaire de noeud FXML, selon ue partie, et une musique
@@ -67,10 +69,12 @@ public class GestionnaireEcransFxml extends StackPane {
 	public GestionnaireEcransFxml(Moteur m) {
 		super();
 		moteur = m;
-		/*media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
-		media.setAutoPlay(true);
-		musique = true;
-		media.play();*/
+		if (sonActive){
+			media = new MediaPlayer(new Media(new File(model.Proprietes.MEDIA_PATH).toURI().toString()));
+			media.setAutoPlay(true);
+			musique = true;
+			media.play();
+		}
 	}
 
 	/**

@@ -89,6 +89,7 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
     						t71,t72,t73,t74,t75,t76,t77,
     						t81,t82,t83,t84,t85,t86,t87,t88;
     Timeline timeline;
+    boolean majNoms = true;
 
 	/**
 	 * initialisation des parametres au chargement du noeud fxml associe a ce controleur
@@ -161,6 +162,10 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if (liste_Ecran.client.moteur.aRafraichir) {
+        								if (majNoms) {
+        						    	    miseAjour_initiale(anchorPanes, noms);
+        									majNoms = false;
+        								}
         								miseAjour_tourDeJeu();
         								liste_Ecran.client.moteur.aRafraichir = false;
         							}

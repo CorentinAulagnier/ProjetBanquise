@@ -138,10 +138,8 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	liste_Ecran.moteur = new Moteur(p);
     	liste_Ecran.moteur.phasePlacement = false;
 
-    	String[] args = {"local", "", "COCO"};
-    	
-    	System.out.println("Client K");
-    	
+    	String[] args = {"local", "", nom1.getText()};
+    	    	
     	PingouinServer ps = new PingouinServer(liste_Ecran.moteur);
     	ps.start();
 

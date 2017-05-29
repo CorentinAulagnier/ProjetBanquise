@@ -58,6 +58,14 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 	 
 	 
 	 public void miseAjour(){
+		if (gestionnaireFxmlCourant.client != null) {
+			gestionnaireFxmlCourant.moteur = gestionnaireFxmlCourant.client.moteur;
+			nouvelle_partie.setVisible(false);
+			nouvelle_partie.setDisable(true);
+			nouvelle_manche.setVisible(false);
+			nouvelle_manche.setDisable(true);
+		}
+			
 		 ArrayList<Joueur> gagnants = gestionnaireFxmlCourant.moteur.partie.getGagnant();
 		 Joueur[] Classement = gestionnaireFxmlCourant.moteur.partie.classement();
 		 
@@ -111,13 +119,7 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 	 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-		if (gestionnaireFxmlCourant.client != null) {
-			gestionnaireFxmlCourant.moteur = gestionnaireFxmlCourant.client.moteur;
-			nouvelle_partie.setVisible(false);
-			nouvelle_partie.setDisable(true);
-			nouvelle_manche.setVisible(false);
-			nouvelle_manche.setDisable(true);
-		}
+
     	
     	accueil.setStyle(model.Proprietes.STYLE_NORMAL);
     	nouvelle_partie.setStyle(model.Proprietes.STYLE_NORMAL);

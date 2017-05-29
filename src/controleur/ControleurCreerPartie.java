@@ -125,9 +125,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	for (int i = 0 ; i < nbJoueurs ; i++){
     		tableauDeJoueur[i] = creerJoueur(i,nbPingouins);
-            for(int j = 0; j<nbPingouins;j++) {
-            	tableauDeJoueur[i].myPingouins[j] = new Pingouin();
-            }
+
     	}
 	    
 	    
@@ -139,7 +137,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	liste_Ecran.moteur.phasePlacement = false;
 
     	String[] args = {"local", "", nom1.getText()};
-    	    	
+    	    	   
     	PingouinServer ps = new PingouinServer(liste_Ecran.moteur);
     	ps.start();
 
@@ -156,20 +154,24 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     public Joueur creerJoueur(int couleur, int nbP){
     	String name = "";
     	String path =  model.Proprietes.IMAGE_JOUEUR_PATH+modeJeu[couleur]+""+couleur+".png";
-
+/*
     	if (couleur == model.Proprietes.JAUNE) {
     		name = nom1.getText();
-    	}
+    	} else {
+    		name = " ";
+    	}*/
 
     	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
-    		return new Humain(name, nbP, path, couleur);
+    		return new Humain("", nbP, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.CREVETTE){
     		return new IA("IA"+couleur, nbP, 1, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.EVE){
     		return new IA("IA"+couleur, nbP, 2, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.ORQUE){
     		return new IA("IA"+couleur, nbP, 3, path, couleur);
-    	}else{
+    	}else if (modeJeu[couleur] == 0) {
+    		return new IA("IA"+couleur, nbP, 1, model.Proprietes.IMAGE_JOUEUR_PATH+1+""+couleur+".png", couleur);
+    	}else {
     		return null;
     	}
     }

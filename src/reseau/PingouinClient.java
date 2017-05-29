@@ -109,13 +109,14 @@ public class PingouinClient extends Thread{
 	            
 			} catch (Exception e) {
 				System.out.println("Vous avez été déconnecté du serveur. Relancez l'application pour réessayer.");
-				//System.exit(0);
-			/*	try {
+				try {
 					socket.close();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}*/
+				}
+				System.exit(0);
+
 			}
 		}
         try {

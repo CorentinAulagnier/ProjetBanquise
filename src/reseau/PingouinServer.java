@@ -38,6 +38,7 @@ public class PingouinServer extends Thread{
 			listener = new ServerSocket(PORT);
             while (true) {
                 new Handler(listener.accept()).start();
+                break;
             }
         } catch (Exception e) {
 			e.printStackTrace();

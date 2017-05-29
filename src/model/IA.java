@@ -146,7 +146,7 @@ public class IA extends Joueur {
 			case 2:
 				return player.placementMoyen(p);
 			case 3:
-				return player.placementMoyen(p);
+				return player.placementDifficile(p);
 			default:
 		}
 		return null;

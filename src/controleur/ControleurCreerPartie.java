@@ -89,11 +89,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 		flecheGaucheMode[model.Proprietes.VERT] = modevertgauche;
 		flecheGaucheMode[model.Proprietes.ROUGE] = moderougegauche;
 		flecheGaucheMode[model.Proprietes.BLEU] = modebleugauche;
-		/*
-		retour.setStyle(model.Proprietes.STYLE_NORMAL);
-		lancer.setStyle(model.Proprietes.STYLE_NORMAL);
-		*/
-		//modeValide();
+
 		
 		
     }
@@ -147,21 +143,9 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	liste_Ecran.client = new PingouinClient(liste_Ecran.moteur, args);
     	liste_Ecran.client.start();
 
-    	
-    	//nettoyerMenu(optionbox, roue);
-    	
-    	//System.out.println(liste_Ecran.moteur.partie.toString2());
-    	
-    	
     	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
     	
     	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
-    	/*
-    	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_JEU, model.Proprietes.ECRAN_JEU_FXML);
-    	
-    	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_JEU);  
-*/
-       // liste_Ecran.moteur.execPremiereIA();
 
     }
     
@@ -171,18 +155,16 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
 
     	if (couleur == model.Proprietes.JAUNE) {
     		name = nom1.getText();
-    	} else {
-    		name = "";
     	}
 
     	if (modeJeu[couleur] == model.Proprietes.JOUEUR){
     		return new Humain(name, nbP, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.CREVETTE){
-    		return new IA(name, nbP, 1,path, couleur);
+    		return new IA("IA"+couleur, nbP, 1, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.EVE){
-    		return new IA(name, nbP, 2,path, couleur);
+    		return new IA("IA"+couleur, nbP, 2, path, couleur);
     	}else if (modeJeu[couleur] == model.Proprietes.ORQUE){
-    		return new IA(name, nbP, 3, path, couleur);
+    		return new IA("IA"+couleur, nbP, 3, path, couleur);
     	}else{
     		return null;
     	}

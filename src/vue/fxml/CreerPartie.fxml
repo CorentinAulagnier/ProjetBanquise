@@ -212,12 +212,12 @@
                         <Font name="System Bold" size="20.0" fx:id="x15" />
                      </font>
                   </Label>
-              <Label id="Joueur2" fx:id="joueur2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Joueur" textAlignment="CENTER" textFill="#006e00" visible="false">
+              <Label id="Joueur2" fx:id="joueur2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="Joueur" textAlignment="CENTER" textFill="#006e00">
                      <font>
                         <Font name="System Bold" size="20.0" fx:id="x16" />
                      </font>
                   </Label>
-              <Label id="Iafacile2" fx:id="iafacile2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Facile" textAlignment="CENTER" textFill="#006e00" visible="true">
+              <Label id="Iafacile2" fx:id="iafacile2" alignment="CENTER" minHeight="30.0" minWidth="160.0" prefHeight="30.0" prefWidth="160.0" text="IA Facile" textAlignment="CENTER" textFill="#006e00" visible="false">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -248,7 +248,7 @@
           </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="508.0" layoutY="180.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
+      <AnchorPane layoutX="508.0" layoutY="265.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
          <children>
           <Button fx:id="modebleugauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>
@@ -304,7 +304,7 @@
                </cursor>
           </Button>
          </children></AnchorPane>
-      <AnchorPane layoutX="508.0" layoutY="265.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
+      <AnchorPane layoutX="508.0" layoutY="180.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0">
          <children>
           <Button fx:id="moderougegauche" contentDisplay="GRAPHIC_ONLY" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#flecheModeEvent" onMousePressed="#boutonPresse" onMouseReleased="#boutonLache" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="Button">
             <graphic>

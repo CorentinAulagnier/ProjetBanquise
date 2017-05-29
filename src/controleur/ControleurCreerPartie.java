@@ -70,7 +70,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	/*MODE DE JEU ET IMAGE INITIALES*/
     	modeJeu[model.Proprietes.JAUNE]= model.Proprietes.JOUEUR;
- 		modeJeu[model.Proprietes.VERT]= model.Proprietes.CREVETTE;
+ 		modeJeu[model.Proprietes.VERT]= model.Proprietes.JOUEUR;
  		modeJeu[model.Proprietes.ROUGE]= model.Proprietes.AUCUN;
  		modeJeu[model.Proprietes.BLEU]= model.Proprietes.AUCUN;
  		 		
@@ -246,9 +246,11 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
      */
     public int selectType(StackPane stck, int indice, boolean direction){//false = gauche, true = droit	
     	stck.getChildren().get(indice).setVisible(false);
-    	if (direction){	indice = (indice+1)%5;
+    	if (indice == model.Proprietes.JOUEUR){	
+    		indice = model.Proprietes.AUCUN;
     	}else{			
-    		indice = (indice+4)%5;}
+    		indice = model.Proprietes.JOUEUR;
+    	}
     	stck.getChildren().get(indice).setVisible(true);
     	return indice;
     	

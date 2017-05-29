@@ -150,7 +150,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	liste_Ecran.client.start();
 
     	
-    	nettoyerMenu(optionbox, roue);
+    	//nettoyerMenu(optionbox, roue);
     	
     	//System.out.println(liste_Ecran.moteur.partie.toString2());
     	

@@ -325,7 +325,7 @@ public class ControleurJeu extends ControleurPere implements Initializable, Ecra
 			
 			//TODO ici pour retirer le text d'explication text tour :	 
 			text_tourDe.setVisible(true);
-		    if(liste_Ecran.moteur.phasePlacement){ 	text_tourDe.setText("Placez un pingouin");	   }
+		    if(liste_Ecran.moteur.phasePlacement){ 	text_tourDe.setText("Placez un pingouin ( " + (1+  liste_Ecran.moteur.partie.nbPingouinActif(liste_Ecran.moteur.partie.getJoueurActif())) + " / " + liste_Ecran.moteur.partie.getJoueurActif().nbPingouin + " )"  );	   }
 		    else if(liste_Ecran.moteur.phaseJeu){text_tourDe.setText("Déplacez un pingouin");}
 	    	
 		} 

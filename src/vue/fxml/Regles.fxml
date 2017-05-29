@@ -34,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
     </Button>
-    <Text fx:id="reglesTitre" layoutX="185.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectif" textAlignment="CENTER" underline="true" wrappingWidth="431.0">
+    <Text fx:id="reglesTitre" layoutX="185.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectif" textAlignment="CENTER" wrappingWidth="431.0">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>

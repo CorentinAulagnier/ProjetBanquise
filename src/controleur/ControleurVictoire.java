@@ -111,7 +111,7 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 	 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-		if (gestionnaireFxmlCourant.client.moteur != null) {
+		if (gestionnaireFxmlCourant.client != null) {
 			gestionnaireFxmlCourant.moteur = gestionnaireFxmlCourant.client.moteur;
 		}
     	

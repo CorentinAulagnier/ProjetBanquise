@@ -135,6 +135,7 @@ public class PingouinServer extends Thread{
         public void getNom(ObjectInputStream in, ObjectOutputStream out) {
         	try {
         		synchronized (m) {
+                    num = nbClients;
 	                out.writeObject("SUBMITNAME "+String.valueOf(num));
 	                Object obj = in.readObject();
 	                if (obj instanceof String) {
@@ -149,7 +150,6 @@ public class PingouinServer extends Thread{
                     	m.partie.joueurs[num].myPingouins[i] = new Pingouin();
                     }
                     //Maj phaseConnexion
-                    num = nbClients;
     	            nbClients++;
     	            if(nbClients == m.partie.nbJoueurs || m.partie.joueurs[nbClients].getClass()==IA.class) {
     	            	phaseConnexion = false;

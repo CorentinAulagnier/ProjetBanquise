@@ -107,17 +107,10 @@ public class ControleurAccueilMultijoueur extends ControleurPere implements Init
 	        if (matchAddr.matches()) {
 	        	String[] args = {"distant", ip, name};
 	        	
-	    		//liste_Ecran.moteur = null;
 
 	    		liste_Ecran.client = new PingouinClient(liste_Ecran.moteur, args);
 	    		liste_Ecran.client.start();
-	    		/*
-	    		while (liste_Ecran.moteur == null || liste_Ecran.moteur.partie == null) {
-	    			liste_Ecran.moteur = liste_Ecran.client.moteur;
-	    		}*/
-	    		//System.out.println(liste_Ecran.client.moteur.partie);
 
-	    		
 	        	liste_Ecran.chargeEcran(model.Proprietes.ECRAN_MULTI, model.Proprietes.ECRAN_MULTI_FXML);
 	        	liste_Ecran.changeEcranCourant(model.Proprietes.ECRAN_MULTI);  
 	        	

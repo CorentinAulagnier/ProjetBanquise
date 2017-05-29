@@ -111,6 +111,10 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
 	 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+		if (gestionnaireFxmlCourant.client.moteur != null) {
+			gestionnaireFxmlCourant.moteur = gestionnaireFxmlCourant.client.moteur;
+		}
+    	
     	accueil.setStyle(model.Proprietes.STYLE_NORMAL);
     	nouvelle_partie.setStyle(model.Proprietes.STYLE_NORMAL);
     	nouvelle_manche.setStyle(model.Proprietes.STYLE_NORMAL);

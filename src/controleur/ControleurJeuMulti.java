@@ -162,10 +162,10 @@ public class ControleurJeuMulti extends ControleurPere implements Initializable,
         	timeline = new Timeline( new KeyFrame(  Duration.seconds(temps) , new EventHandler<ActionEvent>(){
         						@Override public void handle(ActionEvent actionEvent) {
         							if (liste_Ecran.client.moteur.aRafraichir) {
-        								if (majNoms) {
+        								//if (majNoms) {
         						    	    miseAjour_initiale(anchorPanes, noms);
-        									majNoms = false;
-        								}
+        									//majNoms = false;
+        								//}
         								miseAjour_tourDeJeu();
         								liste_Ecran.client.moteur.aRafraichir = false;
         							}

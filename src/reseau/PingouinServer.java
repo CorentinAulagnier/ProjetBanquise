@@ -21,7 +21,7 @@ public class PingouinServer extends Thread{
     private static Moteur m;
     private static boolean phaseConnexion = true;
 	private static PrintStream so = System.out;
-    
+
 	
 	public static void main(String[] args) {
 	}
@@ -38,7 +38,6 @@ public class PingouinServer extends Thread{
 			listener = new ServerSocket(PORT);
             while (true) {
                 new Handler(listener.accept()).start();
-                break;
             }
         } catch (Exception e) {
 			e.printStackTrace();

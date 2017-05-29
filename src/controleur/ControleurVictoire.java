@@ -113,6 +113,10 @@ public class ControleurVictoire  extends ControleurPere implements Initializable
     public void initialize(URL url, ResourceBundle rb) {
 		if (gestionnaireFxmlCourant.client != null) {
 			gestionnaireFxmlCourant.moteur = gestionnaireFxmlCourant.client.moteur;
+			nouvelle_partie.setVisible(false);
+			nouvelle_partie.setDisable(true);
+			nouvelle_manche.setVisible(false);
+			nouvelle_manche.setDisable(true);
 		}
     	
     	accueil.setStyle(model.Proprietes.STYLE_NORMAL);

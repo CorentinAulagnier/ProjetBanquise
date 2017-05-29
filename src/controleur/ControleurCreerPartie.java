@@ -125,7 +125,7 @@ public class ControleurCreerPartie extends ControleurPere implements Initializab
     	
     	for (int i = 0 ; i < nbJoueurs ; i++){
     		tableauDeJoueur[i] = creerJoueur(i,nbPingouins);
-            for(int j = 0; j<nbPingouins;i++) {
+            for(int j = 0; j<nbPingouins;j++) {
             	tableauDeJoueur[i].myPingouins[j] = new Pingouin();
             }
     	}

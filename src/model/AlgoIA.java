@@ -1085,14 +1085,10 @@ public class AlgoIA {
                 }
             }
         }
-
-        if (nbTuiles <= 55) {
-            nbCoupsmax = 3;
-        }
-        if (nbTuiles <= 47) {
+        if (nbTuiles <= 40) {
             nbCoupsmax = 5;
         }
-        if (nbTuiles <= 37) {
+        if (nbTuiles <= 31) {
             nbCoupsmax = 7;
         }
         if (nbTuiles <= 25) {
